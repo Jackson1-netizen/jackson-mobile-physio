@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+import { site } from "../content/site";
+import { getLocalBusinessJsonLd, getFaqJsonLd } from "../lib/structured-data";
+import DraftBanner from "../components/DraftBanner.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import StickyContactBar from "../components/StickyContactBar.astro";
+import I18nScript from "../components/I18nScript.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  hideChrome?: boolean;
+  /** Homepage V1: draft banner only; full chrome inside page component */
+  v1Home?: boolean;
+  includeFaqSchema?: boolean;
+}
+
+const {
+  title = site.seo.defaultTitle,
+  description = site.seo.description,
+  canonicalPath = "/",
+  hideChrome = false,
+  v1Home = false,
+  includeFaqSchema = false,
+} = Astro.props;
+
+const showSiteChrome = !hideChrome && !v1Home;
+const showDraftBanner = site.draft && (showSiteChrome || v1Home);
+
+const canonicalUrl = new URL(canonicalPath, site.websiteUrl).href;
+const ogImage = new URL(site.seo.ogImagePath, site.websiteUrl).href;
+const jsonLd = JSON.stringify(getLocalBusinessJsonLd());
+const faqLd = includeFaqSchema ? JSON.stringify(getFaqJsonLd()) : null;
+const robotsContent = site.draft ? "noindex, nofollow" : "index, follow";
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="theme-color" content="#2d6a5a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={site.seo.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={site.businessName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={jsonLd} />
+    {faqLd && <script type="application/ld+json" set:html={faqLd} />}
+  </head>
+  <body class={showSiteChrome ? "pb-16 sm:pb-0" : ""}>
+    {showDraftBanner && <DraftBanner />}
+    {showSiteChrome && <SiteHeader />}
+    <main id="main-content" class={v1Home ? "p-0" : ""}>
+      <slot />
+    </main>
+    {showSiteChrome && <SiteFooter />}
+    {showSiteChrome && <StickyContactBar />}
+    {showSiteChrome && <I18nScript />}
+  </body>
+</html>

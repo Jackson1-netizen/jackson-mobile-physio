@@ -1,0 +1,57 @@
+---
+const concepts = [
+  {
+    id: 1,
+    name: "Editorial Forest",
+    pitch: "Full-bleed hero, cool forest palette, medium interaction density — BetterCare polish without their yellow/navy.",
+  },
+  {
+    id: 2,
+    name: "Warm Meadow",
+    pitch: "Warmer cream surfaces, centred calm hierarchy, lower density — maximum readability for older readers.",
+  },
+  {
+    id: 3,
+    name: "Active Path",
+    pitch: "Diagonal energy, visible journey steps, higher purposeful density — community vitality without gym clichés.",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Homepage visual concepts — pick 1, 2, or 3</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="font-family: 'Source Sans 3', sans-serif; background: #f7f6f3; color: #1a2e28; margin: 0; padding: 2rem 1.25rem;">
+    <main style="max-width: 42rem; margin: 0 auto;">
+      <h1 style="font-family: 'Source Serif 4', serif; font-size: 1.75rem;">Homepage visual concepts</h1>
+      <p style="font-size: 1.125rem; line-height: 1.6;">
+        Mockups for Jackson to compare. Reply with <strong>1</strong>, <strong>2</strong>, or <strong>3</strong> — then Wonder refinement (not started yet).
+      </p>
+      <ul style="list-style: none; padding: 0; display: grid; gap: 1rem; margin-top: 2rem;">
+        {concepts.map((c) => (
+          <li style="border: 1px solid #d8ddd9; border-radius: 12px; background: #fff; padding: 1.25rem;">
+            <h2 style="font-family: 'Source Serif 4', serif; margin: 0 0 0.5rem;">
+              <a href={`/concepts/${c.id}/`} style="color: #2d6a5a; text-decoration: none;">Concept {c.id}: {c.name}</a>
+            </h2>
+            <p style="margin: 0 0 1rem; line-height: 1.55;">{c.pitch}</p>
+            <a
+              href={`/concepts/${c.id}/`}
+              style="display: inline-block; background: #2d6a5a; color: #fff; padding: 0.65rem 1.25rem; border-radius: 999px; text-decoration: none; font-weight: 600;"
+            >
+              Open Concept {c.id}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>

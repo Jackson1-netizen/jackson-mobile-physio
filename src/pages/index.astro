@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HomepageV2 from "../components/concept1/HomepageV2.astro";
+import { site } from "../content/site";
+---
+
+<BaseLayout
+  v1Home={true}
+  canonicalPath="/"
+  title={`${site.displayBrand} | Mobile physiotherapy — Melbourne eastern suburbs (preview)`}
+  description="Homepage V1 preview — mobile physiotherapy in Melbourne's eastern suburbs. Draft, not for indexing."
+>
+  <HomepageV2 theme="a" mode="v1" />
+</BaseLayout>

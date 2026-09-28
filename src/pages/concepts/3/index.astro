@@ -1,0 +1,303 @@
+---
+import ConceptLayout from "../../../layouts/ConceptLayout.astro";
+---
+
+<ConceptLayout
+  concept={3}
+  title="Concept 3 — Active Path (homepage mockup)"
+  description="Homepage visual concept: diagonal energy, journey steps, higher purposeful interaction density."
+>
+  <Fragment slot="head">
+    <style>
+      .c3 {
+        --ink: #152822;
+        --muted: #3a5048;
+        --bg: #eef3f0;
+        --panel: #ffffff;
+        --forest: #1e4d42;
+        --sage: #3d7a6a;
+        --lime: #5fa88a;
+        --border: #c5d5cc;
+        font-family: "Source Sans 3", system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      .c3 h1,
+      .c3 h2,
+      .c3 h3 {
+        font-family: "Source Serif 4", Georgia, serif;
+      }
+      .c3 header {
+        position: sticky;
+        top: 2.25rem;
+        z-index: 30;
+        background: var(--forest);
+        color: #fff;
+      }
+      .c3 .shell {
+        max-width: 76rem;
+        margin: 0 auto;
+        padding: 0 1.25rem;
+      }
+      .c3 .nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        font-size: 0.95rem;
+      }
+      .c3 .nav-cta {
+        background: var(--lime);
+        color: var(--ink);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .c3 .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 2.5rem 0 4rem;
+        background: linear-gradient(135deg, #dcebe4 0%, #f7f6f3 45%, #c9e0d4 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+      }
+      .c3 .hero-inner {
+        display: grid;
+        gap: 2rem;
+        align-items: end;
+      }
+      @media (min-width: 880px) {
+        .c3 .hero-inner {
+          grid-template-columns: 1.2fr 0.8fr;
+        }
+      }
+      .c3 h1 {
+        font-size: clamp(2.15rem, 4.8vw, 3.6rem);
+        line-height: 1.05;
+        margin: 0.5rem 0 0;
+        max-width: 15ch;
+      }
+      .c3 .tag {
+        display: inline-block;
+        background: var(--forest);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.35rem 0.65rem;
+        border-radius: 4px;
+      }
+      .c3 .lead {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: var(--muted);
+        max-width: 40ch;
+        margin-top: 1rem;
+      }
+      .c3 .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.25rem;
+      }
+      .c3 .chip {
+        background: #fff;
+        border: 1px solid var(--border);
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+      }
+      .c3 .visual {
+        background: repeating-linear-gradient(
+          -12deg,
+          #ffffff55,
+          #ffffff55 12px,
+          #2d6a5a22 12px,
+          #2d6a5a22 24px
+        );
+        border: 2px solid var(--sage);
+        border-radius: 1rem 1rem 2.5rem 1rem;
+        min-height: 260px;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.25rem;
+      }
+      .c3 .visual p {
+        margin: 0;
+        background: #fff;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+      .c3 .path {
+        margin-top: -1.5rem;
+        padding: 3rem 0 4rem;
+      }
+      .c3 .path-scroll {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+      }
+      .c3 .step {
+        flex: 0 0 min(85vw, 240px);
+        scroll-snap-align: start;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 1.25rem;
+        transition: border-color 0.2s, transform 0.2s;
+      }
+      .c3 .step:hover {
+        border-color: var(--sage);
+        transform: translateY(-3px);
+      }
+      .c3 .step strong {
+        display: block;
+        font-size: 2rem;
+        color: var(--sage);
+        font-family: "Source Serif 4", serif;
+        line-height: 1;
+      }
+      .c3 .tiles {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (min-width: 700px) {
+        .c3 .tiles {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .c3 .tile {
+        background: var(--panel);
+        border-radius: 12px;
+        padding: 1rem;
+        border: 1px solid var(--border);
+        font-size: 1.05rem;
+        min-height: 5.5rem;
+      }
+      .c3 details {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0 1rem;
+        margin-top: 0.75rem;
+      }
+      .c3 summary {
+        cursor: pointer;
+        font-weight: 700;
+        padding: 1rem 0;
+        list-style: none;
+      }
+      .c3 summary::-webkit-details-marker {
+        display: none;
+      }
+      .c3 .sticky-call {
+        display: none;
+      }
+      @media (max-width: 639px) {
+        .c3 .sticky-call {
+          display: flex;
+          gap: 0.5rem;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 40;
+          background: var(--forest);
+          padding: 0.65rem;
+        }
+        .c3 .sticky-call a {
+          flex: 1;
+          text-align: center;
+          color: #fff;
+          text-decoration: none;
+          font-weight: 700;
+          padding: 0.65rem;
+          border-radius: 8px;
+          background: var(--sage);
+        }
+        .c3 {
+          padding-bottom: 4rem;
+        }
+      }
+    </style>
+  </Fragment>
+
+  <div class="c3" id="main">
+    <header>
+      <div class="shell nav">
+        <span><strong>Jackson</strong> · Mobile physio · EN / 粵 / 普</span>
+        <a class="nav-cta" href="tel:+61433479703">0433 479 703</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="shell hero-inner">
+        <div>
+          <span class="tag">Eastern suburbs · Home visits</span>
+          <h1>Mobile physiotherapy in Melbourne&rsquo;s eastern suburbs</h1>
+          <p class="lead">Vitality in everyday movement — Jackson is your contact and your clinician. Plan/self-managed NDIS enquiries only; not a registered NDIS provider.</p>
+          <div class="chips">
+            <span class="chip">Box Hill</span>
+            <span class="chip">Doncaster</span>
+            <span class="chip">Ringwood</span>
+            <span class="chip">+ surrounds</span>
+          </div>
+          <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.65rem;">
+            <a href="#path" style="background: var(--forest); color: #fff; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; text-decoration: none;">See how it works</a>
+            <a href="tel:+61433479703" style="background: #fff; border: 2px solid var(--forest); color: var(--forest); padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; text-decoration: none;">Call</a>
+          </div>
+        </div>
+        <div class="visual">
+          <p>Community & home environment imagery — placeholder until Jackson&rsquo;s photo shoot. No fake practitioner photo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="path" id="path">
+      <div class="shell">
+        <h2 style="font-size: clamp(1.75rem, 4vw, 2.35rem); margin: 0 0 0.35rem;">Your path with Jackson</h2>
+        <p style="color: var(--muted); font-size: 1.1rem; margin: 0 0 1.25rem;">Purposeful density — scroll on mobile, grid on desktop.</p>
+        <div class="path-scroll">
+          <article class="step"><strong>01</strong><h3 style="margin: 0.5rem 0 0.35rem; font-size: 1.15rem;">You reach out</h3><p style="margin: 0; color: var(--muted); font-size: 1rem;">Phone or enquiry — Jackson responds.</p></article>
+          <article class="step"><strong>02</strong><h3 style="margin: 0.5rem 0 0.35rem; font-size: 1.15rem;">Home visit</h3><p style="margin: 0; color: var(--muted); font-size: 1rem;">Assessment where you live.</p></article>
+          <article class="step"><strong>03</strong><h3 style="margin: 0.5rem 0 0.35rem; font-size: 1.15rem;">Together</h3><p style="margin: 0; color: var(--muted); font-size: 1rem;">Goals that fit your routine.</p></article>
+          <article class="step"><strong>04</strong><h3 style="margin: 0.5rem 0 0.35rem; font-size: 1.15rem;">Keep moving</h3><p style="margin: 0; color: var(--muted); font-size: 1rem;">Ongoing support as agreed.</p></article>
+        </div>
+        <div class="tiles" style="margin-top: 2rem;">
+          <div class="tile">Strength & balance</div>
+          <div class="tile">NDIS (plan/self)</div>
+          <div class="tile">Older adults welcome</div>
+          <div class="tile">AHPRA pending</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0 4rem;">
+      <div class="shell">
+        <h2 style="font-size: 1.5rem;">Common questions</h2>
+        <details open>
+          <summary>Who will I speak with?</summary>
+          <p style="color: var(--muted); padding-bottom: 1rem; font-size: 1.05rem;">Jackson — the physiotherapist who attends your visit.</p>
+        </details>
+        <details>
+          <summary>Are you an NDIS registered provider?</summary>
+          <p style="color: var(--muted); padding-bottom: 1rem; font-size: 1.05rem;">No. Enquiries from plan-managed and self-managed participants only.</p>
+        </details>
+      </div>
+    </section>
+
+    <div class="sticky-call">
+      <a href="tel:+61433479703">Call</a>
+      <a href="#path">How it works</a>
+    </div>
+  </div>
+</ConceptLayout>

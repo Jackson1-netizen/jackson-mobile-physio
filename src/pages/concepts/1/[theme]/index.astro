@@ -1,0 +1,23 @@
+---
+import ConceptLayout from "../../../../layouts/ConceptLayout.astro";
+import HomepageV2 from "../../../../components/concept1/HomepageV2.astro";
+import { concept1ThemeMeta, type Concept1Theme } from "../../../../content/concept1-images";
+
+export function getStaticPaths() {
+  return (["a", "b", "c"] as Concept1Theme[]).map((theme) => ({
+    params: { theme },
+  }));
+}
+
+const { theme } = Astro.params as { theme: Concept1Theme };
+const meta = concept1ThemeMeta[theme];
+---
+
+<ConceptLayout
+  concept={1}
+  status={`Editorial Forest · ${meta.label}`}
+  title={`Concept 1 — ${meta.label} (homepage mockup)`}
+  description={meta.description}
+>
+  <HomepageV2 theme={theme} mode="concept" />
+</ConceptLayout>

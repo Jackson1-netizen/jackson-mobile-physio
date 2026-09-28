@@ -1,0 +1,17 @@
+---
+import { localeLabels } from "../content/i18n";
+---
+
+<div class="flex items-center gap-1 rounded-md border border-[var(--color-border)] bg-white p-0.5 text-xs" role="group" aria-label="Language">
+  {
+    Object.entries(localeLabels).map(([code, label]) => (
+      <button
+        type="button"
+        class="lang-btn rounded px-2 py-1 font-medium text-[var(--color-ink-muted)] transition hover:text-[var(--color-accent)] data-[active=true]:bg-[var(--color-accent)] data-[active=true]:text-white"
+        data-locale={code}
+      >
+        {label}
+      </button>
+    ))
+  }
+</div>
