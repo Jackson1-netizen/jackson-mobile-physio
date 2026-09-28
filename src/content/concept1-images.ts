@@ -4,10 +4,10 @@
  */
 export const concept1Images = {
   heroVideo: {
-    mp4: "https://videos.pexels.com/video-files/8434144/8434144-hd_1920_1080_25fps.mp4",
+    mp4: "https://videos.pexels.com/video-files/4761418/4761418-hd_1920_1080_25fps.mp4",
     poster:
-      "https://images.pexels.com/photos/4506164/pexels-photo-4506164.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Generic physiotherapist guiding a home exercise — not Jackson or a specific client",
+      "https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    alt: "Generic physiotherapist guiding a client through exercise with a therapy band — not Jackson or a specific client",
   },
   physioAtHome: {
     src: "https://images.pexels.com/photos/8421524/pexels-photo-8421524.jpeg?auto=compress&cs=tinysrgb&w=1400",

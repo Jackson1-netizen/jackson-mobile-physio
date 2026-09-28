@@ -9,13 +9,15 @@ export const site = {
   /** Site is in draft — not a live public professional site */
   draft: true,
 
-  businessName: "WAI WA LAW",
+  businessName: "Home Motion",
   /** Swappable wordmark in header — rebrand without restructuring site */
-  displayBrand: "WAI WA LAW",
+  displayBrand: "Home Motion",
   practitionerName: 'Wai Wa "Jackson" Law',
   legalNamePlaceholder: "[LEGAL TRADING NAME IF DISTINCT — NOT CONFIRMED]",
 
   tagline: "Mobile Physiotherapy",
+  /** Brand line in hero — swappable */
+  motto: "Your physio comes to you.",
   locationDescriptor: "Melbourne Eastern Suburbs",
 
   phone: "0433 479 703",
@@ -23,7 +25,7 @@ export const site = {
 
   email: EMAIL_PLACEHOLDER,
   /** mailto without a fabricated address — subject-only until email is confirmed */
-  emailHref: "mailto:?subject=Enquiry%20%E2%80%94%20WAI%20WA%20LAW",
+  emailHref: "mailto:?subject=Enquiry%20%E2%80%94%20Home%20Motion",
 
   /**
    * Internal canonical/base URL only. Do not render on public pages.

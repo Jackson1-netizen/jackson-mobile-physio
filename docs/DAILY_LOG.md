@@ -80,3 +80,9 @@
 
 - **Changed:** `/` serves Homepage V1 theme A; site `displayBrand` + `registrationStatus`; hero stock video.  
 - **Next:** Wait for writing-plans instruction.  
+
+## 2026-09-28 (Home Motion + hero advantages)
+
+- **Changed:** Rebrand to Home Motion (`motto`, logo in header); hero motto + blended icon advantages row; guided-exercise hero video; `AdvantageIcon` component.  
+- **Decisions:** Temporary registered name Home Motion — still swappable via `site.ts`.  
+- **Next:** Jackson review at `http://127.0.0.1:4721/`.  

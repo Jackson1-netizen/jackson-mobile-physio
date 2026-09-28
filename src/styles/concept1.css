@@ -92,44 +92,86 @@
   }
 }
 
-.c1-highlight-grid {
+.c1-hero-unified {
+  background: var(--c-hero-grad);
+}
+
+.c1-hero-unified::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 55%,
+    color-mix(in srgb, var(--c-surface) 35%, transparent) 88%,
+    var(--c-surface) 100%
+  );
+  pointer-events: none;
+}
+
+.c1-hero-motto {
+  font-family: var(--c-font-serif);
+  font-size: clamp(1.85rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--c-deep);
+  max-width: 14ch;
+}
+
+.c1-advantage-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: 0.75rem;
+  gap: 0.65rem 1rem;
   grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--c-elevated) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-border) 65%, transparent);
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--c-deep) 6%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 @media (min-width: 640px) {
-  .c1-highlight-grid {
+  .c1-advantage-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.25rem;
+    padding: 1rem 1.25rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .c1-highlight-grid {
+  .c1-advantage-grid {
     grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem 0.75rem;
   }
 }
 
-.c1-highlight-box {
+.c1-advantage-item {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 5.5rem;
-  padding: 1.1rem 1rem;
-  border-radius: 1rem;
-  border: 2px solid var(--c-border);
-  background: var(--c-elevated);
-  text-align: center;
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-  font-weight: 700;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
   line-height: 1.35;
   color: var(--c-ink);
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--c-deep) 8%, transparent);
 }
 
-.c1-highlight-box.is-emphasis {
-  border-color: color-mix(in srgb, var(--c-accent) 55%, var(--c-border));
-  background: color-mix(in srgb, var(--c-mist) 70%, var(--c-elevated));
+.c1-advantage-icon {
+  flex-shrink: 0;
+  display: flex;
+  margin-top: 0.1rem;
+  color: var(--c-accent);
+}
+
+.c1-hero-registration {
+  position: relative;
+  z-index: 1;
+  color: var(--c-muted);
 }
 
 .c1-services-menu {

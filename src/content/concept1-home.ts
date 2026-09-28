@@ -20,11 +20,11 @@ export const concept1Purpose = {
 };
 
 export const concept1TrustHighlights = [
-  { line: "Home & community visits", emphasis: false },
-  { line: "Plan-managed enquiries welcome", emphasis: false },
-  { line: "Self-managed enquiries welcome", emphasis: false },
-  { line: "Not an NDIS registered provider", emphasis: true },
-  { line: "English · 廣東話 · 普通話", emphasis: false },
+  { icon: "home" as const, line: "Home & community visits" },
+  { icon: "plan" as const, line: "Plan-managed enquiries welcome" },
+  { icon: "self" as const, line: "Self-managed enquiries welcome" },
+  { icon: "ndis" as const, line: "Not an NDIS registered provider" },
+  { icon: "lang" as const, line: "English · 廣東話 · 普通話" },
 ] as const;
 
 export const concept1ServiceNav = [
