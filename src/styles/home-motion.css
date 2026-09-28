@@ -880,17 +880,19 @@
 }
 
 .hm-how-media .hm-img-zoom {
+  position: relative;
   min-height: 9.5rem;
   aspect-ratio: 4 / 3;
 }
 
 .hm-how-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 30%;
   border-radius: 1.1rem;
-  min-height: 9.5rem;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -915,11 +917,14 @@
 }
 
 .hm-why-media .hm-img-zoom {
+  position: relative;
   min-height: 12rem;
   aspect-ratio: 4 / 3;
 }
 
 .hm-why-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1005,17 +1010,20 @@
 }
 
 .hm-ndis-photo {
+  position: relative;
   border-radius: 1.2rem;
   overflow: hidden;
   min-height: 14rem;
+  aspect-ratio: 4 / 3;
 }
 
 .hm-ndis-photo img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 28%;
-  min-height: 14rem;
 }
 
 .hm-ndis ul {
