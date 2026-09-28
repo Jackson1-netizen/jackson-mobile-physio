@@ -1,8 +1,10 @@
 ---
 import { site } from "../../content/site";
-import { homeAreas, homeSuburbs } from "../../content/home-motion";
+import { homeAreas, homeCardEmail, homeSuburbs } from "../../content/home-motion";
 import ServiceAreaMap from "./ServiceAreaMap.astro";
 import HomeIcon from "./HomeIcon.astro";
+
+// homeCardEmail is a draft visual on the card only — not site.email and not a confirmed inbox.
 ---
 
 <section id="areas" class="hm-areas-band scroll-mt-24">
@@ -11,36 +13,42 @@ import HomeIcon from "./HomeIcon.astro";
       <div class="hm-card-stack" aria-label="Home Motion contact card">
         <article class="hm-print-card hm-print-card-back">
           <img src="/home-motion-logo.png" alt="" width="180" height="56" />
-          <p>{site.tagline}</p>
         </article>
         <article class="hm-print-card hm-print-card-front">
           <p class="hm-print-name">Jackson</p>
           <p class="hm-print-role">Mobile Physiotherapist</p>
-          <p><a href={site.phoneHref}>{site.phone}</a></p>
-          <p>{site.locationDescriptor}</p>
-          <p class="hm-print-motto">{homeAreas.motto}</p>
+          <p class="hm-print-phone"><a href={site.phoneHref}>{site.phone}</a></p>
+          <p class="hm-print-email">{homeCardEmail}</p>
+          <div class="hm-print-foot">
+            <p class="hm-print-place">{homeAreas.cardPlace}</p>
+            <p class="hm-print-motto">{homeAreas.motto}</p>
+          </div>
         </article>
       </div>
     </div>
     <div class="hm-areas-copy">
-      <h2>{homeAreas.kicker}</h2>
-      <p>{homeAreas.heading}</p>
-      <ul class="hm-pin-list">
-        {
-          homeSuburbs.map((suburb) => (
-            <li>
-              <a href={suburb.href}>
-                <span class="hm-pin">
-                  <HomeIcon name="pin" size={18} />
-                </span>
-                {suburb.name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <ServiceAreaMap />
-      <p class="hm-map-caption">{homeAreas.mapCaption}</p>
+      <div class="hm-areas-copy-text">
+        <h2>{homeAreas.kicker}</h2>
+        <p>{homeAreas.heading}</p>
+        <ul class="hm-pin-list">
+          {
+            homeSuburbs.map((suburb) => (
+              <li>
+                <a href={suburb.href}>
+                  <span class="hm-pin">
+                    <HomeIcon name="pin" size={18} />
+                  </span>
+                  {suburb.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="hm-areas-map-col">
+        <ServiceAreaMap />
+        <p class="hm-map-caption">{homeAreas.mapCaption}</p>
+      </div>
     </div>
   </div>
 </section>

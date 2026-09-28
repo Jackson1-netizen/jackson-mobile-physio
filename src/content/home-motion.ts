@@ -143,7 +143,26 @@ export const homeAreas = {
     "https://www.openstreetmap.org/export/embed.html?bbox=145.02%2C-37.90%2C145.28%2C-37.76&layer=mapnik",
   mapExternal: "https://www.openstreetmap.org/#map=12/-37.82/145.15",
   motto: "People Movement Home",
+  cardPlace: "Melbourne's Eastern Suburbs",
 };
+
+/**
+ * Draft visual on the business card only.
+ * Not a confirmed inbox — do not copy into site.email or the enquiry mailto.
+ */
+export const homeCardEmail = "hello@homemotionphysio.au";
+
+/** Suburb centres for the service-area map. Not a home or clinic address. */
+export const homeMapPins = [
+  { name: "Box Hill", lat: -37.819, lng: 145.1227 },
+  { name: "Doncaster", lat: -37.788, lng: 145.124 },
+  { name: "Blackburn", lat: -37.8197, lng: 145.1515 },
+  { name: "Ringwood", lat: -37.8116, lng: 145.2296 },
+  { name: "Burwood", lat: -37.8498, lng: 145.1135 },
+  { name: "Glen Waverley", lat: -37.8796, lng: 145.1648 },
+  { name: "Mitcham", lat: -37.817, lng: 145.1928 },
+  { name: "Nunawading", lat: -37.8203, lng: 145.1771 },
+] as const;
 
 export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {
   const page = suburbPages.find((s) => s.name === name);

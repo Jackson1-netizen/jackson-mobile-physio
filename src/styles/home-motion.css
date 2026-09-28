@@ -212,7 +212,7 @@
 }
 
 .hm-card-stage {
-  min-height: 18rem;
+  min-height: 24rem;
   background:
     linear-gradient(180deg, rgb(250 246 240 / 0.15), rgb(22 53 46 / 0.08)),
     url("https://images.pexels.com/photos/172292/pexels-photo-172292.jpeg?auto=compress&cs=tinysrgb&w=1200")
@@ -224,13 +224,12 @@
 
 .hm-card-stack {
   position: relative;
-  width: min(18rem, 86%);
-  height: 12.5rem;
+  width: min(21rem, 94%);
+  height: 19rem;
 }
 
 .hm-print-card {
   position: absolute;
-  inset: 0;
   background: #fffdf8;
   border-radius: 0.55rem;
   box-shadow: 0 14px 30px rgb(22 53 46 / 0.22);
@@ -238,12 +237,18 @@
 }
 
 .hm-print-card-back {
-  transform: rotate(-11deg) translate(-0.4rem, -0.35rem);
+  z-index: 1;
+  top: 0.2rem;
+  left: 0;
+  width: 16.5rem;
+  transform: rotate(-12deg);
 }
 
 .hm-print-card-back img {
-  height: 3.2rem;
+  display: block;
+  height: 4.1rem;
   width: auto;
+  mix-blend-mode: multiply;
 }
 
 .hm-print-card-back p {
@@ -253,8 +258,47 @@
 }
 
 .hm-print-card-front {
-  transform: rotate(6deg) translate(0.8rem, 1.4rem);
-  font-size: 0.82rem;
+  z-index: 2;
+  top: 7.4rem;
+  left: 2.3rem;
+  width: 17.2rem;
+  transform: rotate(7deg);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.hm-print-card-front p {
+  margin: 0;
+}
+
+.hm-print-card a {
+  color: var(--hm-forest);
+  text-decoration: none;
+}
+
+.hm-print-phone,
+.hm-print-email,
+.hm-print-place {
+  font-size: 0.78rem;
+}
+
+.hm-print-email {
+  margin-top: 0.15rem;
+}
+
+.hm-print-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.65rem;
+  margin-top: 0.45rem;
+}
+
+.hm-print-place {
+  max-width: 14ch;
+  font-size: 0.72rem;
 }
 
 .hm-print-name {
@@ -270,16 +314,22 @@
 }
 
 .hm-print-motto {
-  margin-top: 0.55rem;
-  font-size: 0.68rem;
+  margin: 0;
+  max-width: 9ch;
+  text-align: right;
+  font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.08em;
+  line-height: 1.25;
   text-transform: uppercase;
 }
 
 .hm-areas-copy {
+  display: grid;
+  gap: 1.1rem;
   padding: 2rem 1.4rem 2.2rem;
   background: #fff;
+  align-items: center;
 }
 
 .hm-areas-copy h2 {
@@ -340,7 +390,11 @@
 
 @media (min-width: 1024px) {
   .hm-areas-split {
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 0.82fr 1.18fr;
+  }
+  .hm-areas-copy {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 0.8rem 1rem;
   }
   .hm-refer-points {
     grid-template-columns: repeat(3, 1fr);
@@ -603,12 +657,31 @@
 }
 
 .hm-hero-media video,
-.hm-hero-media img {
+.hm-hero-poster {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Official logo PNG. Multiply drops the white plate so the mark sits on the shirt. */
+.hm-polo-logo {
+  position: absolute;
+  z-index: 3;
+  left: 2%;
+  top: 7%;
+  width: 32%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.hm-polo-logo.is-on-clip {
+  left: 18%;
+  top: 38%;
+  width: 24%;
 }
 
 .hm-hero-script {
@@ -856,18 +929,97 @@
 }
 
 .hm-map {
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
   overflow: hidden;
   border-radius: 1.2rem;
+  height: 20rem;
   min-height: 16rem;
-  background: #e7efe4;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.2), rgb(255 255 255 / 0)),
+    #e4efe4;
   box-shadow: 0 16px 40px rgb(23 61 53 / 0.1);
 }
 
-.hm-map iframe {
-  display: block;
+.hm-map-canvas,
+.hm-map .leaflet-container {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 18rem;
+  height: 100%;
+  background: #e7efe6;
+  font-family: var(--hm-sans);
+}
+
+.hm-map .leaflet-container img,
+.hm-map .leaflet-tile {
+  max-width: none;
+}
+
+.hm-map-pins {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.hm-map.is-live .hm-map-pins {
+  visibility: hidden;
+}
+
+.hm-map-pin,
+.hm-leaflet-pin {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  width: max-content !important;
+  height: auto !important;
+  background: transparent;
   border: 0;
+}
+
+.hm-leaflet-pin.is-label-left {
+  justify-content: flex-end;
+}
+
+.hm-map-pin {
+  transform: translate(-0.15rem, -0.85rem);
+}
+
+.hm-map-pin-mark,
+.hm-leaflet-pin-mark {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 0.1rem;
+  background: #e36a2a;
+  border: 2px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  box-shadow: 0 1px 3px rgb(40 32 20 / 0.28);
+  transform: rotate(-45deg);
+}
+
+.hm-map-pin-label,
+.hm-leaflet-pin-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #3a332b;
+  white-space: nowrap;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 3px #fff,
+    0 1px 0 #fff;
+}
+
+.hm-map .leaflet-control-attribution {
+  font-size: 10px;
+  background: rgb(255 255 255 / 0.82);
 }
 
 .hm-map-caption,

@@ -62,6 +62,13 @@ const registrationLine = getRegistrationDisplayLine();
           height="900"
           fetchpriority="high"
         />
+        <img
+          class="hm-polo-logo"
+          src="/home-motion-logo.png"
+          alt=""
+          width="627"
+          height="388"
+        />
       </div>
       <div class="hm-blobs" aria-hidden="true">
         <span class="hm-blob hm-blob-orange"></span>
@@ -70,4 +77,16 @@ const registrationLine = getRegistrationDisplayLine();
       </div>
     </div>
   </div>
+  <script>
+    const video = document.querySelector<HTMLVideoElement>(".hm-hero-video");
+    const logo = document.querySelector(".hm-polo-logo");
+    if (video && logo) {
+      const sync = () => {
+        logo.classList.toggle("is-on-clip", !video.paused && !video.ended && video.readyState >= 2);
+      };
+      video.addEventListener("playing", sync);
+      video.addEventListener("pause", sync);
+      video.addEventListener("ended", sync);
+    }
+  </script>
 </section>

@@ -1,12 +1,97 @@
 ---
-import { homeAreas } from "../../content/home-motion";
+import "leaflet/dist/leaflet.css";
+import { homeMapPins } from "../../content/home-motion";
+
+const west = 145.09;
+const east = 145.25;
+const north = -37.775;
+const south = -37.895;
+
+const pins = homeMapPins.map((pin) => {
+  const left = ((pin.lng - west) / (east - west)) * 100;
+  const top = ((north - pin.lat) / (north - south)) * 100;
+  return { ...pin, left, top };
+});
 ---
 
-<div class="hm-map">
-  <iframe
-    title={homeAreas.mapCaption}
-    src={homeAreas.mapEmbed}
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
+<div class="hm-map" data-hm-map>
+  <div class="hm-map-canvas" data-hm-map-canvas></div>
+  <ul class="hm-map-pins">
+    {
+      pins.map((pin) => (
+        <li
+          class="hm-map-pin"
+          data-lat={pin.lat}
+          data-lng={pin.lng}
+          style={`left:${pin.left.toFixed(1)}%;top:${pin.top.toFixed(1)}%;`}
+        >
+          <span class="hm-map-pin-mark" aria-hidden="true"></span>
+          <span class="hm-map-pin-label">{pin.name}</span>
+        </li>
+      ))
+    }
+  </ul>
 </div>
+
+<script>
+  import * as L from "leaflet";
+
+  const mountMap = () => {
+    const root = document.querySelector<HTMLElement>("[data-hm-map]");
+    const canvas = root?.querySelector<HTMLElement>("[data-hm-map-canvas]");
+    if (!root || !canvas || canvas.dataset.mounted === "1") return;
+
+    const pins = [...root.querySelectorAll<HTMLElement>(".hm-map-pin")]
+      .map((el) => ({
+        name: el.querySelector(".hm-map-pin-label")?.textContent?.trim() ?? "",
+        lat: Number(el.dataset.lat),
+        lng: Number(el.dataset.lng),
+      }))
+      .filter((pin) => Number.isFinite(pin.lat) && Number.isFinite(pin.lng) && pin.name);
+
+    if (!pins.length) return;
+    canvas.dataset.mounted = "1";
+
+    const map = L.map(canvas, {
+      scrollWheelZoom: false,
+      zoomControl: true,
+      attributionControl: true,
+      zoomSnap: 0.25,
+      zoomDelta: 0.5,
+    });
+
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxZoom: 19,
+        attribution:
+          'Tiles &copy; <a href="https://www.esri.com/">Esri</a>',
+      },
+    ).addTo(map);
+
+    const labelLeft = new Set(["Box Hill", "Burwood", "Nunawading"]);
+    const bounds: [number, number][] = [];
+    for (const pin of pins) {
+      const left = labelLeft.has(pin.name);
+      const icon = L.divIcon({
+        className: left ? "hm-leaflet-pin is-label-left" : "hm-leaflet-pin",
+        html: left
+          ? `<span class="hm-leaflet-pin-label">${pin.name}</span><span class="hm-leaflet-pin-mark" aria-hidden="true"></span>`
+          : `<span class="hm-leaflet-pin-mark" aria-hidden="true"></span><span class="hm-leaflet-pin-label">${pin.name}</span>`,
+        iconSize: left ? [132, 24] : [132, 24],
+        iconAnchor: left ? [124, 12] : [8, 12],
+      });
+      L.marker([pin.lat, pin.lng], { icon, title: pin.name, keyboard: false }).addTo(map);
+      bounds.push([pin.lat, pin.lng]);
+    }
+
+    const fit = () => {
+      map.invalidateSize();
+      map.fitBounds(bounds, { padding: [22, 26], maxZoom: 13 });
+    };
+    root.classList.add("is-live");
+    requestAnimationFrame(fit);
+  };
+
+  mountMap();
+</script>
