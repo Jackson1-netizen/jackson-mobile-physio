@@ -587,7 +587,6 @@
   font-size: 0.95rem;
   font-weight: 600;
 }
-}
 
 .hm-ahpra {
   margin: 1rem 0 0;
@@ -597,8 +596,8 @@
 
 .hm-hero-media {
   position: relative;
-  min-height: min(26rem, 62vw);
-  border-radius: 2rem 0.75rem 2rem 8rem;
+  min-height: min(28rem, 70vw);
+  border-radius: 1.35rem;
   overflow: hidden;
   box-shadow: 0 28px 60px rgb(23 61 53 / 0.18);
 }
@@ -1182,5 +1181,8 @@
   }
   .hm-hero {
     padding-bottom: 5.5rem;
+  }
+  .hm-hero h1 span {
+    white-space: normal;
   }
 }

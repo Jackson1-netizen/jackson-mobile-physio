@@ -3,7 +3,7 @@ import { homeServices } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 ---
 
-<section id="services" class="hm-band hm-band-green hm-reveal scroll-mt-24">
+<section id="services" class="hm-band hm-band-green scroll-mt-24">
   <div class="hm-wrap hm-section">
     <div class="hm-section-head">
       <div>
@@ -16,7 +16,7 @@ import HomeIcon from "./HomeIcon.astro";
       </a>
     </div>
     <p class="sr-only">{homeServices.intro}</p>
-    <ul class="hm-service-grid hm-stagger">
+    <ul class="hm-service-grid">
       {
         homeServices.cards.map((card) => (
           <li>
