@@ -69,3 +69,10 @@ Append-only record. Do not silently overwrite prior entries.
 - **Recommended BUILD approach:** “Polished sole practitioner” (~60% BetterCare interaction density, forest/sage hybrid §8).  
 - **Explicit won’t copy:** Yellow/navy brand, mega-menu, fake/review carousel UX, NDIS registered positioning, team-at-scale imagery.  
 - **No implementation** — awaiting **BUILD V2**.  
+
+## 2026-09-28 — Workflow locked: concepts before plans
+
+- **Chain:** Competitor ref → brainstorming (§14) → **3 homepage concepts** → Jackson pick → Wonder refinement → writing-plans → executing-plans → Astro production → audit.  
+- **Benchmark quote** recorded in §14.  
+- **Concept routes:** `/concepts/1/` Editorial Forest, `/concepts/2/` Warm Meadow, `/concepts/3/` Active Path — mockups only, `noindex`.  
+- **Gate:** Waiting for Jackson to reply **1**, **2**, or **3**. No writing-plans, no executing-plans, no production multi-page site yet.  

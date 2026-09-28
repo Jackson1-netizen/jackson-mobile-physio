@@ -4,13 +4,13 @@
 
 ---
 
-## Website V2 (visual direction locked — awaiting BUILD)
+## Website V2 (workflow — pick a concept)
 
-1. **Visual direction:** **Approved** — hybrid §8. **Quality bar:** BetterCare reference adapted in §14 (not a clone).  
-2. **Jackson (optional):** Confirm sitemap / suburb list / copy tweaks before BUILD.  
-3. **Jackson:** Reply **BUILD V2** in Cursor to authorize implementation (no site work until then).  
-4. **After BUILD V2:** Photography per `docs/PHOTO_SHOT_LIST.md`; SEO per `docs/SEO_STRATEGY.md` and `docs/SEO_LAUNCH_CHECKLIST.md`.  
-5. **Plan branch:** `cursor/website-v2-plan-e732` (docs). Implementation branches from this plan after BUILD V2.
+1. **Jackson:** Open concept hub `http://127.0.0.1:4721/concepts/` — compare **Concept 1**, **2**, **3** (desktop + mobile).  
+2. **Jackson:** Reply **1**, **2**, or **3** in Cursor.  
+3. **Then:** Wonder refinement (may need your auth) → writing-plans → executing-plans → production Astro site → Lighthouse/SEO audit.  
+4. **Do not skip:** No full implementation plan or multi-page BUILD until after Wonder.  
+5. **Docs:** `docs/WEBSITE_V2_PLAN.md` §14–§15; branch `cursor/website-v2-plan-e732`.
 
 ---
 

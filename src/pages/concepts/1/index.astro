@@ -1,0 +1,337 @@
+---
+import ConceptLayout from "../../../layouts/ConceptLayout.astro";
+---
+
+<ConceptLayout
+  concept={1}
+  title="Concept 1 — Editorial Forest (homepage mockup)"
+  description="Homepage visual concept: cool forest palette, editorial hero, medium interaction density."
+>
+  <Fragment slot="head">
+    <style>
+      .c1 {
+        --ink: #1a2e28;
+        --muted: #3d524c;
+        --surface: #f4f6f4;
+        --white: #ffffff;
+        --accent: #2d6a5a;
+        --accent-bright: #3a8a72;
+        --border: #d0ddd6;
+        font-family: "Source Sans 3", system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--surface);
+      }
+      .c1 h1,
+      .c1 h2,
+      .c1 h3 {
+        font-family: "Source Serif 4", Georgia, serif;
+      }
+      .c1 header {
+        position: sticky;
+        top: 2.25rem;
+        z-index: 40;
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.92);
+        border-bottom: 1px solid var(--border);
+      }
+      .c1 .shell {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 1.25rem;
+      }
+      .c1 .nav-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.85rem 0;
+      }
+      .c1 .brand {
+        font-family: "Source Serif 4", serif;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      .c1 .brand small {
+        display: block;
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .c1 .langs span {
+        display: inline-block;
+        padding: 0.25rem 0.55rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        font-size: 0.8rem;
+        margin-left: 0.25rem;
+      }
+      .c1 .langs span.on {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .c1 .hero {
+        min-height: min(92vh, 52rem);
+        display: grid;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .c1 .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(105deg, #e8f0ec 0%, #c5d9ce 42%, #8fb5a3 100%);
+      }
+      .c1 .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #f4f6f4f5 0%, #f4f6f4cc 38%, transparent 68%);
+      }
+      .c1 .hero-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3.5rem 0 4rem;
+      }
+      @media (min-width: 900px) {
+        .c1 .hero-grid {
+          grid-template-columns: 1.05fr 0.95fr;
+          align-items: center;
+        }
+      }
+      .c1 .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .c1 h1 {
+        font-size: clamp(2.1rem, 5vw, 3.75rem);
+        line-height: 1.08;
+        margin: 0.75rem 0 0;
+        max-width: 16ch;
+      }
+      .c1 .lead {
+        font-size: clamp(1.125rem, 2vw, 1.35rem);
+        line-height: 1.65;
+        color: var(--muted);
+        max-width: 38ch;
+        margin: 1.25rem 0 0;
+      }
+      .c1 .photo-slot {
+        border: 2px dashed #5a7a6e;
+        border-radius: 1.25rem;
+        min-height: 280px;
+        background: linear-gradient(160deg, #ffffff99, #ffffff44);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1.5rem;
+        color: #2f4f44;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+      .c1 .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+      }
+      .c1 .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3rem;
+        padding: 0 1.35rem;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .c1 .btn-primary {
+        background: var(--accent-bright);
+        color: #fff;
+      }
+      .c1 .btn-secondary {
+        background: #fff;
+        border-color: var(--border);
+        color: var(--ink);
+      }
+      .c1 .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(26, 46, 40, 0.12);
+      }
+      .c1 .trust {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .c1 .trust span {
+        font-size: 0.85rem;
+        padding: 0.45rem 0.75rem;
+        background: #fff;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+      }
+      .c1 section {
+        padding: clamp(3.5rem, 8vw, 5.5rem) 0;
+      }
+      .c1 .cards {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 700px) {
+        .c1 .cards {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .c1 .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 1.35rem;
+        transition: transform 0.22s, border-color 0.22s;
+      }
+      .c1 .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+      }
+      .c1 .card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+      }
+      .c1 .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.55;
+      }
+      .c1 .sticky-call {
+        display: none;
+      }
+      @media (max-width: 639px) {
+        .c1 .sticky-call {
+          display: flex;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 45;
+          background: var(--accent);
+          color: #fff;
+          justify-content: center;
+          align-items: center;
+          min-height: 3.25rem;
+          font-weight: 700;
+          text-decoration: none;
+        }
+        .c1 {
+          padding-bottom: 3.5rem;
+        }
+      }
+      .c1 .notice {
+        background: #faf3e0;
+        border: 1px solid #e8d9a8;
+        border-radius: 0.75rem;
+        padding: 1rem 1.15rem;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        margin-top: 1.25rem;
+      }
+      .c1 .reviews-empty {
+        border: 2px dashed var(--border);
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        color: var(--muted);
+        background: #fff;
+      }
+    </style>
+  </Fragment>
+
+  <div class="c1" id="main">
+    <header>
+      <div class="shell nav-row">
+        <div class="brand">
+          Jackson · Mobile Physio
+          <small>Melbourne eastern suburbs</small>
+        </div>
+        <div class="langs" aria-label="Languages">
+          <span class="on">EN</span><span>粵</span><span>普</span>
+        </div>
+        <a class="btn btn-primary" href="tel:+61433479703">0433 479 703</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Independent · Home & community visits</p>
+          <h1>Mobile physiotherapy in Melbourne&rsquo;s eastern suburbs</h1>
+          <p class="lead">
+            When you enquire, you speak with Jackson — the physiotherapist who personally delivers your care. English,
+            Cantonese, and Mandarin.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">Enquire</a>
+            <a class="btn btn-secondary" href="tel:+61433479703">Call</a>
+          </div>
+          <div class="trust">
+            <span>NDIS plan & self-managed enquiries</span>
+            <span>Not an NDIS registered provider</span>
+            <span>AHPRA registration pending</span>
+          </div>
+          <p class="notice">Draft concept — AHPRA physiotherapy registration is pending. This is not a claim of current registration.</p>
+        </div>
+        <div class="photo-slot" role="img" aria-label="Photography placeholder">
+          <div>
+            <strong>Photography slot</strong><br />Real portrait & home-visit image after shoot.<br />No stock or fake photos in this mockup.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: #fff;">
+      <div class="shell">
+        <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin: 0 0 0.5rem;">How a visit works</h2>
+        <p style="font-size: 1.125rem; color: var(--muted); max-width: 42ch; line-height: 1.6;">
+          Clear steps — the same person from first call to home visit.
+        </p>
+        <div class="cards" style="margin-top: 2rem;">
+          <article class="card"><h3>1 · Contact</h3><p>Call or send a short enquiry with your suburb and goals.</p></article>
+          <article class="card"><h3>2 · Home visit</h3><p>Assessment in your home or community setting.</p></article>
+          <article class="card"><h3>3 · Your plan</h3><p>Practical strategies for mobility and daily life.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="shell">
+        <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem);">Ready to talk?</h2>
+        <p style="font-size: 1.125rem; line-height: 1.6; color: var(--muted);">Concept footer — full enquiry form on production contact page.</p>
+        <a class="btn btn-primary" href="tel:+61433479703" style="margin-top: 1.25rem;">0433 479 703</a>
+      </div>
+    </section>
+
+    <section style="background: #eef2ef;">
+      <div class="shell">
+        <h2 style="font-size: 1.5rem; margin: 0 0 1rem;">Reviews</h2>
+        <div class="reviews-empty">Reviews will appear here after launch — no fabricated testimonials in this concept.</div>
+      </div>
+    </section>
+
+    <a class="sticky-call" href="tel:+61433479703">Call Jackson · 0433 479 703</a>
+  </div>
+</ConceptLayout>

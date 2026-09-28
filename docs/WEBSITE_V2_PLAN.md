@@ -356,5 +356,133 @@ Submit: mailto compose (static) or future form endpoint — **no** clinical data
 ## 13. Approval
 
 - **Visual direction:** **Approved** — hybrid in [§8](#8-visual-directions-approved) (2026-09-28).  
-- **Still required:** Jackson replies **BUILD V2** to authorize implementation. Sitemap and retain/redesign in this document remain the BUILD spec unless Jackson sends further copy changes.  
+- **Quality bar:** **Reference documented** — Better Care patterns adapted in [§14](#14-quality-bar--better-care-health-group-reference) (2026-09-28); not a second brand approval gate.  
+- **Concept pick:** Jackson chooses **1, 2, or 3** (§15) → then Wonder → writing-plans → executing-plans → production site.  
+- **BUILD V2** (full multi-page implementation) runs only after that chain — not after concept pick alone.  
 - **Launch:** No deployment until `docs/SEO_LAUNCH_CHECKLIST.md` is satisfied and AHPRA status is updated in config.
+
+---
+
+## 14. Quality bar — Better Care Health Group reference
+
+**Reference site:** [bettercarehg.com](https://www.bettercarehg.com) (Better Care Health Group — Melbourne allied health at home; **not** Jackson’s business model).  
+**Benchmark quote (locked):** *“Use Better Care Health Group as a benchmark for information density, polish, purposeful interaction and allied-health credibility — not as a visual template.”*  
+**Jackson ask (brainstorming, 2026-09-28):** Match their **visual quality** and **interaction density**, adapted to an **independent sole mobile physio** with the locked hybrid in §8. **No cloning** of their branding, copy, photos, yellow/navy palette, or multi-service catalogue.
+
+### 14.1 Site audit (public pages, desktop + mobile)
+
+| Dimension | Better Care (observed) | Notes for Jackson |
+|-----------|------------------------|-------------------|
+| **First screen** | Full-viewport hero (`~100dvh − header`); edge-to-edge **photo/video**; oversized H1 (`clamp(3.5rem–6.2rem)`); funding subline; dual pill CTAs; cream gradient wash | Strong **editorial hierarchy** — Jackson H1 stays **service intent**, not slogan-only; one portrait/environment, not multi-discipline montage |
+| **Photography** | Staged lifestyle + service imagery on cards; featured **full-bleed** tile; team **portrait** module | Quality bar = **real Jackson** shots, warm grading — not their assets or multi-practitioner team grid |
+| **Colour** | Warm cream/butter (`#fffdf8`, `#fff8df`), sun yellow accent (`#f4bd2a`), navy deep (`#083b58`), teal FAQ accents (`#087d76`) | Jackson keeps **forest/sage** §8 — borrow **warmth and section rhythm**, not yellow/navy brand |
+| **Type** | Geist sans; tight negative letter-spacing; display-sized section H2s | Jackson keeps **Source Serif + Sans**; adopt **scale rhythm** (eyebrow → display H2 → 18px+ body) |
+| **Nav** | Sticky blurred header; **mega-menu** Services (15+ links); CN → `/zh`; primary **Online enquiry** CTA | Jackson: **shallow nav** (8 pages); trilingual **switcher** on same URLs; phone + Enquire |
+| **Trust rail** | 3 pills: Registered NDIS, AHPRA practitioners, Melbourne coverage | Jackson: **honest** strip — languages, plan/self-managed NDIS, **not** registered provider, AHPRA status from config |
+| **Section rhythm** | Alternating backgrounds (cream → butter → mint FAQ → yellow reviews → enquiry); `clamp()` vertical padding | Adopt **clear chapter breaks**; fewer sections than BetterCare home (sole service) |
+| **Cards / density** | 1 featured + 4 service cards (image + hover lift); process **3-up** grid; team preview card | **3–4** interactive blocks on home max above fold on mobile; link out to `/mobile-physiotherapy/` |
+| **Motion** | Image scale on hover; card `translateY`; FAQ plus rotate; **auto-scrolling** review track with drag, tilt, grab cursor; reduced-motion → horizontal scroll-snap | Jackson: **no** auto-marquee reviews; optional **manual** scroll row post-GBP; hover lift **subtle** (2–3px); respect `prefers-reduced-motion` |
+| **Reviews** | Live Google embed aesthetic: **4.9**, stars, 10 cards, drag UX | **Do not copy** until real reviews — §8 ethics |
+| **FAQ** | Two-column: sticky intro + animated `<details>` | Adopt **sticky intro on desktop** + accessible accordion (static Astro-friendly) |
+| **Conversion** | Header enquiry CTA; repeated phone/email; bottom enquiry band; floating support prompt (blur card) | **Persistent tel** + one enquiry path; optional discrete “Need help?” **text link**, not intrusive floating promo |
+| **Mobile** | `details` hamburger; full service tree inside menu; smaller hero buttons; stacked service cards | Simpler menu; **sticky call bar** (already planned); touch targets ≥44px |
+
+**Interaction density (rough):** BetterCare home **above the fold (mobile):** logo, menu, 2+ CTAs, trust rail (3), hero actions (2) ≈ **8–12** actionable targets. Jackson target: **5–8** (phone, enquire, language, 1–2 in-hero links) — dense enough to feel **finished**, not corporate portal.
+
+### 14.2 Transferable patterns (what “quality” and “density” mean)
+
+| Pattern | What it achieves | Jackson adaptation |
+|---------|------------------|-------------------|
+| **Staged photography + gradient scrim** | Premium feel without clutter | Portrait + home visit; scrim for text contrast; no video autoplay |
+| **Editorial type scale** | Confidence, scanability | Large H1/H2 with **plain language**; body ≥18px |
+| **Eyebrow + section title + copy** | Predictable rhythm | Per-page heroes on inner routes |
+| **Trust micro-row** | Fast credibility scan | Config-driven badges (AHPRA pending/registered, NDIS honesty) |
+| **Interactive service cards** | Explore without wall of text | 3 teasers → dedicated pages; whole card clickable |
+| **Process grid** | Reduces anxiety | 3–4 steps on home (already planned §9) |
+| **FAQ with motion** | Feels “designed” | CSS-only details; plus icon rotate; RM fallback |
+| **Persistent enquiry CTA** | Conversion | Header + footer + sticky mobile call |
+| **Section background cadence** | Long-page legibility | 2–3 surface tokens (cream, white, sage mist) — not 6+ colours |
+| **Focus/hover affordances** | Density without noise | Buttons lift slightly; visible focus rings |
+
+### 14.3 Adaptation to Jackson’s locked hybrid (§8)
+
+| Pillar | BetterCare signal | Jackson interpretation |
+|--------|-------------------|----------------------|
+| Calm Professional | Navy/teal discipline | Forest/sage discipline; **no** butter/yellow brand |
+| Vitality | Community/service imagery, motion on cards | Community **photos**, step flow, subtle hover — **no** gym/startup motion |
+| Older adults | Large type, calm copy (despite flashy reviews) | **Larger** than BetterCare body on mobile; **no** drag-only review UI |
+| 亲近感 | Team portrait module, “personal” review quotes | **One** practitioner story on `/about/`; Jackson portrait |
+| 伦理感 | Claims NDIS registered + AHPRA team | **Opposite** NDIS registration honesty; AHPRA from `registrationStatus` only |
+| Independent mobile physio | Hidden inside multi-service org | Single-offering clarity; **contact = attending physio** in hero subline |
+| CALD | `/zh` alternate site | EN/粵/普 **switcher** on same URLs (Phase 1 pattern) |
+
+### 14.4 Will take / will not take
+
+**Will take (BUILD V2)**
+
+- Full-bleed hero with photography (or typographic fallback pre-shoot)  
+- Trust strip under hero (config-driven, honest)  
+- Section padding rhythm (`clamp`), alternating surfaces  
+- Clickable service/teaser cards with hover/focus states  
+- Process strip with clear numbering  
+- FAQ layout (sticky intro desktop + accordion)  
+- Strong enquiry + phone persistence (header, footer, sticky bar)  
+- Subtle micro-interactions (button lift, card border, FAQ icon)  
+- OG/social image quality tier (post photo shoot)  
+- Skip link + semantic landmarks (already partly present)
+
+**Will not take**
+
+- BetterCare **yellow/navy** palette, logo, name, or copy  
+- **Registered NDIS provider** / broad allied-health catalogue positioning  
+- Mega-menu with 15+ services  
+- **Fabricated or imported** Google review carousel (4.9, drag-marquee, tilt cards)  
+- Auto-playing review track or scroll-jacking  
+- Multi-practitioner **team grid** implying large org  
+- Mount Waverley **clinic address** pattern (Jackson is service-area only)  
+- Separate `/zh` site fork (unless Jackson later requests)  
+- Floating “support prompt” that feels like chat marketing  
+- Video hero autoplay  
+- Implying **NDIA-managed** or corporate intake team — Jackson is direct practitioner contact
+
+### 14.5 BUILD V2 adaptation approaches
+
+| Approach | Summary | Trade-offs |
+|----------|---------|------------|
+| **1 — “Polished sole practitioner”** *(recommended)* | BetterCare **layout discipline** (hero, trust row, 3 teasers, process, FAQ, CTA) at **~60% interaction density**; forest/sage; minimal JS | Best fit §8 + ethics; achievable in Astro static |
+| **2 — “Editorial lite”** | Strong photography + type; **fewer** hover/card effects; density closer to Phase 1 | Faster BUILD; may feel below BetterCare “designed” bar |
+| **3 — “High-motion parity”** | Near BetterCare drag reviews + more animation | **Rejected** for older-audience RM, AHPRA draft honesty, no review data |
+
+**Recommendation:** **Approach 1** — chaptered home, tactile cards, FAQ polish, persistent phone — without review marquee or multi-service chrome.
+
+**Brainstorming status:** Design reference recorded in §14 — **complete**.
+
+---
+
+## 15. Delivery workflow (locked 2026-09-28)
+
+| Step | Status | Output |
+|------|--------|--------|
+| 1. Competitor reference | Done | Project store `docs/competitor-reference.md` |
+| 2. Brainstorming — BetterCare quality bar | Done | §14 |
+| 3. **Homepage visual concepts (3)** | **Done — awaiting Jackson** | `/concepts/1/`, `/concepts/2/`, `/concepts/3/` (hub: `/concepts/`) |
+| 4. Jackson picks concept **1, 2, or 3** | **Waiting** | Reply in Cursor |
+| 5. Wonder refinement | Not started | May need Jackson MCP auth |
+| 6. writing-plans | **Not started** | After Wonder only |
+| 7. executing-plans | **Not started** | |
+| 8. Astro/Tailwind production multi-page site | **Not started** | |
+| 9. Lighthouse / mobile / SEO audit | Not started | |
+
+**Current gate:** Jackson chooses **Concept 1, 2, or 3**. Do **not** run `writing-plans`, `executing-plans`, or production multi-page BUILD until Wonder refinement completes.
+
+### 15.1 Homepage visual concepts (comparison)
+
+| Concept | Name | Composition | Type | Photo treatment | Interaction density | Colour temperature |
+|---------|------|-------------|------|-----------------|---------------------|-------------------|
+| **1** | Editorial Forest | Asymmetric hero; copy left, photo slot right; sticky header | Serif display H1 + sans UI | Cool gradient scrim + dashed portrait frame | **Medium** — trust pills, hover cards, sticky call | Cool forest / sage |
+| **2** | Warm Meadow | Centred column; generous vertical rhythm | 1.125rem+ body; serif headlines | Rounded warm frame on cream | **Lower** — stacked blocks, simple nav | Warmer cream / oat |
+| **3** | Active Path | Diagonal hero clip; forest header bar | Tags + numbered journey | Pattern block + environment note | **Higher (purposeful)** — scroll-snap steps, tiles, FAQ | Cool forest + lime CTA accent |
+
+Shared rules: service-intent H1, EN/粵/普, honest AHPRA/NDIS, no fake photos or testimonials, concept `noindex` banner.
+
+**Local preview:** `npm run dev` → [concept hub](http://127.0.0.1:4721/concepts/)

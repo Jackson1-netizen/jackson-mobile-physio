@@ -55,3 +55,10 @@
 - **Decisions:** See `docs/DECISIONS.md` (2026-09-28 BetterCare quality bar).  
 - **Blockers:** None for planning.  
 - **Next:** **BUILD V2** when Jackson approves; opened reference + local draft in cloud desktop for comparison.  
+
+## 2026-09-28 (homepage visual concepts)
+
+- **Changed:** Three concept mockup routes; `docs/WEBSITE_V2_PLAN.md` §15 workflow; BetterCare benchmark quote in §14.  
+- **Decisions:** See `docs/DECISIONS.md` (2026-09-28 workflow locked).  
+- **Blockers:** Jackson concept pick (1 / 2 / 3).  
+- **Next:** Wonder refinement after pick — not started.  
