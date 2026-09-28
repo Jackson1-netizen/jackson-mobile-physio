@@ -1,0 +1,39 @@
+---
+import { site } from "../../content/site";
+import { homeReferrers } from "../../content/home-motion";
+
+const leaf = "M72 8c18 22 18 48 4 72-22 38-62 58-92 48 28-18 42-48 34-82C10 22 38-8 72 8Z";
+---
+
+<section id="referrers" class="hm-band hm-band-refer hm-reveal scroll-mt-24">
+  <svg class="hm-leaf hm-leaf-bl" viewBox="0 0 120 140" aria-hidden="true">
+    <path fill="currentColor" d={leaf}></path>
+  </svg>
+  <div class="hm-wrap hm-section hm-refer-grid">
+    <div class="hm-refer-copy">
+      <p class="hm-kicker" data-i18n-path="sections.referrers">For referrers</p>
+      <h2>{homeReferrers.heading}</h2>
+      <p class="mt-4">{homeReferrers.lead}</p>
+      <p class="mt-3" data-i18n-path="referrers.body">{homeReferrers.audience}</p>
+      <ul>
+        {homeReferrers.points.map((point) => <li>{point}</li>)}
+      </ul>
+      <a class="hm-btn hm-btn-primary" href="/referral">
+        <span data-i18n-path="referrers.sheetLink">{homeReferrers.cta}</span>
+        <span class="hm-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <aside class="hm-brand-card" aria-label="Home Motion contact card">
+      <img src="/home-motion-logo.png" alt={site.displayBrand} width="160" height="50" loading="lazy" />
+      <p class="mt-3 text-sm font-semibold">{site.tagline}</p>
+      <p class="mt-4 text-sm">
+        <strong>{site.practitionerName}</strong>
+      </p>
+      <p class="mt-1 text-sm">
+        <a href={site.phoneHref}>{site.phone}</a>
+      </p>
+      <p class="mt-3 text-xs text-[#5b6e67]">{site.abnDisplay}</p>
+      <p class="mt-2 text-xs text-[#5b6e67]">{site.locationDescriptor}</p>
+    </aside>
+  </div>
+</section>

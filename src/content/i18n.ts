@@ -14,6 +14,7 @@ export const defaultLocale: Locale = "en";
 
 const en = {
   nav: {
+    home: "Home",
     about: "About",
     services: "Services",
     howItWorks: "How it works",
@@ -22,6 +23,7 @@ const en = {
     faq: "FAQ",
     contact: "Contact",
     refer: "Refer",
+    forReferrers: "For Referrers",
     referralSheet: "Referral sheet",
   },
   cta: {
@@ -178,10 +180,26 @@ const en = {
   draftBanner: {
     short: "Draft preview — not indexed",
   },
+  home: {
+    eyebrow: "Mobile physiotherapy",
+    h1Lead: "Expert physiotherapy",
+    h1Mid: "in the comfort of",
+    h1Em: "home.",
+    support:
+      "Independent mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you speak directly with Jackson — the physiotherapist who personally delivers your care. Appointments in English, Cantonese and Mandarin.",
+    primaryCta: "Make an enquiry",
+    secondaryCta: "Learn about our services",
+    chips: [
+      "Home & community visits",
+      "English / Cantonese / Mandarin",
+      "Personalised one-to-one care",
+    ],
+  },
 } as const;
 
 const zhHant = {
   nav: {
+    home: "主頁",
     about: "關於",
     services: "服務",
     howItWorks: "流程",
@@ -190,6 +208,7 @@ const zhHant = {
     faq: "常見問題",
     contact: "聯絡",
     refer: "轉介",
+    forReferrers: "轉介夥伴",
     referralSheet: "轉介表",
   },
   cta: {
@@ -335,10 +354,22 @@ const zhHant = {
   draftBanner: {
     short: "草稿預覽 — 未公開索引",
   },
+  home: {
+    eyebrow: "上門物理治療",
+    h1Lead: "專業物理治療",
+    h1Mid: "在家中安心接受",
+    h1Em: "服務。",
+    support:
+      "墨爾本東郊獨立上門物理治療。查詢時由 Jackson 本人接聽，亦由他親自提供護理。可使用英語、粵語或普通話。",
+    primaryCta: "查詢預約",
+    secondaryCta: "了解服務",
+    chips: ["上門及社區探訪", "英語 / 粵語 / 普通話", "一對一個人化護理"],
+  },
 } as const;
 
 const zhHans = {
   nav: {
+    home: "主页",
     about: "关于",
     services: "服务",
     howItWorks: "流程",
@@ -347,6 +378,7 @@ const zhHans = {
     faq: "常见问题",
     contact: "联系",
     refer: "转介",
+    forReferrers: "转介伙伴",
     referralSheet: "转介表",
   },
   cta: {
@@ -489,6 +521,17 @@ const zhHans = {
   },
   draftBanner: {
     short: "草稿预览 — 未公开索引",
+  },
+  home: {
+    eyebrow: "上门物理治疗",
+    h1Lead: "专业物理治疗",
+    h1Mid: "在家中安心接受",
+    h1Em: "服务。",
+    support:
+      "墨尔本东郊独立上门物理治疗。查询时由 Jackson 本人接听，亦由他亲自提供护理。可使用英语、粤语或普通话。",
+    primaryCta: "查询预约",
+    secondaryCta: "了解服务",
+    chips: ["上门及社区探访", "英语 / 粤语 / 普通话", "一对一个人化护理"],
   },
 } as const;
 

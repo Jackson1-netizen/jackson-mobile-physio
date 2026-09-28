@@ -14,3 +14,16 @@ export {
   suburbPath,
   type SuburbPage,
 } from "./suburbs";
+export {
+  homeNav,
+  homeHero,
+  homeServices,
+  homeSteps,
+  homeWhy,
+  homeAbout,
+  homeReferrers,
+  homeAreas,
+  homeSuburbs,
+  homeFaq,
+  homeMedia,
+} from "./home-motion";

@@ -1,0 +1,17 @@
+---
+import { site } from "../../content/site";
+import EnquiryForm from "../EnquiryForm.astro";
+---
+
+<section id="contact" class="hm-contact hm-reveal scroll-mt-24">
+  <div class="hm-wrap hm-section max-w-3xl">
+    <h2 data-i18n-path="sections.contact">Contact</h2>
+    <p class="mt-3" data-i18n-path="enquiry.intro">
+      Share a brief message — Jackson will respond when available. For urgent medical emergencies, call 000.
+    </p>
+    <p class="mt-4 text-xl font-bold">
+      <a class="text-white no-underline" href={site.phoneHref}>{site.phone}</a>
+    </p>
+    <EnquiryForm />
+  </div>
+</section>

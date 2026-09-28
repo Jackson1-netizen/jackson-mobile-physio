@@ -1,0 +1,21 @@
+---
+import { homeWhy } from "../../content/home-motion";
+---
+
+<section class="hm-why hm-reveal">
+  <div class="hm-wrap hm-section">
+    <p class="hm-kicker">Why choose Home Motion</p>
+    <h2>{homeWhy.heading}</h2>
+    <p class="mt-4 max-w-3xl text-[#3d5a52]">{homeWhy.intro}</p>
+    <ul class="hm-why-grid hm-stagger mt-8">
+      {
+        homeWhy.items.map((item) => (
+          <li class="hm-card">
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

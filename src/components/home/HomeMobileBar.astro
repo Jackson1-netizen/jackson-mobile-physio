@@ -1,0 +1,11 @@
+---
+import { site } from "../../content/site";
+import { homeHero } from "../../content/home-motion";
+---
+
+<div class="hm-mobile-bar no-print sm:hidden" aria-label="Quick contact">
+  <a href={site.phoneHref} data-i18n-path="cta.call">Call</a>
+  <a href="#contact">
+    <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
+  </a>
+</div>

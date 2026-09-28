@@ -1,0 +1,41 @@
+---
+import { site } from "../../content/site";
+import { homeAbout, homeMedia } from "../../content/home-motion";
+---
+
+<section id="about" class="hm-reveal scroll-mt-24 bg-[var(--hm-warm-white)]">
+  <div class="hm-wrap hm-section hm-about-grid">
+    <div class="hm-portrait hm-img-zoom">
+      <img
+        src={homeMedia.about.src}
+        alt={homeMedia.about.alt}
+        width="800"
+        height="1000"
+        loading="lazy"
+      />
+    </div>
+    <div>
+      <p class="hm-kicker" data-i18n-path="sections.about">{homeAbout.kicker}</p>
+      <h2>{homeAbout.heading}</h2>
+      {
+        homeAbout.paragraphs.map((p, i) => (
+          <p class="mt-4 text-[#3d5a52]" data-i18n-path={`about.paragraphs.${i}`}>
+            {p}
+          </p>
+        ))
+      }
+      <p class="mt-4 font-medium">{homeAbout.philosophy}</p>
+      <p class="mt-5 text-[#3d5a52]">
+        <strong data-i18n-path="about.languagesLabel">{homeAbout.languagesLabel}:</strong>
+        {" "}
+        {site.languages.join(", ")}
+      </p>
+      <p class="mt-3 text-sm text-[#3d5a52]">
+        <strong data-i18n-path="about.qualificationsLabel">{homeAbout.qualificationsLabel}:</strong>
+        {" "}
+        {site.qualifications.map((q) => `${q.label} — ${q.value}`).join("; ")}
+      </p>
+      <p class="hm-notice">{site.ahpraNotice}</p>
+    </div>
+  </div>
+</section>

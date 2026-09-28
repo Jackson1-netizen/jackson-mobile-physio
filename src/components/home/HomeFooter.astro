@@ -1,0 +1,18 @@
+---
+import { site } from "../../content/site";
+---
+
+<footer class="hm-footer">
+  <div class="hm-wrap hm-footer-inner">
+    <a class="hm-logo" href="/" aria-label={site.displayBrand}>
+      <img src="/home-motion-logo.png" alt="" width="120" height="38" loading="lazy" />
+    </a>
+    <p class="text-sm text-[#5b6e67]">
+      {site.displayBrand} · {site.abnDisplay} · {site.footer.copyrightSuffix}
+    </p>
+    <p class="flex flex-wrap gap-4 text-sm">
+      <a class="underline-offset-4 hover:underline" href="/privacy">{site.footer.privacyLinkLabel}</a>
+      <a class="underline-offset-4 hover:underline" href="/referral">Referral sheet</a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,48 @@
+---
+import { site } from "../../content/site";
+import { homeNav, homeHero } from "../../content/home-motion";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
+
+const toolsId = "hm-header-tools";
+---
+
+<header class="hm-header no-print">
+  <div class="hm-wrap hm-header-inner">
+    <a class="hm-logo" href="/" aria-label={site.displayBrand}>
+      <img src="/home-motion-logo.png" alt={site.displayBrand} width="140" height="44" />
+    </a>
+
+    <nav class="hm-nav" aria-label="Primary">
+      {
+        homeNav.map((item) => (
+          <a href={item.href} data-i18n-path={item.path} data-spy={item.spy ?? undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hm-header-tools" id={toolsId}>
+      <div class="hm-lang">
+        <LanguageSwitcher />
+      </div>
+      <a class="hm-btn hm-btn-primary hm-cta-desktop" href="#contact">
+        <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
+        <span class="hm-arrow" aria-hidden="true">→</span>
+      </a>
+      <details class="hm-menu">
+        <summary aria-label="Open menu">Menu</summary>
+        <nav class="hm-menu-panel" aria-label="Mobile">
+          {
+            homeNav.map((item) => (
+              <a href={item.href} data-i18n-path={item.path}>
+                {item.label}
+              </a>
+            ))
+          }
+          <a href="#contact" data-i18n-path="home.primaryCta">{homeHero.primaryCta}</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

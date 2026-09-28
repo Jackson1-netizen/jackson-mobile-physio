@@ -1,0 +1,39 @@
+---
+import "../../styles/home-motion.css";
+import I18nScript from "../I18nScript.astro";
+import HomeHeader from "./HomeHeader.astro";
+import HomeHero from "./HomeHero.astro";
+import HomeServices from "./HomeServices.astro";
+import HomeHowItWorks from "./HomeHowItWorks.astro";
+import HomeWhyChoose from "./HomeWhyChoose.astro";
+import HomeAbout from "./HomeAbout.astro";
+import HomeNdis from "./HomeNdis.astro";
+import HomeAreas from "./HomeAreas.astro";
+import HomeReferrers from "./HomeReferrers.astro";
+import HomeFaq from "./HomeFaq.astro";
+import HomeContact from "./HomeContact.astro";
+import HomeFooter from "./HomeFooter.astro";
+import HomeMobileBar from "./HomeMobileBar.astro";
+---
+
+<div class="hm">
+  <HomeHeader />
+  <HomeHero />
+  <HomeServices />
+  <HomeHowItWorks />
+  <HomeWhyChoose />
+  <HomeAbout />
+  <HomeNdis />
+  <HomeAreas />
+  <HomeReferrers />
+  <HomeFaq />
+  <HomeContact />
+  <HomeFooter />
+  <HomeMobileBar />
+</div>
+<I18nScript />
+
+<script>
+  import { initHomeMotion } from "../../lib/home-motion-motion";
+  initHomeMotion();
+</script>

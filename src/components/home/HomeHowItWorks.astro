@@ -1,0 +1,43 @@
+---
+import { homeSteps, homeMedia } from "../../content/home-motion";
+---
+
+<section id="how" class="hm-how hm-reveal scroll-mt-24">
+  <div class="hm-wrap hm-section hm-how-grid">
+    <div>
+      <p class="hm-kicker">How our service works</p>
+      <h2>Simple, flexible and tailored to you.</h2>
+      <ol class="hm-step-grid hm-stagger mt-8">
+        {
+          homeSteps.map((step) => (
+            <li class="hm-card hm-step">
+              <span class="hm-step-num">{step.num}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div class="hm-how-media">
+      <div class="hm-img-zoom">
+        <img
+          src={homeMedia.howOne.src}
+          alt={homeMedia.howOne.alt}
+          width="1400"
+          height="900"
+          loading="lazy"
+        />
+      </div>
+      <div class="hm-img-zoom">
+        <img
+          src={homeMedia.howTwo.src}
+          alt={homeMedia.howTwo.alt}
+          width="1200"
+          height="800"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

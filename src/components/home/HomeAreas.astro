@@ -1,0 +1,30 @@
+---
+import { homeAreas, homeSuburbs } from "../../content/home-motion";
+import ServiceAreaMap from "./ServiceAreaMap.astro";
+---
+
+<section id="areas" class="hm-reveal scroll-mt-24">
+  <div class="hm-wrap hm-section hm-areas-grid">
+    <div>
+      <p class="hm-kicker">{homeAreas.kicker}</p>
+      <h2>{homeAreas.heading}</h2>
+      <p class="mt-4 text-[#3d5a52]" data-i18n-path="areas.intro">{homeAreas.intro}</p>
+      <ul class="hm-suburb-list">
+        {
+          homeSuburbs.map((suburb) => (
+            <li>
+              <a href={suburb.href}>{suburb.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <ServiceAreaMap />
+      <p class="hm-map-caption mt-2">{homeAreas.mapCaption}</p>
+      <p class="hm-map-link mt-1">
+        <a href={homeAreas.mapExternal} rel="noopener noreferrer">{homeAreas.mapLinkLabel}</a>
+      </p>
+    </div>
+  </div>
+</section>

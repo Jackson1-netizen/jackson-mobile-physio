@@ -98,3 +98,9 @@
 - **Changed:** Wrote `docs/HOME_MOTION_BRANCH_REDESIGN.md` (audit + visual spec). Stored reference artboards in `docs/references/`. No homepage implementation.
 - **Decisions:** See `docs/DECISIONS.md` (ChatGPT visual redesign audit).
 - **Next:** Wait for **BUILD HOME MOTION DESIGN**. Do not merge to `main`.
+
+## 2026-09-28 (Home Motion ChatGPT visual BUILD)
+
+- **Changed:** New `/` homepage module (`src/components/home/*`) matching the ChatGPT reference: cream/orange/medium-green system, editorial H1, 6 service cards, how-it-works, why-choose, OSM service-area map, HTML brand card, FAQ JSON-LD, working enquiry form. Concept archive and `main` untouched.
+- **Decisions:** OSM embed instead of Leaflet; no fake merch photos; NDIS honesty retained.
+- **Next:** Jackson compares this branch with `main` V1. Do not merge or deploy.

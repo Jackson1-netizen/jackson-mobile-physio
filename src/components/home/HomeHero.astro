@@ -1,0 +1,67 @@
+---
+import { getRegistrationDisplayLine } from "../../content/site";
+import { homeHero, homeMedia } from "../../content/home-motion";
+import AdvantageIcon from "../concept1/AdvantageIcon.astro";
+
+const registrationLine = getRegistrationDisplayLine();
+---
+
+<section class="hm-hero" aria-labelledby="hm-hero-heading">
+  <div class="hm-wrap hm-hero-grid">
+    <div>
+      <p class="hm-kicker" data-i18n-path="home.eyebrow">{homeHero.eyebrow}</p>
+      <h1 id="hm-hero-heading" class="hm-h1-enter">
+        <span data-i18n-path="home.h1Lead">{homeHero.h1Lead}</span>
+        <br />
+        <span data-i18n-path="home.h1Mid">{homeHero.h1Mid}</span>
+        <br />
+        <span class="hm-em" data-i18n-path="home.h1Em">{homeHero.h1Em}</span>
+      </h1>
+      <p class="hm-hero-support" data-i18n-path="home.support">{homeHero.support}</p>
+      <div class="hm-hero-actions">
+        <a class="hm-btn hm-btn-primary" href="#contact">
+          <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
+          <span class="hm-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="hm-btn hm-btn-secondary" href="#services" data-i18n-path="home.secondaryCta">
+          {homeHero.secondaryCta}
+        </a>
+      </div>
+      <ul class="hm-chips">
+        {
+          homeHero.chips.map((chip, i) => (
+            <li>
+              <AdvantageIcon name={chip.icon} />
+              <span data-i18n-path={`home.chips.${i}`}>{chip.line}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="hm-ahpra">{registrationLine}</p>
+    </div>
+
+    <div class="hm-hero-media" data-hm-parallax>
+      <video
+        class="hm-hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={homeMedia.heroVideo.poster}
+        aria-hidden="true"
+      >
+        <source src={homeMedia.heroVideo.mp4} type="video/mp4" />
+      </video>
+      <img
+        class="hm-hero-poster"
+        src={homeMedia.heroVideo.poster}
+        alt={homeMedia.heroVideo.alt}
+        width="1200"
+        height="900"
+        fetchpriority="high"
+      />
+      <p class="hm-hero-script" aria-hidden="true">{homeHero.scriptOverlay}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+---
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+
+const ndis = messages.en.ndis;
+---
+
+<section id="ndis" class="hm-ndis hm-reveal scroll-mt-24">
+  <div class="hm-wrap hm-section max-w-3xl">
+    <p class="hm-kicker" data-i18n-path="nav.ndis">NDIS</p>
+    <h2 data-i18n-path="sections.ndis">{site.ndisHeading}</h2>
+    <p class="mt-4 text-lg text-[#3d5a52]" data-i18n-path="ndis.lead">{ndis.lead}</p>
+    <ul>
+      <li>
+        <span aria-hidden="true">•</span>
+        <span>
+          <strong data-i18n-path="ndis.planManaged">{ndis.planManaged}.</strong>
+          {" "}
+          <span data-i18n-path="ndis.planManagedDesc">{ndis.planManagedDesc}</span>
+        </span>
+      </li>
+      <li>
+        <span aria-hidden="true">•</span>
+        <span>
+          <strong data-i18n-path="ndis.planManaged2">{ndis.planManaged2}.</strong>
+          {" "}
+          <span data-i18n-path="ndis.planManaged2Desc">{ndis.planManaged2Desc}</span>
+        </span>
+      </li>
+      <li>
+        <span aria-hidden="true">•</span>
+        <span>
+          <strong data-i18n-path="ndis.notRegistered">{ndis.notRegistered}.</strong>
+          {" "}
+          <span data-i18n-path="ndis.notRegisteredDesc">{ndis.notRegisteredDesc}</span>
+        </span>
+      </li>
+    </ul>
+    <p class="mt-5 text-sm text-[#5b6e67]" data-i18n-path="ndis.noGuarantee">{ndis.noGuarantee}</p>
+  </div>
+</section>

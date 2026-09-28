@@ -1,14 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HomepageV2 from "../components/concept1/HomepageV2.astro";
+import HomeMotionPage from "../components/home/HomeMotionPage.astro";
 import { site } from "../content/site";
 ---
 
 <BaseLayout
   v1Home={true}
+  includeFaqSchema={true}
   canonicalPath="/"
-  title={`${site.displayBrand} | Mobile physiotherapy — Melbourne eastern suburbs (preview)`}
-  description="Homepage V1 preview — mobile physiotherapy in Melbourne's eastern suburbs. Draft, not for indexing."
+  title={`${site.displayBrand} | Mobile physiotherapy — Melbourne eastern suburbs (draft)`}
+  description={site.seo.description}
 >
-  <HomepageV2 theme="a" mode="v1" />
+  <HomeMotionPage />
 </BaseLayout>

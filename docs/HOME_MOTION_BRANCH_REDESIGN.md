@@ -1,6 +1,6 @@
 # Home Motion branch redesign — Phase 1 audit (do not implement yet)
 
-> **Status:** AUDIT ONLY. Implementation starts only after Jackson replies **`BUILD HOME MOTION DESIGN`**.  
+> **Status:** Implementation in progress on `cursor/chatgpt-version-b759` after **BUILD HOME MOTION DESIGN**. `main` remains the saved V1. Do not merge.
 > **Branch:** `cursor/chatgpt-version-b759`  
 > **Do not merge into `main`.** `main` is the saved approved V1.  
 > **Do not delete** `src/components/concept1/HomepageV2.astro` or concept archive routes.

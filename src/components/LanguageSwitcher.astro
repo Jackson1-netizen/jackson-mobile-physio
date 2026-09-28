@@ -9,6 +9,7 @@ import { localeLabels } from "../content/i18n";
         type="button"
         class="lang-btn rounded px-2 py-1 font-medium text-[var(--color-ink-muted)] transition hover:text-[var(--color-accent)] data-[active=true]:bg-[var(--color-accent)] data-[active=true]:text-white"
         data-locale={code}
+        data-active={code === "en" ? "true" : "false"}
       >
         {label}
       </button>
