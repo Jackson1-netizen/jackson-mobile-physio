@@ -470,22 +470,21 @@ Submit: mailto compose (static) or future form endpoint — **no** clinical data
 | 3. **Homepage visual concepts (3)** | Done | `/concepts/1/`, `/concepts/2/`, `/concepts/3/` |
 | 4. Jackson picks concept | **Done — Concept 1** | Editorial Forest |
 | 5. Wonder refinement | Done (in-repo) | Full homepage system on Concept 1 |
-| 5b. **Colour theme pick (A / B / C)** | **Waiting** | Same layout: `/concepts/1/a/`, `/b/`, `/c/` — hub `/concepts/1/` |
-| 6. writing-plans | **Waiting** | After colour pick + explicit request |
+| 5b. **Colour theme pick (A / B / C)** | **Done — A (forest/sage)** | Locked palette |
+| 5c. **Homepage V1 preview** | **Done** | **`/`** — scrollable draft homepage (theme A) |
+| 6. writing-plans | **Waiting** | Explicit request only |
 | 7. executing-plans | **Not started** | |
 | 8. Astro/Tailwind production multi-page site | **Not started** | |
 | 9. Lighthouse / mobile / SEO audit | Not started | |
 
-**Current gate:** Jackson picks colour theme **A**, **B**, or **C** on the Concept 1 homepage system. Then wait for explicit **writing-plans**. No production multi-page BUILD yet.
+**Current gate:** Homepage **V1** live at **`/`** for Jackson review (draft, noindex). Next: explicit **writing-plans** — not production multi-page BUILD yet.
 
 ### 15.1 Chosen concept — Editorial Forest (Concept 1)
 
-- **Locked:** 2026-09-28.  
-- **Homepage system:** Full single-page mockup (all V2 home sections, no reviews) — three palettes, shared layout.  
-- **Compare hub:** `http://127.0.0.1:4721/concepts/1/` (or `?theme=a|b|c` redirect).  
-- **Themes:** **A** forest/sage · **B** sand/olive · **C** teal/deep green.  
-- **Imagery:** Generic illustrative Unsplash blocks via `src/content/concept1-images.ts` — not Jackson, not real clients.  
-- **Concepts 2 & 3:** Archived references only.
+- **Palette:** **A — forest/sage** (locked 2026-09-28).  
+- **V1 preview URL:** `http://127.0.0.1:4721/` (replaces Phase 1 one-page on `/` for review).  
+- **Archive:** `/concepts/1/a|b|c/` for colour comparison; B/C not active for V1.  
+- **Config:** `site.displayBrand`, `registrationStatus`, `concept1-images.ts` for media swap.  
 
 ### 15.2 Homepage visual concepts (comparison — archive)
 

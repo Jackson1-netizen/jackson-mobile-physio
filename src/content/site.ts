@@ -10,6 +10,8 @@ export const site = {
   draft: true,
 
   businessName: "WAI WA LAW",
+  /** Swappable wordmark in header — rebrand without restructuring site */
+  displayBrand: "WAI WA LAW",
   practitionerName: 'Wai Wa "Jackson" Law',
   legalNamePlaceholder: "[LEGAL TRADING NAME IF DISTINCT — NOT CONFIRMED]",
 
@@ -32,6 +34,8 @@ export const site = {
   abnDisplay: "ABN 75 612 731 757",
 
   ahpraRegistrationNumber: "",
+  registrationStatus: "pending" as "pending" | "registered",
+  registrationNumber: null as string | null,
   ahpraStatus: "Pending" as const,
   ahpraNotice:
     "AHPRA physiotherapy registration is pending and has not been granted. This draft site must not be read as a currently AHPRA-registered physiotherapy practice.",
@@ -186,6 +190,14 @@ export const site = {
 export function formatServiceAreasLine(): string {
   const { region, suburbs, surroundingNote } = site.serviceAreas;
   return `${region} — ${suburbs.join(", ")}, ${surroundingNote}`;
+}
+
+/** One-line AHPRA status for homepage trust strip — no false registration claims. */
+export function getRegistrationDisplayLine(): string {
+  if (site.registrationStatus === "registered" && site.registrationNumber) {
+    return "AHPRA registered practitioner";
+  }
+  return "AHPRA registration pending — not yet registered as a physiotherapist";
 }
 
 export type SiteContent = typeof site;

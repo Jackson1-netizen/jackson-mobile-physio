@@ -9,6 +9,14 @@ export const concept1Hero = {
     "Not an NDIS registered provider",
     "AHPRA registration pending",
   ] as const,
+  primaryCta: "Make an enquiry",
+  secondaryCta: "Explore services",
+};
+
+export const concept1Purpose = {
+  heading: "Personal mobile physiotherapy",
+  body:
+    "We provide one-to-one physiotherapy in your home and community across Melbourne's eastern suburbs — built on clear communication, practical goals, and care in English, Cantonese, and Mandarin. The person you speak with is the person who provides your care.",
 };
 
 export const concept1TrustStrip = [

@@ -13,6 +13,8 @@ interface Props {
   description?: string;
   canonicalPath?: string;
   hideChrome?: boolean;
+  /** Homepage V1: draft banner only; full chrome inside page component */
+  v1Home?: boolean;
   includeFaqSchema?: boolean;
 }
 
@@ -21,8 +23,12 @@ const {
   description = site.seo.description,
   canonicalPath = "/",
   hideChrome = false,
+  v1Home = false,
   includeFaqSchema = false,
 } = Astro.props;
+
+const showSiteChrome = !hideChrome && !v1Home;
+const showDraftBanner = site.draft && (showSiteChrome || v1Home);
 
 const canonicalUrl = new URL(canonicalPath, site.websiteUrl).href;
 const ogImage = new URL(site.seo.ogImagePath, site.websiteUrl).href;
@@ -66,14 +72,14 @@ const robotsContent = site.draft ? "noindex, nofollow" : "index, follow";
     <script type="application/ld+json" set:html={jsonLd} />
     {faqLd && <script type="application/ld+json" set:html={faqLd} />}
   </head>
-  <body class={hideChrome ? "" : "pb-16 sm:pb-0"}>
-    {!hideChrome && <DraftBanner />}
-    {!hideChrome && <SiteHeader />}
-    <main id="main-content">
+  <body class={showSiteChrome ? "pb-16 sm:pb-0" : ""}>
+    {showDraftBanner && <DraftBanner />}
+    {showSiteChrome && <SiteHeader />}
+    <main id="main-content" class={v1Home ? "p-0" : ""}>
       <slot />
     </main>
-    {!hideChrome && <SiteFooter />}
-    {!hideChrome && <StickyContactBar />}
-    {!hideChrome && <I18nScript />}
+    {showSiteChrome && <SiteFooter />}
+    {showSiteChrome && <StickyContactBar />}
+    {showSiteChrome && <I18nScript />}
   </body>
 </html>

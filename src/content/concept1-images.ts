@@ -3,6 +3,12 @@
  * Not Jackson, not real clients. Swap URLs here after Jackson's shoot.
  */
 export const concept1Images = {
+  heroVideo: {
+    mp4: "https://videos.pexels.com/video-files/8434144/8434144-hd_1920_1080_25fps.mp4",
+    poster:
+      "https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    alt: "Generic home-visit physiotherapy exercise scene — not Jackson or a specific client",
+  },
   hero: {
     src: "https://images.unsplash.com/photo-1556912173-46c735c5fb72?auto=format&fit=crop&w=1600&q=80",
     alt: "Illustrative bright home interior — placeholder for home-visit physiotherapy context",

@@ -91,3 +91,9 @@ Append-only record. Do not silently overwrite prior entries.
 - **Content:** Central `concept1-home.ts`, `concept1-images.ts`; component `HomepageV2.astro`.  
 - **Sections:** Trust → Physio at home → Services (7) → How it works → Meet Jackson → NDIS → Areas/map → Referrers → FAQ → Contact; reviews skipped.  
 - **Gate:** Jackson picks **A**, **B**, or **C** before writing-plans.  
+
+## 2026-09-28 — Palette A locked; Homepage V1 at `/`
+
+- **Palette:** **A (forest/sage)** chosen.  
+- **V1:** Full scrollable homepage on **`/`** — video hero (reduced-motion poster), `displayBrand` header, registration line from `registrationStatus`, all sections, no reviews; draft + noindex via `BaseLayout` `v1Home`.  
+- **Not done:** Multi-page production site, deploy, writing-plans.  

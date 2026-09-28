@@ -75,3 +75,8 @@
 - **Changed:** Full homepage system + themes A/B/C on `/concepts/1/`; generic image config.  
 - **Decisions:** See DECISIONS (homepage system + colour themes).  
 - **Next:** Jackson picks A, B, or C.  
+
+## 2026-09-28 (Homepage V1 preview at /)
+
+- **Changed:** `/` serves Homepage V1 theme A; site `displayBrand` + `registrationStatus`; hero stock video.  
+- **Next:** Wait for writing-plans instruction.  

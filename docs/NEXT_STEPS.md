@@ -6,10 +6,9 @@
 
 ## Website V2 (workflow — Concept 1 refined)
 
-1. **Chosen:** **Concept 1 — Editorial Forest** (locked in `docs/WEBSITE_V2_PLAN.md` §15).  
-2. **Compare colours:** `http://127.0.0.1:4721/concepts/1/` → themes **A**, **B**, **C**.  
-3. **Jackson:** Reply **A**, **B**, or **C** for palette lock.  
-4. **Then:** Explicit **writing-plans** request (not started).  
+1. **Review V1:** `http://127.0.0.1:4721/` (palette A, draft, noindex).  
+2. **Archive:** `/concepts/1/` for B/C comparison only.  
+3. **Next:** Explicit **writing-plans** when ready — not production multi-page yet.  
 4. **Then:** executing-plans → production multi-page Astro site → Lighthouse/SEO audit.  
 5. **Branch:** `cursor/website-v2-plan-e732`.
 
