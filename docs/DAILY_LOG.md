@@ -104,3 +104,9 @@
 - **Changed:** New `/` homepage module (`src/components/home/*`) matching the ChatGPT reference: cream/orange/medium-green system, editorial H1, 6 service cards, how-it-works, why-choose, OSM service-area map, HTML brand card, FAQ JSON-LD, working enquiry form. Concept archive and `main` untouched.
 - **Decisions:** OSM embed instead of Leaflet; no fake merch photos; NDIS honesty retained.
 - **Next:** Jackson compares this branch with `main` V1. Do not merge or deploy.
+
+## 2026-09-28 (archive ChatGPT visual; open option 2)
+
+- **Changed:** Frozen ChatGPT homepage as option 1 on `cursor/chatgpt-version-b759`. Opened `cursor/design-option-2-b759` for a second design.
+- **Decisions:** See `docs/DECISIONS.md` (ChatGPT visual archived; option 2 branch opened).
+- **Next:** Jackson directs the second design. Do not merge to `main`.

@@ -111,3 +111,9 @@ Append-only record. Do not silently overwrite prior entries.
 - **Approach:** New homepage module on `/`; leave Concept 1 archive and `main` V1 untouched.
 - **Motion:** Keep existing reveals, video, hovers, accordion, sticky CTAs; add only subtle extras (arrow, stagger, optional desktop parallax). Current site has no mouse-follow or per-word heading animation.
 - **Honesty:** Do not use reference email, fake map, fake merch, or “NDIS & private clients” chip.
+
+## 2026-09-28 — ChatGPT visual archived; option 2 branch opened
+
+- **Archived:** `cursor/chatgpt-version-b759` is option 1 (ChatGPT visual). Treat as frozen for comparison.
+- **New branch:** `cursor/design-option-2-b759` for the second design exploration. Starts from the archived ChatGPT snapshot so Jackson can change it without touching option 1 or `main`.
+- **Still do not merge to `main`.** `main` remains the original V1.

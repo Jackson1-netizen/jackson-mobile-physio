@@ -8,10 +8,11 @@
 
 | Branch | What it is |
 |--------|------------|
-| `main` | **Saved** Home Motion V1 — the design Jackson is happy with. Baseline. |
-| `cursor/chatgpt-version-b759` | Alternative **ChatGPT-produced** version, branched from that saved V1. Experiment here. |
+| `main` | **Saved** Home Motion V1 — original forest/sage homepage Jackson liked. Baseline. Do not overwrite. |
+| `cursor/chatgpt-version-b759` | **Archived option 1** — ChatGPT visual redesign (cream / orange / medium green). Frozen. Do not keep experimenting here. |
+| `cursor/design-option-2-b759` | **Option 2** — second design branch. New visual experiments go here. |
 
-Jackson will come back and pick which one to use. Keep experimental redesigns off `main`.
+Jackson will come back and pick which design to use. Keep experimental redesigns off `main`. Do not merge into `main` until Jackson chooses.
 
 ## Website V2 (workflow — Concept 1 refined)
 
