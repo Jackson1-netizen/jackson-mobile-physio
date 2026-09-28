@@ -18,3 +18,12 @@ Append-only record. Do not silently overwrite prior entries.
 - **Still placeholder:** email, website URL, credentials, bio, AHPRA registration number, distinct legal trading name, hours, privacy policy.  
 - **Draft posture unchanged:** `noindex` / robots disallow until AHPRA granted; no claim of current AHPRA registration or NDIS registered provider status.  
 - **GitHub:** Jackson wants a **private** repo `jackson-mobile-physio`; creation blocked in cloud — `gh` not authenticated (`gh auth login` required on his side or token via secure env, not in repo).  
+
+## 2026-09-28 — Central content refactor + privacy page
+
+- **Single file:** All public copy fields consolidated in `src/content/site.ts` (practitionerName, qualifications, about paragraphs, NDIS single description, privacy sections, internal `websiteUrl` only).  
+- **Email:** `[EXISTING BUSINESS EMAIL — NOT PROVIDED]` — Jackson did not supply an address; no invented email.  
+- **`websiteUrl`:** `https://example.com` for Astro/canonical/JSON-LD only — **not rendered** on public pages or referral sheet.  
+- **AHPRA:** `ahpraStatus` Pending; `ahpraRegistrationNumber` empty; no registered-physio claims.  
+- **`/privacy`:** Draft policy from `site.privacy`; footer links to `/privacy`.  
+- **Hours:** Stored in `businessHours` for docs/GBP prep; not shown on marketing pages.  

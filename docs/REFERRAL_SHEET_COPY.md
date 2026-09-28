@@ -1,6 +1,6 @@
 # Referral sheet copy (mirrors `/referral`)
 
-Draft — AHPRA not granted; confirm email/website before printing.
+Draft — AHPRA pending; email not published. No website URL on print sheet until confirmed for display.
 
 ---
 
@@ -12,10 +12,13 @@ Mobile Physiotherapy — Melbourne Eastern Suburbs
 
 ## Practitioner
 
-WAI WA LAW  
-[CREDENTIALS — NOT CONFIRMED]
+Wai Wa "Jackson" Law
 
-AHPRA physiotherapy registration has been submitted and is not yet granted. This site is in draft and does not represent a currently AHPRA-registered physiotherapy practice.
+- Physiotherapy qualification: [DEGREE / UNIVERSITY TO BE CONFIRMED]
+- AHPRA registration: Pending
+- Professional insurance: Maintained as required for practice
+
+AHPRA physiotherapy registration is pending and has not been granted. This draft site must not be read as a currently AHPRA-registered physiotherapy practice.
 
 ## Service model
 
@@ -25,7 +28,7 @@ When you enquire, you speak with the physiotherapist who personally delivers you
 
 ## Service areas
 
-Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley, Mitcham, Nunawading
+Melbourne Eastern Suburbs — Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley, Mitcham, Nunawading, and surrounding areas
 
 ## Languages
 
@@ -37,21 +40,16 @@ Mobility and movement; Strength and balance; Functional exercise; Falls preventi
 
 Examples of support that may be discussed at assessment. Specific care is planned individually; nothing below is a guarantee of treatment or outcomes.
 
-## NDIS & funding enquiries
+## NDIS
 
-Plan-managed and self-managed NDIS participants are welcome to enquire. We can discuss whether mobile physiotherapy may suit your goals and how sessions might be arranged.
-
-- Enquiries welcome from participants, families, and support coordinators.  
-- Funding and eligibility are determined by the NDIA and your plan — we cannot guarantee funding or eligibility.  
-- We are not stating NDIS provider registration status on this draft site; please ask directly about current arrangements.
+Enquiries welcome from self-managed and plan-managed NDIS participants. Funding eligibility and availability should be confirmed before services commence.
 
 ## Contact
 
 Phone: 0433 479 703  
-Email: [EMAIL PLACEHOLDER]  
-Website: [WEBSITE URL PLACEHOLDER]
+Email: [EXISTING BUSINESS EMAIL — NOT PROVIDED]
 
-QR code: **[QR PLACEHOLDER — add when URL confirmed]**
+QR code: **[QR PLACEHOLDER — add when URL confirmed for print]**
 
 ---
 

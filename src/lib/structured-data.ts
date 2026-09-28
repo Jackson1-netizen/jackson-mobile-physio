@@ -1,20 +1,19 @@
 import { site } from "../content/site";
 
-/** JSON-LD for LocalBusiness / healthcare-oriented mobile service (draft placeholders). */
+/** JSON-LD for LocalBusiness / healthcare-oriented mobile service (draft). */
 export function getLocalBusinessJsonLd(): Record<string, unknown> {
-  const areaServed = site.serviceAreas.map((name) => ({
+  const areaServed = site.serviceAreas.suburbs.map((name) => ({
     "@type": "City",
     name: `${name}, Victoria, Australia`,
   }));
 
-  return {
+  const json: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "MedicalBusiness"],
     name: site.businessName,
     description: site.seo.description,
-    url: site.seo.siteUrl,
-    telephone: site.contact.phone,
-    email: site.contact.email,
+    url: site.websiteUrl,
+    telephone: site.phone,
     areaServed,
     serviceType: "Mobile physiotherapy",
     availableLanguage: [...site.languages],
@@ -24,17 +23,34 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
       addressRegion: "VIC",
       addressCountry: "AU",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: -37.8136,
-      longitude: 145.0,
-    },
     additionalProperty: [
       {
         "@type": "PropertyValue",
         name: "Draft status",
-        value: "Site in draft; AHPRA registration not granted",
+        value: "Site in draft; AHPRA registration pending",
+      },
+      {
+        "@type": "PropertyValue",
+        name: "AHPRA status",
+        value: site.ahpraStatus,
       },
     ],
   };
+
+  if (site.email && !site.email.includes("NOT PROVIDED")) {
+    json.email = site.email;
+  }
+
+  if (site.ahpraRegistrationNumber) {
+    json.additionalProperty = [
+      ...(json.additionalProperty as object[]),
+      {
+        "@type": "PropertyValue",
+        name: "AHPRA registration number",
+        value: site.ahpraRegistrationNumber,
+      },
+    ];
+  }
+
+  return json;
 }

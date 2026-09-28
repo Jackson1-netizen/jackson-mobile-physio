@@ -14,11 +14,13 @@
 |-------|-------------|------------|
 | Business name | WAI WA LAW | Confirmed (draft site) |
 | Primary category | Physiotherapist (or Mobile physiotherapist if available) | TODO |
-| Service areas | Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley, Mitcham, Nunawading | TODO |
+| Practitioner (display) | Wai Wa "Jackson" Law | Confirmed (draft site) |
+| Service areas | Melbourne Eastern Suburbs + listed suburbs and surrounding areas | Align with `site.ts` |
 | Phone | 0433 479 703 | Confirmed |
 | ABN | 75 612 731 757 | Confirmed |
-| Website | [WEBSITE URL PLACEHOLDER] | NOT CONFIRMED |
-| Hours | [HOURS — NOT CONFIRMED] | NOT CONFIRMED |
+| Email | [EXISTING BUSINESS EMAIL — NOT PROVIDED] | NOT CONFIRMED |
+| Website | Not displayed on draft site; internal placeholder only until launch URL chosen | NOT CONFIRMED |
+| Hours | By appointment (Mon–Sat); Sunday closed — do not publish fixed opening hours on draft site | TODO for GBP |
 | Description | Use calm, factual copy from `src/content/site.ts` — no AHPRA registration claims until granted | TODO |
 
 ## Services (examples only)
@@ -39,7 +41,7 @@ Align with website list — mobility, strength and balance, functional exercise,
 
 ## AHPRA
 
-- [ ] Registration **not granted** on draft site — do not state practitioner is currently AHPRA-registered until confirmed  
+- [ ] Status **Pending** — do not state practitioner is currently AHPRA-registered; no registration number until granted  
 - [ ] Update profile only after registration outcome is known  
 
 ## Photo checklist (before launch)

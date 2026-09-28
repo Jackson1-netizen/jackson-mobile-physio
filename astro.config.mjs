@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.placeholder',
+  site: 'https://example.com',
   output: 'static',
   server: {
     port: 4721,

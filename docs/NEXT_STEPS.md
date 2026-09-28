@@ -1,5 +1,5 @@
 # Next steps (short)
 
-1. Confirm **email**, **website URL**, credentials, bio, AHPRA number (when granted), legal trading name if distinct, hours, privacy policy — update `src/content/site.ts`.  
-2. **GitHub:** Authenticate `gh` on your machine and create/connect private repo `jackson-mobile-physio` (see `docs/GITHUB_WORKFLOW.md`) — agent could not create repo without `gh` auth in cloud environment.  
-3. Keep site **draft** (`noindex`, robots disallow) until AHPRA registration is **granted**; then review all copy before any public launch.  
+1. Add **confirmed business email** to `email` in `src/content/site.ts` (and real `mailto:`) — still `[EXISTING BUSINESS EMAIL — NOT PROVIDED]`.  
+2. When AHPRA is **granted**, update `ahpraStatus`, `ahpraRegistrationNumber`, and `ahpraNotice`; then plan removal of draft `noindex` (only after legal/privacy review).  
+3. Confirm degree/university for qualifications line; review `/privacy` draft with adviser; set `privacy.lastUpdated` and launch URL (replace internal `websiteUrl` only — still do not show URL on pages until intended).  

@@ -13,3 +13,10 @@
 - **Decisions:** Remain draft until AHPRA granted; see `docs/DECISIONS.md` (2026-09-28 Jackson confirmed).  
 - **Blockers:** Private GitHub repo not created — `gh auth status` shows not logged in.  
 - **Next:** Jackson runs `gh auth login`, creates private `jackson-mobile-physio`, repoints `origin`, push; then merge Phase 1 to `main`.  
+
+## 2026-09-28 (content refactor)
+
+- **Changed:** Expanded `site.ts`; `/privacy` page; about/NDIS/contact/referral updates; referral sheet without website line; docs synced.  
+- **Decisions:** See `docs/DECISIONS.md` (2026-09-28 central content refactor).  
+- **Blockers:** Email still not provided; AHPRA pending.  
+- **Next:** Jackson supplies email; legal review of privacy draft.  

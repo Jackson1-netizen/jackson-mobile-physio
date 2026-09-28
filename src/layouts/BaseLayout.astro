@@ -20,8 +20,8 @@ const {
   hideChrome = false,
 } = Astro.props;
 
-const canonicalUrl = new URL(canonicalPath, site.seo.siteUrl).href;
-const ogImage = new URL(site.seo.ogImagePath, site.seo.siteUrl).href;
+const canonicalUrl = new URL(canonicalPath, site.websiteUrl).href;
+const ogImage = new URL(site.seo.ogImagePath, site.websiteUrl).href;
 const jsonLd = JSON.stringify(getLocalBusinessJsonLd());
 ---
 
