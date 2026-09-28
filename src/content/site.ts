@@ -148,57 +148,21 @@ export const site = {
 
   privacy: {
     pageTitle: "Privacy policy (draft)",
+    metaDescription:
+      "Draft privacy policy for people who contact or use the WAI WA LAW mobile physiotherapy service.",
+    lastUpdatedLabel: "Last updated:",
     lastUpdated: "[MONTH YEAR — NOT CONFIRMED]",
+    paragraphs: [
+      "We respect the privacy of people who contact or use our service. We may collect personal information such as your name, contact details, referral information and information you voluntarily provide when making an enquiry.",
+      "Where healthcare services are provided, relevant health and clinical information may also be collected where reasonably necessary for providing care, maintaining appropriate records and meeting professional or legal obligations.",
+      "Personal information is used only for purposes connected with providing and administering the service, communicating with clients or referrers, managing appointments, invoicing and meeting applicable professional or legal requirements.",
+      "We do not sell personal information. Information may be disclosed to another person or organisation where the individual has provided consent, where it is reasonably necessary for providing the requested service, or where disclosure is required or authorised by law.",
+      "Reasonable steps are taken to protect personal information from misuse, loss, unauthorised access or disclosure.",
+      "Individuals may contact us to request access to, or correction of, personal information we hold about them.",
+    ],
+    privacyEnquiriesContactLabel: "For privacy enquiries, contact:",
     workingDraftNotice:
       "This privacy policy is a working draft and must be reviewed before public launch.",
-    sections: [
-      {
-        heading: "About this policy",
-        paragraphs: [
-          "This draft policy describes how WAI WA LAW (draft mobile physiotherapy service) intends to handle personal information. It applies to this development website and future services once launched.",
-          "This privacy policy is a working draft and must be reviewed before public launch.",
-        ],
-      },
-      {
-        heading: "What we may collect",
-        paragraphs: [
-          "If you contact us, we may collect information you choose to provide, such as your name, phone number, email address, general location or suburb, and information about your enquiry or referral.",
-          "We do not intentionally collect sensitive information through this draft site without a clear purpose and appropriate consent.",
-        ],
-      },
-      {
-        heading: "How we may use information",
-        paragraphs: [
-          "We may use contact information to respond to enquiries, arrange appointments, and communicate about physiotherapy services you have asked about.",
-          "We do not sell personal information.",
-        ],
-      },
-      {
-        heading: "Disclosure",
-        paragraphs: [
-          "We may disclose information where required by law, or to service providers who assist us to operate our practice (for example secure email or record-keeping tools), subject to appropriate confidentiality arrangements.",
-        ],
-      },
-      {
-        heading: "Storage and security",
-        paragraphs: [
-          "We take reasonable steps to protect personal information from misuse, loss, and unauthorised access. Specific systems and retention periods will be confirmed before public launch.",
-        ],
-      },
-      {
-        heading: "Access and complaints",
-        paragraphs: [
-          "You may request access to personal information we hold about you, or lodge a complaint about privacy, by contacting us using the details below.",
-          "If you are not satisfied with our response, you may contact the Office of the Australian Information Commissioner (OAIC).",
-        ],
-      },
-      {
-        heading: "Contact for privacy",
-        paragraphs: [
-          "Privacy contact email (placeholder until confirmed):",
-        ],
-      },
-    ],
   },
 
   seo: {
