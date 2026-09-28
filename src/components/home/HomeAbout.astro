@@ -1,22 +1,27 @@
 ---
 import { site } from "../../content/site";
-import { homeAbout, homeMedia } from "../../content/home-motion";
+import { homeAbout } from "../../content/home-motion";
+
+const photo = homeAbout.photo;
 ---
 
 <section id="about" class="hm-reveal scroll-mt-24 bg-[var(--hm-warm-white)]">
   <div class="hm-wrap hm-section hm-about-grid">
     <div class="hm-portrait hm-img-zoom">
       <img
-        src={homeMedia.about.src}
-        alt={homeMedia.about.alt}
-        width="800"
-        height="1000"
+        src={photo.src}
+        alt={photo.alt}
+        width={photo.width}
+        height={photo.height}
         loading="lazy"
+        decoding="async"
       />
     </div>
     <div>
       <p class="hm-kicker" data-i18n-path="sections.about">{homeAbout.kicker}</p>
-      <h2>{homeAbout.heading}</h2>
+      <h2 data-i18n-path="about.heading">{homeAbout.heading}</h2>
+      <p class="hm-about-name">{homeAbout.name}</p>
+      <p class="hm-about-role" data-i18n-path="about.role">{homeAbout.role}</p>
       {
         homeAbout.paragraphs.map((p, i) => (
           <p class="mt-4 text-[#3d5a52]" data-i18n-path={`about.paragraphs.${i}`}>
@@ -24,7 +29,7 @@ import { homeAbout, homeMedia } from "../../content/home-motion";
           </p>
         ))
       }
-      <p class="mt-4 font-medium">{homeAbout.philosophy}</p>
+      <p class="mt-4 font-medium" data-i18n-path="about.differentiator">{homeAbout.philosophy}</p>
       <p class="mt-5 text-[#3d5a52]">
         <strong data-i18n-path="about.languagesLabel">{homeAbout.languagesLabel}:</strong>
         {" "}

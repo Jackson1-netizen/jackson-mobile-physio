@@ -26,4 +26,5 @@ export {
   homeSuburbs,
   homeFaq,
   homeMedia,
+  homePhotos,
 } from "./home-motion";

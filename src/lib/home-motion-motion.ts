@@ -26,20 +26,6 @@ export function initHomeMotion(root: ParentNode = document): void {
     else requestAnimationFrame(() => heading.classList.add("is-in"));
   }
 
-  const video = root.querySelector<HTMLVideoElement>(".hm-hero-video");
-  if (video && "IntersectionObserver" in window) {
-    const pauseObs = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) void video.play().catch(() => {});
-          else video.pause();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    pauseObs.observe(video);
-  }
-
   const media = root.querySelector<HTMLElement>("[data-hm-parallax]");
   if (media && finePointer && !reduced) {
     const max = 8;

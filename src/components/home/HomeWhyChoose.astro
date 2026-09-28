@@ -1,5 +1,7 @@
 ---
 import { homeWhy } from "../../content/home-motion";
+
+const [whyHome, whyHydro] = homeWhy.photos;
 ---
 
 <section class="hm-why hm-reveal">
@@ -7,6 +9,33 @@ import { homeWhy } from "../../content/home-motion";
     <p class="hm-kicker">Why choose Home Motion</p>
     <h2>{homeWhy.heading}</h2>
     <p class="mt-4 max-w-3xl text-[#3d5a52]">{homeWhy.intro}</p>
+    <div class="hm-why-media">
+      <div class="hm-img-zoom">
+        <img
+          src={whyHome.src}
+          alt={whyHome.alt}
+          width={whyHome.width}
+          height={whyHome.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <figure class="hm-why-hydro">
+        <div class="hm-img-zoom">
+          <img
+            src={whyHydro.src}
+            alt={whyHydro.alt}
+            width={whyHydro.width}
+            height={whyHydro.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption class="hm-why-caption" data-i18n-path="about.hydroCaption">
+          {homeWhy.hydroCaption}
+        </figcaption>
+      </figure>
+    </div>
     <ul class="hm-why-grid hm-stagger mt-8">
       {
         homeWhy.items.map((item) => (

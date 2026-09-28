@@ -52,12 +52,16 @@ const en = {
     enquiry: "Send an enquiry",
   },
   about: {
+    heading: "Meet Jackson",
     practitionerLabel: "Practitioner",
     qualificationsLabel: "Qualifications",
     languagesLabel: "Languages",
+    role: site.tagline,
     paragraphs: [...site.aboutParagraphs],
     differentiator: site.differentiator,
     contactCta: site.contactCta,
+    hydroCaption:
+      "Illustrative aquatic-setting care only. Home Motion is a mobile home and community physiotherapy service — we do not run a pool clinic.",
   },
   services: {
     intro: site.servicesIntro,
@@ -236,17 +240,21 @@ const zhHant = {
     enquiry: "發送查詢",
   },
   about: {
+    heading: "認識 Jackson",
     practitionerLabel: "治療師",
     qualificationsLabel: "資歷",
     languagesLabel: "語言",
+    role: "上門物理治療",
     paragraphs: [
-      "Jackson 在墨爾本東區提供個人化上門物理治療，專注家居及社區照護，並可提供英語、廣東話及普通話預約。",
+      "Jackson（Wai Wa Law）在墨爾本東區提供個人化上門物理治療，專注家居及社區照護，並可提供英語、廣東話及普通話預約。",
       "Jackson 具社區及殘疾服務經驗，重視切合個人需要的實用照護，以活動能力、功能及日常生活目標為本。",
     ],
     differentiator:
       "查詢時您會直接與負責治療的物理治療師溝通 — 並非電話中心或輪更團隊。",
     contactCta:
       "正在尋找墨爾本東區上門物理治療？歡迎聯絡我們，討論您的需要、地點及可預約時間。",
+    hydroCaption:
+      "圖片僅作水中照護情境示意。Home Motion 為上門及社區物理治療服務，並非水療診所。",
   },
   services: {
     intro:
@@ -405,16 +413,20 @@ const zhHans = {
     enquiry: "发送咨询",
   },
   about: {
+    heading: "认识 Jackson",
     practitionerLabel: "治疗师",
     qualificationsLabel: "资历",
     languagesLabel: "语言",
+    role: "上门物理治疗",
     paragraphs: [
-      "Jackson 在墨尔本东区提供个性化上门物理治疗，专注家居及社区照护，并可提供英语、粤语及普通话预约。",
+      "Jackson（Wai Wa Law）在墨尔本东区提供个性化上门物理治疗，专注家居及社区照护，并可提供英语、粤语及普通话预约。",
       "Jackson 具社区及残疾服务经验，重视切合个人需要的实用照护，以活动能力、功能及日常生活目标为本。",
     ],
     differentiator: "咨询时您会直接与负责治疗的物理治疗师沟通 — 并非电话中心或轮更团队。",
     contactCta:
       "正在寻找墨尔本东区上门物理治疗？欢迎联系我们，讨论您的需要、地点及可预约时间。",
+    hydroCaption:
+      "图片仅作水中照护情境示意。Home Motion 为上门及社区物理治疗服务，并非水疗诊所。",
   },
   services: {
     intro: "以下为评估时可能讨论的支援例子。具体照护按个人计划；概不保证任何治疗或结果。",

@@ -30,6 +30,69 @@ export const homeHero = {
   ],
 };
 
+export const homePhotos = {
+  portrait: {
+    src: "/photos/jackson-portrait.jpg",
+    width: 1120,
+    height: 1400,
+    alt: "Jackson, Home Motion mobile physiotherapist, in a Home Motion polo",
+  },
+  homeWalker: {
+    src: "/photos/home-walker.jpg",
+    width: 819,
+    height: 614,
+    alt: "Jackson providing mobile physiotherapy at home, supporting walking practice with a walking frame",
+  },
+  homeGait: {
+    src: "/photos/home-gait-support.jpg",
+    width: 819,
+    height: 614,
+    alt: "Jackson supporting standing and gait practice during a home physiotherapy visit",
+  },
+  homeSitToStand: {
+    src: "/photos/home-sit-to-stand.jpg",
+    width: 819,
+    height: 614,
+    alt: "Jackson coaching sit-to-stand practice at home during a physiotherapy visit",
+  },
+  homeSeatedDumbbells: {
+    src: "/photos/home-seated-dumbbells.jpg",
+    width: 819,
+    height: 614,
+    alt: "Jackson guiding seated strength exercise with light weights during a home physiotherapy visit",
+  },
+  gymStepCoaching: {
+    src: "/photos/gym-step-coaching.jpg",
+    width: 819,
+    height: 614,
+    alt: "Jackson coaching step-box strength and functional exercise in a community gym setting",
+  },
+  gymStepStrength: {
+    src: "/photos/gym-step-strength.jpg",
+    width: 819,
+    height: 614,
+    alt: "Jackson coaching lower-limb strength exercise on a step box in a community gym setting",
+  },
+  gymResistanceBand: {
+    src: "/photos/gym-resistance-band.jpg",
+    width: 819,
+    height: 614,
+    alt: "Jackson guiding seated resistance-band exercise as part of mobile physiotherapy care",
+  },
+  hydroAquaDumbbells: {
+    src: "/photos/hydro-aqua-dumbbells.jpg",
+    width: 819,
+    height: 614,
+    alt: "Illustrative aquatic-setting physiotherapy with foam weights — not a Home Motion pool clinic",
+  },
+  hydroWalkingSupport: {
+    src: "/photos/hydro-walking-support.jpg",
+    width: 819,
+    height: 614,
+    alt: "Illustrative aquatic-setting walking support — not a Home Motion pool clinic",
+  },
+} as const;
+
 export const homeServices = {
   heading: "Our Services",
   supporting: "Supporting your movement, function and independence.",
@@ -40,31 +103,37 @@ export const homeServices = {
       icon: "person" as const,
       title: "Mobile Physiotherapy",
       body: "One-on-one care at home and in the community.",
+      image: homePhotos.homeSeatedDumbbells,
     },
     {
       icon: "run" as const,
       title: "Mobility & Balance",
       body: "Improve safety and confidence in daily activities.",
+      image: homePhotos.homeGait,
     },
     {
       icon: "dumbbell" as const,
       title: "Strength & Functional Capacity",
       body: "Build strength for independence.",
+      image: homePhotos.gymStepCoaching,
     },
     {
       icon: "house" as const,
       title: "Rehabilitation After Hospitalisation",
       body: "Support your recovery and return to everyday life.",
+      image: homePhotos.homeSitToStand,
     },
     {
       icon: "brain" as const,
       title: "Neurological & Disability-Related",
       body: "Tailored physiotherapy for your individual goals.",
+      image: homePhotos.gymResistanceBand,
     },
     {
       icon: "clipboard" as const,
       title: "Home Exercise Programs",
       body: "Practical and individualised exercise plans.",
+      image: homePhotos.gymStepStrength,
     },
   ],
 };
@@ -108,15 +177,21 @@ export const homeWhy = {
       body: `Home and community visits across ${site.serviceAreas.region}, by appointment.`,
     },
   ],
+  photos: [homePhotos.homeSeatedDumbbells, homePhotos.hydroAquaDumbbells],
+  hydroCaption:
+    "Illustrative aquatic-setting care only. Home Motion is a mobile home and community physiotherapy service — we do not run a pool clinic.",
 };
 
 export const homeAbout = {
   kicker: "About",
   heading: "Meet Jackson",
+  name: site.practitionerName,
+  role: site.tagline,
   paragraphs: [...site.aboutParagraphs],
   philosophy: site.differentiator,
   languagesLabel: "Languages",
   qualificationsLabel: "Qualifications",
+  photo: homePhotos.portrait,
 };
 
 export const homeReferrers = {
@@ -176,10 +251,14 @@ export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {
 export const homeFaq = messages.en.faq.items;
 
 export const homeMedia = {
-  heroVideo: images.heroVideo,
-  about: images.meetJackson,
-  howOne: images.physioAtHome,
-  howTwo: images.mobility,
+  hero: homePhotos.homeWalker,
+  about: homePhotos.portrait,
+  howOne: homePhotos.homeGait,
+  howTwo: homePhotos.homeSitToStand,
+  whyHome: homePhotos.homeSeatedDumbbells,
+  whyHydro: homePhotos.hydroAquaDumbbells,
+  ndis: homePhotos.homeGait,
+  areasBackdrop: homePhotos.homeWalker,
 };
 
 export { images, site };

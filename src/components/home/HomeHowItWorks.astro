@@ -24,18 +24,20 @@ import { homeSteps, homeMedia } from "../../content/home-motion";
         <img
           src={homeMedia.howOne.src}
           alt={homeMedia.howOne.alt}
-          width="1400"
-          height="900"
+          width={homeMedia.howOne.width}
+          height={homeMedia.howOne.height}
           loading="lazy"
+          decoding="async"
         />
       </div>
       <div class="hm-img-zoom">
         <img
           src={homeMedia.howTwo.src}
           alt={homeMedia.howTwo.alt}
-          width="1200"
-          height="800"
+          width={homeMedia.howTwo.width}
+          height={homeMedia.howTwo.height}
           loading="lazy"
+          decoding="async"
         />
       </div>
     </div>

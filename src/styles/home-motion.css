@@ -30,6 +30,10 @@
   background: var(--hm-cream);
 }
 
+.hm img {
+  max-width: 100%;
+}
+
 .hm h1,
 .hm h2,
 .hm h3 {
@@ -141,6 +145,7 @@
 .hm-hero-media {
   border-radius: 1.5rem;
   min-height: min(28rem, 70vw);
+  overflow: hidden;
 }
 
 .hm-blobs {
@@ -204,9 +209,8 @@
 .hm-card-stage {
   min-height: 24rem;
   background:
-    linear-gradient(180deg, rgb(250 246 240 / 0.15), rgb(22 53 46 / 0.08)),
-    url("https://images.pexels.com/photos/172292/pexels-photo-172292.jpeg?auto=compress&cs=tinysrgb&w=1200")
-      center / cover;
+    linear-gradient(180deg, rgb(250 246 240 / 0.22), rgb(22 53 46 / 0.18)),
+    var(--hm-areas-photo) center / cover no-repeat;
   display: grid;
   place-items: center;
   padding: 2rem 1.25rem;
@@ -649,32 +653,13 @@
   box-shadow: 0 28px 60px rgb(23 61 53 / 0.18);
 }
 
-.hm-hero-media video,
-.hm-hero-poster {
+.hm-hero-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* Official logo PNG. Multiply drops the white plate so the mark sits on the shirt. */
-.hm-polo-logo {
-  position: absolute;
-  z-index: 3;
-  left: 2%;
-  top: 7%;
-  width: 32%;
-  height: auto;
-  object-fit: contain;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-}
-
-.hm-polo-logo.is-on-clip {
-  left: 18%;
-  top: 38%;
-  width: 24%;
+  object-position: 62% 36%;
 }
 
 .hm-hero-script {
@@ -854,6 +839,25 @@
   line-height: 1.45;
 }
 
+.hm-service-photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  margin: 0 0 0.7rem;
+}
+
+.hm-service-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+}
+
 .hm-how {
   background: var(--hm-warm-white);
 }
@@ -870,15 +874,21 @@
 }
 
 .hm-how-media {
-  display: none;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
+}
+
+.hm-how-media .hm-img-zoom {
+  min-height: 9.5rem;
+  aspect-ratio: 4 / 3;
 }
 
 .hm-how-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 30%;
   border-radius: 1.1rem;
   min-height: 9.5rem;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -895,6 +905,37 @@
 
 .hm-why .hm-card {
   background: #fff;
+}
+
+.hm-why-media {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.hm-why-media .hm-img-zoom {
+  min-height: 12rem;
+  aspect-ratio: 4 / 3;
+}
+
+.hm-why-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: 1.1rem;
+}
+
+.hm-why-hydro {
+  margin: 0;
+}
+
+.hm-why-caption {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #5b6e67;
 }
 
 .hm-about-grid,
@@ -916,8 +957,25 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 12%;
   min-height: 22rem;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hm-about-name {
+  margin: 0.4rem 0 0;
+  font-family: var(--hm-sans);
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.hm-about-role {
+  margin: 0.15rem 0 0;
+  color: var(--hm-orange);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 
@@ -938,6 +996,26 @@
 
 .hm-ndis {
   background: #fff8ee;
+}
+
+.hm-ndis-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hm-ndis-photo {
+  border-radius: 1.2rem;
+  overflow: hidden;
+  min-height: 14rem;
+}
+
+.hm-ndis-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+  min-height: 14rem;
 }
 
 .hm-ndis ul {
@@ -1290,6 +1368,10 @@
   .hm-step-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .hm-why-media {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
   .hm-header .hm-cta-desktop {
     display: inline-flex;
   }
@@ -1328,10 +1410,18 @@
     grid-template-columns: 1fr;
   }
   .hm-how-media {
-    display: grid;
+    align-content: start;
   }
   .hm-hero-media {
     min-height: 32rem;
+  }
+  .hm-why-media {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
+  .hm-ndis-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    max-width: none;
   }
   .hm-faq-layout {
     grid-template-columns: 0.85fr 1.15fr;
@@ -1349,8 +1439,8 @@
 
 @media (min-width: 1200px) {
   .hm-service-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
   }
 }
 
@@ -1368,18 +1458,6 @@
   .hm-img-zoom:hover img,
   .hm-portrait:hover img {
     transform: none;
-  }
-  .hm-hero-video {
-    display: none;
-  }
-  .hm-hero-poster {
-    display: block;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .hm-hero-poster {
-    display: none;
   }
 }
 

@@ -4,6 +4,7 @@ import { homeHero, homeMedia } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 
 const registrationLine = getRegistrationDisplayLine();
+const hero = homeMedia.hero;
 ---
 
 <section class="hm-hero" aria-labelledby="hm-hero-heading">
@@ -42,32 +43,14 @@ const registrationLine = getRegistrationDisplayLine();
 
     <div class="hm-hero-frame">
       <div class="hm-hero-media" data-hm-parallax>
-        <video
-          class="hm-hero-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster={homeMedia.heroVideo.poster}
-          aria-hidden="true"
-        >
-          <source src={homeMedia.heroVideo.mp4} type="video/mp4" />
-        </video>
         <img
-          class="hm-hero-poster"
-          src={homeMedia.heroVideo.poster}
-          alt={homeMedia.heroVideo.alt}
-          width="1200"
-          height="900"
+          class="hm-hero-photo"
+          src={hero.src}
+          alt={hero.alt}
+          width={hero.width}
+          height={hero.height}
           fetchpriority="high"
-        />
-        <img
-          class="hm-polo-logo"
-          src="/home-motion-logo.png"
-          alt=""
-          width="627"
-          height="388"
+          decoding="async"
         />
       </div>
       <div class="hm-blobs" aria-hidden="true">
@@ -77,16 +60,4 @@ const registrationLine = getRegistrationDisplayLine();
       </div>
     </div>
   </div>
-  <script>
-    const video = document.querySelector<HTMLVideoElement>(".hm-hero-video");
-    const logo = document.querySelector(".hm-polo-logo");
-    if (video && logo) {
-      const sync = () => {
-        logo.classList.toggle("is-on-clip", !video.paused && !video.ended && video.readyState >= 2);
-      };
-      video.addEventListener("playing", sync);
-      video.addEventListener("pause", sync);
-      video.addEventListener("ended", sync);
-    }
-  </script>
 </section>

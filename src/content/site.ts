@@ -82,7 +82,7 @@ export const site = {
   ] as const,
 
   aboutParagraphs: [
-    "Jackson provides a personal, mobile physiotherapy service focused on home and community-based care across Melbourne's eastern suburbs. The service is designed to make physiotherapy more accessible and convenient, with appointments available in English, Cantonese and Mandarin.",
+    "Jackson (Wai Wa Law) provides a personal, mobile physiotherapy service focused on home and community-based care across Melbourne's eastern suburbs. The service is designed to make physiotherapy more accessible and convenient, with appointments available in English, Cantonese and Mandarin.",
     "Jackson has experience working with people in community and disability settings and values practical, individualised care focused on mobility, function and meaningful everyday goals.",
   ] as const,
 
