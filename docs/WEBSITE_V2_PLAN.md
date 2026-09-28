@@ -467,17 +467,27 @@ Submit: mailto compose (static) or future form endpoint — **no** clinical data
 |------|--------|--------|
 | 1. Competitor reference | Done | Project store `docs/competitor-reference.md` |
 | 2. Brainstorming — BetterCare quality bar | Done | §14 |
-| 3. **Homepage visual concepts (3)** | **Done — awaiting Jackson** | `/concepts/1/`, `/concepts/2/`, `/concepts/3/` (hub: `/concepts/`) |
-| 4. Jackson picks concept **1, 2, or 3** | **Waiting** | Reply in Cursor |
-| 5. Wonder refinement | Not started | May need Jackson MCP auth |
-| 6. writing-plans | **Not started** | After Wonder only |
+| 3. **Homepage visual concepts (3)** | Done | `/concepts/1/`, `/concepts/2/`, `/concepts/3/` |
+| 4. Jackson picks concept | **Done — Concept 1** | Editorial Forest |
+| 5. Wonder refinement | Done (in-repo) | Full homepage system on Concept 1 |
+| 5b. **Colour theme pick (A / B / C)** | **Waiting** | Same layout: `/concepts/1/a/`, `/b/`, `/c/` — hub `/concepts/1/` |
+| 6. writing-plans | **Waiting** | After colour pick + explicit request |
 | 7. executing-plans | **Not started** | |
 | 8. Astro/Tailwind production multi-page site | **Not started** | |
 | 9. Lighthouse / mobile / SEO audit | Not started | |
 
-**Current gate:** Jackson chooses **Concept 1, 2, or 3**. Do **not** run `writing-plans`, `executing-plans`, or production multi-page BUILD until Wonder refinement completes.
+**Current gate:** Jackson picks colour theme **A**, **B**, or **C** on the Concept 1 homepage system. Then wait for explicit **writing-plans**. No production multi-page BUILD yet.
 
-### 15.1 Homepage visual concepts (comparison)
+### 15.1 Chosen concept — Editorial Forest (Concept 1)
+
+- **Locked:** 2026-09-28.  
+- **Homepage system:** Full single-page mockup (all V2 home sections, no reviews) — three palettes, shared layout.  
+- **Compare hub:** `http://127.0.0.1:4721/concepts/1/` (or `?theme=a|b|c` redirect).  
+- **Themes:** **A** forest/sage · **B** sand/olive · **C** teal/deep green.  
+- **Imagery:** Generic illustrative Unsplash blocks via `src/content/concept1-images.ts` — not Jackson, not real clients.  
+- **Concepts 2 & 3:** Archived references only.
+
+### 15.2 Homepage visual concepts (comparison — archive)
 
 | Concept | Name | Composition | Type | Photo treatment | Interaction density | Colour temperature |
 |---------|------|-------------|------|-----------------|---------------------|-------------------|

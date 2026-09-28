@@ -69,3 +69,9 @@
 - **Decisions:** Concept 1 Editorial Forest; Wonder N/A (needs auth).  
 - **Blockers:** None.  
 - **Next:** Wait for Jackson/parent to request writing-plans.  
+
+## 2026-09-28 (Concept 1 colour variants)
+
+- **Changed:** Full homepage system + themes A/B/C on `/concepts/1/`; generic image config.  
+- **Decisions:** See DECISIONS (homepage system + colour themes).  
+- **Next:** Jackson picks A, B, or C.  

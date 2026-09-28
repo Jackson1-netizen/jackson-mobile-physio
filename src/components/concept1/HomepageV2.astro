@@ -1,0 +1,325 @@
+---
+import "../../styles/concept1.css";
+import type { Concept1Theme } from "../../content/concept1-images";
+import { concept1Images } from "../../content/concept1-images";
+import {
+  concept1Hero,
+  concept1TrustStrip,
+  concept1Services,
+  concept1Steps,
+  concept1MeetJackson,
+  concept1Ndis,
+  concept1Suburbs,
+  concept1Faq,
+  concept1Nav,
+  concept1Phone,
+  concept1PhoneHref,
+} from "../../content/concept1-home";
+
+interface Props {
+  theme: Concept1Theme;
+}
+
+const { theme } = Astro.props;
+---
+
+<div class="c1-home" data-theme={theme} id="main">
+  <header
+    class="sticky top-9 z-40 border-b border-[var(--c-border)] bg-[color-mix(in_srgb,var(--c-elevated)_94%,transparent)] backdrop-blur-md"
+  >
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-3">
+      <a href={`/concepts/1/${theme}/`} class="font-serif text-lg font-semibold text-[var(--c-ink)] no-underline">
+        Jackson · Mobile Physio
+        <span class="block font-sans text-xs font-normal text-[var(--c-muted)]">Melbourne eastern suburbs</span>
+      </a>
+      <nav class="hidden flex-wrap gap-4 text-sm text-[var(--c-muted)] lg:flex" aria-label="Primary">
+        {concept1Nav.map((item) => (
+          <a href={item.href} class="no-underline hover:text-[var(--c-accent)]">{item.label}</a>
+        ))}
+      </nav>
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="flex gap-1 text-xs font-semibold" aria-label="Languages">
+          <span class="rounded-full bg-[var(--c-deep)] px-2 py-1 text-white">EN</span>
+          <span class="rounded-full border border-[var(--c-border)] px-2 py-1">粵</span>
+          <span class="rounded-full border border-[var(--c-border)] px-2 py-1">普</span>
+        </div>
+        <a
+          href="#referrers"
+          class="hidden rounded-full border border-[var(--c-border)] px-3 py-2 text-sm font-semibold no-underline text-[var(--c-ink)] sm:inline-flex"
+        >Refer a client</a>
+        <a
+          href="#contact"
+          class="rounded-full bg-[var(--c-accent-bright)] px-4 py-2 text-sm font-bold text-white no-underline hover:bg-[var(--c-accent-hover)]"
+        >Enquire</a>
+        <a href={concept1PhoneHref} class="rounded-full border border-[var(--c-border)] px-3 py-2 text-sm font-bold no-underline lg:hidden"
+        >Call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative min-h-[min(calc(100dvh-7rem),52rem)] overflow-hidden">
+    <div class="absolute inset-0 bg-[image:var(--c-hero-grad)]" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,var(--c-surface)_96%,transparent)] via-[color-mix(in_srgb,var(--c-surface)_75%,transparent)] to-transparent"
+      aria-hidden="true"
+    ></div>
+    <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 lg:grid-cols-2 lg:py-20">
+      <div class="border-l-[5px] border-[var(--c-accent-bright)] pl-6 lg:pl-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">Independent mobile physiotherapy</p>
+        <h1 class="mt-3 max-w-[16ch] text-[clamp(2.15rem,5vw,3.75rem)] leading-[1.06] tracking-tight">
+          {concept1Hero.h1}
+        </h1>
+        <p class="mt-5 max-w-[42ch] text-lg text-[var(--c-muted)]">{concept1Hero.support}</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          {concept1Hero.chips.map((chip) => (
+            <span class="rounded-full border border-[var(--c-border)] bg-[var(--c-elevated)] px-3 py-1.5 text-sm text-[var(--c-ink)]">
+              {chip}
+            </span>
+          ))}
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="#contact"
+            class="inline-flex min-h-[3rem] min-w-[9rem] items-center justify-center rounded-full bg-[var(--c-accent-bright)] px-6 font-bold text-white no-underline hover:bg-[var(--c-accent-hover)]"
+          >Enquire</a>
+          <a
+            href={concept1PhoneHref}
+            class="inline-flex min-h-[3rem] items-center justify-center rounded-full border border-[var(--c-border)] bg-[var(--c-elevated)] px-6 font-bold no-underline text-[var(--c-ink)]"
+          >Call</a>
+          <a
+            href="#referrers"
+            class="inline-flex min-h-[3rem] items-center justify-center rounded-full border border-[var(--c-accent)] px-6 font-bold no-underline text-[var(--c-deep)]"
+          >Refer a client</a>
+        </div>
+      </div>
+      <div class="c1-img-wrap aspect-[4/5] max-h-[min(520px,70vh)]">
+        <img src={concept1Images.hero.src} alt={concept1Images.hero.alt} loading="eager" width="800" height="1000" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <section class="border-y border-[var(--c-border)] bg-[var(--c-band)]" aria-label="Trust highlights">
+    <div class="mx-auto grid max-w-6xl gap-3 px-5 py-5 sm:grid-cols-2 lg:grid-cols-4">
+      {concept1TrustStrip.map((item) => (
+        <div class="rounded-xl border border-[var(--c-border)] bg-[var(--c-elevated)] p-4">
+          <p class="text-xs font-bold uppercase tracking-wide text-[var(--c-accent)]">{item.title}</p>
+          <p class="mt-1 text-base text-[var(--c-muted)]">{item.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Physiotherapy at Home -->
+  <section class="bg-[var(--c-elevated)] py-16 lg:py-24">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 lg:grid-cols-2">
+      <div class="c1-img-wrap order-2 aspect-[16/11] lg:order-1">
+        <img src={concept1Images.physioAtHome.src} alt={concept1Images.physioAtHome.alt} loading="lazy" width="1200" height="825" />
+      </div>
+      <div class="order-1 lg:order-2">
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">Physiotherapy at home</p>
+        <h2 class="mt-2 text-[clamp(1.85rem,4vw,2.65rem)] leading-tight">Care in the place that matters most</h2>
+        <p class="mt-4 text-[var(--c-muted)]">
+          Assessment and treatment in your home or community setting — practical support for mobility, strength, and everyday
+          function. Illustrative imagery only; not a depiction of Jackson or a specific client.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="scroll-mt-28 bg-[var(--c-surface)] py-16 lg:py-24">
+    <div class="mx-auto max-w-6xl px-5">
+      <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">Services</p>
+      <h2 class="mt-2 text-[clamp(1.85rem,4vw,2.65rem)]">How we can help</h2>
+      <p class="mt-3 max-w-2xl text-[var(--c-muted)]">Examples discussed at assessment — individual care, not guaranteed outcomes.</p>
+      <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {concept1Services.map((name) => (
+          <li>
+            <a
+              href="#contact"
+              class="flex min-h-[4.5rem] items-center justify-between rounded-xl border border-[var(--c-border)] bg-[var(--c-elevated)] px-5 py-4 font-semibold text-[var(--c-ink)] no-underline transition hover:-translate-y-0.5 hover:border-[var(--c-accent)] hover:shadow-lg"
+            >
+              {name}
+              <span class="text-[var(--c-accent)]" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="scroll-mt-28 bg-[var(--c-mist)] py-16 lg:py-24">
+    <div class="mx-auto max-w-6xl px-5">
+      <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">How it works</p>
+      <h2 class="mt-2 text-[clamp(1.85rem,4vw,2.65rem)]">A clear, personal start</h2>
+      <ol class="mt-10 grid gap-4 lg:grid-cols-3">
+        {concept1Steps.map((step, i) => (
+          <li class="rounded-xl border border-[var(--c-border)] bg-[var(--c-elevated)] p-6">
+            <span class="text-sm font-bold uppercase tracking-wide text-[var(--c-accent-bright)]">Step {i + 1}</span>
+            <h3 class="mt-2 text-xl">{step.title}</h3>
+            <p class="mt-2 text-[var(--c-muted)]">{step.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Meet Jackson -->
+  <section id="about" class="scroll-mt-28 bg-[var(--c-elevated)] py-16 lg:py-24">
+    <div class="mx-auto grid max-w-6xl items-start gap-10 px-5 lg:grid-cols-[1fr_1.1fr]">
+      <div class="c1-img-wrap aspect-square max-w-md">
+        <img src={concept1Images.meetJackson.src} alt={concept1Images.meetJackson.alt} loading="lazy" width="800" height="800" />
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">Practitioner</p>
+        <h2 class="mt-2 text-[clamp(1.85rem,4vw,2.65rem)]">{concept1MeetJackson.heading}</h2>
+        {concept1MeetJackson.paragraphs.map((p) => (
+          <p class="mt-4 text-[var(--c-muted)]">{p}</p>
+        ))}
+        <p class="mt-4 font-medium text-[var(--c-ink)]">{concept1MeetJackson.philosophy}</p>
+        <p class="mt-6 text-sm text-[var(--c-muted)]">
+          <strong class="text-[var(--c-ink)]">Qualifications:</strong> {concept1MeetJackson.qualificationsPlaceholder}
+        </p>
+        <p class="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">{concept1MeetJackson.ahpra}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NDIS -->
+  <section id="ndis" class="scroll-mt-28 bg-[var(--c-surface)] py-16 lg:py-24">
+    <div class="mx-auto max-w-3xl px-5">
+      <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">Funding</p>
+      <h2 class="mt-2 text-[clamp(1.85rem,4vw,2.65rem)]">{concept1Ndis.heading}</h2>
+      <p class="mt-4 text-[var(--c-muted)]">{concept1Ndis.lead}</p>
+      <ul class="mt-6 space-y-3 text-[var(--c-muted)]">
+        {concept1Ndis.bullets.map((b) => (
+          <li class="flex gap-2">
+            <span class="text-[var(--c-accent)]" aria-hidden="true">•</span>
+            {b}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Service areas -->
+  <section id="areas" class="scroll-mt-28 bg-[var(--c-mist)] py-16 lg:py-24">
+    <div class="mx-auto max-w-6xl px-5">
+      <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">Coverage</p>
+      <h2 class="mt-2 text-[clamp(1.85rem,4vw,2.65rem)]">Service areas</h2>
+      <p class="mt-3 max-w-2xl text-[var(--c-muted)]">
+        Mobile visits across Melbourne's eastern suburbs. Service-area business — no residential address or client location pins on this map.
+      </p>
+      <div class="mt-8 grid gap-8 lg:grid-cols-2">
+        <ul class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          {concept1Suburbs.map((s) => (
+            <li class="rounded-lg border border-[var(--c-border)] bg-[var(--c-elevated)] px-3 py-2 text-center text-sm font-medium">
+              {s}
+            </li>
+          ))}
+          <li class="col-span-2 rounded-lg border border-dashed border-[var(--c-border)] px-3 py-2 text-center text-sm text-[var(--c-muted)] sm:col-span-3">
+            Surrounding areas — enquire to confirm
+          </li>
+        </ul>
+        <div class="c1-map flex flex-col justify-center" role="img" aria-label="Stylised eastern suburbs service area — no pin markers">
+          <svg viewBox="0 0 320 200" class="mx-auto h-40 w-full max-w-sm text-[var(--c-accent)]" aria-hidden="true">
+            <path
+              fill="currentColor"
+              fill-opacity="0.12"
+              stroke="currentColor"
+              stroke-width="1.5"
+              d="M40 120c40-60 120-80 200-40 20 80-60 100-120 60S20 180 40 120z"></path>
+            <text x="160" y="105" text-anchor="middle" class="fill-[var(--c-muted)] text-[11px] font-sans">Eastern suburbs</text>
+            <text x="160" y="125" text-anchor="middle" class="fill-[var(--c-muted)] text-[10px] font-sans">Service area only</text>
+          </svg>
+          <p class="mt-2 text-center text-xs text-[var(--c-muted)]">Illustrative coverage map — not navigation or a clinic location.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Referrers -->
+  <section id="referrers" class="scroll-mt-28 bg-[var(--c-elevated)] py-16 lg:py-24">
+    <div class="mx-auto max-w-3xl px-5 text-center">
+      <h2 class="text-[clamp(1.75rem,4vw,2.35rem)]">For referrers</h2>
+      <p class="mt-4 text-[var(--c-muted)]">
+        GPs, support coordinators, families, and other health professionals are welcome to get in touch regarding potential referrals.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/referral" class="rounded-full bg-[var(--c-accent-bright)] px-6 py-3 font-bold text-white no-underline">Referral information</a>
+        <a href={concept1PhoneHref} class="rounded-full border border-[var(--c-border)] px-6 py-3 font-bold no-underline">Call {concept1Phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="scroll-mt-28 bg-[var(--c-surface)] py-16 lg:py-24">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">FAQ</p>
+        <h2 class="mt-2 text-[clamp(1.85rem,4vw,2.35rem)]">Useful answers before we talk</h2>
+        <p class="mt-3 text-[var(--c-muted)]">Every situation is different — this is a starting point only.</p>
+      </div>
+      <div>
+        {concept1Faq.map((item) => (
+          <details class="group border-t border-[var(--c-border)] py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-bold marker:content-none">
+              {item.q}
+              <span
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--c-border)] text-[var(--c-accent)] transition group-open:rotate-45 group-open:bg-[var(--c-accent)] group-open:text-white"
+              >+</span>
+            </summary>
+            <p class="pb-4 pr-8 text-[var(--c-muted)]">{item.a}</p>
+          </details>
+        ))}
+        <div class="border-t border-[var(--c-border)]"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="scroll-mt-28 bg-[var(--c-enquiry)] py-16 text-white lg:py-20">
+    <div class="mx-auto max-w-3xl px-5">
+      <h2 class="text-[clamp(1.75rem,4vw,2.35rem)] text-white">Contact</h2>
+      <p class="mt-3 text-[color-mix(in_srgb,white_85%,transparent)]">
+        A short message is enough — production site will include a full enquiry form with privacy consent.
+      </p>
+      <p class="mt-6 text-xl font-bold">
+        <a href={concept1PhoneHref} class="text-white no-underline">{concept1Phone}</a>
+      </p>
+      <form class="mt-8 space-y-4 rounded-xl bg-white/10 p-6 backdrop-blur-sm" onsubmit="return false;">
+        <label class="block text-sm">
+          <span class="font-semibold">Name</span>
+          <input type="text" class="mt-1 w-full rounded-lg border-0 px-3 py-2 text-[var(--c-ink)]" />
+        </label>
+        <label class="block text-sm">
+          <span class="font-semibold">Suburb</span>
+          <input type="text" class="mt-1 w-full rounded-lg border-0 px-3 py-2 text-[var(--c-ink)]" />
+        </label>
+        <label class="block text-sm">
+          <span class="font-semibold">Message</span>
+          <textarea rows="3" class="mt-1 w-full rounded-lg border-0 px-3 py-2 text-[var(--c-ink)]"></textarea>
+        </label>
+        <button type="button" class="rounded-full bg-[var(--c-accent-bright)] px-6 py-3 font-bold text-white">Enquire (mockup)</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="border-t border-[var(--c-border)] bg-[var(--c-elevated)] py-10">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 text-sm text-[var(--c-muted)] sm:flex-row sm:justify-between">
+      <p>Concept 1 homepage mockup · Theme {theme.toUpperCase()} · not final IA</p>
+      <p>
+        <a href="/concepts/1/" class="text-[var(--c-accent)] underline-offset-2 hover:underline">Compare colour themes</a>
+      </p>
+    </div>
+  </footer>
+
+  <div class="fixed bottom-0 left-0 right-0 z-50 grid grid-cols-2 border-t border-[var(--c-border)] bg-[var(--c-elevated)] sm:hidden">
+    <a href={concept1PhoneHref} class="py-3 text-center font-bold no-underline text-[var(--c-deep)]">Call</a>
+    <a href="#contact" class="bg-[var(--c-deep)] py-3 text-center font-bold text-white no-underline">Enquire</a>
+  </div>
+  <div class="h-12 sm:hidden" aria-hidden="true"></div>
+</div>

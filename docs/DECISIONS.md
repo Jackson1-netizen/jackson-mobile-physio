@@ -83,3 +83,11 @@ Append-only record. Do not silently overwrite prior entries.
 - **Wonder MCP:** Namespace `Wonder` status `needsAuth` — Jackson auth not performed; refinement done **in-place** on `/concepts/1/`.  
 - **Refinement:** Trust band, nav + dual CTAs, editorial hero (left accent), service teasers, process, FAQ accordion, forest enquiry band; no fake photos/reviews.  
 - **Next gate:** Explicit request to run **writing-plans** — not started.  
+
+## 2026-09-28 — Concept 1 homepage system + three colour themes
+
+- **Scope:** Complete V2 **homepage** mockup only (not production multi-page site).  
+- **Routes:** `/concepts/1/` compare hub; `/concepts/1/a|b|c/`; `?theme=` redirect on hub.  
+- **Content:** Central `concept1-home.ts`, `concept1-images.ts`; component `HomepageV2.astro`.  
+- **Sections:** Trust → Physio at home → Services (7) → How it works → Meet Jackson → NDIS → Areas/map → Referrers → FAQ → Contact; reviews skipped.  
+- **Gate:** Jackson picks **A**, **B**, or **C** before writing-plans.  

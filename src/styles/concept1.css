@@ -1,0 +1,101 @@
+/* Concept 1 homepage — theme tokens (swap via data-theme on root) */
+
+.c1-home {
+  --c-font-serif: "Source Serif 4", Georgia, serif;
+  --c-font-sans: "Source Sans 3", system-ui, sans-serif;
+  font-family: var(--c-font-sans);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--c-ink);
+  background: var(--c-surface);
+}
+
+.c1-home[data-theme="a"] {
+  --c-ink: #1a2e28;
+  --c-muted: #3d524c;
+  --c-surface: #f4f6f4;
+  --c-elevated: #ffffff;
+  --c-mist: #e8f0ec;
+  --c-accent: #2d6a5a;
+  --c-accent-hover: #245548;
+  --c-accent-bright: #3a8a72;
+  --c-deep: #1e4d42;
+  --c-border: #c5d5cc;
+  --c-hero-grad: linear-gradient(118deg, #e8f0ec 0%, #b8d4c8 48%, #7aa892 100%);
+  --c-band: #eef4f1;
+  --c-enquiry: #1e4d42;
+}
+
+.c1-home[data-theme="b"] {
+  --c-ink: #2a2824;
+  --c-muted: #5c564c;
+  --c-surface: #f7f3eb;
+  --c-elevated: #fffcf7;
+  --c-mist: #ebe4d6;
+  --c-accent: #6b7c4a;
+  --c-accent-hover: #58673d;
+  --c-accent-bright: #7d9156;
+  --c-deep: #4a4438;
+  --c-border: #ddd4c4;
+  --c-hero-grad: linear-gradient(118deg, #f5efe3 0%, #e8dcc8 45%, #c9b896 100%);
+  --c-band: #f0e9dc;
+  --c-enquiry: #4a4438;
+}
+
+.c1-home[data-theme="c"] {
+  --c-ink: #142824;
+  --c-muted: #3a524c;
+  --c-surface: #f2f8f7;
+  --c-elevated: #ffffff;
+  --c-mist: #dceee9;
+  --c-accent: #1a7a6e;
+  --c-accent-hover: #156258;
+  --c-accent-bright: #2a9d8f;
+  --c-deep: #0f4a42;
+  --c-border: #b8d4cc;
+  --c-hero-grad: linear-gradient(118deg, #e0f2ef 0%, #a8d8cf 50%, #5ba898 100%);
+  --c-band: #e6f3f0;
+  --c-enquiry: #0f4a42;
+}
+
+.c1-home h1,
+.c1-home h2,
+.c1-home h3 {
+  font-family: var(--c-font-serif);
+  font-weight: 600;
+}
+
+.c1-img-wrap {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--c-deep) 18%, transparent);
+}
+
+.c1-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c1-img-wrap:hover img {
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c1-img-wrap img {
+    transition: none;
+  }
+  .c1-img-wrap:hover img {
+    transform: none;
+  }
+}
+
+.c1-map {
+  background: var(--c-mist);
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  min-height: 220px;
+}

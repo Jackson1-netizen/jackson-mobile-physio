@@ -7,8 +7,9 @@
 ## Website V2 (workflow — Concept 1 refined)
 
 1. **Chosen:** **Concept 1 — Editorial Forest** (locked in `docs/WEBSITE_V2_PLAN.md` §15).  
-2. **Preview refined comp:** `http://127.0.0.1:4721/concepts/1/` (Wonder MCP unavailable — refined in-repo).  
-3. **Jackson / parent:** When ready, explicitly ask to run **writing-plans** (not started).  
+2. **Compare colours:** `http://127.0.0.1:4721/concepts/1/` → themes **A**, **B**, **C**.  
+3. **Jackson:** Reply **A**, **B**, or **C** for palette lock.  
+4. **Then:** Explicit **writing-plans** request (not started).  
 4. **Then:** executing-plans → production multi-page Astro site → Lighthouse/SEO audit.  
 5. **Branch:** `cursor/website-v2-plan-e732`.
 
