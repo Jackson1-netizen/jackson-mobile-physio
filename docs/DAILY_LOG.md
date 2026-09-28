@@ -86,3 +86,9 @@
 - **Changed:** Rebrand to Home Motion (`motto`, logo in header); hero motto + blended icon advantages row; guided-exercise hero video; `AdvantageIcon` component.  
 - **Decisions:** Temporary registered name Home Motion — still swappable via `site.ts`.  
 - **Next:** Jackson review at `http://127.0.0.1:4721/`.  
+
+## 2026-09-28 (saved V1 + ChatGPT comparison branch)
+
+- **Changed:** Recorded the current Home Motion V1 as the saved baseline on `main`. Created branch `cursor/chatgpt-version-b759` from that snapshot for a possible ChatGPT-produced alternative design.
+- **Decisions:** See `docs/DECISIONS.md` (saved V1 on main; ChatGPT alternative branch).
+- **Next:** Jackson reviews both later and chooses which design to use. No public deploy.

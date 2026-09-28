@@ -97,3 +97,9 @@ Append-only record. Do not silently overwrite prior entries.
 - **Palette:** **A (forest/sage)** chosen.  
 - **V1:** Full scrollable homepage on **`/`** — video hero (reduced-motion poster), `displayBrand` header, registration line from `registrationStatus`, all sections, no reviews; draft + noindex via `BaseLayout` `v1Home`.  
 - **Not done:** Multi-page production site, deploy, writing-plans.  
+
+## 2026-09-28 — Saved V1 on `main`; ChatGPT alternative branch
+
+- **Saved design:** Jackson is happy with the current Home Motion homepage V1 (palette A, forest/sage). That snapshot stays on **`main`** — do not overwrite it with an experimental redesign.
+- **Comparison branch:** **`cursor/chatgpt-version-b759`** starts from this same commit. Use it for a possible ChatGPT-produced alternative site so Jackson can come back and pick which design to ship.
+- **How to compare:** keep `main` as the baseline; put ChatGPT/experimental UI only on `cursor/chatgpt-version-b759`. No deploy; both remain draft/`noindex`.

@@ -4,6 +4,15 @@
 
 ---
 
+## Design comparison (do not mix)
+
+| Branch | What it is |
+|--------|------------|
+| `main` | **Saved** Home Motion V1 — the design Jackson is happy with. Baseline. |
+| `cursor/chatgpt-version-b759` | Alternative **ChatGPT-produced** version, branched from that saved V1. Experiment here. |
+
+Jackson will come back and pick which one to use. Keep experimental redesigns off `main`.
+
 ## Website V2 (workflow — Concept 1 refined)
 
 1. **Review V1:** `http://127.0.0.1:4721/` (palette A, draft, noindex).  
