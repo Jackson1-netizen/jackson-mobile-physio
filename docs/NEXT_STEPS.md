@@ -4,13 +4,13 @@
 
 ---
 
-## Website V2 (planning complete — awaiting BUILD)
+## Website V2 (visual direction locked — awaiting BUILD)
 
-1. **Jackson:** Read `docs/WEBSITE_V2_PLAN.md` — choose visual direction **A**, **B**, or **C** (or hybrid).  
-2. **Jackson:** Confirm sitemap and retain/redesign list; note any copy or suburb list changes.  
-3. **Jackson:** Reply **BUILD V2** in Cursor to authorize implementation (no work until then).  
-4. **After BUILD V2:** Photography per `docs/PHOTO_SHOT_LIST.md`; SEO execution per `docs/SEO_STRATEGY.md` and `docs/SEO_LAUNCH_CHECKLIST.md`.  
-5. **Plan branch:** `cursor/website-v2-plan-e732` (docs only). Implementation will branch from approved plan.
+1. **Visual direction:** **Approved** — hybrid Calm Professional + vitality + older-adult warmth + 亲近感 + 伦理感. See `docs/WEBSITE_V2_PLAN.md` §8.  
+2. **Jackson (optional):** Confirm sitemap / suburb list / copy tweaks before BUILD.  
+3. **Jackson:** Reply **BUILD V2** in Cursor to authorize implementation (no site work until then).  
+4. **After BUILD V2:** Photography per `docs/PHOTO_SHOT_LIST.md`; SEO per `docs/SEO_STRATEGY.md` and `docs/SEO_LAUNCH_CHECKLIST.md`.  
+5. **Plan branch:** `cursor/website-v2-plan-e732` (docs). Implementation branches from this plan after BUILD V2.
 
 ---
 

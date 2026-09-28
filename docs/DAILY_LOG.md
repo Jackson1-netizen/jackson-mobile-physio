@@ -41,3 +41,10 @@
 - **Decisions:** See `docs/DECISIONS.md` (2026-09-28 Website V2 planning).  
 - **Blockers:** Jackson review of visual direction (A/B/C) and **BUILD V2** approval before implementation.  
 - **Next:** Jackson reads `docs/WEBSITE_V2_PLAN.md` and replies BUILD V2 or feedback.  
+
+## 2026-09-28 (V2 visual direction locked)
+
+- **Changed:** Updated `docs/WEBSITE_V2_PLAN.md` §8 with Jackson-approved hybrid visual direction; §13 approval state; executive summary.  
+- **Decisions:** See `docs/DECISIONS.md` (2026-09-28 V2 visual direction approved).  
+- **Blockers:** None for planning; **BUILD V2** not started.  
+- **Next:** Jackson replies **BUILD V2** when ready for implementation.  

@@ -12,7 +12,7 @@ Phase 1 delivered a **functionally complete draft**: central config, trilingual 
 
 **V2 goal:** A small, trustworthy **multi-page** static site that ranks for **service + location intent**, foregrounds **direct access to Jackson** (EN / Cantonese / Mandarin), and stays legally accurate through **AHPRA** and **NDIS non-provider** rules — without suburb doorway farms, fake trust signals, or a locked-in trading name in the visual identity.
 
-**Recommended visual direction:** **Direction A — Calm Professional (evolved)** with selective cues from **Direction C** (stronger typographic hierarchy on hero). See [§8](#8-visual-directions).
+**Approved visual direction:** Hybrid **Calm Professional + vitality + approachability + 亲近感 + 伦理感** — locked 2026-09-28. See [§8](#8-visual-directions-approved).
 
 ---
 
@@ -243,7 +243,52 @@ seo: { defaultTitleTemplate, pages: Record<slug, { title, description, h1 }> }
 
 ---
 
-## 8. Homepage section hierarchy (V2)
+## 8. Visual directions (approved)
+
+**Status:** **Locked** — Jackson approved this hybrid on 2026-09-28. Pure A, B, or C were **not** chosen. BUILD V2 implements this section only.
+
+### Approved hybrid — Calm Professional with vitality, warmth, and integrity
+
+| Pillar | Requirement | BUILD V2 expression |
+|--------|-------------|---------------------|
+| **Base (A)** | Forest/sage palette, serif + sans, referrer-friendly, trustworthy | Deep forest (`#1e4d42`), sage accent (`#3d7a6a`), warm off-white (`#f8f7f4`); **Source Serif 4** headings + **Source Sans 3** body; generous whitespace, rounded cards, subtle borders |
+| **Energy** | More vitality than “static” Calm Professional — movement, health, getting around in the **community** | Real photography (street, home, local outings); clear “how it works” flow; slightly **brighter CTA green** on primary buttons only — **no** gym look, startup gradients, flashy animation, parallax, or running-physio / dumbbell icon clichés |
+| **Older adults** | Warm, easy to read, uncluttered — not clinical-cold, not youth fitness | Body text **≥18px** (fluid scale), line-height **≥1.6**, WCAG **AA** contrast minimum; short paragraphs; one focal action per section; avoid dense card grids |
+| **亲近感 (closeness)** | Personal, one-to-one; Jackson is who you meet | Portrait-forward hero; copy that names Jackson and “you speak with your physio”; human photos (see §10) — not corporate stock teams |
+| **伦理感 (integrity)** | Professional ethics; honest compliance; calm confidence | Visible AHPRA/NDIS accuracy (no hype); no fake testimonials or star ratings; tone **informative, not salesy** — no countdowns, “limited spots”, or aggressive urgency |
+
+**Also incorporated (from earlier plan, not Direction C wholesale):** Strong hero typographic hierarchy (clear H1 scale) and **sticky phone bar** on mobile — within the A palette, not navy/teal modern clinic styling.
+
+**Logo / wordmark (V2 BUILD)**
+
+- Text wordmark from `displayBrand` or practitioner first name + “Mobile Physio”; no permanent “WAI WA LAW” lockup in hero.  
+- Favicon: simple monogram “J” or abstract **movement** mark (subtle curve/path — not a running figure) — not legal name.
+
+**Motion & interaction**
+
+- Prefer `prefers-reduced-motion`; no autoplay carousels or scroll-jacking.  
+- Hover/focus states only — sufficient for accessibility.
+
+---
+
+### Reference — Direction A (base only; not chosen alone)
+
+- **Palette / type:** As in approved hybrid table above.  
+- **Note:** Jackson rejected using **pure** Direction A without added vitality and warmth pillars.
+
+### Reference — Direction B — Community Local (**not chosen**)
+
+- Terracotta / neighbourly illustration-led look was **not** selected.  
+- **Borrowed idea only:** warmth for older readers — achieved via typography and photography, not terracotta palette.
+
+### Reference — Direction C — East Melbourne Modern (**not chosen**)
+
+- Navy/teal clinic-modern system was **not** selected.  
+- **Borrowed only:** hero type hierarchy + sticky call bar (see approved hybrid).
+
+---
+
+## 9. Homepage section hierarchy (V2)
 
 Recommended scroll order on `/`:
 
@@ -259,43 +304,6 @@ Recommended scroll order on `/`:
 10. **Final CTA** — phone + `/contact/`.
 
 Header nav: Home · Mobile physio · NDIS · Areas · Referrals · About · Contact · [Language].
-
----
-
-## 9. Visual directions
-
-### Direction A — Calm Professional (recommended)
-
-- **Palette:** Deep forest green (`#1e4d42`), sage accent (`#3d7a6a`), warm off-white (`#f8f7f4`), charcoal text.  
-- **Type:** Source Serif 4 for headings (keep familiarity), Source Sans 3 body — or swap body to **DM Sans** for slightly warmer feel.  
-- **Layout:** Wide hero with **real portrait** + soft environmental blur; generous whitespace; rounded-2xl cards; subtle borders.  
-- **Mood:** Clinical warmth, NDIS/coordinator friendly, CALD-inclusive without stereotype imagery.  
-- **Why:** Closest to current code tokens; lowest rebuild risk; matches trust expectations of referrers.
-
-### Direction B — Community Local
-
-- **Palette:** Terracotta accent (`#c4694a`), eucalyptus green secondary, cream background.  
-- **Type:** **Fraunces** or **Libre Baskerville** headings + **Nunito Sans** body.  
-- **Layout:** Illustrated map of east suburbs (simple SVG); more “neighbour” tone; optional hand-drawn line icons.  
-- **Mood:** Eastern Mobile / neighbourly — good for older adults and families.  
-- **Risk:** Can feel less “NDIS coordinator professional” if pushed too casual.
-
-### Direction C — East Melbourne Modern
-
-- **Palette:** Navy (`#1a2b3c`) + bright teal CTA (`#0d9488`), white surfaces.  
-- **Type:** **Inter** or **Geist** throughout; tighter tracking on H1.  
-- **Layout:** Split hero (copy left, full-height photo right); sharp 8px radius; strong sticky call bar.  
-- **Mood:** iMotion / contemporary clinic — reads “capable and current.”  
-- **Risk:** Can resemble generic clinic templates without strong photography.
-
-### Recommendation
-
-**Direction A (Calm Professional)**, incorporating **Direction C’s** stronger hero typography and sticky phone bar. Defer terracotta (B) unless Jackson prefers a warmer neighbourhood feel over coordinator-facing polish.
-
-**Logo / wordmark (V2 BUILD)**
-
-- Text wordmark from `displayBrand` or practitioner first name + “Mobile Physio”; no permanent “WAI WA LAW” lockup in hero.  
-- Favicon: simple monogram “J” or abstract movement mark — not legal name.
 
 ---
 
@@ -347,4 +355,6 @@ Submit: mailto compose (static) or future form endpoint — **no** clinical data
 
 ## 13. Approval
 
-Jackson: review visual direction (**A / B / C**), sitemap, and retain/redesign list. Reply **BUILD V2** to authorize implementation. No deployment until `docs/SEO_LAUNCH_CHECKLIST.md` is satisfied and AHPRA status is updated in config.
+- **Visual direction:** **Approved** — hybrid in [§8](#8-visual-directions-approved) (2026-09-28).  
+- **Still required:** Jackson replies **BUILD V2** to authorize implementation. Sitemap and retain/redesign in this document remain the BUILD spec unless Jackson sends further copy changes.  
+- **Launch:** No deployment until `docs/SEO_LAUNCH_CHECKLIST.md` is satisfied and AHPRA status is updated in config.

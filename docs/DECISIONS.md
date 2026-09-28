@@ -54,3 +54,10 @@ Append-only record. Do not silently overwrite prior entries.
 - **NDIS:** Remain not a registered provider; plan/self-managed enquiries only; no NDIA-managed claims.  
 - **Visual:** Three directions documented; **recommended Direction A (Calm Professional)** with C-style hero typography.  
 - **Approval gate:** Jackson replies **BUILD V2** after reviewing plan; until then Phase 1 code on `cursor/launch-ready-site-2581` remains canonical implementation.  
+
+## 2026-09-28 — V2 visual direction approved (hybrid)
+
+- **Chosen:** Hybrid on **Direction A (Calm Professional)** base — forest/sage, serif+sans, referrer-friendly — plus **vitality** (community movement, not gym/startup/flashy animation), **older-adult readability** (large type, high contrast, uncluttered warmth), **亲近感** (personal, Jackson-forward photography/copy), **伦理感** (honest AHPRA/NDIS, no fake social proof, calm not salesy).  
+- **Not chosen alone:** Pure B (Community Local) or pure C (East Melbourne Modern); partial borrow from C: hero type hierarchy + sticky phone bar only.  
+- **Documented in:** `docs/WEBSITE_V2_PLAN.md` §8.  
+- **Implementation:** Still blocked until Jackson sends **BUILD V2**; no UI changes in this update.  
