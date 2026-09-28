@@ -266,8 +266,8 @@ seo: { defaultTitleTemplate, pages: Record<slug, { title, description, h1 }> }
 
 **Motion & interaction**
 
-- Prefer `prefers-reduced-motion`; no autoplay carousels or scroll-jacking.  
-- Hover/focus states only — sufficient for accessibility.
+- Calibrated **interaction density** vs [§14](#14-quality-bar--better-care-health-group-reference) — richer than Phase 1 wireframe, gentler than BetterCare’s review carousel.  
+- `prefers-reduced-motion`: static layouts, no drag-marquee; FAQ/step reveals optional and disabled when reduced motion is set.
 
 ---
 

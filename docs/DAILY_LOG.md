@@ -48,3 +48,10 @@
 - **Decisions:** See `docs/DECISIONS.md` (2026-09-28 V2 visual direction approved).  
 - **Blockers:** None for planning; **BUILD V2** not started.  
 - **Next:** Jackson replies **BUILD V2** when ready for implementation.  
+
+## 2026-09-28 (BetterCare quality bar brainstorm)
+
+- **Changed:** Added `docs/WEBSITE_V2_PLAN.md` §14 — BetterCare audit, pattern mapping, will/won’t take, adaptation approaches.  
+- **Decisions:** See `docs/DECISIONS.md` (2026-09-28 BetterCare quality bar).  
+- **Blockers:** None for planning.  
+- **Next:** **BUILD V2** when Jackson approves; opened reference + local draft in cloud desktop for comparison.  

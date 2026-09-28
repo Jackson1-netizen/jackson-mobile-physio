@@ -6,7 +6,7 @@
 
 ## Website V2 (visual direction locked — awaiting BUILD)
 
-1. **Visual direction:** **Approved** — hybrid Calm Professional + vitality + older-adult warmth + 亲近感 + 伦理感. See `docs/WEBSITE_V2_PLAN.md` §8.  
+1. **Visual direction:** **Approved** — hybrid §8. **Quality bar:** BetterCare reference adapted in §14 (not a clone).  
 2. **Jackson (optional):** Confirm sitemap / suburb list / copy tweaks before BUILD.  
 3. **Jackson:** Reply **BUILD V2** in Cursor to authorize implementation (no site work until then).  
 4. **After BUILD V2:** Photography per `docs/PHOTO_SHOT_LIST.md`; SEO per `docs/SEO_STRATEGY.md` and `docs/SEO_LAUNCH_CHECKLIST.md`.  

@@ -61,3 +61,11 @@ Append-only record. Do not silently overwrite prior entries.
 - **Not chosen alone:** Pure B (Community Local) or pure C (East Melbourne Modern); partial borrow from C: hero type hierarchy + sticky phone bar only.  
 - **Documented in:** `docs/WEBSITE_V2_PLAN.md` §8.  
 - **Implementation:** Still blocked until Jackson sends **BUILD V2**; no UI changes in this update.  
+
+## 2026-09-28 — BetterCare quality bar (brainstorming, planning only)
+
+- **Reference:** [bettercarehg.com](https://www.bettercarehg.com) for **visual quality** and **interaction density** — adapted, not cloned.  
+- **Documented:** `docs/WEBSITE_V2_PLAN.md` §14 (audit, transferable patterns, will/won’t take, three BUILD approaches).  
+- **Recommended BUILD approach:** “Polished sole practitioner” (~60% BetterCare interaction density, forest/sage hybrid §8).  
+- **Explicit won’t copy:** Yellow/navy brand, mega-menu, fake/review carousel UX, NDIS registered positioning, team-at-scale imagery.  
+- **No implementation** — awaiting **BUILD V2**.  
