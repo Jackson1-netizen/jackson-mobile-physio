@@ -15,7 +15,12 @@ const toolsId = "hm-header-tools";
     <nav class="hm-nav" aria-label="Primary">
       {
         homeNav.map((item) => (
-          <a href={item.href} data-i18n-path={item.path} data-spy={item.spy ?? undefined}>
+          <a
+            href={item.href}
+            class={item.href === "/" ? "is-active" : undefined}
+            data-i18n-path={item.path}
+            data-spy={item.spy ?? undefined}
+          >
             {item.label}
           </a>
         ))

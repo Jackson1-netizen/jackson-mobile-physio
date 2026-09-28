@@ -1,30 +1,46 @@
 ---
+import { site } from "../../content/site";
 import { homeAreas, homeSuburbs } from "../../content/home-motion";
 import ServiceAreaMap from "./ServiceAreaMap.astro";
+import HomeIcon from "./HomeIcon.astro";
 ---
 
-<section id="areas" class="hm-reveal scroll-mt-24">
-  <div class="hm-wrap hm-section hm-areas-grid">
-    <div>
-      <p class="hm-kicker">{homeAreas.kicker}</p>
-      <h2>{homeAreas.heading}</h2>
-      <p class="mt-4 text-[#3d5a52]" data-i18n-path="areas.intro">{homeAreas.intro}</p>
-      <ul class="hm-suburb-list">
+<section id="areas" class="hm-areas-band hm-reveal scroll-mt-24">
+  <div class="hm-areas-split">
+    <div class="hm-card-stage">
+      <div class="hm-card-stack" aria-label="Home Motion contact card">
+        <article class="hm-print-card hm-print-card-back">
+          <img src="/home-motion-logo.png" alt="" width="180" height="56" />
+          <p>{site.tagline}</p>
+        </article>
+        <article class="hm-print-card hm-print-card-front">
+          <p class="hm-print-name">Jackson</p>
+          <p class="hm-print-role">Mobile Physiotherapist</p>
+          <p><a href={site.phoneHref}>{site.phone}</a></p>
+          <p>{site.locationDescriptor}</p>
+          <p class="hm-print-motto">{homeAreas.motto}</p>
+        </article>
+      </div>
+    </div>
+    <div class="hm-areas-copy">
+      <h2>{homeAreas.kicker}</h2>
+      <p>{homeAreas.heading}</p>
+      <ul class="hm-pin-list">
         {
           homeSuburbs.map((suburb) => (
             <li>
-              <a href={suburb.href}>{suburb.name}</a>
+              <a href={suburb.href}>
+                <span class="hm-pin">
+                  <HomeIcon name="pin" size={18} />
+                </span>
+                {suburb.name}
+              </a>
             </li>
           ))
         }
       </ul>
-    </div>
-    <div>
       <ServiceAreaMap />
-      <p class="hm-map-caption mt-2">{homeAreas.mapCaption}</p>
-      <p class="hm-map-link mt-1">
-        <a href={homeAreas.mapExternal} rel="noopener noreferrer">{homeAreas.mapLinkLabel}</a>
-      </p>
+      <p class="hm-map-caption">{homeAreas.mapCaption}</p>
     </div>
   </div>
 </section>

@@ -1,15 +1,17 @@
 /* Home Motion ChatGPT-branch homepage — do not import from concept archive pages */
 
 .hm {
-  --hm-forest: #173d35;
-  --hm-orange: #d85a26;
-  --hm-orange-hover: #c04e20;
-  --hm-olive: #8b9c67;
-  --hm-cream: #f7f2e9;
-  --hm-warm-white: #fcfaf6;
-  --hm-green-grad: linear-gradient(135deg, #52785f 0%, #71956f 45%, #8fa97a 100%);
-  --hm-refer-grad: linear-gradient(160deg, #2f5a45 0%, #4d7a5c 55%, #6b9468 100%);
-  --hm-radius-card: 1.25rem;
+  --hm-forest: #16352e;
+  --hm-orange: #e45a22;
+  --hm-orange-hover: #cc4c1b;
+  --hm-olive: #7f9a4e;
+  --hm-cream: #faf6f0;
+  --hm-warm-white: #fffdf9;
+  --hm-green-deep: #1a3a32;
+  --hm-gold: #e2b441;
+  --hm-green-grad: #1a3a32;
+  --hm-refer-grad: #16352e;
+  --hm-radius-card: 1.15rem;
   --hm-radius-pill: 999px;
   --hm-serif: "Source Serif 4", Georgia, serif;
   --hm-sans: "Source Sans 3", system-ui, sans-serif;
@@ -60,6 +62,295 @@
   text-transform: uppercase;
   color: var(--hm-orange);
 }
+
+.hm-kicker-forest {
+  color: var(--hm-forest);
+  letter-spacing: 0.2em;
+}
+
+.hm-logo img {
+  height: 3.4rem;
+  width: auto;
+}
+
+.hm-nav a.is-active {
+  color: var(--hm-orange);
+  border-bottom-color: var(--hm-orange);
+}
+
+.hm-btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #f3c7ae;
+}
+
+.hm-btn-outline:hover {
+  background: #fff;
+  color: var(--hm-forest);
+}
+
+.hm-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hm-text-link:hover .hm-arrow {
+  transform: translateX(3px);
+}
+
+.hm-supporting {
+  margin: 0.45rem 0 0;
+  max-width: 22ch;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-family: var(--hm-serif);
+  line-height: 1.2;
+  color: rgb(255 255 255 / 0.94);
+}
+
+.hm-chips {
+  gap: 1.1rem 1.6rem;
+  margin-top: 1.35rem;
+}
+
+.hm-chips li {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.hm-chip-icon {
+  color: var(--hm-orange);
+  display: flex;
+}
+
+.hm-hero-frame {
+  position: relative;
+}
+
+.hm-hero-media {
+  border-radius: 1.5rem;
+  min-height: min(28rem, 70vw);
+}
+
+.hm-blobs {
+  position: absolute;
+  right: -1.2rem;
+  bottom: -0.6rem;
+  width: 8rem;
+  height: 8rem;
+  pointer-events: none;
+}
+
+.hm-blob {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.hm-blob-orange {
+  width: 4.2rem;
+  height: 4.2rem;
+  right: 0;
+  top: 0.4rem;
+  background: var(--hm-orange);
+  opacity: 0.9;
+}
+
+.hm-blob-green {
+  width: 3.4rem;
+  height: 3.4rem;
+  left: 0.2rem;
+  bottom: 0.2rem;
+  background: var(--hm-olive);
+  opacity: 0.85;
+}
+
+.hm-blob-leaf {
+  width: 2.4rem;
+  height: 3.6rem;
+  right: 2.4rem;
+  bottom: -0.4rem;
+  background: #6f8c45;
+  border-radius: 80% 20% 70% 30%;
+  opacity: 0.75;
+  transform: rotate(18deg);
+}
+
+.hm-service-card {
+  text-align: center;
+  min-height: 100%;
+  padding: 1.35rem 0.85rem 1.2rem;
+}
+
+.hm-service-icon {
+  display: inline-flex;
+  color: var(--hm-orange);
+  margin-bottom: 0.55rem;
+}
+
+.hm-service-card h3 {
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.hm-service-card p {
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.hm-areas-band {
+  background: var(--hm-cream);
+}
+
+.hm-areas-split {
+  display: grid;
+}
+
+.hm-card-stage {
+  min-height: 18rem;
+  background:
+    linear-gradient(180deg, rgb(250 246 240 / 0.15), rgb(22 53 46 / 0.08)),
+    url("https://images.pexels.com/photos/172292/pexels-photo-172292.jpeg?auto=compress&cs=tinysrgb&w=1200")
+      center / cover;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem;
+}
+
+.hm-card-stack {
+  position: relative;
+  width: min(18rem, 86%);
+  height: 12.5rem;
+}
+
+.hm-print-card {
+  position: absolute;
+  inset: 0;
+  background: #fffdf8;
+  border-radius: 0.55rem;
+  box-shadow: 0 14px 30px rgb(22 53 46 / 0.22);
+  padding: 1.1rem 1.15rem;
+}
+
+.hm-print-card-back {
+  transform: rotate(-11deg) translate(-0.4rem, -0.35rem);
+}
+
+.hm-print-card-back img {
+  height: 3.2rem;
+  width: auto;
+}
+
+.hm-print-card-back p {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  color: #5b6e67;
+}
+
+.hm-print-card-front {
+  transform: rotate(6deg) translate(0.8rem, 1.4rem);
+  font-size: 0.82rem;
+}
+
+.hm-print-name {
+  margin: 0;
+  font-family: var(--hm-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.hm-print-role,
+.hm-print-motto {
+  color: #5b6e67;
+}
+
+.hm-print-motto {
+  margin-top: 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hm-areas-copy {
+  padding: 2rem 1.4rem 2.2rem;
+  background: #fff;
+}
+
+.hm-areas-copy h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+}
+
+.hm-pin-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 1rem;
+  list-style: none;
+  margin: 1.1rem 0 1.2rem;
+  padding: 0;
+}
+
+.hm-pin-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--hm-forest);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.hm-pin {
+  color: var(--hm-orange);
+  display: flex;
+}
+
+.hm-refer-points {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.hm-refer-icon {
+  color: var(--hm-gold);
+  display: inline-flex;
+  margin-bottom: 0.45rem;
+}
+
+.hm-refer-points p {
+  margin: 0;
+  font-weight: 600;
+  color: #fff;
+}
+
+.hm-band-green h2,
+.hm-band-refer h2 {
+  color: #fff;
+}
+
+@media (min-width: 1024px) {
+  .hm-areas-split {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+  .hm-refer-points {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+  .hm-service-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
 
 .hm-btn {
   display: inline-flex;
@@ -146,7 +437,7 @@
 }
 
 .hm-logo img {
-  height: 2.75rem;
+  height: 3.35rem;
   width: auto;
 }
 
@@ -245,8 +536,17 @@
 
 .hm-hero h1 {
   margin: 0.85rem 0 0;
-  font-size: clamp(2.35rem, 6vw, 3.65rem);
+  font-size: clamp(2.35rem, 6vw, 3.55rem);
   color: var(--hm-forest);
+}
+
+.hm-hero h1 span {
+  white-space: nowrap;
+}
+
+.hm-hero-media {
+  min-height: min(28rem, 70vw);
+  border-radius: 1.35rem;
 }
 
 .hm-hero h1 .hm-em {
@@ -270,8 +570,8 @@
 .hm-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.5rem;
+  gap: 1.1rem 1.5rem;
+  margin-top: 1.35rem;
   padding: 0;
   list-style: none;
 }
@@ -280,12 +580,13 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--hm-radius-pill);
-  background: var(--hm-warm-white);
-  border: 1px solid #eadfce;
-  font-size: 0.9rem;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  font-size: 0.95rem;
   font-weight: 600;
+}
 }
 
 .hm-ahpra {
@@ -349,7 +650,7 @@
 }
 
 .hm-band-green {
-  background: var(--hm-green-grad);
+  background: #1a3a32;
   color: #fff;
 }
 
@@ -749,7 +1050,9 @@
 }
 
 .hm-reveal.is-visible .hm-stagger > * {
-  animation: hm-stagger 0.45s ease forwards;
+  opacity: 1;
+  transform: none;
+  animation: hm-stagger 0.45s ease both;
 }
 
 .hm-reveal.is-visible .hm-stagger > *:nth-child(1) {
@@ -798,6 +1101,9 @@
   .hm-menu {
     display: none;
   }
+  .hm-header .hm-lang {
+    display: none;
+  }
   .hm-hero-grid,
   .hm-how-grid,
   .hm-about-grid,
@@ -808,7 +1114,8 @@
     gap: 2.5rem;
   }
   .hm-service-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.7rem;
   }
   .hm-why-grid {
     grid-template-columns: repeat(4, 1fr);

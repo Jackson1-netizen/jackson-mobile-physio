@@ -110,3 +110,8 @@
 - **Changed:** Frozen ChatGPT homepage as option 1 on `cursor/chatgpt-version-b759`. Opened `cursor/design-option-2-b759` for a second design.
 - **Decisions:** See `docs/DECISIONS.md` (ChatGPT visual archived; option 2 branch opened).
 - **Next:** Jackson directs the second design. Do not merge to `main`.
+
+## 2026-09-28 (option 2 visual match)
+
+- **Changed:** Restyled `cursor/design-option-2-b759` to match the attached single-page UI: dark forest services band, orange outline icons, chip row, stacked HTML business cards, pin list + OSM map, gold referrer icons. ChatGPT option 1 and `main` untouched.
+- **Honesty:** No invented email on the card; AHPRA pending line kept; NDIS legal section still below the fold.

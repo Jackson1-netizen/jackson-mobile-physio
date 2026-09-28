@@ -4,12 +4,6 @@ import { suburbPages, suburbPath } from "./suburbs";
 import { concept1Purpose } from "./concept1-home";
 import { concept1Images as images } from "./concept1-images";
 
-const mobility = site.services.find((s) => s.title === "Mobility and movement");
-const strength = site.services.find((s) => s.title === "Strength and balance");
-const functional = site.services.find((s) => s.title === "Functional exercise");
-const rehab = site.services.find((s) => s.title === "Rehabilitation");
-const community = site.services.find((s) => s.title === "Community mobility");
-
 export const homeNav = [
   { href: "/", label: "Home", path: "nav.home", spy: null },
   { href: "#about", label: "About", path: "nav.about", spy: "about" },
@@ -26,46 +20,51 @@ export const homeHero = {
   h1Mid: "in the comfort of",
   h1Em: "home.",
   support:
-    "Independent mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you speak directly with Jackson — the physiotherapist who personally delivers your care. Appointments in English, Cantonese and Mandarin.",
+    "Personalised, evidence-based physiotherapy care in Melbourne's eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
   primaryCta: "Make an enquiry",
   secondaryCta: "Learn about our services",
-  scriptOverlay: "People Movement Home",
   chips: [
     { icon: "home" as const, line: "Home & community visits" },
-    { icon: "lang" as const, line: "English / Cantonese / Mandarin" },
-    { icon: "self" as const, line: "Personalised one-to-one care" },
+    { icon: "people" as const, line: "All ages welcome" },
+    { icon: "heart" as const, line: "NDIS & private clients" },
   ],
 };
 
 export const homeServices = {
-  kicker: "Our Services",
-  heading: "Supporting your movement, function and independence.",
+  heading: "Our Services",
+  supporting: "Supporting your movement, function and independence.",
   viewAll: "View all services",
   intro: site.servicesIntro,
   cards: [
     {
+      icon: "person" as const,
       title: "Mobile Physiotherapy",
-      body: "One-to-one physiotherapy at home and in the community across Melbourne's eastern suburbs.",
+      body: "One-on-one care at home and in the community.",
     },
     {
+      icon: "run" as const,
       title: "Mobility & Balance",
-      body: mobility?.description ?? "Support to move more comfortably at home and in the community.",
+      body: "Improve safety and confidence in daily activities.",
     },
     {
+      icon: "dumbbell" as const,
       title: "Strength & Functional Capacity",
-      body: functional?.description ?? strength?.description ?? "",
+      body: "Build strength for independence.",
     },
     {
+      icon: "house" as const,
       title: "Rehabilitation After Hospitalisation",
-      body: rehab?.description ?? "Recovery-focused physiotherapy in familiar settings; scope and frequency agreed with you.",
+      body: "Support your recovery and return to everyday life.",
     },
     {
+      icon: "brain" as const,
       title: "Neurological & Disability-Related",
-      body: `${site.servicesIntro} Community and disability settings may be discussed where relevant — this is not a specialist registration claim.`,
+      body: "Tailored physiotherapy for your individual goals.",
     },
     {
+      icon: "clipboard" as const,
       title: "Home Exercise Programs",
-      body: community?.description ?? functional?.description ?? "Activities aligned with what matters to you, practised in your own environment.",
+      body: "Practical and individualised exercise plans.",
     },
   ],
 };
@@ -126,11 +125,11 @@ export const homeReferrers = {
   audience:
     "Support Coordinators, Recovery Coaches, GPs, allied health professionals, families and authorised representatives are welcome to get in touch.",
   points: [
-    "Clear communication and progress updates",
-    "Goal-oriented, client-centred care",
-    "Flexible and responsive service",
+    { icon: "notes" as const, title: "Clear communication and progress updates" },
+    { icon: "group" as const, title: "Goal-oriented, client-centred care" },
+    { icon: "handshake" as const, title: "Flexible and responsive service" },
   ],
-  cta: "Referral information",
+  cta: "Referrer information",
 };
 
 export const homeAreas = {
@@ -143,6 +142,7 @@ export const homeAreas = {
   mapEmbed:
     "https://www.openstreetmap.org/export/embed.html?bbox=145.02%2C-37.90%2C145.28%2C-37.76&layer=mapnik",
   mapExternal: "https://www.openstreetmap.org/#map=12/-37.82/145.15",
+  motto: "People Movement Home",
 };
 
 export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {
