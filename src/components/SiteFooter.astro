@@ -1,0 +1,26 @@
+---
+import { site } from "../content/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)] bg-[var(--color-ink)] text-[var(--color-surface)]">
+  <div class="mx-auto max-w-5xl px-4 py-10 text-sm leading-relaxed">
+    <p class="font-serif text-lg font-semibold">{site.businessName}</p>
+    <p class="mt-2 text-white/80">{site.legalNamePlaceholder}</p>
+    <p class="mt-4">
+      <a class="text-white underline-offset-4 hover:underline" href={site.contact.phoneHref}>
+        {site.contact.phone}
+      </a>
+      <span class="mx-2 text-white/50" aria-hidden="true">·</span>
+      <a class="text-white underline-offset-4 hover:underline" href={site.contact.emailHref}>
+        {site.contact.email}
+      </a>
+    </p>
+    <p class="mt-2 text-white/70">{site.footer.abnPlaceholder}</p>
+    <p class="mt-4 text-white/60">{site.ahpra.notice}</p>
+    <p class="mt-4 text-white/60">{site.footer.privacyPlaceholder}</p>
+    <p class="mt-6 text-white/50">
+      © {year} {site.businessName}. {site.footer.copyrightSuffix}
+    </p>
+  </div>
+</footer>

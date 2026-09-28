@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../content/site";
+---
+
+<BaseLayout>
+  <section
+    class="border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]"
+    aria-labelledby="hero-heading"
+  >
+    <div class="mx-auto max-w-5xl px-4 py-14 sm:py-20">
+      <p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">
+        {site.locationDescriptor}
+      </p>
+      <h1
+        id="hero-heading"
+        class="mt-3 font-serif text-4xl font-bold leading-tight text-[var(--color-ink)] sm:text-5xl"
+      >
+        {site.businessName}
+      </h1>
+      <p class="mt-2 text-2xl text-[var(--color-ink-muted)] sm:text-3xl">{site.tagline}</p>
+      <p class="prose-width mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]">
+        {site.differentiator}
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <a
+          href={site.contact.phoneHref}
+          class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 text-center font-semibold text-white no-underline hover:bg-[var(--color-accent-hover)]"
+        >
+          Call {site.contact.phone}
+        </a>
+        <a
+          href={site.contact.emailHref}
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 text-center font-semibold text-[var(--color-ink)] no-underline hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+        >
+          Email us
+        </a>
+        <a
+          href="#referral"
+          class="inline-flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-center font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline"
+        >
+          {site.referral.ctaLabel}
+        </a>
+      </div>
+      <p class="mt-8 text-sm text-[var(--color-ink-muted)]">
+        Languages: {site.languages.join(" · ")}
+      </p>
+    </div>
+  </section>
+
+  <section id="about" class="scroll-mt-20 border-b border-[var(--color-border)]" aria-labelledby="about-heading">
+    <div class="mx-auto max-w-5xl px-4 py-14">
+      <h2 id="about-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">About</h2>
+      <div class="prose-width mt-6 space-y-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">
+        <p>
+          {site.businessName} is being set up as an independent, sole-trader mobile physiotherapy service.
+          Care is delivered where it suits you — at home or in community settings across Melbourne's eastern suburbs.
+        </p>
+        <p>{site.differentiator}</p>
+        <p>
+          <strong class="text-[var(--color-ink)]">Practitioner:</strong> {site.practitioner.name}
+          ({site.practitioner.credentialsPlaceholder}).
+        </p>
+        <p>{site.practitioner.bioPlaceholder}</p>
+        <p>
+          <strong class="text-[var(--color-ink)]">Languages:</strong> We can communicate in {site.languages.join(", ")}.
+        </p>
+        <p class="rounded-md border border-amber-200 bg-[var(--color-draft-bg)] p-4 text-base text-[var(--color-draft)]">
+          {site.ahpra.notice}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="scroll-mt-20 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]" aria-labelledby="services-heading">
+    <div class="mx-auto max-w-5xl px-4 py-14">
+      <h2 id="services-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">Services</h2>
+      <p class="prose-width mt-4 text-lg text-[var(--color-ink-muted)]">{site.servicesIntro}</p>
+      <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+        {site.services.map((service) => (
+          <li class="rounded-lg border border-[var(--color-border)] bg-white p-6">
+            <h3 class="font-serif text-xl font-semibold text-[var(--color-ink)]">{service.title}</h3>
+            <p class="mt-2 text-[var(--color-ink-muted)] leading-relaxed">{service.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="ndis" class="scroll-mt-20 border-b border-[var(--color-border)]" aria-labelledby="ndis-heading">
+    <div class="mx-auto max-w-5xl px-4 py-14">
+      <h2 id="ndis-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">{site.ndis.heading}</h2>
+      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">{site.ndis.intro}</p>
+      <ul class="prose-width mt-6 list-disc space-y-2 pl-5 text-[var(--color-ink-muted)]">
+        {site.ndis.bullets.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <p class="prose-width mt-6 text-sm text-[var(--color-ink-muted)]">{site.ndis.disclaimer}</p>
+    </div>
+  </section>
+
+  <section id="areas" class="scroll-mt-20 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]" aria-labelledby="areas-heading">
+    <div class="mx-auto max-w-5xl px-4 py-14">
+      <h2 id="areas-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">Service areas</h2>
+      <p class="prose-width mt-4 text-lg text-[var(--color-ink-muted)]">
+        Mobile visits across eastern Melbourne. This is a service-area business — we do not publish a clinic or home address.
+      </p>
+      <ul class="mt-8 flex flex-wrap gap-2" aria-label="Suburbs served">
+        {site.serviceAreas.map((area) => (
+          <li>
+            <span class="inline-block rounded-full border border-[var(--color-border)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-ink)]">
+              {area}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="referral" class="scroll-mt-20" aria-labelledby="referral-heading">
+    <div class="mx-auto max-w-5xl px-4 py-14">
+      <h2 id="referral-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">{site.referral.heading}</h2>
+      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">{site.referral.intro}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <a
+          href={`${site.contact.emailHref}?subject=${encodeURIComponent(site.referral.emailSubject)}`}
+          class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 font-semibold text-white no-underline hover:bg-[var(--color-accent-hover)]"
+        >
+          {site.referral.ctaLabel}
+        </a>
+        <a
+          href={site.contact.phoneHref}
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
+        >
+          Call
+        </a>
+        <a
+          href={site.contact.emailHref}
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
+        >
+          Email
+        </a>
+        <a
+          href="/referral"
+          class="inline-flex items-center justify-center px-6 py-3 font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline"
+        >
+          Printable referral sheet
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

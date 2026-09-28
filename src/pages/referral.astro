@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../content/site";
+
+const serviceList = site.services.map((s) => s.title).join("; ");
+---
+
+<BaseLayout
+  title={`Referral sheet | ${site.businessName}`}
+  description="Printable referral information for support coordinators and families (draft placeholders)."
+  canonicalPath="/referral"
+>
+  <div class="referral-sheet mx-auto max-w-[210mm] bg-white px-6 py-8 text-[var(--color-ink)] sm:px-10 sm:py-12">
+    <p class="no-print mb-6 rounded border border-amber-200 bg-[var(--color-draft-bg)] p-3 text-sm text-[var(--color-draft)]">
+      Draft referral sheet — confirm all details before printing. Use your browser&apos;s Print command (Ctrl+P / ⌘P).
+    </p>
+
+    <header class="border-b border-[var(--color-border)] pb-6">
+      <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">Referral information (draft)</p>
+      <h1 class="mt-2 font-serif text-3xl font-bold">{site.businessName}</h1>
+      <p class="text-lg text-[var(--color-ink-muted)]">{site.tagline} — {site.locationDescriptor}</p>
+    </header>
+
+    <div class="mt-6 grid gap-8 sm:grid-cols-[1fr_auto]">
+      <div class="space-y-6 text-sm leading-relaxed">
+        <section>
+          <h2 class="font-serif text-lg font-semibold">Practitioner</h2>
+          <p class="mt-1">{site.practitioner.name}</p>
+          <p class="text-[var(--color-ink-muted)]">{site.practitioner.credentialsPlaceholder}</p>
+          <p class="mt-2 text-[var(--color-ink-muted)]">{site.ahpra.notice}</p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg font-semibold">Service model</h2>
+          <p class="mt-1">Independent mobile / home / community physiotherapy.</p>
+          <p class="mt-2">{site.differentiator}</p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg font-semibold">Service areas</h2>
+          <p class="mt-1">{site.serviceAreas.join(", ")}</p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg font-semibold">Languages</h2>
+          <p class="mt-1">{site.languages.join(", ")}</p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg font-semibold">Example services (non-exhaustive)</h2>
+          <p class="mt-1">{serviceList}</p>
+          <p class="mt-2 text-[var(--color-ink-muted)]">{site.servicesIntro}</p>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg font-semibold">NDIS &amp; funding enquiries</h2>
+          <p class="mt-1">{site.ndis.intro}</p>
+          <ul class="mt-2 list-disc pl-5 text-[var(--color-ink-muted)]">
+            {site.ndis.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-serif text-lg font-semibold">Contact</h2>
+          <p class="mt-1">Phone: {site.contact.phone}</p>
+          <p>Email: {site.contact.email}</p>
+          <p>Website: {site.contact.websiteDisplay}</p>
+        </section>
+      </div>
+
+      <aside class="flex flex-col items-center justify-start text-center" aria-label="QR code placeholder">
+        <div
+          class="flex h-32 w-32 items-center justify-center border-2 border-dashed border-[var(--color-border)] bg-[var(--color-surface)] text-xs text-[var(--color-ink-muted)]"
+          role="img"
+          aria-label="QR code placeholder — add when website URL is confirmed"
+        >
+          QR placeholder
+        </div>
+        <p class="mt-2 max-w-[8rem] text-xs text-[var(--color-ink-muted)]">Scan when live URL confirmed</p>
+      </aside>
+    </div>
+
+    <footer class="mt-10 border-t border-[var(--color-border)] pt-4 text-xs text-[var(--color-ink-muted)]">
+      {site.draftNotice.title}. {site.footer.abnPlaceholder}. Not for emergency use.
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    .referral-sheet {
+      max-width: none;
+      padding: 0;
+    }
+  }
+</style>
