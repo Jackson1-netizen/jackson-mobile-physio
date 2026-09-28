@@ -477,36 +477,9 @@
   text-decoration: none;
 }
 
-.hm-header .hm-logo {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.15rem;
-}
-
-.hm-logo-mark {
-  display: block;
-  overflow: hidden;
-}
-
-.hm-header .hm-logo-mark {
-  height: 4.35rem;
-}
-
-.hm-header .hm-logo-mark img {
-  height: 9rem;
+.hm-header .hm-logo img {
+  height: 5.6rem;
   width: auto;
-  max-width: none;
-  margin-top: -2.9rem;
-}
-
-.hm-logo-service {
-  color: var(--hm-forest);
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  line-height: 1.05;
-  text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .hm-logo img {
@@ -1322,23 +1295,11 @@
   }
 }
 
-@media (min-width: 1200px) {
-  .hm-header .hm-logo-mark {
-    height: 5.5rem;
-  }
-
-  .hm-header .hm-logo-mark img {
-    height: 11.4rem;
-    margin-top: -3.67rem;
-  }
-
-  .hm-logo-service {
-    font-size: 1.5rem;
-    letter-spacing: 0.05em;
-  }
-}
-
 @media (min-width: 1024px) {
+  .hm-header .hm-logo img {
+    height: 7.15rem;
+  }
+
   .hm-nav {
     display: flex;
   }

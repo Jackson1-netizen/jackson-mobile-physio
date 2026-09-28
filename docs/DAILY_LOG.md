@@ -119,5 +119,6 @@
 ## 2026-09-28 (larger logo + AHPRA granted)
 
 - **Changed:** Header logo enlarged, with a readable “Mobile Physiotherapy” line under it. Hero service label enlarged. AHPRA copy across the site, referrer section, and referral sheet updated to registered. Registration number not added.
+- **Follow-up:** Removed the extra line under the logo. Header now shows the full logo file, including the roof tip and the Mobile Physiotherapy line printed on the logo, at a slightly smaller size.
 - **Decisions:** See `docs/DECISIONS.md` (AHPRA registration granted).
 - **Next:** Jackson can send the AHPRA number to print on the site. Still draft, not deployed.
