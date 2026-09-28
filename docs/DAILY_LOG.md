@@ -92,3 +92,9 @@
 - **Changed:** Recorded the current Home Motion V1 as the saved baseline on `main`. Created branch `cursor/chatgpt-version-b759` from that snapshot for a possible ChatGPT-produced alternative design.
 - **Decisions:** See `docs/DECISIONS.md` (saved V1 on main; ChatGPT alternative branch).
 - **Next:** Jackson reviews both later and chooses which design to use. No public deploy.
+
+## 2026-09-28 (Home Motion redesign audit)
+
+- **Changed:** Wrote `docs/HOME_MOTION_BRANCH_REDESIGN.md` (audit + visual spec). Stored reference artboards in `docs/references/`. No homepage implementation.
+- **Decisions:** See `docs/DECISIONS.md` (ChatGPT visual redesign audit).
+- **Next:** Wait for **BUILD HOME MOTION DESIGN**. Do not merge to `main`.

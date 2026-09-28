@@ -103,3 +103,11 @@ Append-only record. Do not silently overwrite prior entries.
 - **Saved design:** Jackson is happy with the current Home Motion homepage V1 (palette A, forest/sage). That snapshot stays on **`main`** — do not overwrite it with an experimental redesign.
 - **Comparison branch:** **`cursor/chatgpt-version-b759`** starts from this same commit. Use it for a possible ChatGPT-produced alternative site so Jackson can come back and pick which design to ship.
 - **How to compare:** keep `main` as the baseline; put ChatGPT/experimental UI only on `cursor/chatgpt-version-b759`. No deploy; both remain draft/`noindex`.
+
+## 2026-09-28 — Home Motion ChatGPT visual redesign (audit only)
+
+- **Branch:** `cursor/chatgpt-version-b759` only. No merge to `main`. No implementation until Jackson sends **BUILD HOME MOTION DESIGN**.
+- **Spec:** `docs/HOME_MOTION_BRANCH_REDESIGN.md`. Visual source: `docs/references/home-motion-chatgpt-reference.png`.
+- **Approach:** New homepage module on `/`; leave Concept 1 archive and `main` V1 untouched.
+- **Motion:** Keep existing reveals, video, hovers, accordion, sticky CTAs; add only subtle extras (arrow, stagger, optional desktop parallax). Current site has no mouse-follow or per-word heading animation.
+- **Honesty:** Do not use reference email, fake map, fake merch, or “NDIS & private clients” chip.
