@@ -245,7 +245,6 @@
 
 .hm-hero h1 {
   margin: 0.85rem 0 0;
-  max-width: 14ch;
   font-size: clamp(2.35rem, 6vw, 3.65rem);
   color: var(--hm-forest);
 }
@@ -870,5 +869,11 @@
   .hm-header .hm-cta-desktop,
   .hm-header .hm-lang {
     display: none;
+  }
+  .hm-hero-actions .hm-btn-primary {
+    display: none;
+  }
+  .hm-hero {
+    padding-bottom: 5.5rem;
   }
 }
