@@ -34,3 +34,10 @@
 - **Decisions:** See `docs/DECISIONS.md` (2026-09-28 launch-ready upgrade).  
 - **Blockers:** Email not provided; AHPRA pending; no deployment.  
 - **Next:** Jackson confirms email + AHPRA; follow `docs/NEXT_STEPS.md` before removing noindex.  
+
+## 2026-09-28 (Website V2 plan)
+
+- **Changed:** Authored V2 planning docs (UX/SEO/visual, shot list, launch checklist); appended decisions and next steps. Branch `cursor/website-v2-plan-e732`.  
+- **Decisions:** See `docs/DECISIONS.md` (2026-09-28 Website V2 planning).  
+- **Blockers:** Jackson review of visual direction (A/B/C) and **BUILD V2** approval before implementation.  
+- **Next:** Jackson reads `docs/WEBSITE_V2_PLAN.md` and replies BUILD V2 or feedback.  

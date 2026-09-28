@@ -43,3 +43,14 @@ Append-only record. Do not silently overwrite prior entries.
 - **SEO prep:** Per-page title/description, OG tags, LocalBusiness + FAQ JSON-LD, Astro sitemap integration (blocked from indexing while draft).  
 - **Trust:** No fake testimonials; empty reviews slot; AHPRA remains Pending; NDIS plan/self-managed only — not registered provider.  
 - **Deploy:** Not performed; `draft: true`, `noindex`, robots disallow unchanged until Jackson confirms AHPRA and launch steps in `docs/NEXT_STEPS.md`.  
+
+## 2026-09-28 — Website V2 planning (no implementation)
+
+- **Direction reset:** Jackson requested a full UX/SEO/visual **plan only** — no BUILD V2, no homepage decoration, no deploy.  
+- **Deliverables:** `docs/WEBSITE_V2_PLAN.md`, `docs/SEO_STRATEGY.md`, `docs/SEO_LAUNCH_CHECKLIST.md`, `docs/PHOTO_SHOT_LIST.md` on branch `cursor/website-v2-plan-e732`.  
+- **IA:** Multi-page sitemap (`/`, `/about/`, `/mobile-physiotherapy/`, `/ndis-physiotherapy/`, `/service-areas/`, `/referrals/`, `/contact/`, `/privacy/`); **deprecate** `/areas/[slug]` suburb doorway pages.  
+- **SEO:** H1 = service/search intent, not `businessName`; `businessName` separate from `practitionerName`; rebrand-friendly `displayBrand` proposed in config spec.  
+- **AHPRA config (V2):** `registrationStatus: "pending" | "registered"`, `registrationNumber: null | string` — replace ad-hoc pending strings at implementation.  
+- **NDIS:** Remain not a registered provider; plan/self-managed enquiries only; no NDIA-managed claims.  
+- **Visual:** Three directions documented; **recommended Direction A (Calm Professional)** with C-style hero typography.  
+- **Approval gate:** Jackson replies **BUILD V2** after reviewing plan; until then Phase 1 code on `cursor/launch-ready-site-2581` remains canonical implementation.  

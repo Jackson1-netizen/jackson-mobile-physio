@@ -35,3 +35,11 @@ Marketing website and referral collateral for an independent **mobile / home / c
 
 - Deployment, booking, payments, CMS, auth, database  
 - Real photography, QR codes, or live domain  
+
+---
+
+## Phase 2 — Website V2 (planned, not started)
+
+**Intent (2026-09-28):** Full UX, SEO, and visual redesign documented in `docs/WEBSITE_V2_PLAN.md`. Multi-page static site; service-intent H1s; rebrand-friendly identity (`businessName` ≠ hero brand); remove suburb doorway pages in favour of `/service-areas/`. Implementation waits for Jackson approval (**BUILD V2**). Phase 1 history and `cursor/launch-ready-site-2581` remain the current shipped draft codebase until V2 BUILD merges.
+
+**Supporting docs:** `docs/SEO_STRATEGY.md`, `docs/SEO_LAUNCH_CHECKLIST.md`, `docs/PHOTO_SHOT_LIST.md`.
