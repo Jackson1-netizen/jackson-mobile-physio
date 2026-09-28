@@ -1,18 +1,18 @@
 # Referral sheet copy (mirrors `/referral`)
 
-Draft placeholders — confirm before printing.
+Draft — AHPRA not granted; confirm email/website before printing.
 
 ---
 
 **Referral information (draft)**
 
-# BUSINESS_NAME
+# WAI WA LAW
 
 Mobile Physiotherapy — Melbourne Eastern Suburbs
 
 ## Practitioner
 
-[PRACTITIONER NAME PLACEHOLDER]  
+WAI WA LAW  
 [CREDENTIALS — NOT CONFIRMED]
 
 AHPRA physiotherapy registration has been submitted and is not yet granted. This site is in draft and does not represent a currently AHPRA-registered physiotherapy practice.
@@ -47,7 +47,7 @@ Plan-managed and self-managed NDIS participants are welcome to enquire. We can d
 
 ## Contact
 
-Phone: [PHONE PLACEHOLDER]  
+Phone: 0433 479 703  
 Email: [EMAIL PLACEHOLDER]  
 Website: [WEBSITE URL PLACEHOLDER]
 
@@ -55,4 +55,4 @@ QR code: **[QR PLACEHOLDER — add when URL confirmed]**
 
 ---
 
-Draft site — not for public use. [ABN — NOT CONFIRMED]. Not for emergency use.
+Draft site — not for public use. ABN 75 612 731 757. Not for emergency use.

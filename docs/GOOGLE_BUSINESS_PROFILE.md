@@ -12,10 +12,11 @@
 
 | Field | Draft value | Confirmed? |
 |-------|-------------|------------|
-| Business name | BUSINESS_NAME | NOT CONFIRMED |
+| Business name | WAI WA LAW | Confirmed (draft site) |
 | Primary category | Physiotherapist (or Mobile physiotherapist if available) | TODO |
 | Service areas | Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley, Mitcham, Nunawading | TODO |
-| Phone | [PHONE PLACEHOLDER] | NOT CONFIRMED |
+| Phone | 0433 479 703 | Confirmed |
+| ABN | 75 612 731 757 | Confirmed |
 | Website | [WEBSITE URL PLACEHOLDER] | NOT CONFIRMED |
 | Hours | [HOURS — NOT CONFIRMED] | NOT CONFIRMED |
 | Description | Use calm, factual copy from `src/content/site.ts` — no AHPRA registration claims until granted | TODO |
@@ -45,12 +46,12 @@ Align with website list — mobility, strength and balance, functional exercise,
 
 - [ ] Professional headshot (consent / quality checked)  
 - [ ] Mobile / community context photo (no identifiable clients without consent)  
-- [ ] Logo or wordmark once BUSINESS_NAME is chosen  
+- [ ] Logo or wordmark for WAI WA LAW  
 - [ ] No stock photos that imply false credentials or facilities  
 
 ## Launch checklist
 
-- [ ] BUSINESS_NAME, phone, email, domain live and match website  
+- [ ] WAI WA LAW, phone, email, domain live and match website (name + phone + ABN confirmed in repo)  
 - [ ] Website removed from draft (`noindex` / robots) only when appropriate  
 - [ ] Referral sheet PDF or URL updated with real QR code  
 - [ ] Privacy policy URL added  

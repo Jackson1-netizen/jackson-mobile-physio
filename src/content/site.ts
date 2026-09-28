@@ -7,14 +7,14 @@ export const site = {
   /** Site is in draft — not a live public professional site */
   draft: true,
 
-  businessName: "BUSINESS_NAME",
-  legalNamePlaceholder: "[LEGAL BUSINESS NAME — NOT CONFIRMED]",
+  businessName: "WAI WA LAW",
+  legalNamePlaceholder: "[LEGAL TRADING NAME IF DISTINCT — NOT CONFIRMED]",
   tagline: "Mobile Physiotherapy",
   locationDescriptor: "Melbourne Eastern Suburbs",
 
   contact: {
-    phone: "[PHONE PLACEHOLDER]",
-    phoneHref: "tel:+61000000000",
+    phone: "0433 479 703",
+    phoneHref: "tel:+61433479703",
     email: "[EMAIL PLACEHOLDER]",
     emailHref: "mailto:email@placeholder.example",
     websiteDisplay: "[WEBSITE URL PLACEHOLDER]",
@@ -22,7 +22,7 @@ export const site = {
   },
 
   practitioner: {
-    name: "[PRACTITIONER NAME PLACEHOLDER]",
+    name: "WAI WA LAW",
     credentialsPlaceholder: "[CREDENTIALS — NOT CONFIRMED]",
     bioPlaceholder:
       "[Short practitioner bio placeholder — to be confirmed. No qualifications or years of experience stated until verified.]",
@@ -105,26 +105,26 @@ export const site = {
     intro:
       "For support coordinators, families, and participants: share basic details and we will respond when available. No clinical information is required in your first message.",
     ctaLabel: "Refer a participant",
-    emailSubject: "Participant referral enquiry — BUSINESS_NAME",
+    emailSubject: "Participant referral enquiry — WAI WA LAW",
   },
 
   draftNotice: {
     title: "Draft site — not for public use",
     body:
-      "This website is a work in progress for an independent mobile physiotherapy service. Business name, registration, and contact details are placeholders. Do not rely on this page for clinical or emergency care.",
+      "This website is a work in progress for WAI WA LAW, an independent mobile physiotherapy service. AHPRA registration is not yet granted; email and website details are still being confirmed. Do not rely on this page for clinical or emergency care.",
   },
 
   footer: {
-    abnPlaceholder: "[ABN — NOT CONFIRMED]",
+    abnDisplay: "ABN 75 612 731 757",
     privacyPlaceholder: "[Privacy policy — TO BE ADDED]",
     copyrightSuffix: "All rights reserved.",
   },
 
   seo: {
     siteUrl: "https://example.placeholder",
-    defaultTitle: "BUSINESS_NAME | Mobile Physiotherapy — Melbourne Eastern Suburbs",
+    defaultTitle: "WAI WA LAW | Mobile Physiotherapy — Melbourne Eastern Suburbs",
     description:
-      "Draft marketing site for independent mobile physiotherapy in Melbourne's eastern suburbs. English, Cantonese, and Mandarin enquiries welcome. NDIS plan-managed and self-managed enquiries welcome.",
+      "Draft marketing site for WAI WA LAW — independent mobile physiotherapy in Melbourne's eastern suburbs. English, Cantonese, and Mandarin enquiries welcome. NDIS plan-managed and self-managed enquiries welcome.",
     locale: "en_AU",
     ogImagePath: "/og-placeholder.svg",
     keywords: [
