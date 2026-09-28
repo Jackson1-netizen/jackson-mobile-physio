@@ -19,6 +19,14 @@ Append-only record. Do not silently overwrite prior entries.
 - **Draft posture unchanged:** `noindex` / robots disallow until AHPRA granted; no claim of current AHPRA registration or NDIS registered provider status.  
 - **GitHub:** Jackson wants a **private** repo `jackson-mobile-physio`; creation blocked in cloud — `gh` not authenticated (`gh auth login` required on his side or token via secure env, not in repo).  
 
+## 2026-09-28 — Private GitHub repo created (Phase 1 push)
+
+- **Owner:** `Jackson1-netizen` / repo `jackson-mobile-physio` (private).  
+- **Clone:** `https://github.com/Jackson1-netizen/jackson-mobile-physio.git`  
+- **Remotes in dev:** keep Cursor **Origin** as `origin`; add **GitHub** as `github`.  
+- **Branches on GitHub:** `cursor/bootstrap-jackson-mobile-physio-e489` (Phase 1 tip ~`b627277`); `main` fast-forwarded to same tip (safe — Origin `main` was README-only).  
+- **Deploy:** not performed; site remains draft (`noindex`).  
+
 ## 2026-09-28 — Central content refactor + privacy page
 
 - **Single file:** All public copy fields consolidated in `src/content/site.ts` (practitionerName, qualifications, about paragraphs, NDIS single description, privacy sections, internal `websiteUrl` only).  

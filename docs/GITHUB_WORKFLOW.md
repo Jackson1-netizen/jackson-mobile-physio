@@ -1,20 +1,34 @@
 # GitHub workflow (two computers)
 
-**Private** repository: `jackson-mobile-physio` (intended GitHub path: `jacks0n-g/jackson-mobile-physio` once created).
+**Private** repository: [Jackson1-netizen/jackson-mobile-physio](https://github.com/Jackson1-netizen/jackson-mobile-physio)
 
-Until GitHub `origin` is connected, this clone may still use Cursor Origin (`origin.cursor.com`). After you create the private repo, switch `origin` as below.
+- **GitHub (`github` remote):** `https://github.com/Jackson1-netizen/jackson-mobile-physio.git` — primary for Jackson’s machines.
+- **Cursor Origin (`origin` remote):** cloud agent / project Origin — keep for Cursor sessions unless you rename remotes.
 
-## One-time: create private repo and connect (on your computer)
+Phase 1 lives on `cursor/bootstrap-jackson-mobile-physio-e489`; `main` on GitHub matches that tip (Origin `main` was init-only).
+
+## One-time: clone on a second computer
 
 ```bash
 gh auth login
 # Choose: GitHub.com → HTTPS → Login with browser (recommended)
 
-gh repo create jackson-mobile-physio --private --source=. --remote=github --push
-# Or if repo already exists empty on GitHub:
-git remote add github git@github.com:jacks0n-g/jackson-mobile-physio.git
-git push -u github cursor/bootstrap-jackson-mobile-physio-e489
-git push -u github main
+git clone https://github.com/Jackson1-netizen/jackson-mobile-physio.git
+cd jackson-mobile-physio
+npm install
+git checkout cursor/bootstrap-jackson-mobile-physio-e489   # or main (same Phase 1 tip)
+npm run dev
+```
+
+**Clone URL (private, HTTPS):** `https://github.com/Jackson1-netizen/jackson-mobile-physio.git`  
+**Clone URL (private, SSH):** `git@github.com:Jackson1-netizen/jackson-mobile-physio.git`
+
+If this clone still has only Cursor Origin, add GitHub:
+
+```bash
+git remote add github https://github.com/Jackson1-netizen/jackson-mobile-physio.git
+git fetch github
+git checkout cursor/bootstrap-jackson-mobile-physio-e489
 ```
 
 To make GitHub the primary remote (optional):
@@ -23,9 +37,6 @@ To make GitHub the primary remote (optional):
 git remote rename origin cursor-origin
 git remote rename github origin
 ```
-
-**Clone URL (private, HTTPS):** `https://github.com/jacks0n-g/jackson-mobile-physio.git`  
-**Clone URL (private, SSH):** `git@github.com:jacks0n-g/jackson-mobile-physio.git`
 
 Do not commit tokens or `.env` files. Never force-push.
 
@@ -43,7 +54,8 @@ npm run dev
 git status
 git add <files>   # or git add -A when appropriate
 git commit -m "Describe what changed"
-git push -u origin <branch-name>
+git push github <branch-name>
+git push origin <branch-name>   # if Cursor Origin is still configured
 ```
 
 Or use the safe checkpoint helper (also appends `docs/DAILY_LOG.md`):
@@ -53,15 +65,3 @@ npm run checkpoint
 ```
 
 **Never** force-push. If `pull --rebase` or `push` conflicts, stop and resolve manually.
-
-## Clone on a second computer
-
-```bash
-git clone https://github.com/jacks0n-g/jackson-mobile-physio.git
-cd jackson-mobile-physio
-npm install
-git checkout cursor/bootstrap-jackson-mobile-physio-e489   # or main after merge
-npm run dev
-```
-
-Use SSH clone URL if you prefer SSH keys. Authenticate with `gh auth login` or Git credential manager — do not store PATs in the repo.

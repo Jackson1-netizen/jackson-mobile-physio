@@ -20,3 +20,10 @@
 - **Decisions:** See `docs/DECISIONS.md` (2026-09-28 central content refactor).  
 - **Blockers:** Email still not provided; AHPRA pending.  
 - **Next:** Jackson supplies email; legal review of privacy draft.  
+
+## 2026-09-28 (GitHub private repo)
+
+- **Changed:** Created private `Jackson1-netizen/jackson-mobile-physio`; pushed Phase 1; updated `docs/GITHUB_WORKFLOW.md` with HTTPS clone URL; `main` and feature branch aligned on GitHub.  
+- **Decisions:** See `docs/DECISIONS.md` (2026-09-28 private GitHub repo).  
+- **Blockers:** Email still not provided; AHPRA pending; no deployment.  
+- **Next:** Jackson clones on second computer; continue edits on feature branch or `main` on GitHub.  
