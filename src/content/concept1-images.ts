@@ -1,29 +1,45 @@
 /**
- * Concept 1 homepage imagery — generic illustrative photos only.
+ * Concept 1 homepage imagery — generic people-in-care scenes only.
  * Not Jackson, not real clients. Swap URLs here after Jackson's shoot.
  */
 export const concept1Images = {
   heroVideo: {
     mp4: "https://videos.pexels.com/video-files/8434144/8434144-hd_1920_1080_25fps.mp4",
     poster:
-      "https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Generic home-visit physiotherapy exercise scene — not Jackson or a specific client",
-  },
-  hero: {
-    src: "https://images.unsplash.com/photo-1556912173-46c735c5fb72?auto=format&fit=crop&w=1600&q=80",
-    alt: "Illustrative bright home interior — placeholder for home-visit physiotherapy context",
+      "https://images.pexels.com/photos/4506164/pexels-photo-4506164.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    alt: "Generic physiotherapist guiding a home exercise — not Jackson or a specific client",
   },
   physioAtHome: {
-    src: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1400&q=80",
-    alt: "Illustrative supportive care at home — not a real client or practitioner",
+    src: "https://images.pexels.com/photos/8421524/pexels-photo-8421524.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    alt: "Generic hands-on physiotherapy support at home — illustrative only",
   },
-  mobility: {
-    src: "https://images.unsplash.com/photo-1519824145375-de6a1bc34e70?auto=format&fit=crop&w=1200&q=80",
-    alt: "Illustrative community mobility and walking — generic stock scene",
+  physioAtHomeVideo: {
+    mp4: "https://videos.pexels.com/video-files/6550162/6550162-hd_1920_1080_25fps.mp4",
+    poster:
+      "https://images.pexels.com/photos/4506105/pexels-photo-4506105.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    alt: "Generic home-visit mobility assistance — not Jackson or a specific client",
   },
   meetJackson: {
-    src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80",
-    alt: "Abstract clinical calm texture — placeholder until practitioner portrait is available",
+    src: "https://images.pexels.com/photos/4506105/pexels-photo-4506105.jpeg?auto=compress&cs=tinysrgb&w=1000",
+    alt: "Generic practitioner supporting a client with movement — placeholder, not Jackson's portrait",
+  },
+  mobility: {
+    src: "https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    alt: "Generic community walking practice with support — illustrative stock scene",
+  },
+  serviceThumbs: {
+    mobilePhysio:
+      "https://images.pexels.com/photos/4506164/pexels-photo-4506164.jpeg?auto=compress&cs=tinysrgb&w=400",
+    ndisPhysio:
+      "https://images.pexels.com/photos/5680177/pexels-photo-5680177.jpeg?auto=compress&cs=tinysrgb&w=400",
+    mobility:
+      "https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=400",
+    rehabilitation:
+      "https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&w=400",
+    homeExercise:
+      "https://images.pexels.com/photos/8419752/pexels-photo-8419752.jpeg?auto=compress&cs=tinysrgb&w=400",
+    community:
+      "https://images.pexels.com/photos/3823063/pexels-photo-3823063.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
 } as const;
 

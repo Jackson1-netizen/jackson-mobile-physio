@@ -497,3 +497,25 @@ Submit: mailto compose (static) or future form endpoint — **no** clinical data
 Shared rules: service-intent H1, EN/粵/普, honest AHPRA/NDIS, no fake photos or testimonials, concept `noindex` banner.
 
 **Local preview:** `npm run dev` → [concept hub](http://127.0.0.1:4721/concepts/)
+
+### 15.3 V1 vs BetterCare — what to learn
+
+**Essential difference:** Better Care Health Group is a **multi-discipline allied-health organisation** (NDIS registered, clinic base, large service catalogue, team page, review carousel). Jackson V1 is a **sole mobile physiotherapist** — one practitioner, honest non-provider NDIS positioning, service-area only, no reviews until real.
+
+**Borrow (patterns, not pixels)**
+
+- **Section rhythm:** Full-width chapters with alternating surfaces and generous vertical padding (`clamp`).  
+- **Large people imagery:** Hero and section media show **care in context** (home, movement, hands-on support) at editorial scale — not small decorative thumbnails.  
+- **Funding / service facts at a glance:** One row of **large, scannable boxes** immediately under the hero (our forest/sage band — not their yellow trust rail).  
+- **Image-led service discovery:** Light desktop **Services** panel with people thumbnails + labels (not a 15-link mega-menu).  
+- **Enquiry repetition:** Clear primary CTA in header, hero, band, and contact — without floating chat widgets.
+
+**Do not copy**
+
+- Yellow/navy palette, logo, or “Care that moves with you” headline model.  
+- Wording, NDIS **registered provider** claims, NDIA-managed breadth, or Mount Waverley **clinic address**.  
+- Google **review carousel** (4.9 / drag-marquee) or fabricated social proof.  
+- **Meet our team** grid — Jackson stays **Meet Jackson**, one clinician.  
+- Auto-playing **review** UX, corporate intake tone, or multi-city scale cues.
+
+**V1 alignment (2026-09-28):** Hero/first screen retained; post-hero **highlight boxes** + people-led stock media + light services menu implemented on `/`.

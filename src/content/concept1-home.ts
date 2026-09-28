@@ -19,6 +19,23 @@ export const concept1Purpose = {
     "We provide one-to-one physiotherapy in your home and community across Melbourne's eastern suburbs — built on clear communication, practical goals, and care in English, Cantonese, and Mandarin. The person you speak with is the person who provides your care.",
 };
 
+export const concept1TrustHighlights = [
+  { line: "Home & community visits", emphasis: false },
+  { line: "Plan-managed enquiries welcome", emphasis: false },
+  { line: "Self-managed enquiries welcome", emphasis: false },
+  { line: "Not an NDIS registered provider", emphasis: true },
+  { line: "English · 廣東話 · 普通話", emphasis: false },
+] as const;
+
+export const concept1ServiceNav = [
+  { label: "Mobile Physio", href: "#services", thumbKey: "mobilePhysio" as const },
+  { label: "NDIS Physio", href: "#ndis", thumbKey: "ndisPhysio" as const },
+  { label: "Mobility & Balance", href: "#services", thumbKey: "mobility" as const },
+  { label: "Rehabilitation", href: "#services", thumbKey: "rehabilitation" as const },
+  { label: "Home Exercise Programs", href: "#services", thumbKey: "homeExercise" as const },
+  { label: "Community Mobility", href: "#services", thumbKey: "community" as const },
+] as const;
+
 export const concept1TrustStrip = [
   { title: "Home & community visits", body: "Physiotherapy where you live — no clinic visit required." },
   { title: "Eastern suburbs", body: "Mobile service across Melbourne's east and surrounding areas." },

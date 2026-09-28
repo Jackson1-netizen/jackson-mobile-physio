@@ -5,7 +5,8 @@ import { concept1Images } from "../../content/concept1-images";
 import {
   concept1Hero,
   concept1Purpose,
-  concept1TrustStrip,
+  concept1TrustHighlights,
+  concept1ServiceNav,
   concept1Services,
   concept1Steps,
   concept1MeetJackson,
@@ -28,6 +29,7 @@ const isV1 = mode === "v1";
 const homeHref = isV1 ? "/" : `/concepts/1/${theme}/`;
 const headerSticky = isV1 ? "top-0" : "top-9";
 const registrationLine = getRegistrationDisplayLine();
+const navWithoutServices = concept1Nav.filter((item) => item.label !== "Services");
 ---
 
 <div class="c1-home" data-theme={theme}>
@@ -48,9 +50,30 @@ const registrationLine = getRegistrationDisplayLine();
       </a>
 
       <nav class="hidden items-center gap-5 text-sm text-[var(--c-muted)] lg:flex" aria-label="Primary">
-        {concept1Nav.map((item) => (
+        {navWithoutServices.map((item) => (
           <a href={item.href} class="no-underline hover:text-[var(--c-accent)]">{item.label}</a>
         ))}
+        <details class="c1-services-menu">
+          <summary class="text-[var(--c-muted)] hover:text-[var(--c-accent)]">Services</summary>
+          <div class="c1-services-panel">
+            <p class="mb-2 text-xs font-bold uppercase tracking-wide text-[var(--c-accent)]">Our services</p>
+            <div class="c1-services-panel-grid">
+              {concept1ServiceNav.map((svc) => (
+                <a href={svc.href} class="c1-service-nav-item">
+                  <img
+                    src={concept1Images.serviceThumbs[svc.thumbKey]}
+                    alt=""
+                    width="52"
+                    height="52"
+                    loading="lazy"
+                  />
+                  <span>{svc.label}</span>
+                </a>
+              ))}
+            </div>
+            <a href="#services" class="mt-3 block text-center text-sm font-semibold text-[var(--c-accent)] no-underline">View all services →</a>
+          </div>
+        </details>
         <a href="#referrers" class="font-semibold text-[var(--c-deep)] no-underline hover:text-[var(--c-accent)]">Refer a client</a>
       </nav>
 
@@ -62,6 +85,13 @@ const registrationLine = getRegistrationDisplayLine();
           <nav class="absolute right-0 z-50 mt-2 min-w-[12rem] rounded-xl border border-[var(--c-border)] bg-[var(--c-elevated)] p-3 shadow-lg">
             {concept1Nav.map((item) => (
               <a href={item.href} class="block py-2 text-sm font-medium no-underline text-[var(--c-ink)]">{item.label}</a>
+            ))}
+            <p class="mt-2 border-t border-[var(--c-border)] pt-2 text-xs font-bold uppercase text-[var(--c-accent)]">Services</p>
+            {concept1ServiceNav.map((svc) => (
+              <a href={svc.href} class="flex items-center gap-2 py-2 text-sm no-underline text-[var(--c-ink)]">
+                <img src={concept1Images.serviceThumbs[svc.thumbKey]} alt="" class="h-10 w-10 rounded-md object-cover" width="40" height="40" />
+                {svc.label}
+              </a>
             ))}
             <a href="#referrers" class="block py-2 text-sm font-semibold no-underline text-[var(--c-accent)]">Refer a client</a>
           </nav>
@@ -89,11 +119,6 @@ const registrationLine = getRegistrationDisplayLine();
           {concept1Hero.h1}
         </h1>
         <p class="mt-5 max-w-[44ch] text-lg text-[var(--c-muted)]">{concept1Hero.support}</p>
-        <div class="mt-5 flex flex-wrap gap-2">
-          {concept1Hero.chips.map((chip) => (
-            <span class="rounded-full border border-[var(--c-border)] bg-[var(--c-elevated)] px-3 py-1.5 text-sm">{chip}</span>
-          ))}
-        </div>
         <div class="mt-8 flex flex-wrap gap-3">
           <a
             href="#contact"
@@ -136,12 +161,16 @@ const registrationLine = getRegistrationDisplayLine();
     </div>
   </section>
 
-  <!-- Post-hero trust line -->
-  <section class="border-y border-[var(--c-border)] bg-[var(--c-band)] px-5 py-5 text-center">
-    <p class="text-lg font-semibold text-[var(--c-ink)]">{registrationLine}</p>
-    <p class="mt-1 text-base text-[var(--c-muted)]">
-      Home and community visits across Melbourne — including the eastern suburbs.
-    </p>
+  <!-- Post-hero highlights -->
+  <section class="border-b border-[var(--c-border)] bg-[var(--c-deep)] px-5 py-6 lg:py-8" aria-label="Service highlights">
+    <div class="mx-auto max-w-6xl">
+      <div class="c1-highlight-grid">
+        {concept1TrustHighlights.map((item) => (
+          <div class={`c1-highlight-box ${item.emphasis ? "is-emphasis" : ""}`}>{item.line}</div>
+        ))}
+      </div>
+      <p class="mt-5 text-center text-base font-medium text-[color-mix(in_srgb,white_92%,transparent)]">{registrationLine}</p>
+    </div>
   </section>
 
   <!-- Purpose -->
@@ -177,23 +206,29 @@ const registrationLine = getRegistrationDisplayLine();
     </div>
   </section>
 
-  <!-- Trust strip -->
-  <section class="c1-reveal border-y border-[var(--c-border)] bg-[var(--c-band)]" aria-label="Trust highlights">
-    <div class="mx-auto grid max-w-6xl gap-3 px-5 py-6 sm:grid-cols-2 lg:grid-cols-4">
-      {concept1TrustStrip.map((item) => (
-        <div class="rounded-xl border border-[var(--c-border)] bg-[var(--c-elevated)] p-4 transition hover:border-[var(--c-accent)]">
-          <p class="text-xs font-bold uppercase tracking-wide text-[var(--c-accent)]">{item.title}</p>
-          <p class="mt-1 text-base text-[var(--c-muted)]">{item.body}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
   <!-- Physiotherapy at Home -->
   <section class="c1-reveal bg-[var(--c-elevated)] py-16 lg:py-24">
     <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 lg:grid-cols-2">
-      <div class="c1-img-wrap aspect-[16/10] lg:aspect-[16/11]">
-        <img src={concept1Images.physioAtHome.src} alt={concept1Images.physioAtHome.alt} loading="lazy" width="1400" height="900" />
+      <div class="c1-section-media aspect-[16/10] lg:aspect-[16/11]">
+        <video
+          class="section-video-anim min-h-full"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster={concept1Images.physioAtHomeVideo.poster}
+          aria-label={concept1Images.physioAtHomeVideo.alt}
+        >
+          <source src={concept1Images.physioAtHomeVideo.mp4} type="video/mp4" />
+        </video>
+        <img
+          src={concept1Images.physioAtHome.src}
+          alt={concept1Images.physioAtHome.alt}
+          class="section-video-static absolute inset-0 min-h-full w-full object-cover"
+          loading="lazy"
+          width="1400"
+          height="900"
+        />
       </div>
       <div>
         <p class="text-xs font-bold uppercase tracking-widest text-[var(--c-accent)]">Physiotherapy at home</p>
