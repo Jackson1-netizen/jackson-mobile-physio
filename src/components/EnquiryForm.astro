@@ -1,0 +1,97 @@
+---
+import { site } from "../content/site";
+---
+
+<form
+  id="enquiry-form"
+  class="mt-8 space-y-4 rounded-lg border border-[var(--color-border)] bg-white p-6"
+  novalidate
+>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <label class="block text-sm">
+      <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.name">Your name</span>
+      <input
+        type="text"
+        name="name"
+        autocomplete="name"
+        class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2 text-[var(--color-ink)]"
+      />
+    </label>
+    <label class="block text-sm">
+      <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.phone">Phone</span>
+      <input
+        type="tel"
+        name="phone"
+        autocomplete="tel"
+        class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2"
+      />
+    </label>
+  </div>
+  <label class="block text-sm">
+    <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.suburb">Suburb</span>
+    <input
+      type="text"
+      name="suburb"
+      class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2"
+    />
+  </label>
+  <label class="block text-sm">
+    <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.language">Preferred language</span>
+    <select name="language" class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2">
+      <option>English</option>
+      <option>Cantonese</option>
+      <option>Mandarin</option>
+      <option>No preference</option>
+    </select>
+  </label>
+  <label class="flex items-start gap-2 text-sm">
+    <input type="checkbox" name="ndis" class="mt-1" />
+    <span data-i18n-path="enquiry.ndisLabel">NDIS participant (plan-managed or self-managed)</span>
+  </label>
+  <label class="block text-sm">
+    <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.message">How can we help?</span>
+    <textarea
+      name="message"
+      rows="4"
+      required
+      class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2"
+    ></textarea>
+  </label>
+  <p class="text-xs text-[var(--color-ink-muted)]" data-i18n-path="enquiry.privacyNote">
+    Do not include sensitive clinical details in this form unless necessary.
+  </p>
+  <button
+    type="submit"
+    class="inline-flex w-full items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 font-semibold text-white hover:bg-[var(--color-accent-hover)] sm:w-auto"
+  >
+    <span data-i18n-path="cta.sendEnquiry">Send enquiry</span>
+  </button>
+</form>
+
+<script define:vars={{ emailHref: site.emailHref, businessName: site.businessName }}>
+  const form = document.getElementById("enquiry-form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const suburb = String(data.get("suburb") || "").trim();
+    const language = String(data.get("language") || "");
+    const ndis = data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / unsure";
+    const message = String(data.get("message") || "").trim();
+    const body = encodeURIComponent(
+      [
+        name && `Name: ${name}`,
+        phone && `Phone: ${phone}`,
+        suburb && `Suburb: ${suburb}`,
+        `Language: ${language}`,
+        `NDIS participant: ${ndis}`,
+        "",
+        message,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    );
+    window.location.href = `${emailHref}&body=${body}`;
+  });
+</script>

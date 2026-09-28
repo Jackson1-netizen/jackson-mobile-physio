@@ -35,3 +35,11 @@ Append-only record. Do not silently overwrite prior entries.
 - **AHPRA:** `ahpraStatus` Pending; `ahpraRegistrationNumber` empty; no registered-physio claims.  
 - **`/privacy`:** Draft policy from `site.privacy`; footer links to `/privacy`.  
 - **Hours:** Stored in `businessHours` for docs/GBP prep; not shown on marketing pages.  
+
+## 2026-09-28 — Launch-ready marketing upgrade (still draft)
+
+- **Scope:** Multi-section home, 8 suburb pages under `/areas/[slug]`, FAQ accordion + FAQPage schema, how-it-works steps, enquiry mailto form, sticky mobile CTAs, trilingual UI via `src/content/i18n.ts` (English / 繁體 / 简体).  
+- **Content split:** `site.ts` (business + launch switches), `i18n.ts` (UI strings), `suburbs.ts` (geo landing copy), `index.ts` re-export.  
+- **SEO prep:** Per-page title/description, OG tags, LocalBusiness + FAQ JSON-LD, Astro sitemap integration (blocked from indexing while draft).  
+- **Trust:** No fake testimonials; empty reviews slot; AHPRA remains Pending; NDIS plan/self-managed only — not registered provider.  
+- **Deploy:** Not performed; `draft: true`, `noindex`, robots disallow unchanged until Jackson confirms AHPRA and launch steps in `docs/NEXT_STEPS.md`.  

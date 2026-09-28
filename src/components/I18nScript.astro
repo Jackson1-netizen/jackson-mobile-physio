@@ -1,0 +1,71 @@
+---
+import { messages, defaultLocale } from "../content/i18n";
+const serialized = JSON.stringify(messages);
+---
+
+<script define:vars={{ serialized, defaultLocale }}>
+  const WWL_MESSAGES = JSON.parse(serialized);
+
+  function getNestedValue(obj, path) {
+    return path.split(".").reduce((acc, part) => {
+      if (acc == null) return undefined;
+      if (Array.isArray(acc)) {
+        const idx = Number(part);
+        if (!Number.isNaN(idx)) return acc[idx];
+      }
+      if (typeof acc === "object" && part in acc) {
+        return acc[part];
+      }
+      return undefined;
+    }, obj);
+  }
+
+  function htmlLang(locale) {
+    if (locale === "en") return "en-AU";
+    return locale;
+  }
+
+  function applyLocale(locale) {
+    const bundle = WWL_MESSAGES[locale] || WWL_MESSAGES[defaultLocale];
+    document.documentElement.lang = htmlLang(locale);
+    document.querySelectorAll("[data-i18n-path]").forEach((el) => {
+      const path = el.getAttribute("data-i18n-path");
+      if (!path) return;
+      const value = getNestedValue(bundle, path);
+      if (typeof value === "string") {
+        el.textContent = value;
+      }
+    });
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.setAttribute("data-active", btn.getAttribute("data-locale") === locale ? "true" : "false");
+    });
+    try {
+      localStorage.setItem("wwl-locale", locale);
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function initLocale() {
+    let locale = defaultLocale;
+    try {
+      const stored = localStorage.getItem("wwl-locale");
+      if (stored && WWL_MESSAGES[stored]) locale = stored;
+    } catch {
+      /* ignore */
+    }
+    applyLocale(locale);
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const next = btn.getAttribute("data-locale");
+        if (next && WWL_MESSAGES[next]) applyLocale(next);
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLocale);
+  } else {
+    initLocale();
+  }
+</script>

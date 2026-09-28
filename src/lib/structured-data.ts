@@ -1,4 +1,5 @@
 import { site } from "../content/site";
+import { messages } from "../content/i18n";
 
 /** JSON-LD for LocalBusiness / healthcare-oriented mobile service (draft). */
 export function getLocalBusinessJsonLd(): Record<string, unknown> {
@@ -53,4 +54,22 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
   }
 
   return json;
+}
+
+/** FAQPage schema from English FAQ copy (SEO baseline). */
+export function getFaqJsonLd(): Record<string, unknown> {
+  const items = messages.en.faq.items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items,
+  };
 }

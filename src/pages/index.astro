@@ -1,17 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import EnquiryForm from "../components/EnquiryForm.astro";
 import { site, formatServiceAreasLine } from "../content/site";
+import { messages } from "../content/i18n";
+import { suburbPages, suburbPath } from "../content/suburbs";
 
 const serviceAreaLine = formatServiceAreasLine();
+const faqItems = messages.en.faq.items;
+const steps = messages.en.howItWorks.steps;
 ---
 
-<BaseLayout>
+<BaseLayout includeFaqSchema canonicalPath="/">
   <section
-    class="border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]"
+    class="border-b border-[var(--color-border)] bg-gradient-to-b from-[var(--color-surface-elevated)] to-[var(--color-surface)]"
     aria-labelledby="hero-heading"
   >
     <div class="mx-auto max-w-5xl px-4 py-14 sm:py-20">
-      <p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">
+      <p
+        class="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]"
+        data-i18n-path="hero.regionLabel"
+      >
         {site.locationDescriptor}
       </p>
       <h1
@@ -21,45 +29,54 @@ const serviceAreaLine = formatServiceAreasLine();
         {site.businessName}
       </h1>
       <p class="mt-2 text-2xl text-[var(--color-ink-muted)] sm:text-3xl">{site.tagline}</p>
-      <p class="prose-width mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]">
+      <p
+        class="prose-width mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]"
+        data-i18n-path="about.differentiator"
+      >
         {site.differentiator}
+      </p>
+      <p class="mt-4 text-sm font-medium text-[var(--color-ink-muted)]" data-i18n-path="hero.fundingNote">
+        NDIS plan-managed & self-managed enquiries welcome · Not an NDIS registered provider
       </p>
       <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a
           href={site.phoneHref}
           class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 text-center font-semibold text-white no-underline hover:bg-[var(--color-accent-hover)]"
         >
-          Call {site.phone}
+          <span data-i18n-path="cta.call">Call</span> {site.phone}
         </a>
         <a
           href={site.emailHref}
           class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 text-center font-semibold text-[var(--color-ink)] no-underline hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
         >
-          Email us
+          <span data-i18n-path="cta.email">Email</span>
         </a>
         <a
-          href="#referral"
-          class="inline-flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-center font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline"
+          href="/referral"
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 text-center font-semibold no-underline hover:border-[var(--color-accent)]"
         >
-          {site.referral.ctaLabel}
+          <span data-i18n-path="cta.referParticipant">{site.referral.ctaLabel}</span>
         </a>
       </div>
       <p class="mt-8 text-sm text-[var(--color-ink-muted)]">
-        Languages: {site.languages.join(" · ")}
+        <span data-i18n-path="hero.languagesLabel">Languages</span>: {site.languages.join(" · ")}
       </p>
     </div>
   </section>
 
-  <section id="about" class="scroll-mt-20 border-b border-[var(--color-border)]" aria-labelledby="about-heading">
+  <section id="about" class="scroll-mt-36 border-b border-[var(--color-border)]" aria-labelledby="about-heading">
     <div class="mx-auto max-w-5xl px-4 py-14">
-      <h2 id="about-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">About</h2>
+      <h2 id="about-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.about">
+        About
+      </h2>
       <div class="prose-width mt-6 space-y-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">
-        {site.aboutParagraphs.map((paragraph) => (
-          <p>{paragraph}</p>
+        {site.aboutParagraphs.map((paragraph, i) => (
+          <p data-i18n-path={`about.paragraphs.${i}`}>{paragraph}</p>
         ))}
-        <p>{site.differentiator}</p>
+        <p data-i18n-path="about.differentiator">{site.differentiator}</p>
         <p>
-          <strong class="text-[var(--color-ink)]">Practitioner:</strong> {site.practitionerName}
+          <strong class="text-[var(--color-ink)]" data-i18n-path="about.practitionerLabel">Practitioner:</strong>
+          {site.practitionerName}
         </p>
         <ul class="list-none space-y-2 pl-0">
           {site.qualifications.map((item) => (
@@ -69,7 +86,8 @@ const serviceAreaLine = formatServiceAreasLine();
           ))}
         </ul>
         <p>
-          <strong class="text-[var(--color-ink)]">Languages:</strong> {site.languages.join(", ")}
+          <strong class="text-[var(--color-ink)]" data-i18n-path="about.languagesLabel">Languages:</strong>
+          {site.languages.join(", ")}
         </p>
         <p class="rounded-md border border-amber-200 bg-[var(--color-draft-bg)] p-4 text-base text-[var(--color-draft)]">
           {site.ahpraNotice}
@@ -78,13 +96,21 @@ const serviceAreaLine = formatServiceAreasLine();
     </div>
   </section>
 
-  <section id="services" class="scroll-mt-20 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]" aria-labelledby="services-heading">
+  <section
+    id="services"
+    class="scroll-mt-36 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]"
+    aria-labelledby="services-heading"
+  >
     <div class="mx-auto max-w-5xl px-4 py-14">
-      <h2 id="services-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">Services</h2>
-      <p class="prose-width mt-4 text-lg text-[var(--color-ink-muted)]">{site.servicesIntro}</p>
+      <h2 id="services-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.services">
+        Services
+      </h2>
+      <p class="prose-width mt-4 text-lg text-[var(--color-ink-muted)]" data-i18n-path="services.intro">
+        {site.servicesIntro}
+      </p>
       <ul class="mt-10 grid gap-6 sm:grid-cols-2">
         {site.services.map((service) => (
-          <li class="rounded-lg border border-[var(--color-border)] bg-white p-6">
+          <li class="rounded-lg border border-[var(--color-border)] bg-white p-6 shadow-sm shadow-[var(--color-ink)]/5">
             <h3 class="font-serif text-xl font-semibold text-[var(--color-ink)]">{service.title}</h3>
             <p class="mt-2 leading-relaxed text-[var(--color-ink-muted)]">{service.description}</p>
           </li>
@@ -93,80 +119,183 @@ const serviceAreaLine = formatServiceAreasLine();
     </div>
   </section>
 
-  <section id="ndis" class="scroll-mt-20 border-b border-[var(--color-border)]" aria-labelledby="ndis-heading">
+  <section id="how-it-works" class="scroll-mt-36 border-b border-[var(--color-border)]" aria-labelledby="how-heading">
     <div class="mx-auto max-w-5xl px-4 py-14">
-      <h2 id="ndis-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">{site.ndisHeading}</h2>
-      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">{site.ndisDescription}</p>
+      <h2 id="how-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.howItWorks">
+        How it works
+      </h2>
+      <p class="prose-width mt-4 text-lg text-[var(--color-ink-muted)]" data-i18n-path="howItWorks.intro">
+        {messages.en.howItWorks.intro}
+      </p>
+      <ol class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {steps.map((step, i) => (
+          <li class="relative rounded-lg border border-[var(--color-border)] bg-white p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-[var(--color-accent)]">Step {i + 1}</span>
+            <h3 class="mt-2 font-serif text-lg font-semibold" data-i18n-path={`howItWorks.steps.${i}.title`}>
+              {step.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-[var(--color-ink-muted)]" data-i18n-path={`howItWorks.steps.${i}.description`}>
+              {step.description}
+            </p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <section id="areas" class="scroll-mt-20 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]" aria-labelledby="areas-heading">
+  <section id="ndis" class="scroll-mt-36 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]" aria-labelledby="ndis-heading">
     <div class="mx-auto max-w-5xl px-4 py-14">
-      <h2 id="areas-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">Service areas</h2>
-      <p class="prose-width mt-4 text-lg text-[var(--color-ink-muted)]">
+      <h2 id="ndis-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.ndis">
+        {site.ndisHeading}
+      </h2>
+      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]" data-i18n-path="ndis.lead">
+        {site.ndisDescription}
+      </p>
+      <ul class="prose-width mt-8 space-y-6">
+        <li class="rounded-lg border border-[var(--color-border)] bg-white p-5">
+          <h3 class="font-semibold text-[var(--color-ink)]" data-i18n-path="ndis.planManaged">
+            Self-managed NDIS participants
+          </h3>
+          <p class="mt-2 text-[var(--color-ink-muted)]" data-i18n-path="ndis.planManagedDesc">
+            {messages.en.ndis.planManagedDesc}
+          </p>
+        </li>
+        <li class="rounded-lg border border-[var(--color-border)] bg-white p-5">
+          <h3 class="font-semibold text-[var(--color-ink)]" data-i18n-path="ndis.planManaged2">
+            Plan-managed NDIS participants
+          </h3>
+          <p class="mt-2 text-[var(--color-ink-muted)]" data-i18n-path="ndis.planManaged2Desc">
+            {messages.en.ndis.planManaged2Desc}
+          </p>
+        </li>
+        <li class="rounded-lg border border-amber-200 bg-[var(--color-draft-bg)] p-5">
+          <h3 class="font-semibold text-[var(--color-draft)]" data-i18n-path="ndis.notRegistered">
+            Not an NDIS registered provider
+          </h3>
+          <p class="mt-2 text-[var(--color-ink-muted)]" data-i18n-path="ndis.notRegisteredDesc">
+            {messages.en.ndis.notRegisteredDesc}
+          </p>
+        </li>
+      </ul>
+      <p class="prose-width mt-6 text-sm text-[var(--color-ink-muted)]" data-i18n-path="ndis.noGuarantee">
+        {messages.en.ndis.noGuarantee}
+      </p>
+    </div>
+  </section>
+
+  <section id="areas" class="scroll-mt-36 border-b border-[var(--color-border)]" aria-labelledby="areas-heading">
+    <div class="mx-auto max-w-5xl px-4 py-14">
+      <h2 id="areas-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.areas">
+        Service areas
+      </h2>
+      <p class="prose-width mt-4 text-lg text-[var(--color-ink-muted)]" data-i18n-path="areas.intro">
         Mobile visits across {serviceAreaLine}. This is a service-area business — we do not publish a clinic or home address.
       </p>
-      <ul class="mt-8 flex flex-wrap gap-2" aria-label="Suburbs served">
-        {site.serviceAreas.suburbs.map((area) => (
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {suburbPages.map((suburb) => (
           <li>
-            <span class="inline-block rounded-full border border-[var(--color-border)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-ink)]">
-              {area}
-            </span>
+            <a
+              href={suburbPath(suburb.slug)}
+              class="block rounded-lg border border-[var(--color-border)] bg-white px-4 py-3 no-underline shadow-sm transition hover:border-[var(--color-accent)] hover:shadow-md"
+            >
+              <span class="font-semibold text-[var(--color-ink)]">{suburb.name}</span>
+              <span class="mt-1 block text-xs text-[var(--color-accent)]" data-i18n-path="areas.viewSuburb">
+                Mobile physio in
+              </span>
+            </a>
           </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <section id="contact" class="scroll-mt-20 border-b border-[var(--color-border)]" aria-labelledby="contact-heading">
+  <section id="faq" class="scroll-mt-36 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]" aria-labelledby="faq-heading">
+    <div class="mx-auto max-w-3xl px-4 py-14">
+      <h2 id="faq-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.faq">
+        Frequently asked questions
+      </h2>
+      <div class="mt-8 space-y-3">
+        {faqItems.map((item, i) => (
+          <details class="faq-details group rounded-lg border border-[var(--color-border)] bg-white px-4 py-1">
+            <summary class="cursor-pointer list-none py-3 font-semibold text-[var(--color-ink)] marker:content-none [&::-webkit-details-marker]:hidden">
+              <span data-i18n-path={`faq.items.${i}.question`}>{item.question}</span>
+            </summary>
+            <p class="pb-4 text-[var(--color-ink-muted)] leading-relaxed" data-i18n-path={`faq.items.${i}.answer`}>
+              {item.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="scroll-mt-36 border-b border-[var(--color-border)]" aria-labelledby="reviews-heading">
     <div class="mx-auto max-w-5xl px-4 py-14">
-      <h2 id="contact-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">Contact</h2>
-      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">{site.contactCta}</p>
+      <h2 id="reviews-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.reviews">
+        Reviews
+      </h2>
+      <div class="mt-6 rounded-lg border border-dashed border-[var(--color-border)] bg-white p-8 text-center">
+        <p class="font-medium text-[var(--color-ink)]" data-i18n-path="reviews.emptyTitle">
+          Reviews after launch
+        </p>
+        <p class="mx-auto mt-2 max-w-xl text-[var(--color-ink-muted)]" data-i18n-path="reviews.emptyBody">
+          {messages.en.reviews.emptyBody}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="scroll-mt-36 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]" aria-labelledby="contact-heading">
+    <div class="mx-auto max-w-5xl px-4 py-14">
+      <h2 id="contact-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.contact">
+        Contact
+      </h2>
+      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]" data-i18n-path="about.contactCta">
+        {site.contactCta}
+      </p>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a
           href={site.phoneHref}
           class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 font-semibold text-white no-underline hover:bg-[var(--color-accent-hover)]"
         >
-          Call {site.phone}
+          <span data-i18n-path="cta.call">Call</span> {site.phone}
         </a>
         <a
           href={site.emailHref}
           class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
         >
-          Email us
+          <span data-i18n-path="cta.email">Email</span>
         </a>
       </div>
+
+      <h3 class="mt-12 font-serif text-2xl font-semibold" data-i18n-path="sections.enquiry">Send an enquiry</h3>
+      <p class="prose-width mt-2 text-[var(--color-ink-muted)]" data-i18n-path="enquiry.intro">
+        {messages.en.enquiry.intro}
+      </p>
+      <EnquiryForm />
     </div>
   </section>
 
-  <section id="referral" class="scroll-mt-20" aria-labelledby="referral-heading">
+  <section id="referral" class="scroll-mt-36" aria-labelledby="referral-heading">
     <div class="mx-auto max-w-5xl px-4 py-14">
-      <h2 id="referral-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]">{site.referral.heading}</h2>
-      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">{site.referrersCta}</p>
+      <h2 id="referral-heading" class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.referrers">
+        Referrers & coordinators
+      </h2>
+      <p class="prose-width mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]" data-i18n-path="referrers.lead">
+        {site.referrersCta}
+      </p>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a
           href={`mailto:?subject=${encodeURIComponent(site.referral.emailSubject)}`}
           class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 font-semibold text-white no-underline hover:bg-[var(--color-accent-hover)]"
         >
-          {site.referral.ctaLabel}
-        </a>
-        <a
-          href={site.phoneHref}
-          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
-        >
-          Call
-        </a>
-        <a
-          href={site.emailHref}
-          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
-        >
-          Email
+          <span data-i18n-path="cta.referParticipant">{site.referral.ctaLabel}</span>
         </a>
         <a
           href="/referral"
-          class="inline-flex items-center justify-center px-6 py-3 font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline"
+          class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
         >
-          Printable referral sheet
+          <span data-i18n-path="referrers.sheetLink">Open printable referral sheet</span>
         </a>
       </div>
     </div>

@@ -166,9 +166,9 @@ export const site = {
   },
 
   seo: {
-    defaultTitle: "WAI WA LAW | Mobile Physiotherapy — Melbourne Eastern Suburbs",
+    defaultTitle: "WAI WA LAW | Mobile Physiotherapist — Melbourne Eastern Suburbs",
     description:
-      "Draft marketing site for WAI WA LAW — independent mobile physiotherapy in Melbourne's eastern suburbs. English, Cantonese, and Mandarin enquiries welcome.",
+      "Independent mobile physiotherapy in Melbourne's eastern suburbs — Box Hill, Doncaster, Ringwood, and surrounds. English, Cantonese, and Mandarin. NDIS plan-managed and self-managed enquiries welcome. AHPRA registration pending.",
     locale: "en_AU",
     ogImagePath: "/og-placeholder.svg",
     keywords: [

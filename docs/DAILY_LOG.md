@@ -27,3 +27,10 @@
 - **Decisions:** See `docs/DECISIONS.md` (2026-09-28 private GitHub repo).  
 - **Blockers:** Email still not provided; AHPRA pending; no deployment.  
 - **Next:** Jackson clones on second computer; continue edits on feature branch or `main` on GitHub.  
+
+## 2026-09-28 (launch-ready site)
+
+- **Changed:** Launch-ready draft marketing site — suburb pages, i18n switcher, FAQ/how-it-works/enquiry form, expanded SEO/schema, docs/NEXT_STEPS launch checklist. Branch `cursor/launch-ready-site-2581`.  
+- **Decisions:** See `docs/DECISIONS.md` (2026-09-28 launch-ready upgrade).  
+- **Blockers:** Email not provided; AHPRA pending; no deployment.  
+- **Next:** Jackson confirms email + AHPRA; follow `docs/NEXT_STEPS.md` before removing noindex.  

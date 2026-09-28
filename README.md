@@ -1,8 +1,8 @@
-# Jackson mobile physiotherapy — Phase 1 (draft)
+# WAI WA LAW — mobile physiotherapy (draft)
 
-Static marketing site for an independent **mobile physiotherapy** service in Melbourne's eastern suburbs. Built with **Astro**, **TypeScript**, and **Tailwind CSS**.
+Launch-ready **draft** marketing site for **WAI WA LAW** — independent mobile physiotherapy in Melbourne's eastern suburbs. Built with **Astro 7**, **TypeScript**, and **Tailwind CSS 4**.
 
-> **Draft:** Placeholders only. Not deployed. Not a live public professional site. AHPRA registration is described as submitted-not-granted.
+> **Not live:** `site.draft = true`, `noindex`, and `robots.txt` disallow. AHPRA registration is **pending** — the site does not claim current registered-physiotherapist status. **Do not deploy publicly** until Jackson confirms AHPRA and follows `docs/NEXT_STEPS.md`.
 
 ## Run locally
 
@@ -13,30 +13,39 @@ npm run dev
 
 Open [http://127.0.0.1:4721](http://127.0.0.1:4721).
 
-Other commands:
-
 ```bash
-npm run build    # static output to dist/
-npm run preview  # preview production build
-npm run check    # astro check
-npm run checkpoint  # safe git checkpoint + DAILY_LOG append
+npm run build
+npm run preview
+npm run check
+npm run checkpoint   # safe git checkpoint + DAILY_LOG append
 ```
 
-## Edit business content
+## Edit content
 
-All name, contact, areas, services, NDIS, and SEO strings live in:
-
-`src/content/site.ts`
+| File | Purpose |
+|------|---------|
+| `src/content/site.ts` | Business details, NDIS/AHPRA posture, launch switches (`draft`, `ahpraStatus`) |
+| `src/content/i18n.ts` | UI copy in English, 繁體中文, 简体中文 |
+| `src/content/suburbs.ts` | Suburb landing page copy |
+| `src/content/index.ts` | Single re-export |
 
 Do not scatter business copy across components.
 
-## Key routes
+## Routes
 
 | Path | Purpose |
 |------|---------|
-| `/` | Single-page marketing site |
-| `/referral` | A4-friendly printable referral sheet |
+| `/` | Home |
+| `/areas/box-hill` (etc.) | Suburb landing pages |
+| `/referral` | Printable referral sheet |
+| `/privacy` | Privacy policy (draft) |
+
+## GitHub
+
+Private repo: `https://github.com/Jackson1-netizen/jackson-mobile-physio.git`  
+See `docs/GITHUB_WORKFLOW.md`.
 
 ## Documentation
 
-See `docs/PROJECT_BRIEF.md`, `docs/NEXT_STEPS.md`, and `docs/GITHUB_WORKFLOW.md`.
+- `docs/NEXT_STEPS.md` — **what to flip when AHPRA is granted**
+- `docs/PROJECT_BRIEF.md`, `docs/DECISIONS.md`, `docs/DAILY_LOG.md`
