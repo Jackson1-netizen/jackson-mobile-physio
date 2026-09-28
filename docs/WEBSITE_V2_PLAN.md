@@ -357,7 +357,9 @@ Submit: mailto compose (static) or future form endpoint — **no** clinical data
 
 - **Visual direction:** **Approved** — hybrid in [§8](#8-visual-directions-approved) (2026-09-28).  
 - **Quality bar:** **Reference documented** — Better Care patterns adapted in [§14](#14-quality-bar--better-care-health-group-reference) (2026-09-28); not a second brand approval gate.  
-- **Concept pick:** Jackson chooses **1, 2, or 3** (§15) → then Wonder → writing-plans → executing-plans → production site.  
+- **Homepage concept:** **Locked — Concept 1 (Editorial Forest)** (2026-09-28).  
+- **Wonder refinement:** Completed **in-repo** on `/concepts/1/` (Wonder MCP required auth — not used).  
+- **Next:** writing-plans only when Jackson / parent explicitly requests — then executing-plans → production site.  
 - **BUILD V2** (full multi-page implementation) runs only after that chain — not after concept pick alone.  
 - **Launch:** No deployment until `docs/SEO_LAUNCH_CHECKLIST.md` is satisfied and AHPRA status is updated in config.
 

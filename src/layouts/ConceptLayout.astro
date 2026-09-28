@@ -3,9 +3,10 @@ interface Props {
   concept: 1 | 2 | 3;
   title: string;
   description: string;
+  status?: string;
 }
 
-const { concept, title, description } = Astro.props;
+const { concept, title, description, status } = Astro.props;
 ---
 
 <!doctype html>
@@ -30,7 +31,8 @@ const { concept, title, description } = Astro.props;
     </a>
     <div class="concept-chrome" data-concept={concept}>
       <div class="concept-banner">
-        <strong>Concept {concept}</strong> — homepage visual mockup only (not final IA).{" "}
+        <strong>Concept {concept}</strong>
+        {status ? ` — ${status}` : ""} — homepage mockup only (not final IA).{" "}
         <a href="/concepts/">All concepts</a> · <a href="/">Phase 1 draft site</a>
       </div>
       <slot />

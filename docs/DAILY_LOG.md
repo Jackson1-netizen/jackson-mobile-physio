@@ -62,3 +62,10 @@
 - **Decisions:** See `docs/DECISIONS.md` (2026-09-28 workflow locked).  
 - **Blockers:** Jackson concept pick (1 / 2 / 3).  
 - **Next:** Wonder refinement after pick — not started.  
+
+## 2026-09-28 (Concept 1 locked + refined)
+
+- **Changed:** Refined `/concepts/1/` mockup; docs workflow §15 updated.  
+- **Decisions:** Concept 1 Editorial Forest; Wonder N/A (needs auth).  
+- **Blockers:** None.  
+- **Next:** Wait for Jackson/parent to request writing-plans.  

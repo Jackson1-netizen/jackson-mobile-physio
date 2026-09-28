@@ -4,13 +4,13 @@
 
 ---
 
-## Website V2 (workflow — pick a concept)
+## Website V2 (workflow — Concept 1 refined)
 
-1. **Jackson:** Open concept hub `http://127.0.0.1:4721/concepts/` — compare **Concept 1**, **2**, **3** (desktop + mobile).  
-2. **Jackson:** Reply **1**, **2**, or **3** in Cursor.  
-3. **Then:** Wonder refinement (may need your auth) → writing-plans → executing-plans → production Astro site → Lighthouse/SEO audit.  
-4. **Do not skip:** No full implementation plan or multi-page BUILD until after Wonder.  
-5. **Docs:** `docs/WEBSITE_V2_PLAN.md` §14–§15; branch `cursor/website-v2-plan-e732`.
+1. **Chosen:** **Concept 1 — Editorial Forest** (locked in `docs/WEBSITE_V2_PLAN.md` §15).  
+2. **Preview refined comp:** `http://127.0.0.1:4721/concepts/1/` (Wonder MCP unavailable — refined in-repo).  
+3. **Jackson / parent:** When ready, explicitly ask to run **writing-plans** (not started).  
+4. **Then:** executing-plans → production multi-page Astro site → Lighthouse/SEO audit.  
+5. **Branch:** `cursor/website-v2-plan-e732`.
 
 ---
 

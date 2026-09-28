@@ -76,3 +76,10 @@ Append-only record. Do not silently overwrite prior entries.
 - **Benchmark quote** recorded in §14.  
 - **Concept routes:** `/concepts/1/` Editorial Forest, `/concepts/2/` Warm Meadow, `/concepts/3/` Active Path — mockups only, `noindex`.  
 - **Gate:** Waiting for Jackson to reply **1**, **2**, or **3**. No writing-plans, no executing-plans, no production multi-page site yet.  
+
+## 2026-09-28 — Concept 1 locked; Wonder refinement in-repo
+
+- **Chosen:** **Concept 1 — Editorial Forest** for homepage visual direction.  
+- **Wonder MCP:** Namespace `Wonder` status `needsAuth` — Jackson auth not performed; refinement done **in-place** on `/concepts/1/`.  
+- **Refinement:** Trust band, nav + dual CTAs, editorial hero (left accent), service teasers, process, FAQ accordion, forest enquiry band; no fake photos/reviews.  
+- **Next gate:** Explicit request to run **writing-plans** — not started.  
