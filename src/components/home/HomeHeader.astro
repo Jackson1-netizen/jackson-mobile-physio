@@ -8,8 +8,11 @@ const toolsId = "hm-header-tools";
 
 <header class="hm-header no-print">
   <div class="hm-wrap hm-header-inner">
-    <a class="hm-logo" href="/" aria-label={site.displayBrand}>
-      <img src="/home-motion-logo.png" alt={site.displayBrand} width="140" height="44" />
+    <a class="hm-logo" href="/" aria-label={`${site.displayBrand} — ${site.tagline}`}>
+      <span class="hm-logo-mark">
+        <img src="/home-motion-logo.png" alt="" width="627" height="388" />
+      </span>
+      <span class="hm-logo-service" data-i18n-path="home.eyebrow">{site.tagline}</span>
     </a>
 
     <nav class="hm-nav" aria-label="Primary">

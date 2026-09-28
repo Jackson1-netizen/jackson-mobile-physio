@@ -138,7 +138,7 @@ const en = {
       {
         question: "Is AHPRA registration confirmed?",
         answer:
-          "AHPRA physiotherapy registration is currently pending and has not been granted. This draft site must not be read as a currently registered practice until Jackson confirms registration and updates this site.",
+          "Yes. AHPRA physiotherapy registration has been granted. Jackson is an AHPRA-registered physiotherapist.",
       },
       {
         question: "Do I need a GP referral?",
@@ -315,8 +315,7 @@ const zhHant = {
       },
       {
         question: "AHPRA 註冊是否已確認？",
-        answer:
-          "AHPRA 物理治療師註冊現仍待批，尚未獲批。在 Jackson 確認註冊並更新網站前，請勿視本網站為已註冊執業。",
+        answer: "是。AHPRA 物理治療師註冊已獲批。Jackson 是已註冊物理治療師。",
       },
       {
         question: "需要家庭醫生轉介嗎？",
@@ -483,8 +482,7 @@ const zhHans = {
       },
       {
         question: "AHPRA 注册是否已确认？",
-        answer:
-          "AHPRA 物理治疗师注册现仍待批，尚未获批。在 Jackson 确认注册并更新网站前，请勿视本网站为已注册执业。",
+        answer: "是。AHPRA 物理治疗师注册已获批。Jackson 是已注册物理治疗师。",
       },
       {
         question: "需要全科医生转介吗？",

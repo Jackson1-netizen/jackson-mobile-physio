@@ -13,13 +13,14 @@ const serviceAreaLine = formatServiceAreasLine();
 >
   <div class="referral-sheet mx-auto max-w-[210mm] bg-white px-6 py-8 text-[var(--color-ink)] sm:px-10 sm:py-12">
     <p class="no-print mb-6 rounded border border-amber-200 bg-[var(--color-draft-bg)] p-3 text-sm text-[var(--color-draft)]">
-      Draft referral sheet — confirm all details before printing. Use your browser&apos;s Print command (Ctrl+P / ⌘P).
+      Referral sheet — AHPRA registration granted. Confirm contact details before printing. Use your browser&apos;s Print command (Ctrl+P / ⌘P).
     </p>
 
     <header class="border-b border-[var(--color-border)] pb-6">
-      <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">Referral information (draft)</p>
+      <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">Referral information</p>
       <h1 class="mt-2 font-serif text-3xl font-bold">{site.businessName}</h1>
-      <p class="text-lg text-[var(--color-ink-muted)]">{site.tagline} — {site.locationDescriptor}</p>
+      <p class="mt-1 text-xl font-semibold tracking-wide text-[var(--color-ink)]">{site.tagline}</p>
+      <p class="text-lg text-[var(--color-ink-muted)]">{site.locationDescriptor}</p>
     </header>
 
     <div class="mt-6 grid gap-8 sm:grid-cols-[1fr_auto]">

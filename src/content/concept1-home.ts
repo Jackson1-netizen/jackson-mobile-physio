@@ -7,7 +7,7 @@ export const concept1Hero = {
   chips: [
     "NDIS plan & self-managed",
     "Not an NDIS registered provider",
-    "AHPRA registration pending",
+    "AHPRA registered physiotherapist",
   ] as const,
   primaryCta: "Make an enquiry",
   secondaryCta: "Explore services",
@@ -101,7 +101,7 @@ export const concept1Faq = [
   },
   {
     q: "Is AHPRA registration current?",
-    a: "AHPRA physiotherapy registration is pending. This site does not claim current registration.",
+    a: "Yes. AHPRA physiotherapy registration has been granted. Jackson is an AHPRA-registered physiotherapist.",
   },
   {
     q: "Do you have a clinic I can visit?",

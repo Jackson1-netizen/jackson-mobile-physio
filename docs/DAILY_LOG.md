@@ -115,3 +115,9 @@
 
 - **Changed:** Restyled `cursor/design-option-2-b759` to match the attached single-page UI: dark forest services band, orange outline icons, chip row, stacked HTML business cards, pin list + OSM map, gold referrer icons. ChatGPT option 1 and `main` untouched.
 - **Honesty:** No invented email on the card; AHPRA pending line kept; NDIS legal section still below the fold.
+
+## 2026-09-28 (larger logo + AHPRA granted)
+
+- **Changed:** Header logo enlarged, with a readable “Mobile Physiotherapy” line under it. Hero service label enlarged. AHPRA copy across the site, referrer section, and referral sheet updated to registered. Registration number not added.
+- **Decisions:** See `docs/DECISIONS.md` (AHPRA registration granted).
+- **Next:** Jackson can send the AHPRA number to print on the site. Still draft, not deployed.

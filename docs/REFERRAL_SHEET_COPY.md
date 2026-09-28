@@ -1,12 +1,12 @@
 # Referral sheet copy (mirrors `/referral`)
 
-Draft — AHPRA pending; email not published. No website URL on print sheet until confirmed for display.
+AHPRA registration granted. Registration number not printed until Jackson supplies it. Email not published. No website URL on the print sheet until confirmed for display.
 
 ---
 
-**Referral information (draft)**
+**Referral information**
 
-# WAI WA LAW
+# Home Motion
 
 Mobile Physiotherapy — Melbourne Eastern Suburbs
 
@@ -15,10 +15,10 @@ Mobile Physiotherapy — Melbourne Eastern Suburbs
 Wai Wa "Jackson" Law
 
 - Physiotherapy qualification: [DEGREE / UNIVERSITY TO BE CONFIRMED]
-- AHPRA registration: Pending
+- AHPRA registration: Registered
 - Professional insurance: Maintained as required for practice
 
-AHPRA physiotherapy registration is pending and has not been granted. This draft site must not be read as a currently AHPRA-registered physiotherapy practice.
+AHPRA physiotherapy registration has been granted. Jackson is an AHPRA-registered physiotherapist.
 
 ## Service model
 

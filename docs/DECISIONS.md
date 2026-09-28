@@ -112,6 +112,12 @@ Append-only record. Do not silently overwrite prior entries.
 - **Motion:** Keep existing reveals, video, hovers, accordion, sticky CTAs; add only subtle extras (arrow, stagger, optional desktop parallax). Current site has no mouse-follow or per-word heading animation.
 - **Honesty:** Do not use reference email, fake map, fake merch, or “NDIS & private clients” chip.
 
+## 2026-09-28 — AHPRA registration granted
+
+- **Confirmed by Jackson:** AHPRA physiotherapy registration has been granted.
+- **Updated:** `registrationStatus` is `registered`; qualifications, notices, FAQs, suburb copy, referral sheet, and schema no longer say pending.
+- **Not invented:** registration number is still empty until Jackson provides it. Site stays draft / noindex. Not deployed.
+
 ## 2026-09-28 — ChatGPT visual archived; option 2 branch opened
 
 - **Archived:** `cursor/chatgpt-version-b759` is option 1 (ChatGPT visual). Treat as frozen for comparison.

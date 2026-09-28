@@ -38,7 +38,7 @@ export const suburbPages: SuburbPage[] = [
     seo: {
       title: "Mobile Physiotherapist Doncaster | WAI WA LAW",
       description:
-        "Home-visit physiotherapy in Doncaster and Doncaster East. Personal mobile service in English, Cantonese, or Mandarin. AHPRA registration pending — draft site.",
+        "Home-visit physiotherapy in Doncaster and Doncaster East. Personal mobile service in English, Cantonese, or Mandarin. AHPRA-registered physiotherapist.",
     },
     headline: "Mobile physiotherapy in Doncaster",
     paragraphs: [
@@ -76,7 +76,7 @@ export const suburbPages: SuburbPage[] = [
     seo: {
       title: "Mobile Physiotherapist Ringwood | WAI WA LAW",
       description:
-        "Home-visit physiotherapy in Ringwood and Ringwood East. Mobile eastern suburbs service with trilingual consultations. Draft marketing site — AHPRA pending.",
+        "Home-visit physiotherapy in Ringwood and Ringwood East. Mobile eastern suburbs service with trilingual consultations. AHPRA-registered physiotherapist.",
     },
     headline: "Mobile physiotherapy in Ringwood",
     paragraphs: [
@@ -124,7 +124,7 @@ export const suburbPages: SuburbPage[] = [
     localPoints: [
       "Glen Waverley and adjacent suburbs by arrangement",
       "CALD-friendly communication throughout care",
-      "AHPRA registration pending until confirmed by practitioner",
+      "AHPRA-registered physiotherapist",
     ],
   },
   {
@@ -162,7 +162,7 @@ export const suburbPages: SuburbPage[] = [
     localPoints: [
       "Nunawading and surrounding pockets",
       "Referral-friendly for coordinators and GPs",
-      "Draft site — verify AHPRA status before public launch",
+      "AHPRA-registered physiotherapist",
     ],
   },
 ];

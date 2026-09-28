@@ -2,7 +2,7 @@
 
 Launch-ready **draft** marketing site for **WAI WA LAW** — independent mobile physiotherapy in Melbourne's eastern suburbs. Built with **Astro 7**, **TypeScript**, and **Tailwind CSS 4**.
 
-> **Not live:** `site.draft = true`, `noindex`, and `robots.txt` disallow. AHPRA registration is **pending** — the site does not claim current registered-physiotherapist status. **Do not deploy publicly** until Jackson confirms AHPRA and follows `docs/NEXT_STEPS.md`.
+> **Not live:** `site.draft = true`, `noindex`, and `robots.txt` disallow. AHPRA physiotherapy registration is **granted**. The registration number is not on the site until Jackson supplies it. **Do not deploy publicly** until Jackson asks and the remaining launch items in `docs/NEXT_STEPS.md` are done.
 
 ## Run locally
 

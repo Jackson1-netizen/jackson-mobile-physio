@@ -56,16 +56,21 @@
 
 .hm-kicker {
   margin: 0;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--hm-orange);
 }
 
+.hm-hero .hm-kicker {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.16em;
+}
+
 .hm-kicker-forest {
   color: var(--hm-forest);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
 }
 
 .hm-logo img {
@@ -472,8 +477,40 @@
   text-decoration: none;
 }
 
+.hm-header .hm-logo {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.hm-logo-mark {
+  display: block;
+  overflow: hidden;
+}
+
+.hm-header .hm-logo-mark {
+  height: 4.35rem;
+}
+
+.hm-header .hm-logo-mark img {
+  height: 9rem;
+  width: auto;
+  max-width: none;
+  margin-top: -2.9rem;
+}
+
+.hm-logo-service {
+  color: var(--hm-forest);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .hm-logo img {
-  height: 3.35rem;
+  height: 3.4rem;
   width: auto;
 }
 
@@ -572,7 +609,7 @@
 
 .hm-hero h1 {
   margin: 0.85rem 0 0;
-  font-size: clamp(2.35rem, 6vw, 3.55rem);
+  font-size: clamp(2.7rem, 6.4vw, 4.05rem);
   color: var(--hm-forest);
 }
 
@@ -591,8 +628,9 @@
 
 .hm-hero-support {
   margin: 1.15rem 0 0;
-  max-width: 42ch;
-  font-size: 1.08rem;
+  max-width: 44ch;
+  font-size: 1.28rem;
+  line-height: 1.5;
   color: #3d5a52;
 }
 
@@ -909,13 +947,20 @@
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hm-notice {
+
+.hm-registered {
   margin-top: 1rem;
   padding: 0.9rem 1rem;
   border-radius: 0.9rem;
-  background: #fbf3d9;
-  color: #5c4a1f;
-  font-size: 0.92rem;
+  background: #e7f2ea;
+  color: var(--hm-forest);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.hm-refer-copy .hm-registered {
+  display: inline-block;
+  color: var(--hm-forest);
 }
 
 .hm-ndis {
@@ -1274,6 +1319,22 @@
   }
   .hm-header .hm-cta-desktop {
     display: inline-flex;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hm-header .hm-logo-mark {
+    height: 5.5rem;
+  }
+
+  .hm-header .hm-logo-mark img {
+    height: 11.4rem;
+    margin-top: -3.67rem;
+  }
+
+  .hm-logo-service {
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
   }
 }
 

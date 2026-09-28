@@ -28,7 +28,7 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
       {
         "@type": "PropertyValue",
         name: "Draft status",
-        value: "Site in draft; AHPRA registration pending",
+        value: "Site in draft; AHPRA physiotherapy registration granted",
       },
       {
         "@type": "PropertyValue",

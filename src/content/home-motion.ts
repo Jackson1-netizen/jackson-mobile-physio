@@ -122,6 +122,7 @@ export const homeAbout = {
 export const homeReferrers = {
   heading: "For Referrers",
   lead: "I work collaboratively with GPs, specialists and allied health professionals to support shared clients with timely, goal-oriented physiotherapy care.",
+  registration: "AHPRA registered physiotherapist.",
   audience:
     "Support Coordinators, Recovery Coaches, GPs, allied health professionals, families and authorised representatives are welcome to get in touch.",
   points: [

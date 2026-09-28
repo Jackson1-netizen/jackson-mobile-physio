@@ -36,11 +36,11 @@ export const site = {
   abnDisplay: "ABN 75 612 731 757",
 
   ahpraRegistrationNumber: "",
-  registrationStatus: "pending" as "pending" | "registered",
+  registrationStatus: "registered" as "pending" | "registered",
   registrationNumber: null as string | null,
-  ahpraStatus: "Pending" as const,
+  ahpraStatus: "Registered" as const,
   ahpraNotice:
-    "AHPRA physiotherapy registration is pending and has not been granted. This draft site must not be read as a currently AHPRA-registered physiotherapy practice.",
+    "AHPRA physiotherapy registration has been granted. Jackson is an AHPRA-registered physiotherapist.",
 
   qualifications: [
     {
@@ -49,7 +49,7 @@ export const site = {
     },
     {
       label: "AHPRA registration",
-      value: "Pending",
+      value: "Registered",
     },
     {
       label: "Professional insurance",
@@ -144,7 +144,7 @@ export const site = {
   draftNotice: {
     title: "Draft site — not for public use",
     body:
-      "This website is a work in progress for WAI WA LAW, an independent mobile physiotherapy service. AHPRA registration is pending; contact email is not yet published here. Do not rely on this page for clinical or emergency care.",
+      "This website is a work in progress for WAI WA LAW, an independent mobile physiotherapy service. AHPRA physiotherapy registration has been granted. Contact email is not yet published here. Do not rely on this page for clinical or emergency care.",
   },
 
   footer: {
@@ -174,7 +174,7 @@ export const site = {
   seo: {
     defaultTitle: "WAI WA LAW | Mobile Physiotherapist — Melbourne Eastern Suburbs",
     description:
-      "Independent mobile physiotherapy in Melbourne's eastern suburbs — Box Hill, Doncaster, Ringwood, and surrounds. English, Cantonese, and Mandarin. NDIS plan-managed and self-managed enquiries welcome. AHPRA registration pending.",
+      "Independent mobile physiotherapy in Melbourne's eastern suburbs — Box Hill, Doncaster, Ringwood, and surrounds. English, Cantonese, and Mandarin. NDIS plan-managed and self-managed enquiries welcome. AHPRA-registered physiotherapist.",
     locale: "en_AU",
     ogImagePath: "/og-placeholder.svg",
     keywords: [
@@ -194,10 +194,12 @@ export function formatServiceAreasLine(): string {
   return `${region} — ${suburbs.join(", ")}, ${surroundingNote}`;
 }
 
-/** One-line AHPRA status for homepage trust strip — no false registration claims. */
+/** One-line AHPRA status for homepage trust strip. Number is shown only when Jackson supplies it. */
 export function getRegistrationDisplayLine(): string {
-  if (site.registrationStatus === "registered" && site.registrationNumber) {
-    return "AHPRA registered practitioner";
+  if (site.registrationStatus === "registered") {
+    return site.registrationNumber
+      ? `AHPRA registered physiotherapist · ${site.registrationNumber}`
+      : "AHPRA registered physiotherapist";
   }
   return "AHPRA registration pending — not yet registered as a physiotherapist";
 }
