@@ -932,8 +932,8 @@
   border-radius: 1.1rem;
 }
 
-.hm-why-hydro {
-  margin: 0;
+.hm-why-hydro img {
+  object-position: 22% 42%;
 }
 
 .hm-why-caption {
