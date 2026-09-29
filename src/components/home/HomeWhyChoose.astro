@@ -1,45 +1,22 @@
 ---
 import { homeWhy } from "../../content/home-motion";
+import HomeIcon, { type HomeIconName } from "./HomeIcon.astro";
 
-const [whyHome, whyHydro] = homeWhy.photos;
+const icons: HomeIconName[] = ["house", "person", "run", "pin"];
 ---
 
 <section class="hm-why hm-reveal">
   <div class="hm-wrap hm-section">
     <p class="hm-kicker" data-i18n-path="hm.why.kicker">{homeWhy.kicker}</p>
     <h2 data-i18n-path="hm.why.heading">{homeWhy.heading}</h2>
-    <p class="mt-4 max-w-3xl text-[#3d5a52]" data-i18n-path="hm.why.intro">{homeWhy.intro}</p>
-    <div class="hm-why-media">
-      <div class="hm-img-zoom">
-        <img
-          src={whyHome.src}
-          alt={whyHome.alt}
-          width={whyHome.width}
-          height={whyHome.height}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <figure class="hm-why-hydro">
-        <div class="hm-img-zoom">
-          <img
-            src={whyHydro.src}
-            alt={whyHydro.alt}
-            width={whyHydro.width}
-            height={whyHydro.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <figcaption class="hm-why-caption" data-i18n-path="about.hydroCaption">
-          {homeWhy.hydroCaption}
-        </figcaption>
-      </figure>
-    </div>
+    <p class="mt-4 text-[#3d5a52]" data-i18n-path="hm.why.intro">{homeWhy.intro}</p>
     <ul class="hm-why-grid hm-stagger mt-8">
       {
         homeWhy.items.map((item, i) => (
           <li class="hm-card">
+            <span class="hm-why-icon">
+              <HomeIcon name={icons[i] ?? "heart"} size={24} />
+            </span>
             <h3 data-i18n-path={`hm.why.items.${i}.title`}>{item.title}</h3>
             <p data-i18n-path={`hm.why.items.${i}.body`}>{item.body}</p>
           </li>

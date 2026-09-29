@@ -1,6 +1,6 @@
 ---
 import { site } from "../../content/site";
-import { homeAreas, homeCardEmail, homeMedia, homeSuburbs } from "../../content/home-motion";
+import { homeAreas, homeCardEmail, homeSuburbs } from "../../content/home-motion";
 import ServiceAreaMap from "./ServiceAreaMap.astro";
 import HomeIcon from "./HomeIcon.astro";
 
@@ -9,7 +9,7 @@ import HomeIcon from "./HomeIcon.astro";
 
 <section id="areas" class="hm-areas-band">
   <div class="hm-areas-split">
-    <div class="hm-card-stage" style={`--hm-areas-photo: url('${homeMedia.areasBackdrop.src}')`}>
+    <div class="hm-card-stage">
       <div class="hm-card-stack" role="group" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
         <article class="hm-print-card hm-print-card-back" lang="en">
           <img src="/home-motion-logo.png" alt="" width="180" height="56" />

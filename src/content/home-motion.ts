@@ -44,13 +44,13 @@ export const homePhotos = {
     src: "/photos/home-gait-support.jpg",
     width: 819,
     height: 614,
-    alt: "Jackson supporting standing and gait practice during a home physiotherapy visit",
+    alt: hm.photos.gaitAlt,
   },
   homeSitToStand: {
     src: "/photos/home-sit-to-stand.jpg",
     width: 819,
     height: 614,
-    alt: "Jackson coaching sit-to-stand practice at home during a physiotherapy visit",
+    alt: hm.photos.sitToStandAlt,
   },
   homeSeatedDumbbells: {
     src: "/photos/home-seated-dumbbells.jpg",
@@ -133,9 +133,6 @@ export const homeWhy = {
   heading: hm.why.heading,
   intro: hm.why.intro,
   items: hm.why.items,
-  photos: [homePhotos.homeSeatedDumbbells, homePhotos.hydroAquaDumbbells],
-  hydroCaption:
-    "Illustrative aquatic-setting care only. Home Motion is a mobile home and community physiotherapy service — we do not run a pool clinic.",
 };
 
 export const homeAbout = {
@@ -207,15 +204,15 @@ export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {
 
 export const homeFaq = messages.en.faq.items;
 
+/**
+ * Homepage photo placements — each photo appears once. Hydro images are not used on the
+ * homepage (no verified aquatic service); gym images are kept for other pages only.
+ */
 export const homeMedia = {
   hero: homePhotos.homeWalker,
   about: homePhotos.portrait,
-  howOne: homePhotos.homeGait,
-  howTwo: homePhotos.homeSitToStand,
-  whyHome: homePhotos.homeSeatedDumbbells,
-  whyHydro: homePhotos.hydroAquaDumbbells,
+  how: homePhotos.homeSitToStand,
   ndis: homePhotos.homeGait,
-  areasBackdrop: homePhotos.homeWalker,
 };
 
 export { images, site };

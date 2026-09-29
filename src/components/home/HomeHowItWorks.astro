@@ -1,6 +1,8 @@
 ---
 import { homeSteps, homeMedia } from "../../content/home-motion";
 import { messages } from "../../content/i18n";
+
+const photo = homeMedia.how;
 ---
 
 <section id="how" class="hm-how hm-reveal">
@@ -20,27 +22,16 @@ import { messages } from "../../content/i18n";
         }
       </ol>
     </div>
-    <div class="hm-how-media">
-      <div class="hm-img-zoom">
-        <img
-          src={homeMedia.howOne.src}
-          alt={homeMedia.howOne.alt}
-          width={homeMedia.howOne.width}
-          height={homeMedia.howOne.height}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div class="hm-img-zoom">
-        <img
-          src={homeMedia.howTwo.src}
-          alt={homeMedia.howTwo.alt}
-          width={homeMedia.howTwo.width}
-          height={homeMedia.howTwo.height}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+    <div class="hm-how-media hm-img-zoom">
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        data-i18n-attr="alt:hm.photos.sitToStandAlt"
+        width={photo.width}
+        height={photo.height}
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </div>
 </section>

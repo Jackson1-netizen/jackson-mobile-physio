@@ -319,6 +319,10 @@ const en = {
       ahpraNotice: site.ahpraNotice,
       portraitAlt: "Jackson, Home Motion mobile physiotherapist, in a Home Motion polo",
     },
+    photos: {
+      sitToStandAlt: "Jackson coaching sit-to-stand practice at home during a physiotherapy visit",
+      gaitAlt: "Jackson supporting standing and gait practice during a home physiotherapy visit",
+    },
     mobileBar: { label: "Quick contact" },
     footer: {
       rights: site.footer.copyrightSuffix,
@@ -599,6 +603,10 @@ const zhHant = {
       ahpraNotice: "AHPRA 物理治療師註冊已獲批。Jackson 是 AHPRA 註冊物理治療師。",
       portraitAlt: "Home Motion 上門物理治療師 Jackson，身穿 Home Motion Polo 衫",
     },
+    photos: {
+      sitToStandAlt: "Jackson 在上門物理治療期間，於家中指導由坐到站的練習",
+      gaitAlt: "Jackson 在上門物理治療期間，協助站立及步態練習",
+    },
     mobileBar: { label: "快速聯絡" },
     footer: {
       rights: "版權所有。",
@@ -876,6 +884,10 @@ const zhHans = {
       qualificationValues: { "1": "已注册", "2": "按执业要求投保" },
       ahpraNotice: "AHPRA 物理治疗师注册已获批。Jackson 是 AHPRA 注册物理治疗师。",
       portraitAlt: "Home Motion 上门物理治疗师 Jackson，身穿 Home Motion Polo 衫",
+    },
+    photos: {
+      sitToStandAlt: "Jackson 在上门物理治疗期间，在家中指导从坐到站的练习",
+      gaitAlt: "Jackson 在上门物理治疗期间，协助站立及步态练习",
     },
     mobileBar: { label: "快速联系" },
     footer: {
