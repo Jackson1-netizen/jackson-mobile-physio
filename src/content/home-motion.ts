@@ -30,7 +30,7 @@ export const homeHero = {
 export const homePhotos = {
   portrait: {
     src: "/photos/jackson-portrait.jpg",
-    widths: [480, 800, 1120],
+    widths: [480, 640, 800, 1120],
     width: 1120,
     height: 1400,
     alt: hm.about.portraitAlt,

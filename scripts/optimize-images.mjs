@@ -14,7 +14,7 @@ const photos = [
   { file: "home-walker.jpg", widths: [480, 640, 819] },
   { file: "home-sit-to-stand.jpg", widths: [480, 640, 819] },
   { file: "home-gait-support.jpg", widths: [480, 640, 819] },
-  { file: "jackson-portrait.jpg", widths: [480, 800, 1120] },
+  { file: "jackson-portrait.jpg", widths: [480, 640, 800, 1120] },
 ];
 
 const photoOut = join(root, "photos", "opt");
