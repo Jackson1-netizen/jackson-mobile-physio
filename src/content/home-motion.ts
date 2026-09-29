@@ -99,32 +99,26 @@ export const homeServices = {
     {
       icon: "person" as const,
       ...hm.services.cards[0],
-      image: homePhotos.homeSeatedDumbbells,
     },
     {
       icon: "run" as const,
       ...hm.services.cards[1],
-      image: homePhotos.homeGait,
     },
     {
       icon: "dumbbell" as const,
       ...hm.services.cards[2],
-      image: homePhotos.gymStepCoaching,
     },
     {
       icon: "house" as const,
       ...hm.services.cards[3],
-      image: homePhotos.homeSitToStand,
     },
     {
       icon: "brain" as const,
       ...hm.services.cards[4],
-      image: homePhotos.gymResistanceBand,
     },
     {
       icon: "clipboard" as const,
       ...hm.services.cards[5],
-      image: homePhotos.gymStepStrength,
     },
   ],
 };

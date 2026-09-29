@@ -21,20 +21,13 @@ import HomeIcon from "./HomeIcon.astro";
         homeServices.cards.map((card, i) => (
           <li>
             <div class="hm-card hm-service-card">
-              <span class="hm-service-photo">
-                <img
-                  src={card.image.src}
-                  alt={card.image.alt}
-                  width={card.image.width}
-                  height={card.image.height}
-                  decoding="async"
-                />
-              </span>
               <span class="hm-service-icon">
-                <HomeIcon name={card.icon} size={34} />
+                <HomeIcon name={card.icon} size={28} />
               </span>
-              <h3 data-i18n-path={`hm.services.cards.${i}.title`}>{card.title}</h3>
-              <p data-i18n-path={`hm.services.cards.${i}.body`}>{card.body}</p>
+              <div>
+                <h3 data-i18n-path={`hm.services.cards.${i}.title`}>{card.title}</h3>
+                <p data-i18n-path={`hm.services.cards.${i}.body`}>{card.body}</p>
+              </div>
             </div>
           </li>
         ))

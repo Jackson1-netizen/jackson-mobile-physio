@@ -11,10 +11,10 @@ import HomeIcon from "./HomeIcon.astro";
   <div class="hm-areas-split">
     <div class="hm-card-stage" style={`--hm-areas-photo: url('${homeMedia.areasBackdrop.src}')`}>
       <div class="hm-card-stack" role="group" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
-        <article class="hm-print-card hm-print-card-back">
+        <article class="hm-print-card hm-print-card-back" lang="en">
           <img src="/home-motion-logo.png" alt="" width="180" height="56" />
         </article>
-        <article class="hm-print-card hm-print-card-front">
+        <article class="hm-print-card hm-print-card-front" lang="en">
           <p class="hm-print-name">Jackson</p>
           <p class="hm-print-role">Mobile Physiotherapist</p>
           <p class="hm-print-phone"><a href={site.phoneHref}>{site.phone}</a></p>
