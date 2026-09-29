@@ -262,6 +262,7 @@ const en = {
       lead: "Home and community visits across Melbourne's eastern suburbs",
       cardLabel: "Home Motion contact card",
       mapCaption: "Interactive map of the eastern suburbs service area — no private address pin.",
+      mapLabel: "Service area map",
     },
     referrers: {
       heading: "For Referrers",
@@ -555,6 +556,7 @@ const zhHant = {
       lead: "為墨爾本東區提供上門及社區探訪",
       cardLabel: "Home Motion 聯絡卡",
       mapCaption: "東區服務範圍互動地圖 — 不顯示任何私人地址。",
+      mapLabel: "服務地區地圖",
     },
     referrers: {
       heading: "轉介人士",
@@ -837,6 +839,7 @@ const zhHans = {
       lead: "为墨尔本东区提供上门及社区探访",
       cardLabel: "Home Motion 联系卡",
       mapCaption: "东区服务范围互动地图 — 不显示任何私人地址。",
+      mapLabel: "服务地区地图",
     },
     referrers: {
       heading: "转介方",

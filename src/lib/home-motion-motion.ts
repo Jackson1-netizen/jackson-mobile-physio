@@ -1,11 +1,14 @@
 export function initHomeMotion(root: ParentNode = document): void {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  const reveals = root.querySelectorAll(".hm-reveal");
-  if (reduced) {
-    reveals.forEach((el) => el.classList.add("is-visible"));
-  } else {
+  const host = root.querySelector<HTMLElement>(".hm");
+  const reveals = [...root.querySelectorAll<HTMLElement>(".hm-reveal")];
+  if (host && reveals.length && !reduced && "IntersectionObserver" in window) {
+    // Sections already on screen stay visible; only content below the fold fades in.
+    for (const el of reveals) {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-visible");
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -15,19 +18,14 @@ export function initHomeMotion(root: ParentNode = document): void {
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px", threshold: 0 },
     );
-    reveals.forEach((el) => observer.observe(el));
-  }
-
-  const heading = root.querySelector(".hm-h1-enter");
-  if (heading) {
-    if (reduced) heading.classList.add("is-in");
-    else requestAnimationFrame(() => heading.classList.add("is-in"));
+    reveals.filter((el) => !el.classList.contains("is-visible")).forEach((el) => observer.observe(el));
+    host.classList.add("hm-motion");
   }
 
   const media = root.querySelector<HTMLElement>("[data-hm-parallax]");
-  if (media && finePointer && !reduced) {
+  if (media && precisePointer && !reduced) {
     const max = 8;
     let frame = 0;
     const onMove = (event: MouseEvent) => {
@@ -56,7 +54,10 @@ function initHeaderOffset(root: ParentNode): void {
   const header = root.querySelector<HTMLElement>(".hm-header");
   const host = root.querySelector<HTMLElement>(".hm");
   if (!header || !host) return;
-  const update = () => host.style.setProperty("--hm-header-h", `${header.offsetHeight}px`);
+  const update = () => {
+    host.style.setProperty("--hm-header-h", `${header.offsetHeight}px`);
+    document.documentElement.style.scrollPaddingTop = `${header.offsetHeight + 12}px`;
+  };
   update();
   new ResizeObserver(update).observe(header);
 }

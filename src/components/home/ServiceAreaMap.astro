@@ -1,6 +1,7 @@
 ---
 import "leaflet/dist/leaflet.css";
 import { homeMapPins } from "../../content/home-motion";
+import { messages } from "../../content/i18n";
 
 const west = 145.09;
 const east = 145.25;
@@ -15,7 +16,13 @@ const pins = homeMapPins.map((pin) => {
 ---
 
 <div class="hm-map" data-hm-map>
-  <div class="hm-map-canvas" data-hm-map-canvas></div>
+  <div
+    class="hm-map-canvas"
+    data-hm-map-canvas
+    role="region"
+    aria-label={messages.en.hm.areas.mapLabel}
+    data-i18n-attr="aria-label:hm.areas.mapLabel"
+  ></div>
   <ul class="hm-map-pins">
     {
       pins.map((pin) => (

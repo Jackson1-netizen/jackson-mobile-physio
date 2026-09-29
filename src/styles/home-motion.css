@@ -2,8 +2,14 @@
 
 .hm {
   --hm-forest: #16352e;
+  /* Brand orange: decoration, icons and large display text only. */
   --hm-orange: #e45a22;
-  --hm-orange-hover: #cc4c1b;
+  /* White text on these passes 4.5:1 (action 4.96:1, hover 6.45:1). */
+  --hm-orange-action: #c4461a;
+  --hm-orange-action-hover: #a9380b;
+  /* Orange text on cream/white: 5.13:1 on #faf6f0. */
+  --hm-orange-text: #b8410f;
+  --hm-focus: #b8410f;
   --hm-olive: #7f9a4e;
   --hm-cream: #faf6f0;
   --hm-warm-white: #fffdf9;
@@ -17,8 +23,8 @@
   --hm-sans: "Source Sans 3", system-ui, sans-serif;
   --color-ink: var(--hm-forest);
   --color-ink-muted: #3d5a52;
-  --color-accent: var(--hm-orange);
-  --color-accent-hover: var(--hm-orange-hover);
+  --color-accent: var(--hm-orange-action);
+  --color-accent-hover: var(--hm-orange-action-hover);
   --color-border: #e4ddd0;
   --color-surface: var(--hm-cream);
   --color-surface-elevated: var(--hm-warm-white);
@@ -48,14 +54,17 @@
   line-height: 1.15;
 }
 
-.hm a:focus-visible,
-.hm button:focus-visible,
-.hm summary:focus-visible,
-.hm input:focus-visible,
-.hm textarea:focus-visible,
-.hm select:focus-visible {
-  outline: 2px solid var(--hm-orange);
+.hm :is(a, button, summary, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--hm-focus);
   outline-offset: 3px;
+}
+
+.hm :is(.hm-band-green, .hm-band-refer, .hm-contact) {
+  --hm-focus: #ffd2b8;
+}
+
+.hm .hm-map .leaflet-container:focus-visible {
+  outline-offset: -4px;
 }
 
 .hm-wrap {
@@ -91,12 +100,18 @@
   text-transform: none;
 }
 
-.hm section[id] {
-  scroll-margin-top: calc(var(--hm-header-h) + 0.75rem);
+/* Keeps anchor targets and keyboard focus clear of the sticky header and the mobile bar.
+   initHomeMotion replaces the top value with the measured header height. */
+html:has(.hm-header) {
+  scroll-padding-top: 7.85rem;
+  scroll-padding-bottom: 4rem;
 }
 
-.hm #main-content {
-  scroll-margin-top: var(--hm-header-h);
+@media (min-width: 1024px) {
+  html:has(.hm-header) {
+    scroll-padding-top: 9.45rem;
+    scroll-padding-bottom: 0;
+  }
 }
 
 .hm .lang-switch {
@@ -133,7 +148,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--hm-orange);
+  color: var(--hm-orange-text);
 }
 
 .hm-hero .hm-kicker {
@@ -149,11 +164,6 @@
 .hm-logo img {
   height: 3.4rem;
   width: auto;
-}
-
-.hm-nav a.is-active {
-  color: var(--hm-orange);
-  border-bottom-color: var(--hm-orange);
 }
 
 .hm-btn-outline {
@@ -435,6 +445,7 @@
 .hm-pin-list a {
   display: flex;
   align-items: center;
+  min-height: 2.25rem;
   gap: 0.4rem;
   color: var(--hm-forest);
   text-decoration: none;
@@ -517,15 +528,21 @@
 }
 
 .hm-btn-primary {
-  background: var(--hm-orange);
+  background: var(--hm-orange-action);
   color: #fff;
-  border: 2px solid var(--hm-orange);
+  border: 2px solid var(--hm-orange-action);
 }
 
 .hm-btn-primary:hover {
-  background: var(--hm-orange-hover);
-  border-color: var(--hm-orange-hover);
+  background: var(--hm-orange-action-hover);
+  border-color: var(--hm-orange-action-hover);
   color: #fff;
+}
+
+.hm-btn-primary:active,
+.hm-btn-secondary:active,
+.hm-btn-outline:active {
+  transform: translateY(1px);
 }
 
 .hm-btn-secondary {
@@ -600,8 +617,8 @@
 
 .hm-nav a:hover,
 .hm-nav a.is-active {
-  color: var(--hm-orange);
-  border-bottom-color: var(--hm-orange);
+  color: var(--hm-orange-text);
+  border-bottom-color: currentColor;
 }
 
 .hm-header-tools {
@@ -619,6 +636,12 @@
 .hm .lang-btn[data-active="true"] {
   background: var(--hm-forest);
   color: #fff;
+}
+
+.hm .lang-btn:not([data-active="true"]):hover {
+  background: var(--hm-cream);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .hm-menu {
@@ -786,19 +809,16 @@
   pointer-events: none;
 }
 
-.hm-h1-enter {
-  opacity: 0;
-  transform: translateY(0.7rem);
-}
-
-.hm-h1-enter.is-in {
-  animation: hm-h1 0.45s ease forwards;
+@media (prefers-reduced-motion: no-preference) {
+  .hm-h1-enter {
+    animation: hm-h1 0.4s ease-out both;
+  }
 }
 
 @keyframes hm-h1 {
-  to {
-    opacity: 1;
-    transform: none;
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
   }
 }
 
@@ -944,7 +964,7 @@ a.hm-card:hover {
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: var(--hm-orange);
+  color: var(--hm-orange-text);
 }
 
 .hm-how-media {
@@ -961,7 +981,6 @@ a.hm-card:hover {
   object-fit: cover;
   object-position: 50% 30%;
   border-radius: 1.1rem;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hm-img-zoom {
@@ -969,9 +988,6 @@ a.hm-card:hover {
   border-radius: 1.1rem;
 }
 
-.hm-img-zoom:hover img {
-  transform: scale(1.02);
-}
 
 .hm-why .hm-card {
   background: #fff;
@@ -1010,7 +1026,6 @@ a.hm-card:hover {
   object-fit: cover;
   object-position: 50% 12%;
   min-height: 22rem;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hm-about-name {
@@ -1022,7 +1037,7 @@ a.hm-card:hover {
 
 .hm-about-role {
   margin: 0.15rem 0 0;
-  color: var(--hm-orange);
+  color: var(--hm-orange-text);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -1105,8 +1120,8 @@ a.hm-card:hover {
 }
 
 .hm-suburb-list a:hover {
-  border-color: var(--hm-orange);
-  color: var(--hm-orange);
+  border-color: var(--hm-orange-text);
+  color: var(--hm-orange-text);
 }
 
 .hm-map {
@@ -1198,6 +1213,14 @@ a.hm-card:hover {
     0 1px 0 #fff;
 }
 
+.hm .hm-map .leaflet-bar a {
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  font-size: 1.35rem;
+  color: var(--hm-forest);
+}
+
 .hm-map .leaflet-control-attribution {
   font-size: 10px;
   background: rgb(255 255 255 / 0.82);
@@ -1272,7 +1295,7 @@ a.hm-card:hover {
   place-items: center;
   border-radius: 999px;
   border: 1px solid #eadfce;
-  color: var(--hm-orange);
+  color: var(--hm-orange-text);
   transition:
     transform 0.2s ease,
     background 0.2s ease,
@@ -1281,7 +1304,7 @@ a.hm-card:hover {
 
 .hm-faq details[open] .hm-faq-mark {
   transform: rotate(45deg);
-  background: var(--hm-orange);
+  background: var(--hm-orange-action);
   color: #fff;
 }
 
@@ -1376,9 +1399,9 @@ a.hm-card:hover {
 
 .hm-field-check input {
   flex: none;
-  width: 1.3rem;
-  height: 1.3rem;
-  margin-top: 0.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1rem;
   accent-color: var(--hm-orange);
 }
 
@@ -1485,6 +1508,12 @@ a.hm-card:hover {
   color: var(--hm-forest);
 }
 
+.hm-footer p a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
 .hm-mobile-bar {
   position: fixed;
   inset: auto 0 0;
@@ -1510,58 +1539,20 @@ a.hm-card:hover {
 }
 
 .hm-mobile-bar a:last-child {
-  background: var(--hm-orange);
+  background: var(--hm-orange-action);
   color: #fff;
 }
 
-.hm-reveal {
-  opacity: 0;
-  transform: translateY(1rem);
+/* Hidden state applies only once JS has confirmed motion is allowed (see initHomeMotion). */
+.hm.hm-motion .hm-reveal {
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+    opacity 0.35s ease-out,
+    transform 0.35s ease-out;
 }
 
-.hm-reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-.hm-stagger > * {
+.hm.hm-motion .hm-reveal:not(.is-visible) {
   opacity: 0;
-  transform: translateY(0.7rem);
-}
-
-.hm-reveal.is-visible .hm-stagger > * {
-  opacity: 1;
-  transform: none;
-  animation: hm-stagger 0.45s ease both;
-}
-
-.hm-reveal.is-visible .hm-stagger > *:nth-child(1) {
-  animation-delay: 0.04s;
-}
-.hm-reveal.is-visible .hm-stagger > *:nth-child(2) {
-  animation-delay: 0.09s;
-}
-.hm-reveal.is-visible .hm-stagger > *:nth-child(3) {
-  animation-delay: 0.14s;
-}
-.hm-reveal.is-visible .hm-stagger > *:nth-child(4) {
-  animation-delay: 0.19s;
-}
-.hm-reveal.is-visible .hm-stagger > *:nth-child(5) {
-  animation-delay: 0.24s;
-}
-.hm-reveal.is-visible .hm-stagger > *:nth-child(6) {
-  animation-delay: 0.29s;
-}
-
-@keyframes hm-stagger {
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  transform: translateY(0.75rem);
 }
 
 @media (min-width: 640px) {
@@ -1663,19 +1654,19 @@ a.hm-card:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hm-reveal,
-  .hm-stagger > *,
-  .hm-h1-enter {
+  .hm *,
+  .hm *::before,
+  .hm *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hm-reveal {
     opacity: 1 !important;
     transform: none !important;
-    animation: none !important;
-    transition: none !important;
   }
-  a.hm-card:hover,
   .hm-btn .hm-arrow,
-  .hm-img-zoom:hover img,
-  .hm-portrait:hover img {
-    transform: none;
+  .hm-text-link:hover .hm-arrow {
+    transform: none !important;
   }
 }
 
