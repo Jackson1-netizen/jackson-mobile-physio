@@ -1,12 +1,13 @@
 ---
 import { homeFaq } from "../../content/home-motion";
+import { messages } from "../../content/i18n";
 ---
 
-<section id="faq" class="hm-faq hm-reveal scroll-mt-24 bg-[var(--hm-warm-white)]">
+<section id="faq" class="hm-faq hm-reveal bg-[var(--hm-warm-white)]">
   <div class="hm-wrap hm-section hm-faq-layout">
-    <div class="lg:sticky lg:top-24 lg:self-start">
+    <div class="hm-faq-aside">
       <p class="hm-kicker" data-i18n-path="nav.faq">FAQ</p>
-      <h2 data-i18n-path="sections.faq">Useful answers before we talk</h2>
+      <h2 data-i18n-path="sections.faq">{messages.en.sections.faq}</h2>
     </div>
     <div>
       {

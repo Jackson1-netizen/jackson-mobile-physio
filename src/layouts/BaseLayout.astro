@@ -73,11 +73,18 @@ const robotsContent = site.draft ? "noindex, nofollow" : "index, follow";
     {faqLd && <script type="application/ld+json" set:html={faqLd} />}
   </head>
   <body class={showSiteChrome ? "pb-16 sm:pb-0" : ""}>
+    <a class="skip-link" href="#main-content" data-i18n-path="hm.skipLink">Skip to main content</a>
     {showDraftBanner && <DraftBanner />}
     {showSiteChrome && <SiteHeader />}
-    <main id="main-content" class={v1Home ? "p-0" : ""}>
-      <slot />
-    </main>
+    {
+      v1Home ? (
+        <slot />
+      ) : (
+        <main id="main-content" tabindex="-1">
+          <slot />
+        </main>
+      )
+    }
     {showSiteChrome && <SiteFooter />}
     {showSiteChrome && <StickyContactBar />}
     {showSiteChrome && <I18nScript />}

@@ -3,24 +3,24 @@ import { homeServices } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 ---
 
-<section id="services" class="hm-band hm-band-green scroll-mt-24">
+<section id="services" class="hm-band hm-band-green">
   <div class="hm-wrap hm-section">
     <div class="hm-section-head">
       <div>
-        <h2>{homeServices.heading}</h2>
-        <p class="hm-supporting">{homeServices.supporting}</p>
+        <h2 data-i18n-path="hm.services.heading">{homeServices.heading}</h2>
+        <p class="hm-supporting" data-i18n-path="hm.services.supporting">{homeServices.supporting}</p>
       </div>
       <a class="hm-text-link" href="#contact">
-        {homeServices.viewAll}
+        <span data-i18n-path="hm.services.enquire">{homeServices.enquire}</span>
         <span class="hm-arrow" aria-hidden="true">→</span>
       </a>
     </div>
-    <p class="sr-only">{homeServices.intro}</p>
+    <p class="sr-only" data-i18n-path="services.intro">{homeServices.intro}</p>
     <ul class="hm-service-grid">
       {
-        homeServices.cards.map((card) => (
+        homeServices.cards.map((card, i) => (
           <li>
-            <a class="hm-card hm-service-card" href="#contact">
+            <div class="hm-card hm-service-card">
               <span class="hm-service-photo">
                 <img
                   src={card.image.src}
@@ -33,9 +33,9 @@ import HomeIcon from "./HomeIcon.astro";
               <span class="hm-service-icon">
                 <HomeIcon name={card.icon} size={34} />
               </span>
-              <h3>{card.title}</h3>
-              <p>{card.body}</p>
-            </a>
+              <h3 data-i18n-path={`hm.services.cards.${i}.title`}>{card.title}</h3>
+              <p data-i18n-path={`hm.services.cards.${i}.body`}>{card.body}</p>
+            </div>
           </li>
         ))
       }

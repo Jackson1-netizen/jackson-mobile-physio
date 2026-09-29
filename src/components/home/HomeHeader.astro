@@ -1,25 +1,27 @@
 ---
 import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
 import { homeNav, homeHero } from "../../content/home-motion";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
 
-const toolsId = "hm-header-tools";
+const t = messages.en.hm.header;
 ---
 
 <header class="hm-header no-print">
   <div class="hm-wrap hm-header-inner">
-    <a class="hm-logo" href="/" aria-label={`${site.displayBrand} — ${site.tagline}`}>
+    <a class="hm-logo" href="/">
       <img src="/home-motion-logo.png" alt={`${site.displayBrand} ${site.tagline}`} width="627" height="388" />
     </a>
 
-    <nav class="hm-nav" aria-label="Primary">
+    <nav class="hm-nav" aria-label={t.primaryNav} data-i18n-attr="aria-label:hm.header.primaryNav">
       {
         homeNav.map((item) => (
           <a
             href={item.href}
-            class={item.href === "/" ? "is-active" : undefined}
+            class={item.spy === "top" ? "is-active" : undefined}
+            aria-current={item.spy === "top" ? "page" : undefined}
             data-i18n-path={item.path}
-            data-spy={item.spy ?? undefined}
+            data-spy={item.spy}
           >
             {item.label}
           </a>
@@ -27,7 +29,7 @@ const toolsId = "hm-header-tools";
       }
     </nav>
 
-    <div class="hm-header-tools" id={toolsId}>
+    <div class="hm-header-tools">
       <div class="hm-lang">
         <LanguageSwitcher />
       </div>
@@ -36,17 +38,22 @@ const toolsId = "hm-header-tools";
         <span class="hm-arrow" aria-hidden="true">→</span>
       </a>
       <details class="hm-menu">
-        <summary aria-label="Open menu">Menu</summary>
-        <nav class="hm-menu-panel" aria-label="Mobile">
-          {
-            homeNav.map((item) => (
-              <a href={item.href} data-i18n-path={item.path}>
-                {item.label}
-              </a>
-            ))
-          }
-          <a href="#contact" data-i18n-path="home.primaryCta">{homeHero.primaryCta}</a>
-        </nav>
+        <summary data-i18n-path="hm.header.menu">{t.menu}</summary>
+        <div class="hm-menu-panel">
+          <nav aria-label={t.mobileNav} data-i18n-attr="aria-label:hm.header.mobileNav">
+            {
+              homeNav.map((item) => (
+                <a href={item.href} data-i18n-path={item.path} data-spy={item.spy}>
+                  {item.label}
+                </a>
+              ))
+            }
+            <a class="hm-menu-cta" href="#contact" data-i18n-path="home.primaryCta">{homeHero.primaryCta}</a>
+          </nav>
+          <div class="hm-menu-lang">
+            <LanguageSwitcher />
+          </div>
+        </div>
       </details>
     </div>
   </div>

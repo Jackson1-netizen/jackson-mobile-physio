@@ -7,10 +7,10 @@ import HomeIcon from "./HomeIcon.astro";
 // homeCardEmail is a draft visual on the card only — not site.email and not a confirmed inbox.
 ---
 
-<section id="areas" class="hm-areas-band scroll-mt-24">
+<section id="areas" class="hm-areas-band">
   <div class="hm-areas-split">
     <div class="hm-card-stage" style={`--hm-areas-photo: url('${homeMedia.areasBackdrop.src}')`}>
-      <div class="hm-card-stack" aria-label="Home Motion contact card">
+      <div class="hm-card-stack" role="group" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
         <article class="hm-print-card hm-print-card-back">
           <img src="/home-motion-logo.png" alt="" width="180" height="56" />
         </article>
@@ -28,8 +28,8 @@ import HomeIcon from "./HomeIcon.astro";
     </div>
     <div class="hm-areas-copy">
       <div class="hm-areas-copy-text">
-        <h2>{homeAreas.kicker}</h2>
-        <p>{homeAreas.heading}</p>
+        <h2 data-i18n-path="hm.areas.heading">{homeAreas.kicker}</h2>
+        <p data-i18n-path="hm.areas.lead">{homeAreas.heading}</p>
         <ul class="hm-pin-list">
           {
             homeSuburbs.map((suburb) => (
@@ -47,7 +47,7 @@ import HomeIcon from "./HomeIcon.astro";
       </div>
       <div class="hm-areas-map-col">
         <ServiceAreaMap />
-        <p class="hm-map-caption">{homeAreas.mapCaption}</p>
+        <p class="hm-map-caption" data-i18n-path="hm.areas.mapCaption">{homeAreas.mapCaption}</p>
       </div>
     </div>
   </div>

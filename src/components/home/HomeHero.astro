@@ -1,15 +1,19 @@
 ---
-import { getRegistrationDisplayLine } from "../../content/site";
+import { site, getRegistrationDisplayLine } from "../../content/site";
 import { homeHero, homeMedia } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
 
 const registrationLine = getRegistrationDisplayLine();
 const hero = homeMedia.hero;
 ---
 
-<section class="hm-hero" aria-labelledby="hm-hero-heading">
+<section id="top" class="hm-hero" aria-labelledby="hm-hero-heading">
   <div class="hm-wrap hm-hero-grid">
     <div>
+      <div class="hm-hero-lang">
+        <LanguageSwitcher />
+      </div>
       <p class="hm-kicker hm-kicker-forest" data-i18n-path="home.eyebrow">{homeHero.eyebrow}</p>
       <h1 id="hm-hero-heading" class="hm-h1-enter">
         <span data-i18n-path="home.h1Lead">{homeHero.h1Lead}</span>
@@ -18,15 +22,15 @@ const hero = homeMedia.hero;
         <br />
         <span class="hm-em" data-i18n-path="home.h1Em">{homeHero.h1Em}</span>
       </h1>
-      <p class="hm-hero-support">{homeHero.support}</p>
+      <p class="hm-hero-support" data-i18n-path="hm.hero.support">{homeHero.support}</p>
       <ul class="hm-chips">
         {
-          homeHero.chips.map((chip) => (
+          homeHero.chips.map((chip, i) => (
             <li>
               <span class="hm-chip-icon">
                 <HomeIcon name={chip.icon} size={22} />
               </span>
-              <span>{chip.line}</span>
+              <span data-i18n-path={`hm.hero.chips.${i}`}>{chip.line}</span>
             </li>
           ))
         }
@@ -36,9 +40,13 @@ const hero = homeMedia.hero;
           <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
           <span class="hm-arrow" aria-hidden="true">→</span>
         </a>
-        <a class="hm-btn hm-btn-secondary" href="#services">{homeHero.secondaryCta}</a>
+        <a class="hm-btn hm-btn-secondary" href="#services" data-i18n-path="home.secondaryCta">
+          {homeHero.secondaryCta}
+        </a>
       </div>
-      <p class="hm-ahpra">{registrationLine}</p>
+      <p class="hm-ahpra" data-i18n-path={site.registrationNumber ? undefined : "hm.hero.ahpra"}>
+        {registrationLine}
+      </p>
     </div>
 
     <div class="hm-hero-frame">
@@ -47,6 +55,7 @@ const hero = homeMedia.hero;
           class="hm-hero-photo"
           src={hero.src}
           alt={hero.alt}
+          data-i18n-attr="alt:hm.hero.photoAlt"
           width={hero.width}
           height={hero.height}
           fetchpriority="high"

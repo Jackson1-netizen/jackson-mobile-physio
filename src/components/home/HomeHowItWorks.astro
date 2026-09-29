@@ -1,19 +1,20 @@
 ---
 import { homeSteps, homeMedia } from "../../content/home-motion";
+import { messages } from "../../content/i18n";
 ---
 
-<section id="how" class="hm-how hm-reveal scroll-mt-24">
+<section id="how" class="hm-how hm-reveal">
   <div class="hm-wrap hm-section hm-how-grid">
     <div>
-      <p class="hm-kicker">How our service works</p>
-      <h2>Simple, flexible and tailored to you.</h2>
+      <p class="hm-kicker" data-i18n-path="hm.how.kicker">{messages.en.hm.how.kicker}</p>
+      <h2 data-i18n-path="hm.how.heading">{messages.en.hm.how.heading}</h2>
       <ol class="hm-step-grid hm-stagger mt-8">
         {
-          homeSteps.map((step) => (
+          homeSteps.map((step, i) => (
             <li class="hm-card hm-step">
               <span class="hm-step-num">{step.num}</span>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
+              <h3 data-i18n-path={`hm.how.steps.${i}.title`}>{step.title}</h3>
+              <p data-i18n-path={`hm.how.steps.${i}.body`}>{step.body}</p>
             </li>
           ))
         }

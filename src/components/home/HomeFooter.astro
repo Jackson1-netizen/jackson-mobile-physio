@@ -1,18 +1,29 @@
 ---
 import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
 ---
 
 <footer class="hm-footer">
   <div class="hm-wrap hm-footer-inner">
-    <a class="hm-logo" href="/" aria-label={site.displayBrand}>
+    <a
+      class="hm-logo"
+      href="/"
+      aria-label={messages.en.hm.header.logoLabel}
+      data-i18n-attr="aria-label:hm.header.logoLabel"
+    >
       <img src="/home-motion-logo.png" alt="" width="120" height="38" loading="lazy" />
     </a>
     <p class="text-sm text-[#5b6e67]">
-      {site.displayBrand} · {site.abnDisplay} · {site.footer.copyrightSuffix}
+      {site.displayBrand} · {site.abnDisplay} ·
+      <span data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</span>
     </p>
     <p class="flex flex-wrap gap-4 text-sm">
-      <a class="underline-offset-4 hover:underline" href="/privacy">{site.footer.privacyLinkLabel}</a>
-      <a class="underline-offset-4 hover:underline" href="/referral">Referral sheet</a>
+      <a class="underline-offset-4 hover:underline" href="/privacy" data-i18n-path="hm.footer.privacy">
+        {site.footer.privacyLinkLabel}
+      </a>
+      <a class="underline-offset-4 hover:underline" href="/referral" data-i18n-path="nav.referralSheet">
+        {messages.en.nav.referralSheet}
+      </a>
     </p>
   </div>
 </footer>

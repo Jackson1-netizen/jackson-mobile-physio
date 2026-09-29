@@ -1,6 +1,7 @@
 /** UI and marketing copy — English, Traditional Chinese, Simplified Chinese */
 
 import { site } from "./site";
+import { concept1Purpose } from "./concept1-home";
 
 export const localeLabels = {
   en: "English",
@@ -219,6 +220,111 @@ const en = {
       "Personalised one-to-one care",
     ],
   },
+  /** Homepage (`/`) copy. English here is the source rendered by src/components/home/*. */
+  hm: {
+    skipLink: "Skip to main content",
+    header: {
+      primaryNav: "Primary",
+      mobileNav: "Mobile menu",
+      menu: "Menu",
+      languageGroup: "Language",
+      logoLabel: `${site.displayBrand} home`,
+    },
+    hero: {
+      support:
+        "Personalised, evidence-based physiotherapy care in Melbourne's eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
+      chips: ["Home & community visits", "All ages welcome", "NDIS & private clients"],
+      ahpra: "AHPRA registered physiotherapist",
+      photoAlt:
+        "Jackson providing mobile physiotherapy at home, supporting walking practice with a walking frame",
+    },
+    services: {
+      heading: "Our Services",
+      supporting: "Supporting your movement, function and independence.",
+      enquire: "Ask about a service",
+      cards: [
+        { title: "Mobile Physiotherapy", body: "One-on-one care at home and in the community." },
+        { title: "Mobility & Balance", body: "Improve safety and confidence in daily activities." },
+        { title: "Strength & Functional Capacity", body: "Build strength for independence." },
+        {
+          title: "Rehabilitation After Hospitalisation",
+          body: "Support your recovery and return to everyday life.",
+        },
+        {
+          title: "Neurological & Disability-Related",
+          body: "Tailored physiotherapy for your individual goals.",
+        },
+        { title: "Home Exercise Programs", body: "Practical and individualised exercise plans." },
+      ],
+    },
+    areas: {
+      heading: "Service Areas",
+      lead: "Home and community visits across Melbourne's eastern suburbs",
+      cardLabel: "Home Motion contact card",
+      mapCaption: "Interactive map of the eastern suburbs service area — no private address pin.",
+    },
+    referrers: {
+      heading: "For Referrers",
+      lead: "I work collaboratively with GPs, specialists and allied health professionals to support shared clients with timely, goal-oriented physiotherapy care.",
+      registration: "AHPRA registered physiotherapist.",
+      points: [
+        "Clear communication and progress updates",
+        "Goal-oriented, client-centred care",
+        "Flexible and responsive service",
+      ],
+      cta: "Referrer information",
+    },
+    how: {
+      kicker: "How our service works",
+      heading: "Simple, flexible and tailored to you.",
+      steps: [
+        {
+          title: "Get in touch",
+          body: "Make an enquiry and share your suburb, language and needs. You speak with Jackson — not a call centre.",
+        },
+        {
+          title: "We arrange a visit",
+          body: "We talk through goals, location and funding context, then arrange a home or community appointment if suitable.",
+        },
+        {
+          title: "Personalised care",
+          body: "You receive assessment and a practical plan in your environment, with the same physiotherapist for follow-up visits.",
+        },
+      ],
+    },
+    why: {
+      kicker: "Why choose Home Motion",
+      heading: "Why Choose Home Motion?",
+      intro: concept1Purpose.body,
+      items: [
+        {
+          title: "Care at home",
+          body: "Physiotherapy where you live and move — no clinic visit required.",
+        },
+        { title: "Personalised approach", body: site.differentiator },
+        {
+          title: "Greater independence",
+          body: "Practical goals focused on mobility, function and everyday tasks that matter to you.",
+        },
+        {
+          title: "Local and flexible",
+          body: `Home and community visits across ${site.serviceAreas.region}, by appointment.`,
+        },
+      ],
+    },
+    about: {
+      languagesList: site.languages.join(", "),
+      qualificationLabels: site.qualifications.map((q) => q.label),
+      qualificationValues: site.qualifications.map((q) => q.value),
+      ahpraNotice: site.ahpraNotice,
+      portraitAlt: "Jackson, Home Motion mobile physiotherapist, in a Home Motion polo",
+    },
+    mobileBar: { label: "Quick contact" },
+    footer: {
+      rights: site.footer.copyrightSuffix,
+      privacy: site.footer.privacyLinkLabel,
+    },
+  },
 } as const;
 
 const zhHant = {
@@ -411,6 +517,94 @@ const zhHant = {
     secondaryCta: "了解服務",
     chips: ["上門及社區探訪", "英語 / 粵語 / 普通話", "一對一個人化護理"],
   },
+  hm: {
+    skipLink: "跳至主要內容",
+    header: {
+      primaryNav: "主要導覽",
+      mobileNav: "流動版選單",
+      menu: "選單",
+      languageGroup: "語言",
+      logoLabel: "Home Motion 主頁",
+    },
+    hero: {
+      support:
+        "為墨爾本東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
+      chips: ["上門及社區探訪", "歡迎所有年齡人士", "NDIS 及私人客戶"],
+      ahpra: "AHPRA 註冊物理治療師",
+      photoAlt: "Jackson 上門提供物理治療，協助使用助行架進行步行練習",
+    },
+    services: {
+      heading: "我們的服務",
+      supporting: "支援您的活動能力、身體功能及獨立生活。",
+      enquire: "查詢服務",
+      cards: [
+        { title: "上門物理治療", body: "在家中及社區提供一對一照護。" },
+        { title: "活動能力及平衡", body: "提升日常活動時的安全感和信心。" },
+        { title: "肌力及功能能力", body: "鍛鍊肌力，保持獨立生活。" },
+        { title: "出院後康復", body: "支援您康復，重返日常生活。" },
+        { title: "神經及殘疾相關物理治療", body: "按您的個人目標度身制定物理治療。" },
+        { title: "家居運動計劃", body: "實用及個人化的運動計劃。" },
+      ],
+    },
+    areas: {
+      heading: "服務地區",
+      lead: "為墨爾本東區提供上門及社區探訪",
+      cardLabel: "Home Motion 聯絡卡",
+      mapCaption: "東區服務範圍互動地圖 — 不顯示任何私人地址。",
+    },
+    referrers: {
+      heading: "轉介人士",
+      lead: "我與家庭醫生、專科醫生及其他專職醫療人員合作，為共同服務的客戶提供及時、以目標為本的物理治療。",
+      registration: "AHPRA 註冊物理治療師。",
+      points: ["清晰溝通，定期匯報進度", "以目標為本、以客戶為中心的照護", "靈活及迅速回應的服務"],
+      cta: "轉介資料",
+    },
+    how: {
+      kicker: "服務流程",
+      heading: "簡單、靈活，切合您的需要。",
+      steps: [
+        {
+          title: "聯絡我們",
+          body: "提出查詢，並告訴我們您所在的郊區、語言及需要。您會直接與 Jackson 溝通 — 並非電話中心。",
+        },
+        {
+          title: "安排到訪",
+          body: "我們會了解您的目標、地點及資助情況，如合適便安排上門或社區預約。",
+        },
+        {
+          title: "個人化照護",
+          body: "在您熟悉的環境接受評估並獲得實用計劃，之後的跟進亦由同一位物理治療師負責。",
+        },
+      ],
+    },
+    why: {
+      kicker: "為何選擇 Home Motion",
+      heading: "為何選擇 Home Motion？",
+      intro:
+        "我們在墨爾本東區的家居及社區提供一對一物理治療 — 重視清晰溝通和實際目標，並可使用英語、廣東話及普通話。與您溝通的人，就是為您提供治療的人。",
+      items: [
+        { title: "上門照護", body: "在您生活和活動的地方接受物理治療 — 無需前往診所。" },
+        {
+          title: "個人化方式",
+          body: "查詢時您會直接與負責治療的物理治療師溝通 — 並非電話中心或輪更團隊。",
+        },
+        { title: "更獨立自主", body: "以活動能力、身體功能及對您重要的日常事務為實際目標。" },
+        { title: "本地而靈活", body: "於墨爾本東區提供上門及社區探訪，需預約。" },
+      ],
+    },
+    about: {
+      languagesList: "英語、廣東話、普通話",
+      qualificationLabels: ["物理治療資歷", "AHPRA 註冊", "專業保險"],
+      qualificationValues: { "1": "已註冊", "2": "按執業要求投保" },
+      ahpraNotice: "AHPRA 物理治療師註冊已獲批。Jackson 是 AHPRA 註冊物理治療師。",
+      portraitAlt: "Home Motion 上門物理治療師 Jackson，身穿 Home Motion Polo 衫",
+    },
+    mobileBar: { label: "快速聯絡" },
+    footer: {
+      rights: "版權所有。",
+      privacy: "私隱政策（草稿）",
+    },
+  },
 } as const;
 
 const zhHans = {
@@ -600,6 +794,94 @@ const zhHans = {
     primaryCta: "查询预约",
     secondaryCta: "了解服务",
     chips: ["上门及社区探访", "英语 / 粤语 / 普通话", "一对一个人化护理"],
+  },
+  hm: {
+    skipLink: "跳到主要内容",
+    header: {
+      primaryNav: "主导航",
+      mobileNav: "移动端菜单",
+      menu: "菜单",
+      languageGroup: "语言",
+      logoLabel: "Home Motion 主页",
+    },
+    hero: {
+      support:
+        "为墨尔本东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
+      chips: ["上门及社区探访", "欢迎所有年龄人士", "NDIS 及私人客户"],
+      ahpra: "AHPRA 注册物理治疗师",
+      photoAlt: "Jackson 上门提供物理治疗，协助使用助行架进行步行练习",
+    },
+    services: {
+      heading: "我们的服务",
+      supporting: "支持您的活动能力、身体功能及独立生活。",
+      enquire: "咨询服务",
+      cards: [
+        { title: "上门物理治疗", body: "在家中及社区提供一对一照护。" },
+        { title: "活动能力与平衡", body: "提升日常活动时的安全感和信心。" },
+        { title: "肌力与功能能力", body: "锻炼肌力，保持独立生活。" },
+        { title: "出院后康复", body: "支持您康复，重返日常生活。" },
+        { title: "神经及残障相关物理治疗", body: "根据您的个人目标量身定制物理治疗。" },
+        { title: "居家运动计划", body: "实用且个性化的运动计划。" },
+      ],
+    },
+    areas: {
+      heading: "服务地区",
+      lead: "为墨尔本东区提供上门及社区探访",
+      cardLabel: "Home Motion 联系卡",
+      mapCaption: "东区服务范围互动地图 — 不显示任何私人地址。",
+    },
+    referrers: {
+      heading: "转介方",
+      lead: "我与全科医生、专科医生及其他专职医疗人员合作，为共同服务的客户提供及时、以目标为导向的物理治疗。",
+      registration: "AHPRA 注册物理治疗师。",
+      points: ["清晰沟通，定期反馈进展", "以目标为导向、以客户为中心的照护", "灵活、及时响应的服务"],
+      cta: "转介信息",
+    },
+    how: {
+      kicker: "服务流程",
+      heading: "简单、灵活，贴合您的需要。",
+      steps: [
+        {
+          title: "联系我们",
+          body: "提交咨询，并告诉我们您所在的郊区、语言及需要。您会直接与 Jackson 沟通 — 而不是呼叫中心。",
+        },
+        {
+          title: "安排上门",
+          body: "我们会了解您的目标、地点及资助情况，如合适便安排上门或社区预约。",
+        },
+        {
+          title: "个性化照护",
+          body: "在您熟悉的环境中接受评估并获得实用计划，后续跟进也由同一位物理治疗师负责。",
+        },
+      ],
+    },
+    why: {
+      kicker: "为何选择 Home Motion",
+      heading: "为何选择 Home Motion？",
+      intro:
+        "我们在墨尔本东区的居家及社区提供一对一物理治疗 — 注重清晰沟通和实际目标，并可使用英语、粤语及普通话。与您沟通的人，就是为您提供治疗的人。",
+      items: [
+        { title: "上门照护", body: "在您生活和活动的地方接受物理治疗 — 无需前往诊所。" },
+        {
+          title: "个性化方式",
+          body: "咨询时您会直接与负责治疗的物理治疗师沟通 — 并非电话中心或轮更团队。",
+        },
+        { title: "更加独立", body: "以活动能力、身体功能及对您重要的日常事务为实际目标。" },
+        { title: "本地且灵活", body: "在墨尔本东区提供上门及社区探访，需预约。" },
+      ],
+    },
+    about: {
+      languagesList: "英语、粤语、普通话",
+      qualificationLabels: ["物理治疗资历", "AHPRA 注册", "专业保险"],
+      qualificationValues: { "1": "已注册", "2": "按执业要求投保" },
+      ahpraNotice: "AHPRA 物理治疗师注册已获批。Jackson 是 AHPRA 注册物理治疗师。",
+      portraitAlt: "Home Motion 上门物理治疗师 Jackson，身穿 Home Motion Polo 衫",
+    },
+    mobileBar: { label: "快速联系" },
+    footer: {
+      rights: "版权所有。",
+      privacy: "隐私政策（草稿）",
+    },
   },
 } as const;
 

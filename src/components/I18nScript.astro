@@ -36,8 +36,19 @@ const serialized = JSON.stringify(messages);
         el.textContent = value;
       }
     });
+    // data-i18n-attr="aria-label:hm.header.menu;alt:hm.hero.photoAlt"
+    document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+      (el.getAttribute("data-i18n-attr") || "").split(";").forEach((pair) => {
+        const [attr, path] = pair.split(":").map((part) => part.trim());
+        if (!attr || !path) return;
+        const value = getNestedValue(bundle, path);
+        if (typeof value === "string") el.setAttribute(attr, value);
+      });
+    });
     document.querySelectorAll(".lang-btn").forEach((btn) => {
-      btn.setAttribute("data-active", btn.getAttribute("data-locale") === locale ? "true" : "false");
+      const active = btn.getAttribute("data-locale") === locale ? "true" : "false";
+      btn.setAttribute("data-active", active);
+      btn.setAttribute("aria-pressed", active);
     });
     try {
       localStorage.setItem("wwl-locale", locale);

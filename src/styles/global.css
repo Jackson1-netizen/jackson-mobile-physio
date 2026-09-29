@@ -15,8 +15,10 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -37,6 +39,30 @@
   .faq-details[open] summary {
     @apply text-[var(--color-accent)];
   }
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.1rem;
+  border-radius: 0.5rem;
+  background: #16352e;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+  outline: 3px solid #f6b48f;
+  outline-offset: 2px;
+}
+
+#main-content:focus {
+  outline: none;
 }
 
 @media print {
