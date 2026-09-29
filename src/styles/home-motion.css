@@ -214,12 +214,14 @@
   display: grid;
   place-items: center;
   padding: 2rem 1.25rem;
+  overflow: hidden;
+  overflow: clip;
 }
 
 .hm-card-stack {
   position: relative;
-  width: min(21rem, 94%);
-  height: 19rem;
+  width: min(21rem, 100%);
+  aspect-ratio: 21 / 19;
 }
 
 .hm-print-card {
@@ -232,9 +234,9 @@
 
 .hm-print-card-back {
   z-index: 1;
-  top: 0.2rem;
+  top: 1%;
   left: 0;
-  width: 16.5rem;
+  width: 78%;
   transform: rotate(-12deg);
 }
 
@@ -253,9 +255,9 @@
 
 .hm-print-card-front {
   z-index: 2;
-  top: 7.4rem;
-  left: 2.3rem;
-  width: 17.2rem;
+  top: 39%;
+  left: 11%;
+  width: 82%;
   transform: rotate(7deg);
   font-size: 0.8rem;
   display: flex;
@@ -265,6 +267,22 @@
 
 .hm-print-card-front p {
   margin: 0;
+}
+
+@media (max-width: 379px) {
+  .hm-card-stage {
+    min-height: 0;
+    padding: 1.75rem 1rem 2.25rem;
+  }
+  .hm-print-card {
+    padding: 0.9rem 0.95rem;
+  }
+  .hm-print-card-back {
+    transform: rotate(-7deg);
+  }
+  .hm-print-card-front {
+    transform: rotate(4deg);
+  }
 }
 
 .hm-print-card a {
@@ -875,13 +893,12 @@
 
 .hm-how-media {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
 .hm-how-media .hm-img-zoom {
   position: relative;
-  min-height: 9.5rem;
   aspect-ratio: 4 / 3;
 }
 
@@ -918,7 +935,6 @@
 
 .hm-why-media .hm-img-zoom {
   position: relative;
-  min-height: 12rem;
   aspect-ratio: 4 / 3;
 }
 
@@ -1013,7 +1029,6 @@
   position: relative;
   border-radius: 1.2rem;
   overflow: hidden;
-  min-height: 14rem;
   aspect-ratio: 4 / 3;
 }
 
@@ -1167,6 +1182,8 @@
 .hm-band-refer {
   background: var(--hm-refer-grad);
   color: #fff;
+  overflow: hidden;
+  overflow: clip;
 }
 
 .hm-refer-copy p,
@@ -1254,23 +1271,170 @@
   color: #fff;
 }
 
-.hm-contact #enquiry-form {
+.hm-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
   background: rgb(255 255 255 / 0.08);
-  border-color: rgb(255 255 255 / 0.14);
+  border: 1px solid rgb(255 255 255 / 0.14);
 }
 
-.hm-contact #enquiry-form span,
-.hm-contact #enquiry-form p {
-  color: rgb(255 255 255 / 0.92);
+.hm-field {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+  align-content: start;
 }
 
-.hm-contact #enquiry-form button {
-  background: var(--hm-orange);
-  border-radius: var(--hm-radius-pill);
+.hm-contact .hm-field label,
+.hm-contact .hm-field label span {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #fff;
 }
 
-.hm-contact #enquiry-form button:hover {
-  background: var(--hm-orange-hover);
+.hm-contact .hm-req {
+  margin-left: 0.15rem;
+  color: #ffc9b3;
+}
+
+.hm-contact .hm-field .hm-optional {
+  margin-left: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.hm-input {
+  width: 100%;
+  min-height: 2.9rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #c9bfae;
+  border-radius: 0.6rem;
+  background: #fff;
+  color: var(--hm-forest);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.hm-select,
+.hm-select option {
+  background-color: #fff;
+  color: var(--hm-forest);
+}
+
+.hm-input[aria-invalid="true"] {
+  border: 2px solid #ffb499;
+  box-shadow: 0 0 0 3px rgb(255 180 153 / 0.35);
+}
+
+.hm-contact .hm-field-error {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffd9c9;
+}
+
+.hm-field-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.hm-field-check input {
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.2rem;
+  accent-color: var(--hm-orange);
+}
+
+.hm-contact .hm-field-check label {
+  font-weight: 400;
+}
+
+.hm-contact .hm-form-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgb(255 255 255 / 0.86);
+}
+
+.hm-contact .hm-form-unavailable {
+  margin: 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.7rem;
+  background: rgb(255 255 255 / 0.1);
+  font-size: 0.98rem;
+  color: #fff;
+}
+
+.hm-form-unavailable a {
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hm-form-submit {
+  justify-self: start;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.hm-form-feedback:focus {
+  outline: none;
+}
+
+.hm-form-feedback.is-visible {
+  padding: 1rem 1.1rem;
+  border-radius: 0.8rem;
+  border-left: 5px solid var(--hm-orange);
+  background: var(--hm-warm-white);
+}
+
+.hm-form-feedback.is-visible:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.hm-form-feedback.is-error {
+  border-left-color: #b42318;
+}
+
+.hm-contact .hm-form-feedback p {
+  margin: 0;
+  color: var(--hm-forest);
+}
+
+.hm-contact .hm-form-feedback p + p {
+  margin-top: 0.35rem;
+}
+
+.hm-contact .hm-form-feedback .hm-form-feedback-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.hm-form-call {
+  color: var(--hm-forest);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+@media (max-width: 639px) {
+  .hm-form {
+    padding: 1.1rem;
+  }
+  .hm-form-submit {
+    justify-self: stretch;
+  }
 }
 
 .hm-footer {

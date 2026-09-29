@@ -1,97 +1,256 @@
 ---
-import { site } from "../content/site";
+import { site, hasConfirmedEmail } from "../content/site";
+import { messages } from "../content/i18n";
+
+const t = messages.en.enquiry;
+const emailReady = hasConfirmedEmail();
+const recipient = emailReady ? site.email : null;
+const enquiryMessages = {
+  en: messages.en.enquiry,
+  "zh-Hant": messages["zh-Hant"].enquiry,
+  "zh-Hans": messages["zh-Hans"].enquiry,
+};
+const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
 ---
 
-<form
-  id="enquiry-form"
-  class="mt-8 space-y-4 rounded-lg border border-[var(--color-border)] bg-white p-6"
-  novalidate
->
+<form id="enquiry-form" class="hm-form" novalidate aria-describedby="enq-required-note">
+  <p id="enq-required-note" class="hm-form-note" data-i18n-path="enquiry.requiredNote">{t.requiredNote}</p>
+
   <div class="grid gap-4 sm:grid-cols-2">
-    <label class="block text-sm">
-      <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.name">Your name</span>
+    <div class="hm-field">
+      <label for="enq-name">
+        <span data-i18n-path="enquiry.name">{t.name}</span>
+        <span class="hm-req" aria-hidden="true">*</span>
+      </label>
+      <input id="enq-name" class="hm-input" type="text" name="name" autocomplete="name" required />
+      <p id="enq-name-error" class="hm-field-error" hidden></p>
+    </div>
+    <div class="hm-field">
+      <label for="enq-phone">
+        <span data-i18n-path="enquiry.phone">{t.phone}</span>
+        <span class="hm-req" aria-hidden="true">*</span>
+      </label>
       <input
-        type="text"
-        name="name"
-        autocomplete="name"
-        class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2 text-[var(--color-ink)]"
-      />
-    </label>
-    <label class="block text-sm">
-      <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.phone">Phone</span>
-      <input
+        id="enq-phone"
+        class="hm-input"
         type="tel"
         name="phone"
         autocomplete="tel"
-        class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2"
+        inputmode="tel"
+        required
       />
-    </label>
+      <p id="enq-phone-error" class="hm-field-error" hidden></p>
+    </div>
   </div>
-  <label class="block text-sm">
-    <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.suburb">Suburb</span>
-    <input
-      type="text"
-      name="suburb"
-      class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2"
-    />
-  </label>
-  <label class="block text-sm">
-    <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.language">Preferred language</span>
-    <select name="language" class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2">
-      <option>English</option>
-      <option>Cantonese</option>
-      <option>Mandarin</option>
-      <option>No preference</option>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div class="hm-field">
+      <label for="enq-email">
+        <span data-i18n-path="enquiry.email">{t.email}</span>
+        <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+      </label>
+      <input id="enq-email" class="hm-input" type="email" name="email" autocomplete="email" />
+      <p id="enq-email-error" class="hm-field-error" hidden></p>
+    </div>
+    <div class="hm-field">
+      <label for="enq-suburb">
+        <span data-i18n-path="enquiry.suburb">{t.suburb}</span>
+        <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+      </label>
+      <input id="enq-suburb" class="hm-input" type="text" name="suburb" autocomplete="address-level2" />
+    </div>
+  </div>
+
+  <div class="hm-field">
+    <label for="enq-language">
+      <span data-i18n-path="enquiry.language">{t.language}</span>
+    </label>
+    <select id="enq-language" class="hm-input hm-select" name="language" autocomplete="off">
+      {
+        languageValues.map((value, i) => (
+          <option value={value} data-i18n-path={`enquiry.languageOptions.${i}`}>
+            {t.languageOptions[i]}
+          </option>
+        ))
+      }
     </select>
-  </label>
-  <label class="flex items-start gap-2 text-sm">
-    <input type="checkbox" name="ndis" class="mt-1" />
-    <span data-i18n-path="enquiry.ndisLabel">NDIS participant (plan-managed or self-managed)</span>
-  </label>
-  <label class="block text-sm">
-    <span class="font-medium text-[var(--color-ink)]" data-i18n-path="enquiry.message">How can we help?</span>
-    <textarea
-      name="message"
-      rows="4"
-      required
-      class="mt-1 w-full rounded-md border border-[var(--color-border)] px-3 py-2"
-    ></textarea>
-  </label>
-  <p class="text-xs text-[var(--color-ink-muted)]" data-i18n-path="enquiry.privacyNote">
-    Do not include sensitive clinical details in this form unless necessary.
-  </p>
-  <button
-    type="submit"
-    class="inline-flex w-full items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 font-semibold text-white hover:bg-[var(--color-accent-hover)] sm:w-auto"
-  >
-    <span data-i18n-path="cta.sendEnquiry">Send enquiry</span>
+  </div>
+
+  <div class="hm-field hm-field-check">
+    <input id="enq-ndis" type="checkbox" name="ndis" />
+    <label for="enq-ndis" data-i18n-path="enquiry.ndisLabel">{t.ndisLabel}</label>
+  </div>
+
+  <div class="hm-field">
+    <label for="enq-message">
+      <span data-i18n-path="enquiry.message">{t.message}</span>
+      <span class="hm-req" aria-hidden="true">*</span>
+    </label>
+    <textarea id="enq-message" class="hm-input" name="message" rows="4" required></textarea>
+    <p id="enq-message-error" class="hm-field-error" hidden></p>
+  </div>
+
+  <p class="hm-form-note" data-i18n-path="enquiry.privacyNote">{t.privacyNote}</p>
+
+  {
+    !emailReady && (
+      <p class="hm-form-unavailable">
+        <span data-i18n-path="enquiry.unavailableNotice">{t.unavailableNotice}</span>{" "}
+        <a href={site.phoneHref}>{site.phone}</a>.
+      </p>
+    )
+  }
+
+  <noscript>
+    <p class="hm-form-unavailable">
+      <span data-i18n-path="enquiry.noscript">{t.noscript}</span>{" "}
+      <a href={site.phoneHref}>{site.phone}</a>
+    </p>
+  </noscript>
+
+  <button type="submit" class="hm-btn hm-btn-primary hm-form-submit">
+    {
+      emailReady ? (
+        <span data-i18n-path="cta.sendEnquiry">{messages.en.cta.sendEnquiry}</span>
+      ) : (
+        <span data-i18n-path="enquiry.continue">{t.continue}</span>
+      )
+    }
   </button>
+
+  <div id="enq-feedback" class="hm-form-feedback" role="status" aria-live="polite" tabindex="-1">
+    <div data-feedback="errors" hidden>
+      <p data-i18n-path="enquiry.errorSummary">{t.errorSummary}</p>
+    </div>
+    <div data-feedback="unavailable" hidden>
+      <p class="hm-form-feedback-title" data-i18n-path="enquiry.unavailableTitle">{t.unavailableTitle}</p>
+      <p>
+        <span data-i18n-path="enquiry.unavailableBody">{t.unavailableBody}</span>{" "}
+        <a class="hm-form-call" href={site.phoneHref}>{site.phone}</a>
+      </p>
+    </div>
+    <div data-feedback="mailto" hidden>
+      <p class="hm-form-feedback-title" data-i18n-path="enquiry.mailtoTitle">{t.mailtoTitle}</p>
+      <p>
+        <span data-i18n-path="enquiry.mailtoBody">{t.mailtoBody}</span>{" "}
+        <a class="hm-form-call" href={site.phoneHref}>{site.phone}</a>
+      </p>
+    </div>
+  </div>
 </form>
 
-<script define:vars={{ emailHref: site.emailHref, businessName: site.businessName }}>
+<script
+  define:vars={{
+    recipient,
+    enquiryMessages,
+    subject: `Enquiry — ${site.businessName}`,
+  }}
+>
   const form = document.getElementById("enquiry-form");
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const name = String(data.get("name") || "").trim();
-    const phone = String(data.get("phone") || "").trim();
-    const suburb = String(data.get("suburb") || "").trim();
-    const language = String(data.get("language") || "");
-    const ndis = data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / unsure";
-    const message = String(data.get("message") || "").trim();
-    const body = encodeURIComponent(
-      [
-        name && `Name: ${name}`,
-        phone && `Phone: ${phone}`,
-        suburb && `Suburb: ${suburb}`,
-        `Language: ${language}`,
-        `NDIS participant: ${ndis}`,
+  if (form) {
+    const feedback = form.querySelector("#enq-feedback");
+    const fields = {
+      name: form.querySelector("#enq-name"),
+      phone: form.querySelector("#enq-phone"),
+      email: form.querySelector("#enq-email"),
+      message: form.querySelector("#enq-message"),
+    };
+    let attempted = false;
+
+    const currentMessages = () => {
+      const lang = document.documentElement.lang;
+      const key = lang === "zh-Hant" || lang === "zh-Hans" ? lang : "en";
+      return enquiryMessages[key] || enquiryMessages.en;
+    };
+
+    const checkField = (name) => {
+      const value = fields[name].value.trim();
+      if (name === "name") return value ? null : "nameRequired";
+      if (name === "phone") {
+        if (!value) return "phoneRequired";
+        const digits = value.replace(/\D/g, "");
+        return /^[+\d\s().-]+$/.test(value) && digits.length >= 8 && digits.length <= 15
+          ? null
+          : "phoneInvalid";
+      }
+      if (name === "email") {
+        return !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? null : "emailInvalid";
+      }
+      if (name === "message") return value ? null : "messageRequired";
+      return null;
+    };
+
+    const showFieldState = (name, errorKey) => {
+      const input = fields[name];
+      const error = form.querySelector(`#enq-${name}-error`);
+      if (errorKey) {
+        error.setAttribute("data-i18n-path", `enquiry.errors.${errorKey}`);
+        error.textContent = currentMessages().errors[errorKey];
+        error.hidden = false;
+        input.setAttribute("aria-invalid", "true");
+        input.setAttribute("aria-describedby", error.id);
+      } else {
+        error.removeAttribute("data-i18n-path");
+        error.textContent = "";
+        error.hidden = true;
+        input.removeAttribute("aria-invalid");
+        input.removeAttribute("aria-describedby");
+      }
+    };
+
+    const showFeedback = (kind) => {
+      feedback.querySelectorAll("[data-feedback]").forEach((block) => {
+        block.hidden = block.getAttribute("data-feedback") !== kind;
+      });
+      feedback.classList.toggle("is-error", kind === "errors");
+      feedback.classList.toggle("is-visible", Boolean(kind));
+    };
+
+    Object.keys(fields).forEach((name) => {
+      const handler = () => {
+        if (!attempted) return;
+        showFieldState(name, checkField(name));
+        if (!form.querySelector("[aria-invalid='true']")) showFeedback(null);
+      };
+      fields[name].addEventListener("input", handler);
+      fields[name].addEventListener("blur", handler);
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      attempted = true;
+      let firstInvalid = null;
+      for (const name of Object.keys(fields)) {
+        const errorKey = checkField(name);
+        showFieldState(name, errorKey);
+        if (errorKey && !firstInvalid) firstInvalid = fields[name];
+      }
+      if (firstInvalid) {
+        showFeedback("errors");
+        firstInvalid.focus();
+        return;
+      }
+
+      if (!recipient) {
+        showFeedback("unavailable");
+        feedback.focus();
+        return;
+      }
+
+      const data = new FormData(form);
+      const get = (key) => String(data.get(key) || "").trim();
+      const lines = [`Name: ${get("name")}`, `Phone: ${get("phone")}`];
+      if (get("email")) lines.push(`Email: ${get("email")}`);
+      if (get("suburb")) lines.push(`Suburb: ${get("suburb")}`);
+      lines.push(
+        `Language: ${get("language")}`,
+        `NDIS participant: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / unsure"}`,
         "",
-        message,
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    );
-    window.location.href = `${emailHref}&body=${body}`;
-  });
+        get("message"),
+      );
+      const body = lines.join("\n");
+      showFeedback("mailto");
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
 </script>

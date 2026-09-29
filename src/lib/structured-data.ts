@@ -1,4 +1,4 @@
-import { site } from "../content/site";
+import { site, hasConfirmedEmail } from "../content/site";
 import { messages } from "../content/i18n";
 
 /** JSON-LD for LocalBusiness / healthcare-oriented mobile service (draft). */
@@ -38,7 +38,7 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
     ],
   };
 
-  if (site.email && !site.email.includes("NOT PROVIDED")) {
+  if (hasConfirmedEmail()) {
     json.email = site.email;
   }
 

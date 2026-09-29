@@ -188,6 +188,21 @@ export const site = {
   },
 } as const;
 
+/**
+ * True only once `site.email` holds a real address. While it is the placeholder,
+ * email actions (mailto links, enquiry form sending) must stay disabled.
+ */
+export function hasConfirmedEmail(): boolean {
+  const email: string = site.email;
+  return email !== EMAIL_PLACEHOLDER && /^[^\s@[\]]+@[^\s@[\]]+\.[^\s@[\]]+$/.test(email);
+}
+
+/** mailto link with a real recipient, or null while the business email is unconfirmed. */
+export function getEmailHref(subject = "Enquiry — Home Motion"): string | null {
+  if (!hasConfirmedEmail()) return null;
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
+}
+
 /** Full service-area line for prose (no website URL). */
 export function formatServiceAreasLine(): string {
   const { region, suburbs, surroundingNote } = site.serviceAreas;

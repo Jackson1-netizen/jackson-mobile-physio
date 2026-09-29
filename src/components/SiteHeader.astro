@@ -1,7 +1,9 @@
 ---
-import { site } from "../content/site";
+import { site, getEmailHref } from "../content/site";
 import { messages } from "../content/i18n";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const emailHref = getEmailHref();
 
 const nav = [
   { href: "/#about", path: "nav.about", label: messages.en.nav.about },
@@ -21,9 +23,11 @@ const nav = [
         {site.phone}
       </a>
       <div class="flex flex-wrap items-center gap-3">
-        <a href={site.emailHref} class="hidden text-white/90 no-underline hover:text-white hover:underline sm:inline">
-          <span data-i18n-path="cta.email">Email</span>
-        </a>
+        {emailHref && (
+          <a href={emailHref} class="hidden text-white/90 no-underline hover:text-white hover:underline sm:inline">
+            <span data-i18n-path="cta.email">Email</span>
+          </a>
+        )}
         <a
           href="/referral"
           class="rounded-md bg-white/10 px-3 py-1 text-xs font-semibold text-white no-underline hover:bg-white/20"
