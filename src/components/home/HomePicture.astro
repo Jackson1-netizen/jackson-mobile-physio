@@ -1,0 +1,39 @@
+---
+interface Photo {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  widths?: readonly number[];
+}
+
+interface Props {
+  photo: Photo;
+  sizes: string;
+  class?: string;
+  /** i18n path for the alt text (applied by I18nScript). */
+  altPath?: string;
+  priority?: boolean;
+}
+
+const { photo, sizes, class: className, altPath, priority = false } = Astro.props;
+const widths = photo.widths ?? [];
+const stem = photo.src.replace(/^\/photos\//, "/photos/opt/").replace(/\.[a-z]+$/i, "");
+const srcset = (ext: string) => widths.map((w) => `${stem}-${w}.${ext} ${w}w`).join(", ");
+---
+
+<picture>
+  {widths.length > 0 && <source type="image/avif" srcset={srcset("avif")} sizes={sizes} />}
+  {widths.length > 0 && <source type="image/webp" srcset={srcset("webp")} sizes={sizes} />}
+  <img
+    class={className}
+    src={photo.src}
+    alt={photo.alt}
+    data-i18n-attr={altPath ? `alt:${altPath}` : undefined}
+    width={photo.width}
+    height={photo.height}
+    loading={priority ? "eager" : "lazy"}
+    fetchpriority={priority ? "high" : undefined}
+    decoding={priority ? undefined : "async"}
+  />
+</picture>

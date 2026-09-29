@@ -122,3 +122,9 @@
 - **Follow-up:** Removed the extra line under the logo. Header now shows the full logo file, including the roof tip and the Mobile Physiotherapy line printed on the logo, at a slightly smaller size.
 - **Decisions:** See `docs/DECISIONS.md` (AHPRA registration granted).
 - **Next:** Jackson can send the AHPRA number to print on the site. Still draft, not deployed.
+
+## 2026-09-29 (option 2 fixes: six staged checkpoints)
+
+- **Changed:** On `cursor/design-option-2-b759` only. Fixed horizontal overflow at every width. The enquiry form now validates inline and says honestly that online sending is not set up yet (phone link instead). Service links and navigation fixed; skip link and scroll-spy added; homepage fully translated into 繁/简. Services are compact and icon-led, with one placement per photo. Motion is lighter, contrast is AA, and focus rings are visible. Fonts are self-hosted, photos served as AVIF/WebP at several widths, and the map loads only when scrolled near. `/concepts` is excluded from the sitemap.
+- **Results:** Lighthouse mobile performance 75 → 98 and accessibility 96 → 100, measured on the local production preview. axe: 0 violations.
+- **Still open:** Business email, form endpoint, degree, AHPRA number, production domain. Still draft / noindex. Not deployed.

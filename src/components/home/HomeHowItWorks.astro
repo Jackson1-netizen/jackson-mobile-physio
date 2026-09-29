@@ -1,4 +1,5 @@
 ---
+import HomePicture from "./HomePicture.astro";
 import { homeSteps, homeMedia } from "../../content/home-motion";
 import { messages } from "../../content/i18n";
 
@@ -23,14 +24,10 @@ const photo = homeMedia.how;
       </ol>
     </div>
     <div class="hm-how-media hm-img-zoom">
-      <img
-        src={photo.src}
-        alt={photo.alt}
-        data-i18n-attr="alt:hm.photos.sitToStandAlt"
-        width={photo.width}
-        height={photo.height}
-        loading="lazy"
-        decoding="async"
+      <HomePicture
+        photo={photo}
+        altPath="hm.photos.sitToStandAlt"
+        sizes="(min-width: 1024px) 556px, (min-width: 768px) 728px, calc(100vw - 2.5rem)"
       />
     </div>
   </div>

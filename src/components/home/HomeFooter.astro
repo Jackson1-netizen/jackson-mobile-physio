@@ -1,4 +1,5 @@
 ---
+import HomeLogo from "./HomeLogo.astro";
 import { site } from "../../content/site";
 import { messages } from "../../content/i18n";
 ---
@@ -11,7 +12,7 @@ import { messages } from "../../content/i18n";
       aria-label={messages.en.hm.header.logoLabel}
       data-i18n-attr="aria-label:hm.header.logoLabel"
     >
-      <img src="/home-motion-logo.png" alt="" width="120" height="38" loading="lazy" />
+      <HomeLogo sizes="88px" lazy />
     </a>
     <p class="text-sm text-[#5b6e67]">
       {site.displayBrand} · {site.abnDisplay} ·{" "}

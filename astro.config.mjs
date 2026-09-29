@@ -14,5 +14,10 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Concept mockups stay reachable locally but are not part of the site.
+      filter: (page) => !new URL(page).pathname.startsWith('/concepts'),
+    }),
+  ],
 });

@@ -19,8 +19,8 @@
   --hm-refer-grad: #16352e;
   --hm-radius-card: 1.15rem;
   --hm-radius-pill: 999px;
-  --hm-serif: "Source Serif 4", Georgia, serif;
-  --hm-sans: "Source Sans 3", system-ui, sans-serif;
+  --hm-serif: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+  --hm-sans: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
   --color-ink: var(--hm-forest);
   --color-ink-muted: #3d5a52;
   --color-accent: var(--hm-orange-action);
@@ -43,6 +43,10 @@
 
 .hm img {
   max-width: 100%;
+}
+
+.hm picture {
+  display: contents;
 }
 
 .hm h1,
@@ -77,13 +81,13 @@
 }
 
 .hm:lang(zh-Hant) {
-  --hm-sans: "Source Sans 3", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
-  --hm-serif: "Source Serif 4", "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif;
+  --hm-sans: "Source Sans 3", "Source Sans 3 Fallback", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --hm-serif: "Source Serif 4", "Source Serif 4 Fallback", "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif;
 }
 
 .hm:lang(zh-Hans) {
-  --hm-sans: "Source Sans 3", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-  --hm-serif: "Source Serif 4", "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
+  --hm-sans: "Source Sans 3", "Source Sans 3 Fallback", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --hm-serif: "Source Serif 4", "Source Serif 4 Fallback", "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
 }
 
 .hm:lang(zh) {
@@ -122,6 +126,9 @@ html:has(.hm-header) {
   min-width: 2.75rem;
   min-height: 2.75rem;
   padding-inline: 0.6rem;
+  border: 0;
+  background: transparent;
+  color: var(--hm-forest);
   cursor: pointer;
 }
 
@@ -161,11 +168,6 @@ html:has(.hm-header) {
   letter-spacing: 0.14em;
 }
 
-.hm-logo img {
-  height: 3.4rem;
-  width: auto;
-}
-
 .hm-btn-outline {
   background: transparent;
   color: #fff;
@@ -199,19 +201,6 @@ html:has(.hm-header) {
   color: rgb(255 255 255 / 0.94);
 }
 
-.hm-chips {
-  gap: 1.1rem 1.6rem;
-  margin-top: 1.35rem;
-}
-
-.hm-chips li {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
 .hm-chip-icon {
   color: var(--hm-orange);
   display: flex;
@@ -219,12 +208,6 @@ html:has(.hm-header) {
 
 .hm-hero-frame {
   position: relative;
-}
-
-.hm-hero-media {
-  border-radius: 1.5rem;
-  min-height: min(28rem, 70vw);
-  overflow: hidden;
 }
 
 .hm-blobs {
@@ -556,17 +539,6 @@ html:has(.hm-header) {
   color: #fff;
 }
 
-.hm-btn-ghost {
-  background: transparent;
-  color: #fff;
-  border: 2px solid rgb(255 255 255 / 0.55);
-}
-
-.hm-btn-ghost:hover {
-  background: #fff;
-  color: var(--hm-forest);
-}
-
 .hm-header {
   position: sticky;
   top: 0;
@@ -625,12 +597,6 @@ html:has(.hm-header) {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-}
-
-.hm .lang-btn {
-  border: 0;
-  background: transparent;
-  color: var(--hm-forest);
 }
 
 .hm .lang-btn[data-active="true"] {
@@ -725,11 +691,6 @@ html:has(.hm-header) {
   white-space: nowrap;
 }
 
-.hm-hero-media {
-  min-height: min(28rem, 70vw);
-  border-radius: 1.35rem;
-}
-
 .hm-hero h1 .hm-em {
   color: var(--hm-orange);
 }
@@ -793,22 +754,6 @@ html:has(.hm-header) {
   object-position: 62% 36%;
 }
 
-.hm-hero-script {
-  position: absolute;
-  right: 8%;
-  top: 10%;
-  z-index: 2;
-  margin: 0;
-  max-width: 6ch;
-  font-family: var(--hm-serif);
-  font-style: italic;
-  font-size: clamp(1.4rem, 3vw, 2.1rem);
-  line-height: 1.05;
-  color: #fff;
-  text-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .hm-h1-enter {
     animation: hm-h1 0.4s ease-out both;
@@ -844,11 +789,6 @@ html:has(.hm-header) {
   opacity: 0.16;
   pointer-events: none;
   z-index: 0;
-}
-
-.hm-leaf-bl {
-  left: -4rem;
-  bottom: -3rem;
 }
 
 .hm-leaf-tr {
@@ -1005,7 +945,6 @@ a.hm-card:hover {
 }
 
 .hm-about-grid,
-.hm-areas-grid,
 .hm-how-grid,
 .hm-refer-grid {
   display: grid;
@@ -1096,32 +1035,6 @@ a.hm-card:hover {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.55rem;
-}
-
-.hm-suburb-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.55rem;
-  list-style: none;
-  margin: 1.2rem 0 0;
-  padding: 0;
-}
-
-.hm-suburb-list a {
-  display: block;
-  padding: 0.7rem 0.8rem;
-  border-radius: 0.85rem;
-  background: var(--hm-warm-white);
-  border: 1px solid #eadfce;
-  color: var(--hm-forest);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.92rem;
-}
-
-.hm-suburb-list a:hover {
-  border-color: var(--hm-orange-text);
-  color: var(--hm-orange-text);
 }
 
 .hm-map {
@@ -1226,8 +1139,7 @@ a.hm-card:hover {
   background: rgb(255 255 255 / 0.82);
 }
 
-.hm-map-caption,
-.hm-map-link {
+.hm-map-caption {
   font-size: 0.82rem;
   color: #5b6e67;
 }
@@ -1247,20 +1159,6 @@ a.hm-card:hover {
 .hm-refer-copy ul {
   margin: 1rem 0 1.4rem;
   padding-left: 1.1rem;
-}
-
-.hm-brand-card {
-  background: var(--hm-warm-white);
-  color: var(--hm-forest);
-  border-radius: 1.15rem;
-  padding: 1.3rem 1.2rem 1.1rem;
-  box-shadow: 0 18px 40px rgb(23 61 53 / 0.18);
-  max-width: 22rem;
-}
-
-.hm-brand-card img {
-  height: 3.4rem;
-  width: auto;
 }
 
 .hm-faq-layout {
@@ -1607,7 +1505,6 @@ a.hm-card:hover {
   .hm-hero-grid,
   .hm-how-grid,
   .hm-about-grid,
-  .hm-areas-grid,
   .hm-refer-grid,
   .hm-faq-layout {
     grid-template-columns: 1fr 1fr;
@@ -1640,9 +1537,6 @@ a.hm-card:hover {
   }
   .hm-mobile-bar {
     display: none;
-  }
-  .hm-suburb-list {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 

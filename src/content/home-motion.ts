@@ -30,24 +30,28 @@ export const homeHero = {
 export const homePhotos = {
   portrait: {
     src: "/photos/jackson-portrait.jpg",
+    widths: [480, 800, 1120],
     width: 1120,
     height: 1400,
     alt: hm.about.portraitAlt,
   },
   homeWalker: {
     src: "/photos/home-walker.jpg",
+    widths: [480, 640, 819],
     width: 819,
     height: 614,
     alt: hm.hero.photoAlt,
   },
   homeGait: {
     src: "/photos/home-gait-support.jpg",
+    widths: [480, 640, 819],
     width: 819,
     height: 614,
     alt: hm.photos.gaitAlt,
   },
   homeSitToStand: {
     src: "/photos/home-sit-to-stand.jpg",
+    widths: [480, 640, 819],
     width: 819,
     height: 614,
     alt: hm.photos.sitToStandAlt,

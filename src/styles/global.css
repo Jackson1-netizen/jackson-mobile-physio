@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 @theme {
-  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Source Serif 4", ui-serif, Georgia, serif;
+  --font-sans: "Source Sans 3", "Source Sans 3 Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4", "Source Serif 4 Fallback", ui-serif, Georgia, serif;
   --color-ink: #1a2e28;
   --color-ink-muted: #3d524c;
   --color-surface: #f7f6f3;

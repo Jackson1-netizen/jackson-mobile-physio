@@ -123,3 +123,11 @@ Append-only record. Do not silently overwrite prior entries.
 - **Archived:** `cursor/chatgpt-version-b759` is option 1 (ChatGPT visual). Treat as frozen for comparison.
 - **New branch:** `cursor/design-option-2-b759` for the second design exploration. Starts from the archived ChatGPT snapshot so Jackson can change it without touching option 1 or `main`.
 - **Still do not merge to `main`.** `main` remains the original V1.
+
+## 2026-09-29 — Option 2: honest form, self-hosted assets, lazy map
+
+- **Enquiry form:** No email address or form endpoint is confirmed, so the form checks the fields and then shows a "not available yet — please call" notice. It never claims to send. It switches to a `mailto:` automatically once `site.email` is a real address (`hasConfirmedEmail()`). All other email links are hidden until then.
+- **Fonts:** Source Sans 3 / Source Serif 4 Latin subsets are self-hosted in `public/fonts/` with `font-display: swap`. They use the same weights as before, plus metric-matched local fallbacks so the swap doesn't shift the layout. Google Fonts are no longer requested by the site; concept mockups are unchanged.
+- **Images:** `scripts/optimize-images.mjs` (sharp, already installed with Astro) writes AVIF/WebP variants to `public/photos/opt/` and lossless resized logo copies to `public/logo/`. Originals, including `home-motion-logo.png`, are unchanged.
+- **Map:** Leaflet JS and CSS load only when the map is within 300px of the viewport. If they fail, the static pin fallback stays visible.
+- **Sitemap:** `/concepts/**` excluded. Draft / noindex unchanged.

@@ -1,4 +1,5 @@
 ---
+import HomePicture from "./HomePicture.astro";
 import { site, getRegistrationDisplayLine } from "../../content/site";
 import { homeHero, homeMedia } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
@@ -51,15 +52,12 @@ const hero = homeMedia.hero;
 
     <div class="hm-hero-frame">
       <div class="hm-hero-media" data-hm-parallax>
-        <img
+        <HomePicture
           class="hm-hero-photo"
-          src={hero.src}
-          alt={hero.alt}
-          data-i18n-attr="alt:hm.hero.photoAlt"
-          width={hero.width}
-          height={hero.height}
-          fetchpriority="high"
-          decoding="async"
+          photo={hero}
+          altPath="hm.hero.photoAlt"
+          sizes="(min-width: 1024px) 690px, (min-width: 768px) 728px, calc(100vw - 2.5rem)"
+          priority
         />
       </div>
       <div class="hm-blobs" aria-hidden="true">

@@ -1,4 +1,5 @@
 ---
+import HomePicture from "./HomePicture.astro";
 import { site } from "../../content/site";
 import { homeAbout } from "../../content/home-motion";
 
@@ -8,14 +9,10 @@ const photo = homeAbout.photo;
 <section id="about" class="hm-reveal bg-[var(--hm-warm-white)]">
   <div class="hm-wrap hm-section hm-about-grid">
     <div class="hm-portrait hm-img-zoom">
-      <img
-        src={photo.src}
-        alt={photo.alt}
-        data-i18n-attr="alt:hm.about.portraitAlt"
-        width={photo.width}
-        height={photo.height}
-        loading="lazy"
-        decoding="async"
+      <HomePicture
+        photo={photo}
+        altPath="hm.about.portraitAlt"
+        sizes="(min-width: 1024px) 556px, (min-width: 768px) 728px, calc(100vw - 2.5rem)"
       />
     </div>
     <div>

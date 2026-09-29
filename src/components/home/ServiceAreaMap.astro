@@ -1,5 +1,4 @@
 ---
-import "leaflet/dist/leaflet.css";
 import { homeMapPins } from "../../content/home-motion";
 import { messages } from "../../content/i18n";
 
@@ -41,12 +40,24 @@ const pins = homeMapPins.map((pin) => {
 </div>
 
 <script>
-  import * as L from "leaflet";
+  // Leaflet (JS + CSS) is fetched only when the map nears the viewport. Until then —
+  // or if the chunk fails to load — the static CSS-positioned pins stay visible.
+  // `?url` keeps Astro from hoisting leaflet.css into the page as a blocking stylesheet.
+  import leafletCssUrl from "leaflet/dist/leaflet.css?url";
 
-  const mountMap = () => {
-    const root = document.querySelector<HTMLElement>("[data-hm-map]");
-    const canvas = root?.querySelector<HTMLElement>("[data-hm-map-canvas]");
-    if (!root || !canvas || canvas.dataset.mounted === "1") return;
+  const loadStylesheet = (href: string) =>
+    new Promise<void>((resolve, reject) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.onload = () => resolve();
+      link.onerror = () => reject(new Error(`Failed to load ${href}`));
+      document.head.append(link);
+    });
+
+  const mountMap = async (root: HTMLElement) => {
+    const canvas = root.querySelector<HTMLElement>("[data-hm-map-canvas]");
+    if (!canvas || canvas.dataset.mounted === "1") return;
 
     const pins = [...root.querySelectorAll<HTMLElement>(".hm-map-pin")]
       .map((el) => ({
@@ -58,6 +69,14 @@ const pins = homeMapPins.map((pin) => {
 
     if (!pins.length) return;
     canvas.dataset.mounted = "1";
+
+    let L: typeof import("leaflet");
+    try {
+      [L] = await Promise.all([import("leaflet"), loadStylesheet(leafletCssUrl)]);
+    } catch {
+      canvas.dataset.mounted = "";
+      return;
+    }
 
     const map = L.map(canvas, {
       scrollWheelZoom: false,
@@ -100,5 +119,21 @@ const pins = homeMapPins.map((pin) => {
     requestAnimationFrame(fit);
   };
 
-  mountMap();
+  const root = document.querySelector<HTMLElement>("[data-hm-map]");
+  if (root) {
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            io.disconnect();
+            void mountMap(root);
+          }
+        },
+        { rootMargin: "300px 0px" },
+      );
+      io.observe(root);
+    } else {
+      void mountMap(root);
+    }
+  }
 </script>

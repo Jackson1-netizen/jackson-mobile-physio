@@ -1,0 +1,28 @@
+---
+interface Props {
+  alt?: string;
+  /** Rendered CSS width(s) of the logo, used to pick the 200w / 300w / 400w copy. */
+  sizes: string;
+  lazy?: boolean;
+}
+
+const { alt = "", sizes, lazy = false } = Astro.props;
+---
+
+<picture>
+  <source
+    type="image/webp"
+    srcset="/logo/home-motion-logo-200.webp 200w, /logo/home-motion-logo-300.webp 300w, /logo/home-motion-logo-400.webp 400w"
+    sizes={sizes}
+  />
+  <img
+    src="/home-motion-logo.png"
+    srcset="/logo/home-motion-logo-200.png 200w, /logo/home-motion-logo-300.png 300w, /logo/home-motion-logo-400.png 400w, /home-motion-logo.png 627w"
+    sizes={sizes}
+    alt={alt}
+    width="627"
+    height="388"
+    loading={lazy ? "lazy" : undefined}
+    decoding="async"
+  />
+</picture>

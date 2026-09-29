@@ -1,4 +1,5 @@
 ---
+import HomeLogo from "./HomeLogo.astro";
 import { site } from "../../content/site";
 import { homeAreas, homeCardEmail, homeSuburbs } from "../../content/home-motion";
 import ServiceAreaMap from "./ServiceAreaMap.astro";
@@ -12,7 +13,7 @@ import HomeIcon from "./HomeIcon.astro";
     <div class="hm-card-stage">
       <div class="hm-card-stack" role="group" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
         <article class="hm-print-card hm-print-card-back" lang="en">
-          <img src="/home-motion-logo.png" alt="" width="180" height="56" />
+          <HomeLogo sizes="106px" lazy />
         </article>
         <article class="hm-print-card hm-print-card-front" lang="en">
           <p class="hm-print-name">Jackson</p>

@@ -1,4 +1,5 @@
 ---
+import HomeLogo from "./HomeLogo.astro";
 import { site } from "../../content/site";
 import { messages } from "../../content/i18n";
 import { homeNav, homeHero } from "../../content/home-motion";
@@ -10,7 +11,7 @@ const t = messages.en.hm.header;
 <header class="hm-header no-print">
   <div class="hm-wrap hm-header-inner">
     <a class="hm-logo" href="/">
-      <img src="/home-motion-logo.png" alt={`${site.displayBrand} ${site.tagline}`} width="627" height="388" />
+      <HomeLogo alt={`${site.displayBrand} ${site.tagline}`} sizes="(min-width: 1024px) 185px, 145px" />
     </a>
 
     <nav class="hm-nav" aria-label={t.primaryNav} data-i18n-attr="aria-label:hm.header.primaryNav">
