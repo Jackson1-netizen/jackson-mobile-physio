@@ -115,4 +115,14 @@ function initMenu(root: ParentNode): void {
     const next = event.relatedTarget as Node | null;
     if (menu.open && next && !menu.contains(next)) menu.open = false;
   });
+
+  // Above the fold the draft banner pushes the header down, so cap the panel from its real position.
+  const panel = menu.querySelector<HTMLElement>(".hm-menu-panel");
+  menu.addEventListener("toggle", () => {
+    if (!panel) return;
+    panel.style.maxHeight = "";
+    if (!menu.open) return;
+    const available = window.innerHeight - panel.getBoundingClientRect().top - 8;
+    if (panel.scrollHeight > available) panel.style.maxHeight = `${Math.max(available, 160)}px`;
+  });
 }

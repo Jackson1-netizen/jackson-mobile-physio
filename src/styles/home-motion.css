@@ -642,6 +642,10 @@ html:has(.hm-header) {
   border: 1px solid var(--color-border);
   box-shadow: 0 18px 40px rgb(23 61 53 / 0.12);
   z-index: 50;
+  /* The header is sticky, so an over-tall panel could never be scrolled into view. */
+  max-height: calc(100dvh - var(--hm-header-h) - 1rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .hm-menu-panel a {
@@ -1544,6 +1548,20 @@ a.hm-card:hover {
   .hm-service-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.9rem;
+  }
+}
+
+/* Short viewports (200% zoom, phones in landscape): keep the sticky header compact. */
+@media (max-height: 520px) {
+  .hm-header-inner {
+    padding-block: 0.4rem;
+  }
+  .hm-header .hm-logo img {
+    height: 3.6rem;
+  }
+  .hm-header-tools {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
