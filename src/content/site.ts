@@ -3,7 +3,10 @@
  * Do not duplicate these values in components — import from here.
  */
 
-const EMAIL_PLACEHOLDER = "[EXISTING BUSINESS EMAIL — NOT PROVIDED]";
+/** Public-facing enquiry identity. Display only — mailbox may not be live yet. */
+const PUBLIC_BUSINESS_EMAIL = "hello@homemotionphysio.com.au";
+/** Public-facing referral identity. Display only — mailbox may not be live yet. */
+const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
 
 export const site = {
   /** Site is in draft — not a live public professional site */
@@ -23,9 +26,16 @@ export const site = {
   phone: "0433 479 703",
   phoneHref: "tel:+61433479703",
 
-  email: EMAIL_PLACEHOLDER,
-  /** mailto without a fabricated address — subject-only until email is confirmed */
-  emailHref: "mailto:?subject=Enquiry%20%E2%80%94%20Home%20Motion",
+  /**
+   * Public business emails for display and future routing.
+   * These mailboxes are not verified as receiving mail until domain email is configured.
+   * Internal notification destinations live in env vars — never duplicate those here.
+   */
+  publicEmail: PUBLIC_BUSINESS_EMAIL,
+  referralEmail: REFERRAL_PUBLIC_EMAIL,
+  /** Alias of publicEmail for general-contact surfaces. */
+  email: PUBLIC_BUSINESS_EMAIL,
+  emailHref: `mailto:${PUBLIC_BUSINESS_EMAIL}?subject=${encodeURIComponent("Enquiry — Home Motion")}`,
 
   /**
    * Internal canonical/base URL only. Do not render on public pages.
@@ -144,7 +154,7 @@ export const site = {
   draftNotice: {
     title: "Draft site — not for public use",
     body:
-      "This website is a work in progress for WAI WA LAW, an independent mobile physiotherapy service. AHPRA physiotherapy registration has been granted. Contact email is not yet published here. Do not rely on this page for clinical or emergency care.",
+      "This website is a work in progress for WAI WA LAW, an independent mobile physiotherapy service. AHPRA physiotherapy registration has been granted. Public contact emails are listed on this site; those mailboxes are not verified yet. Do not rely on this page for clinical or emergency care.",
   },
 
   footer: {
@@ -188,19 +198,19 @@ export const site = {
   },
 } as const;
 
-/**
- * True only once `site.email` holds a real address. While it is the placeholder,
- * email actions (mailto links, enquiry form sending) must stay disabled.
- */
+/** Public enquiry address is published. Does not mean the mailbox is receiving mail. */
 export function hasConfirmedEmail(): boolean {
-  const email: string = site.email;
-  return email !== EMAIL_PLACEHOLDER && /^[^\s@[\]]+@[^\s@[\]]+\.[^\s@[\]]+$/.test(email);
+  return Boolean(site.publicEmail);
 }
 
-/** mailto link with a real recipient, or null while the business email is unconfirmed. */
-export function getEmailHref(subject = "Enquiry — Home Motion"): string | null {
-  if (!hasConfirmedEmail()) return null;
-  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
+/** mailto to the public enquiry address. Delivery is not guaranteed until domain email is live. */
+export function getEmailHref(subject = "Enquiry — Home Motion"): string {
+  return `mailto:${site.publicEmail}?subject=${encodeURIComponent(subject)}`;
+}
+
+/** mailto to the public referral address. */
+export function getReferralEmailHref(subject = "Referral enquiry — Home Motion"): string {
+  return `mailto:${site.referralEmail}?subject=${encodeURIComponent(subject)}`;
 }
 
 /** Full service-area line for prose (no website URL). */

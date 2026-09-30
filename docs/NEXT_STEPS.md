@@ -55,7 +55,7 @@ Jackson must **tell you in writing** (message to Cursor agent or confirmed note)
 
 | Item | Action |
 |------|--------|
-| **Business email** | Replace `[EXISTING BUSINESS EMAIL — NOT PROVIDED]` in `site.ts`; set real `emailHref` (`mailto:`). |
+| **Business email** | Public addresses are in `site.publicEmail` / `site.referralEmail`. Do **not** enable `EMAIL_DELIVERY_READY` until domain mailboxes are verified (`docs/EMAIL_SETUP.md`). |
 | **Degree / university** | Confirm qualifications line (currently placeholder). |
 | **Privacy** | Legal review of `site.privacy`; set `privacy.lastUpdated`. |
 | **Legal trading name** | Confirm or remove `legalNamePlaceholder`. |

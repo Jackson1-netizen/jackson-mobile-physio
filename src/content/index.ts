@@ -1,5 +1,5 @@
 /** Single import point for all site content */
-export { site, formatServiceAreasLine, type SiteContent } from "./site";
+export { site, formatServiceAreasLine, getEmailHref, getReferralEmailHref, hasConfirmedEmail, type SiteContent } from "./site";
 export {
   messages,
   localeLabels,

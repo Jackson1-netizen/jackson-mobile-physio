@@ -1,11 +1,10 @@
 ---
 import HomeLogo from "./HomeLogo.astro";
 import { site } from "../../content/site";
-import { homeAreas, homeCardEmail, homeSuburbs } from "../../content/home-motion";
+import { homeAreas, homeSuburbs } from "../../content/home-motion";
 import ServiceAreaMap from "./ServiceAreaMap.astro";
 import HomeIcon from "./HomeIcon.astro";
 
-// homeCardEmail is a draft visual on the card only — not site.email and not a confirmed inbox.
 ---
 
 <section id="areas" class="hm-areas-band">
@@ -19,7 +18,7 @@ import HomeIcon from "./HomeIcon.astro";
           <p class="hm-print-name">Jackson</p>
           <p class="hm-print-role">Mobile Physiotherapist</p>
           <p class="hm-print-phone"><a href={site.phoneHref}>{site.phone}</a></p>
-          <p class="hm-print-email">{homeCardEmail}</p>
+          <p class="hm-print-email"><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a></p>
           <div class="hm-print-foot">
             <p class="hm-print-place">{homeAreas.cardPlace}</p>
             <p class="hm-print-motto">{homeAreas.motto}</p>

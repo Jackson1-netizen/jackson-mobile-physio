@@ -48,4 +48,5 @@ See `docs/GITHUB_WORKFLOW.md`.
 ## Documentation
 
 - `docs/NEXT_STEPS.md` — **what to flip when AHPRA is granted**
+- `docs/EMAIL_SETUP.md` — public vs private email routing (no live sending yet)
 - `docs/PROJECT_BRIEF.md`, `docs/DECISIONS.md`, `docs/DAILY_LOG.md`

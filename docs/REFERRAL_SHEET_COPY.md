@@ -1,6 +1,6 @@
 # Referral sheet copy (mirrors `/referral`)
 
-AHPRA registration granted. Registration number not printed until Jackson supplies it. Email not published. No website URL on the print sheet until confirmed for display.
+AHPRA registration granted. Registration number not printed until Jackson supplies it. Referral email: referrals@homemotionphysio.com.au (mailbox not verified until domain email is configured). No website URL on the print sheet until confirmed for display.
 
 ---
 
@@ -47,7 +47,7 @@ Enquiries welcome from self-managed and plan-managed NDIS participants. Funding 
 ## Contact
 
 Phone: 0433 479 703  
-Email: [EXISTING BUSINESS EMAIL — NOT PROVIDED]
+Email: referrals@homemotionphysio.com.au
 
 QR code: **[QR PLACEHOLDER — add when URL confirmed for print]**
 

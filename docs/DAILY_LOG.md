@@ -127,4 +127,10 @@
 
 - **Changed:** On `cursor/design-option-2-b759` only. Fixed horizontal overflow at every width. The enquiry form now validates inline and says honestly that online sending is not set up yet (phone link instead). Service links and navigation fixed; skip link and scroll-spy added; homepage fully translated into 繁/简. Services are compact and icon-led, with one placement per photo. Motion is lighter, contrast is AA, and focus rings are visible. Fonts are self-hosted, photos served as AVIF/WebP at several widths, and the map loads only when scrolled near. `/concepts` is excluded from the sitemap.
 - **Results:** Lighthouse mobile performance 75 → 98 and accessibility 96 → 100, measured on the local production preview. axe: 0 violations.
-- **Still open:** Business email, form endpoint, degree, AHPRA number, production domain. Still draft / noindex. Not deployed.
+- **Still open:** Degree, AHPRA number, production domain. Public emails are published but mailboxes are not verified. Still draft / noindex. Not deployed.
+
+## 2026-09-30 (public emails, no live sending)
+
+- **Changed:** Published `hello@homemotionphysio.com.au` (general) and `referrals@homemotionphysio.com.au` (referrers). Form, contact, footer, referral sheet, and card now use those values from `site.ts`. Delivery is not live; private inbox env vars are documented only.
+- **Decisions:** See `docs/DECISIONS.md` and `docs/EMAIL_SETUP.md`.
+- **Next:** Domain email configuration and a verified test send before `EMAIL_DELIVERY_READY`.

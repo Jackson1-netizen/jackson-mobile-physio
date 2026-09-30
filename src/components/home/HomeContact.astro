@@ -1,6 +1,8 @@
 ---
-import { site } from "../../content/site";
+import { site, getEmailHref } from "../../content/site";
 import EnquiryForm from "../EnquiryForm.astro";
+
+const publicMailto = getEmailHref();
 ---
 
 <section id="contact" class="hm-contact">
@@ -11,6 +13,9 @@ import EnquiryForm from "../EnquiryForm.astro";
     </p>
     <p class="mt-4 text-xl font-bold">
       <a class="text-white no-underline" href={site.phoneHref}>{site.phone}</a>
+    </p>
+    <p class="mt-2">
+      <a class="text-white underline underline-offset-4" href={publicMailto}>{site.publicEmail}</a>
     </p>
     <EnquiryForm />
   </div>

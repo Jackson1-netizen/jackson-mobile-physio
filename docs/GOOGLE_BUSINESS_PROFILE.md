@@ -18,7 +18,7 @@
 | Service areas | Melbourne Eastern Suburbs + listed suburbs and surrounding areas | Align with `site.ts` |
 | Phone | 0433 479 703 | Confirmed |
 | ABN | 75 612 731 757 | Confirmed |
-| Email | [EXISTING BUSINESS EMAIL — NOT PROVIDED] | NOT CONFIRMED |
+| Email | hello@homemotionphysio.com.au (mailbox not verified) | PUBLISHED, NOT LIVE |
 | Website | Not displayed on draft site; internal placeholder only until launch URL chosen | NOT CONFIRMED |
 | Hours | By appointment (Mon–Sat); Sunday closed — do not publish fixed opening hours on draft site | TODO for GBP |
 | Description | Use calm, factual copy from `src/content/site.ts` — no AHPRA registration claims until granted | TODO |

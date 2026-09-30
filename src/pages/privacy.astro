@@ -19,7 +19,10 @@ import { site } from "../content/site";
         <p>{paragraph}</p>
       ))}
       <p>
-        {site.privacy.privacyEnquiriesContactLabel} <span class="font-medium text-[var(--color-ink)]">{site.email}</span>
+        {site.privacy.privacyEnquiriesContactLabel}{" "}
+        <a class="font-medium text-[var(--color-ink)] underline underline-offset-4" href={`mailto:${site.publicEmail}`}>
+          {site.publicEmail}
+        </a>
       </p>
     </div>
 

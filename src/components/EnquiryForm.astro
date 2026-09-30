@@ -1,10 +1,11 @@
 ---
-import { site, hasConfirmedEmail } from "../content/site";
+import { site, getEmailHref } from "../content/site";
+import { isEmailDeliveryReady } from "../lib/email-delivery";
 import { messages } from "../content/i18n";
 
 const t = messages.en.enquiry;
-const emailReady = hasConfirmedEmail();
-const recipient = emailReady ? site.email : null;
+const deliveryReady = isEmailDeliveryReady();
+const publicMailto = getEmailHref("Enquiry — Home Motion");
 const enquiryMessages = {
   en: messages.en.enquiry,
   "zh-Hant": messages["zh-Hant"].enquiry,
@@ -93,10 +94,12 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
   <p class="hm-form-note" data-i18n-path="enquiry.privacyNote">{t.privacyNote}</p>
 
   {
-    !emailReady && (
+    !deliveryReady && (
       <p class="hm-form-unavailable">
         <span data-i18n-path="enquiry.unavailableNotice">{t.unavailableNotice}</span>{" "}
-        <a href={site.phoneHref}>{site.phone}</a>.
+        <a href={site.phoneHref}>{site.phone}</a>
+        <span data-i18n-path="enquiry.unavailableEmailLead">{t.unavailableEmailLead}</span>{" "}
+        <a href={publicMailto}>{site.publicEmail}</a>.
       </p>
     )
   }
@@ -109,13 +112,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
   </noscript>
 
   <button type="submit" class="hm-btn hm-btn-primary hm-form-submit">
-    {
-      emailReady ? (
-        <span data-i18n-path="cta.sendEnquiry">{messages.en.cta.sendEnquiry}</span>
-      ) : (
-        <span data-i18n-path="enquiry.continue">{t.continue}</span>
-      )
-    }
+    <span data-i18n-path="enquiry.continue">{t.continue}</span>
   </button>
 
   <div id="enq-feedback" class="hm-form-feedback" role="status" aria-live="polite" tabindex="-1">
@@ -128,6 +125,11 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         <span data-i18n-path="enquiry.unavailableBody">{t.unavailableBody}</span>{" "}
         <a class="hm-form-call" href={site.phoneHref}>{site.phone}</a>
       </p>
+      <p>
+        <span data-i18n-path="enquiry.composeLead">{t.composeLead}</span>{" "}
+        <a class="hm-form-call" data-enq-compose href={publicMailto}>{site.publicEmail}</a>.
+        <span data-i18n-path="enquiry.mailboxNote">{t.mailboxNote}</span>
+      </p>
     </div>
     <div data-feedback="mailto" hidden>
       <p class="hm-form-feedback-title" data-i18n-path="enquiry.mailtoTitle">{t.mailtoTitle}</p>
@@ -135,15 +137,16 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         <span data-i18n-path="enquiry.mailtoBody">{t.mailtoBody}</span>{" "}
         <a class="hm-form-call" href={site.phoneHref}>{site.phone}</a>
       </p>
+      <p data-i18n-path="enquiry.mailboxNote">{t.mailboxNote}</p>
     </div>
   </div>
 </form>
 
 <script
   define:vars={{
-    recipient,
+    deliveryReady,
+    publicMailto,
     enquiryMessages,
-    subject: `Enquiry — ${site.businessName}`,
   }}
 >
   const form = document.getElementById("enquiry-form");
@@ -231,7 +234,25 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         return;
       }
 
-      if (!recipient) {
+      if (!deliveryReady) {
+        const compose = form.querySelector("[data-enq-compose]");
+        const data = new FormData(form);
+        const get = (key) => String(data.get(key) || "").trim();
+        const lines = [`Name: ${get("name")}`, `Phone: ${get("phone")}`];
+        if (get("email")) lines.push(`Email: ${get("email")}`);
+        if (get("suburb")) lines.push(`Suburb: ${get("suburb")}`);
+        lines.push(
+          `Language: ${get("language")}`,
+          `NDIS participant: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / unsure"}`,
+          "",
+          get("message"),
+        );
+        if (compose) {
+          compose.setAttribute(
+            "href",
+            `${publicMailto}&body=${encodeURIComponent(lines.join("\n"))}`,
+          );
+        }
         showFeedback("unavailable");
         feedback.focus();
         return;
@@ -250,7 +271,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
       );
       const body = lines.join("\n");
       showFeedback("mailto");
-      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = `${publicMailto}&body=${encodeURIComponent(body)}`;
     });
   }
 </script>

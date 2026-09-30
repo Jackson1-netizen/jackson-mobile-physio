@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { site, formatServiceAreasLine } from "../content/site";
+import { site, formatServiceAreasLine, getReferralEmailHref } from "../content/site";
 
 const serviceList = site.services.map((s) => s.title).join("; ");
 const serviceAreaLine = formatServiceAreasLine();
+const referralMailto = getReferralEmailHref();
 ---
 
 <BaseLayout
@@ -66,7 +67,7 @@ const serviceAreaLine = formatServiceAreasLine();
         <section>
           <h2 class="font-serif text-lg font-semibold">Contact</h2>
           <p class="mt-1">Phone: {site.phone}</p>
-          <p>Email: {site.email}</p>
+          <p>Email: <a href={referralMailto}>{site.referralEmail}</a></p>
         </section>
       </div>
 

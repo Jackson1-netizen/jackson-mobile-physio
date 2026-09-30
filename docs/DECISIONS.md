@@ -127,6 +127,12 @@ Append-only record. Do not silently overwrite prior entries.
 ## 2026-09-29 — Option 2: honest form, self-hosted assets, lazy map
 
 - **Enquiry form:** No email address or form endpoint is confirmed, so the form checks the fields and then shows a "not available yet — please call" notice. It never claims to send. It switches to a `mailto:` automatically once `site.email` is a real address (`hasConfirmedEmail()`). All other email links are hidden until then.
+
+## 2026-09-30 — Public business emails published, delivery not live
+
+- **Public identity:** `publicEmail` = `hello@homemotionphysio.com.au`; `referralEmail` = `referrals@homemotionphysio.com.au` in `src/content/site.ts`. Displayed by audience (contact/footer vs referrers/referral sheet). Old `hello@homemotionphysio.au` card address removed.
+- **Not live:** Mailboxes are not verified. The form still never claims a message was sent. `src/lib/email-delivery.ts` keeps private notification env vars (`ENQUIRY_NOTIFICATION_EMAIL`, `REFERRAL_NOTIFICATION_EMAIL`) off the frontend. No SMTP, DNS, or secrets were added.
+- **Later:** Domain forwarding and reply-from identity are documented in `docs/EMAIL_SETUP.md`. Set `EMAIL_DELIVERY_READY=true` only after a test message arrives.
 - **Fonts:** Source Sans 3 / Source Serif 4 Latin subsets are self-hosted in `public/fonts/` with `font-display: swap`. They use the same weights as before, plus metric-matched local fallbacks so the swap doesn't shift the layout. Google Fonts are no longer requested by the site; concept mockups are unchanged.
 - **Images:** `scripts/optimize-images.mjs` (sharp, already installed with Astro) writes AVIF/WebP variants to `public/photos/opt/` and lossless resized logo copies to `public/logo/`. Originals, including `home-motion-logo.png`, are unchanged.
 - **Map:** Leaflet JS and CSS load only when the map is within 300px of the viewport. If they fail, the static pin fallback stays visible.

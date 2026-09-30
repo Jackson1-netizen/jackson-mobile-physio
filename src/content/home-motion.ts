@@ -180,13 +180,6 @@ export const homeAreas = {
   cardPlace: "Melbourne's Eastern Suburbs",
 };
 
-/**
- * Draft visual on the business card only.
- * Not a confirmed inbox — do not copy into site.email or the enquiry mailto.
- */
-export const homeCardEmail = "hello@homemotionphysio.au";
-
-/** Suburb centres for the service-area map. Not a home or clinic address. */
 export const homeMapPins = [
   { name: "Box Hill", lat: -37.819, lng: 145.1227 },
   { name: "Doncaster", lat: -37.788, lng: 145.124 },
