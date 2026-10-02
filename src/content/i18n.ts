@@ -1,6 +1,6 @@
 /** UI and marketing copy — English, Traditional Chinese, Simplified Chinese */
 
-import { site } from "./site";
+import { isPlaceholder, site } from "./site";
 import { concept1Purpose } from "./concept1-home";
 
 export const localeLabels = {
@@ -321,7 +321,7 @@ const en = {
     about: {
       languagesList: site.languages.join(", "),
       qualificationLabels: site.qualifications.map((q) => q.label),
-      qualificationValues: site.qualifications.map((q) => q.value),
+      qualificationValues: site.qualifications.map((q) => (isPlaceholder(q.value) ? "" : q.value)),
       ahpraNotice: site.ahpraNotice,
       portraitAlt: "Jackson, Home Motion mobile physiotherapist, in a Home Motion polo",
     },
