@@ -12,16 +12,16 @@
 
 | Field | Draft value | Confirmed? |
 |-------|-------------|------------|
-| Business name | WAI WA LAW | Confirmed (draft site) |
+| Business name | Home Motion Physiotherapy (public wordmark: Home Motion) | Confirmed — ASIC registered business name |
 | Primary category | Physiotherapist (or Mobile physiotherapist if available) | TODO |
 | Practitioner (display) | Wai Wa "Jackson" Law | Confirmed (draft site) |
 | Service areas | Melbourne Eastern Suburbs + listed suburbs and surrounding areas | Align with `site.ts` |
 | Phone | 0433 479 703 | Confirmed |
 | ABN | 75 612 731 757 | Confirmed |
-| Email | hello@homemotionphysio.com.au (mailbox not verified) | PUBLISHED, NOT LIVE |
-| Website | Not displayed on draft site; internal placeholder only until launch URL chosen | NOT CONFIRMED |
+| Email | hello@homemotionphysio.com.au | Workspace is active; test of this mailbox not recorded |
+| Website | https://homemotionphysio.com.au | Domain registered; still the VentraIP parked page. Do not publish GBP until the real site is on HTTPS |
 | Hours | By appointment (Mon–Sat); Sunday closed — do not publish fixed opening hours on draft site | TODO for GBP |
-| Description | Use calm, factual copy from `src/content/site.ts` — no AHPRA registration claims until granted | TODO |
+| Description | Mobile physiotherapy, eastern suburbs, English / Cantonese / Mandarin. NDIS plan-managed and self-managed enquiries welcome. Not an NDIS registered provider. | Use `src/content/site.ts` |
 
 ## Services (examples only)
 
@@ -41,8 +41,8 @@ Align with website list — mobility, strength and balance, functional exercise,
 
 ## AHPRA
 
-- [ ] Status **Pending** — do not state practitioner is currently AHPRA-registered; no registration number until granted  
-- [ ] Update profile only after registration outcome is known  
+- [x] General registration as a physiotherapist, PHY0004088824. Do not publish an expiry date.
+- [ ] Create the GBP only when Jackson asks. The website is still a draft.  
 
 ## Photo checklist (before launch)
 

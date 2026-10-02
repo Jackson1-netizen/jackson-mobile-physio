@@ -23,3 +23,6 @@ Thumbs.db
 
 # Astro
 .astro/
+
+# Generated at build time from site.draft. See scripts/write-netlify-headers.mjs
+public/_headers

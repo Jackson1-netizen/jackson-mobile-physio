@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev --port 4721",
-    "build": "astro build",
+    "build": "node scripts/write-netlify-headers.mjs && astro build && node scripts/assert-netlify-form.mjs",
     "preview": "astro preview --port 4721",
     "check": "astro check",
     "checkpoint": "node scripts/checkpoint.mjs",

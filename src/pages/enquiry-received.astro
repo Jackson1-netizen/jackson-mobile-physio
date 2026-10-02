@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../content/site";
+import { messages } from "../content/i18n";
+
+const t = messages.en.enquiry;
+---
+
+<BaseLayout
+  title={`${t.successTitle} | ${site.businessName}`}
+  description="Your Home Motion enquiry has been received."
+  canonicalPath="/enquiry-received"
+>
+  <article class="mx-auto max-w-3xl px-4 py-14">
+    <h1 class="font-serif text-3xl font-bold text-[var(--color-ink)]">{t.successTitle}</h1>
+    <p class="mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]">
+      {t.successBody} <a class="font-semibold text-[var(--color-ink)] underline underline-offset-4" href={site.phoneHref}>{site.phone}</a>.
+    </p>
+    <p class="mt-6 text-sm">
+      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/">Back to home</a>
+    </p>
+  </article>
+</BaseLayout>

@@ -1,6 +1,8 @@
 # Next steps — launch checklist
 
-**Current posture:** `site.draft = true`, `site.ahpraStatus = "Registered"`, site-wide `noindex`, and `robots.txt` disallows all crawlers. AHPRA registration is granted. The registration number is not published until Jackson provides it. **Do not deploy publicly** until Jackson is ready to go live.
+**Current posture (2026-10-02):** see `docs/LAUNCH_STATUS.md`. `site.draft = true` is the only indexing switch. ABN 75 612 731 757 and AHPRA PHY0004088824 are published. The domain is registered and still parked. **Do not deploy or change DNS** until Jackson asks.
+
+The sections below are the earlier checklist and are kept for history. Where they disagree with `docs/LAUNCH_STATUS.md`, follow `docs/LAUNCH_STATUS.md`.
 
 ---
 
@@ -55,12 +57,12 @@ Jackson must **tell you in writing** (message to Cursor agent or confirmed note)
 
 | Item | Action |
 |------|--------|
-| **Business email** | Public addresses are in `site.publicEmail` / `site.referralEmail`. Do **not** enable `EMAIL_DELIVERY_READY` until domain mailboxes are verified (`docs/EMAIL_SETUP.md`). |
+| **Business email** | Public addresses are in `site.publicEmail` / `site.referralEmail`. The enquiry form is a Netlify Form; the notification to `hello@` is a Netlify dashboard setting (`docs/EMAIL_SETUP.md`). Leave `EMAIL_DELIVERY_READY` unset. |
 | **Degree / university** | Confirm qualifications line (currently placeholder). |
 | **Privacy** | Legal review of `site.privacy`; set `privacy.lastUpdated`. |
 | **Legal trading name** | Confirm or remove `legalNamePlaceholder`. |
 | **Production URL** | Set `websiteUrl` when domain is known. |
-| **Deploy** | Jackson chooses host; agents do not deploy without explicit request. |
+| **Deploy** | Netlify staging only. Production branch is `cursor/design-option-2-b759` after this pull request is merged there. Do not use `main`. Do not attach the production domain (`docs/DEPLOYMENT.md`). |
 
 ---
 

@@ -155,6 +155,7 @@ export const homeReferrers = {
   heading: hm.referrers.heading,
   lead: hm.referrers.lead,
   registration: hm.referrers.registration,
+  ndis: hm.referrers.ndis,
   audience:
     "Support Coordinators, Recovery Coaches, GPs, allied health professionals, families and authorised representatives are welcome to get in touch.",
   points: [

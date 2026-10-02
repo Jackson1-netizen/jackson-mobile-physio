@@ -11,10 +11,11 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
   const json: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "MedicalBusiness"],
-    name: site.businessName,
+    name: site.registeredBusinessName,
+    alternateName: [site.displayBrand, site.practitionerName],
     description: site.seo.description,
     url: site.websiteUrl,
-    telephone: site.phone,
+    telephone: site.phoneHref.replace(/^tel:/, ""),
     areaServed,
     serviceType: "Mobile physiotherapy",
     availableLanguage: [...site.languages],

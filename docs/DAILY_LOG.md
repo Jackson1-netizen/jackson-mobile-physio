@@ -134,3 +134,24 @@
 - **Changed:** Published `hello@homemotionphysio.com.au` (general) and `referrals@homemotionphysio.com.au` (referrers). Form, contact, footer, referral sheet, and card now use those values from `site.ts`. Delivery is not live; private inbox env vars are documented only.
 - **Decisions:** See `docs/DECISIONS.md` and `docs/EMAIL_SETUP.md`.
 - **Next:** Domain email configuration and a verified test send before `EMAIL_DELIVERY_READY`.
+
+## 2026-10-02 (launch-readiness, still draft)
+
+- **Changed:** Central config now carries the registered business name, ABN 75 612 731 757, and AHPRA PHY0004088824 (no expiry). NDIS wording, the short enquiry form, draft privacy policy, and draft disclaimer are updated. Indexing stays off via `site.draft`.
+- **Infrastructure recorded:** domain at VentraIP (parked HTTP page, expires 30 Sep 2027); Google Workspace MX and SPF active; DKIM and DMARC not set up; no website host connected.
+- **Decisions:** `docs/DECISIONS.md`, `docs/LAUNCH_STATUS.md`.
+- **Next:** Jackson reviews the legal drafts, tests the two public mailboxes, and chooses a host before any DNS change.
+
+## 2026-10-02 (Netlify preview config, still draft)
+
+- **Changed:** Added `netlify.toml`, the build-ignore script, generated Netlify headers, and a Netlify Forms enquiry form. Docs now list environment-variable names and the dashboard steps for deploy previews plus a branch deploy of `cursor/design-option-2-b759`.
+- **Not done:** No Netlify site was created. No custom domain. No DNS change. No merge to `main`. No extra email provider.
+- **Decisions:** `docs/DECISIONS.md` (Netlify preview only).
+- **Next:** Jackson connects the GitHub repo in Netlify, enables those two deploy types, and adds the form notification to `hello@homemotionphysio.com.au`.
+
+## 2026-10-02 (staging production branch)
+
+- **Changed:** The ignore script now builds only a production deploy of `cursor/design-option-2-b759` and deploy previews of pull requests into that branch. `main` is skipped because it has no `netlify.toml` and would otherwise publish the old site. Docs now say to merge the pull request into the design branch, then set that branch as Netlify’s production branch for staging.
+- **Indexing:** While `site.draft` is true, meta, `robots.txt`, and `X-Robots-Tag` stay `noindex` on those deploys.
+- **Not done:** No Netlify site created. No custom domain. No DNS change. The pull request was not merged.
+- **Next:** Jackson merges the pull request into `cursor/design-option-2-b759`, then connects Netlify with that production branch.

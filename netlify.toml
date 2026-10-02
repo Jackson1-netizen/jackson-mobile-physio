@@ -1,0 +1,31 @@
+# Home Motion — Netlify free-plan staging.
+# Production branch in the Netlify UI must be cursor/design-option-2-b759.
+# main has no copy of this file. Do not leave production on main.
+# Does not attach homemotionphysio.com.au. Does not change DNS.
+# Dashboard steps: docs/DEPLOYMENT.md
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  # Exit 0 skips. Exit 1 builds. See scripts/netlify-ignore-build.mjs.
+  ignore = "node scripts/netlify-ignore-build.mjs"
+
+[build.environment]
+  # package.json requires Node >= 22.12.0. No secrets belong here.
+  NODE_VERSION = "22"
+
+# Staging site. Netlify sets CONTEXT=production for the production branch.
+[context.production]
+  command = "npm run build"
+
+# Pull requests into the production branch. Netlify sets CONTEXT=deploy-preview.
+[context.deploy-preview]
+  command = "npm run build"
+
+# Same command if Netlify selects the branch context for the staging branch.
+[context."cursor/design-option-2-b759"]
+  command = "npm run build"
+
+# Security headers and X-Robots-Tag are written at build time
+# by scripts/write-netlify-headers.mjs. While site.draft is true, the staging
+# production deploy and its deploy previews are noindex.

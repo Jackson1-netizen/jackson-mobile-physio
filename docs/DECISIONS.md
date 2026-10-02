@@ -137,3 +137,30 @@ Append-only record. Do not silently overwrite prior entries.
 - **Images:** `scripts/optimize-images.mjs` (sharp, already installed with Astro) writes AVIF/WebP variants to `public/photos/opt/` and lossless resized logo copies to `public/logo/`. Originals, including `home-motion-logo.png`, are unchanged.
 - **Map:** Leaflet JS and CSS load only when the map is within 300px of the viewport. If they fail, the static pin fallback stays visible.
 - **Sitemap:** `/concepts/**` excluded. Draft / noindex unchanged.
+
+## 2026-10-02 — Launch-readiness pass on the option 2 design (still draft)
+
+- **Branch:** work landed on `cursor/launch-readiness-16bd`, based on `cursor/design-option-2-b759`. Not merged to `main`. Not deployed.
+- **Identity published from public registers:** ABN 75 612 731 757 (LAW, WAI WA, sole trader; ASIC business name Home Motion Physiotherapy). AHPRA general registration PHY0004088824. Expiry date is not published.
+- **Launch switch:** `site.draft` remains `true` (noindex + robots disallow). Production origin prepared as `https://homemotionphysio.com.au` without changing DNS.
+- **NDIS:** “NDIS plan-managed and self-managed enquiries welcome.” Not an NDIS registered provider. No funding guarantee.
+- **Enquiry:** name and phone required; other fields optional; no health-detail fields; note not to include sensitive information. Mailto only.
+- **Legal:** `/privacy` and `/disclaimer` rewritten as drafts pending owner review (`docs/LEGAL_DRAFTS.md`).
+- **Not merged:** `cursor/launch-ready-site-2581` and related branches have no merge base with this design and would conflict. Recorded in `docs/LAUNCH_STATUS.md`.
+
+## 2026-10-02 — Netlify preview only (no production domain)
+
+- **Host:** Netlify free plan. `netlify.toml` builds `dist` with Node 22. The ignore script allows pull-request deploy previews and the branch `cursor/design-option-2-b759`. It skips `main` and every other branch.
+- **Not done from this repo:** creating the Netlify site, adding a custom domain, changing VentraIP DNS, or merging to `main`.
+- **Indexing:** `site.draft` stays `true`. HTML `noindex`, `robots.txt` disallow, and a generated `X-Robots-Tag` stay in place. Preview and that branch deploy stay `noindex` even if the draft switch later changes.
+- **Canonicals:** preview and branch deploys use `DEPLOY_PRIME_URL` or `URL`. `PUBLIC_SITE_URL` stays unset on those deploys.
+- **Enquiry form:** Netlify Forms, notification destination `hello@homemotionphysio.com.au` (dashboard only). No Formspree, EmailJS, Resend, SMTP, or other new account. `ENQUIRY_NOTIFICATION_EMAIL`, `REFERRAL_NOTIFICATION_EMAIL`, and `EMAIL_DELIVERY_READY` are unused and must stay unset.
+- **Env names** (no values in Git): `CONTEXT`, `BRANCH`, `URL`, `DEPLOY_PRIME_URL` from Netlify; `NODE_VERSION` in `netlify.toml`; optional `PUBLIC_SITE_URL` for a non-preview local build only.
+
+## 2026-10-02 — Staging production branch is the design branch
+
+- **Risk:** `main` has no `netlify.toml`. If Netlify’s production branch stayed `main`, the first production deploy would auto-detect a build, skip the ignore script, and publish the old site at `*.netlify.app` without this `noindex` header.
+- **Staging:** After PR #3 is merged into `cursor/design-option-2-b759`, that branch is Netlify’s production branch. No custom domain. No merge to `main`.
+- **Ignore script:** Builds only `CONTEXT=production` with `BRANCH=cursor/design-option-2-b759`, and deploy previews whose pull request targets that branch (`REVIEW_ID` via the public GitHub API). Everything else is skipped.
+- **Indexing:** While `site.draft` is true, that production deploy and those previews stay `noindex` in the HTML meta tag, `robots.txt`, and `X-Robots-Tag`.
+- **Launch later:** The real production branch and the domain are a separate decision with Jackson.

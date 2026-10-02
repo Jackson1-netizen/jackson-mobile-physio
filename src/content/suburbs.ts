@@ -17,7 +17,7 @@ export const suburbPages: SuburbPage[] = [
     slug: "box-hill",
     name: "Box Hill",
     seo: {
-      title: "Mobile Physiotherapist Box Hill | WAI WA LAW",
+      title: "Mobile Physiotherapist Box Hill | Home Motion",
       description:
         "Independent mobile physiotherapy in Box Hill and surrounds. English, Cantonese, and Mandarin. NDIS plan-managed and self-managed enquiries welcome — not an NDIS registered provider.",
     },
@@ -36,7 +36,7 @@ export const suburbPages: SuburbPage[] = [
     slug: "doncaster",
     name: "Doncaster",
     seo: {
-      title: "Mobile Physiotherapist Doncaster | WAI WA LAW",
+      title: "Mobile Physiotherapist Doncaster | Home Motion",
       description:
         "Home-visit physiotherapy in Doncaster and Doncaster East. Personal mobile service in English, Cantonese, or Mandarin. AHPRA-registered physiotherapist.",
     },
@@ -55,7 +55,7 @@ export const suburbPages: SuburbPage[] = [
     slug: "blackburn",
     name: "Blackburn",
     seo: {
-      title: "Mobile Physiotherapist Blackburn | WAI WA LAW",
+      title: "Mobile Physiotherapist Blackburn | Home Motion",
       description:
         "Mobile physio in Blackburn and Blackburn South. Eastern suburbs home visits; English, Cantonese, and Mandarin. Independent practitioner — not a corporate roster.",
     },
@@ -74,7 +74,7 @@ export const suburbPages: SuburbPage[] = [
     slug: "ringwood",
     name: "Ringwood",
     seo: {
-      title: "Mobile Physiotherapist Ringwood | WAI WA LAW",
+      title: "Mobile Physiotherapist Ringwood | Home Motion",
       description:
         "Home-visit physiotherapy in Ringwood and Ringwood East. Mobile eastern suburbs service with trilingual consultations. AHPRA-registered physiotherapist.",
     },
@@ -93,7 +93,7 @@ export const suburbPages: SuburbPage[] = [
     slug: "burwood",
     name: "Burwood",
     seo: {
-      title: "Mobile Physiotherapist Burwood | WAI WA LAW",
+      title: "Mobile Physiotherapist Burwood | Home Motion",
       description:
         "Mobile physiotherapy in Burwood and Burwood East. University and family-friendly area; home visits in English, Cantonese, or Mandarin.",
     },
@@ -112,9 +112,9 @@ export const suburbPages: SuburbPage[] = [
     slug: "glen-waverley",
     name: "Glen Waverley",
     seo: {
-      title: "Mobile Physiotherapist Glen Waverley | WAI WA LAW",
+      title: "Mobile Physiotherapist Glen Waverley | Home Motion",
       description:
-        "Home-visit physio in Glen Waverley. CALD-friendly mobile physiotherapy across Melbourne's east. NDIS non-provider honesty; plan/self-managed enquiries.",
+        "Home-visit physiotherapy in Glen Waverley. English, Cantonese and Mandarin. NDIS plan-managed and self-managed enquiries welcome. Not an NDIS registered provider.",
     },
     headline: "Mobile physiotherapy in Glen Waverley",
     paragraphs: [
@@ -131,7 +131,7 @@ export const suburbPages: SuburbPage[] = [
     slug: "mitcham",
     name: "Mitcham",
     seo: {
-      title: "Mobile Physiotherapist Mitcham | WAI WA LAW",
+      title: "Mobile Physiotherapist Mitcham | Home Motion",
       description:
         "Mobile physiotherapy in Mitcham and Mitcham East. Quiet residential areas; personal home-visit service. Eastern suburbs; trilingual enquiries.",
     },
@@ -150,7 +150,7 @@ export const suburbPages: SuburbPage[] = [
     slug: "nunawading",
     name: "Nunawading",
     seo: {
-      title: "Mobile Physiotherapist Nunawading | WAI WA LAW",
+      title: "Mobile Physiotherapist Nunawading | Home Motion",
       description:
         "Home-visit physiotherapy in Nunawading. Mobile service for eastern suburbs participants and private clients. English, Cantonese, Mandarin.",
     },

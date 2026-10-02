@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../content/site";
+---
+
+<BaseLayout
+  title={`${site.disclaimer.pageTitle} | ${site.businessName}`}
+  description={site.disclaimer.metaDescription}
+  canonicalPath="/disclaimer"
+>
+  <article class="mx-auto max-w-3xl px-4 py-14">
+    <h1 class="font-serif text-3xl font-bold text-[var(--color-ink)]">{site.disclaimer.pageTitle}</h1>
+    <p class="mt-2 text-sm text-[var(--color-ink-muted)]">
+      {site.disclaimer.lastUpdatedLabel} {site.disclaimer.lastUpdated}
+    </p>
+    <p class="mt-6 rounded-md border border-amber-200 bg-[var(--color-draft-bg)] p-4 text-sm text-[var(--color-draft)]">
+      {site.disclaimer.workingDraftNotice}
+    </p>
+
+    <div class="mt-10 space-y-8 text-[var(--color-ink-muted)] leading-relaxed">
+      {
+        site.disclaimer.sections.map((section) => (
+          <section>
+            <h2 class="font-serif text-xl font-semibold text-[var(--color-ink)]">{section.heading}</h2>
+            <div class="mt-3 space-y-3">
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    <p class="mt-10 text-sm">
+      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/privacy">Privacy policy (draft)</a>
+      <span class="mx-2 text-[var(--color-ink-muted)]" aria-hidden="true">·</span>
+      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/">Back to home</a>
+    </p>
+  </article>
+</BaseLayout>

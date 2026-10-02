@@ -1,6 +1,6 @@
 # Referral sheet copy (mirrors `/referral`)
 
-AHPRA registration granted. Registration number not printed until Jackson supplies it. Referral email: referrals@homemotionphysio.com.au (mailbox not verified until domain email is configured). No website URL on the print sheet until confirmed for display.
+AHPRA general registration PHY0004088824 (no expiry printed). Referral email: referrals@homemotionphysio.com.au. No website URL or QR on the print sheet while the domain still shows the parked page.
 
 ---
 
@@ -14,11 +14,13 @@ Mobile Physiotherapy — Melbourne Eastern Suburbs
 
 Wai Wa "Jackson" Law
 
-- Physiotherapy qualification: [DEGREE / UNIVERSITY TO BE CONFIRMED]
-- AHPRA registration: Registered
+- Physiotherapy qualification: not printed until Jackson confirms the degree and university
+- AHPRA registration: General registration · PHY0004088824
 - Professional insurance: Maintained as required for practice
 
-AHPRA physiotherapy registration has been granted. Jackson is an AHPRA-registered physiotherapist.
+Jackson holds general registration as a physiotherapist with AHPRA (PHY0004088824).
+
+Home Motion Physiotherapy is a registered business name of Wai Wa Law, sole trader. ABN 75 612 731 757.
 
 ## Service model
 
@@ -42,15 +44,26 @@ Examples of support that may be discussed at assessment. Specific care is planne
 
 ## NDIS
 
-Enquiries welcome from self-managed and plan-managed NDIS participants. Funding eligibility and availability should be confirmed before services commence.
+NDIS plan-managed and self-managed enquiries welcome.
+
+Home Motion is not an NDIS registered provider.
+
+Funding eligibility and availability must be confirmed before care begins. Nothing on this site guarantees NDIS funding, approval, or outcomes.
+
+## How to refer
+
+- Phone Jackson, or email the referral address. You will reach the physiotherapist who provides the service.
+- For a first contact, a name, phone number, suburb, preferred language, and whether the enquiry is plan-managed or self-managed is enough.
+- Please do not include health information in the first email.
 
 ## Contact
 
 Phone: 0433 479 703  
-Email: referrals@homemotionphysio.com.au
+Referrals: referrals@homemotionphysio.com.au  
+General enquiries: hello@homemotionphysio.com.au
 
 QR code: **[QR PLACEHOLDER — add when URL confirmed for print]**
 
 ---
 
-Draft site — not for public use. ABN 75 612 731 757. Not for emergency use.
+Draft site — not for public use. ABN 75 612 731 757. AHPRA PHY0004088824. Not for emergency use. Call 000.

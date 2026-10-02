@@ -1,6 +1,6 @@
 ---
 import HomePicture from "./HomePicture.astro";
-import { site, getRegistrationDisplayLine } from "../../content/site";
+import { getRegistrationDisplayLine } from "../../content/site";
 import { homeHero, homeMedia } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
@@ -45,7 +45,7 @@ const hero = homeMedia.hero;
           {homeHero.secondaryCta}
         </a>
       </div>
-      <p class="hm-ahpra" data-i18n-path={site.registrationNumber ? undefined : "hm.hero.ahpra"}>
+      <p class="hm-ahpra" data-i18n-path="hm.hero.ahpra">
         {registrationLine}
       </p>
     </div>
