@@ -1,5 +1,7 @@
 # Website V2 — UX, SEO & visual redesign plan
 
+> **Superseded / current state (2026-10-02):** This is a planning document from 28 September 2026. It is not the live site. The current source of truth is `docs/LAUNCH_STATUS.md`. The public brand is Home Motion. AHPRA is no longer described as pending on the draft site. “WAI WA LAW” in the sections below is historical wording, not the current wordmark. Do not build from this plan unless Jackson asks.
+
 **Status:** Planning only — no BUILD V2 implementation until Jackson approves this document and replies **BUILD V2**.  
 **Baseline codebase:** branch `cursor/launch-ready-site-2581` (Phase 1 launch-ready draft).  
 **Date:** 28 September 2026.

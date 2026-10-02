@@ -1,6 +1,6 @@
 # Project brief — Jackson mobile physiotherapy (Phase 1)
 
-> **Current status (2026-10-02):** `docs/LAUNCH_STATUS.md`. The brand is Home Motion. The constraints below are the original Phase 1 brief and are kept for history.
+> **Superseded / current state (2026-10-02):** `docs/LAUNCH_STATUS.md` is the source of truth. The brand is Home Motion. AHPRA general registration is recorded in that file. Staging is on Netlify. Lines below that say registration is not granted, that the site is not deployed, or that there is no QR code are the original Phase 1 brief and are kept for history.
 
 ## Purpose
 

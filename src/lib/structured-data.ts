@@ -1,5 +1,6 @@
 import { site } from "../content/site";
 import { messages } from "../content/i18n";
+import { draftStatusProperties } from "./draft-schema.mjs";
 
 /** JSON-LD for LocalBusiness / healthcare-oriented mobile service (draft). */
 export function getLocalBusinessJsonLd(): Record<string, unknown> {
@@ -26,11 +27,7 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
       addressCountry: "AU",
     },
     additionalProperty: [
-      {
-        "@type": "PropertyValue",
-        name: "Draft status",
-        value: "Site in draft; AHPRA physiotherapy registration granted",
-      },
+      ...draftStatusProperties(site.draft),
       {
         "@type": "PropertyValue",
         name: "AHPRA status",

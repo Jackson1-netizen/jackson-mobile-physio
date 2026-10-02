@@ -19,11 +19,11 @@ Current status of the owner-approved design branch. Staging is live and stays a 
 - Netlify staging is live at `https://homemotion-staging.netlify.app`. Production branch is `cursor/design-option-2-b759`. Branch deploys are limited to that production branch. Deploy previews are pull requests against it. No custom domain and no Netlify environment variables. Visitor Access / team login is on (anonymous HTTP 401).
 - Pull request #3 is merged into `cursor/design-option-2-b759` (merge commit `a5f5745`). `main` is untouched and is not a deploy target.
 - Netlify Forms detected form `enquiry`. The email notification to `hello@homemotionphysio.com.au` is saved. As of about 4:55 AM AEST on 3 Oct 2026, the form-to-email path is verified on staging: the test submission “TEST - staging check (please ignore)” (4:45 AM AEST) is in Netlify Forms, and the notification from `formresponses@netlify.com` with subject “Form submission from enquiry form:” arrived in the `hello@` Workspace inbox, not in Spam.
-- The referral sheet includes a QR code generated at build time for `https://homemotionphysio.com.au/referral/`. It does not call a QR website. Until DNS changes, that address still opens the parked page.
-- Draft privacy policy and website disclaimer are on the site and linked from the footer.
-- Indexing is off behind `site.draft`. Concept mockups stay out of the sitemap, and stay disallowed in `robots.txt` even after launch.
-- Canonical URLs on the staging deploy and its pull-request previews use the hostname Netlify assigns (`DEPLOY_PRIME_URL` or `URL`). They do not claim the public domain. A local build still falls back to `https://homemotionphysio.com.au` unless `PUBLIC_SITE_URL` is set. That fallback does not change DNS. `.env.example` lists variable names only.
-- Favicon and Open Graph image use the Home Motion name. A photographic social image is still outstanding.
+- The referral sheet includes a QR code generated at build time for `https://homemotionphysio.com.au/referral/`. It does not call a QR website. Until DNS changes, that address still opens the parked page. No page shows a QR placeholder.
+- Draft privacy policy and website disclaimer are on the site and linked from the footer. They say the map is loaded from Esri (ArcGIS) and that Netlify hosts the site and processes the form. They are still pending owner review and are not adopted.
+- Indexing is off behind `site.draft`. Historical concept pages are in `docs/archive/concepts` and are not part of the build or the sitemap. `robots.txt` still disallows `/concepts/` after launch.
+- Canonical URLs, Open Graph, JSON-LD, and the sitemap use the staging origin while `site.draft` is true: `DEPLOY_PRIME_URL`, then `URL`, then `https://homemotion-staging.netlify.app`. A production-context build of `cursor/design-option-2-b759` does not use `https://homemotionphysio.com.au`. `PUBLIC_SITE_URL` is ignored until `site.draft` is false. That does not change DNS. See `docs/DEPLOYMENT.md`.
+- The Open Graph image is `public/og.png` (1200×630), made from the existing logo and brand colours. It is not a photograph.
 
 ## BLOCKED
 
@@ -35,17 +35,19 @@ Current status of the owner-approved design branch. Staging is live and stays a 
 - The GitHub repository is **public**. Treat every committed file as public. Do not add patient information, passwords, or private inboxes.
 - University / degree line is still unconfirmed, so it is kept in config and hidden on the pages.
 - Privacy policy and disclaimer are not adopted. They are not legal advice.
-- A photographic 1200×630 social image is still outstanding. The referral QR points at the confirmed public URL, which still parks until DNS changes.
+- A photographic Open Graph image is optional. The shipped image is the branded logo card at `public/og.png`. The referral QR points at the confirmed public URL, which still parks until DNS changes.
 
 ## NEEDS JACKSON
 
+- Confirm the AHPRA public-register entry: practitioner name, profession, General registration status, and any conditions or limitations. Do not infer the result from the number already printed on the draft site.
+- Confirm the HOME MOTION PHYSIOTHERAPY business-name registration details. Do not infer them.
 - Send a test email from an address outside the domain to `referrals@homemotionphysio.com.au` and to `hello@homemotionphysio.com.au`, and confirm both arrive. That checks inbound alias routing from external senders. The Netlify form notification to `hello@` is already verified.
 - After monitoring, consider raising DMARC from `p=none` to `p=quarantine`. Do not change it in this repo, and do not invent keys.
 - Confirm the phone number `0433 479 703` and these eight suburbs: Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley, Mitcham, Nunawading.
 - Review and approve the `/privacy` and `/disclaimer` drafts, or ask a lawyer to review them (`docs/LEGAL_DRAFTS.md`).
 - Decide whether the physiotherapy degree and university should be shown. The line stays hidden until then.
 - Decide whether the public wordmark stays “Home Motion” (it does now) while the footer uses the registered name “Home Motion Physiotherapy”.
-- Approve a photographic Open Graph image if he wants one before launch.
+- Say if he wants a photographic Open Graph image before launch. The branded 1200×630 logo image is already in place.
 - Approve launch. The later steps are in `docs/DEPLOYMENT.md`: add `homemotionphysio.com.au` and `www` in Netlify, replace the VentraIP apex `A` record `103.42.108.46` with `75.2.60.5`, replace the `www` `A` record with a CNAME to `homemotion-staging.netlify.app`, wait for the HTTPS certificate, remove Visitor Access, set `site.draft` to `false`, verify the form and both mailboxes on the live domain, then decide the production-branch strategy. Do not deploy `main`.
 
 ## READY FOR LAUNCH

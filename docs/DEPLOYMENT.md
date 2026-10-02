@@ -73,7 +73,7 @@ While `site.draft` is `true`, the staging production deploy and its deploy previ
 
 Those three follow `site.draft` for a production build. Deploy previews and branch deploys also get `X-Robots-Tag` when `CONTEXT` is `deploy-preview` or `branch-deploy`, including after a later change to `site.draft`. Leave `site.draft` true until the launch steps at the bottom of this file.
 
-Other headers: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` with camera, microphone, geolocation, and payment disabled, `Strict-Transport-Security` for one year with `includeSubDomains` (no preload), and a Content-Security-Policy that allows this site’s own assets, Astro’s inline scripts and styles, and the map and concept-page hosts already used by the build. Forms may post only to this site (`form-action 'self'`).
+Other headers: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` with camera, microphone, geolocation, and payment disabled, `Strict-Transport-Security` for one year with `includeSubDomains` (no preload), and a Content-Security-Policy that allows this site’s own assets, Astro’s inline scripts and styles, and the Esri map tiles (`server.arcgisonline.com`). Forms may post only to this site (`form-action 'self'`). Historical concept pages are archived and are not part of this build, so their font and photo hosts are not in the policy.
 
 ## Environment variables
 
@@ -82,15 +82,23 @@ Names only. No values belong in Git. None of these are API keys.
 | Name | Who sets it | How the build uses it |
 | --- | --- | --- |
 | `CONTEXT` | Netlify | `production` for the staging branch, or `deploy-preview` for a pull request. The ignore script builds those two only when they belong to `cursor/design-option-2-b759`. `branch-deploy` is skipped. While `site.draft` is true, the header script sends `X-Robots-Tag` for every context. It also sends that header for `deploy-preview` and `branch-deploy` after a later draft change. |
-| `BRANCH` | Netlify | On the staging production deploy this is `cursor/design-option-2-b759`. On a deploy preview it is often `pull/<id>/head`. The staging branch uses the Netlify hostname as its canonical origin. |
+| `BRANCH` | Netlify | On the staging production deploy this is `cursor/design-option-2-b759`. On a deploy preview it is often `pull/<id>/head`. Passed into `scripts/site-origin.mjs`. It does not by itself select the public domain. |
 | `REVIEW_ID` | Netlify | Pull request number for a deploy preview. The ignore script uses it to read the public base branch. It is not a secret. |
-| `URL` | Netlify | Site URL for the deploy. Used as the canonical origin on staging or a preview when `DEPLOY_PRIME_URL` is empty. |
-| `DEPLOY_PRIME_URL` | Netlify | Primary URL of that specific deploy. Preferred over `URL` for staging and preview canonicals. |
+| `URL` | Netlify | Site URL for the deploy. Used as the canonical origin while the site is still a draft, or on a preview, when `DEPLOY_PRIME_URL` is empty. |
+| `DEPLOY_PRIME_URL` | Netlify | Primary URL of that specific deploy. Preferred over `URL` for draft and preview canonicals. |
 | `REPOSITORY_URL` | Netlify | Used only to choose the GitHub repository for the public pull-request lookup. |
 | `NODE_VERSION` | `netlify.toml` (`22`) | Selects the Node version for the build. Not a secret. `package.json` requires Node `>=22.12.0`. |
-| `PUBLIC_SITE_URL` | Nobody, on staging | Optional. **Do not set it** on the staging site or its deploy previews. Those builds use `DEPLOY_PRIME_URL` or `URL`. A local build uses it only when `CONTEXT` is not a preview and `BRANCH` is not the staging branch. If it is also unset, the local fallback is `https://homemotionphysio.com.au`. That fallback does not attach the domain. |
+| `PUBLIC_SITE_URL` | Nobody, until launch | Optional override used only when `site.draft` is `false` and the context is not a deploy preview or branch deploy. **Do not set it** on staging. While `site.draft` is true it is ignored, even if it is `https://homemotionphysio.com.au`. |
 
-`astro.config.mjs` passes the resolved origin in as `__HM_SITE_ORIGIN__`. Pages read that for canonical URLs, Open Graph, JSON-LD, and the sitemap. It is a public URL, not a credential.
+### Canonical origin
+
+`scripts/site-origin.mjs` decides the origin. `astro.config.mjs` passes `CONTEXT`, `BRANCH`, `URL`, `DEPLOY_PRIME_URL`, and `PUBLIC_SITE_URL` into it and injects the result as `__HM_SITE_ORIGIN__`. Pages use that for canonical URLs, Open Graph, JSON-LD, and the sitemap.
+
+While `draft: true` in `src/content/site.ts`, the origin is `DEPLOY_PRIME_URL`, then `URL`, then `https://homemotion-staging.netlify.app`. A production-context build of `cursor/design-option-2-b759` does not emit `https://homemotionphysio.com.au`. Setting `PUBLIC_SITE_URL` does not change that.
+
+The public domain is used only when production is explicitly launched: `site.draft` is `false`, and the build is not a deploy preview or branch deploy. `PUBLIC_SITE_URL` can then override that domain. Deploy previews still use the Netlify URL. None of this attaches the domain or changes DNS.
+
+`npm test` covers the staging production case and the explicit-launch case.
 
 These names are **not** read by the enquiry form. Leave them unset. Do not commit values:
 
@@ -121,7 +129,7 @@ No Formspree, EmailJS, Resend, or SMTP account is added. Netlify Forms on the fr
 ## Enquiry form
 
 - Form name `enquiry`, `method="POST"`, `action="/enquiry-received/"`, `data-netlify="true"`, honeypot `bot-field`.
-- Fields: name and phone (required); email, suburb, language, NDIS-plan checkbox, and a short message (optional, 400 characters). The page asks people not to include health information and links to `/privacy`.
+- Fields: name (100) and phone (20) required; email (254), suburb (80), language, NDIS-plan checkbox, and a short message (1000) optional. The note beside the message says not to include detailed medical or health information and links to `/privacy`. The honeypot is off-screen, not `display: none`. There is no CAPTCHA.
 - With JavaScript, the browser posts `application/x-www-form-urlencoded` to `/`. The success state is shown only when that response is OK. A local `astro preview` rejects the post, so it must show the failure state and keep the mailto link.
 - Without JavaScript, the browser posts to `/enquiry-received/`.
 - `mailto:hello@homemotionphysio.com.au` stays visible as a secondary link. It is not the form handler.
@@ -147,6 +155,6 @@ Order:
 4. Do not change MX (`smtp.google.com`), SPF (`v=spf1 include:_spf.google.com ~all`), the DKIM TXT for selector `google`, the DMARC TXT, or the Google site-verification TXT.
 5. Wait until Netlify shows the HTTPS certificate as issued for the new domain.
 6. Remove Netlify Visitor Access / team login. While it is on, anonymous visitors get HTTP 401 and cannot submit the enquiry form. Leave it on until this step.
-7. Set `site.draft` to `false` in `src/content/site.ts` and redeploy. Until then the HTML meta tag, `robots.txt`, and `X-Robots-Tag` stay `noindex`. Do this after HTTPS works, so the public URL is the domain rather than only the staging hostname.
+7. Set `site.draft` to `false` in `src/content/site.ts` and redeploy. Until then the HTML meta tag, `robots.txt`, and `X-Robots-Tag` stay `noindex`, and canonical URLs stay on the staging hostname. Do this after HTTPS works, so the public URL is the domain rather than only the staging hostname. The referral QR already points at `https://homemotionphysio.com.au/referral/`. Until this DNS cutover, that address opens the VentraIP parked page.
 8. On the live HTTPS site, submit one enquiry and confirm it arrives at `hello@homemotionphysio.com.au`. Send one message to `hello@` and one to `referrals@` from an outside address.
 9. After that, decide with Jackson whether the Netlify production branch stays `cursor/design-option-2-b759` or changes. Do not point production at `main`.

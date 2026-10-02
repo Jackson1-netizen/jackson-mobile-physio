@@ -1,6 +1,8 @@
 # Google Business Profile — editable draft
 
-**Status:** TODO / NOT CONFIRMED — do not publish until business details are verified.
+> **Superseded / current state (2026-10-02):** Do not create the profile yet. Current facts are in `docs/LAUNCH_STATUS.md`. The public brand is Home Motion / Home Motion Physiotherapy, not “WAI WA LAW”. There is no `example.com` placeholder. `hello@homemotionphysio.com.au` receives the Netlify form notification; an outside-sender test is still open. The website URL is still the parked domain until DNS cutover. The referral QR points at `https://homemotionphysio.com.au/referral/` and opens that parked page until then.
+
+**Status:** TODO / NOT CONFIRMED — do not publish until business details are verified and Jackson asks.
 
 ## Business type
 
