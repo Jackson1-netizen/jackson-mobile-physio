@@ -6,8 +6,11 @@
  * or a branch deploy. While `site.draft` is true, PUBLIC_SITE_URL is ignored,
  * including a production-context build of cursor/design-option-2-b759.
  *
- * Staging and previews use DEPLOY_PRIME_URL, then URL, then
- * https://homemotion-staging.netlify.app. This does not attach a domain or change DNS.
+ * While the site is a draft and CONTEXT is production, the origin is URL
+ * (Netlify's main site URL), then https://homemotion-staging.netlify.app.
+ * DEPLOY_PRIME_URL is not used there: on that deploy it is the branch hostname.
+ * Deploy previews and branch deploys use DEPLOY_PRIME_URL, then URL, then the
+ * staging origin. This does not attach a domain or change DNS.
  */
 import { readFileSync } from "node:fs";
 
@@ -26,8 +29,13 @@ function strip(value) {
   return String(value || "").trim().replace(/\/$/, "");
 }
 
-function netlifyOrigin(env) {
-  return strip(env.DEPLOY_PRIME_URL) || strip(env.URL);
+function draftOrigin(env) {
+  const context = env.CONTEXT || "";
+  const previewContext = context === "deploy-preview" || context === "branch-deploy";
+  if (previewContext) {
+    return strip(env.DEPLOY_PRIME_URL) || strip(env.URL) || STAGING_ORIGIN;
+  }
+  return strip(env.URL) || STAGING_ORIGIN;
 }
 
 /**
@@ -44,7 +52,7 @@ export function resolveSiteOrigin(env = process.env, options = {}) {
   const launched = draft === false && !previewContext;
 
   if (!launched) {
-    return netlifyOrigin(env) || STAGING_ORIGIN;
+    return draftOrigin(env);
   }
 
   return strip(env.PUBLIC_SITE_URL) || PUBLIC_ORIGIN;
