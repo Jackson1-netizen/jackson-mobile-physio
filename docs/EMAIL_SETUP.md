@@ -1,36 +1,45 @@
 # Email setup
 
-Public identities are on the draft site. Google Workspace is the mail host for `homemotionphysio.com.au` (MX `smtp.google.com`, SPF `include:_spf.google.com`). DKIM and DMARC are **not** set up yet. This website still does not send mail. Do not set `EMAIL_DELIVERY_READY` until a test message to each public address is confirmed.
+Public identities are on the draft site. Google Workspace is the mail host for `homemotionphysio.com.au` (MX `smtp.google.com`, SPF `include:_spf.google.com`). DKIM and DMARC are **not** set up yet.
+
+The website does not send mail itself. The enquiry form is a **Netlify Form**. No Formspree, EmailJS, Resend, SMTP, or other mail API is used, and none should be added. No extra paid account is required.
 
 ## Public identity
 
 | Audience | Address | Where it appears |
 | --- | --- | --- |
-| General enquiries | `hello@homemotionphysio.com.au` (`site.publicEmail`) | Contact, footer, business card, privacy, FAQ, header Email action |
+| General enquiries | `hello@homemotionphysio.com.au` (`site.publicEmail`) | Contact form notification, footer, business card, privacy, FAQ, header Email action |
 | Referrals / professionals | `referrals@homemotionphysio.com.au` (`site.referralEmail`) | For Referrers, referral sheet |
 
-Do not show both addresses on every surface.
+Do not show both addresses on every surface. Do not publish the admin mailbox.
 
-## Intended routing (later)
+## How an enquiry is delivered
 
 ```
-Website enquiry
-  → Home Motion enquiry backend (not implemented)
-  → notification to ENQUIRY_NOTIFICATION_EMAIL (private inbox, env only)
-
-Referral enquiry
-  → Home Motion referral backend (not implemented)
-  → notification to REFERRAL_NOTIFICATION_EMAIL (or the same private inbox)
+Website form (name="enquiry")
+  → Netlify Forms (included on the Netlify free plan)
+  → email notification to hello@homemotionphysio.com.au
 ```
 
-The visitor still sees the public Home Motion addresses. The private inbox must never appear in HTML, client JavaScript, JSON-LD, or Git.
+Jackson adds that notification in the Netlify dashboard after the first deploy: **Forms → enquiry → email notification**. The address is typed there. It is not an environment variable, and it is not stored in client code or GitHub.
 
-Reply-from (later, at the email provider):
+Netlify stores the submission. The privacy draft says that storage may be outside Australia. This site does not keep its own copy and does not write the form to `localStorage`.
 
-- Replies to customers should appear as `hello@homemotionphysio.com.au`
-- Replies to referrers should appear as `referrals@homemotionphysio.com.au`
+`mailto:hello@homemotionphysio.com.au` remains on the page as a secondary link. It opens the visitor’s own email app. It is not the form handler.
 
-## Domain / provider work
+Referral email stays a `mailto:` to `referrals@`. There is no second form and no second provider.
+
+## What the build does not use
+
+Leave these unset. The Netlify form does not read them. Do not commit values.
+
+- `ENQUIRY_NOTIFICATION_EMAIL`
+- `REFERRAL_NOTIFICATION_EMAIL`
+- `EMAIL_DELIVERY_READY`
+
+`src/lib/email-delivery.ts` is still a non-sending stub. Do not turn it into an API client.
+
+## Domain mail (Google Workspace)
 
 Already in place, from the owner’s DNS records:
 
@@ -38,29 +47,11 @@ Already in place, from the owner’s DNS records:
 2. Google Workspace is active for the domain.
 3. SPF includes `_spf.google.com`.
 
-Still to do, outside this repo:
+Still to do, outside this repo, and without changing website DNS:
 
-1. Confirm mailboxes or aliases exist for `hello@` and `referrals@`, and that a test message arrives at each.
-2. Confirm a reply shows that public address as From.
-3. Add DKIM and DMARC. Do not commit the keys.
-4. Only then set `EMAIL_DELIVERY_READY=true` in the **server** environment (never in Git) and add `ENQUIRY_NOTIFICATION_EMAIL` / `REFERRAL_NOTIFICATION_EMAIL`.
+1. Confirm mailboxes or aliases exist for `hello@` and `referrals@`.
+2. After the Netlify form notification is saved, send one test enquiry and confirm it arrives at `hello@`.
+3. Confirm a reply shows `hello@` or `referrals@` as From, matching the audience.
+4. Add DKIM and DMARC when Jackson is ready. Do not commit the keys.
 
-The website host is a separate choice. DNS still shows no website host. See `docs/DEPLOYMENT.md`.
-
-Until step 5 is done:
-
-- The website must not claim an enquiry was sent.
-- Opening a visitor’s mail app (`mailto:`) only drafts a message **to** the public address from their own account. Delivery still depends on the mailbox existing.
-
-## What this codebase already has
-
-- `src/content/site.ts` — `publicEmail` and `referralEmail` (display source of truth).
-- `src/lib/email-delivery.ts` — separates public identity from private notification env vars; `deliverEnquiry()` is a stub and does not send.
-- `.env.example` — names of server env vars. No secrets.
-
-## What this codebase must not do yet
-
-- Configure DNS.
-- Invent SMTP credentials.
-- Commit `.env` or any private email.
-- Send production email from `hello@` or `referrals@`.
+Do not point the website domain at Netlify as part of this email work. See `docs/DEPLOYMENT.md`.

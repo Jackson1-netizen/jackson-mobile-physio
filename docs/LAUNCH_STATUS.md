@@ -15,18 +15,21 @@ Current status of the owner-approved design branch. The site stays a **private d
 - ABN **75 612 731 757** is shown where the site shows the business identity (footer, referral sheet, privacy page).
 - AHPRA **general registration** **PHY0004088824** is shown in the hero, about section, referrer section, footer, referral sheet, privacy page, and disclaimer. The expiry date is not stored or shown.
 - NDIS copy uses “NDIS plan-managed and self-managed enquiries welcome”, states that Home Motion is not an NDIS registered provider, and does not guarantee funding.
-- Enquiry form asks for name and phone, with optional email, suburb, language, an NDIS-plan checkbox, and an optional short reason. It tells people not to include health information. The site does not store or send the form; it opens the visitor’s email app to `hello@homemotionphysio.com.au`. Referrers are directed to `referrals@homemotionphysio.com.au`.
+- Enquiry form asks for name and phone, with optional email, suburb, language, an NDIS-plan checkbox, and an optional short reason. It tells people not to include health information and links to `/privacy`. It posts to **Netlify Forms** (form name `enquiry`, honeypot, no extra email provider). A success message is shown only when that post is accepted. `mailto:hello@homemotionphysio.com.au` stays as a secondary link. Referrers are directed to `referrals@homemotionphysio.com.au`.
+- Netlify preview config is in the repo: `netlify.toml`, build ignore rules, and generated security headers including `X-Robots-Tag: noindex, nofollow` while `site.draft` is true. Pull-request deploy previews and a branch deploy of `cursor/design-option-2-b759` are the only deploys the ignore script allows. `main` is skipped. No custom domain is configured.
 - Draft privacy policy and website disclaimer are on the site and linked from the footer.
 - Indexing is off behind `site.draft`. Concept mockups stay out of the sitemap, and stay disallowed in `robots.txt` even after launch.
-- Production origin `https://homemotionphysio.com.au` is prepared for canonical URLs, Open Graph, JSON-LD, and the sitemap. `.env.example` documents `PUBLIC_SITE_URL`. This does not change DNS or hosting.
+- Canonical URLs on a Netlify preview or on the `cursor/design-option-2-b759` branch deploy use the hostname Netlify assigns (`DEPLOY_PRIME_URL` or `URL`). They do not claim the public domain. A local build still falls back to `https://homemotionphysio.com.au` unless `PUBLIC_SITE_URL` is set. That fallback does not change DNS. `.env.example` lists variable names only.
 - Favicon and Open Graph image use the Home Motion name. A photographic social image is still outstanding.
 
 ## BLOCKED
 
-- **Do not point the domain at this site yet.** `homemotionphysio.com.au` is registered at VentraIP and still shows the VentraIP parked page over HTTP. There is no HTTPS website, and no website host is connected in DNS.
-- **Do not set `draft` to `false`.** Indexing, the draft banner, and `robots.txt` all follow that one switch.
-- **Do not enable `EMAIL_DELIVERY_READY`.** Google Workspace is the mail host, but this website still does not send mail. DKIM and DMARC are not set up. A test that `hello@` and `referrals@` both receive and reply as those addresses is not recorded.
-- **No host is chosen.** There is no GitHub Actions workflow, GitHub Pages site, Vercel project, or Netlify config in this repo. Do not add one until Jackson picks a host.
+- **Do not point the domain at this site.** `homemotionphysio.com.au` stays on the VentraIP parked page over HTTP. There is no HTTPS website. DNS is unchanged. The records for a later go-live are in `docs/DEPLOYMENT.md` and need a separate approval.
+- **Do not set `draft` to `false`.** Indexing, the draft banner, `robots.txt`, and the generated `X-Robots-Tag` all keep the site out of search while that switch is true. Preview and branch deploys stay `noindex` even after it changes.
+- **Do not merge into `main`.** Netlify’s production branch stays `main`, and the ignore script skips that branch.
+- **The Netlify site is not connected yet.** The repo has the config. Jackson still has to create the free-plan site from GitHub, enable Deploy Previews, and add a branch deploy for `cursor/design-option-2-b759`. No production domain.
+- **Form notification is not turned on until he saves it in Netlify.** Destination: `hello@homemotionphysio.com.au`, typed in the Netlify Forms notification settings. No second provider. `EMAIL_DELIVERY_READY` is unused and must stay unset.
+- **DKIM and DMARC are not set up.** A test that `hello@` and `referrals@` receive mail is not recorded. Google Workspace remains the mailbox host.
 - The GitHub repository is **public**. Treat every committed file as public. Do not add patient information, passwords, or private inboxes.
 - University / degree line is still unconfirmed, so it is kept in config and hidden on the pages.
 - Privacy policy and disclaimer are not adopted. They are not legal advice.
@@ -34,8 +37,9 @@ Current status of the owner-approved design branch. The site stays a **private d
 
 ## NEEDS JACKSON
 
-- Read and approve, or ask a lawyer to review, `/privacy` and `/disclaimer` before launch (`docs/LEGAL_DRAFTS.md`).
-- Choose a website host. DNS at VentraIP should stay as it is until that host is ready and he asks for the change.
+- Read and approve, or ask a lawyer to review, `/privacy` and `/disclaimer` before launch (`docs/LEGAL_DRAFTS.md`). The privacy draft now names Netlify as the form host.
+- In Netlify (free plan): connect this GitHub repo, leave the production branch as `main`, enable Deploy Previews, and add a branch deploy for `cursor/design-option-2-b759`. Do not add a custom domain. Steps: `docs/DEPLOYMENT.md`.
+- After the first preview deploy, add a Netlify Forms email notification for form `enquiry` to `hello@homemotionphysio.com.au`, then send one test enquiry.
 - Confirm a test message arrives at `hello@homemotionphysio.com.au` and `referrals@homemotionphysio.com.au`, and that replies show those From addresses.
 - Add DKIM and DMARC in Google Workspace / DNS when he is ready. Do not invent the keys in this repo.
 - Supply the physiotherapy degree and university if he wants that line on the site.
@@ -50,9 +54,9 @@ Do these only after the blocked items and Jackson’s decisions above. Checking 
 - [ ] Jackson has approved the privacy policy and disclaimer, and the draft banners on those pages have been updated to the adopted date.
 - [ ] `hello@` and `referrals@` receive a test message. Replies use those addresses.
 - [ ] DKIM and DMARC are in place if he wants them before launch.
-- [ ] A host is chosen. The production build is deployed only when he asks.
-- [ ] VentraIP DNS for `homemotionphysio.com.au` points at that host, with HTTPS working. The parked page is gone.
-- [ ] `PUBLIC_SITE_URL` is `https://homemotionphysio.com.au` with no trailing slash.
+- [ ] The Netlify preview is already the chosen host. A production domain is added only when he asks, using the VentraIP records in `docs/DEPLOYMENT.md`.
+- [ ] VentraIP DNS for `homemotionphysio.com.au` points at that Netlify site, with HTTPS working. The parked page is gone. MX, SPF, and the site-verification TXT are unchanged.
+- [ ] `PUBLIC_SITE_URL` is set for the production build only, with no trailing slash. It stays unset on preview and branch deploys.
 - [ ] `site.draft` is set to `false` in `src/content/site.ts` (single launch switch).
 - [ ] `robots.txt` then allows `/`, still disallows `/concepts/`, and publishes the sitemap.
 - [ ] Homepage title no longer says “(draft)”. The amber draft banner is gone.
@@ -69,13 +73,15 @@ As supplied from the owner’s records and DNS. This repo does not change any of
 | Item | State |
 | --- | --- |
 | Domain | `homemotionphysio.com.au`, registered at VentraIP, expires **30 Sep 2027** |
-| Website DNS | No website host chosen or connected. The domain shows the **VentraIP parked page over HTTP**. No HTTPS site. |
+| Website host | **Netlify free plan, preview only.** Config is in this repo (`netlify.toml`). The Netlify site itself is not created from here. No custom domain. |
+| Website DNS | Unchanged. The domain shows the **VentraIP parked page over HTTP**. No HTTPS site. Do not apply the later DNS notes until Jackson asks. |
 | Email | **Google Workspace is active.** MX `smtp.google.com`. SPF `include:_spf.google.com`. Site-verification TXT is present. |
 | DKIM | Not set up |
 | DMARC | Not set up |
-| Public addresses | `hello@homemotionphysio.com.au` (enquiries), `referrals@homemotionphysio.com.au` (referrals). The website does not send mail. |
+| Public addresses | `hello@homemotionphysio.com.au` (enquiries), `referrals@homemotionphysio.com.au` (referrals). The enquiry form notifies `hello@` through Netlify Forms once Jackson saves that notification. No extra mail provider. |
+| Environment variables | Names only, in `.env.example` and `docs/DEPLOYMENT.md`. Netlify sets `CONTEXT`, `BRANCH`, `URL`, `DEPLOY_PRIME_URL`. Do not set `PUBLIC_SITE_URL` on the preview. `ENQUIRY_NOTIFICATION_EMAIL`, `REFERRAL_NOTIFICATION_EMAIL`, and `EMAIL_DELIVERY_READY` stay unset. |
 | Admin mailbox | Not published on the site |
-| Repository | GitHub `Jackson1-netizen/jackson-mobile-physio` is **public**. No GitHub Pages site (API 404). No deploy workflow. |
+| Repository | GitHub `Jackson1-netizen/jackson-mobile-physio` is **public**. No GitHub Pages site. No GitHub Actions deploy. Netlify builds from `netlify.toml` after Jackson connects the repo. |
 | Indexing | Off, via `site.draft === true` |
 
 ## Other branches (not merged)

@@ -1,5 +1,8 @@
 /// <reference types="astro/client" />
 
+/** Set by astro.config.mjs at build time. Not a secret. */
+declare const __HM_SITE_ORIGIN__: string;
+
 interface ImportMetaEnv {
   /**
    * Public site origin for canonical URLs, Open Graph, JSON-LD and the sitemap.

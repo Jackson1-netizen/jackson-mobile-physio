@@ -18,6 +18,7 @@ What the drafts try to cover, for his review:
 - Home Motion Physiotherapy is the registered business name of Wai Wa Law, sole trader, ABN 75 612 731 757.
 - General AHPRA registration PHY0004088824. No expiry date.
 - The site does not claim to be an NDIS registered provider and does not guarantee funding.
-- Email for the domain is hosted with Google Workspace, which may store messages outside Australia. The website host is not chosen yet.
+- Email for the domain is hosted with Google Workspace, which may store messages outside Australia.
+- The enquiry form is a Netlify Form. Netlify stores the submission and can email it to `hello@homemotionphysio.com.au`. Netlify may process that submission outside Australia. The site does not keep its own database of form entries. The website is a Netlify preview only; the production domain is not attached.
 
 After he approves the text, replace the “pending owner review” status with the date he adopts it, and remove the draft banner on those two pages only. Leave `site.draft` true until the rest of the launch checklist is done.

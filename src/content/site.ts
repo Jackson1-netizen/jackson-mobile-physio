@@ -9,14 +9,15 @@ const PUBLIC_BUSINESS_EMAIL = "hello@homemotionphysio.com.au";
 const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
 
 /**
- * Intended production origin. Setting this does not publish the site or change DNS.
- * Override with PUBLIC_SITE_URL in the environment (see .env.example).
+ * Fallback origin for local builds only. Netlify preview and branch deploys
+ * inject their own URL via __HM_SITE_ORIGIN__. This does not attach the domain.
  */
 const DEFAULT_PUBLIC_SITE_ORIGIN = "https://homemotionphysio.com.au";
 
 function resolvePublicSiteOrigin(): string {
-  const raw = import.meta.env.PUBLIC_SITE_URL?.trim();
-  const value = raw ? raw : DEFAULT_PUBLIC_SITE_ORIGIN;
+  const injected = typeof __HM_SITE_ORIGIN__ === "string" ? __HM_SITE_ORIGIN__.trim() : "";
+  const fromEnv = import.meta.env.PUBLIC_SITE_URL?.trim() || "";
+  const value = injected || fromEnv || DEFAULT_PUBLIC_SITE_ORIGIN;
   return value.replace(/\/$/, "");
 }
 
@@ -244,8 +245,8 @@ export const site = {
       {
         heading: "Email, storage, and overseas access",
         paragraphs: [
-          "This draft website does not store form submissions on a server. The form opens your own email app, addressed to the public Home Motion mailbox. Email for homemotionphysio.com.au is hosted with Google Workspace. A message is only sent if you send it from your own email app.",
-          "Google may store those messages, including on systems outside Australia. The website host is not chosen yet. This draft has not been legally reviewed against that arrangement.",
+          "The enquiry form is handled by Netlify, the service hosting this website. Netlify stores the name, phone number, and any optional details you submit, and can email that enquiry to hello@homemotionphysio.com.au. Netlify may process and store that information outside Australia. This website does not keep its own database of form submissions.",
+          "You can also email hello@homemotionphysio.com.au from your own email app. Those messages are handled by Google Workspace, which may store them outside Australia. This draft has not been legally reviewed against either arrangement.",
         ],
       },
       {

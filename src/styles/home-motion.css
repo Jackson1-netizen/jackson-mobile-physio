@@ -1317,6 +1317,24 @@ a.hm-card:hover {
   color: rgb(255 255 255 / 0.86);
 }
 
+.hm-contact .hm-form-note a,
+.hm-contact .hm-form-secondary a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hm-form-secondary {
+  margin: 0;
+  color: rgb(255 255 255 / 0.9);
+}
+
+.hm-form-submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
 .hm-contact .hm-form-unavailable {
   margin: 0;
   padding: 0.75rem 0.9rem;

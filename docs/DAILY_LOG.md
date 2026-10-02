@@ -141,3 +141,10 @@
 - **Infrastructure recorded:** domain at VentraIP (parked HTTP page, expires 30 Sep 2027); Google Workspace MX and SPF active; DKIM and DMARC not set up; no website host connected.
 - **Decisions:** `docs/DECISIONS.md`, `docs/LAUNCH_STATUS.md`.
 - **Next:** Jackson reviews the legal drafts, tests the two public mailboxes, and chooses a host before any DNS change.
+
+## 2026-10-02 (Netlify preview config, still draft)
+
+- **Changed:** Added `netlify.toml`, the build-ignore script, generated Netlify headers, and a Netlify Forms enquiry form. Docs now list environment-variable names and the dashboard steps for deploy previews plus a branch deploy of `cursor/design-option-2-b759`.
+- **Not done:** No Netlify site was created. No custom domain. No DNS change. No merge to `main`. No extra email provider.
+- **Decisions:** `docs/DECISIONS.md` (Netlify preview only).
+- **Next:** Jackson connects the GitHub repo in Netlify, enables those two deploy types, and adds the form notification to `hello@homemotionphysio.com.au`.

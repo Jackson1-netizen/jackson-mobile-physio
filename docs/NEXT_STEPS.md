@@ -57,12 +57,12 @@ Jackson must **tell you in writing** (message to Cursor agent or confirmed note)
 
 | Item | Action |
 |------|--------|
-| **Business email** | Public addresses are in `site.publicEmail` / `site.referralEmail`. Do **not** enable `EMAIL_DELIVERY_READY` until domain mailboxes are verified (`docs/EMAIL_SETUP.md`). |
+| **Business email** | Public addresses are in `site.publicEmail` / `site.referralEmail`. The enquiry form is a Netlify Form; the notification to `hello@` is a Netlify dashboard setting (`docs/EMAIL_SETUP.md`). Leave `EMAIL_DELIVERY_READY` unset. |
 | **Degree / university** | Confirm qualifications line (currently placeholder). |
 | **Privacy** | Legal review of `site.privacy`; set `privacy.lastUpdated`. |
 | **Legal trading name** | Confirm or remove `legalNamePlaceholder`. |
 | **Production URL** | Set `websiteUrl` when domain is known. |
-| **Deploy** | Jackson chooses host; agents do not deploy without explicit request. |
+| **Deploy** | Netlify free-plan preview only. Config is in the repo. Jackson connects the site and does not attach the production domain (`docs/DEPLOYMENT.md`). |
 
 ---
 

@@ -1,10 +1,8 @@
 ---
 import { site, getEmailHref } from "../content/site";
-import { isEmailDeliveryReady } from "../lib/email-delivery";
 import { messages } from "../content/i18n";
 
 const t = messages.en.enquiry;
-const deliveryReady = isEmailDeliveryReady();
 const publicMailto = getEmailHref("Enquiry — Home Motion");
 const enquiryMessages = {
   en: messages.en.enquiry,
@@ -14,143 +12,150 @@ const enquiryMessages = {
 const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
 ---
 
-<form id="enquiry-form" class="hm-form" novalidate aria-describedby="enq-required-note">
-  <p id="enq-required-note" class="hm-form-note" data-i18n-path="enquiry.requiredNote">{t.requiredNote}</p>
+<form
+  id="enquiry-form"
+  class="hm-form"
+  name="enquiry"
+  method="POST"
+  action="/enquiry-received/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  novalidate
+  aria-describedby="enq-required-note"
+>
+  <input type="hidden" name="form-name" value="enquiry" />
+  <p class="hm-honeypot" hidden>
+    <label>
+      Leave this blank
+      <input name="bot-field" tabindex="-1" autocomplete="off" />
+    </label>
+  </p>
 
-  <div class="grid gap-4 sm:grid-cols-2">
-    <div class="hm-field">
-      <label for="enq-name">
-        <span data-i18n-path="enquiry.name">{t.name}</span>
-        <span class="hm-req" aria-hidden="true">*</span>
-      </label>
-      <input id="enq-name" class="hm-input" type="text" name="name" autocomplete="name" required />
-      <p id="enq-name-error" class="hm-field-error" hidden></p>
-    </div>
-    <div class="hm-field">
-      <label for="enq-phone">
-        <span data-i18n-path="enquiry.phone">{t.phone}</span>
-        <span class="hm-req" aria-hidden="true">*</span>
-      </label>
-      <input
-        id="enq-phone"
-        class="hm-input"
-        type="tel"
-        name="phone"
-        autocomplete="tel"
-        inputmode="tel"
-        required
-      />
-      <p id="enq-phone-error" class="hm-field-error" hidden></p>
-    </div>
-  </div>
+  <div id="enq-fields">
+    <p id="enq-required-note" class="hm-form-note" data-i18n-path="enquiry.requiredNote">{t.requiredNote}</p>
 
-  <div class="grid gap-4 sm:grid-cols-2">
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="hm-field">
+        <label for="enq-name">
+          <span data-i18n-path="enquiry.name">{t.name}</span>
+          <span class="hm-req" aria-hidden="true">*</span>
+        </label>
+        <input id="enq-name" class="hm-input" type="text" name="name" autocomplete="name" required />
+        <p id="enq-name-error" class="hm-field-error" hidden></p>
+      </div>
+      <div class="hm-field">
+        <label for="enq-phone">
+          <span data-i18n-path="enquiry.phone">{t.phone}</span>
+          <span class="hm-req" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="enq-phone"
+          class="hm-input"
+          type="tel"
+          name="phone"
+          autocomplete="tel"
+          inputmode="tel"
+          required
+        />
+        <p id="enq-phone-error" class="hm-field-error" hidden></p>
+      </div>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="hm-field">
+        <label for="enq-email">
+          <span data-i18n-path="enquiry.email">{t.email}</span>
+          <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+        </label>
+        <input id="enq-email" class="hm-input" type="email" name="email" autocomplete="email" />
+        <p id="enq-email-error" class="hm-field-error" hidden></p>
+      </div>
+      <div class="hm-field">
+        <label for="enq-suburb">
+          <span data-i18n-path="enquiry.suburb">{t.suburb}</span>
+          <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+        </label>
+        <input id="enq-suburb" class="hm-input" type="text" name="suburb" autocomplete="address-level2" />
+      </div>
+    </div>
+
     <div class="hm-field">
-      <label for="enq-email">
-        <span data-i18n-path="enquiry.email">{t.email}</span>
+      <label for="enq-language">
+        <span data-i18n-path="enquiry.language">{t.language}</span>
+      </label>
+      <select id="enq-language" class="hm-input hm-select" name="language" autocomplete="off">
+        {
+          languageValues.map((value, i) => (
+            <option value={value} data-i18n-path={`enquiry.languageOptions.${i}`}>
+              {t.languageOptions[i]}
+            </option>
+          ))
+        }
+      </select>
+    </div>
+
+    <div class="hm-field hm-field-check">
+      <input id="enq-ndis" type="checkbox" name="ndis" value="Yes — plan-managed or self-managed" />
+      <label for="enq-ndis" data-i18n-path="enquiry.ndisLabel">{t.ndisLabel}</label>
+    </div>
+
+    <div class="hm-field">
+      <label for="enq-message">
+        <span data-i18n-path="enquiry.message">{t.message}</span>
         <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
       </label>
-      <input id="enq-email" class="hm-input" type="email" name="email" autocomplete="email" />
-      <p id="enq-email-error" class="hm-field-error" hidden></p>
+      <textarea id="enq-message" class="hm-input" name="message" rows="3" maxlength="400" aria-describedby="enq-privacy-note"></textarea>
     </div>
-    <div class="hm-field">
-      <label for="enq-suburb">
-        <span data-i18n-path="enquiry.suburb">{t.suburb}</span>
-        <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
-      </label>
-      <input id="enq-suburb" class="hm-input" type="text" name="suburb" autocomplete="address-level2" />
-    </div>
-  </div>
 
-  <div class="hm-field">
-    <label for="enq-language">
-      <span data-i18n-path="enquiry.language">{t.language}</span>
-    </label>
-    <select id="enq-language" class="hm-input hm-select" name="language" autocomplete="off">
-      {
-        languageValues.map((value, i) => (
-          <option value={value} data-i18n-path={`enquiry.languageOptions.${i}`}>
-            {t.languageOptions[i]}
-          </option>
-        ))
-      }
-    </select>
-  </div>
-
-  <div class="hm-field hm-field-check">
-    <input id="enq-ndis" type="checkbox" name="ndis" />
-    <label for="enq-ndis" data-i18n-path="enquiry.ndisLabel">{t.ndisLabel}</label>
-  </div>
-
-  <div class="hm-field">
-    <label for="enq-message">
-      <span data-i18n-path="enquiry.message">{t.message}</span>
-      <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
-    </label>
-    <textarea id="enq-message" class="hm-input" name="message" rows="3" maxlength="400" aria-describedby="enq-privacy-note"></textarea>
-  </div>
-
-  <p id="enq-privacy-note" class="hm-form-note" data-i18n-path="enquiry.privacyNote">{t.privacyNote}</p>
-
-  {
-    !deliveryReady && (
-      <p class="hm-form-unavailable">
-        <span data-i18n-path="enquiry.unavailableNotice">{t.unavailableNotice}</span>{" "}
-        <a href={site.phoneHref}>{site.phone}</a>
-        <span data-i18n-path="enquiry.unavailableEmailLead">{t.unavailableEmailLead}</span>{" "}
-        <a href={publicMailto}>{site.publicEmail}</a>.
-      </p>
-    )
-  }
-
-  <noscript>
-    <p class="hm-form-unavailable">
-      <span data-i18n-path="enquiry.noscript">{t.noscript}</span>{" "}
-      <a href={site.phoneHref}>{site.phone}</a>
+    <p id="enq-privacy-note" class="hm-form-note">
+      <span data-i18n-path="enquiry.privacyNote">{t.privacyNote}</span>{" "}
+      <a href="/privacy" data-i18n-path="enquiry.privacyLink">{t.privacyLink}</a>.
     </p>
-  </noscript>
 
-  <button type="submit" class="hm-btn hm-btn-primary hm-form-submit">
-    <span data-i18n-path="enquiry.continue">{t.continue}</span>
-  </button>
+    <noscript>
+      <p class="hm-form-unavailable">
+        <span data-i18n-path="enquiry.noscript">{t.noscript}</span>{" "}
+        <a href={site.phoneHref}>{site.phone}</a>
+      </p>
+    </noscript>
+
+    <button type="submit" class="hm-btn hm-btn-primary hm-form-submit">
+      <span data-i18n-path="enquiry.submit">{t.submit}</span>
+    </button>
+  </div>
+
+  <p class="hm-form-secondary">
+    <span data-i18n-path="enquiry.secondaryLead">{t.secondaryLead}</span>{" "}
+    <a href={publicMailto}>{site.publicEmail}</a>
+  </p>
 
   <div id="enq-feedback" class="hm-form-feedback" role="status" aria-live="polite" tabindex="-1">
     <div data-feedback="errors" hidden>
       <p data-i18n-path="enquiry.errorSummary">{t.errorSummary}</p>
     </div>
-    <div data-feedback="unavailable" hidden>
-      <p class="hm-form-feedback-title" data-i18n-path="enquiry.unavailableTitle">{t.unavailableTitle}</p>
+    <div data-feedback="success" hidden>
+      <p class="hm-form-feedback-title" data-i18n-path="enquiry.successTitle">{t.successTitle}</p>
       <p>
-        <span data-i18n-path="enquiry.unavailableBody">{t.unavailableBody}</span>{" "}
-        <a class="hm-form-call" href={site.phoneHref}>{site.phone}</a>
-      </p>
-      <p>
-        <span data-i18n-path="enquiry.composeLead">{t.composeLead}</span>{" "}
-        <a class="hm-form-call" data-enq-compose href={publicMailto}>{site.publicEmail}</a>.
-        <span data-i18n-path="enquiry.mailboxNote">{t.mailboxNote}</span>
+        <span data-i18n-path="enquiry.successBody">{t.successBody}</span>{" "}
+        <a class="hm-form-call" href={site.phoneHref}>{site.phone}</a>.
       </p>
     </div>
-    <div data-feedback="mailto" hidden>
-      <p class="hm-form-feedback-title" data-i18n-path="enquiry.mailtoTitle">{t.mailtoTitle}</p>
+    <div data-feedback="failed" hidden>
+      <p class="hm-form-feedback-title" data-i18n-path="enquiry.failedTitle">{t.failedTitle}</p>
       <p>
-        <span data-i18n-path="enquiry.mailtoBody">{t.mailtoBody}</span>{" "}
+        <span data-i18n-path="enquiry.failedBody">{t.failedBody}</span>{" "}
         <a class="hm-form-call" href={site.phoneHref}>{site.phone}</a>
       </p>
-      <p data-i18n-path="enquiry.mailboxNote">{t.mailboxNote}</p>
     </div>
   </div>
 </form>
 
-<script
-  define:vars={{
-    deliveryReady,
-    publicMailto,
-    enquiryMessages,
-  }}
->
+<script define:vars={{ enquiryMessages }}>
   const form = document.getElementById("enquiry-form");
   if (form) {
     const feedback = form.querySelector("#enq-feedback");
+    const fieldsWrap = form.querySelector("#enq-fields");
+    const submitButton = form.querySelector("button[type=submit]");
     const fields = {
       name: form.querySelector("#enq-name"),
       phone: form.querySelector("#enq-phone"),
@@ -202,7 +207,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
       feedback.querySelectorAll("[data-feedback]").forEach((block) => {
         block.hidden = block.getAttribute("data-feedback") !== kind;
       });
-      feedback.classList.toggle("is-error", kind === "errors");
+      feedback.classList.toggle("is-error", kind === "errors" || kind === "failed");
       feedback.classList.toggle("is-visible", Boolean(kind));
     };
 
@@ -216,7 +221,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
       fields[name].addEventListener("blur", handler);
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       attempted = true;
       let firstInvalid = null;
@@ -231,42 +236,33 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         return;
       }
 
-      if (!deliveryReady) {
-        const compose = form.querySelector("[data-enq-compose]");
-        const data = new FormData(form);
-        const get = (key) => String(data.get(key) || "").trim();
-        const lines = [`Name: ${get("name")}`, `Phone: ${get("phone")}`];
-        if (get("email")) lines.push(`Email: ${get("email")}`);
-        if (get("suburb")) lines.push(`Suburb: ${get("suburb")}`);
-        lines.push(
-          `Language: ${get("language")}`,
-          `NDIS plan enquiry: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / not stated"}`,
-        );
-        if (get("message")) lines.push("", `Reason: ${get("message")}`);
-        if (compose) {
-          compose.setAttribute(
-            "href",
-            `${publicMailto}&body=${encodeURIComponent(lines.join("\n"))}`,
-          );
-        }
-        showFeedback("unavailable");
-        feedback.focus();
-        return;
-      }
+      const bot = form.querySelector("[name=bot-field]");
+      if (bot && bot.value) return;
 
-      const data = new FormData(form);
-      const get = (key) => String(data.get(key) || "").trim();
-      const lines = [`Name: ${get("name")}`, `Phone: ${get("phone")}`];
-      if (get("email")) lines.push(`Email: ${get("email")}`);
-      if (get("suburb")) lines.push(`Suburb: ${get("suburb")}`);
-      lines.push(
-        `Language: ${get("language")}`,
-        `NDIS plan enquiry: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / not stated"}`,
-      );
-      if (get("message")) lines.push("", `Reason: ${get("message")}`);
-      const body = lines.join("\n");
-      showFeedback("mailto");
-      window.location.href = `${publicMailto}&body=${encodeURIComponent(body)}`;
+      const messagesNow = currentMessages();
+      const label = submitButton.querySelector("span");
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-busy", "true");
+      if (label) label.textContent = messagesNow.sending;
+
+      try {
+        const body = new URLSearchParams(new FormData(form)).toString();
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body,
+        });
+        if (!response.ok) throw new Error("Form was not accepted");
+        fieldsWrap.hidden = true;
+        showFeedback("success");
+        feedback.focus();
+      } catch {
+        showFeedback("failed");
+        feedback.focus();
+        submitButton.disabled = false;
+        submitButton.removeAttribute("aria-busy");
+        if (label) label.textContent = messagesNow.submit;
+      }
     });
   }
 </script>
