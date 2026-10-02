@@ -40,12 +40,26 @@ test("PUBLIC_SITE_URL cannot select the public domain while the site is still a 
   assert.equal(origin, STAGING_ORIGIN);
 });
 
-test("a draft deploy uses the Netlify URL when one is present", () => {
+test("production context prefers the stable site URL over the branch deploy URL", () => {
+  const origin = resolveSiteOrigin(
+    {
+      CONTEXT: "production",
+      BRANCH: stagingBranch,
+      URL: "https://homemotion-staging.netlify.app",
+      DEPLOY_PRIME_URL: "https://cursor-design-option-2-b759--homemotion-staging.netlify.app",
+    },
+    { draft: true },
+  );
+  assert.equal(origin, "https://homemotion-staging.netlify.app");
+});
+
+test("a draft deploy preview uses DEPLOY_PRIME_URL when one is present", () => {
   const netlify = "https://deploy-preview-4--homemotion-staging.netlify.app";
   const origin = resolveSiteOrigin(
     {
       CONTEXT: "deploy-preview",
       BRANCH: "pull/4/head",
+      URL: STAGING_ORIGIN,
       DEPLOY_PRIME_URL: netlify,
       PUBLIC_SITE_URL: PUBLIC_ORIGIN,
     },

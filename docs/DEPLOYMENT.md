@@ -84,8 +84,8 @@ Names only. No values belong in Git. None of these are API keys.
 | `CONTEXT` | Netlify | `production` for the staging branch, or `deploy-preview` for a pull request. The ignore script builds those two only when they belong to `cursor/design-option-2-b759`. `branch-deploy` is skipped. While `site.draft` is true, the header script sends `X-Robots-Tag` for every context. It also sends that header for `deploy-preview` and `branch-deploy` after a later draft change. |
 | `BRANCH` | Netlify | On the staging production deploy this is `cursor/design-option-2-b759`. On a deploy preview it is often `pull/<id>/head`. Passed into `scripts/site-origin.mjs`. It does not by itself select the public domain. |
 | `REVIEW_ID` | Netlify | Pull request number for a deploy preview. The ignore script uses it to read the public base branch. It is not a secret. |
-| `URL` | Netlify | Site URL for the deploy. Used as the canonical origin while the site is still a draft, or on a preview, when `DEPLOY_PRIME_URL` is empty. |
-| `DEPLOY_PRIME_URL` | Netlify | Primary URL of that specific deploy. Preferred over `URL` for draft and preview canonicals. |
+| `URL` | Netlify | Main site URL. While `site.draft` is true and `CONTEXT` is `production`, this is the canonical origin. |
+| `DEPLOY_PRIME_URL` | Netlify | Primary URL of that specific deploy. Used for `deploy-preview` and `branch-deploy` canonicals. Not used for a draft production-context build, where it is the branch hostname. |
 | `REPOSITORY_URL` | Netlify | Used only to choose the GitHub repository for the public pull-request lookup. |
 | `NODE_VERSION` | `netlify.toml` (`22`) | Selects the Node version for the build. Not a secret. `package.json` requires Node `>=22.12.0`. |
 | `PUBLIC_SITE_URL` | Nobody, until launch | Optional override used only when `site.draft` is `false` and the context is not a deploy preview or branch deploy. **Do not set it** on staging. While `site.draft` is true it is ignored, even if it is `https://homemotionphysio.com.au`. |
@@ -94,7 +94,7 @@ Names only. No values belong in Git. None of these are API keys.
 
 `scripts/site-origin.mjs` decides the origin. `astro.config.mjs` passes `CONTEXT`, `BRANCH`, `URL`, `DEPLOY_PRIME_URL`, and `PUBLIC_SITE_URL` into it and injects the result as `__HM_SITE_ORIGIN__`. Pages use that for canonical URLs, Open Graph, JSON-LD, and the sitemap.
 
-While `draft: true` in `src/content/site.ts`, the origin is `DEPLOY_PRIME_URL`, then `URL`, then `https://homemotion-staging.netlify.app`. A production-context build of `cursor/design-option-2-b759` does not emit `https://homemotionphysio.com.au`. Setting `PUBLIC_SITE_URL` does not change that.
+While `draft: true` and `CONTEXT` is `production`, the origin is `URL`, then `https://homemotion-staging.netlify.app`. `DEPLOY_PRIME_URL` is not used in that context, because Netlify sets it to the branch hostname. Deploy previews and branch deploys use `DEPLOY_PRIME_URL`, then `URL`, then the staging origin. A production-context build does not emit `https://homemotionphysio.com.au`. Setting `PUBLIC_SITE_URL` does not change that.
 
 The public domain is used only when production is explicitly launched: `site.draft` is `false`, and the build is not a deploy preview or branch deploy. `PUBLIC_SITE_URL` can then override that domain. Deploy previews still use the Netlify URL. None of this attaches the domain or changes DNS.
 
