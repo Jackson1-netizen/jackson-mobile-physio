@@ -2,6 +2,8 @@
 
 Append-only record. Do not silently overwrite prior entries.
 
+> **Superseded / current state (2026-10-02):** Follow `docs/LAUNCH_STATUS.md`. The public brand is Home Motion, not “WAI WA LAW”. AHPRA general registration PHY0004088824 is on the draft site. The canonical origin is not `example.com`. Older entries below are the record of what was decided at the time.
+
 ## 2026-09-28 — Phase 1 bootstrap
 
 - **Stack:** Astro 7 + TypeScript (strict) + Tailwind CSS 4, static output.  

@@ -11,6 +11,7 @@
     "build": "node scripts/write-netlify-headers.mjs && astro build && node scripts/assert-netlify-form.mjs",
     "preview": "astro preview --port 4721",
     "check": "astro check",
+    "test": "node --test tests/*.test.mjs",
     "checkpoint": "node scripts/checkpoint.mjs",
     "astro": "astro"
   },
@@ -19,6 +20,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.5",
     "leaflet": "^1.9.4",
+    "qrcode": "^1.5.4",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {

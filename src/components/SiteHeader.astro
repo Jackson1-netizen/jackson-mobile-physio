@@ -3,6 +3,11 @@ import { site, getEmailHref } from "../content/site";
 import { messages } from "../content/i18n";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 
+interface Props {
+  showLanguageSwitcher?: boolean;
+}
+
+const { showLanguageSwitcher = false } = Astro.props;
 const emailHref = getEmailHref();
 
 const nav = [
@@ -35,7 +40,7 @@ const nav = [
         >
           <span data-i18n-path="nav.referralSheet">Referral sheet</span>
         </a>
-        <LanguageSwitcher />
+        {showLanguageSwitcher && <LanguageSwitcher />}
       </div>
     </div>
   </div>

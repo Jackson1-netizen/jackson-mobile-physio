@@ -1,6 +1,6 @@
 # Email setup
 
-Public identities are on the draft site. Google Workspace is the mail host for `homemotionphysio.com.au` (MX `smtp.google.com`, SPF `include:_spf.google.com`). DKIM and DMARC are **not** set up yet.
+Public identities are on the draft site. Google Workspace is the mail host for `homemotionphysio.com.au` (MX `smtp.google.com`). As of about 4:55 AM AEST on 3 Oct 2026, SPF `v=spf1 include:_spf.google.com ~all` is valid, DKIM signing is active (selector `google`, `google._domainkey` resolves, admin status “Authenticating email with DKIM”), and DMARC `v=DMARC1; p=none` is live. The aggregate report address is not written in this repo.
 
 The website does not send mail itself. The enquiry form is a **Netlify Form**. No Formspree, EmailJS, Resend, SMTP, or other mail API is used, and none should be added. No extra paid account is required.
 
@@ -41,17 +41,17 @@ Leave these unset. The Netlify form does not read them. Do not commit values.
 
 ## Domain mail (Google Workspace)
 
-Already in place, from the owner’s DNS records:
+Already in place, from the owner’s DNS records, as of about 4:55 AM AEST on 3 Oct 2026:
 
 1. `homemotionphysio.com.au` is registered at VentraIP (expires 30 Sep 2027).
-2. Google Workspace is active for the domain.
-3. SPF includes `_spf.google.com`.
+2. Google Workspace is active for the domain. `hello@` and `referrals@` are aliases on that user.
+3. SPF `v=spf1 include:_spf.google.com ~all` is valid. DKIM signing is active. DMARC `p=none` is live.
+4. The staging enquiry form’s notification to `hello@` arrived (not in Spam). See `docs/LAUNCH_STATUS.md`.
 
 Still to do, outside this repo, and without changing website DNS:
 
-1. Confirm mailboxes or aliases exist for `hello@` and `referrals@`.
-2. After the Netlify form notification is saved, send one test enquiry and confirm it arrives at `hello@`.
-3. Confirm a reply shows `hello@` or `referrals@` as From, matching the audience.
-4. Add DKIM and DMARC when Jackson is ready. Do not commit the keys.
+1. Send one message to `hello@` and one to `referrals@` from an address outside the domain, and confirm both arrive.
+2. Confirm a reply shows `hello@` or `referrals@` as From, matching the audience.
+3. After monitoring, consider raising DMARC from `p=none` to `p=quarantine`. Do not commit keys or the report address.
 
 Do not point the website domain at Netlify as part of this email work. See `docs/DEPLOYMENT.md`.

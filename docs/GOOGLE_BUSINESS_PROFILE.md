@@ -1,6 +1,8 @@
 # Google Business Profile — editable draft
 
-**Status:** TODO / NOT CONFIRMED — do not publish until business details are verified.
+> **Superseded / current state (2026-10-02):** Do not create the profile yet. Current facts are in `docs/LAUNCH_STATUS.md`. The public brand is Home Motion / Home Motion Physiotherapy, not “WAI WA LAW”. There is no `example.com` placeholder. `hello@homemotionphysio.com.au` receives the Netlify form notification; an outside-sender test is still open. The website URL is still the parked domain until DNS cutover. The referral QR points at `https://homemotionphysio.com.au/referral/` and opens that parked page until then.
+
+**Status:** TODO / NOT CONFIRMED — do not publish until business details are verified and Jackson asks.
 
 ## Business type
 
@@ -48,14 +50,14 @@ Align with website list — mobility, strength and balance, functional exercise,
 
 - [ ] Professional headshot (consent / quality checked)  
 - [ ] Mobile / community context photo (no identifiable clients without consent)  
-- [ ] Logo or wordmark for WAI WA LAW  
+- [ ] Logo or wordmark for Home Motion  
 - [ ] No stock photos that imply false credentials or facilities  
 
 ## Launch checklist
 
-- [ ] WAI WA LAW, phone, email, domain live and match website (name + phone + ABN confirmed in repo)  
+- [ ] Home Motion, phone, email, and domain live and match the website (name, phone, and ABN confirmed in the repo)  
 - [ ] Website removed from draft (`noindex` / robots) only when appropriate  
-- [ ] Referral sheet PDF or URL updated with real QR code  
+- [ ] Referral sheet URL matches the printed QR code (`https://homemotionphysio.com.au/referral/`) once that page is on HTTPS  
 - [ ] Privacy policy URL added  
 - [ ] ABN on footer confirmed  
 - [ ] Second person reviews NDIS and AHPRA wording  

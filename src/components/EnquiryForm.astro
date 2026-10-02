@@ -24,7 +24,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
   aria-describedby="enq-required-note"
 >
   <input type="hidden" name="form-name" value="enquiry" />
-  <p class="hm-honeypot" hidden>
+  <p class="hm-honeypot" aria-hidden="true">
     <label>
       Leave this blank
       <input name="bot-field" tabindex="-1" autocomplete="off" />
@@ -40,7 +40,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
           <span data-i18n-path="enquiry.name">{t.name}</span>
           <span class="hm-req" aria-hidden="true">*</span>
         </label>
-        <input id="enq-name" class="hm-input" type="text" name="name" autocomplete="name" required />
+        <input id="enq-name" class="hm-input" type="text" name="name" autocomplete="name" required maxlength="100" />
         <p id="enq-name-error" class="hm-field-error" hidden></p>
       </div>
       <div class="hm-field">
@@ -56,6 +56,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
           autocomplete="tel"
           inputmode="tel"
           required
+          maxlength="20"
         />
         <p id="enq-phone-error" class="hm-field-error" hidden></p>
       </div>
@@ -67,7 +68,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
           <span data-i18n-path="enquiry.email">{t.email}</span>
           <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
         </label>
-        <input id="enq-email" class="hm-input" type="email" name="email" autocomplete="email" />
+        <input id="enq-email" class="hm-input" type="email" name="email" autocomplete="email" maxlength="254" />
         <p id="enq-email-error" class="hm-field-error" hidden></p>
       </div>
       <div class="hm-field">
@@ -75,7 +76,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
           <span data-i18n-path="enquiry.suburb">{t.suburb}</span>
           <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
         </label>
-        <input id="enq-suburb" class="hm-input" type="text" name="suburb" autocomplete="address-level2" />
+        <input id="enq-suburb" class="hm-input" type="text" name="suburb" autocomplete="address-level2" maxlength="80" />
       </div>
     </div>
 
@@ -104,13 +105,12 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         <span data-i18n-path="enquiry.message">{t.message}</span>
         <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
       </label>
-      <textarea id="enq-message" class="hm-input" name="message" rows="3" maxlength="400" aria-describedby="enq-privacy-note"></textarea>
+      <textarea id="enq-message" class="hm-input" name="message" rows="3" maxlength="1000" aria-describedby="enq-privacy-note"></textarea>
+      <p id="enq-privacy-note" class="hm-form-note">
+        <span data-i18n-path="enquiry.privacyNote">{t.privacyNote}</span>{" "}
+        <a href="/privacy" data-i18n-path="enquiry.privacyLink">{t.privacyLink}</a>.
+      </p>
     </div>
-
-    <p id="enq-privacy-note" class="hm-form-note">
-      <span data-i18n-path="enquiry.privacyNote">{t.privacyNote}</span>{" "}
-      <a href="/privacy" data-i18n-path="enquiry.privacyLink">{t.privacyLink}</a>.
-    </p>
 
     <noscript>
       <p class="hm-form-unavailable">

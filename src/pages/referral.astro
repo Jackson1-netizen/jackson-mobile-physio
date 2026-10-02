@@ -1,10 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import QRCode from "qrcode";
 import { site, formatServiceAreasLine, getReferralEmailHref, publicQualifications } from "../content/site";
 
 const serviceList = site.services.map((s) => s.title).join("; ");
 const serviceAreaLine = formatServiceAreasLine();
 const referralMailto = getReferralEmailHref();
+const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
+  type: "svg",
+  margin: 1,
+  errorCorrectionLevel: "M",
+  color: { dark: "#16352e", light: "#ffffff" },
+})).replace(/<\?xml[^>]*>\s*/i, "").replace("<svg ", '<svg role="img" aria-label="QR code for the Home Motion referral page" ');
 ---
 
 <BaseLayout
@@ -14,7 +21,7 @@ const referralMailto = getReferralEmailHref();
 >
   <div class="referral-sheet mx-auto max-w-[210mm] bg-white px-6 py-8 text-[var(--color-ink)] sm:px-10 sm:py-12">
     <p class="no-print mb-6 rounded border border-amber-200 bg-[var(--color-draft-bg)] p-3 text-sm text-[var(--color-draft)]">
-      Referral sheet — AHPRA registration granted. Confirm contact details before printing. Use your browser&apos;s Print command (Ctrl+P / ⌘P).
+      Draft referral sheet. Use your browser&apos;s Print command (Ctrl+P / ⌘P). This page is the printable sheet, not a PDF.
     </p>
 
     <header class="border-b border-[var(--color-border)] pb-6">
@@ -84,15 +91,11 @@ const referralMailto = getReferralEmailHref();
         </section>
       </div>
 
-      <aside class="flex flex-col items-center justify-start text-center" aria-label="QR code placeholder">
-        <div
-          class="flex h-32 w-32 items-center justify-center border-2 border-dashed border-[var(--color-border)] bg-[var(--color-surface)] text-xs text-[var(--color-ink-muted)]"
-          role="img"
-          aria-label="QR code placeholder — add when a public website URL is confirmed for display"
-        >
-          QR placeholder
-        </div>
-        <p class="mt-2 max-w-[8rem] text-xs text-[var(--color-ink-muted)]">Add when URL confirmed for print</p>
+      <aside class="referral-qr flex flex-col items-center justify-start text-center" aria-label="QR code for the referral page">
+        <div set:html={qrSvg} />
+        <p class="referral-qr-caption mt-2 max-w-[9.5rem] text-xs leading-snug text-[var(--color-ink-muted)]">
+          {site.referralSheetUrl}
+        </p>
       </aside>
     </div>
 
@@ -112,6 +115,25 @@ const referralMailto = getReferralEmailHref();
     .referral-sheet {
       max-width: none;
       padding: 0;
+    }
+  }
+</style>
+
+<style is:global>
+  .referral-qr svg {
+    display: block;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .referral-qr-caption {
+    overflow-wrap: anywhere;
+  }
+
+  @media print {
+    .referral-qr svg {
+      width: 28mm;
+      height: 28mm;
     }
   }
 </style>

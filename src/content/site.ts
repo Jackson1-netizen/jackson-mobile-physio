@@ -9,15 +9,15 @@ const PUBLIC_BUSINESS_EMAIL = "hello@homemotionphysio.com.au";
 const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
 
 /**
- * Fallback origin for local builds only. Netlify preview and branch deploys
- * inject their own URL via __HM_SITE_ORIGIN__. This does not attach the domain.
+ * Used only when Astro did not inject __HM_SITE_ORIGIN__.
+ * scripts/site-origin.mjs chooses the real origin: staging while site.draft
+ * is true, and https://homemotionphysio.com.au only after that switch is false.
  */
-const DEFAULT_PUBLIC_SITE_ORIGIN = "https://homemotionphysio.com.au";
+const UNINJECTED_ORIGIN = "https://homemotion-staging.netlify.app";
 
 function resolvePublicSiteOrigin(): string {
   const injected = typeof __HM_SITE_ORIGIN__ === "string" ? __HM_SITE_ORIGIN__.trim() : "";
-  const fromEnv = import.meta.env.PUBLIC_SITE_URL?.trim() || "";
-  const value = injected || fromEnv || DEFAULT_PUBLIC_SITE_ORIGIN;
+  const value = injected || UNINJECTED_ORIGIN;
   return value.replace(/\/$/, "");
 }
 
@@ -67,6 +67,12 @@ export const site = {
    * This does not point DNS or deploy the site. Indexing is controlled only by `draft`.
    */
   websiteUrl: resolvePublicSiteOrigin(),
+  /**
+   * Printed on the referral sheet as a QR code.
+   * Always the public referral page, never the Netlify staging hostname.
+   * Until DNS is changed, this URL still opens the VentraIP parked page.
+   */
+  referralSheetUrl: "https://homemotionphysio.com.au/referral/",
 
   /** ABN 75 612 731 757, registered to LAW, WAI WA, sole trader. */
   abn: "75 612 731 757",
@@ -250,6 +256,13 @@ export const site = {
         ],
       },
       {
+        heading: "Hosting and the service-area map",
+        paragraphs: [
+          "This website is hosted by Netlify. When your browser loads a page, that request can send standard connection information, such as your IP address and browser details, to Netlify.",
+          "The service-area map is loaded from Esri (ArcGIS). When the map loads, standard connection information such as your IP address and browser details may be sent to Esri. The map does not ask for your location, and this website does not store those map requests.",
+        ],
+      },
+      {
         heading: "Security, access, and correction",
         paragraphs: [
           "Reasonable steps are taken to protect personal information from misuse, loss, and unauthorised access or disclosure. No method of sending information over the internet is completely secure.",
@@ -320,7 +333,10 @@ export const site = {
     description:
       "Home Motion provides mobile physiotherapy at home and in the community across Melbourne's eastern suburbs. Jackson Law, AHPRA-registered physiotherapist. English, Cantonese and Mandarin. NDIS plan-managed and self-managed enquiries welcome. Not an NDIS registered provider.",
     locale: "en_AU",
-    ogImagePath: "/og-placeholder.svg",
+    ogImagePath: "/og.png",
+    ogImageAlt: "Home Motion Physiotherapy",
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
     keywords: [
       "mobile physiotherapist Box Hill",
       "NDIS physiotherapist Box Hill",

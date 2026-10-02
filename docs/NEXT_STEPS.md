@@ -1,8 +1,8 @@
 # Next steps — launch checklist
 
-**Current posture (2026-10-02):** see `docs/LAUNCH_STATUS.md`. `site.draft = true` is the only indexing switch. ABN 75 612 731 757 and AHPRA PHY0004088824 are published. The domain is registered and still parked. **Do not deploy or change DNS** until Jackson asks.
+> **Superseded / current state (2026-10-02):** `docs/LAUNCH_STATUS.md` is the source of truth. `site.draft = true` is the only indexing switch. ABN 75 612 731 757 and AHPRA PHY0004088824 are already on the draft site. Staging is live on Netlify. The domain is still parked. **Do not change DNS** until Jackson asks.
 
-The sections below are the earlier checklist and are kept for history. Where they disagree with `docs/LAUNCH_STATUS.md`, follow `docs/LAUNCH_STATUS.md`.
+The sections below are the earlier checklist and are kept for history. The heading “When Jackson confirms AHPRA registration is granted” is outdated: that confirmation is already recorded in `docs/LAUNCH_STATUS.md`. Do not treat those steps as still to do. Where this file disagrees with `docs/LAUNCH_STATUS.md`, follow `docs/LAUNCH_STATUS.md`.
 
 ---
 

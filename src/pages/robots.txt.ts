@@ -3,7 +3,7 @@ import { site } from "../content/site";
 
 /**
  * Indexing follows the single launch switch `site.draft`.
- * Concept mockups stay disallowed even after launch.
+ * /concepts/ is archived and not built. The disallow remains so an old URL stays out of search.
  */
 export const GET: APIRoute = () => {
   const lines = ["User-agent: *"];
