@@ -48,14 +48,14 @@ Align with website list — mobility, strength and balance, functional exercise,
 
 - [ ] Professional headshot (consent / quality checked)  
 - [ ] Mobile / community context photo (no identifiable clients without consent)  
-- [ ] Logo or wordmark for WAI WA LAW  
+- [ ] Logo or wordmark for Home Motion  
 - [ ] No stock photos that imply false credentials or facilities  
 
 ## Launch checklist
 
-- [ ] WAI WA LAW, phone, email, domain live and match website (name + phone + ABN confirmed in repo)  
+- [ ] Home Motion, phone, email, and domain live and match the website (name, phone, and ABN confirmed in the repo)  
 - [ ] Website removed from draft (`noindex` / robots) only when appropriate  
-- [ ] Referral sheet PDF or URL updated with real QR code  
+- [ ] Referral sheet URL matches the printed QR code (`https://homemotionphysio.com.au/referral/`) once that page is on HTTPS  
 - [ ] Privacy policy URL added  
 - [ ] ABN on footer confirmed  
 - [ ] Second person reviews NDIS and AHPRA wording  

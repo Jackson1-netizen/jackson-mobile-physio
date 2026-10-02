@@ -67,6 +67,12 @@ export const site = {
    * This does not point DNS or deploy the site. Indexing is controlled only by `draft`.
    */
   websiteUrl: resolvePublicSiteOrigin(),
+  /**
+   * Printed on the referral sheet as a QR code.
+   * Always the public referral page, never the Netlify staging hostname.
+   * Until DNS is changed, this URL still opens the VentraIP parked page.
+   */
+  referralSheetUrl: "https://homemotionphysio.com.au/referral/",
 
   /** ABN 75 612 731 757, registered to LAW, WAI WA, sole trader. */
   abn: "75 612 731 757",

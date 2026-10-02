@@ -1,8 +1,25 @@
-# Deployment — Netlify preview only
+# Deployment — Netlify staging
 
-The host for this draft is **Netlify’s free plan**, as a preview. This repository contains the build config. It does not create the Netlify site, attach `homemotionphysio.com.au`, change DNS, or merge into `main`.
+Staging is live at **https://homemotion-staging.netlify.app**. `site.draft` is still `true`, so the site stays `noindex`. There is no custom domain. `main` is untouched and must not be deployed: it has no `netlify.toml` and is the older site.
 
-Indexing stays off. `site.draft` in `src/content/site.ts` is `true`.
+## Verified on 3 Oct 2026
+
+- Git: pull request #3 is merged into `cursor/design-option-2-b759` (merge commit `a5f5745`). `main` was not updated.
+- Netlify production branch: `cursor/design-option-2-b759`.
+- Branch deploys: production branch only. Deploy previews: pull requests against that branch.
+- No custom domain. No environment variables set in Netlify.
+- Visitor Access / team login is on. Anonymous requests get **HTTP 401**. That is acceptable for staging. It must be removed at launch, or the public enquiry form will fail.
+- Netlify Forms detection is on. Form `enquiry` is detected. An email notification for `enquiry` goes to `hello@homemotionphysio.com.au`.
+- One real test submission at **4:45 AM AEST on 3 Oct 2026** succeeded and is stored in Netlify Forms (name, phone, email, preferred language, reason, suburb, NDIS checkbox). Arrival of the notification email at `hello@` is not yet verified.
+
+## Do not do these yet
+
+- Do not add `homemotionphysio.com.au` as a custom domain in Netlify.
+- Do not change VentraIP DNS. The launch records are at the bottom of this file and need Jackson’s approval.
+- Do not merge this work into `main`, and do not set Netlify’s production branch to `main`.
+- Do not set `site.draft` to `false`.
+- Do not turn off Visitor Access until the launch steps below.
+- Do not add Formspree, EmailJS, Resend, SMTP, or any other mail API. Netlify Forms is the form handler. No extra paid account is required.
 
 ## Do not do these
 
@@ -53,7 +70,7 @@ While `site.draft` is `true`, the staging production deploy and its deploy previ
 - `robots.txt` disallows `/` (`src/pages/robots.txt.ts`).
 - `public/_headers`, copied to `dist/_headers`, sends `X-Robots-Tag: noindex, nofollow`.
 
-Those three follow `site.draft` for a production build. Deploy previews and branch deploys also get `X-Robots-Tag` when `CONTEXT` is `deploy-preview` or `branch-deploy`, including after a later change to `site.draft`. Do not set `site.draft` to `false` until the real launch branch and domain are decided.
+Those three follow `site.draft` for a production build. Deploy previews and branch deploys also get `X-Robots-Tag` when `CONTEXT` is `deploy-preview` or `branch-deploy`, including after a later change to `site.draft`. Leave `site.draft` true until the launch steps at the bottom of this file.
 
 Other headers: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` with camera, microphone, geolocation, and payment disabled, `Strict-Transport-Security` for one year with `includeSubDomains` (no preload), and a Content-Security-Policy that allows this site’s own assets, Astro’s inline scripts and styles, and the map and concept-page hosts already used by the build. Forms may post only to this site (`form-action 'self'`).
 
@@ -82,23 +99,21 @@ These names are **not** read by the enquiry form. Leave them unset. Do not commi
 
 `src/lib/email-delivery.ts` is still a stub and does not send mail. The live path is Netlify Forms.
 
-## Netlify setup Jackson does in the dashboard
+## Netlify settings already in place
 
-This repo cannot click these. Do them on the free plan. Do not add a custom domain at any step. Do not merge the pull request from here; Jackson merges it.
+These match the live staging site. Do not point the production branch back at `main`.
 
-1. Merge the ready pull request into `cursor/design-option-2-b759` first. That puts `netlify.toml` on the branch Netlify will build. Do not merge it into `main`.
-2. Add a new site from Git and choose `Jackson1-netizen/jackson-mobile-physio`.
-3. Set the **production branch** to `cursor/design-option-2-b759` before the first deploy runs. Do not leave it on `main`. If a `main` deploy starts, cancel it. If one was published, delete that deploy so the old site is not left on the `*.netlify.app` URL.
-4. Build settings come from `netlify.toml`: command `npm run build`, publish directory `dist`, Node 22. Do not add environment variables.
-5. Open **Project configuration → Build & deploy → Continuous Deployment → Branches and deploy contexts**.
-6. Leave **Branch deploys** off (none, or no extra branches). The staging site is the production-branch deploy, not a separate branch deploy.
-7. Under **Deploy Previews**, leave them enabled. Pull requests into `cursor/design-option-2-b759` then get a preview, because that branch is the production branch. Pull requests into `main` are not built.
-8. The staging URL will be a `*.netlify.app` hostname. Confirm it is not `homemotionphysio.com.au`.
-9. After the first successful deploy, open **Forms**. Netlify should list a form named `enquiry`. The published homepage includes `<form name="enquiry" data-netlify="true">`, the honeypot, and a hidden `form-name` field. The build fails if those are missing from `dist/index.html`. Add an **email notification** to `hello@homemotionphysio.com.au`. Type that address in the dashboard only. It is not an environment variable and it is not a credential in client code or GitHub.
-10. Submit one test enquiry on the staging URL and confirm it arrives at `hello@`. The site does not store a second copy.
-11. On the staging response, confirm `X-Robots-Tag: noindex, nofollow`, a `noindex` robots meta tag, and `robots.txt` disallowing `/`.
+- Site: `https://homemotion-staging.netlify.app`
+- Production branch: `cursor/design-option-2-b759`
+- Branch deploys: production branch only
+- Deploy previews: pull requests against that branch
+- Build command `npm run build`, publish `dist`, Node 22, from `netlify.toml`
+- No environment variables
+- No custom domain
+- Visitor Access / team login on (HTTP 401 for anonymous requests)
+- Form `enquiry` detected; notification to `hello@homemotionphysio.com.au` saved in the dashboard, not in Git
 
-For a real launch later, decide the production branch and the domain with Jackson. The DNS records below stay unused until that decision.
+The published homepage includes `<form name="enquiry" data-netlify="true">`, the honeypot, and a hidden `form-name` field. The build fails if those are missing from `dist/index.html`.
 
 No Formspree, EmailJS, Resend, or SMTP account is added. Netlify Forms on the free plan stores the submission and sends the notification. The privacy draft says Netlify may store that submission outside Australia.
 
@@ -111,16 +126,26 @@ No Formspree, EmailJS, Resend, or SMTP account is added. Netlify Forms on the fr
 - `mailto:hello@homemotionphysio.com.au` stays visible as a secondary link. It is not the form handler.
 - Nothing is written to `localStorage`. This site has no database of submissions.
 
-## DNS — do not apply
+## Launch steps — do not apply until Jackson approves
 
-**Do not change VentraIP DNS, and do not add the domain in Netlify, until Jackson asks in a separate step.** The domain still shows the VentraIP parked page over HTTP. These notes are only for that later approval.
+The domain still shows the VentraIP parked page. Do these only as a later, approved launch. High-Performance Edge uses different DNS targets; this site is on the free plan.
 
-Free-plan DNS, after he asks (Netlify’s external-DNS guidance; High-Performance Edge uses different targets and is not this plan):
+Netlify’s external-DNS guidance ([configure external DNS](https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns), [SSL troubleshooting](https://docs.netlify.com/manage/domains/troubleshooting/troubleshoot-ssl-and-https)):
 
-1. Delete every existing apex `A` and `AAAA` record, and delete the parking `www` record.
-2. Add one `A` record: host `@` (or blank) → `75.2.60.5`. Leave only that one apex `A` record.
-3. Add a `CNAME`: host `www` → the site’s `<name>.netlify.app` hostname shown in the Netlify dashboard. That hostname does not exist until the site is created. Do not guess it.
-4. Do not change MX (`smtp.google.com`), SPF (`include:_spf.google.com`), or the Google site-verification TXT.
-5. Add the custom domain in Netlify only after those records are in place and he has approved it. HTTPS follows DNS. Then, and only then, consider `site.draft`.
+- Apex domains cannot use a CNAME. The recommended record is an ALIAS, ANAME, or flattened CNAME to `apex-loadbalancer.netlify.com`.
+- VentraIP does not offer that record type. Use the documented fallback: one `A` record to Netlify’s load balancer IP **`75.2.60.5`**.
+- `www` is a CNAME to the site hostname **`homemotion-staging.netlify.app`**.
+- Keep a single apex `A` record. Extra apex `A` or `AAAA` records block the certificate.
+- Prefer `www` as the primary domain in Netlify when DNS stays at VentraIP. Netlify then redirects the apex to `www`.
 
-Until that approval, preview and branch deploys stay on `*.netlify.app` and stay `noindex`.
+Order:
+
+1. In Netlify, add the custom domains `homemotionphysio.com.au` and `www.homemotionphysio.com.au`. Do not turn on Netlify DNS. Set `www` as the primary domain.
+2. At VentraIP, replace the apex `A` record **`103.42.108.46`** with one `A` record: host `@` (or blank) → **`75.2.60.5`**. Delete any other apex `A` or `AAAA` record.
+3. Replace the `www` `A` record with a `CNAME`: host `www` → **`homemotion-staging.netlify.app`**.
+4. Do not change MX (`smtp.google.com`), SPF (`v=spf1 include:_spf.google.com ~all`), the DKIM TXT for selector `google`, the DMARC TXT, or the Google site-verification TXT.
+5. Wait until Netlify shows the HTTPS certificate as issued for the new domain.
+6. Remove Netlify Visitor Access / team login. While it is on, anonymous visitors get HTTP 401 and cannot submit the enquiry form. Leave it on until this step.
+7. Set `site.draft` to `false` in `src/content/site.ts` and redeploy. Until then the HTML meta tag, `robots.txt`, and `X-Robots-Tag` stay `noindex`. Do this after HTTPS works, so the public URL is the domain rather than only the staging hostname.
+8. On the live HTTPS site, submit one enquiry and confirm it arrives at `hello@homemotionphysio.com.au`. Send one message to `hello@` and one to `referrals@` from an outside address.
+9. After that, decide with Jackson whether the Netlify production branch stays `cursor/design-option-2-b759` or changes. Do not point production at `main`.

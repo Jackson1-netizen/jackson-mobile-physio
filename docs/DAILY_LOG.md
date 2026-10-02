@@ -155,3 +155,8 @@
 - **Indexing:** While `site.draft` is true, meta, `robots.txt`, and `X-Robots-Tag` stay `noindex` on those deploys.
 - **Not done:** No Netlify site created. No custom domain. No DNS change. The pull request was not merged.
 - **Next:** Jackson merges the pull request into `cursor/design-option-2-b759`, then connects Netlify with that production branch.
+
+## 2026-10-03 (staging QA follow-up)
+
+- **Changed:** Replaced the referral-sheet QR placeholder with a build-time QR code for `https://homemotionphysio.com.au/referral/`. Removed the two font preloads that Chrome was warning about. Recorded the live Netlify staging site, Workspace mail, and the launch DNS values.
+- **Not done:** No merge. No DNS change. Visitor Access stays on. `site.draft` stays true. `main` stays untouched.
