@@ -1,9 +1,13 @@
 ---
 import HomePicture from "./HomePicture.astro";
-import { site } from "../../content/site";
+import { site, publicQualifications } from "../../content/site";
 import { homeAbout } from "../../content/home-motion";
 
 const photo = homeAbout.photo;
+const shownQualifications = publicQualifications().map((item) => ({
+  item,
+  index: site.qualifications.indexOf(item),
+}));
 ---
 
 <section id="about" class="hm-reveal bg-[var(--hm-warm-white)]">
@@ -33,20 +37,23 @@ const photo = homeAbout.photo;
         {" "}
         <span data-i18n-path="hm.about.languagesList">{site.languages.join(", ")}</span>
       </p>
-      <p class="mt-3 text-sm text-[#3d5a52]">
-        <strong><span data-i18n-path="about.qualificationsLabel">{homeAbout.qualificationsLabel}</span>:</strong>
-        {" "}
-        {
-          site.qualifications.map((q, i) => (
-            <>
-              {i > 0 && "; "}
-              <span data-i18n-path={`hm.about.qualificationLabels.${i}`}>{q.label}</span>
-              {" — "}
-              <span data-i18n-path={`hm.about.qualificationValues.${i}`}>{q.value}</span>
-            </>
-          ))
-        }
-      </p>
+      {
+        shownQualifications.length > 0 && (
+          <p class="mt-3 text-sm text-[#3d5a52]">
+            <strong>
+              <span data-i18n-path="about.qualificationsLabel">{homeAbout.qualificationsLabel}</span>:
+            </strong>{" "}
+            {shownQualifications.map(({ item, index }, visibleIndex) => (
+              <>
+                {visibleIndex > 0 && "; "}
+                <span data-i18n-path={`hm.about.qualificationLabels.${index}`}>{item.label}</span>
+                {" — "}
+                <span data-i18n-path={`hm.about.qualificationValues.${index}`}>{item.value}</span>
+              </>
+            ))}
+          </p>
+        )
+      }
       <p class="hm-registered" data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</p>
     </div>
   </div>

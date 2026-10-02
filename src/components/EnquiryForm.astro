@@ -85,13 +85,12 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
   <div class="hm-field">
     <label for="enq-message">
       <span data-i18n-path="enquiry.message">{t.message}</span>
-      <span class="hm-req" aria-hidden="true">*</span>
+      <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
     </label>
-    <textarea id="enq-message" class="hm-input" name="message" rows="4" required></textarea>
-    <p id="enq-message-error" class="hm-field-error" hidden></p>
+    <textarea id="enq-message" class="hm-input" name="message" rows="3" maxlength="400" aria-describedby="enq-privacy-note"></textarea>
   </div>
 
-  <p class="hm-form-note" data-i18n-path="enquiry.privacyNote">{t.privacyNote}</p>
+  <p id="enq-privacy-note" class="hm-form-note" data-i18n-path="enquiry.privacyNote">{t.privacyNote}</p>
 
   {
     !deliveryReady && (
@@ -156,7 +155,6 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
       name: form.querySelector("#enq-name"),
       phone: form.querySelector("#enq-phone"),
       email: form.querySelector("#enq-email"),
-      message: form.querySelector("#enq-message"),
     };
     let attempted = false;
 
@@ -179,7 +177,6 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
       if (name === "email") {
         return !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? null : "emailInvalid";
       }
-      if (name === "message") return value ? null : "messageRequired";
       return null;
     };
 
@@ -243,10 +240,9 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         if (get("suburb")) lines.push(`Suburb: ${get("suburb")}`);
         lines.push(
           `Language: ${get("language")}`,
-          `NDIS participant: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / unsure"}`,
-          "",
-          get("message"),
+          `NDIS plan enquiry: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / not stated"}`,
         );
+        if (get("message")) lines.push("", `Reason: ${get("message")}`);
         if (compose) {
           compose.setAttribute(
             "href",
@@ -265,10 +261,9 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
       if (get("suburb")) lines.push(`Suburb: ${get("suburb")}`);
       lines.push(
         `Language: ${get("language")}`,
-        `NDIS participant: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / unsure"}`,
-        "",
-        get("message"),
+        `NDIS plan enquiry: ${data.get("ndis") ? "Yes (plan-managed or self-managed)" : "No / not stated"}`,
       );
+      if (get("message")) lines.push("", `Reason: ${get("message")}`);
       const body = lines.join("\n");
       showFeedback("mailto");
       window.location.href = `${publicMailto}&body=${encodeURIComponent(body)}`;

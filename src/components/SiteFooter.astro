@@ -9,7 +9,9 @@ const year = new Date().getFullYear();
     <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
       <div>
         <p class="font-serif text-lg font-semibold">{site.businessName}</p>
-        <p class="mt-2 text-white/80">{site.legalNamePlaceholder}</p>
+        <p class="mt-2 text-white/80">
+          {site.registeredBusinessName} · {site.soleTraderName}, sole trader
+        </p>
         <p class="mt-4">
           <a class="text-white underline underline-offset-4" href={site.phoneHref}>
             {site.phone}
@@ -20,6 +22,7 @@ const year = new Date().getFullYear();
           </a>
         </p>
         <p class="mt-2 text-white/70">{site.abnDisplay}</p>
+        <p class="mt-2 text-white/70">AHPRA {site.ahpraRegistrationNumber}</p>
         <p class="mt-4 text-white/60">{site.ahpraNotice}</p>
       </div>
       <div>
@@ -38,6 +41,10 @@ const year = new Date().getFullYear();
     <p class="mt-8">
       <a class="text-white/80 underline-offset-4 hover:text-white hover:underline" href="/privacy">
         {site.footer.privacyLinkLabel}
+      </a>
+      <span class="mx-2 text-white/40" aria-hidden="true">·</span>
+      <a class="text-white/80 underline-offset-4 hover:text-white hover:underline" href="/disclaimer">
+        {site.footer.disclaimerLinkLabel}
       </a>
       <span class="mx-2 text-white/40" aria-hidden="true">·</span>
       <a class="text-white/80 underline-offset-4 hover:text-white hover:underline" href="/referral">

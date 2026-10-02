@@ -17,7 +17,9 @@ const publicMailto = getEmailHref();
       <HomeLogo sizes="88px" lazy />
     </a>
     <p class="text-sm text-[#5b6e67]">
-      {site.displayBrand} · {site.abnDisplay} ·{" "}
+      {site.registeredBusinessName} · {site.abnDisplay} · AHPRA {site.ahpraRegistrationNumber}
+    </p>
+    <p class="text-sm text-[#5b6e67]">
       <span data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</span>
     </p>
     <p class="flex flex-wrap gap-4 text-sm">
@@ -25,6 +27,9 @@ const publicMailto = getEmailHref();
       <a class="underline-offset-4 hover:underline" href={publicMailto}>{site.publicEmail}</a>
       <a class="underline-offset-4 hover:underline" href="/privacy" data-i18n-path="hm.footer.privacy">
         {site.footer.privacyLinkLabel}
+      </a>
+      <a class="underline-offset-4 hover:underline" href="/disclaimer" data-i18n-path="hm.footer.disclaimer">
+        {site.footer.disclaimerLinkLabel}
       </a>
       <a class="underline-offset-4 hover:underline" href="/referral" data-i18n-path="nav.referralSheet">
         {messages.en.nav.referralSheet}

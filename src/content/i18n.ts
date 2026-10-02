@@ -77,7 +77,7 @@ const en = {
       "Enquiries welcome where your plan manager can arrange payment with an independent physiotherapist.",
     notRegistered: "Not an NDIS registered provider",
     notRegisteredDesc:
-      "WAI WA LAW is not registered with the NDIS Commission. We cannot bill NDIA-managed plans directly. Please confirm funding with your coordinator before services start.",
+      "Home Motion is not an NDIS registered provider and is not registered with the NDIS Commission. We cannot bill NDIA-managed plans directly. Please confirm funding with your coordinator before services start.",
     noGuarantee:
       "Funding eligibility and availability must be confirmed before care begins. Nothing on this site guarantees NDIS approval or outcomes.",
   },
@@ -123,7 +123,7 @@ const en = {
       {
         question: "Do you have a clinic I can visit?",
         answer:
-          "No — WAI WA LAW is mobile only. Appointments are at your home or an agreed community location across the eastern suburbs.",
+          "No. Home Motion is mobile only. Appointments are at your home or an agreed community location across the eastern suburbs.",
       },
       {
         question: "Which suburbs do you cover?",
@@ -133,7 +133,7 @@ const en = {
       {
         question: "Can I use NDIS funding?",
         answer:
-          "Enquiries are welcome from self-managed and plan-managed participants. We are not an NDIS registered provider and cannot service NDIA-managed plans directly. Confirm funding with your coordinator before starting.",
+          "NDIS plan-managed and self-managed enquiries welcome. Home Motion is not an NDIS registered provider and cannot bill NDIA-managed plans directly. Funding is not guaranteed. Confirm arrangements with your coordinator before starting.",
       },
       {
         question: "Which languages are available?",
@@ -143,7 +143,7 @@ const en = {
       {
         question: "Is AHPRA registration confirmed?",
         answer:
-          "Yes. AHPRA physiotherapy registration has been granted. Jackson is an AHPRA-registered physiotherapist.",
+          `Yes. Jackson holds general registration as a physiotherapist with AHPRA (${site.ahpraRegistrationNumber}).`,
       },
       {
         question: "Do I need a GP referral?",
@@ -153,7 +153,7 @@ const en = {
       {
         question: "How do I book?",
         answer:
-          `There is no online booking system. Phone Jackson or email ${site.publicEmail} to discuss availability. Hours are by appointment. The mailbox is being set up, so please call if you do not hear back.`,
+          `There is no online booking system. Phone Jackson or email ${site.publicEmail} to discuss availability. Hours are by appointment. If you do not hear back, please call.`,
       },
     ],
   },
@@ -164,15 +164,16 @@ const en = {
   },
   enquiry: {
     intro:
-      "Share a brief message — Jackson will respond when available. For urgent medical emergencies, call 000.",
+      "A name and phone number are enough for a first contact. Please do not include health information. For a medical emergency, call 000.",
     name: "Your name",
     phone: "Phone",
     suburb: "Suburb",
-    message: "How can we help?",
-    ndisLabel: "NDIS participant (plan-managed or self-managed)",
+    message: "Brief reason for getting in touch",
+    ndisLabel: "This enquiry relates to an NDIS plan (plan-managed or self-managed)",
     language: "Preferred language",
     languageOptions: ["English", "Cantonese", "Mandarin", "No preference"],
-    privacyNote: "Do not include sensitive clinical details in this form unless necessary.",
+    privacyNote:
+      "Please do not include health information or other sensitive details. A short note about why you are getting in touch is enough.",
     email: "Email",
     optional: "(optional)",
     requiredNote: "Fields marked * are required.",
@@ -183,7 +184,7 @@ const en = {
     unavailableTitle: "Your enquiry has not been sent",
     unavailableBody: "Please call Jackson to make your enquiry:",
     composeLead: "Or open your email app to write to",
-    mailboxNote: "That inbox is being set up and may not receive mail until domain email is configured.",
+    mailboxNote: "Your email app sends the message. This website does not store it. If you do not hear back, please call.",
     mailtoTitle: "Opening your email app",
     mailtoBody:
       "Your email app should open with your enquiry filled in. Please check it and press send in your email app. If nothing opens, call Jackson:",
@@ -194,7 +195,7 @@ const en = {
       phoneRequired: "Please enter a phone number so Jackson can call you back.",
       phoneInvalid: "Please enter a valid phone number (at least 8 digits).",
       emailInvalid: "Please enter a valid email address, or leave this field blank.",
-      messageRequired: "Please tell us briefly how we can help.",
+      messageRequired: "A reason is optional. Please do not include health information.",
     },
   },
   referrers: {
@@ -236,8 +237,8 @@ const en = {
     hero: {
       support:
         "Personalised, evidence-based physiotherapy care in Melbourne's eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
-      chips: ["Home & community visits", "All ages welcome", "NDIS & private clients"],
-      ahpra: "AHPRA registered physiotherapist",
+      chips: ["Home & community visits", "All ages welcome", "NDIS enquiries welcome"],
+      ahpra: `AHPRA registered physiotherapist · ${site.ahpraRegistrationNumber}`,
       photoAlt:
         "Jackson providing mobile physiotherapy at home, supporting walking practice with a walking frame",
     },
@@ -269,12 +270,13 @@ const en = {
     },
     referrers: {
       heading: "For Referrers",
-      lead: "I work collaboratively with GPs, specialists and allied health professionals to support shared clients with timely, goal-oriented physiotherapy care.",
-      registration: "AHPRA registered physiotherapist.",
+      lead: "Jackson (Wai Wa Law) is the physiotherapist who provides this service. Home Motion offers home and community visits across Melbourne's eastern suburbs, in English, Cantonese and Mandarin. Support coordinators, GPs, allied health professionals and families can contact him directly.",
+      registration: `AHPRA general registration as a physiotherapist · ${site.ahpraRegistrationNumber}.`,
+      ndis: `${site.ndisDescription} ${site.ndisNotRegistered} Funding is not guaranteed.`,
       points: [
-        "Clear communication and progress updates",
-        "Goal-oriented, client-centred care",
-        "Flexible and responsive service",
+        "You contact Jackson, and Jackson provides the physiotherapy.",
+        "Home and community visits — no clinic to travel to.",
+        site.ndisDescription,
       ],
       cta: "Referrer information",
     },
@@ -331,6 +333,7 @@ const en = {
     footer: {
       rights: site.footer.copyrightSuffix,
       privacy: site.footer.privacyLinkLabel,
+      disclaimer: site.footer.disclaimerLinkLabel,
     },
   },
 } as const;
@@ -395,14 +398,14 @@ const zhHant = {
       "以下為評估時可能討論的支援例子。具體照護按個人計劃；概不保證任何治療或結果。",
   },
   ndis: {
-    lead: "歡迎自管及計劃管理的 NDIS 參加者查詢。開始服務前須確認資助資格及可預約時段。",
+    lead: "歡迎 NDIS 計劃管理及自管查詢。",
     planManaged: "NDIS 自管參加者",
     planManagedDesc: "若您自管 NDIS 計劃並希望直接聘用物理治療師，歡迎查詢。",
     planManaged2: "NDIS 計劃管理參加者",
     planManaged2Desc: "若您的計劃經理可與獨立物理治療師安排付款，歡迎查詢。",
     notRegistered: "非 NDIS 註冊服務提供者",
     notRegisteredDesc:
-      "WAI WA LAW 未在 NDIS 委員會註冊，無法直接為 NDIA 管理的計劃開帳。開始服務前請與協調員確認資助安排。",
+      "Home Motion 不是 NDIS 註冊服務提供者，亦未在 NDIS 委員會註冊，無法直接為 NDIA 管理的計劃開帳。開始服務前請與協調員確認資助安排。資助並無保證。",
     noGuarantee: "開始照護前須確認資助資格及可預約時段。本網站不保證 NDIS 批准或治療結果。",
   },
   areas: {
@@ -449,7 +452,7 @@ const zhHant = {
       {
         question: "可以使用 NDIS 資助嗎？",
         answer:
-          "歡迎自管及計劃管理的參加者查詢。我們非 NDIS 註冊提供者，無法直接服務 NDIA 管理的計劃。開始前請與協調員確認。",
+          "歡迎 NDIS 計劃管理及自管查詢。Home Motion 不是 NDIS 註冊服務提供者，無法直接為 NDIA 管理的計劃開帳。資助並無保證。開始前請與協調員確認。",
       },
       {
         question: "可使用哪些語言？",
@@ -457,7 +460,7 @@ const zhHant = {
       },
       {
         question: "AHPRA 註冊是否已確認？",
-        answer: "是。AHPRA 物理治療師註冊已獲批。Jackson 是已註冊物理治療師。",
+        answer: `是。Jackson 持有 AHPRA 物理治療師一般註冊（${site.ahpraRegistrationNumber}）。`,
       },
       {
         question: "需要家庭醫生轉介嗎？",
@@ -465,7 +468,7 @@ const zhHant = {
       },
       {
         question: "如何預約？",
-        answer: `沒有網上預約系統。請致電 Jackson，或電郵 ${site.publicEmail} 討論時間。服務時間為預約制。該郵箱仍在設置中，如未收到回覆請致電。`,
+        answer: `沒有網上預約系統。請致電 Jackson，或電郵 ${site.publicEmail} 討論時間。服務時間為預約制。如未收到回覆，請致電。`,
       },
     ],
   },
@@ -474,15 +477,15 @@ const zhHant = {
     emptyBody: "執業後若客戶願意分享，將在此連結至經核實的 Google 評價。我們不會展示虛假見證。",
   },
   enquiry: {
-    intro: "請簡述您的需要 — Jackson 會在方便時回覆。緊急醫療情況請致電 000。",
+    intro: "首次聯絡只需姓名及電話。請勿填寫健康資料。緊急醫療情況請致電 000。",
     name: "姓名",
     phone: "電話",
     suburb: "郊區",
-    message: "我們如何協助？",
-    ndisLabel: "NDIS 參加者（計劃管理或自管）",
+    message: "簡短聯絡原因",
+    ndisLabel: "此查詢與 NDIS 計劃有關（計劃管理或自管）",
     language: "偏好語言",
     languageOptions: ["英語", "廣東話", "普通話", "無偏好"],
-    privacyNote: "除非必要，請勿在此表格填寫敏感臨床資料。",
+    privacyNote: "請勿填寫健康資料或其他敏感資料。簡短說明聯絡原因即可。",
     email: "電郵",
     optional: "（選填）",
     requiredNote: "標有 * 的欄位必須填寫。",
@@ -492,7 +495,7 @@ const zhHant = {
     unavailableTitle: "查詢尚未傳送",
     unavailableBody: "請致電 Jackson 進行查詢：",
     composeLead: "或開啟電郵程式寫信至",
-    mailboxNote: "該郵箱仍在設置中，域名電郵尚未開通前可能收不到信件。",
+    mailboxNote: "訊息由您的電郵程式送出。本網站不會儲存。如未收到回覆，請致電。",
     mailtoTitle: "正在開啟您的電郵程式",
     mailtoBody:
       "您的電郵程式應會開啟，並已填好查詢內容。請檢查後在電郵程式內按「傳送」。如沒有開啟，請致電 Jackson：",
@@ -503,7 +506,7 @@ const zhHant = {
       phoneRequired: "請輸入電話號碼，方便 Jackson 回電。",
       phoneInvalid: "請輸入有效的電話號碼（最少 8 位數字）。",
       emailInvalid: "請輸入有效的電郵地址，或留空此欄。",
-      messageRequired: "請簡述我們可以如何協助您。",
+      messageRequired: "原因可以不填。請勿填寫健康資料。",
     },
   },
   referrers: {
@@ -540,8 +543,8 @@ const zhHant = {
     hero: {
       support:
         "為墨爾本東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
-      chips: ["上門及社區探訪", "歡迎所有年齡人士", "NDIS 及私人客戶"],
-      ahpra: "AHPRA 註冊物理治療師",
+      chips: ["上門及社區探訪", "歡迎所有年齡人士", "歡迎 NDIS 查詢"],
+      ahpra: `AHPRA 註冊物理治療師 · ${site.ahpraRegistrationNumber}`,
       photoAlt: "Jackson 上門提供物理治療，協助使用助行架進行步行練習",
     },
     services: {
@@ -566,9 +569,14 @@ const zhHant = {
     },
     referrers: {
       heading: "轉介人士",
-      lead: "我與家庭醫生、專科醫生及其他專職醫療人員合作，為共同服務的客戶提供及時、以目標為本的物理治療。",
-      registration: "AHPRA 註冊物理治療師。",
-      points: ["清晰溝通，定期匯報進度", "以目標為本、以客戶為中心的照護", "靈活及迅速回應的服務"],
+      lead: "Jackson（Wai Wa Law）是提供這項服務的物理治療師。Home Motion 在墨爾本東區提供上門及社區探訪，可使用英語、廣東話及普通話。支援協調員、家庭醫生、專職醫療人員及家屬可直接聯絡他。",
+      registration: `AHPRA 物理治療師一般註冊 · ${site.ahpraRegistrationNumber}。`,
+      ndis: "歡迎 NDIS 計劃管理及自管查詢。Home Motion 不是 NDIS 註冊服務提供者。資助並無保證。",
+      points: [
+        "您聯絡的是 Jackson，治療亦由 Jackson 提供。",
+        "上門及社區探訪，無需前往診所。",
+        "歡迎 NDIS 計劃管理及自管查詢。",
+      ],
       cta: "轉介資料",
     },
     how: {
@@ -607,8 +615,8 @@ const zhHant = {
     about: {
       languagesList: "英語、廣東話、普通話",
       qualificationLabels: ["物理治療資歷", "AHPRA 註冊", "專業保險"],
-      qualificationValues: { "1": "已註冊", "2": "按執業要求投保" },
-      ahpraNotice: "AHPRA 物理治療師註冊已獲批。Jackson 是 AHPRA 註冊物理治療師。",
+      qualificationValues: { "1": `一般註冊 · ${site.ahpraRegistrationNumber}`, "2": "按執業要求投保" },
+      ahpraNotice: `Jackson 持有 AHPRA 物理治療師一般註冊（${site.ahpraRegistrationNumber}）。`,
       portraitAlt: "Home Motion 上門物理治療師 Jackson，身穿 Home Motion Polo 衫",
     },
     photos: {
@@ -619,6 +627,7 @@ const zhHant = {
     footer: {
       rights: "版權所有。",
       privacy: "私隱政策（草稿）",
+      disclaimer: "網站聲明（草稿）",
     },
   },
 } as const;
@@ -681,14 +690,14 @@ const zhHans = {
     intro: "以下为评估时可能讨论的支援例子。具体照护按个人计划；概不保证任何治疗或结果。",
   },
   ndis: {
-    lead: "欢迎自管及计划管理的 NDIS 参加者咨询。开始服务前须确认资助资格及可预约时段。",
+    lead: "欢迎 NDIS 计划管理及自管咨询。",
     planManaged: "NDIS 自管参加者",
     planManagedDesc: "若您自管 NDIS 计划并希望直接聘用物理治疗师，欢迎咨询。",
     planManaged2: "NDIS 计划管理参加者",
     planManaged2Desc: "若您的计划经理可与独立物理治疗师安排付款，欢迎咨询。",
     notRegistered: "非 NDIS 注册服务提供者",
     notRegisteredDesc:
-      "WAI WA LAW 未在 NDIS 委员会注册，无法直接为 NDIA 管理的计划开票。开始服务前请与协调员确认资助安排。",
+      "Home Motion 不是 NDIS 注册服务提供者，也未在 NDIS 委员会注册，无法直接为 NDIA 管理的计划开票。开始服务前请与协调员确认资助安排。资助并无保证。",
     noGuarantee: "开始照护前须确认资助资格及可预约时段。本网站不保证 NDIS 批准或治疗结果。",
   },
   areas: {
@@ -735,7 +744,7 @@ const zhHans = {
       {
         question: "可以使用 NDIS 资助吗？",
         answer:
-          "欢迎自管及计划管理的参加者咨询。我们非 NDIS 注册提供者，无法直接服务 NDIA 管理的计划。开始前请与协调员确认。",
+          "欢迎 NDIS 计划管理及自管咨询。Home Motion 不是 NDIS 注册服务提供者，无法直接为 NDIA 管理的计划开票。资助并无保证。开始前请与协调员确认。",
       },
       {
         question: "可使用哪些语言？",
@@ -743,7 +752,7 @@ const zhHans = {
       },
       {
         question: "AHPRA 注册是否已确认？",
-        answer: "是。AHPRA 物理治疗师注册已获批。Jackson 是已注册物理治疗师。",
+        answer: `是。Jackson 持有 AHPRA 物理治疗师一般注册（${site.ahpraRegistrationNumber}）。`,
       },
       {
         question: "需要全科医生转介吗？",
@@ -751,7 +760,7 @@ const zhHans = {
       },
       {
         question: "如何预约？",
-        answer: `没有网上预约系统。请致电 Jackson，或发送邮件至 ${site.publicEmail} 讨论时间。服务时间为预约制。该邮箱仍在设置中，如未收到回复请致电。`,
+        answer: `没有网上预约系统。请致电 Jackson，或发送邮件至 ${site.publicEmail} 讨论时间。服务时间为预约制。如未收到回复，请致电。`,
       },
     ],
   },
@@ -760,15 +769,15 @@ const zhHans = {
     emptyBody: "执业后若客户愿意分享，将在此链接至经核实的 Google 评价。我们不会展示虚假见证。",
   },
   enquiry: {
-    intro: "请简述您的需要 — Jackson 会在方便时回复。紧急医疗情况请致电 000。",
+    intro: "首次联系只需姓名和电话。请勿填写健康资料。紧急医疗情况请致电 000。",
     name: "姓名",
     phone: "电话",
     suburb: "郊区",
-    message: "我们如何协助？",
-    ndisLabel: "NDIS 参加者（计划管理或自管）",
+    message: "简短联系原因",
+    ndisLabel: "此咨询与 NDIS 计划有关（计划管理或自管）",
     language: "偏好语言",
     languageOptions: ["英语", "粤语", "普通话", "无偏好"],
-    privacyNote: "除非必要，请勿在此表格填写敏感临床资料。",
+    privacyNote: "请勿填写健康资料或其他敏感资料。简短说明联系原因即可。",
     email: "电子邮箱",
     optional: "（选填）",
     requiredNote: "标有 * 的项目为必填项。",
@@ -778,7 +787,7 @@ const zhHans = {
     unavailableTitle: "咨询尚未发送",
     unavailableBody: "请致电 Jackson 进行咨询：",
     composeLead: "或打开邮件应用写信至",
-    mailboxNote: "该邮箱仍在设置中，域名邮件尚未开通前可能收不到信件。",
+    mailboxNote: "信息由您的邮件应用发出。本网站不会保存。如未收到回复，请致电。",
     mailtoTitle: "正在打开您的邮件应用",
     mailtoBody:
       "您的邮件应用应会打开，并已填好咨询内容。请检查后在邮件应用中点击“发送”。如果没有打开，请致电 Jackson：",
@@ -789,7 +798,7 @@ const zhHans = {
       phoneRequired: "请输入电话号码，方便 Jackson 回电。",
       phoneInvalid: "请输入有效的电话号码（至少 8 位数字）。",
       emailInvalid: "请输入有效的电子邮箱地址，或留空此项。",
-      messageRequired: "请简要说明我们可以如何帮助您。",
+      messageRequired: "原因可以不填。请勿填写健康资料。",
     },
   },
   referrers: {
@@ -826,8 +835,8 @@ const zhHans = {
     hero: {
       support:
         "为墨尔本东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
-      chips: ["上门及社区探访", "欢迎所有年龄人士", "NDIS 及私人客户"],
-      ahpra: "AHPRA 注册物理治疗师",
+      chips: ["上门及社区探访", "欢迎所有年龄人士", "欢迎 NDIS 咨询"],
+      ahpra: `AHPRA 注册物理治疗师 · ${site.ahpraRegistrationNumber}`,
       photoAlt: "Jackson 上门提供物理治疗，协助使用助行架进行步行练习",
     },
     services: {
@@ -852,9 +861,14 @@ const zhHans = {
     },
     referrers: {
       heading: "转介方",
-      lead: "我与全科医生、专科医生及其他专职医疗人员合作，为共同服务的客户提供及时、以目标为导向的物理治疗。",
-      registration: "AHPRA 注册物理治疗师。",
-      points: ["清晰沟通，定期反馈进展", "以目标为导向、以客户为中心的照护", "灵活、及时响应的服务"],
+      lead: "Jackson（Wai Wa Law）是提供这项服务的物理治疗师。Home Motion 在墨尔本东区提供上门及社区探访，可使用英语、粤语及普通话。支持协调员、全科医生、专职医疗人员及家属可以直接联系他。",
+      registration: `AHPRA 物理治疗师一般注册 · ${site.ahpraRegistrationNumber}。`,
+      ndis: "欢迎 NDIS 计划管理及自管咨询。Home Motion 不是 NDIS 注册服务提供者。资助并无保证。",
+      points: [
+        "您联系的是 Jackson，治疗也由 Jackson 提供。",
+        "上门及社区探访，无需前往诊所。",
+        "欢迎 NDIS 计划管理及自管咨询。",
+      ],
       cta: "转介信息",
     },
     how: {
@@ -893,8 +907,8 @@ const zhHans = {
     about: {
       languagesList: "英语、粤语、普通话",
       qualificationLabels: ["物理治疗资历", "AHPRA 注册", "专业保险"],
-      qualificationValues: { "1": "已注册", "2": "按执业要求投保" },
-      ahpraNotice: "AHPRA 物理治疗师注册已获批。Jackson 是 AHPRA 注册物理治疗师。",
+      qualificationValues: { "1": `一般注册 · ${site.ahpraRegistrationNumber}`, "2": "按执业要求投保" },
+      ahpraNotice: `Jackson 持有 AHPRA 物理治疗师一般注册（${site.ahpraRegistrationNumber}）。`,
       portraitAlt: "Home Motion 上门物理治疗师 Jackson，身穿 Home Motion Polo 衫",
     },
     photos: {
@@ -905,6 +919,7 @@ const zhHans = {
     footer: {
       rights: "版权所有。",
       privacy: "隐私政策（草稿）",
+      disclaimer: "网站声明（草稿）",
     },
   },
 } as const;
