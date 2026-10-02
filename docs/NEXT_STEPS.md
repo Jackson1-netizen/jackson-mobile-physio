@@ -62,7 +62,7 @@ Jackson must **tell you in writing** (message to Cursor agent or confirmed note)
 | **Privacy** | Legal review of `site.privacy`; set `privacy.lastUpdated`. |
 | **Legal trading name** | Confirm or remove `legalNamePlaceholder`. |
 | **Production URL** | Set `websiteUrl` when domain is known. |
-| **Deploy** | Netlify free-plan preview only. Config is in the repo. Jackson connects the site and does not attach the production domain (`docs/DEPLOYMENT.md`). |
+| **Deploy** | Netlify staging only. Production branch is `cursor/design-option-2-b759` after this pull request is merged there. Do not use `main`. Do not attach the production domain (`docs/DEPLOYMENT.md`). |
 
 ---
 

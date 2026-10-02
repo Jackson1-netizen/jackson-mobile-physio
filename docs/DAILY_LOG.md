@@ -148,3 +148,10 @@
 - **Not done:** No Netlify site was created. No custom domain. No DNS change. No merge to `main`. No extra email provider.
 - **Decisions:** `docs/DECISIONS.md` (Netlify preview only).
 - **Next:** Jackson connects the GitHub repo in Netlify, enables those two deploy types, and adds the form notification to `hello@homemotionphysio.com.au`.
+
+## 2026-10-02 (staging production branch)
+
+- **Changed:** The ignore script now builds only a production deploy of `cursor/design-option-2-b759` and deploy previews of pull requests into that branch. `main` is skipped because it has no `netlify.toml` and would otherwise publish the old site. Docs now say to merge the pull request into the design branch, then set that branch as Netlify’s production branch for staging.
+- **Indexing:** While `site.draft` is true, meta, `robots.txt`, and `X-Robots-Tag` stay `noindex` on those deploys.
+- **Not done:** No Netlify site created. No custom domain. No DNS change. The pull request was not merged.
+- **Next:** Jackson merges the pull request into `cursor/design-option-2-b759`, then connects Netlify with that production branch.

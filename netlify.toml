@@ -1,5 +1,7 @@
-# Home Motion — Netlify free-plan preview only.
-# Does not attach homemotionphysio.com.au. Does not change DNS. Does not deploy main.
+# Home Motion — Netlify free-plan staging.
+# Production branch in the Netlify UI must be cursor/design-option-2-b759.
+# main has no copy of this file. Do not leave production on main.
+# Does not attach homemotionphysio.com.au. Does not change DNS.
 # Dashboard steps: docs/DEPLOYMENT.md
 
 [build]
@@ -12,20 +14,18 @@
   # package.json requires Node >= 22.12.0. No secrets belong here.
   NODE_VERSION = "22"
 
-# Pull-request previews. Netlify sets CONTEXT=deploy-preview.
+# Staging site. Netlify sets CONTEXT=production for the production branch.
+[context.production]
+  command = "npm run build"
+
+# Pull requests into the production branch. Netlify sets CONTEXT=deploy-preview.
 [context.deploy-preview]
   command = "npm run build"
 
-# Branch deploys. Netlify sets CONTEXT=branch-deploy.
-[context.branch-deploy]
-  command = "npm run build"
-
-# Steady preview of the approved design branch.
-# Enable this branch under Branch deploys in the Netlify UI.
+# Same command if Netlify selects the branch context for the staging branch.
 [context."cursor/design-option-2-b759"]
   command = "npm run build"
 
 # Security headers and X-Robots-Tag are written at build time
-# by scripts/write-netlify-headers.mjs. While site.draft is true, every
-# allowed deploy is noindex. Deploy previews and the
-# cursor/design-option-2-b759 branch deploy stay noindex even after that switch.
+# by scripts/write-netlify-headers.mjs. While site.draft is true, the staging
+# production deploy and its deploy previews are noindex.

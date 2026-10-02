@@ -1,13 +1,14 @@
 /**
  * Writes public/_headers before `astro build` copies it into dist/.
  *
- * X-Robots-Tag: noindex, nofollow is added when any of these is true:
- * - site.draft is true (every build, including a production context), or
- * - Netlify CONTEXT is deploy-preview or branch-deploy, or
- * - BRANCH is cursor/design-option-2-b759 (that branch deploy stays non-indexable).
+ * X-Robots-Tag: noindex, nofollow is added when either is true:
+ * - site.draft is true (every context, including production of the staging branch), or
+ * - Netlify CONTEXT is deploy-preview or branch-deploy.
  *
- * A production deploy omits the header only when site.draft is false and the
- * deploy is not a preview or that branch. This does not change DNS.
+ * While site.draft is true, the staging production deploy and its pull-request
+ * previews stay noindex. A later production launch can omit this header only
+ * after site.draft is false, and only for a production context. This does not
+ * change DNS.
  */
 import { readFileSync, writeFileSync } from "node:fs";
 
@@ -20,9 +21,7 @@ if (!draftMatch) {
 
 const draft = draftMatch[1] === "true";
 const context = process.env.CONTEXT || "";
-const branch = process.env.BRANCH || "";
-const previewBranch = branch === "cursor/design-option-2-b759";
-const previewContext = context === "deploy-preview" || context === "branch-deploy" || previewBranch;
+const previewContext = context === "deploy-preview" || context === "branch-deploy";
 const noindex = draft || previewContext;
 
 const csp = [
