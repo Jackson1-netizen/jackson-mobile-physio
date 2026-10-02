@@ -18,7 +18,7 @@ Current status of the owner-approved design branch. Staging is live and stays a 
 - Enquiry form asks for name and phone, with optional email, suburb, language, an NDIS-plan checkbox, and an optional short reason. It tells people not to include health information and links to `/privacy`. It posts to **Netlify Forms** (form name `enquiry`, honeypot, no extra email provider). A success message is shown only when that post is accepted. `mailto:hello@homemotionphysio.com.au` stays as a secondary link. Referrers are directed to `referrals@homemotionphysio.com.au`.
 - Netlify staging is live at `https://homemotion-staging.netlify.app`. Production branch is `cursor/design-option-2-b759`. Branch deploys are limited to that production branch. Deploy previews are pull requests against it. No custom domain and no Netlify environment variables. Visitor Access / team login is on (anonymous HTTP 401).
 - Pull request #3 is merged into `cursor/design-option-2-b759` (merge commit `a5f5745`). `main` is untouched and is not a deploy target.
-- Netlify Forms detected form `enquiry`. The email notification to `hello@homemotionphysio.com.au` is saved. A real test submission at 4:45 AM AEST on 3 Oct 2026 is in Netlify Forms (name, phone, email, preferred language, reason, suburb, NDIS checkbox). Delivery of that notification into the `hello@` mailbox is not yet confirmed.
+- Netlify Forms detected form `enquiry`. The email notification to `hello@homemotionphysio.com.au` is saved. As of about 4:55 AM AEST on 3 Oct 2026, the form-to-email path is verified on staging: the test submission “TEST - staging check (please ignore)” (4:45 AM AEST) is in Netlify Forms, and the notification from `formresponses@netlify.com` with subject “Form submission from enquiry form:” arrived in the `hello@` Workspace inbox, not in Spam.
 - The referral sheet includes a QR code generated at build time for `https://homemotionphysio.com.au/referral/`. It does not call a QR website. Until DNS changes, that address still opens the parked page.
 - Draft privacy policy and website disclaimer are on the site and linked from the footer.
 - Indexing is off behind `site.draft`. Concept mockups stay out of the sitemap, and stay disallowed in `robots.txt` even after launch.
@@ -31,8 +31,7 @@ Current status of the owner-approved design branch. Staging is live and stays a 
 - **Do not set `draft` to `false`.** While it is true, the HTML robots meta, `robots.txt`, and `X-Robots-Tag` keep staging and its deploy previews out of search.
 - **Do not deploy `main`.** It is untouched, it has no `netlify.toml`, and it is the older site.
 - **Do not remove Visitor Access until launch.** Anonymous requests get HTTP 401. Public enquiries fail while that protection stays on.
-- **The `hello@` notification email is not confirmed in the mailbox.** The Netlify Forms row exists. `EMAIL_DELIVERY_READY` stays unset. DKIM is published, but Google Admin “Start authentication” has not been clicked.
-- **DKIM authentication is not finished.** The TXT record resolves, and DMARC is live at `p=none`. Google Admin still needs “Start authentication”. A test that `hello@` and `referrals@` receive mail is not recorded.
+- **Inbound mail from outside the domain is not confirmed.** The Netlify notification reached `hello@`. A message sent from an outside address to `hello@` and to `referrals@` is still outstanding. `EMAIL_DELIVERY_READY` stays unset.
 - The GitHub repository is **public**. Treat every committed file as public. Do not add patient information, passwords, or private inboxes.
 - University / degree line is still unconfirmed, so it is kept in config and hidden on the pages.
 - Privacy policy and disclaimer are not adopted. They are not legal advice.
@@ -40,8 +39,8 @@ Current status of the owner-approved design branch. Staging is live and stays a 
 
 ## NEEDS JACKSON
 
-- Sign in to Google Admin again and click DKIM **Start authentication** for selector `google`. The 2048-bit TXT record is already published and resolving. DMARC is already live. Do not invent new keys in this repo.
-- Confirm the Netlify notification arrives at `hello@homemotionphysio.com.au`. Send one test email to `hello@` and one to `referrals@` from an address outside the domain, and confirm replies use those From addresses.
+- Send a test email from an address outside the domain to `referrals@homemotionphysio.com.au` and to `hello@homemotionphysio.com.au`, and confirm both arrive. That checks inbound alias routing from external senders. The Netlify form notification to `hello@` is already verified.
+- After monitoring, consider raising DMARC from `p=none` to `p=quarantine`. Do not change it in this repo, and do not invent keys.
 - Confirm the phone number `0433 479 703` and these eight suburbs: Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley, Mitcham, Nunawading.
 - Review and approve the `/privacy` and `/disclaimer` drafts, or ask a lawyer to review them (`docs/LEGAL_DRAFTS.md`).
 - Decide whether the physiotherapy degree and university should be shown. The line stays hidden until then.
@@ -54,8 +53,9 @@ Current status of the owner-approved design branch. Staging is live and stays a 
 Do these only after the blocked items and Jackson’s decisions above. Checking a box here does not perform the step.
 
 - [ ] Jackson has approved the privacy policy and disclaimer, and the draft banners on those pages have been updated to the adopted date.
-- [ ] `hello@` and `referrals@` receive a test message. Replies use those addresses.
-- [ ] DKIM and DMARC are in place if he wants them before launch.
+- [x] DKIM signing is active, and DMARC `p=none` is live (3 Oct 2026).
+- [ ] `hello@` and `referrals@` each receive a message sent from outside the domain. Replies use those From addresses.
+- [ ] DMARC is raised to `p=quarantine` only after that monitoring, if Jackson wants it before launch.
 - [ ] Visitor Access is removed so anonymous visitors can open the site and submit the form.
 - [ ] Custom domains `homemotionphysio.com.au` and `www` are added in Netlify, with `www` primary. VentraIP apex `A` `103.42.108.46` is replaced by `75.2.60.5`. The `www` `A` record is replaced by a CNAME to `homemotion-staging.netlify.app`. MX, SPF, DKIM, DMARC, and the site-verification TXT are unchanged. HTTPS is issued.
 - [ ] The production-branch strategy is decided with Jackson after that. `PUBLIC_SITE_URL` stays unset on staging. Do not deploy `main`.
@@ -78,10 +78,11 @@ As supplied from the owner’s records and DNS. This repo does not change any of
 | Website host | **Netlify free plan.** Staging: `https://homemotion-staging.netlify.app`. Production branch `cursor/design-option-2-b759`. Branch deploys: that branch only. Deploy previews: pull requests against it. No custom domain. No Netlify env vars. Visitor Access on (HTTP 401). |
 | Website DNS | Unchanged. Apex `A` is **`103.42.108.46`**. The domain shows the **VentraIP parked page over HTTP**. No HTTPS site on the domain. |
 | Email | **Google Workspace Business Starter** (Flexible, trial; paid from about 1 Nov 2026). One user. MX `smtp.google.com`. |
-| SPF | `v=spf1 include:_spf.google.com ~all` — valid |
-| DKIM | 2048-bit selector `google` TXT is published and resolving. Google Admin **Start authentication** has not been clicked. |
-| DMARC | `v=DMARC1; p=none; rua=mailto:jackson@homemotionphysio.com.au` — live |
-| Public addresses | `hello@` and `referrals@` are aliases on the Workspace user (no extra licence). Form notification to `hello@` is configured. Mailbox delivery of that notification is not yet verified. |
+| SPF | `v=spf1 include:_spf.google.com ~all` — valid, as of about 4:55 AM AEST on 3 Oct 2026 |
+| DKIM | **Active.** Admin console: “Authenticating email with DKIM”. The `google._domainkey` TXT record resolves publicly. 2048-bit selector `google`. |
+| DMARC | `v=DMARC1; p=none` is live, with an aggregate report address set. The report address is not written here. |
+| Public addresses | `hello@` and `referrals@` are confirmed aliases on the Workspace user (no extra licence). The admin mailbox is not published on the site. |
+| Form email | Verified on staging. Notification from `formresponses@netlify.com`, subject “Form submission from enquiry form:”, reached the `hello@` inbox (not Spam) for the 4:45 AM AEST test. |
 | Environment variables | None set in Netlify. Names are in `.env.example`. `ENQUIRY_NOTIFICATION_EMAIL`, `REFERRAL_NOTIFICATION_EMAIL`, and `EMAIL_DELIVERY_READY` stay unset. |
 | Admin mailbox | Not published on the website |
 | Repository | GitHub `Jackson1-netizen/jackson-mobile-physio` is **public**. Pull request #3 is merged to the design branch. `main` is untouched. |

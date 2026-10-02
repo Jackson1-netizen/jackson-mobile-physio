@@ -160,3 +160,8 @@
 
 - **Changed:** Replaced the referral-sheet QR placeholder with a build-time QR code for `https://homemotionphysio.com.au/referral/`. Removed the two font preloads that Chrome was warning about. Recorded the live Netlify staging site, Workspace mail, and the launch DNS values.
 - **Not done:** No merge. No DNS change. Visitor Access stays on. `site.draft` stays true. `main` stays untouched.
+
+## 2026-10-03 (mail verified on staging)
+
+- **Changed:** Recorded that DKIM signing is active, SPF and DMARC `p=none` are live, and the Netlify form notification reached `hello@` (not Spam). The report mailbox is not written in the docs.
+- **Still open:** An outside sender still needs to reach `hello@` and `referrals@`. DMARC `p=quarantine` waits until after monitoring.

@@ -10,7 +10,8 @@ Staging is live at **https://homemotion-staging.netlify.app**. `site.draft` is s
 - No custom domain. No environment variables set in Netlify.
 - Visitor Access / team login is on. Anonymous requests get **HTTP 401**. That is acceptable for staging. It must be removed at launch, or the public enquiry form will fail.
 - Netlify Forms detection is on. Form `enquiry` is detected. An email notification for `enquiry` goes to `hello@homemotionphysio.com.au`.
-- One real test submission at **4:45 AM AEST on 3 Oct 2026** succeeded and is stored in Netlify Forms (name, phone, email, preferred language, reason, suburb, NDIS checkbox). Arrival of the notification email at `hello@` is not yet verified.
+- As of about **4:55 AM AEST on 3 Oct 2026**, that path is verified on staging. The test submission “TEST - staging check (please ignore)” at 4:45 AM AEST is in Netlify Forms (name, phone, email, preferred language, reason, suburb, NDIS checkbox). The notification from `formresponses@netlify.com`, subject “Form submission from enquiry form:”, arrived in the `hello@` Workspace inbox, not in Spam.
+- Google Workspace: DKIM signing is **active** (admin status “Authenticating email with DKIM”; `google._domainkey` resolves). SPF `v=spf1 include:_spf.google.com ~all` is valid. DMARC `v=DMARC1; p=none` is live. `hello@` and `referrals@` are confirmed aliases on the Workspace user. An outside-sender test to those aliases is still open. Consider `p=quarantine` only after monitoring.
 
 ## Do not do these yet
 
