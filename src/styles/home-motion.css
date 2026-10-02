@@ -1091,7 +1091,7 @@ a.hm-card:hover {
 
 @media (max-width: 700px) {
   .hm-map-pins {
-    inset: 10% 8%;
+    inset: 12% 18% 10% 6%;
   }
 
   .hm-map-pin-label {
