@@ -1,6 +1,8 @@
 # Next steps — launch checklist
 
-**Current posture:** `site.draft = true`, `site.ahpraStatus = "Registered"`, site-wide `noindex`, and `robots.txt` disallows all crawlers. AHPRA registration is granted. The registration number is not published until Jackson provides it. **Do not deploy publicly** until Jackson is ready to go live.
+**Current posture (2026-10-02):** see `docs/LAUNCH_STATUS.md`. `site.draft = true` is the only indexing switch. ABN 75 612 731 757 and AHPRA PHY0004088824 are published. The domain is registered and still parked. **Do not deploy or change DNS** until Jackson asks.
+
+The sections below are the earlier checklist and are kept for history. Where they disagree with `docs/LAUNCH_STATUS.md`, follow `docs/LAUNCH_STATUS.md`.
 
 ---
 

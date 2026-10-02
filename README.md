@@ -1,8 +1,8 @@
-# WAI WA LAW — mobile physiotherapy (draft)
+# Home Motion — mobile physiotherapy (draft)
 
-Launch-ready **draft** marketing site for **WAI WA LAW** — independent mobile physiotherapy in Melbourne's eastern suburbs. Built with **Astro 7**, **TypeScript**, and **Tailwind CSS 4**.
+Draft marketing site for **Home Motion Physiotherapy** — mobile physiotherapy in Melbourne's eastern suburbs. Built with **Astro 7**, **TypeScript**, and **Tailwind CSS 4**.
 
-> **Not live:** `site.draft = true`, `noindex`, and `robots.txt` disallow. AHPRA physiotherapy registration is **granted**. The registration number is not on the site until Jackson supplies it. **Do not deploy publicly** until Jackson asks and the remaining launch items in `docs/NEXT_STEPS.md` are done.
+> **Not live:** `site.draft = true` is the launch switch (`noindex` and `robots.txt` disallow). ABN 75 612 731 757. AHPRA general registration PHY0004088824. **Do not deploy or change DNS** until Jackson asks. Status: `docs/LAUNCH_STATUS.md`.
 
 ## Run locally
 
@@ -38,11 +38,13 @@ Do not scatter business copy across components.
 | `/` | Home |
 | `/areas/box-hill` (etc.) | Suburb landing pages |
 | `/referral` | Printable referral sheet |
-| `/privacy` | Privacy policy (draft) |
+| `/privacy` | Privacy policy (draft — pending owner review) |
+| `/disclaimer` | Website disclaimer (draft — pending owner review) |
 
 ## GitHub
 
-Private repo: `https://github.com/Jackson1-netizen/jackson-mobile-physio.git`  
+Public repo: `https://github.com/Jackson1-netizen/jackson-mobile-physio.git`  
+Do not commit secrets or private inboxes.  
 See `docs/GITHUB_WORKFLOW.md`.
 
 ## Documentation

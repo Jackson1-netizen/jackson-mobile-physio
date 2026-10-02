@@ -1,6 +1,8 @@
 # GitHub workflow (two computers)
 
-**Private** repository: [Jackson1-netizen/jackson-mobile-physio](https://github.com/Jackson1-netizen/jackson-mobile-physio)
+> **2026-10-02:** This GitHub repository is **public**. The notes below were written when it was treated as private. Do not commit secrets, patient information, or private inboxes.
+
+Repository: [Jackson1-netizen/jackson-mobile-physio](https://github.com/Jackson1-netizen/jackson-mobile-physio)
 
 - **GitHub (`github` remote):** `https://github.com/Jackson1-netizen/jackson-mobile-physio.git` — primary for Jackson’s machines.
 - **Cursor Origin (`origin` remote):** cloud agent / project Origin — keep for Cursor sessions unless you rename remotes.

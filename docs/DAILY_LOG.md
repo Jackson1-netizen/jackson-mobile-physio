@@ -134,3 +134,10 @@
 - **Changed:** Published `hello@homemotionphysio.com.au` (general) and `referrals@homemotionphysio.com.au` (referrers). Form, contact, footer, referral sheet, and card now use those values from `site.ts`. Delivery is not live; private inbox env vars are documented only.
 - **Decisions:** See `docs/DECISIONS.md` and `docs/EMAIL_SETUP.md`.
 - **Next:** Domain email configuration and a verified test send before `EMAIL_DELIVERY_READY`.
+
+## 2026-10-02 (launch-readiness, still draft)
+
+- **Changed:** Central config now carries the registered business name, ABN 75 612 731 757, and AHPRA PHY0004088824 (no expiry). NDIS wording, the short enquiry form, draft privacy policy, and draft disclaimer are updated. Indexing stays off via `site.draft`.
+- **Infrastructure recorded:** domain at VentraIP (parked HTTP page, expires 30 Sep 2027); Google Workspace MX and SPF active; DKIM and DMARC not set up; no website host connected.
+- **Decisions:** `docs/DECISIONS.md`, `docs/LAUNCH_STATUS.md`.
+- **Next:** Jackson reviews the legal drafts, tests the two public mailboxes, and chooses a host before any DNS change.

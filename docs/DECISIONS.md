@@ -137,3 +137,13 @@ Append-only record. Do not silently overwrite prior entries.
 - **Images:** `scripts/optimize-images.mjs` (sharp, already installed with Astro) writes AVIF/WebP variants to `public/photos/opt/` and lossless resized logo copies to `public/logo/`. Originals, including `home-motion-logo.png`, are unchanged.
 - **Map:** Leaflet JS and CSS load only when the map is within 300px of the viewport. If they fail, the static pin fallback stays visible.
 - **Sitemap:** `/concepts/**` excluded. Draft / noindex unchanged.
+
+## 2026-10-02 — Launch-readiness pass on the option 2 design (still draft)
+
+- **Branch:** work landed on `cursor/launch-readiness-16bd`, based on `cursor/design-option-2-b759`. Not merged to `main`. Not deployed.
+- **Identity published from public registers:** ABN 75 612 731 757 (LAW, WAI WA, sole trader; ASIC business name Home Motion Physiotherapy). AHPRA general registration PHY0004088824. Expiry date is not published.
+- **Launch switch:** `site.draft` remains `true` (noindex + robots disallow). Production origin prepared as `https://homemotionphysio.com.au` without changing DNS.
+- **NDIS:** “NDIS plan-managed and self-managed enquiries welcome.” Not an NDIS registered provider. No funding guarantee.
+- **Enquiry:** name and phone required; other fields optional; no health-detail fields; note not to include sensitive information. Mailto only.
+- **Legal:** `/privacy` and `/disclaimer` rewritten as drafts pending owner review (`docs/LEGAL_DRAFTS.md`).
+- **Not merged:** `cursor/launch-ready-site-2581` and related branches have no merge base with this design and would conflict. Recorded in `docs/LAUNCH_STATUS.md`.

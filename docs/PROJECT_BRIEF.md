@@ -1,5 +1,7 @@
 # Project brief — Jackson mobile physiotherapy (Phase 1)
 
+> **Current status (2026-10-02):** `docs/LAUNCH_STATUS.md`. The brand is Home Motion. The constraints below are the original Phase 1 brief and are kept for history.
+
 ## Purpose
 
 Marketing website and referral collateral for an independent **mobile / home / community physiotherapy** sole-trader service in **Melbourne's eastern suburbs**. Phase 1 is a **draft** static site — not deployed, not a live public professional presence.

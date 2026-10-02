@@ -1,6 +1,6 @@
-# Email setup (after domain mail is purchased)
+# Email setup
 
-Public identities are already on the draft site. They are **not** live inboxes until the domain email service is configured and verified. Do not treat published addresses as working delivery.
+Public identities are on the draft site. Google Workspace is the mail host for `homemotionphysio.com.au` (MX `smtp.google.com`, SPF `include:_spf.google.com`). DKIM and DMARC are **not** set up yet. This website still does not send mail. Do not set `EMAIL_DELIVERY_READY` until a test message to each public address is confirmed.
 
 ## Public identity
 
@@ -30,14 +30,22 @@ Reply-from (later, at the email provider):
 - Replies to customers should appear as `hello@homemotionphysio.com.au`
 - Replies to referrers should appear as `referrals@homemotionphysio.com.au`
 
-## Domain / provider work (not done in this repo)
+## Domain / provider work
 
-1. Buy or connect `homemotionphysio.com.au`.
-2. Create mailboxes (or aliases) for `hello@` and `referrals@`.
-3. Forward both to Jackson’s private inbox **at the provider**, or keep them as mailboxes and add SMTP send.
-4. Add SPF, DKIM, and DMARC for the domain.
-5. Confirm a test message to each public address arrives, and that a reply shows the public From address.
-6. Only then set `EMAIL_DELIVERY_READY=true` in the **server** environment (never in Git) and add `ENQUIRY_NOTIFICATION_EMAIL` / `REFERRAL_NOTIFICATION_EMAIL`.
+Already in place, from the owner’s DNS records:
+
+1. `homemotionphysio.com.au` is registered at VentraIP (expires 30 Sep 2027).
+2. Google Workspace is active for the domain.
+3. SPF includes `_spf.google.com`.
+
+Still to do, outside this repo:
+
+1. Confirm mailboxes or aliases exist for `hello@` and `referrals@`, and that a test message arrives at each.
+2. Confirm a reply shows that public address as From.
+3. Add DKIM and DMARC. Do not commit the keys.
+4. Only then set `EMAIL_DELIVERY_READY=true` in the **server** environment (never in Git) and add `ENQUIRY_NOTIFICATION_EMAIL` / `REFERRAL_NOTIFICATION_EMAIL`.
+
+The website host is a separate choice. DNS still shows no website host. See `docs/DEPLOYMENT.md`.
 
 Until step 5 is done:
 
