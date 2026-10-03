@@ -216,7 +216,7 @@ const en = {
     backHome: "Back to home",
   },
   draftBanner: {
-    short: "Draft preview — not indexed",
+    short: site.draft ? "Draft preview — not indexed" : "",
   },
   home: {
     eyebrow: "Mobile physiotherapy",
@@ -535,7 +535,7 @@ const zhHant = {
     backHome: "返回主頁",
   },
   draftBanner: {
-    short: "草稿預覽 — 未公開索引",
+    short: site.draft ? "草稿預覽 — 未公開索引" : "",
   },
   home: {
     eyebrow: "上門物理治療",
@@ -835,7 +835,7 @@ const zhHans = {
     backHome: "返回主页",
   },
   draftBanner: {
-    short: "草稿预览 — 未公开索引",
+    short: site.draft ? "草稿预览 — 未公开索引" : "",
   },
   home: {
     eyebrow: "上门物理治疗",

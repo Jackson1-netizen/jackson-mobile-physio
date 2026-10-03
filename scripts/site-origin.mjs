@@ -13,17 +13,12 @@
  * staging origin. This does not attach a domain or change DNS.
  */
 import { readFileSync } from "node:fs";
+import { readSiteDraft } from "./site-draft.mjs";
+
+export { readSiteDraft };
 
 export const STAGING_ORIGIN = "https://homemotion-staging.netlify.app";
 export const PUBLIC_ORIGIN = "https://homemotionphysio.com.au";
-
-export function readSiteDraft(source) {
-  const match = String(source).match(/\bdraft:\s*(true|false)/);
-  if (!match) {
-    throw new Error("Could not read site.draft from src/content/site.ts");
-  }
-  return match[1] === "true";
-}
 
 function strip(value) {
   return String(value || "").trim().replace(/\/$/, "");

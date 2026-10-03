@@ -172,5 +172,5 @@ export function getSuburbBySlug(slug: string): SuburbPage | undefined {
 }
 
 export function suburbPath(slug: string): string {
-  return `/areas/${slug}`;
+  return `/areas/${slug}/`;
 }

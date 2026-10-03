@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../content/site";
 
-const disclaimerTitle = site.disclaimer.adopted ? site.disclaimer.pageTitle : `${site.disclaimer.pageTitle} (draft)`;
+const disclaimerTitle = site.disclaimer.pageTitle;
 const sections = site.disclaimer.sections.filter((section) => site.draft || section.heading !== "Draft website");
 ---
 
@@ -10,6 +10,7 @@ const sections = site.disclaimer.sections.filter((section) => site.draft || sect
   title={`${disclaimerTitle} | ${site.businessName}`}
   description={site.disclaimer.metaDescription}
   canonicalPath="/disclaimer"
+  noindex={!site.disclaimer.adopted}
 >
   <article class="mx-auto max-w-3xl px-4 py-14">
     <h1 class="font-serif text-3xl font-bold text-[var(--color-ink)]">{disclaimerTitle}</h1>
@@ -40,9 +41,7 @@ const sections = site.disclaimer.sections.filter((section) => site.draft || sect
     </div>
 
     <p class="mt-10 text-sm">
-      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/privacy">
-        {site.privacy.adopted ? "Privacy policy" : "Privacy policy (draft)"}
-      </a>
+      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/privacy/">Privacy policy</a>
       <span class="mx-2 text-[var(--color-ink-muted)]" aria-hidden="true">·</span>
       <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/">Back to home</a>
     </p>

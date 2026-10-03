@@ -4,12 +4,9 @@
  */
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
+import { readSiteDraft } from "./site-draft.mjs";
 
-export function readSiteDraft(source) {
-  const match = String(source).match(/\bdraft:\s*(true|false)/);
-  if (!match) throw new Error("Could not read site.draft from src/content/site.ts");
-  return match[1] === "true";
-}
+export { readSiteDraft };
 
 function formErrors(html) {
   const errors = [];
@@ -64,6 +61,16 @@ export function assertPublishedSite({ html, robots, headers, draft }) {
     const sitemapLine = origin ? `Sitemap: ${origin}/sitemap-index.xml` : "";
     if (!sitemapLine || !robots.includes(sitemapLine)) {
       errors.push(`Built robots.txt is missing a Sitemap line for ${origin || "the canonical origin"}.`);
+    }
+    for (const phrase of [
+      "Privacy (draft)",
+      "Disclaimer (draft)",
+      "（草稿）",
+      "Draft preview — not indexed",
+      "草稿預覽 — 未公開索引",
+      "草稿预览 — 未公开索引",
+    ]) {
+      if (html.includes(phrase)) errors.push(`Built homepage still contains draft copy: ${phrase}`);
     }
   }
   if (errors.length) {

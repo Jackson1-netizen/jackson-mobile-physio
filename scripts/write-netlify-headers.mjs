@@ -11,15 +11,16 @@
  * change DNS.
  */
 import { readFileSync, writeFileSync } from "node:fs";
+import { readSiteDraft } from "./site-draft.mjs";
 
 const source = readFileSync(new URL("../src/content/site.ts", import.meta.url), "utf8");
-const draftMatch = source.match(/\bdraft:\s*(true|false)/);
-if (!draftMatch) {
-  console.error("Could not read site.draft from src/content/site.ts");
+let draft;
+try {
+  draft = readSiteDraft(source);
+} catch (error) {
+  console.error(error instanceof Error ? error.message : error);
   process.exit(1);
 }
-
-const draft = draftMatch[1] === "true";
 const context = process.env.CONTEXT || "";
 const previewContext = context === "deploy-preview" || context === "branch-deploy";
 const noindex = draft || previewContext;

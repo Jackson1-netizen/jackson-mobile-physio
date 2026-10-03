@@ -9,8 +9,8 @@ const PUBLIC_BUSINESS_EMAIL = "hello@homemotionphysio.com.au";
 const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
 
 /**
- * Keep this identical to the draft property on site below.
- * The header script reads that property, not this const.
+ * Single launch switch. Scripts read this const, and `site.draft` is this same value.
+ * Set it to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
  */
 const draft = true;
 
@@ -34,11 +34,8 @@ export function isPlaceholder(value: string): boolean {
 }
 
 export const site = {
-  /**
-   * LAUNCH SWITCH. While true, every page is noindex and robots.txt disallows all crawlers.
-   * Set to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
-   */
-  draft: true,
+  /** Same value as the single `const draft` above. Do not add a second literal. */
+  draft,
 
   businessName: "Home Motion",
   /** Swappable wordmark in header — rebrand without restructuring site */
@@ -99,7 +96,7 @@ export const site = {
       value: "[DEGREE / UNIVERSITY TO BE CONFIRMED]",
     },
     {
-      label: "AHPRA registration",
+      label: "Registration",
       value: "AHPRA registered physiotherapist",
     },
     {

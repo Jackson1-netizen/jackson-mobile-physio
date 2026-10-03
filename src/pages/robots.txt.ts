@@ -9,10 +9,13 @@ export const GET: APIRoute = () => {
   const lines = ["User-agent: *"];
 
   if (site.draft) {
-    lines.push("Disallow: /", "# Draft — not for indexing. Set site.draft to false in src/content/site.ts to launch.");
+    lines.push("Disallow: /", "# Draft — not for indexing. Set const draft to false in src/content/site.ts to launch.");
   } else {
     const sitemap = new URL("/sitemap-index.xml", site.websiteUrl).href;
-    lines.push("Allow: /", "Disallow: /concepts/", `Sitemap: ${sitemap}`);
+    lines.push("Allow: /", "Disallow: /concepts/");
+    if (!site.privacy.adopted) lines.push("Disallow: /privacy/");
+    if (!site.disclaimer.adopted) lines.push("Disallow: /disclaimer/");
+    lines.push(`Sitemap: ${sitemap}`);
   }
 
   return new Response(`${lines.join("\n")}\n`, {

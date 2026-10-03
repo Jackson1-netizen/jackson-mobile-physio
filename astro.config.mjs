@@ -3,7 +3,9 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { loadEnv } from 'vite';
+import { readFileSync } from 'node:fs';
 import { resolveSiteOrigin } from './scripts/site-origin.mjs';
+import { includeInSitemap, readAdopted } from './scripts/site-draft.mjs';
 
 // While site.draft is true, the origin is the staging hostname or Netlify's URL.
 // The public domain is used only after an explicit launch (site.draft === false).
@@ -34,10 +36,14 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // Historical concept pages are archived outside src/pages and are not built.
+      // Unadopted legal pages stay out of the sitemap even after site.draft is false.
       filter: (page) => {
+        const source = readFileSync(new URL('./src/content/site.ts', import.meta.url), 'utf8');
         const path = new URL(page).pathname;
-        return !path.startsWith('/concepts') && !path.startsWith('/enquiry-received') && path !== '/404' && path !== '/404/';
+        return includeInSitemap(path, {
+          privacyAdopted: readAdopted(source, 'privacy'),
+          disclaimerAdopted: readAdopted(source, 'disclaimer'),
+        });
       },
     }),
   ],
