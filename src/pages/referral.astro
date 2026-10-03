@@ -16,12 +16,16 @@ const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
 
 <BaseLayout
   title={`Referral sheet | ${site.businessName}`}
-  description="Printable referral information for support coordinators and families (draft)."
+  description={
+    site.draft
+      ? "Printable referral information for support coordinators and families (draft)."
+      : "Printable referral information for support coordinators and families."
+  }
   canonicalPath="/referral"
 >
   <div class="referral-sheet mx-auto max-w-[210mm] bg-white px-6 py-8 text-[var(--color-ink)] sm:px-10 sm:py-12">
     <p class="no-print mb-6 rounded border border-amber-200 bg-[var(--color-draft-bg)] p-3 text-sm text-[var(--color-draft)]">
-      Draft referral sheet. Use your browser&apos;s Print command (Ctrl+P / ⌘P). This page is the printable sheet, not a PDF.
+      {site.draft ? "Draft referral sheet. " : ""}Use your browser&apos;s Print command (Ctrl+P / ⌘P). This page is the printable sheet, not a PDF.
     </p>
 
     <header class="border-b border-[var(--color-border)] pb-6">
@@ -100,7 +104,8 @@ const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
     </div>
 
     <footer class="mt-10 border-t border-[var(--color-border)] pt-4 text-xs text-[var(--color-ink-muted)]">
-      {site.draftNotice.title}. {site.abnDisplay}. AHPRA {site.ahpraRegistrationNumber}. Not for emergency use. Call 000.
+      {site.draft && site.draftNotice.title ? `${site.draftNotice.title}. ` : ""}
+      {site.abnDisplay}. AHPRA registered physiotherapist. Not for emergency use. Call 000.
     </footer>
   </div>
 </BaseLayout>

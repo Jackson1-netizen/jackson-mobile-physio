@@ -143,7 +143,7 @@ const en = {
       {
         question: "Is AHPRA registration confirmed?",
         answer:
-          `Yes. Jackson holds general registration as a physiotherapist with AHPRA (${site.ahpraRegistrationNumber}).`,
+          "Yes. Jackson is a physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA).",
       },
       {
         question: "Do I need a GP referral?",
@@ -216,11 +216,11 @@ const en = {
     backHome: "Back to home",
   },
   draftBanner: {
-    short: "Draft preview — not indexed",
+    short: site.draft ? "Draft preview — not indexed" : "",
   },
   home: {
     eyebrow: "Mobile physiotherapy",
-    h1Lead: "Expert physiotherapy",
+    h1Lead: "Personalised physiotherapy",
     h1Mid: "in the comfort of",
     h1Em: "home.",
     support:
@@ -247,7 +247,7 @@ const en = {
       support:
         "Personalised, evidence-based physiotherapy care in Melbourne's eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
       chips: ["Home & community visits", "All ages welcome", "NDIS enquiries welcome"],
-      ahpra: `AHPRA registered physiotherapist · ${site.ahpraRegistrationNumber}`,
+      ahpra: "AHPRA registered physiotherapist",
       photoAlt:
         "Jackson providing mobile physiotherapy at home, supporting walking practice with a walking frame",
     },
@@ -280,7 +280,7 @@ const en = {
     referrers: {
       heading: "For Referrers",
       lead: "Jackson (Wai Wa Law) is the physiotherapist who provides this service. Home Motion offers home and community visits across Melbourne's eastern suburbs, in English, Cantonese and Mandarin. Support coordinators, GPs, allied health professionals and families can contact him directly.",
-      registration: `AHPRA general registration as a physiotherapist · ${site.ahpraRegistrationNumber}.`,
+      registration: "AHPRA registered physiotherapist.",
       ndis: `${site.ndisDescription} ${site.ndisNotRegistered} Funding is not guaranteed.`,
       points: [
         "You contact Jackson, and Jackson provides the physiotherapy.",
@@ -469,7 +469,7 @@ const zhHant = {
       },
       {
         question: "AHPRA 註冊是否已確認？",
-        answer: `是。Jackson 持有 AHPRA 物理治療師一般註冊（${site.ahpraRegistrationNumber}）。`,
+        answer: "是。Jackson 持有 AHPRA 物理治療師一般註冊。",
       },
       {
         question: "需要家庭醫生轉介嗎？",
@@ -535,11 +535,11 @@ const zhHant = {
     backHome: "返回主頁",
   },
   draftBanner: {
-    short: "草稿預覽 — 未公開索引",
+    short: site.draft ? "草稿預覽 — 未公開索引" : "",
   },
   home: {
     eyebrow: "上門物理治療",
-    h1Lead: "專業物理治療",
+    h1Lead: "個人化物理治療",
     h1Mid: "在家中安心接受",
     h1Em: "服務。",
     support:
@@ -561,7 +561,7 @@ const zhHant = {
       support:
         "為墨爾本東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
       chips: ["上門及社區探訪", "歡迎所有年齡人士", "歡迎 NDIS 查詢"],
-      ahpra: `AHPRA 註冊物理治療師 · ${site.ahpraRegistrationNumber}`,
+      ahpra: "AHPRA 註冊物理治療師",
       photoAlt: "Jackson 上門提供物理治療，協助使用助行架進行步行練習",
     },
     services: {
@@ -587,7 +587,7 @@ const zhHant = {
     referrers: {
       heading: "轉介人士",
       lead: "Jackson（Wai Wa Law）是提供這項服務的物理治療師。Home Motion 在墨爾本東區提供上門及社區探訪，可使用英語、廣東話及普通話。支援協調員、家庭醫生、專職醫療人員及家屬可直接聯絡他。",
-      registration: `AHPRA 物理治療師一般註冊 · ${site.ahpraRegistrationNumber}。`,
+      registration: "AHPRA 物理治療師一般註冊。",
       ndis: "歡迎 NDIS 計劃管理及自管查詢。Home Motion 不是 NDIS 註冊服務提供者。資助並無保證。",
       points: [
         "您聯絡的是 Jackson，治療亦由 Jackson 提供。",
@@ -632,8 +632,8 @@ const zhHant = {
     about: {
       languagesList: "英語、廣東話、普通話",
       qualificationLabels: ["物理治療資歷", "AHPRA 註冊", "專業保險"],
-      qualificationValues: { "1": `一般註冊 · ${site.ahpraRegistrationNumber}`, "2": "按執業要求投保" },
-      ahpraNotice: `Jackson 持有 AHPRA 物理治療師一般註冊（${site.ahpraRegistrationNumber}）。`,
+      qualificationValues: { "1": "一般註冊", "2": "按執業要求投保" },
+      ahpraNotice: "Jackson 持有 AHPRA 物理治療師一般註冊。",
       portraitAlt: "Home Motion 上門物理治療師 Jackson，身穿 Home Motion Polo 衫",
     },
     photos: {
@@ -643,8 +643,8 @@ const zhHant = {
     mobileBar: { label: "快速聯絡" },
     footer: {
       rights: "版權所有。",
-      privacy: "私隱政策（草稿）",
-      disclaimer: "網站聲明（草稿）",
+      privacy: site.draft ? "私隱政策（草稿）" : "私隱政策",
+      disclaimer: site.draft ? "網站聲明（草稿）" : "網站聲明",
     },
   },
 } as const;
@@ -769,7 +769,7 @@ const zhHans = {
       },
       {
         question: "AHPRA 注册是否已确认？",
-        answer: `是。Jackson 持有 AHPRA 物理治疗师一般注册（${site.ahpraRegistrationNumber}）。`,
+        answer: "是。Jackson 持有 AHPRA 物理治疗师一般注册。",
       },
       {
         question: "需要全科医生转介吗？",
@@ -835,11 +835,11 @@ const zhHans = {
     backHome: "返回主页",
   },
   draftBanner: {
-    short: "草稿预览 — 未公开索引",
+    short: site.draft ? "草稿预览 — 未公开索引" : "",
   },
   home: {
     eyebrow: "上门物理治疗",
-    h1Lead: "专业物理治疗",
+    h1Lead: "个性化物理治疗",
     h1Mid: "在家中安心接受",
     h1Em: "服务。",
     support:
@@ -861,7 +861,7 @@ const zhHans = {
       support:
         "为墨尔本东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
       chips: ["上门及社区探访", "欢迎所有年龄人士", "欢迎 NDIS 咨询"],
-      ahpra: `AHPRA 注册物理治疗师 · ${site.ahpraRegistrationNumber}`,
+      ahpra: "AHPRA 注册物理治疗师",
       photoAlt: "Jackson 上门提供物理治疗，协助使用助行架进行步行练习",
     },
     services: {
@@ -887,7 +887,7 @@ const zhHans = {
     referrers: {
       heading: "转介方",
       lead: "Jackson（Wai Wa Law）是提供这项服务的物理治疗师。Home Motion 在墨尔本东区提供上门及社区探访，可使用英语、粤语及普通话。支持协调员、全科医生、专职医疗人员及家属可以直接联系他。",
-      registration: `AHPRA 物理治疗师一般注册 · ${site.ahpraRegistrationNumber}。`,
+      registration: "AHPRA 物理治疗师一般注册。",
       ndis: "欢迎 NDIS 计划管理及自管咨询。Home Motion 不是 NDIS 注册服务提供者。资助并无保证。",
       points: [
         "您联系的是 Jackson，治疗也由 Jackson 提供。",
@@ -932,8 +932,8 @@ const zhHans = {
     about: {
       languagesList: "英语、粤语、普通话",
       qualificationLabels: ["物理治疗资历", "AHPRA 注册", "专业保险"],
-      qualificationValues: { "1": `一般注册 · ${site.ahpraRegistrationNumber}`, "2": "按执业要求投保" },
-      ahpraNotice: `Jackson 持有 AHPRA 物理治疗师一般注册（${site.ahpraRegistrationNumber}）。`,
+      qualificationValues: { "1": "一般注册", "2": "按执业要求投保" },
+      ahpraNotice: "Jackson 持有 AHPRA 物理治疗师一般注册。",
       portraitAlt: "Home Motion 上门物理治疗师 Jackson，身穿 Home Motion Polo 衫",
     },
     photos: {
@@ -943,8 +943,8 @@ const zhHans = {
     mobileBar: { label: "快速联系" },
     footer: {
       rights: "版权所有。",
-      privacy: "隐私政策（草稿）",
-      disclaimer: "网站声明（草稿）",
+      privacy: site.draft ? "隐私政策（草稿）" : "隐私政策",
+      disclaimer: site.draft ? "网站声明（草稿）" : "网站声明",
     },
   },
 } as const;

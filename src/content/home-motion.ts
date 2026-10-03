@@ -18,7 +18,7 @@ export const homeNav = [
 
 export const homeHero = {
   eyebrow: "Mobile physiotherapy",
-  h1Lead: "Expert physiotherapy",
+  h1Lead: messages.en.home.h1Lead,
   h1Mid: "in the comfort of",
   h1Em: "home.",
   support: hm.hero.support,

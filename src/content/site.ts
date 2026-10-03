@@ -3,10 +3,16 @@
  * Do not duplicate these values in components — import from here.
  */
 
-/** Public-facing enquiry identity. Display only — mailbox may not be live yet. */
+/** Public enquiry address. */
 const PUBLIC_BUSINESS_EMAIL = "hello@homemotionphysio.com.au";
-/** Public-facing referral identity. Display only — mailbox may not be live yet. */
+/** Public referral address. */
 const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
+
+/**
+ * Single launch switch. Scripts read this const, and `site.draft` is this same value.
+ * Set it to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
+ */
+const draft = true;
 
 /**
  * Used only when Astro did not inject __HM_SITE_ORIGIN__.
@@ -28,11 +34,8 @@ export function isPlaceholder(value: string): boolean {
 }
 
 export const site = {
-  /**
-   * LAUNCH SWITCH. While true, every page is noindex and robots.txt disallows all crawlers.
-   * Set to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
-   */
-  draft: true,
+  /** Same value as the single `const draft` above. Do not add a second literal. */
+  draft,
 
   businessName: "Home Motion",
   /** Swappable wordmark in header — rebrand without restructuring site */
@@ -52,8 +55,7 @@ export const site = {
   phoneHref: "tel:+61433479703",
 
   /**
-   * Public business emails for display and future routing.
-   * These mailboxes are not verified as receiving mail until domain email is configured.
+   * Public business emails.
    * Internal notification destinations live in env vars — never duplicate those here.
    */
   publicEmail: PUBLIC_BUSINESS_EMAIL,
@@ -80,15 +82,13 @@ export const site = {
 
   /**
    * General registration as a physiotherapist.
-   * The expiry date is intentionally not stored or published.
+   * The registration number and expiry are not stored or published.
    */
-  ahpraRegistrationNumber: "PHY0004088824",
   registrationStatus: "registered" as "pending" | "registered",
-  registrationNumber: "PHY0004088824",
   ahpraRegistrationType: "General",
   ahpraStatus: "Registered" as const,
   ahpraNotice:
-    "Jackson holds general registration as a physiotherapist with AHPRA (PHY0004088824).",
+    "Physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA).",
 
   qualifications: [
     {
@@ -96,8 +96,8 @@ export const site = {
       value: "[DEGREE / UNIVERSITY TO BE CONFIRMED]",
     },
     {
-      label: "AHPRA registration",
-      value: "General registration · PHY0004088824",
+      label: "Registration",
+      value: "AHPRA registered physiotherapist",
     },
     {
       label: "Professional insurance",
@@ -198,19 +198,22 @@ export const site = {
   },
 
   draftNotice: {
-    title: "Draft site — not for public use",
-    body:
-      "This website is a private draft for Home Motion, a mobile physiotherapy service in Melbourne's eastern suburbs. It is not indexed. AHPRA physiotherapy registration has been granted. Public email addresses are listed, but those mailboxes are not verified yet. Do not use this page for clinical or emergency care.",
+    title: draft ? "Draft site — not for public use" : "",
+    body: draft
+      ? "This website is a private draft for Home Motion, a mobile physiotherapy service in Melbourne's eastern suburbs. It is not indexed. AHPRA physiotherapy registration has been granted. Do not use this page for clinical or emergency care."
+      : "",
   },
 
   footer: {
     copyrightSuffix: "All rights reserved.",
-    privacyLinkLabel: "Privacy (draft)",
-    disclaimerLinkLabel: "Disclaimer (draft)",
+    privacyLinkLabel: draft ? "Privacy (draft)" : "Privacy",
+    disclaimerLinkLabel: draft ? "Disclaimer (draft)" : "Disclaimer",
   },
 
   privacy: {
-    pageTitle: "Privacy policy (draft)",
+    /** Legal adoption is separate from site.draft. Leave false until Jackson approves the wording. */
+    adopted: false,
+    pageTitle: "Privacy policy",
     metaDescription:
       "Draft privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs. Pending owner review.",
     lastUpdatedLabel: "Status:",
@@ -222,7 +225,7 @@ export const site = {
       {
         heading: "Who we are",
         paragraphs: [
-          "Home Motion Physiotherapy is a registered business name of Wai Wa Law (Jackson Law), a sole trader (ABN 75 612 731 757), providing mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you are contacting the physiotherapist who provides the service. Jackson holds general registration as a physiotherapist with AHPRA (PHY0004088824).",
+          "Home Motion Physiotherapy is a registered business name of Wai Wa Law (Jackson Law), a sole trader (ABN 75 612 731 757), providing mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you are contacting the physiotherapist who provides the service. Jackson is a physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA).",
           "This policy describes how the practice handles personal information, including health information, in line with the Privacy Act 1988 (Cth) and the Australian Privacy Principles. In Victoria, the Health Records Act 2001 (Vic) may also apply to health information. This draft is written in plain language for review. It is not a complete statement of every legal duty.",
         ],
       },
@@ -279,7 +282,9 @@ export const site = {
   },
 
   disclaimer: {
-    pageTitle: "Website disclaimer (draft)",
+    /** Legal adoption is separate from site.draft. Leave false until Jackson approves the wording. */
+    adopted: false,
+    pageTitle: "Website disclaimer",
     metaDescription:
       "Draft website disclaimer for Home Motion mobile physiotherapy. General information only. Pending owner review.",
     lastUpdatedLabel: "Status:",
@@ -303,7 +308,7 @@ export const site = {
       {
         heading: "The practitioner",
         paragraphs: [
-          "Jackson (Wai Wa Law) holds general registration as a physiotherapist with AHPRA (PHY0004088824) and is the person who provides the physiotherapy. Home Motion Physiotherapy is a registered business name of Wai Wa Law (ABN 75 612 731 757).",
+          "Jackson (Wai Wa Law) is a physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA) and is the person who provides the physiotherapy. Home Motion Physiotherapy is a registered business name of Wai Wa Law (ABN 75 612 731 757).",
           "The university qualification is not shown until it is confirmed. Professional insurance is maintained as required for practice.",
         ],
       },
@@ -348,12 +353,12 @@ export const site = {
   },
 } as const;
 
-/** Public enquiry address is published. Does not mean the mailbox is receiving mail. */
+/** Public enquiry address is published. */
 export function hasConfirmedEmail(): boolean {
   return Boolean(site.publicEmail);
 }
 
-/** mailto to the public enquiry address. Delivery is not guaranteed until domain email is live. */
+/** mailto to the public enquiry address. */
 export function getEmailHref(subject = "Enquiry — Home Motion"): string {
   return `mailto:${site.publicEmail}?subject=${encodeURIComponent(subject)}`;
 }
@@ -374,11 +379,8 @@ export function formatServiceAreasLine(): string {
   return `${region} — ${suburbs.join(", ")}, ${surroundingNote}`;
 }
 
-/** One-line AHPRA status for the homepage trust line. Expiry is never included. */
+/** One-line AHPRA status for the homepage trust line. The registration number is never included. */
 export function getRegistrationDisplayLine(): string {
-  if (site.registrationStatus === "registered" && site.registrationNumber) {
-    return `AHPRA registered physiotherapist · ${site.registrationNumber}`;
-  }
   if (site.registrationStatus === "registered") {
     return "AHPRA registered physiotherapist";
   }

@@ -2,7 +2,7 @@ import { site } from "../content/site";
 import { messages } from "../content/i18n";
 import { draftStatusProperties } from "./draft-schema.mjs";
 
-/** JSON-LD for LocalBusiness / healthcare-oriented mobile service (draft). */
+/** JSON-LD for LocalBusiness / healthcare-oriented mobile service. */
 export function getLocalBusinessJsonLd(): Record<string, unknown> {
   const areaServed = site.serviceAreas.suburbs.map((name) => ({
     "@type": "City",
@@ -15,7 +15,7 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
     name: site.registeredBusinessName,
     alternateName: [site.displayBrand, site.practitionerName],
     description: site.seo.description,
-    url: site.websiteUrl,
+    url: `${site.websiteUrl}/`,
     telephone: site.phoneHref.replace(/^tel:/, ""),
     areaServed,
     serviceType: "Mobile physiotherapy",
@@ -38,17 +38,6 @@ export function getLocalBusinessJsonLd(): Record<string, unknown> {
 
   if (site.publicEmail) {
     json.email = site.publicEmail;
-  }
-
-  if (site.ahpraRegistrationNumber) {
-    json.additionalProperty = [
-      ...(json.additionalProperty as object[]),
-      {
-        "@type": "PropertyValue",
-        name: "AHPRA registration number",
-        value: site.ahpraRegistrationNumber,
-      },
-    ];
   }
 
   return json;

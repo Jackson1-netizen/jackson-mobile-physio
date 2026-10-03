@@ -1,21 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../content/site";
+
+const privacyTitle = site.privacy.pageTitle;
 ---
 
 <BaseLayout
-  title={`${site.privacy.pageTitle} | ${site.businessName}`}
+  title={`${privacyTitle} | ${site.businessName}`}
   description={site.privacy.metaDescription}
   canonicalPath="/privacy"
+  noindex={!site.privacy.adopted}
 >
   <article class="mx-auto max-w-3xl px-4 py-14">
-    <h1 class="font-serif text-3xl font-bold text-[var(--color-ink)]">{site.privacy.pageTitle}</h1>
+    <h1 class="font-serif text-3xl font-bold text-[var(--color-ink)]">{privacyTitle}</h1>
     <p class="mt-2 text-sm text-[var(--color-ink-muted)]">
       {site.privacy.lastUpdatedLabel} {site.privacy.lastUpdated}
     </p>
-    <p class="mt-6 rounded-md border border-amber-200 bg-[var(--color-draft-bg)] p-4 text-sm text-[var(--color-draft)]">
-      {site.privacy.workingDraftNotice}
-    </p>
+    {
+      !site.privacy.adopted && (
+        <p class="mt-6 rounded-md border border-amber-200 bg-[var(--color-draft-bg)] p-4 text-sm text-[var(--color-draft)]">
+          {site.privacy.workingDraftNotice}
+        </p>
+      )
+    }
 
     <div class="mt-10 space-y-8 text-[var(--color-ink-muted)] leading-relaxed">
       {
@@ -41,12 +48,12 @@ import { site } from "../content/site";
         </a>
       </p>
       <p>
-        {site.registeredBusinessName} · {site.soleTraderName} · {site.abnDisplay} · AHPRA {site.ahpraRegistrationNumber}
+        {site.registeredBusinessName} · {site.soleTraderName} · {site.abnDisplay} · AHPRA registered physiotherapist
       </p>
     </div>
 
     <p class="mt-10 text-sm">
-      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/disclaimer">Website disclaimer (draft)</a>
+      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/disclaimer/">Website disclaimer</a>
       <span class="mx-2 text-[var(--color-ink-muted)]" aria-hidden="true">·</span>
       <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/">Back to home</a>
     </p>
