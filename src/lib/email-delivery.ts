@@ -5,8 +5,8 @@
  * Internal notification destinations are environment variables and must never
  * be imported into client scripts or passed through Astro `define:vars`.
  *
- * This module does not send mail. SMTP and DNS forwarding are documented in
- * docs/EMAIL_SETUP.md and must wait until the domain mailbox is verified.
+ * This module does not send mail. The live enquiry path is Netlify Forms.
+ * SMTP is not used. See docs/EMAIL_SETUP.md.
  */
 
 import { site } from "../content/site";

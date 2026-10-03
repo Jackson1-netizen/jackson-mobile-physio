@@ -21,6 +21,7 @@ const site = resolveSiteOrigin({
 export default defineConfig({
   site,
   output: 'static',
+  trailingSlash: 'always',
   server: {
     port: 4721,
     host: true,

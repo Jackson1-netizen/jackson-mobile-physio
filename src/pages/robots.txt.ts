@@ -11,7 +11,7 @@ export const GET: APIRoute = () => {
   if (site.draft) {
     lines.push("Disallow: /", "# Draft — not for indexing. Set site.draft to false in src/content/site.ts to launch.");
   } else {
-    const sitemap = new URL("sitemap-index.xml", site.websiteUrl).href;
+    const sitemap = new URL("/sitemap-index.xml", site.websiteUrl).href;
     lines.push("Allow: /", "Disallow: /concepts/", `Sitemap: ${sitemap}`);
   }
 
