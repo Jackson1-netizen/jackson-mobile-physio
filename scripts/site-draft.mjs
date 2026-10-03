@@ -16,8 +16,8 @@ export function readSiteDraft(source) {
 }
 
 export function readAdopted(source, block) {
-  const match = String(source).match(new RegExp(`${block}:\\s*\\{[\\s\\S]*?\\badopted:\\s*(true|false)`));
-  if (!match) throw new Error(`Could not read ${block}.adopted`);
+  const match = String(source).match(new RegExp(`\\bconst ${block}Adopted = (true|false);`));
+  if (!match) throw new Error(`Could not read const ${block}Adopted`);
   return match[1] === "true";
 }
 

@@ -215,9 +215,7 @@ const en = {
   footer: {
     backHome: "Back to home",
   },
-  draftBanner: {
-    short: site.draft ? "Draft preview — not indexed" : "",
-  },
+  ...(site.draft ? { draftBanner: { short: "Draft preview — not indexed" } } : {}),
   home: {
     eyebrow: "Mobile physiotherapy",
     h1Lead: "Personalised physiotherapy",
@@ -534,9 +532,7 @@ const zhHant = {
   footer: {
     backHome: "返回主頁",
   },
-  draftBanner: {
-    short: site.draft ? "草稿預覽 — 未公開索引" : "",
-  },
+  ...(site.draft ? { draftBanner: { short: "草稿預覽 — 未公開索引" } } : {}),
   home: {
     eyebrow: "上門物理治療",
     h1Lead: "個人化物理治療",
@@ -631,8 +627,12 @@ const zhHant = {
     },
     about: {
       languagesList: "英語、廣東話、普通話",
-      qualificationLabels: ["物理治療資歷", "AHPRA 註冊", "專業保險"],
-      qualificationValues: { "1": "一般註冊", "2": "按執業要求投保" },
+      qualificationLabels: site.disclaimer.showInsuranceStatement
+        ? ["物理治療資歷", "AHPRA 註冊", "專業保險"]
+        : ["物理治療資歷", "AHPRA 註冊"],
+      qualificationValues: site.disclaimer.showInsuranceStatement
+        ? { "1": "一般註冊", "2": "按執業要求投保" }
+        : { "1": "一般註冊" },
       ahpraNotice: "Jackson 持有 AHPRA 物理治療師一般註冊。",
       portraitAlt: "Home Motion 上門物理治療師 Jackson，身穿 Home Motion Polo 衫",
     },
@@ -834,9 +834,7 @@ const zhHans = {
   footer: {
     backHome: "返回主页",
   },
-  draftBanner: {
-    short: site.draft ? "草稿预览 — 未公开索引" : "",
-  },
+  ...(site.draft ? { draftBanner: { short: "草稿预览 — 未公开索引" } } : {}),
   home: {
     eyebrow: "上门物理治疗",
     h1Lead: "个性化物理治疗",
@@ -931,8 +929,12 @@ const zhHans = {
     },
     about: {
       languagesList: "英语、粤语、普通话",
-      qualificationLabels: ["物理治疗资历", "AHPRA 注册", "专业保险"],
-      qualificationValues: { "1": "一般注册", "2": "按执业要求投保" },
+      qualificationLabels: site.disclaimer.showInsuranceStatement
+        ? ["物理治疗资历", "AHPRA 注册", "专业保险"]
+        : ["物理治疗资历", "AHPRA 注册"],
+      qualificationValues: site.disclaimer.showInsuranceStatement
+        ? { "1": "一般注册", "2": "按执业要求投保" }
+        : { "1": "一般注册" },
       ahpraNotice: "Jackson 持有 AHPRA 物理治疗师一般注册。",
       portraitAlt: "Home Motion 上门物理治疗师 Jackson，身穿 Home Motion Polo 衫",
     },

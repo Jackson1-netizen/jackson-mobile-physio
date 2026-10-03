@@ -13,6 +13,12 @@ const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
  * Set it to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
  */
 const draft = true;
+/** Legal adoption is separate from `draft`. Leave false until Jackson approves the wording. */
+const privacyAdopted = true;
+/** Legal adoption is separate from `draft`. Jackson approved this wording on 4 October 2026. */
+const disclaimerAdopted = true;
+/** Jackson confirmed this insurance sentence on 4 October 2026. */
+const showInsuranceStatement = true;
 
 /**
  * Used only when Astro did not inject __HM_SITE_ORIGIN__.
@@ -99,11 +105,15 @@ export const site = {
       label: "Registration",
       value: "AHPRA registered physiotherapist",
     },
-    {
-      label: "Professional insurance",
-      value: "Maintained as required for practice",
-    },
-  ] as const,
+    ...(showInsuranceStatement
+      ? [
+          {
+            label: "Professional insurance",
+            value: "Maintained as required for practice",
+          },
+        ]
+      : []),
+  ],
 
   languages: ["English", "Cantonese", "Mandarin"] as const,
 
@@ -212,21 +222,23 @@ export const site = {
 
   privacy: {
     /** Legal adoption is separate from site.draft. Leave false until Jackson approves the wording. */
-    adopted: false,
+    adopted: privacyAdopted,
     pageTitle: "Privacy policy",
-    metaDescription:
-      "Draft privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs. Pending owner review.",
-    lastUpdatedLabel: "Status:",
-    lastUpdated: "Draft for owner review — October 2026. Not yet adopted.",
+    metaDescription: privacyAdopted
+      ? "Privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs."
+      : "Draft privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs. Pending owner review.",
+    lastUpdatedLabel: privacyAdopted ? "Last updated:" : "Status:",
+    lastUpdated: privacyAdopted ? "4 October 2026" : "Draft for owner review — October 2026. Not yet adopted.",
     privacyEnquiriesContactLabel: "For privacy enquiries, contact:",
-    workingDraftNotice:
-      "This privacy policy is a draft pending review by Jackson. It is not legal advice and has not been adopted. Do not treat it as the practice's final policy until he approves it.",
+    workingDraftNotice: privacyAdopted
+      ? ""
+      : "This privacy policy is a draft pending review by Jackson. It is not legal advice and has not been adopted. Do not treat it as the practice's final policy until he approves it.",
     sections: [
       {
         heading: "Who we are",
         paragraphs: [
           "Home Motion Physiotherapy is a registered business name of Wai Wa Law (Jackson Law), a sole trader (ABN 75 612 731 757), providing mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you are contacting the physiotherapist who provides the service. Jackson is a physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA).",
-          "This policy describes how the practice handles personal information, including health information, in line with the Privacy Act 1988 (Cth) and the Australian Privacy Principles. In Victoria, the Health Records Act 2001 (Vic) may also apply to health information. This draft is written in plain language for review. It is not a complete statement of every legal duty.",
+          "This policy describes how the practice handles personal information, including health information, in line with the Privacy Act 1988 (Cth) and the Australian Privacy Principles. In Victoria, the Health Records Act 2001 (Vic) may also apply to health information. It is not a complete statement of every legal duty.",
         ],
       },
       {
@@ -255,7 +267,7 @@ export const site = {
         heading: "Email, storage, and overseas access",
         paragraphs: [
           "The enquiry form is handled by Netlify, the service hosting this website. Netlify stores the name, phone number, and any optional details you submit, and can email that enquiry to hello@homemotionphysio.com.au. Netlify may process and store that information outside Australia. This website does not keep its own database of form submissions.",
-          "You can also email hello@homemotionphysio.com.au from your own email app. Those messages are handled by Google Workspace, which may store them outside Australia. This draft has not been legally reviewed against either arrangement.",
+          "You can also email hello@homemotionphysio.com.au from your own email app. Those messages are handled by Google Workspace, which may store them outside Australia.",
         ],
       },
       {
@@ -283,14 +295,18 @@ export const site = {
 
   disclaimer: {
     /** Legal adoption is separate from site.draft. Leave false until Jackson approves the wording. */
-    adopted: false,
+    adopted: disclaimerAdopted,
+    /** Professional indemnity sentence. Leave false until Jackson confirms the insurance. */
+    showInsuranceStatement,
     pageTitle: "Website disclaimer",
-    metaDescription:
-      "Draft website disclaimer for Home Motion mobile physiotherapy. General information only. Pending owner review.",
-    lastUpdatedLabel: "Status:",
-    lastUpdated: "Draft for owner review — October 2026. Not yet adopted.",
-    workingDraftNotice:
-      "This disclaimer is a draft pending review by Jackson. It is not legal advice and has not been adopted.",
+    metaDescription: disclaimerAdopted
+      ? "Website disclaimer for Home Motion mobile physiotherapy. General information only."
+      : "Draft website disclaimer for Home Motion mobile physiotherapy. General information only. Pending owner review.",
+    lastUpdatedLabel: disclaimerAdopted ? "Last updated:" : "Status:",
+    lastUpdated: disclaimerAdopted ? "4 October 2026" : "Draft for owner review — October 2026. Not yet adopted.",
+    workingDraftNotice: disclaimerAdopted
+      ? ""
+      : "This disclaimer is a draft pending review by Jackson. It is not legal advice and has not been adopted.",
     sections: [
       {
         heading: "General information only",
@@ -309,7 +325,7 @@ export const site = {
         heading: "The practitioner",
         paragraphs: [
           "Jackson (Wai Wa Law) is a physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA) and is the person who provides the physiotherapy. Home Motion Physiotherapy is a registered business name of Wai Wa Law (ABN 75 612 731 757).",
-          "The university qualification is not shown until it is confirmed. Professional insurance is maintained as required for practice.",
+          ...(showInsuranceStatement ? ["Professional insurance is maintained as required for practice."] : []),
         ],
       },
       {
@@ -324,12 +340,16 @@ export const site = {
           "Service descriptions are examples of support that may be discussed at assessment. They are not a promise of a particular treatment, result, appointment time, or travel to every address.",
         ],
       },
-      {
-        heading: "Draft website",
-        paragraphs: [
-          "While this site is marked as a draft, it is not a public professional presence and should not be relied on. Details can change before launch.",
-        ],
-      },
+      ...(draft
+        ? [
+            {
+              heading: "Draft website",
+              paragraphs: [
+                "While this site is marked as a draft, it is not a public professional presence and should not be relied on. Details can change before launch.",
+              ],
+            },
+          ]
+        : []),
     ],
   },
 
