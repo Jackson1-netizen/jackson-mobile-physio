@@ -108,8 +108,8 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(disclaimer, /Not yet adopted/);
     const robots = readFileSync(join(dist, "robots.txt"), "utf8");
     assert.match(robots, /Allow: \//);
-    assert.match(robots, /Disallow: \/privacy\//);
-    assert.match(robots, /Disallow: \/disclaimer\//);
+    assert.doesNotMatch(robots, /Disallow: \/privacy\//);
+    assert.doesNotMatch(robots, /Disallow: \/disclaimer\//);
     assert.match(robots, /Sitemap: https:\/\/homemotionphysio\.com\.au\/sitemap-index\.xml/);
     const headers = readFileSync(join(dist, "_headers"), "utf8");
     assert.equal(headers.includes("X-Robots-Tag"), false);
@@ -120,5 +120,114 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
   } finally {
     rmSync(temp, { recursive: true, force: true });
     assert.match(readFileSync(sitePath, "utf8"), /const draft = true;/);
+  }
+});
+
+function copyTree() {
+  const temp = mkdtempSync(join(tmpdir(), "hm-legal-"));
+  cpSync(root, temp, {
+    recursive: true,
+    filter: (src) => {
+      const rel = src.slice(root.length);
+      return (
+        !rel.includes(`${sep}node_modules`) &&
+        !rel.includes(`${sep}.git`) &&
+        rel !== `${sep}dist` &&
+        !rel.startsWith(`${sep}dist${sep}`)
+      );
+    },
+  });
+  const linkedModules = join(temp, "node_modules");
+  if (!existsSync(linkedModules)) symlinkSync(join(root, "node_modules"), linkedModules);
+  return temp;
+}
+
+function withFlags(source, { draft, adopted }) {
+  return source
+    .replace(/const draft = (true|false);/, `const draft = ${draft ? "true" : "false"};`)
+    .replace(/const privacyAdopted = (true|false);/, `const privacyAdopted = ${adopted ? "true" : "false"};`)
+    .replace(/const disclaimerAdopted = (true|false);/, `const disclaimerAdopted = ${adopted ? "true" : "false"};`);
+}
+
+function buildCopy(flags) {
+  const temp = copyTree();
+  const tempSite = join(temp, "src/content/site.ts");
+  writeFileSync(tempSite, withFlags(readFileSync(tempSite, "utf8"), flags));
+  const env = { ...process.env, CONTEXT: "production" };
+  delete env.URL;
+  delete env.DEPLOY_PRIME_URL;
+  delete env.PUBLIC_SITE_URL;
+  execFileSync("npm", ["run", "build"], { cwd: temp, env, stdio: "pipe" });
+  return temp;
+}
+
+const adoptedPhrases = [
+  "pending owner review",
+  "not yet adopted",
+  "legally reviewed",
+  "written in plain language for review",
+  "university qualification is not shown",
+  "（草稿）",
+];
+
+function draftLeftovers(text) {
+  let cleaned = text;
+  for (const phrase of adoptedPhrases) {
+    if (cleaned.toLowerCase().includes(phrase)) return phrase;
+  }
+  cleaned = cleaned.replace(/--color-draft(?:-bg)?/gi, "");
+  cleaned = cleaned.replace(/color-draft(?:-bg)?/gi, "");
+  const match = cleaned.match(/draft/i);
+  return match ? match[0] : null;
+}
+
+test("adopted legal pages are indexable only after the site leaves draft", { timeout: 180000 }, () => {
+  const launched = buildCopy({ draft: false, adopted: true });
+  const staging = buildCopy({ draft: true, adopted: true });
+  try {
+    assert.match(readFileSync(sitePath, "utf8"), /const privacyAdopted = false;/);
+    assert.match(readFileSync(sitePath, "utf8"), /const disclaimerAdopted = false;/);
+    assert.match(readFileSync(sitePath, "utf8"), /const draft = true;/);
+
+    const dist = join(launched, "dist");
+    const leftovers = [];
+    const allowed = [];
+    for (const file of walk(dist)) {
+      const text = readFileSync(file, "utf8");
+      const hit = draftLeftovers(text);
+      if (hit) leftovers.push(`${hit} in ${file}`);
+      if (/color-draft/i.test(text)) allowed.push(file);
+    }
+    console.log(`adopted-build leftover draft hits ${leftovers.length}; css-token files ${allowed.length}`);
+    if (leftovers.length) {
+      const sample = readFileSync(leftovers[0].split(" in ")[1], "utf8");
+      const at = sample.toLowerCase().indexOf("draft");
+      throw new Error(`${leftovers[0]}\n${sample.slice(Math.max(0, at - 80), at + 80)}`);
+    }
+    assert.deepEqual(leftovers, []);
+
+    const privacy = readFileSync(join(dist, "privacy/index.html"), "utf8");
+    const disclaimer = readFileSync(join(dist, "disclaimer/index.html"), "utf8");
+    assert.match(privacy, /name="robots" content="index, follow"/);
+    assert.match(disclaimer, /name="robots" content="index, follow"/);
+    assert.match(privacy, /Last updated:/);
+    assert.match(privacy, /4 October 2026/);
+    assert.match(disclaimer, /4 October 2026/);
+    assert.doesNotMatch(privacy, /Professional insurance is maintained/);
+    assert.doesNotMatch(disclaimer, /Professional insurance is maintained/);
+    const robots = readFileSync(join(dist, "robots.txt"), "utf8");
+    assert.doesNotMatch(robots, /Disallow: \/privacy\//);
+    assert.doesNotMatch(robots, /Disallow: \/disclaimer\//);
+    const sitemap = readFileSync(join(dist, "sitemap-0.xml"), "utf8");
+    assert.match(sitemap, /\/privacy\//);
+    assert.match(sitemap, /\/disclaimer\//);
+
+    const stagedPrivacy = readFileSync(join(staging, "dist/privacy/index.html"), "utf8");
+    const stagedDisclaimer = readFileSync(join(staging, "dist/disclaimer/index.html"), "utf8");
+    assert.match(stagedPrivacy, /name="robots" content="noindex, nofollow"/);
+    assert.match(stagedDisclaimer, /name="robots" content="noindex, nofollow"/);
+  } finally {
+    rmSync(launched, { recursive: true, force: true });
+    rmSync(staging, { recursive: true, force: true });
   }
 });
