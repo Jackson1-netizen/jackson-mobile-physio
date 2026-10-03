@@ -14,11 +14,11 @@ const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
  */
 const draft = true;
 /** Legal adoption is separate from `draft`. Leave false until Jackson approves the wording. */
-const privacyAdopted = false;
-/** Legal adoption is separate from `draft`. Leave false until Jackson approves the wording. */
-const disclaimerAdopted = false;
-/** Professional indemnity wording stays hidden until Jackson confirms it. */
-const showInsuranceStatement = false;
+const privacyAdopted = true;
+/** Legal adoption is separate from `draft`. Jackson approved this wording on 4 October 2026. */
+const disclaimerAdopted = true;
+/** Jackson confirmed this insurance sentence on 4 October 2026. */
+const showInsuranceStatement = true;
 
 /**
  * Used only when Astro did not inject __HM_SITE_ORIGIN__.

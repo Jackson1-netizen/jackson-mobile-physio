@@ -89,6 +89,28 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     const home = readFileSync(join(dist, "index.html"), "utf8");
     assert.match(home, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/"/);
     assert.match(home, /name="robots" content="index, follow"/);
+    assert.match(home, /Personalised physiotherapy/);
+    assert.match(home, /in the comfort of/);
+    assert.match(home, />home\.</);
+    assert.match(home, /0433 479 703/);
+    for (const suburb of [
+      "Box Hill",
+      "Doncaster",
+      "Blackburn",
+      "Ringwood",
+      "Burwood",
+      "Glen Waverley",
+      "Mitcham",
+      "Nunawading",
+    ]) {
+      assert.match(home, new RegExp(suburb));
+    }
+    assert.doesNotMatch(home, /PHY0004088824/);
+    assert.doesNotMatch(home, /Draft status/);
+    assert.doesNotMatch(home, /Site in draft/);
+    assert.doesNotMatch(home, /conditions or limitations/i);
+    assert.doesNotMatch(home, /university/i);
+    assert.doesNotMatch(home, /\bdegree\b/i);
     assert.match(home, /href="\/privacy\/"/);
     assert.match(home, /href="\/referral\/"/);
     assert.match(home, /href="\/areas\/box-hill\/"/);
@@ -101,11 +123,14 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.equal(missing.includes('rel="canonical"'), false);
     const privacy = readFileSync(join(dist, "privacy/index.html"), "utf8");
     const disclaimer = readFileSync(join(dist, "disclaimer/index.html"), "utf8");
-    assert.match(privacy, /name="robots" content="noindex, nofollow"/);
-    assert.match(disclaimer, /name="robots" content="noindex, nofollow"/);
-    assert.match(privacy, /Not yet adopted/);
-    assert.match(privacy, /Pending owner review/);
-    assert.match(disclaimer, /Not yet adopted/);
+    assert.match(privacy, /name="robots" content="index, follow"/);
+    assert.match(disclaimer, /name="robots" content="index, follow"/);
+    assert.match(privacy, /Last updated:/);
+    assert.match(privacy, /4 October 2026/);
+    assert.match(disclaimer, /4 October 2026/);
+    assert.doesNotMatch(privacy, /Not yet adopted/);
+    assert.doesNotMatch(privacy, /Pending owner review/);
+    assert.doesNotMatch(disclaimer, /Not yet adopted/);
     const robots = readFileSync(join(dist, "robots.txt"), "utf8");
     assert.match(robots, /Allow: \//);
     assert.doesNotMatch(robots, /Disallow: \/privacy\//);
@@ -115,8 +140,8 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.equal(headers.includes("X-Robots-Tag"), false);
     const sitemap = readFileSync(join(dist, "sitemap-0.xml"), "utf8");
     assert.match(sitemap, /https:\/\/homemotionphysio\.com\.au\/referral\//);
-    assert.doesNotMatch(sitemap, /\/privacy\//);
-    assert.doesNotMatch(sitemap, /\/disclaimer\//);
+    assert.match(sitemap, /\/privacy\//);
+    assert.match(sitemap, /\/disclaimer\//);
   } finally {
     rmSync(temp, { recursive: true, force: true });
     assert.match(readFileSync(sitePath, "utf8"), /const draft = true;/);
@@ -185,8 +210,9 @@ test("adopted legal pages are indexable only after the site leaves draft", { tim
   const launched = buildCopy({ draft: false, adopted: true });
   const staging = buildCopy({ draft: true, adopted: true });
   try {
-    assert.match(readFileSync(sitePath, "utf8"), /const privacyAdopted = false;/);
-    assert.match(readFileSync(sitePath, "utf8"), /const disclaimerAdopted = false;/);
+    assert.match(readFileSync(sitePath, "utf8"), /const privacyAdopted = true;/);
+    assert.match(readFileSync(sitePath, "utf8"), /const disclaimerAdopted = true;/);
+    assert.match(readFileSync(sitePath, "utf8"), /const showInsuranceStatement = true;/);
     assert.match(readFileSync(sitePath, "utf8"), /const draft = true;/);
 
     const dist = join(launched, "dist");
@@ -214,7 +240,7 @@ test("adopted legal pages are indexable only after the site leaves draft", { tim
     assert.match(privacy, /4 October 2026/);
     assert.match(disclaimer, /4 October 2026/);
     assert.doesNotMatch(privacy, /Professional insurance is maintained/);
-    assert.doesNotMatch(disclaimer, /Professional insurance is maintained/);
+    assert.match(disclaimer, /Professional insurance is maintained as required for practice\./);
     const robots = readFileSync(join(dist, "robots.txt"), "utf8");
     assert.doesNotMatch(robots, /Disallow: \/privacy\//);
     assert.doesNotMatch(robots, /Disallow: \/disclaimer\//);
