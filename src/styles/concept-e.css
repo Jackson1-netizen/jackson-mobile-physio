@@ -5,7 +5,7 @@
   --si-forest: #16352e;
   --si-orange: #c4461a;
   --si-olive: #7f9a4e;
-  --si-line: #8f7f6c;
+  --si-line: #62584c;
   --si-pad: max(20px, env(safe-area-inset-left, 0px));
   --si-header: 4.75rem;
 }
@@ -210,8 +210,8 @@ body.si summary {
 
 .si-bleed {
   margin: 0;
-  height: 38vh;
-  min-height: 210px;
+  height: 20vh;
+  min-height: 156px;
   max-height: 720px;
   overflow: hidden;
   background: var(--si-forest);
@@ -672,10 +672,15 @@ body.si summary {
 .si-contact .hm-honeypot {
   position: absolute;
   left: -10000px;
-  width: 1px;
-  height: 1px;
+  width: 44px;
+  height: 44px;
   overflow: hidden;
   clip-path: inset(50%);
+}
+
+.si-contact .hm-honeypot input {
+  width: 44px;
+  height: 44px;
 }
 
 .si-contact .hm-field {
@@ -817,6 +822,9 @@ body.si summary {
 
 .si-phone-line a,
 .si-inline-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
   color: var(--si-forest);
   font-weight: 500;
 }
@@ -951,10 +959,32 @@ body.si {
   scroll-margin-top: 6.5rem;
 }
 
+@media (max-width: 1119px) {
+  .si-hero-copy {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .si-caption {
+    padding-top: 0.45rem;
+  }
+
+  .si-hero-copy {
+    padding-top: 1.15rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .si-h1 { order: 1; }
+  .si-lang-fact { order: 2; margin-top: 0.85rem; }
+  .si-actions { order: 3; margin-top: 0.85rem; }
+  .si-switch { order: 4; }
+  .si-deck { order: 5; }
+}
+
 @media (min-width: 700px) {
   .si-bleed {
-    height: 46vh;
-    min-height: 280px;
+    height: 42vh;
+    min-height: 260px;
   }
 
   .si-bleed-mid {
