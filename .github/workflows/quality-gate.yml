@@ -1,0 +1,51 @@
+# Quality gate for pull requests into the CTO integration branch.
+# Runs on the GitHub-hosted runner only. Does not deploy, publish artifacts,
+# or read secrets.
+
+name: Quality gate
+
+on:
+  pull_request:
+    branches:
+      - cto/home-motion-integration
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gate-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: test, check, and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          # package.json engines.node is >=22.12.0. Netlify uses Node 22
+          # (NODE_VERSION=22). Stay on that major and refuse anything older
+          # than the engines minimum. A bare >=22.12.0 range would also
+          # match Node 24 and later.
+          node-version: ">=22.12.0 <23"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Check
+        run: npm run check
+
+      - name: Build
+        run: npm run build
