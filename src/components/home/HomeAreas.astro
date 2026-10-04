@@ -1,54 +1,30 @@
 ---
-import HomeLogo from "./HomeLogo.astro";
-import { site } from "../../content/site";
-import { homeAreas, homeSuburbs } from "../../content/home-motion";
+import BandCta from "./BandCta.astro";
 import ServiceAreaMap from "./ServiceAreaMap.astro";
-import HomeIcon from "./HomeIcon.astro";
-
+import { messages } from "../../content/i18n";
+import { homeAreas, homeSuburbs } from "../../content/home-motion";
+import { site } from "../../content/site";
 ---
 
-<section id="areas" class="hm-areas-band">
-  <div class="hm-areas-split">
-    <div class="hm-card-stage">
-      <div class="hm-card-stack" role="group" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
-        <article class="hm-print-card hm-print-card-back" lang="en">
-          <HomeLogo sizes="106px" lazy />
-        </article>
-        <article class="hm-print-card hm-print-card-front" lang="en">
-          <p class="hm-print-name">Jackson</p>
-          <p class="hm-print-role">Mobile Physiotherapist</p>
-          <p class="hm-print-phone"><a href={site.phoneHref}>{site.phone}</a></p>
-          <p class="hm-print-email"><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a></p>
-          <div class="hm-print-foot">
-            <p class="hm-print-place">{homeAreas.cardPlace}</p>
-            <p class="hm-print-motto">{homeAreas.motto}</p>
-          </div>
-        </article>
-      </div>
+<section id="areas" class="a-band a-band-sand" aria-labelledby="areas-heading">
+  <div class="a-wrap">
+    <h2 id="areas-heading" data-i18n-path="hm.areas.heading">{homeAreas.kicker}</h2>
+    <p class="a-lede" data-i18n-path="hm.areas.lead">{homeAreas.heading}</p>
+    <ul class="a-suburbs">
+      {
+        homeSuburbs.map((suburb) => (
+          <li>
+            <a href={suburb.href}>{suburb.name}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="a-note">{site.serviceAreas.surroundingNote}</p>
+    <p class="a-note" data-i18n-path="areas.intro">{messages.en.areas.intro}</p>
+    <div class="a-map-block">
+      <ServiceAreaMap />
+      <p class="a-caption" data-i18n-path="hm.areas.mapCaption">{homeAreas.mapCaption}</p>
     </div>
-    <div class="hm-areas-copy">
-      <div class="hm-areas-copy-text">
-        <h2 data-i18n-path="hm.areas.heading">{homeAreas.kicker}</h2>
-        <p data-i18n-path="hm.areas.lead">{homeAreas.heading}</p>
-        <ul class="hm-pin-list">
-          {
-            homeSuburbs.map((suburb) => (
-              <li>
-                <a href={suburb.href}>
-                  <span class="hm-pin">
-                    <HomeIcon name="pin" size={18} />
-                  </span>
-                  {suburb.name}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div class="hm-areas-map-col">
-        <ServiceAreaMap />
-        <p class="hm-map-caption" data-i18n-path="hm.areas.mapCaption">{homeAreas.mapCaption}</p>
-      </div>
-    </div>
+    <BandCta />
   </div>
 </section>

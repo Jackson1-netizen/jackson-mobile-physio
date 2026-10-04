@@ -1,36 +1,17 @@
 ---
-import { site, getEmailHref } from "../content/site";
-
-const emailHref = getEmailHref();
+import { site } from "../content/site";
+import { messages } from "../content/i18n";
 ---
 
 <nav
-  class="sticky-cta no-print fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-border)] bg-[var(--color-surface-elevated)]/95 shadow-[0_-4px_24px_rgba(26,46,40,0.08)] backdrop-blur-sm sm:hidden"
-  aria-label="Quick contact"
+  class="a-mobile-bar no-print"
+  aria-label={messages.en.hm.mobileBar.label}
+  data-i18n-attr="aria-label:hm.mobileBar.label"
 >
-  <div class:list={["mx-auto grid max-w-5xl divide-x divide-[var(--color-border)]", emailHref ? "grid-cols-3" : "grid-cols-2"]}>
-    <a
-      href={site.phoneHref}
-      class="flex flex-col items-center justify-center py-3 text-center text-xs font-semibold text-[var(--color-accent)] no-underline"
-    >
-      <span data-i18n-path="cta.call">Call</span>
-      <span class="mt-0.5 font-normal text-[var(--color-ink-muted)]">{site.phone}</span>
-    </a>
-    {
-      emailHref && (
-        <a
-          href={emailHref}
-          class="flex items-center justify-center py-3 text-center text-xs font-semibold text-[var(--color-ink)] no-underline"
-        >
-          <span data-i18n-path="cta.email">Email</span>
-        </a>
-      )
-    }
-    <a
-      href="/referral/"
-      class="flex items-center justify-center py-3 text-center text-xs font-semibold text-[var(--color-ink)] no-underline"
-    >
-      <span data-i18n-path="nav.refer">Refer</span>
-    </a>
-  </div>
+  <a href={site.phoneHref}>
+    <span data-i18n-path="cta.call">{messages.en.cta.call}</span>
+  </a>
+  <a href="/#contact">
+    <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+  </a>
 </nav>

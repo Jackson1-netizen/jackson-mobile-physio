@@ -1,37 +1,27 @@
 ---
-import { homeServices } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
+import BandCta from "./BandCta.astro";
+import { homeServices } from "../../content/home-motion";
 ---
 
-<section id="services" class="hm-band hm-band-green">
-  <div class="hm-wrap hm-section">
-    <div class="hm-section-head">
-      <div>
-        <h2 data-i18n-path="hm.services.heading">{homeServices.heading}</h2>
-        <p class="hm-supporting" data-i18n-path="hm.services.supporting">{homeServices.supporting}</p>
-      </div>
-      <a class="hm-text-link" href="#contact">
-        <span data-i18n-path="hm.services.enquire">{homeServices.enquire}</span>
-        <span class="hm-arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-    <p class="sr-only" data-i18n-path="services.intro">{homeServices.intro}</p>
-    <ul class="hm-service-grid">
+<section id="services" class="a-band a-band-cream" aria-labelledby="services-heading">
+  <div class="a-wrap">
+    <h2 id="services-heading" data-i18n-path="hm.services.heading">{homeServices.heading}</h2>
+    <p class="a-lede" data-i18n-path="hm.services.supporting">{homeServices.supporting}</p>
+    <p class="a-note" data-i18n-path="services.intro">{homeServices.intro}</p>
+    <div class="a-services">
       {
         homeServices.cards.map((card, i) => (
-          <li>
-            <div class="hm-card hm-service-card">
-              <span class="hm-service-icon">
-                <HomeIcon name={card.icon} size={28} />
-              </span>
-              <div>
-                <h3 data-i18n-path={`hm.services.cards.${i}.title`}>{card.title}</h3>
-                <p data-i18n-path={`hm.services.cards.${i}.body`}>{card.body}</p>
-              </div>
-            </div>
-          </li>
+          <article class="a-card">
+            <span class="a-card-icon">
+              <HomeIcon name={card.icon} size={28} />
+            </span>
+            <h3 data-i18n-path={`hm.services.cards.${i}.title`}>{card.title}</h3>
+            <p data-i18n-path={`hm.services.cards.${i}.body`}>{card.body}</p>
+          </article>
         ))
       }
-    </ul>
+    </div>
+    <BandCta />
   </div>
 </section>

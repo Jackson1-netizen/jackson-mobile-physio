@@ -1,72 +1,98 @@
 ---
-import { site, getEmailHref } from "../content/site";
-import { messages } from "../content/i18n";
+import HomeLogo from "./home/HomeLogo.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { site } from "../content/site";
+import { messages } from "../content/i18n";
 
 interface Props {
   showLanguageSwitcher?: boolean;
 }
 
 const { showLanguageSwitcher = false } = Astro.props;
-const emailHref = getEmailHref();
+const here = Astro.url.pathname;
+const onAreas = here.startsWith("/areas");
+const t = messages.en.hm.header;
 
 const nav = [
-  { href: "/#about", path: "nav.about", label: messages.en.nav.about },
-  { href: "/#services", path: "nav.services", label: messages.en.nav.services },
-  { href: "/#how", path: "nav.howItWorks", label: messages.en.nav.howItWorks },
-  { href: "/#ndis", path: "nav.ndis", label: messages.en.nav.ndis },
-  { href: "/#areas", path: "nav.areas", label: messages.en.nav.areas },
-  { href: "/#referrers", path: "nav.forReferrers", label: messages.en.nav.forReferrers },
-  { href: "/#faq", path: "nav.faq", label: messages.en.nav.faq },
-  { href: "/#contact", path: "nav.contact", label: messages.en.nav.contact },
+  { href: "/#about", label: "About Jackson", spy: "about" },
+  { href: "/#services", label: messages.en.nav.services, path: "nav.services", spy: "services" },
+  { href: "/#visit", label: "Your first visit", spy: "visit" },
+  { href: "/#areas", label: "Areas", spy: "areas", current: onAreas },
+  { href: "/#faq", label: messages.en.nav.faq, path: "nav.faq", spy: "faq" },
 ];
 ---
 
-<header class="no-print sticky top-0 z-30 border-b border-[var(--color-border)] bg-[var(--color-surface-elevated)]/95 backdrop-blur-sm">
-  <div class="border-b border-[var(--color-border)] bg-[var(--color-ink)] text-white">
-    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-sm">
-      <a href={site.phoneHref} class="font-semibold text-white no-underline hover:underline">
-        {site.phone}
-      </a>
-      <div class="flex flex-wrap items-center gap-3">
-        {emailHref && (
-          <a href={emailHref} class="hidden text-white/90 no-underline hover:text-white hover:underline sm:inline">
-            <span data-i18n-path="cta.email">Email</span>
+<header class="a-header no-print">
+  <div class="a-wrap a-header-inner">
+    <a
+      class="a-logo"
+      href="/"
+      aria-label={t.logoLabel}
+      data-i18n-attr="aria-label:hm.header.logoLabel"
+      aria-current={here === "/" ? "page" : undefined}
+      translate="no"
+    >
+      <HomeLogo alt="" sizes="(min-width: 1180px) 176px, 148px" />
+    </a>
+
+    <nav class="a-nav" aria-label={t.primaryNav} data-i18n-attr="aria-label:hm.header.primaryNav">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            data-spy={item.spy}
+            data-i18n-path={"path" in item ? item.path : undefined}
+            aria-current={"current" in item && item.current ? "page" : undefined}
+          >
+            {item.label}
           </a>
-        )}
-        <a
-          href="/referral/"
-          class="rounded-md bg-white/10 px-3 py-1 text-xs font-semibold text-white no-underline hover:bg-white/20"
-        >
-          <span data-i18n-path="nav.referralSheet">Referral sheet</span>
-        </a>
-        {showLanguageSwitcher && <LanguageSwitcher />}
-      </div>
+        ))
+      }
+    </nav>
+
+    <div class="a-header-tools">
+      <a class="a-header-phone" href={site.phoneHref} translate="no">{site.phone}</a>
+      {showLanguageSwitcher && <LanguageSwitcher />}
+      <a class="a-btn a-btn-primary a-header-cta" href="/#contact">
+        <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+      </a>
+      <button
+        type="button"
+        class="a-menu-btn"
+        popovertarget="a-menu"
+        aria-controls="a-menu"
+        aria-expanded="false"
+        aria-haspopup="dialog"
+      >
+        <span data-i18n-path="hm.header.menu">{t.menu}</span>
+      </button>
     </div>
   </div>
-  <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-4 lg:flex-row lg:items-center lg:justify-between">
-    <a href="/" class="group text-left no-underline">
-      <span class="block font-serif text-xl font-semibold text-[var(--color-ink)] group-hover:text-[var(--color-accent)]">
-        {site.businessName}
-      </span>
-      <span class="text-sm text-[var(--color-ink-muted)]">
-        {site.tagline} · {site.locationDescriptor}
-      </span>
-    </a>
-    <nav aria-label="Primary" class="overflow-x-auto">
-      <ul class="flex min-w-max gap-x-4 gap-y-2 text-sm">
-        {nav.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class="whitespace-nowrap text-[var(--color-ink-muted)] underline-offset-4 hover:text-[var(--color-accent)] hover:underline"
-              data-i18n-path={item.path}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </div>
 </header>
+
+<div id="a-menu" class="no-print" popover="auto">
+  <nav class="a-wrap a-menu-nav" aria-label={t.mobileNav} data-i18n-attr="aria-label:hm.header.mobileNav">
+    {
+      nav.map((item) => (
+        <a
+          href={item.href}
+          data-spy={item.spy}
+          data-i18n-path={"path" in item ? item.path : undefined}
+          aria-current={"current" in item && item.current ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <a href={site.phoneHref} translate="no">{site.phone}</a>
+    <a class="a-btn a-btn-primary" href="/#contact">
+      <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+    </a>
+    {showLanguageSwitcher && <LanguageSwitcher />}
+  </nav>
+</div>
+
+<script>
+  import { initHomeMotion } from "../lib/home-motion-motion";
+  initHomeMotion();
+</script>

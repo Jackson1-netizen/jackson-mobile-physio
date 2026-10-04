@@ -1,26 +1,25 @@
 ---
+import BandCta from "./BandCta.astro";
 import { homeFaq } from "../../content/home-motion";
 import { messages } from "../../content/i18n";
 ---
 
-<section id="faq" class="hm-faq bg-[var(--hm-warm-white)]">
-  <div class="hm-wrap hm-section hm-faq-layout">
-    <div class="hm-faq-aside">
-      <p class="hm-kicker" data-i18n-path="nav.faq">FAQ</p>
-      <h2 data-i18n-path="sections.faq">{messages.en.sections.faq}</h2>
-    </div>
-    <div>
+<section id="faq" class="a-band a-band-sand a-faq" aria-labelledby="faq-heading">
+  <div class="a-wrap">
+    <h2 id="faq-heading" data-i18n-path="sections.faq">{messages.en.sections.faq}</h2>
+    <div class="a-faq-list">
       {
         homeFaq.map((item, i) => (
           <details>
             <summary>
               <span data-i18n-path={`faq.items.${i}.question`}>{item.question}</span>
-              <span class="hm-faq-mark" aria-hidden="true">+</span>
+              <span class="a-faq-mark" aria-hidden="true">+</span>
             </summary>
             <p data-i18n-path={`faq.items.${i}.answer`}>{item.answer}</p>
           </details>
         ))
       }
     </div>
+    <BandCta />
   </div>
 </section>

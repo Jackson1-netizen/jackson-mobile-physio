@@ -1,70 +1,55 @@
 ---
 import HomePicture from "./HomePicture.astro";
-import { getRegistrationDisplayLine } from "../../content/site";
-import { homeHero, homeMedia } from "../../content/home-motion";
-import HomeIcon from "./HomeIcon.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { homeMedia } from "../../content/home-motion";
+import { concept1TrustHighlights } from "../../content/concept1-home";
 
-const registrationLine = getRegistrationDisplayLine();
 const hero = homeMedia.hero;
+const languageLine = concept1TrustHighlights[4].line;
+const caption = "Preview placeholder — to be replaced with genuine photography";
+const alt = "Preview placeholder photograph of a person with a walking frame indoors. Not a documented visit.";
+const eyebrow = messages.en.hm.why.items[3].body;
 ---
 
-<section id="top" class="hm-hero" aria-labelledby="hm-hero-heading">
-  <div class="hm-wrap hm-hero-grid">
-    <div>
-      <div class="hm-hero-lang">
+<section id="top" class="a-band a-band-cream a-hero" aria-labelledby="hero-heading">
+  <div class="a-wrap a-hero-grid">
+    <div class="a-hero-copy">
+      <p class="a-eyebrow" data-i18n-path="hm.why.items.3.body">{eyebrow}</p>
+      <h1 id="hero-heading">
+        <span data-i18n-path="home.h1Lead">{messages.en.home.h1Lead}</span>{" "}
+        <span data-i18n-path="home.h1Mid">{messages.en.home.h1Mid}</span>{" "}
+        <span data-i18n-path="home.h1Em">{messages.en.home.h1Em}</span>
+      </h1>
+      <p class="a-byline">
+        <span class="a-byline-name" translate="no">{site.practitionerName}</span>
+        <span data-i18n-path="about.role">{messages.en.about.role}</span>
+      </p>
+      <div class="a-actions">
+        <a class="a-btn a-btn-primary" href="/#contact">
+          <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+        </a>
+        <a class="a-btn a-btn-outline" href={site.phoneHref}>
+          <span data-i18n-path="cta.call">{messages.en.cta.call}</span>
+        </a>
+        <a class="a-phone-link" href={site.phoneHref} translate="no">{site.phone}</a>
+      </div>
+      <p class="a-langs">{languageLine}</p>
+      <div class="a-hero-switch">
         <LanguageSwitcher />
       </div>
-      <p class="hm-kicker hm-kicker-forest" data-i18n-path="home.eyebrow">{homeHero.eyebrow}</p>
-      <h1 id="hm-hero-heading" class="hm-h1-enter">
-        <span data-i18n-path="home.h1Lead">{homeHero.h1Lead}</span>
-        <br />
-        <span data-i18n-path="home.h1Mid">{homeHero.h1Mid}</span>
-        <br />
-        <span class="hm-em" data-i18n-path="home.h1Em">{homeHero.h1Em}</span>
-      </h1>
-      <p class="hm-hero-support" data-i18n-path="hm.hero.support">{homeHero.support}</p>
-      <ul class="hm-chips">
-        {
-          homeHero.chips.map((chip, i) => (
-            <li>
-              <span class="hm-chip-icon">
-                <HomeIcon name={chip.icon} size={22} />
-              </span>
-              <span data-i18n-path={`hm.hero.chips.${i}`}>{chip.line}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="hm-hero-actions">
-        <a class="hm-btn hm-btn-primary" href="#contact">
-          <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
-          <span class="hm-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hm-btn hm-btn-secondary" href="#services" data-i18n-path="home.secondaryCta">
-          {homeHero.secondaryCta}
-        </a>
-      </div>
-      <p class="hm-ahpra" data-i18n-path="hm.hero.ahpra">
-        {registrationLine}
-      </p>
     </div>
-
-    <div class="hm-hero-frame">
-      <div class="hm-hero-media" data-hm-parallax>
+    <figure class="a-figure">
+      <div class="a-frame">
         <HomePicture
-          class="hm-hero-photo"
-          photo={hero}
-          altPath="hm.hero.photoAlt"
-          sizes="(min-width: 1024px) 690px, (min-width: 768px) 728px, calc(100vw - 2.5rem)"
+          photo={{ ...hero, alt }}
+          sizes="(min-width: 1180px) 460px, calc(100vw - 2rem)"
           priority
         />
       </div>
-      <div class="hm-blobs" aria-hidden="true">
-        <span class="hm-blob hm-blob-orange"></span>
-        <span class="hm-blob hm-blob-green"></span>
-        <span class="hm-blob hm-blob-leaf"></span>
-      </div>
-    </div>
+      <figcaption class="a-caption">{caption}</figcaption>
+    </figure>
+    <p class="a-support" data-i18n-path="home.support">{messages.en.home.support}</p>
   </div>
 </section>

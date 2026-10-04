@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
 import { suburbPages } from "../../content/suburbs";
+import { concept1TrustHighlights } from "../../content/concept1-home";
+import { homeServices, homeSteps } from "../../content/home-motion";
 
 export function getStaticPaths() {
   return suburbPages.map((suburb) => ({
@@ -11,48 +14,136 @@ export function getStaticPaths() {
 }
 
 const { suburb } = Astro.props;
+const preview = suburb.slug === "box-hill";
+const languageLine = concept1TrustHighlights[4].line;
 ---
 
 <BaseLayout title={suburb.seo.title} description={suburb.seo.description} canonicalPath={`/areas/${suburb.slug}`}>
-  <article class="mx-auto max-w-3xl px-4 py-14">
-    <p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">
-      {site.businessName} · {site.tagline}
-    </p>
-    <h1 class="mt-3 font-serif text-4xl font-bold text-[var(--color-ink)]">{suburb.headline}</h1>
-    <div class="prose-width mt-6 space-y-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">
-      {suburb.paragraphs.map((p) => (
-        <p>{p}</p>
-      ))}
-    </div>
-    <ul class="mt-8 space-y-2 rounded-lg border border-[var(--color-border)] bg-white p-6 text-[var(--color-ink-muted)]">
-      {suburb.localPoints.map((point) => (
-        <li class="flex gap-2">
-          <span class="text-[var(--color-accent)]" aria-hidden="true">•</span>
-          <span>{point}</span>
-        </li>
-      ))}
-    </ul>
-    <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
-      Consultations available in {site.languages.join(", ")}. {site.ahpraNotice}
-    </p>
-    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-      <a
-        href={site.phoneHref}
-        class="inline-flex items-center justify-center rounded-md bg-[var(--color-accent)] px-6 py-3 font-semibold text-white no-underline hover:bg-[var(--color-accent-hover)]"
-      >
-        Call {site.phone}
-      </a>
-      <a
-        href="/#contact"
-        class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
-      >
-        Send an enquiry
-      </a>
-    </div>
-    <p class="mt-10 text-sm">
-      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/">
-        ← All service areas
-      </a>
-    </p>
-  </article>
+  {
+    preview ? (
+      <article>
+        <header class="a-band-cream a-page-hero">
+          <div class="a-wrap">
+            <nav aria-label="Breadcrumb">
+              <ol class="a-crumbs">
+                <li>
+                  <a href="/">{messages.en.nav.home}</a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                  <a href="/#areas">{messages.en.sections.areas}</a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                  <span aria-current="page">{suburb.name}</span>
+                </li>
+              </ol>
+            </nav>
+            <h1>{suburb.headline}</h1>
+          </div>
+        </header>
+        <div class="a-band a-band-cream a-band-follow">
+          <div class="a-wrap a-measure">
+            {suburb.paragraphs.map((paragraph) => (
+              <p class="a-prose">{paragraph}</p>
+            ))}
+            <ul class="a-local">
+              {suburb.localPoints.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+            <p class="a-note">
+              Consultations available in {site.languages.join(", ")}. {site.ahpraNotice}
+            </p>
+
+            <div class="a-section-gap">
+              <h2>{messages.en.hm.how.heading}</h2>
+              <p class="a-visit-who" translate="no">
+                {site.practitionerName}
+              </p>
+              <ol class="a-steps">
+                {homeSteps.map((step) => (
+                  <li>
+                    <span class="a-step-num">{step.num}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div class="a-section-gap">
+              <h2>{homeServices.heading}</h2>
+              <p class="a-lede">{homeServices.supporting}</p>
+              <p class="a-note">{homeServices.intro}</p>
+              <ul class="a-service-list">
+                {homeServices.cards.map((card) => (
+                  <li>
+                    <h3>{card.title}</h3>
+                    <p>{card.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <section class="a-band a-band-forest" aria-label={messages.en.sections.contact}>
+          <div class="a-wrap a-measure">
+            <h2>{messages.en.sections.contact}</h2>
+            <p class="a-lede">{messages.en.enquiry.intro}</p>
+            <p class="a-langs">{languageLine}</p>
+            <div class="a-inner-cta">
+              <a class="a-btn a-btn-primary" href="/#contact">
+                {messages.en.home.primaryCta}
+              </a>
+              <a class="a-btn a-btn-outline" href={site.phoneHref}>
+                {messages.en.cta.call}
+              </a>
+              <a class="a-phone-link" href={site.phoneHref} translate="no">
+                {site.phone}
+              </a>
+            </div>
+          </div>
+        </section>
+      </article>
+    ) : (
+      <article class="mx-auto max-w-3xl px-4 py-14">
+        <p class="text-sm font-semibold text-[var(--color-accent)]">
+          {site.businessName} · {site.tagline}
+        </p>
+        <h1 class="mt-3 font-serif text-4xl font-medium text-[var(--color-ink)]">{suburb.headline}</h1>
+        <div class="prose-width mt-6 space-y-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">
+          {suburb.paragraphs.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+        <ul class="mt-8 space-y-2 border border-[var(--color-border)] bg-white p-6 text-[var(--color-ink-muted)]">
+          {suburb.localPoints.map((point) => (
+            <li class="flex gap-2">
+              <span aria-hidden="true">•</span>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
+          Consultations available in {site.languages.join(", ")}. {site.ahpraNotice}
+        </p>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a class="a-btn a-btn-primary" href={site.phoneHref}>
+            Call {site.phone}
+          </a>
+          <a class="a-btn a-btn-outline" href="/#contact">
+            {messages.en.sections.enquiry}
+          </a>
+        </div>
+        <p class="mt-10">
+          <a class="inline-flex min-h-11 items-center font-semibold underline" href="/">
+            {messages.en.footer.backHome}
+          </a>
+        </p>
+      </article>
+    )
+  }
 </BaseLayout>

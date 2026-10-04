@@ -1,39 +1,19 @@
 ---
-import "../../styles/home-motion.css";
-import HomeHeader from "./HomeHeader.astro";
 import HomeHero from "./HomeHero.astro";
-import HomeServices from "./HomeServices.astro";
-import HomeHowItWorks from "./HomeHowItWorks.astro";
-import HomeWhyChoose from "./HomeWhyChoose.astro";
 import HomeAbout from "./HomeAbout.astro";
-import HomeNdis from "./HomeNdis.astro";
+import HomeHowItWorks from "./HomeHowItWorks.astro";
+import HomeServices from "./HomeServices.astro";
 import HomeAreas from "./HomeAreas.astro";
-import HomeReferrers from "./HomeReferrers.astro";
+import HomeNdis from "./HomeNdis.astro";
 import HomeFaq from "./HomeFaq.astro";
 import HomeContact from "./HomeContact.astro";
-import HomeFooter from "./HomeFooter.astro";
-import HomeMobileBar from "./HomeMobileBar.astro";
 ---
 
-<div class="hm">
-  <HomeHeader />
-  <main id="main-content" tabindex="-1">
-    <HomeHero />
-    <HomeServices />
-    <HomeAreas />
-    <HomeReferrers />
-    <HomeHowItWorks />
-    <HomeWhyChoose />
-    <HomeAbout />
-    <HomeNdis />
-    <HomeFaq />
-    <HomeContact />
-  </main>
-  <HomeFooter />
-  <HomeMobileBar />
-</div>
-
-<script>
-  import { initHomeMotion } from "../../lib/home-motion-motion";
-  initHomeMotion();
-</script>
+<HomeHero />
+<HomeAbout />
+<HomeHowItWorks />
+<HomeServices />
+<HomeAreas />
+<HomeNdis />
+<HomeFaq />
+<HomeContact />

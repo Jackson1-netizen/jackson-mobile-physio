@@ -1,34 +1,39 @@
 ---
-import HomePicture from "./HomePicture.astro";
-import { homeSteps, homeMedia } from "../../content/home-motion";
+import BandCta from "./BandCta.astro";
+import { site } from "../../content/site";
 import { messages } from "../../content/i18n";
+import { homeSteps } from "../../content/home-motion";
 
-const photo = homeMedia.how;
+const shotLabel = "Photo to be shot: Jackson arriving at a front door with his kit";
 ---
 
-<section id="how" class="hm-how hm-reveal">
-  <div class="hm-wrap hm-section hm-how-grid">
+<section id="visit" class="a-band a-band-forest" aria-labelledby="visit-heading">
+  <div class="a-wrap a-visit-grid">
     <div>
-      <p class="hm-kicker" data-i18n-path="hm.how.kicker">{messages.en.hm.how.kicker}</p>
-      <h2 data-i18n-path="hm.how.heading">{messages.en.hm.how.heading}</h2>
-      <ol class="hm-step-grid mt-8">
+      <p class="a-eyebrow">Your first visit</p>
+      <h2 id="visit-heading" data-i18n-path="hm.how.heading">{messages.en.hm.how.heading}</h2>
+      <p class="a-visit-who" translate="no">{site.practitionerName}</p>
+      <p data-i18n-path="about.role">{messages.en.about.role}</p>
+      <ol class="a-steps">
         {
           homeSteps.map((step, i) => (
-            <li class="hm-card hm-step">
-              <span class="hm-step-num">{step.num}</span>
-              <h3 data-i18n-path={`hm.how.steps.${i}.title`}>{step.title}</h3>
-              <p data-i18n-path={`hm.how.steps.${i}.body`}>{step.body}</p>
+            <li>
+              <span class="a-step-num">{step.num}</span>
+              <div>
+                <h3 data-i18n-path={`hm.how.steps.${i}.title`}>{step.title}</h3>
+                <p data-i18n-path={`hm.how.steps.${i}.body`}>{step.body}</p>
+              </div>
             </li>
           ))
         }
       </ol>
+      <BandCta />
     </div>
-    <div class="hm-how-media hm-img-zoom">
-      <HomePicture
-        photo={photo}
-        altPath="hm.photos.sitToStandAlt"
-        sizes="(min-width: 1024px) 556px, (min-width: 768px) 728px, calc(100vw - 2.5rem)"
-      />
-    </div>
+    <figure class="a-shot">
+      <div class="a-door-scene" aria-hidden="true">
+        <span class="a-door"></span>
+      </div>
+      <figcaption class="a-caption">{shotLabel}</figcaption>
+    </figure>
   </div>
 </section>

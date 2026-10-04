@@ -1,58 +1,54 @@
 ---
 import { site } from "../content/site";
+import { messages } from "../content/i18n";
 import { suburbPages, suburbPath } from "../content/suburbs";
+
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[var(--color-border)] bg-[var(--color-ink)] text-[var(--color-surface)]">
-  <div class="mx-auto max-w-5xl px-4 py-10 text-sm leading-relaxed">
-    <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
-      <div>
-        <p class="font-serif text-lg font-semibold">{site.businessName}</p>
-        <p class="mt-2 text-white/80">
-          {site.registeredBusinessName} · {site.soleTraderName}, sole trader
-        </p>
-        <p class="mt-4">
-          <a class="text-white underline underline-offset-4" href={site.phoneHref}>
-            {site.phone}
-          </a>
-          <span class="mx-2 text-white/50" aria-hidden="true">·</span>
-          <a class="text-white underline underline-offset-4" href={site.emailHref}>
-            {site.publicEmail}
-          </a>
-        </p>
-        <p class="mt-2 text-white/70">{site.abnDisplay}</p>
-        <p class="mt-2 text-white/70">AHPRA registered physiotherapist</p>
-        <p class="mt-4 text-white/60">{site.ahpraNotice}</p>
-      </div>
-      <div>
-        <p class="font-semibold text-white/90" data-i18n-path="sections.areas">Service areas</p>
-        <ul class="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-white/75">
-          {suburbPages.map((suburb) => (
-            <li>
-              <a class="hover:text-white hover:underline" href={suburbPath(suburb.slug)}>
-                {suburb.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+<footer class="a-footer">
+  <div class="a-wrap a-footer-grid">
+    <div>
+      <p class="a-footer-brand" translate="no">{site.businessName}</p>
+      <p>
+        {site.registeredBusinessName} · {site.soleTraderName}, sole trader
+      </p>
+      <p class="a-footer-contact">
+        <a href={site.phoneHref} translate="no">{site.phone}</a>
+      </p>
+      <p class="a-footer-contact">
+        <a href={site.emailHref}>{site.publicEmail}</a>
+      </p>
+      <p translate="no">{site.abnDisplay}</p>
     </div>
-    <p class="mt-8">
-      <a class="text-white/80 underline-offset-4 hover:text-white hover:underline" href="/privacy/">
-        {site.footer.privacyLinkLabel}
-      </a>
-      <span class="mx-2 text-white/40" aria-hidden="true">·</span>
-      <a class="text-white/80 underline-offset-4 hover:text-white hover:underline" href="/disclaimer/">
-        {site.footer.disclaimerLinkLabel}
-      </a>
-      <span class="mx-2 text-white/40" aria-hidden="true">·</span>
-      <a class="text-white/80 underline-offset-4 hover:text-white hover:underline" href="/referral/">
-        <span data-i18n-path="nav.referralSheet">Referral sheet</span>
-      </a>
-    </p>
-    <p class="mt-6 text-white/50">
-      © {year} {site.businessName}. {site.footer.copyrightSuffix}
+    <nav aria-label={messages.en.sections.areas}>
+      <p data-i18n-path="sections.areas">{messages.en.sections.areas}</p>
+      <ul class="a-footer-links">
+        {
+          suburbPages.map((suburb) => (
+            <li>
+              <a href={suburbPath(suburb.slug)}>{suburb.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+  <div class="a-wrap">
+    <ul class="a-footer-legal">
+      <li>
+        <a href="/privacy/" data-i18n-path="hm.footer.privacy">{site.footer.privacyLinkLabel}</a>
+      </li>
+      <li>
+        <a href="/disclaimer/" data-i18n-path="hm.footer.disclaimer">{site.footer.disclaimerLinkLabel}</a>
+      </li>
+      <li>
+        <a href="/referral/" data-i18n-path="nav.referralSheet">{messages.en.nav.referralSheet}</a>
+      </li>
+    </ul>
+    <p>
+      © {year} <span translate="no">{site.businessName}</span>.{" "}
+      <span data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</span>
     </p>
   </div>
 </footer>

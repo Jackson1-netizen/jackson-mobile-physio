@@ -1,53 +1,38 @@
 ---
-import HomePicture from "./HomePicture.astro";
+import BandCta from "./BandCta.astro";
 import { site } from "../../content/site";
 import { messages } from "../../content/i18n";
-import { homeMedia } from "../../content/home-motion";
-
-const ndis = messages.en.ndis;
-const photo = homeMedia.ndis;
+import { homeReferrers } from "../../content/home-motion";
 ---
 
-<section id="ndis" class="hm-ndis">
-  <div class="hm-wrap hm-section hm-ndis-grid">
-    <div class="hm-ndis-photo hm-img-zoom">
-      <HomePicture
-        photo={photo}
-        altPath="hm.photos.gaitAlt"
-        sizes="(min-width: 1024px) 508px, (min-width: 768px) 728px, calc(100vw - 2.5rem)"
-      />
+<section id="ndis" class="a-band a-band-cream" aria-labelledby="ndis-heading">
+  <div class="a-wrap a-split">
+    <div>
+      <h2 id="ndis-heading" data-i18n-path="sections.ndis">{messages.en.sections.ndis}</h2>
+      <div class="a-stack">
+        <p data-i18n-path="ndis.lead">{site.ndisDescription}</p>
+        <p>{site.ndisNotRegistered}</p>
+        <p>{site.ndisFundingNote}</p>
+      </div>
     </div>
     <div>
-      <p class="hm-kicker" data-i18n-path="nav.ndis">NDIS</p>
-      <h2 data-i18n-path="sections.ndis">{site.ndisHeading}</h2>
-      <p class="mt-4 text-lg text-[#3d5a52]" data-i18n-path="ndis.lead">{ndis.lead}</p>
-      <ul>
-        <li>
-          <span aria-hidden="true">•</span>
-          <span>
-            <strong data-i18n-path="ndis.planManaged">{ndis.planManaged}.</strong>
-            {" "}
-            <span data-i18n-path="ndis.planManagedDesc">{ndis.planManagedDesc}</span>
-          </span>
-        </li>
-        <li>
-          <span aria-hidden="true">•</span>
-          <span>
-            <strong data-i18n-path="ndis.planManaged2">{ndis.planManaged2}.</strong>
-            {" "}
-            <span data-i18n-path="ndis.planManaged2Desc">{ndis.planManaged2Desc}</span>
-          </span>
-        </li>
-        <li>
-          <span aria-hidden="true">•</span>
-          <span>
-            <strong data-i18n-path="ndis.notRegistered">{ndis.notRegistered}.</strong>
-            {" "}
-            <span data-i18n-path="ndis.notRegisteredDesc">{ndis.notRegisteredDesc}</span>
-          </span>
-        </li>
-      </ul>
-      <p class="mt-5 text-sm text-[#5b6e67]" data-i18n-path="ndis.noGuarantee">{ndis.noGuarantee}</p>
+      <h3 data-i18n-path="hm.referrers.heading">{homeReferrers.heading}</h3>
+      <div class="a-stack">
+        <p data-i18n-path="hm.referrers.lead">{homeReferrers.lead}</p>
+        <ul class="a-points">
+          {
+            homeReferrers.points.slice(0, 2).map((point, i) => (
+              <li data-i18n-path={`hm.referrers.points.${i}`}>{point.title}</li>
+            ))
+          }
+        </ul>
+        <p>
+          <a class="a-btn a-btn-outline" href="/referral/">
+            <span data-i18n-path="hm.referrers.cta">{homeReferrers.cta}</span>
+          </a>
+        </p>
+      </div>
+      <BandCta />
     </div>
   </div>
 </section>
