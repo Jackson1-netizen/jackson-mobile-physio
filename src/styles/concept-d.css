@@ -587,14 +587,6 @@ html {
   line-height: 1.25;
 }
 
-.roof-olive-portrait {
-  top: -0.8rem;
-  left: -0.6rem;
-  right: auto;
-  width: 4.5rem;
-  height: 4.5rem;
-}
-
 .roof-visit {
   background: var(--roof-forest);
   color: var(--roof-cream);
@@ -1185,12 +1177,11 @@ textarea.hm-input {
   .roof-support { grid-area: support; }
   .roof-photo {
     grid-area: photo;
-    width: calc(100% + 1.5rem);
+    width: calc(100% + 2.5rem);
     margin-top: 1.6rem;
-    margin-left: 0.85rem;
     justify-self: end;
     z-index: 3;
-    transform: rotate(-1.4deg);
+    transform: translateX(-7.25rem) rotate(-2.6deg);
   }
 
   .roof-house {
@@ -1225,10 +1216,6 @@ textarea.hm-input {
   .roof-steps {
     grid-template-columns: 1fr 1.08fr 0.92fr;
     align-items: start;
-  }
-
-  .roof-steps li:nth-child(2) {
-    transform: translateY(-0.8rem);
   }
 
   .roof-contact-grid {
@@ -1279,10 +1266,6 @@ textarea.hm-input {
   .roof-tile {
     animation: none;
     transition: none;
-  }
-
-  .roof-steps li:nth-child(2) {
-    transform: none;
   }
 }
 
