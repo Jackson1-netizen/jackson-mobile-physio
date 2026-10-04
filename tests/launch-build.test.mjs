@@ -89,9 +89,10 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     const home = readFileSync(join(dist, "index.html"), "utf8");
     assert.match(home, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/"/);
     assert.match(home, /name="robots" content="index, follow"/);
-    assert.match(home, /Personalised physiotherapy/);
-    assert.match(home, /in the comfort of/);
-    assert.match(home, />home\.</);
+    // The previous hero lines were old markup. Concept F uses the published motto and the enquiry form.
+    assert.match(home, /Your physio comes to you\./);
+    assert.match(home, /Make an enquiry/);
+    assert.match(home, /<form\b[^>]*name="enquiry"/);
     assert.match(home, /0433 479 703/);
     for (const suburb of [
       "Box Hill",
@@ -117,7 +118,12 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     const referral = readFileSync(join(dist, "referral/index.html"), "utf8");
     assert.match(referral, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/referral\/"/);
     assert.match(referral, /Registration:<\/span> AHPRA registered physiotherapist/);
-    assert.doesNotMatch(referral, /AHPRA registration/);
+    // The shared language script includes the FAQ question. The sheet itself must not use that phrase as a status.
+    const referralSheet = referral.slice(
+      referral.indexOf('class="referral-sheet"'),
+      referral.indexOf("</main>"),
+    );
+    assert.doesNotMatch(referralSheet, /AHPRA registration/);
     const missing = readFileSync(join(dist, "404.html"), "utf8");
     assert.match(missing, /name="robots" content="noindex, nofollow"/);
     assert.equal(missing.includes('rel="canonical"'), false);

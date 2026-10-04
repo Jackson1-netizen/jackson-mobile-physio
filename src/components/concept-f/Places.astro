@@ -1,0 +1,46 @@
+---
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { suburbPages, suburbPath } from "../../content/suburbs";
+
+interface Props {
+  marked: string;
+  current?: boolean;
+}
+
+const { marked, current = false } = Astro.props;
+
+const places = site.serviceAreas.suburbs.map((name) => {
+  const page = suburbPages.find((suburb) => suburb.name === name);
+  return { name, href: page ? suburbPath(page.slug) : "/#areas" };
+});
+---
+
+<section class="cf-band" id="areas" aria-labelledby="cf-areas-title">
+  <div class="cf-wrap">
+    <h2 id="cf-areas-title">Eastern suburbs</h2>
+    <p class="cf-intro" data-i18n-path="hm.areas.lead">{messages.en.hm.areas.lead}</p>
+    <div class="cf-diagram">
+      <p class="cf-diagram-label">{site.serviceAreas.region}</p>
+      <ol class="cf-stops">
+        {
+          places.map((place) => {
+            const on = place.name === marked;
+            return (
+              <li>
+                <a
+                  href={place.href}
+                  class:list={["cf-stop", on && "is-marked"]}
+                  aria-current={on && current ? "page" : undefined}
+                >
+                  {place.name}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ol>
+      <p class="cf-diagram-note">{site.serviceAreas.surroundingNote}</p>
+    </div>
+  </div>
+</section>

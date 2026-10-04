@@ -1,0 +1,26 @@
+---
+import Icon from "./Icon.astro";
+import { messages } from "../../content/i18n";
+
+const steps = messages.en.hm.how.steps;
+const icons = ["phone", "pin", "house"] as const;
+---
+
+<section class="cf-band cf-band-sage" id="visit" aria-labelledby="cf-visit-title">
+  <div class="cf-wrap">
+    <h2 id="cf-visit-title">How a home visit works</h2>
+    <ol class="cf-timeline">
+      {
+        steps.map((step, index) => (
+          <li>
+            <span class="cf-timeline-mark">
+              <Icon name={icons[index]} />
+            </span>
+            <h3 data-i18n-path={`hm.how.steps.${index}.title`}>{step.title}</h3>
+            <p data-i18n-path={`hm.how.steps.${index}.body`}>{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

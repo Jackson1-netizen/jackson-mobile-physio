@@ -1,0 +1,53 @@
+---
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { suburbPages, suburbPath } from "../../content/suburbs";
+import { getReferralEmailHref } from "../../content/site";
+
+const year = new Date().getFullYear();
+const referralMailto = getReferralEmailHref();
+---
+
+<footer class="cf-footer">
+  <div class="cf-wrap cf-footer-grid">
+    <nav class="cf-footer-places" aria-label={messages.en.nav.areas} data-i18n-attr="aria-label:nav.areas">
+      <p class="cf-footer-label" data-i18n-path="sections.areas">{messages.en.sections.areas}</p>
+      <ul>
+        {
+          suburbPages.map((suburb) => (
+            <li>
+              <a href={suburbPath(suburb.slug)}>{suburb.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="cf-footer-note">{site.serviceAreas.surroundingNote}</p>
+    </nav>
+
+    <div class="cf-footer-colo">
+      <p class="cf-footer-name" translate="no">{site.businessName}</p>
+      <p>{site.registeredBusinessName}</p>
+      <p translate="no">{site.practitionerName}</p>
+      <p>{site.abnDisplay}</p>
+      <p>
+        <a href={site.phoneHref}>{site.phone}</a>
+      </p>
+      <p>
+        <a href={site.emailHref}>{site.publicEmail}</a>
+      </p>
+      <p>
+        <a href={referralMailto}>{site.referralEmail}</a>
+      </p>
+      <p class="cf-footer-ahpra">{site.ahpraNotice}</p>
+      <p class="cf-footer-legal">
+        <a href="/privacy/" data-i18n-path="hm.footer.privacy">{site.footer.privacyLinkLabel}</a>
+        <a href="/disclaimer/" data-i18n-path="hm.footer.disclaimer">{site.footer.disclaimerLinkLabel}</a>
+        <a href="/referral/" data-i18n-path="nav.referralSheet">{messages.en.nav.referralSheet}</a>
+      </p>
+      <p class="cf-footer-copy">
+        © {year} <span translate="no">{site.businessName}</span>.{" "}
+        <span data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</span>
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,50 @@
+---
+interface Props {
+  name: "house" | "speech" | "pin" | "phone";
+}
+
+const { name } = Astro.props;
+---
+
+<svg class="cf-icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  {
+    name === "house" && (
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 10.5 12 4l8 6.5" />
+        <path d="M7 10V20h10V10" />
+      </g>
+    )
+  }
+  {
+    name === "speech" && (
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M5 6.5h14v8.5H9.2L5 18.2V6.5z"
+      />
+    )
+  }
+  {
+    name === "pin" && (
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s6-5.1 6-10a6 6 0 1 0-12 0c0 4.9 6 10 6 10z" />
+        <circle cx="12" cy="11" r="2" />
+      </g>
+    )
+  }
+  {
+    name === "phone" && (
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M8 4.5h2.6l1.2 3-1.7 1a11 11 0 0 0 5.4 5.4l1-1.7 3 1.2V16a1.8 1.8 0 0 1-2 1.8A14.5 14.5 0 0 1 6.2 6.5 1.8 1.8 0 0 1 8 4.5z"
+      />
+    )
+  }
+</svg>

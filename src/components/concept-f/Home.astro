@@ -1,0 +1,213 @@
+---
+import Icon from "./Icon.astro";
+import Lanes from "./Lanes.astro";
+import Timeline from "./Timeline.astro";
+import Places from "./Places.astro";
+import Shots from "./Shots.astro";
+import EnquiryForm from "../EnquiryForm.astro";
+import { site, getEmailHref } from "../../content/site";
+import { messages } from "../../content/i18n";
+
+const services = site.services.map((service) => ({
+  ...service,
+  slug: service.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, ""),
+}));
+const icons = ["pin", "house", "speech", "house", "pin", "phone"] as const;
+const faqs = messages.en.faq.items.slice(0, 3);
+const mailto = getEmailHref();
+---
+
+<Lanes titleAs="h1" />
+
+<section class="cf-filter" id="services" aria-labelledby="cf-services-title">
+  <div class="cf-wrap">
+    <h2 id="cf-services-title" data-i18n-path="sections.services">{messages.en.sections.services}</h2>
+    <p class="cf-intro" data-i18n-path="services.intro">{site.servicesIntro}</p>
+    <div class="cf-services" data-cf-services>
+      <div class="cf-chips" role="tablist" aria-label={messages.en.sections.services} data-i18n-attr="aria-label:sections.services">
+        {
+          services.map((service, index) => (
+            <button
+              type="button"
+              class="cf-chip"
+              role="tab"
+              id={`cf-tab-${index}`}
+              aria-controls={`cf-panel-${index}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              tabindex={index === 0 ? 0 : -1}
+              data-slug={service.slug}
+            >
+              <Icon name={icons[index]} />
+              <span>{service.title}</span>
+            </button>
+          ))
+        }
+      </div>
+      {
+        services.map((service, index) => (
+          <div
+            class:list={["cf-panel", index === 0 && "is-active"]}
+            role="tabpanel"
+            id={`cf-panel-${index}`}
+            aria-labelledby={`cf-tab-${index}`}
+            tabindex="0"
+          >
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<Timeline />
+<Places marked="Box Hill" />
+
+<section class="cf-band" id="about" aria-labelledby="cf-about-title">
+  <div class="cf-wrap">
+    <h2 id="cf-about-title" data-i18n-path="about.heading">{messages.en.about.heading}</h2>
+    <article class="cf-profile">
+      <div class="cf-shot">
+        <svg viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+          <rect width="400" height="300" fill="#d5dfc8" />
+          <rect x="150" y="28" width="100" height="168" fill="#f7f3ec" />
+          <rect x="168" y="48" width="64" height="88" fill="#7f9a4e" />
+          <rect y="214" width="400" height="86" fill="#16352e" />
+          <rect x="70" y="150" width="70" height="150" fill="#16352e" />
+          <rect x="260" y="150" width="70" height="150" fill="#16352e" />
+        </svg>
+        <p class="cf-shot-bar">Photo to be shot: the practitioner at a doorway, no client</p>
+      </div>
+      <div class="cf-profile-copy">
+        <p class="cf-profile-name" translate="no">{site.practitionerName}</p>
+        <p class="cf-profile-role" data-i18n-path="about.role">{site.tagline}</p>
+        <p data-i18n-path="about.paragraphs.0">{site.aboutParagraphs[0]}</p>
+        <p data-i18n-path="about.paragraphs.1">{site.aboutParagraphs[1]}</p>
+        <p>
+          <span data-i18n-path="about.languagesLabel">{messages.en.about.languagesLabel}</span>
+          <span aria-hidden="true">: </span>
+          <span data-i18n-path="hm.about.languagesList">{messages.en.hm.about.languagesList}</span>
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<Shots />
+
+<section class="cf-band cf-trust" id="trust" aria-labelledby="cf-trust-title">
+  <div class="cf-wrap">
+    <h2 id="cf-trust-title" class="cf-sr">Registration</h2>
+    <ul class="cf-facts">
+      <li>{site.ahpraNotice}</li>
+      <li>{site.ndisDescription}</li>
+      <li>{site.ndisNotRegistered}</li>
+      <li>{site.ndisFundingNote}</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cf-band" id="faq" aria-labelledby="cf-faq-title">
+  <div class="cf-wrap">
+    <h2 id="cf-faq-title" data-i18n-path="sections.faq">{messages.en.sections.faq}</h2>
+    <div class="cf-faq">
+      {
+        faqs.map((item, index) => (
+          <article class="cf-faq-row">
+            <h3 data-i18n-path={`faq.items.${index}.question`}>{item.question}</h3>
+            <p data-i18n-path={`faq.items.${index}.answer`}>{item.answer}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="cf-orange" aria-labelledby="cf-call-label">
+  <div class="cf-wrap cf-orange-inner">
+    <p id="cf-call-label" data-i18n-path="about.contactCta">{site.contactCta}</p>
+    <div class="cf-lane-actions">
+      <a class="cf-btn cf-btn-secondary" href="#contact">
+        <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+      </a>
+      <a class="cf-btn cf-btn-paper" href={site.phoneHref}>
+        <span data-i18n-path="cta.call">{messages.en.cta.call}</span>
+        <span class="cf-btn-num">{site.phone}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cf-band cf-contact" id="contact" aria-labelledby="cf-contact-title">
+  <div class="cf-wrap cf-contact-wrap">
+    <h2 id="cf-contact-title" data-i18n-path="sections.contact">{messages.en.sections.contact}</h2>
+    <p class="cf-intro" data-i18n-path="enquiry.intro">{messages.en.enquiry.intro}</p>
+    <p class="cf-contact-phone">
+      <a href={site.phoneHref}>{site.phone}</a>
+    </p>
+    <p>
+      <a class="cf-text-link" href={mailto}>{site.publicEmail}</a>
+    </p>
+    <EnquiryForm />
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-cf-services]");
+  if (root) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const select = (index: number, updateUrl: boolean) => {
+      tabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach((panel, i) => {
+        const on = i === index;
+        panel.classList.toggle("is-active", on);
+        if (!reduce && on) {
+          panel.classList.remove("is-fading");
+          void panel.offsetWidth;
+          panel.classList.add("is-fading");
+        }
+      });
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        const slug = tabs[index]?.dataset.slug;
+        if (slug) {
+          url.searchParams.set("service", slug);
+          window.history.replaceState(null, "", url);
+        }
+      }
+    };
+
+    const requested = new URLSearchParams(window.location.search).get("service");
+    const initial = Math.max(
+      0,
+      tabs.findIndex((tab) => tab.dataset.slug === requested),
+    );
+    select(initial, false);
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => select(index, true));
+      tab.addEventListener("keydown", (event) => {
+        let next: number | null = null;
+        if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+        if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === "Home") next = 0;
+        if (event.key === "End") next = tabs.length - 1;
+        if (next == null) return;
+        event.preventDefault();
+        select(next, true);
+        tabs[next]?.focus();
+      });
+    });
+  }
+</script>

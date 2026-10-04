@@ -1,0 +1,70 @@
+---
+import Icon from "./Icon.astro";
+import Lanes from "./Lanes.astro";
+import Timeline from "./Timeline.astro";
+import Places from "./Places.astro";
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import type { SuburbPage } from "../../content/suburbs";
+
+interface Props {
+  suburb: SuburbPage;
+}
+
+const { suburb } = Astro.props;
+const icons = ["pin", "house", "speech"] as const;
+const services = site.services.slice(0, 3).map((service) => ({
+  ...service,
+  slug: service.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, ""),
+}));
+---
+
+<section class="cf-band cf-area-title">
+  <div class="cf-wrap">
+    <h1 id="cf-area-title">{suburb.headline}</h1>
+  </div>
+</section>
+
+<Places marked={suburb.name} current />
+
+<section class="cf-band" aria-labelledby="cf-area-title">
+  <div class="cf-wrap">
+    {
+      suburb.paragraphs.map((paragraph) => (
+        <p class="cf-intro">{paragraph}</p>
+      ))
+    }
+    <ul class="cf-points">
+      {suburb.localPoints.map((point) => <li>{point}</li>)}
+    </ul>
+  </div>
+</section>
+
+<Timeline />
+
+<section class="cf-band" id="services" aria-labelledby="cf-area-services">
+  <div class="cf-wrap">
+    <h2 id="cf-area-services" data-i18n-path="sections.services">{messages.en.sections.services}</h2>
+    <p class="cf-intro" data-i18n-path="services.intro">{site.servicesIntro}</p>
+    <div class="cf-service-rows">
+      {
+        services.map((service, index) => (
+          <article class="cf-service-row">
+            <h3>
+              <a href={`/?service=${service.slug}#services`}>
+                <Icon name={icons[index]} />
+                <span>{service.title}</span>
+              </a>
+            </h3>
+            <p>{service.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<Lanes titleAs="p" compact />

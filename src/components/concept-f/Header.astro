@@ -1,0 +1,147 @@
+---
+import HomeLogo from "../home/HomeLogo.astro";
+import { site } from "../../content/site";
+import { messages, localeLabels } from "../../content/i18n";
+
+const t = messages.en.hm.header;
+const nav = [
+  { href: "/#services", path: "nav.services", label: messages.en.nav.services },
+  { href: "/#visit", path: "nav.howItWorks", label: messages.en.nav.howItWorks },
+  { href: "/#areas", path: "nav.areas", label: messages.en.nav.areas },
+  { href: "/#about", path: "nav.about", label: messages.en.nav.about },
+  { href: "/#for-referrers", path: "nav.forReferrers", label: messages.en.nav.forReferrers },
+  { href: "/#faq", path: "nav.faq", label: messages.en.nav.faq },
+  { href: "/#contact", path: "nav.contact", label: messages.en.nav.contact },
+];
+---
+
+<header class="cf-header">
+  <div class="cf-bar">
+    <a
+      class="cf-logo"
+      href="/"
+      aria-label={t.logoLabel}
+      data-i18n-attr="aria-label:hm.header.logoLabel"
+    >
+      <HomeLogo alt="" sizes="(max-width: 719px) 104px, 132px" />
+    </a>
+
+    <nav class="cf-desktop-nav" aria-label={t.primaryNav} data-i18n-attr="aria-label:hm.header.primaryNav">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} data-i18n-path={item.path}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a class="cf-phone" href={site.phoneHref}>{site.phone}</a>
+
+    <div
+      class="cf-lang"
+      role="group"
+      aria-label={t.languageGroup}
+      data-i18n-attr="aria-label:hm.header.languageGroup"
+    >
+      {
+        Object.entries(localeLabels).map(([code, label]) => (
+          <button
+            type="button"
+            class="lang-btn"
+            data-locale={code}
+            data-active={code === "en" ? "true" : "false"}
+            aria-pressed={code === "en" ? "true" : "false"}
+            lang={code === "en" ? "en" : code}
+          >
+            {label}
+          </button>
+        ))
+      }
+    </div>
+
+    <details class="cf-menu">
+      <summary data-i18n-path="hm.header.menu">{t.menu}</summary>
+      <div class="cf-menu-panel">
+        <nav aria-label={t.mobileNav} data-i18n-attr="aria-label:hm.header.mobileNav">
+          <ul>
+            <li>
+              <a href="/" data-i18n-path="nav.home">{messages.en.nav.home}</a>
+            </li>
+            {
+              nav.map((item) => (
+                <li>
+                  <a href={item.href} data-i18n-path={item.path}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+            <li>
+              <a href="/referral/" data-i18n-path="nav.referralSheet">{messages.en.nav.referralSheet}</a>
+            </li>
+            <li>
+              <a href={site.phoneHref}>{site.phone}</a>
+            </li>
+            <li>
+              <a href={site.emailHref}>{site.publicEmail}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </details>
+  </div>
+
+  <div class="cf-ribbon">
+    <p class="cf-ribbon-line">
+      <span class="cf-sr" data-i18n-path="hero.languagesLabel">{messages.en.hero.languagesLabel}</span>
+      <span lang="en">English</span>
+      <span class="cf-ribbon-dot" aria-hidden="true">·</span>
+      <span lang="zh-Hant">廣東話</span>
+      <span class="cf-ribbon-dot" aria-hidden="true">·</span>
+      <span lang="zh-Hans">普通话</span>
+    </p>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>(".cf-header");
+  const menu = document.querySelector<HTMLDetailsElement>(".cf-menu");
+  if (header && menu) {
+    const place = () => {
+      const bottom = header.getBoundingClientRect().bottom;
+      document.documentElement.style.setProperty("--cf-header-bottom", `${Math.max(bottom, 0)}px`);
+    };
+    place();
+    menu.addEventListener("toggle", () => {
+      place();
+      if (menu.open) {
+        const link = menu.querySelector<HTMLAnchorElement>("a");
+        link?.focus();
+      }
+    });
+    window.addEventListener("resize", place);
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (menu.open) place();
+      },
+      { passive: true },
+    );
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.open) {
+        menu.open = false;
+        menu.querySelector("summary")?.focus();
+      }
+    });
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.open = false;
+      });
+    });
+  }
+</script>
