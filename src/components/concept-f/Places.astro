@@ -16,8 +16,9 @@ const places = site.serviceAreas.suburbs.map((name) => {
 });
 ---
 
-<section class="cf-band" id="areas" aria-labelledby="cf-areas-title">
+<section class="cf-band" id="areas" aria-labelledby={current ? "cf-area-title" : "cf-areas-title"}>
   <div class="cf-wrap">
+    {current && <h1 id="cf-area-title">{marked}</h1>}
     <h2 id="cf-areas-title">Eastern suburbs</h2>
     <p class="cf-intro" data-i18n-path="hm.areas.lead">{messages.en.hm.areas.lead}</p>
     <div class="cf-diagram">

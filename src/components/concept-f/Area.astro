@@ -22,16 +22,11 @@ const services = site.services.slice(0, 3).map((service) => ({
 }));
 ---
 
-<section class="cf-band cf-area-title">
-  <div class="cf-wrap">
-    <h1 id="cf-area-title">{suburb.headline}</h1>
-  </div>
-</section>
-
 <Places marked={suburb.name} current />
 
-<section class="cf-band" aria-labelledby="cf-area-title">
+<section class="cf-band">
   <div class="cf-wrap">
+    <p class="cf-intro">{suburb.headline}</p>
     {
       suburb.paragraphs.map((paragraph) => (
         <p class="cf-intro">{paragraph}</p>

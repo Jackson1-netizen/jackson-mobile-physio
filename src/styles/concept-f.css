@@ -309,7 +309,7 @@ body.cf {
   align-items: baseline;
   gap: 6px 10px;
   margin: 0;
-  color: #7f9a4e;
+  color: #4f6a32;
   font-size: 24px;
   font-weight: 600;
   line-height: 1.3;
@@ -728,6 +728,16 @@ body.cf {
   font-weight: 400;
 }
 
+@media (max-width: 899px) {
+  .cf-diagram {
+    padding-bottom: calc(16px + 82px + env(safe-area-inset-bottom));
+  }
+
+  .cf-stop {
+    scroll-margin-bottom: calc(82px + env(safe-area-inset-bottom));
+  }
+}
+
 .cf-stops {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -799,6 +809,14 @@ body.cf {
   aspect-ratio: 4 / 3;
   border-radius: 8px;
   background: #d5dfc8;
+}
+
+.cf-tile-sage {
+  background: #d5dfc8;
+}
+
+.cf-tile-forest {
+  background: #16352e;
 }
 
 .cf-shot svg,
