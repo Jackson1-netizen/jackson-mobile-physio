@@ -69,7 +69,7 @@
 }
 
 .a-wrap {
-  width: min(76rem, calc(100% - 2rem));
+  width: min(76rem, calc(100% - 3rem));
   margin-inline: auto;
 }
 
@@ -106,12 +106,16 @@
   max-width: var(--a-measure);
 }
 
-.a-lede {
-  margin-top: 0.85rem;
+.a-site p.a-lede {
+  margin-top: 1.5rem;
   color: var(--a-muted);
 }
 
-.a-band-forest .a-lede,
+.a-lede + .a-note {
+  margin-top: 1.25rem;
+}
+
+.a-site .a-band-forest p.a-lede,
 .a-band-forest .a-step p {
   color: var(--a-cream);
 }
@@ -397,11 +401,11 @@
   line-height: 1.12;
 }
 
-.a-byline {
+.a-site p.a-byline {
   display: flex;
   flex-wrap: wrap;
   gap: 0.2rem 0.7rem;
-  margin-top: 0.85rem;
+  margin-top: 1.5rem;
   font-size: 1.125rem;
 }
 
@@ -519,9 +523,13 @@
   align-items: start;
 }
 
-.a-visit-who {
-  margin-top: 0.75rem;
+.a-site p.a-visit-who {
+  margin-top: 1.5rem;
   font-weight: 700;
+}
+
+.a-visit-who + p {
+  margin-top: 0.4rem;
 }
 
 .a-steps {
@@ -1119,7 +1127,7 @@
 }
 
 .a-status-inner {
-  width: min(76rem, calc(100% - 2rem));
+  width: min(76rem, calc(100% - 3rem));
   margin-inline: auto;
   padding-block: 0.75rem;
   font-size: 1rem;
@@ -1213,7 +1221,7 @@
 }
 
 .a-measure {
-  width: min(40rem, 100%);
+  max-width: 40rem;
 }
 
 .a-measure .a-prose + .a-prose {
@@ -1391,13 +1399,19 @@
 
 @media (max-width: 699px) {
   .hm-map-pins {
-    inset: 12% 8% 10% 4%;
+    inset: 14% 10% 12% 10%;
+  }
+
+  .hm-leaflet-pin {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .hm-map-pin-label,
   .hm-leaflet-pin-label {
     white-space: normal;
-    max-width: 6.5rem;
+    max-width: 5.5rem;
   }
 }
 

@@ -96,16 +96,17 @@ const pins = homeMapPins.map((pin) => {
     ).addTo(map);
 
     const labelLeft = new Set(["Box Hill", "Burwood", "Nunawading"]);
+    const narrow = canvas.clientWidth < 720;
     const bounds: [number, number][] = [];
     for (const pin of pins) {
-      const left = labelLeft.has(pin.name);
+      const left = !narrow && labelLeft.has(pin.name);
       const icon = L.divIcon({
         className: left ? "hm-leaflet-pin is-label-left" : "hm-leaflet-pin",
         html: left
           ? `<span class="hm-leaflet-pin-label">${pin.name}</span><span class="hm-leaflet-pin-mark" aria-hidden="true"></span>`
           : `<span class="hm-leaflet-pin-mark" aria-hidden="true"></span><span class="hm-leaflet-pin-label">${pin.name}</span>`,
-        iconSize: left ? [132, 24] : [132, 24],
-        iconAnchor: left ? [124, 12] : [8, 12],
+        iconSize: narrow ? [92, 46] : [132, 24],
+        iconAnchor: left ? [124, 12] : narrow ? [46, 8] : [8, 12],
       });
       L.marker([pin.lat, pin.lng], { icon, title: pin.name, keyboard: false }).addTo(map);
       bounds.push([pin.lat, pin.lng]);
@@ -113,7 +114,11 @@ const pins = homeMapPins.map((pin) => {
 
     const fit = () => {
       map.invalidateSize();
-      map.fitBounds(bounds, { padding: [22, 26], maxZoom: 13 });
+      const compact = canvas.clientWidth < 720;
+      map.fitBounds(bounds, {
+        padding: compact ? [44, 56] : [22, 26],
+        maxZoom: compact ? 12 : 13,
+      });
     };
     root.classList.add("is-live");
     requestAnimationFrame(fit);
