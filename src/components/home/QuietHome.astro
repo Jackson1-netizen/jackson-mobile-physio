@@ -1,0 +1,301 @@
+---
+import HomePicture from "./HomePicture.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
+import EnquiryForm from "../EnquiryForm.astro";
+import { concept1TrustHighlights } from "../../content/concept1-home";
+import {
+  homeAbout,
+  homeAreas,
+  homeFaq,
+  homeHero,
+  homeReferrers,
+  homeServices,
+  homeSteps,
+  homeSuburbs,
+} from "../../content/home-motion";
+import { messages } from "../../content/i18n";
+import { getEmailHref, getRegistrationDisplayLine, publicQualifications, site } from "../../content/site";
+
+const registrationLine = getRegistrationDisplayLine();
+const languageLine = concept1TrustHighlights.find((item) => item.icon === "lang")?.line ?? "";
+const languageParts = languageLine.split(" · ");
+const previewCaption = "Preview placeholder — to be replaced with genuine photography";
+const portrait = homeAbout.photo;
+const shownQualifications = publicQualifications().map((item) => ({
+  item,
+  index: site.qualifications.indexOf(item),
+}));
+const ndis = messages.en.ndis;
+const emailHref = getEmailHref();
+const sectionNo = ["01", "02", "03", "04", "05", "06", "07"] as const;
+---
+
+<div class="qb-home">
+  <section id="top" class="qb-hero" aria-labelledby="hm-hero-heading">
+    <div class="qb-wrap">
+      <h1 id="hm-hero-heading" class="qb-h1">
+        <span data-i18n-path="home.h1Lead">{homeHero.h1Lead}</span>{" "}
+        <span data-i18n-path="home.h1Mid">{homeHero.h1Mid}</span>{" "}
+        <span data-i18n-path="home.h1Em">{homeHero.h1Em}</span>
+      </h1>
+      <p class="qb-support" data-i18n-path="home.support">{messages.en.home.support}</p>
+      <p class="qb-langline">
+        {
+          languageParts.map((part, index) => (
+            <>
+              {index > 0 && " · "}
+              {/^[\u3400-\u9FFF]/.test(part) ? <span lang="zh-Hant">{part}</span> : part}
+            </>
+          ))
+        }
+      </p>
+      <div class="qb-hero-actions">
+        <div class="qb-hero-lang">
+          <LanguageSwitcher />
+        </div>
+        <a class="qb-btn" href="/#contact">
+          <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
+        </a>
+        <a class="qb-textlink" href={site.phoneHref}>{site.phone}</a>
+      </div>
+      <div class="qb-byline">
+        <figure class="qb-figure">
+          <div class="qb-frame">
+            <HomePicture
+              photo={portrait}
+              altPath="hm.about.portraitAlt"
+              sizes="160px"
+              priority
+            />
+          </div>
+          <figcaption class="qb-caption">{previewCaption}</figcaption>
+        </figure>
+        <div class="qb-byline-text">
+          <p class="qb-name">{site.practitionerName}</p>
+          <p class="qb-role" data-i18n-path="about.role">{site.tagline}</p>
+          <p class="qb-ahpra" data-i18n-path="hm.hero.ahpra">{registrationLine}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="qb-section" aria-labelledby="services-heading">
+    <div class="qb-wrap">
+      <h2 id="services-heading" class="qb-h2">
+        <span class="qb-idx">{sectionNo[0]} — </span>
+        <span data-i18n-path="sections.services">{messages.en.sections.services}</span>
+      </h2>
+      <p class="qb-lede" data-i18n-path="hm.services.supporting">{homeServices.supporting}</p>
+      <p class="qb-note" data-i18n-path="services.intro">{homeServices.intro}</p>
+      <ul class="qb-rows">
+        {
+          homeServices.cards.map((card, i) => (
+            <li class="qb-row">
+              <span class="qb-idx">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="qb-h3" data-i18n-path={`hm.services.cards.${i}.title`}>
+                  {card.title}
+                </h3>
+                <p data-i18n-path={`hm.services.cards.${i}.body`}>{card.body}</p>
+              </div>
+              <a class="qb-arrow" href="/#contact">
+                <span data-i18n-path="hm.services.enquire">{homeServices.enquire}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="how" class="qb-section" aria-labelledby="how-heading">
+    <div class="qb-wrap">
+      <h2 id="how-heading" class="qb-h2">
+        <span class="qb-idx">{sectionNo[1]} — </span>
+        <span data-i18n-path="nav.howItWorks">{messages.en.nav.howItWorks}</span>
+      </h2>
+      <p class="qb-lede" data-i18n-path="hm.how.heading">{messages.en.hm.how.heading}</p>
+      <ol class="qb-steps">
+        {
+          homeSteps.map((step, i) => (
+            <li class="qb-step">
+              <span class="qb-idx">{step.num}</span>
+              <div>
+                <h3 class="qb-h3" data-i18n-path={`hm.how.steps.${i}.title`}>
+                  {step.title}
+                </h3>
+                <p data-i18n-path={`hm.how.steps.${i}.body`}>{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="about" class="qb-section" aria-labelledby="about-heading">
+    <div class="qb-wrap">
+      <h2 id="about-heading" class="qb-h2">
+        <span class="qb-idx">{sectionNo[2]} — </span>
+        <span data-i18n-path="about.heading">{homeAbout.heading}</span>
+      </h2>
+      <div class="qb-split">
+        <div>
+          <figure class="qb-figure qb-figure-lg">
+            <div class="qb-frame">
+              <HomePicture
+                photo={portrait}
+                altPath="hm.about.portraitAlt"
+                sizes="(min-width: 800px) 280px, 200px"
+              />
+            </div>
+            <figcaption class="qb-caption">{previewCaption}</figcaption>
+          </figure>
+          <ul class="qb-creds">
+            <li>
+              <strong data-i18n-path="about.languagesLabel">{homeAbout.languagesLabel}</strong>
+              <p data-i18n-path="hm.about.languagesList">{messages.en.hm.about.languagesList}</p>
+            </li>
+            {
+              shownQualifications.map(({ item, index }) => (
+                <li>
+                  <strong data-i18n-path={`hm.about.qualificationLabels.${index}`}>{item.label}</strong>
+                  <p data-i18n-path={`hm.about.qualificationValues.${index}`}>{item.value}</p>
+                </li>
+              ))
+            }
+            <li>
+              <p data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</p>
+            </li>
+          </ul>
+        </div>
+        <div class="qb-bio">
+          {
+            homeAbout.paragraphs.map((paragraph, i) => (
+              <p data-i18n-path={`about.paragraphs.${i}`}>{paragraph}</p>
+            ))
+          }
+          <p data-i18n-path="about.differentiator">{homeAbout.philosophy}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="areas" class="qb-section" aria-labelledby="areas-heading">
+    <div class="qb-wrap">
+      <h2 id="areas-heading" class="qb-h2">
+        <span class="qb-idx">{sectionNo[3]} — </span>
+        <span data-i18n-path="hm.areas.heading">{homeAreas.kicker}</span>
+      </h2>
+      <p class="qb-lede" data-i18n-path="hm.areas.lead">{homeAreas.heading}</p>
+      <p class="qb-note" data-i18n-path="areas.intro">{messages.en.areas.intro}</p>
+      <ul class="qb-suburbs">
+        {
+          homeSuburbs.map((suburb) => (
+            <li>
+              <a href={suburb.href}>{suburb.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="ndis" class="qb-section" aria-labelledby="ndis-heading">
+    <div class="qb-wrap">
+      <h2 id="ndis-heading" class="qb-h2">
+        <span class="qb-idx">{sectionNo[4]} — </span>
+        <span data-i18n-path="sections.ndis">{messages.en.sections.ndis}</span>
+      </h2>
+      <p class="qb-lede" data-i18n-path="ndis.lead">{ndis.lead}</p>
+      <div class="qb-routes">
+        <div class="qb-route">
+          <p>
+            <strong data-i18n-path="hm.about.qualificationLabels.1">
+              {messages.en.hm.about.qualificationLabels[1]}
+            </strong>
+          </p>
+          <p data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</p>
+        </div>
+        <div class="qb-route">
+          <p>
+            <strong data-i18n-path="ndis.planManaged">{ndis.planManaged}</strong>
+          </p>
+          <p data-i18n-path="ndis.planManagedDesc">{ndis.planManagedDesc}</p>
+        </div>
+        <div class="qb-route">
+          <p>
+            <strong data-i18n-path="ndis.planManaged2">{ndis.planManaged2}</strong>
+          </p>
+          <p data-i18n-path="ndis.planManaged2Desc">{ndis.planManaged2Desc}</p>
+        </div>
+        <div class="qb-route">
+          <p>
+            <strong data-i18n-path="ndis.notRegistered">{ndis.notRegistered}</strong>
+          </p>
+          <p data-i18n-path="ndis.notRegisteredDesc">{ndis.notRegisteredDesc}</p>
+        </div>
+      </div>
+      <p class="qb-note">{site.ndisFundingNote}</p>
+      <p class="qb-note">{site.ndisNotRegistered}</p>
+
+      <div id="referrers">
+        <h3 class="qb-subhead" data-i18n-path="hm.referrers.heading">{homeReferrers.heading}</h3>
+        <p class="qb-lede" data-i18n-path="hm.referrers.lead">{homeReferrers.lead}</p>
+        <ul class="qb-rows">
+          {
+            homeReferrers.points.map((point, i) => (
+              <li class="qb-row">
+                <span class="qb-idx">{String(i + 1).padStart(2, "0")}</span>
+                <p data-i18n-path={`hm.referrers.points.${i}`}>{point.title}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="qb-doc-actions">
+          <a class="qb-textlink" href="/referral/">
+            <span data-i18n-path="hm.referrers.cta">{homeReferrers.cta}</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="qb-section" aria-labelledby="faq-heading">
+    <div class="qb-wrap">
+      <h2 id="faq-heading" class="qb-h2">
+        <span class="qb-idx">{sectionNo[5]} — </span>
+        <span data-i18n-path="sections.faq">{messages.en.sections.faq}</span>
+      </h2>
+      <div class="qb-faq">
+        {
+          homeFaq.map((item, i) => (
+            <details>
+              <summary>
+                <span data-i18n-path={`faq.items.${i}.question`}>{item.question}</span>
+                <span class="qb-plus" aria-hidden="true">+</span>
+              </summary>
+              <p data-i18n-path={`faq.items.${i}.answer`}>{item.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="qb-section" aria-labelledby="contact-heading">
+    <div class="qb-wrap">
+      <h2 id="contact-heading" class="qb-h2">
+        <span class="qb-idx">{sectionNo[6]} — </span>
+        <span data-i18n-path="sections.contact">{messages.en.sections.contact}</span>
+      </h2>
+      <p class="qb-lede" data-i18n-path="enquiry.intro">{messages.en.enquiry.intro}</p>
+      <p class="hm-contact-links">
+        <a href={site.phoneHref}>{site.phone}</a>
+        <a href={emailHref}>{site.publicEmail}</a>
+      </p>
+      <EnquiryForm />
+    </div>
+  </section>
+</div>

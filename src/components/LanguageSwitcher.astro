@@ -3,7 +3,7 @@ import { localeLabels } from "../content/i18n";
 ---
 
 <div
-  class="lang-switch flex items-center gap-1 rounded-md border border-[var(--color-border)] bg-white p-0.5 text-xs"
+  class="lang-switch"
   role="group"
   aria-label="Language"
   data-i18n-attr="aria-label:hm.header.languageGroup"
@@ -12,7 +12,7 @@ import { localeLabels } from "../content/i18n";
     Object.entries(localeLabels).map(([code, label]) => (
       <button
         type="button"
-        class="lang-btn rounded px-2 py-1 font-medium text-[var(--color-ink-muted)] transition hover:text-[var(--color-accent)] data-[active=true]:bg-[var(--color-accent)] data-[active=true]:text-white"
+        class="lang-btn"
         data-locale={code}
         data-active={code === "en" ? "true" : "false"}
         aria-pressed={code === "en" ? "true" : "false"}
