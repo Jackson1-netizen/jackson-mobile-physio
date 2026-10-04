@@ -210,8 +210,8 @@ body.si summary {
 
 .si-bleed {
   margin: 0;
-  height: 20vh;
-  min-height: 156px;
+  height: calc(20vh - 16px);
+  min-height: 140px;
   max-height: 720px;
   overflow: hidden;
   background: var(--si-forest);
@@ -302,6 +302,14 @@ body.si summary {
   padding-top: 0.9rem;
   border-top: 1px solid var(--si-line);
   font-size: 1.05rem;
+}
+
+.si-practitioner {
+  font-family: "Instrument Sans", "WenQuanYi Micro Hei", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0;
 }
 
 .si-kicker {
@@ -970,14 +978,14 @@ body.si {
   }
 
   .si-hero-copy {
-    padding-top: 1.15rem;
+    padding-top: 0.75rem;
     padding-bottom: 1.75rem;
   }
 
   .si-h1 { order: 1; }
-  .si-lang-fact { order: 2; margin-top: 0.85rem; }
-  .si-actions { order: 3; margin-top: 0.85rem; }
-  .si-switch { order: 4; }
+  .si-lang-fact { order: 2; margin-top: 0.5rem; }
+  .si-actions { order: 3; margin-top: 0.5rem; }
+  .si-switch { order: 4; margin-top: 0.25rem; }
   .si-deck { order: 5; }
 }
 
@@ -1013,8 +1021,8 @@ body.si {
   }
 
   .si-bleed {
-    height: 62vh;
-    min-height: 420px;
+    height: 42vh;
+    min-height: 220px;
   }
 
   .si-bleed-mid {
@@ -1044,9 +1052,17 @@ body.si {
   }
 
   .si-hero-copy {
+    display: flex;
+    flex-direction: column;
     grid-column: 1 / span 10;
-    padding: 4.5rem 1.5rem 4.25rem 1rem;
+    padding: 1rem 1.5rem 1.25rem 1rem;
   }
+
+  .si-h1 { order: 1; }
+  .si-lang-fact { order: 2; margin-top: 0.75rem; }
+  .si-actions { order: 3; margin-top: 0.75rem; }
+  .si-deck { order: 4; }
+  .si-switch { order: 5; }
 
   .si-caption-grid {
     grid-column: 1 / span 8;
