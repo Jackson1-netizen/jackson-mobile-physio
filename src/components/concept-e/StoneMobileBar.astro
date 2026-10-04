@@ -1,0 +1,17 @@
+---
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+---
+
+<nav
+  class="si-bar no-print"
+  aria-label={messages.en.hm.mobileBar.label}
+  data-i18n-attr="aria-label:hm.mobileBar.label"
+>
+  <a href={site.phoneHref}>
+    <span data-i18n-path="cta.call">Call</span>
+  </a>
+  <a href="/#contact">
+    <span data-i18n-path="home.primaryCta">Make an enquiry</span>
+  </a>
+</nav>

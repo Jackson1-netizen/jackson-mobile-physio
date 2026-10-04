@@ -1,16 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HomeMotionPage from "../components/home/HomeMotionPage.astro";
+import StoneHome from "../components/concept-e/StoneHome.astro";
 import { site } from "../content/site";
 ---
 
 <BaseLayout
-  v1Home={true}
   translatable={true}
   includeFaqSchema={true}
   canonicalPath="/"
   title={`${site.seo.defaultTitle}${site.draft ? " (draft)" : ""}`}
   description={site.seo.description}
 >
-  <HomeMotionPage />
+  <StoneHome />
 </BaseLayout>

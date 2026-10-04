@@ -1,0 +1,37 @@
+---
+import { site, getEmailHref, getReferralEmailHref } from "../../content/site";
+import { messages } from "../../content/i18n";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="si-footer no-print">
+  <div class="si-footer-inner">
+    <p class="si-footer-name" translate="no">{site.businessName}</p>
+    <p>{site.registeredBusinessName}</p>
+    <p>{site.soleTraderName}, sole trader</p>
+    <p>{site.abnDisplay}</p>
+    <p class="si-footer-langs">
+      <span lang="en">English</span>
+      <span aria-hidden="true"> · </span>
+      <span lang="zh-Hant">廣東話</span>
+      <span aria-hidden="true"> · </span>
+      <span lang="zh-Hans">普通话</span>
+    </p>
+    <p class="si-footer-links">
+      <a href={site.phoneHref}>{site.phone}</a>
+      <a href={getEmailHref()}>{site.publicEmail}</a>
+      <a href={getReferralEmailHref()}>{site.referralEmail}</a>
+    </p>
+    <p>{site.ahpraNotice}</p>
+    <p class="si-footer-links">
+      <a href="/privacy/" data-i18n-path="hm.footer.privacy">{site.footer.privacyLinkLabel}</a>
+      <a href="/disclaimer/" data-i18n-path="hm.footer.disclaimer">{site.footer.disclaimerLinkLabel}</a>
+      <a href="/referral/" data-i18n-path="nav.referralSheet">{messages.en.nav.referralSheet}</a>
+    </p>
+    <p class="si-footer-copy">
+      © {year} <span translate="no">{site.businessName}</span>.{" "}
+      <span data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</span>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,110 @@
+---
+import StoneRules from "./StoneRules.astro";
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import type { SuburbPage } from "../../content/suburbs";
+
+interface Props {
+  suburb: SuburbPage;
+}
+
+const { suburb } = Astro.props;
+const steps = messages.en.hm.how.steps;
+const stockWarning = "CONCEPT ONLY — licensed stock, not a Home Motion visit";
+---
+
+<figure class="si-bleed si-bleed-mid">
+  <img
+    src="/concept-e/table.jpg"
+    width="1500"
+    height="1009"
+    alt="A wooden table beside a kitchen window. Not a Home Motion visit."
+    fetchpriority="high"
+    decoding="async"
+  />
+</figure>
+<p class="si-caption">
+  Table by a kitchen window. {stockWarning}
+</p>
+
+<article class="si-sheet" aria-labelledby="si-suburb-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-span si-suburb-lead">
+      <p class="si-kicker">{site.serviceAreas.region}</p>
+      <h1 id="si-suburb-heading" class="si-h1">{suburb.name}</h1>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main si-suburb-body">
+      <p class="si-deck">{suburb.headline}</p>
+      <div class="si-about-copy">
+        {suburb.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+      <ul class="si-local">
+        {suburb.localPoints.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+      <h2 class="si-h2 si-follow">How a home visit works</h2>
+      <ol class="si-index">
+        {
+          steps.map((step, i) => (
+            <li class="si-index-row">
+              <span class="si-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="si-step-title">{step.title}</h3>
+                <p class="si-step-body">{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <h2 class="si-h2 si-follow">{messages.en.nav.services}</h2>
+      <ol class="si-index">
+        {
+          site.services.map((service, i) => (
+            <li class="si-index-row">
+              <span class="si-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="si-index-title">{service.title}</h3>
+                <p class="si-index-desc">{service.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="si-ahpra">{site.ahpraNotice}</p>
+      <div class="si-actions">
+        <a class="si-btn" href="/#contact">{messages.en.home.primaryCta}</a>
+        <a class="si-text-link" href={site.phoneHref}>
+          {messages.en.cta.call} {site.phone}
+        </a>
+      </div>
+      <p>
+        <a class="si-back" href="/#areas">{messages.en.areas.allAreas}</a>
+      </p>
+    </div>
+    <div class="si-story si-suburb-facts">
+      <dl class="si-rows">
+        <div>
+          <dt>{messages.en.nav.areas}</dt>
+          <dd>{site.serviceAreas.region}</dd>
+        </div>
+        <div>
+          <dt>{messages.en.hero.languagesLabel}</dt>
+          <dd>{site.languages.join(", ")}</dd>
+        </div>
+        <div>
+          <dt>{site.ndisHeading}</dt>
+          <dd>
+            <p>{site.ndisDescription}</p>
+            <p>{site.ndisNotRegistered}</p>
+            <p>{site.ndisFundingNote}</p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</article>

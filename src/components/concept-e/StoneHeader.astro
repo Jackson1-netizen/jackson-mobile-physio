@@ -1,0 +1,88 @@
+---
+import HomeLogo from "../home/HomeLogo.astro";
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+
+const t = messages.en.hm.header;
+const nav = [
+  { href: "/", path: "nav.home", label: messages.en.nav.home },
+  { href: "/#about", path: "nav.about", label: messages.en.nav.about },
+  { href: "/#services", path: "nav.services", label: messages.en.nav.services },
+  { href: "/#how", path: "nav.howItWorks", label: messages.en.nav.howItWorks },
+  { href: "/#areas", path: "nav.areas", label: messages.en.nav.areas },
+  { href: "/#referrers", path: "nav.forReferrers", label: messages.en.nav.forReferrers },
+  { href: "/#trust", path: "nav.ndis", label: messages.en.nav.ndis },
+  { href: "/#faq", path: "nav.faq", label: messages.en.nav.faq },
+  { href: "/#contact", path: "nav.contact", label: messages.en.nav.contact },
+];
+---
+
+<header class="si-header no-print" data-si-header>
+  <div class="si-header-bar">
+    <a class="si-logo" href="/" aria-label={t.logoLabel} data-i18n-attr="aria-label:hm.header.logoLabel">
+      <HomeLogo alt="" sizes="72px" />
+    </a>
+    <nav class="si-desktop-nav" aria-label={t.primaryNav} data-i18n-attr="aria-label:hm.header.primaryNav">
+      {
+        nav.map((item) => (
+          <a href={item.href} data-i18n-path={item.path}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="si-header-tools">
+      <a class="si-header-phone" href={site.phoneHref}>{site.phone}</a>
+      <button
+        class="si-menu-btn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="si-menu"
+        data-si-menu-btn
+      >
+        <span data-i18n-path="hm.header.menu">{t.menu}</span>
+      </button>
+    </div>
+  </div>
+  <div id="si-menu" class="si-menu" data-si-menu hidden>
+    <nav aria-label={t.mobileNav} data-i18n-attr="aria-label:hm.header.mobileNav">
+      {
+        nav.map((item) => (
+          <a href={item.href} data-i18n-path={item.path}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector("[data-si-header]");
+  const button = header?.querySelector("[data-si-menu-btn]");
+  const panel = header?.querySelector("[data-si-menu]");
+  if (header && button instanceof HTMLButtonElement && panel instanceof HTMLElement) {
+    const setOpen = (open: boolean) => {
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      panel.hidden = !open;
+    };
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") === "true";
+      setOpen(!open);
+      if (!open) {
+        const first = panel.querySelector("a");
+        if (first instanceof HTMLElement) first.focus();
+      }
+    });
+    panel.addEventListener("click", (event) => {
+      const target = event.target;
+      if (target instanceof Element && target.closest("a")) setOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
+        setOpen(false);
+        button.focus();
+      }
+    });
+  }
+</script>

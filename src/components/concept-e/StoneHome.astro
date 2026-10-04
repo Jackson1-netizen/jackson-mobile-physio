@@ -1,0 +1,274 @@
+---
+import EnquiryForm from "../EnquiryForm.astro";
+import StoneLang from "./StoneLang.astro";
+import StoneRules from "./StoneRules.astro";
+import { site, getEmailHref, getReferralEmailHref } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { suburbPages, suburbPath } from "../../content/suburbs";
+
+const en = messages.en;
+const steps = en.hm.how.steps;
+const services = site.services;
+const suburbs = site.serviceAreas.suburbs.map((name) => {
+  const page = suburbPages.find((item) => item.name === name);
+  return { name, href: page ? suburbPath(page.slug) : "/#areas" };
+});
+const stockWarning = "CONCEPT ONLY — licensed stock, not a Home Motion visit";
+---
+
+<figure class="si-bleed">
+  <img
+    src="/concept-e/room.jpg"
+    width="1600"
+    height="1067"
+    alt="Empty room with wooden walls and a single chair. Not a Home Motion visit."
+    fetchpriority="high"
+    decoding="async"
+  />
+</figure>
+<p class="si-caption">
+  Empty room with one chair. {stockWarning}
+</p>
+
+<section class="si-sheet" id="top" aria-labelledby="si-hero-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-span si-hero-copy">
+      <h1 id="si-hero-heading" class="si-h1">{site.motto}</h1>
+      <p class="si-deck" data-i18n-path="about.differentiator">{site.differentiator}</p>
+      <p class="si-lang-fact">
+        <span class="si-kicker" data-i18n-path="hero.languagesLabel">{en.hero.languagesLabel}</span>
+        <span>
+          <span lang="en">English</span>
+          <span aria-hidden="true"> · </span>
+          <span lang="zh-Hant">廣東話</span>
+          <span aria-hidden="true"> · </span>
+          <span lang="zh-Hans">普通话</span>
+        </span>
+      </p>
+      <StoneLang />
+      <div class="si-actions">
+        <a class="si-btn" href="/#contact">
+          <span data-i18n-path="home.primaryCta">{en.home.primaryCta}</span>
+        </a>
+        <a class="si-text-link" href={site.phoneHref}>
+          <span data-i18n-path="cta.call">{en.cta.call}</span>
+          <span aria-hidden="true">&nbsp;</span>
+          <span>{site.phone}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="si-sheet" id="how" aria-labelledby="si-how-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <h2 id="si-how-heading" class="si-h2">How a home visit works</h2>
+      <p class="si-fact" data-i18n-path="howItWorks.intro">{en.howItWorks.intro}</p>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main">
+      <ol class="si-index">
+        {
+          steps.map((step, i) => (
+            <li class="si-index-row">
+              <span class="si-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="si-step-title" data-i18n-path={`hm.how.steps.${i}.title`}>{step.title}</h3>
+                <p class="si-step-body" data-i18n-path={`hm.how.steps.${i}.body`}>{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="si-sheet" id="services" aria-labelledby="si-services-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <h2 id="si-services-heading" class="si-h2" data-i18n-path="nav.services">{en.nav.services}</h2>
+      <p class="si-fact">{site.servicesIntro}</p>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main">
+      <ol class="si-index">
+        {
+          services.map((service, i) => (
+            <li class="si-index-row">
+              <span class="si-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="si-index-title">{service.title}</h3>
+                <p class="si-index-desc">{service.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<figure class="si-bleed si-bleed-mid">
+  <img
+    src="/concept-e/kitchen.jpg"
+    width="1500"
+    height="1000"
+    alt="A bright kitchen with a window and no people. Not a Home Motion visit."
+    loading="lazy"
+    decoding="async"
+  />
+</figure>
+<p class="si-caption">
+  Kitchen in daylight. {stockWarning}
+</p>
+
+<section class="si-sheet" id="about" aria-labelledby="si-about-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <p class="si-kicker" data-i18n-path="nav.about">{en.nav.about}</p>
+      <h2 id="si-about-heading" class="si-name">{site.practitionerName}</h2>
+      <p class="si-role">{site.tagline}</p>
+      <p class="si-langs" data-i18n-path="hm.about.languagesList">{en.hm.about.languagesList}</p>
+      <p class="si-ahpra">{site.ahpraNotice}</p>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main si-about-main">
+      <div class="si-about-copy">
+        {
+          site.aboutParagraphs.map((paragraph, i) => (
+            <p data-i18n-path={`about.paragraphs.${i}`}>{paragraph}</p>
+          ))
+        }
+      </div>
+      <figure class="si-shot">
+        <div class="si-shot-block">
+          <span class="si-shot-mark" aria-hidden="true"></span>
+          <p>Photo to be shot: doorway, no client</p>
+        </div>
+        <figcaption class="si-caption">Photo to be shot: doorway, no client</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="si-sheet" id="areas" aria-labelledby="si-areas-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <h2 id="si-areas-heading" class="si-h2">Eastern suburbs</h2>
+      <p class="si-fact" data-i18n-path="areas.intro">{en.areas.intro}</p>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main">
+      {
+        suburbs.map((suburb) => (
+          <a class="si-place" href={suburb.href}>{suburb.name}</a>
+        ))
+      }
+      <p class="si-note">{site.serviceAreas.surroundingNote}</p>
+    </div>
+  </div>
+</section>
+
+<section class="si-sheet" id="referrers" aria-labelledby="si-referrers-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <h2 id="si-referrers-heading" class="si-h2">For referrers</h2>
+      <p class="si-fact">{site.referrersCta}</p>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main">
+      <ol class="si-index">
+        {
+          site.referral.howToRefer.map((line, i) => (
+            <li class="si-index-row">
+              <span class="si-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <p class="si-index-desc">{line}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="si-actions">
+        <a class="si-btn" href="/referral/">
+          <span data-i18n-path="cta.referParticipant">{en.cta.referParticipant}</span>
+        </a>
+        <a class="si-text-link" href={getReferralEmailHref()}>{site.referralEmail}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="si-sheet" id="trust" aria-labelledby="si-trust-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <h2 id="si-trust-heading" class="si-h2">{site.ndisHeading}</h2>
+      <p class="si-fact">{site.ndisNotRegistered}</p>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main">
+      <dl class="si-rows">
+        <div>
+          <dt>{site.ndisHeading}</dt>
+          <dd>
+            <p>{site.ndisDescription}</p>
+            <p>{site.ndisNotRegistered}</p>
+            <p>{site.ndisFundingNote}</p>
+          </dd>
+        </div>
+        <div>
+          <dt>ABN</dt>
+          <dd>{site.abnDisplay}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="si-sheet" id="faq" aria-labelledby="si-faq-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <h2 id="si-faq-heading" class="si-h2" data-i18n-path="sections.faq">{en.sections.faq}</h2>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main">
+      {
+        en.faq.items.map((item, i) => (
+          <details class="si-faq">
+            <summary data-i18n-path={`faq.items.${i}.question`}>{item.question}</summary>
+            <p data-i18n-path={`faq.items.${i}.answer`}>{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="si-sheet si-contact" id="contact" aria-labelledby="si-contact-heading">
+  <StoneRules />
+  <div class="si-grid">
+    <div class="si-story">
+      <h2 id="si-contact-heading" class="si-h2" data-i18n-path="sections.contact">{en.sections.contact}</h2>
+      <p class="si-fact" data-i18n-path="enquiry.intro">{en.enquiry.intro}</p>
+      <span class="si-rule" aria-hidden="true"></span>
+    </div>
+    <div class="si-main">
+      <p class="si-phone-line">
+        <a href={site.phoneHref}>{site.phone}</a>
+      </p>
+      <p class="si-inline-links">
+        <a href={getEmailHref()}>{site.publicEmail}</a>
+        <a href={getReferralEmailHref()}>{site.referralEmail}</a>
+      </p>
+      <EnquiryForm />
+    </div>
+  </div>
+</section>

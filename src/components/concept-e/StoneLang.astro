@@ -1,0 +1,25 @@
+---
+import { localeLabels } from "../../content/i18n";
+---
+
+<div
+  class="si-switch"
+  role="group"
+  aria-label="Language"
+  data-i18n-attr="aria-label:hm.header.languageGroup"
+>
+  {
+    Object.entries(localeLabels).map(([code, label]) => (
+      <button
+        type="button"
+        class="lang-btn"
+        data-locale={code}
+        data-active={code === "en" ? "true" : "false"}
+        aria-pressed={code === "en" ? "true" : "false"}
+        lang={code === "en" ? "en" : code}
+      >
+        {label}
+      </button>
+    ))
+  }
+</div>
