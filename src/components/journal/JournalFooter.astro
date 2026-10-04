@@ -1,0 +1,101 @@
+---
+import HomeLogo from "../home/HomeLogo.astro";
+import { site, getEmailHref, getRegistrationDisplayLine } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { suburbPages, suburbPath } from "../../content/suburbs";
+import { journalHref } from "../../lib/journal-href";
+
+const path = Astro.url.pathname;
+const href = (hash: string) => journalHref(path, hash);
+const year = new Date().getFullYear();
+const t = messages.en.hm.header;
+const nav = messages.en.nav;
+const registration = getRegistrationDisplayLine();
+
+const index = [
+  { href: href("#about"), label: nav.about, path: "nav.about" },
+  { href: href("#how"), label: nav.howItWorks, path: "nav.howItWorks" },
+  { href: href("#services"), label: nav.services, path: "nav.services" },
+  { href: href("#areas"), label: nav.areas, path: "nav.areas" },
+  { href: href("#ndis"), label: nav.ndis, path: "nav.ndis" },
+  { href: href("#referrers"), label: nav.forReferrers, path: "nav.forReferrers" },
+  { href: href("#faq"), label: nav.faq, path: "nav.faq" },
+  { href: href("#contact"), label: nav.contact, path: "nav.contact" },
+];
+---
+
+<footer class="jc-footer">
+  <div class="jc-wrap jc-footer-grid">
+    <div class="jc-footer-brand">
+      <a
+        class="jc-logo"
+        href="/"
+        aria-label={t.logoLabel}
+        data-i18n-attr="aria-label:hm.header.logoLabel"
+      >
+        <HomeLogo alt="" sizes="120px" lazy />
+      </a>
+      <p translate="no">{site.registeredBusinessName}</p>
+      <p translate="no">{site.soleTraderName}, sole trader</p>
+      <p translate="no">{site.abnDisplay}</p>
+      <p>{registration}</p>
+      <p class="jc-footer-notice">{site.ahpraNotice}</p>
+    </div>
+
+    <div>
+      <p class="jc-footer-label" data-i18n-path="sections.areas">{messages.en.sections.areas}</p>
+      <ul class="jc-footer-links">
+        {
+          suburbPages.map((suburb) => (
+            <li>
+              <a href={suburbPath(suburb.slug)}>{suburb.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <p class="jc-footer-label" data-i18n-path="nav.home">{nav.home}</p>
+      <ul class="jc-footer-links">
+        {
+          index.map((item) => (
+            <li>
+              <a href={item.href} data-i18n-path={item.path}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/referral/" data-i18n-path="nav.referralSheet">{nav.referralSheet}</a>
+        </li>
+        <li>
+          <a href="/privacy/" data-i18n-path="hm.footer.privacy">{site.footer.privacyLinkLabel}</a>
+        </li>
+        <li>
+          <a href="/disclaimer/" data-i18n-path="hm.footer.disclaimer">{site.footer.disclaimerLinkLabel}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="jc-footer-label" data-i18n-path="sections.contact">{messages.en.sections.contact}</p>
+      <ul class="jc-footer-links">
+        <li>
+          <a href={site.phoneHref} translate="no">{site.phone}</a>
+        </li>
+        <li>
+          <a href={getEmailHref()} translate="no">{site.publicEmail}</a>
+        </li>
+        <li>
+          <a href={`mailto:${site.referralEmail}`} translate="no">{site.referralEmail}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <p class="jc-wrap jc-footer-copy">
+    <span translate="no">© {year} {site.businessName}.</span>
+    <span data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</span>
+  </p>
+</footer>

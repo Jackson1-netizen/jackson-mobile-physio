@@ -1,0 +1,18 @@
+---
+import { site } from "../../content/site";
+
+interface Props {
+  label: string;
+  tone?: "forest" | "olive";
+  wide?: boolean;
+}
+
+const { label, tone = "forest", wide = false } = Astro.props;
+---
+
+<figure class:list={["jc-shot", `is-${tone}`, wide && "is-wide"]}>
+  <div class="jc-shot-plate">
+    <p class="jc-shot-label">{label}</p>
+    <p class="jc-shot-place">{site.locationDescriptor}</p>
+  </div>
+</figure>

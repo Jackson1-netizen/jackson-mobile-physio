@@ -1,0 +1,279 @@
+---
+import HomePicture from "../home/HomePicture.astro";
+import ServiceAreaMap from "../home/ServiceAreaMap.astro";
+import EnquiryForm from "../EnquiryForm.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
+import SpokenLine from "./SpokenLine.astro";
+import CtaPair from "./CtaPair.astro";
+import ShotFrame from "./ShotFrame.astro";
+import { site, getEmailHref, publicQualifications } from "../../content/site";
+import { messages } from "../../content/i18n";
+import {
+  homeAbout,
+  homeAreas,
+  homeFaq,
+  homeMedia,
+  homeReferrers,
+  homeServices,
+  homeSteps,
+  homeSuburbs,
+} from "../../content/home-motion";
+
+const photoCaption = "Preview placeholder — to be replaced with genuine photography";
+const heroAlt =
+  "Preview image of two people indoors, one using a walking frame. Not a confirmed Home Motion visit.";
+const portraitAlt = "Preview image of a person in a polo shirt. Not a confirmed Home Motion visit.";
+const visitShot = "Photo to be shot: Jackson arriving at a front door with his kit";
+
+const hero = { ...homeMedia.hero, alt: heroAlt };
+const portrait = { ...homeAbout.photo, alt: portraitAlt };
+const shownQualifications = publicQualifications().map((item) => ({
+  item,
+  index: site.qualifications.indexOf(item),
+}));
+const ndis = messages.en.ndis;
+const how = messages.en.hm.how;
+---
+
+<section class="jc-hero" aria-labelledby="hero-heading">
+  <figure class="jc-hero-photo">
+    <div class="jc-hero-crop">
+      <HomePicture
+        photo={hero}
+        sizes="100vw"
+        priority
+      />
+    </div>
+    <figcaption class="jc-wrap">{photoCaption}</figcaption>
+  </figure>
+
+  <div class="jc-wrap jc-hero-copy">
+    <h1 id="hero-heading" class="jc-h1">
+      <span data-i18n-path="home.h1Lead">{messages.en.home.h1Lead}</span>
+      <span data-i18n-path="home.h1Mid">{messages.en.home.h1Mid}</span>
+      <span data-i18n-path="home.h1Em">{messages.en.home.h1Em}</span>
+    </h1>
+    <p class="jc-hero-support" data-i18n-path="home.support">{messages.en.home.support}</p>
+    <SpokenLine />
+    <div class="jc-hero-lang">
+      <LanguageSwitcher />
+    </div>
+    <CtaPair contactHref="#contact" />
+  </div>
+</section>
+
+<section id="about" class="jc-section" aria-labelledby="about-heading">
+  <div class="jc-wrap jc-chapter">
+    <figure class="jc-photo">
+      <div class="jc-photo-crop is-portrait">
+        <HomePicture
+          photo={portrait}
+          sizes="(min-width: 900px) 46vw, 100vw"
+        />
+      </div>
+      <figcaption>{photoCaption}</figcaption>
+    </figure>
+    <div class="jc-copy">
+      <p class="jc-kicker" data-i18n-path="sections.about">{messages.en.sections.about}</p>
+      <h2 id="about-heading" data-i18n-path="about.heading">{homeAbout.heading}</h2>
+      <p class="jc-name" translate="no">{homeAbout.name}</p>
+      <p class="jc-role" data-i18n-path="about.role">{homeAbout.role}</p>
+      <blockquote class="jc-pull">
+        <p data-i18n-path="about.differentiator">{homeAbout.philosophy}</p>
+      </blockquote>
+      {
+        homeAbout.paragraphs.map((paragraph, i) => (
+          <p data-i18n-path={`about.paragraphs.${i}`}>{paragraph}</p>
+        ))
+      }
+      <p class="jc-lang-block">
+        <span class="jc-kicker" data-i18n-path="about.languagesLabel">{homeAbout.languagesLabel}</span>
+        <SpokenLine />
+      </p>
+      <p class="jc-caption" data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</p>
+      <CtaPair contactHref="#contact" />
+    </div>
+  </div>
+</section>
+
+<section id="how" class="jc-section" aria-labelledby="how-heading">
+  <div class="jc-wrap jc-chapter">
+    <div class="jc-copy">
+      <p class="jc-kicker" data-i18n-path="hm.how.kicker">{how.kicker}</p>
+      <h2 id="how-heading" data-i18n-path="hm.how.heading">{how.heading}</h2>
+      <p data-i18n-path="howItWorks.intro">{messages.en.howItWorks.intro}</p>
+      <ol class="jc-steps">
+        {
+          homeSteps.map((step, i) => (
+            <li>
+              <span class="jc-num">{step.num}</span>
+              <div>
+                <h3 data-i18n-path={`hm.how.steps.${i}.title`}>{step.title}</h3>
+                <p data-i18n-path={`hm.how.steps.${i}.body`}>{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <CtaPair contactHref="#contact" />
+    </div>
+    <ShotFrame label={visitShot} tone="forest" />
+  </div>
+</section>
+
+<section id="services" class="jc-section" aria-labelledby="services-heading">
+  <div class="jc-wrap">
+    <p class="jc-kicker" data-i18n-path="sections.services">{messages.en.sections.services}</p>
+    <h2 id="services-heading" data-i18n-path="hm.services.heading">{homeServices.heading}</h2>
+    <p class="jc-deck" data-i18n-path="hm.services.supporting">{homeServices.supporting}</p>
+    <p data-i18n-path="services.intro">{homeServices.intro}</p>
+    <ol class="jc-index">
+      {
+        homeServices.cards.map((card, i) => (
+          <li>
+            <span class="jc-num">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h3 data-i18n-path={`hm.services.cards.${i}.title`}>{card.title}</h3>
+              <p data-i18n-path={`hm.services.cards.${i}.body`}>{card.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <CtaPair contactHref="#contact" />
+  </div>
+</section>
+
+<section id="areas" class="jc-section" aria-labelledby="areas-heading">
+  <div class="jc-wrap jc-chapter is-flip">
+    <div class="jc-copy">
+      <h2 id="areas-heading" data-i18n-path="hm.areas.heading">{homeAreas.kicker}</h2>
+      <p data-i18n-path="hm.areas.lead">{homeAreas.heading}</p>
+      <p data-i18n-path="areas.intro">{messages.en.areas.intro}</p>
+      <ul class="jc-suburb-list">
+        {
+          homeSuburbs.map((suburb) => (
+            <li>
+              <a href={suburb.href}>{suburb.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="jc-caption">{site.serviceAreas.surroundingNote}</p>
+      <CtaPair contactHref="#contact" />
+    </div>
+    <div class="jc-media">
+      <ServiceAreaMap />
+      <p class="jc-caption" data-i18n-path="hm.areas.mapCaption">{homeAreas.mapCaption}</p>
+    </div>
+  </div>
+</section>
+
+<div class="jc-trust">
+  <section id="ndis" class="jc-section" aria-labelledby="ndis-heading">
+    <div class="jc-wrap jc-measure">
+      <p class="jc-kicker" data-i18n-path="nav.ndis">{messages.en.nav.ndis}</p>
+      <h2 id="ndis-heading" data-i18n-path="sections.ndis">{site.ndisHeading}</h2>
+      <p data-i18n-path="ndis.lead">{ndis.lead}</p>
+      <ul class="jc-notes">
+        <li>
+          <h3 data-i18n-path="ndis.planManaged">{ndis.planManaged}</h3>
+          <p data-i18n-path="ndis.planManagedDesc">{ndis.planManagedDesc}</p>
+        </li>
+        <li>
+          <h3 data-i18n-path="ndis.planManaged2">{ndis.planManaged2}</h3>
+          <p data-i18n-path="ndis.planManaged2Desc">{ndis.planManaged2Desc}</p>
+        </li>
+        <li>
+          <h3 data-i18n-path="ndis.notRegistered">{ndis.notRegistered}</h3>
+          <p data-i18n-path="ndis.notRegisteredDesc">{ndis.notRegisteredDesc}</p>
+        </li>
+      </ul>
+      <p class="jc-caption">{site.ndisFundingNote}</p>
+    </div>
+  </section>
+
+  <section id="referrers" class="jc-section" aria-labelledby="referrers-heading">
+    <div class="jc-wrap jc-measure">
+      <h2 id="referrers-heading" data-i18n-path="hm.referrers.heading">{homeReferrers.heading}</h2>
+      <p data-i18n-path="hm.referrers.lead">{homeReferrers.lead}</p>
+      <ul class="jc-notes">
+        {
+          homeReferrers.points.map((point, i) => (
+            <li>
+              <p data-i18n-path={`hm.referrers.points.${i}`}>{point.title}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p>
+        <a class="jc-text-link" href={`mailto:${site.referralEmail}`} translate="no">{site.referralEmail}</a>
+      </p>
+      <p>
+        <a class="jc-text-link" href="/referral/">
+          <span data-i18n-path="hm.referrers.cta">{homeReferrers.cta}</span>
+          <span aria-hidden="true"> →</span>
+        </a>
+      </p>
+      <CtaPair contactHref="#contact" />
+    </div>
+  </section>
+</div>
+
+<section id="faq" class="jc-section" aria-labelledby="faq-heading">
+  <div class="jc-wrap jc-faq">
+    <p class="jc-kicker" data-i18n-path="nav.faq">{messages.en.nav.faq}</p>
+    <h2 id="faq-heading" data-i18n-path="sections.faq">{messages.en.sections.faq}</h2>
+    <div class="jc-faq-list">
+      {
+        homeFaq.map((item, i) => (
+          <details name="faq">
+            <summary>
+              <span data-i18n-path={`faq.items.${i}.question`}>{item.question}</span>
+              <span class="jc-plus" aria-hidden="true"></span>
+            </summary>
+            <p data-i18n-path={`faq.items.${i}.answer`}>{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="jc-cred" aria-labelledby="cred-heading">
+  <div class="jc-wrap">
+    <h2 id="cred-heading" class="jc-kicker" data-i18n-path="about.qualificationsLabel">
+      {homeAbout.qualificationsLabel}
+    </h2>
+    <ul class="jc-cred-list">
+      <li data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</li>
+      {
+        shownQualifications.map(({ item, index }) => (
+          <li>
+            <span data-i18n-path={`hm.about.qualificationLabels.${index}`}>{item.label}</span>
+            <span aria-hidden="true"> — </span>
+            <span data-i18n-path={`hm.about.qualificationValues.${index}`}>{item.value}</span>
+          </li>
+        ))
+      }
+      <li>{site.ndisDescription}</li>
+      <li>{site.ndisNotRegistered}</li>
+      <li>{site.ndisFundingNote}</li>
+      <li translate="no">{site.abnDisplay}</li>
+      <li>{site.locationDescriptor}</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" class="jc-section jc-contact" aria-labelledby="contact-heading">
+  <div class="jc-wrap jc-measure">
+    <h2 id="contact-heading" data-i18n-path="sections.contact">{messages.en.sections.contact}</h2>
+    <p data-i18n-path="about.contactCta">{site.contactCta}</p>
+    <p data-i18n-path="enquiry.intro">{messages.en.enquiry.intro}</p>
+    <CtaPair contactHref="#contact" />
+    <p>
+      <a class="jc-text-link" href={getEmailHref()} translate="no">{site.publicEmail}</a>
+    </p>
+    <EnquiryForm />
+  </div>
+</section>
