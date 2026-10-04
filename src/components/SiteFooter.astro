@@ -48,7 +48,7 @@ const links = [
     </div>
   </div>
   <div class="qb-wrap">
-    <nav class="qb-footer-links" aria-label={messages.en.hm.header.primaryNav} data-i18n-attr="aria-label:hm.header.primaryNav">
+    <div class="qb-footer-links">
       {
         links.map((item) => (
           <a href={item.href} data-i18n-path={item.path}>
@@ -59,7 +59,7 @@ const links = [
       <a href="/privacy/" data-i18n-path="hm.footer.privacy">{site.footer.privacyLinkLabel}</a>
       <a href="/disclaimer/" data-i18n-path="hm.footer.disclaimer">{site.footer.disclaimerLinkLabel}</a>
       <a href="/referral/" data-i18n-path="nav.referralSheet">{messages.en.nav.referralSheet}</a>
-    </nav>
+    </div>
     <p class="qb-copy">
       © {year} {site.businessName}. <span data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</span>
     </p>
