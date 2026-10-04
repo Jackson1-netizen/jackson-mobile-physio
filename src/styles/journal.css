@@ -498,7 +498,8 @@ html:has(.jc-header) {
 }
 
 .jc-hero-crop {
-  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: min(46vh, calc(100vw * 5 / 4));
 }
 
 .jc-hero-crop picture,
@@ -539,7 +540,7 @@ html:has(.jc-header) {
 }
 
 .jc-hero-copy {
-  padding-top: clamp(1.75rem, 4vw, 3.25rem);
+  padding-top: clamp(1rem, 1.5vw, 1.25rem);
   padding-bottom: clamp(1rem, 3vw, 2rem);
 }
 
@@ -587,13 +588,13 @@ html:has(.jc-header) {
 
 @media (min-width: 768px) {
   .jc-hero-crop {
-    aspect-ratio: 16 / 9;
+    height: min(58vh, calc(100vw * 9 / 16));
   }
 }
 
 @media (min-width: 1100px) {
   .jc-hero-crop {
-    aspect-ratio: 2.25 / 1;
+    height: min(64vh, calc(100vw / 2.25));
   }
 
   .jc-hero-photo figcaption {
@@ -771,10 +772,12 @@ html:has(.jc-header) {
 .jc-shot-plate {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 0.3rem;
   aspect-ratio: 4 / 5;
   min-height: 18rem;
-  padding: 1.35rem 1.35rem 1.35rem 1.7rem;
+  padding: 1.15rem 1.15rem 1rem 1.45rem;
   position: relative;
 }
 
@@ -804,19 +807,19 @@ html:has(.jc-header) {
 
 .jc-shot-label {
   margin: 0;
-  max-width: 16ch;
-  font-family: var(--jc-serif);
-  font-size: clamp(1.7rem, 2.6vw, 2.55rem);
-  font-weight: 400;
-  line-height: 1.18;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
+  max-width: 46ch;
+  font-family: var(--jc-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
 }
 
 .jc-shot-place {
-  margin: 1.5rem 0 0;
+  order: -1;
+  margin: 0;
   font-family: var(--jc-sans);
-  font-size: 0.92rem;
+  font-size: 0.75rem;
   font-weight: 600;
   font-variant: small-caps;
   letter-spacing: 0.12em;
@@ -824,19 +827,17 @@ html:has(.jc-header) {
 }
 
 .jc-shot.is-wide .jc-shot-plate {
-  aspect-ratio: 4 / 5;
-  min-height: 16rem;
+  aspect-ratio: auto;
+  width: 100%;
+  height: 40vh;
+  min-height: 0;
+  max-height: 40vh;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .jc-shot.is-wide .jc-shot-plate {
-    aspect-ratio: 2.2 / 1;
-    padding: 2.5rem 3rem 2.25rem 3.25rem;
-  }
-
-  .jc-shot.is-wide .jc-shot-label {
-    max-width: 18ch;
-    font-size: clamp(2rem, 3vw, 3.1rem);
+    height: 50vh;
+    max-height: 50vh;
   }
 }
 
