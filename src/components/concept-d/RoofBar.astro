@@ -1,0 +1,21 @@
+---
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+
+interface Props {
+  enquireHref?: string;
+}
+
+const { enquireHref = "/#contact" } = Astro.props;
+---
+
+<nav
+  class="roof-bar no-print"
+  aria-label={messages.en.hm.mobileBar.label}
+  data-i18n-attr="aria-label:hm.mobileBar.label"
+>
+  <a class="roof-pill roof-pill-forest" href={site.phoneHref} data-i18n-path="cta.call">Call</a>
+  <a class="roof-pill roof-pill-orange" href={enquireHref}>
+    <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+  </a>
+</nav>

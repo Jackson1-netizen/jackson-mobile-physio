@@ -1,0 +1,72 @@
+---
+import RoofSteps from "./RoofSteps.astro";
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import type { SuburbPage } from "../../content/suburbs";
+
+interface Props {
+  suburb: SuburbPage;
+}
+
+const { suburb } = Astro.props;
+---
+
+<article class="roof-suburb">
+  <div class="roof-wrap">
+    <nav class="roof-crumb" aria-label="Breadcrumb">
+      <a href="/" data-i18n-path="nav.home">{messages.en.nav.home}</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#areas" data-i18n-path="nav.areas">{messages.en.nav.areas}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{suburb.name}</span>
+    </nav>
+
+    <div class="roof-suburb-hero">
+      <svg class="roof-suburb-mark" viewBox="0 0 220 140" aria-hidden="true" focusable="false">
+        <path
+          fill="#e8bba8"
+          d="M110 8c16 0 28 10 42 26l52 58c10 12 4 28-12 32H28c-16-4-22-20-12-32L70 34C84 18 94 8 110 8z"
+        ></path>
+      </svg>
+      <h1>{suburb.name}</h1>
+      <p class="roof-suburb-lead">{suburb.headline}</p>
+    </div>
+
+    <div class="roof-suburb-copy">
+      {suburb.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    <ul class="roof-local">
+      {suburb.localPoints.map((point) => <li>{point}</li>)}
+    </ul>
+
+    <h2>How a home visit works</h2>
+    <RoofSteps tone="peach" />
+
+    <h2 data-i18n-path="sections.services">{messages.en.sections.services}</h2>
+    <ul class="roof-service-index">
+      {site.services.map((service) => <li>{service.title}</li>)}
+    </ul>
+
+    <div class="roof-actions roof-suburb-actions">
+      <a class="roof-pill roof-pill-orange" href="/#contact">
+        <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+      </a>
+      <a class="roof-pill roof-pill-outline" href={site.phoneHref} data-i18n-path="cta.call">Call</a>
+      <a class="roof-phone" href={site.phoneHref} translate="no">{site.phone}</a>
+    </div>
+
+    <dl class="roof-suburb-trust">
+      <div>
+        <dt>Registration</dt>
+        <dd>{site.ahpraNotice}</dd>
+      </div>
+      <div>
+        <dt>NDIS</dt>
+        <dd>{site.ndisDescription}</dd>
+        <dd>{site.ndisNotRegistered}</dd>
+        <dd>{site.ndisFundingNote}</dd>
+      </div>
+    </dl>
+  </div>
+</article>

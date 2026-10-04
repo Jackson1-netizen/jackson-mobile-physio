@@ -1,0 +1,22 @@
+---
+import { messages } from "../../content/i18n";
+
+interface Props {
+  tone?: "band" | "peach";
+}
+
+const { tone = "band" } = Astro.props;
+const steps = messages.en.hm.how.steps;
+---
+
+<ol class:list={["roof-steps", tone === "peach" && "is-on-peach"]}>
+  {
+    steps.map((step, i) => (
+      <li>
+        <span class="roof-num" aria-hidden="true">{i + 1}</span>
+        <h3 data-i18n-path={`hm.how.steps.${i}.title`}>{step.title}</h3>
+        <p data-i18n-path={`hm.how.steps.${i}.body`}>{step.body}</p>
+      </li>
+    ))
+  }
+</ol>

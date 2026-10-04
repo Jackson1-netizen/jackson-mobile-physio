@@ -1,0 +1,30 @@
+---
+import { site, getEmailHref, getReferralEmailHref } from "../../content/site";
+import { messages } from "../../content/i18n";
+
+const hello = getEmailHref();
+const referrals = getReferralEmailHref();
+---
+
+<footer class="roof-footer no-print">
+  <div class="roof-wrap roof-colophon">
+    <p class="roof-colophon-name" translate="no">{site.businessName}</p>
+    <p class="roof-colophon-phone">
+      <a href={site.phoneHref} translate="no">{site.phone}</a>
+    </p>
+    <p>
+      <a href={hello} translate="no">{site.publicEmail}</a>
+      <span aria-hidden="true"> · </span>
+      <a href={referrals} translate="no">{site.referralEmail}</a>
+    </p>
+    <p>{site.languages.join(", ")}</p>
+    <p data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</p>
+    <p translate="no">{site.abnDisplay}</p>
+    <p class="roof-colophon-links">
+      <a href="/privacy/" data-i18n-path="hm.footer.privacy">{site.footer.privacyLinkLabel}</a>
+      <a href="/disclaimer/" data-i18n-path="hm.footer.disclaimer">{site.footer.disclaimerLinkLabel}</a>
+      <a href="/referral/" data-i18n-path="nav.referralSheet">{messages.en.nav.referralSheet}</a>
+    </p>
+    <p data-i18n-path="hm.footer.rights">{site.footer.copyrightSuffix}</p>
+  </div>
+</footer>

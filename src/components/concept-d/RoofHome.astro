@@ -1,0 +1,232 @@
+---
+import RoofHeader from "./RoofHeader.astro";
+import RoofFooter from "./RoofFooter.astro";
+import RoofBar from "./RoofBar.astro";
+import RoofLang from "./RoofLang.astro";
+import RoofSteps from "./RoofSteps.astro";
+import EnquiryForm from "../EnquiryForm.astro";
+import { site, getEmailHref, getReferralEmailHref } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { suburbPages, suburbPath } from "../../content/suburbs";
+
+const motto = site.motto;
+const prefix = "Your physio";
+const mottoLead = motto.startsWith(prefix) ? prefix : motto;
+const mottoRest = motto.startsWith(`${prefix} `) ? motto.slice(prefix.length + 1) : "";
+const hello = getEmailHref();
+const referrals = getReferralEmailHref();
+const stepsHeading = "How a home visit works";
+const areasHeading = "Eastern suburbs";
+const referHeading = "For referrers";
+const moveHeading = "Care that moves with you";
+const suburbs = site.serviceAreas.suburbs.map((name) => {
+  const page = suburbPages.find((item) => item.name === name);
+  return { name, href: page ? suburbPath(page.slug) : "/#areas" };
+});
+const faqs = messages.en.faq.items.slice(0, 3);
+---
+
+<div class="roof-page">
+  <RoofHeader />
+  <main id="main-content" tabindex="-1">
+    <section class="roof-hero" id="top" aria-labelledby="roof-hero-title">
+      <svg class="roof-house" viewBox="0 0 760 640" aria-hidden="true" focusable="false">
+        <path
+          fill="#e8bba8"
+          d="M372 36c28 0 48 18 70 40l196 188c30 28 18 62-14 74l-30 10v168c0 40-28 62-70 66H236c-44-4-72-28-72-70V348l-32-12c-30-12-40-48-12-76L300 78c24-24 46-42 72-42z"
+        ></path>
+      </svg>
+      <svg class="roof-swoosh" viewBox="0 0 820 140" aria-hidden="true" focusable="false">
+        <path
+          d="M24 96c140 52 250 8 372-28 104-30 210-22 390 24"
+          fill="none"
+          stroke="#c4461a"
+          stroke-width="20"
+          stroke-linecap="round"
+        ></path>
+      </svg>
+      <div class="roof-wrap roof-hero-grid">
+        <p class="roof-kicker">
+          <span data-i18n-path="home.eyebrow">{messages.en.home.eyebrow}</span>
+        </p>
+        <h1 id="roof-hero-title" class="roof-h1">
+          <span>{mottoLead}</span>
+          {mottoRest && <span>{mottoRest}</span>}
+        </h1>
+        <p class="roof-scripts" lang="en">
+          <span>English</span>
+          <span aria-hidden="true"> · </span>
+          <span lang="zh-Hant">廣東話</span>
+          <span aria-hidden="true"> · </span>
+          <span lang="zh-Hans">普通话</span>
+        </p>
+        <RoofLang />
+        <div class="roof-actions">
+          <a class="roof-pill roof-pill-orange" href="#contact">
+            <span data-i18n-path="home.primaryCta">{messages.en.home.primaryCta}</span>
+          </a>
+          <a class="roof-pill roof-pill-outline" href={site.phoneHref} data-i18n-path="cta.call">Call</a>
+          <a class="roof-phone" href={site.phoneHref} translate="no">{site.phone}</a>
+        </div>
+        <figure class="roof-photo">
+          <img
+            src="/concept-d/kitchen-light.jpg"
+            alt="Bright kitchen with wooden cabinets and a window. No people. Licensed stock for this preview, not a Home Motion visit."
+            width="1600"
+            height="1067"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <figcaption>CONCEPT ONLY — licensed stock, not a Home Motion visit</figcaption>
+        </figure>
+        <p class="roof-support" data-i18n-path="home.support">{messages.en.home.support}</p>
+      </div>
+    </section>
+
+    <section class="roof-move" aria-labelledby="roof-move-title">
+      <div class="roof-wrap">
+        <h2 id="roof-move-title">{moveHeading}</h2>
+        <p class="roof-move-line" data-i18n-path="about.differentiator">{site.differentiator}</p>
+      </div>
+    </section>
+
+    <section class="roof-services" id="services" aria-labelledby="roof-services-title">
+      <div class="roof-wrap">
+        <h2 id="roof-services-title" data-i18n-path="sections.services">{messages.en.sections.services}</h2>
+        <p class="roof-intro" data-i18n-path="services.intro">{site.servicesIntro}</p>
+        <div class="roof-bento">
+          {
+            site.services.map((service, i) => (
+              <article class:list={["roof-tile", `is-${i + 1}`]} data-roof-tile>
+                {i === 3 && <span class="roof-olive" aria-hidden="true"></span>}
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="roof-about" id="about" aria-labelledby="roof-about-title">
+      <div class="roof-wrap roof-about-grid">
+        <div>
+          <h2 id="roof-about-title" class="roof-name" translate="no">{site.practitionerName}</h2>
+          <p class="roof-role" data-i18n-path="about.role">{messages.en.about.role}</p>
+          {
+            site.aboutParagraphs.map((paragraph, i) => (
+              <p class="roof-about-copy" data-i18n-path={`about.paragraphs.${i}`}>
+                {paragraph}
+              </p>
+            ))
+          }
+          <p class="roof-languages">
+            <span data-i18n-path="about.languagesLabel">{messages.en.about.languagesLabel}</span>
+            <span data-i18n-path="hm.about.languagesList">{site.languages.join(", ")}</span>
+          </p>
+        </div>
+        <div class="roof-portrait" role="img" aria-label="Placeholder for a photograph of Jackson, still to be taken.">
+          <span class="roof-olive roof-olive-portrait" aria-hidden="true"></span>
+          <p>Photo to be shot: Jackson</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="roof-visit" id="visit" aria-labelledby="roof-visit-title">
+      <div class="roof-wrap">
+        <h2 id="roof-visit-title">{stepsHeading}</h2>
+        <RoofSteps />
+      </div>
+    </section>
+
+    <section class="roof-areas" id="areas" aria-labelledby="roof-areas-title">
+      <div class="roof-wrap">
+        <h2 id="roof-areas-title">{areasHeading}</h2>
+        <ul class="roof-places">
+          {
+            suburbs.map((suburb) => (
+              <li>
+                <a href={suburb.href}>{suburb.name}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="roof-surrounding">{site.serviceAreas.surroundingNote}</p>
+      </div>
+    </section>
+
+    <section class="roof-refer" id="referrers" aria-labelledby="roof-refer-title">
+      <div class="roof-wrap">
+        <article class="roof-door">
+          <svg class="roof-door-mark" viewBox="0 0 120 72" aria-hidden="true" focusable="false">
+            <path fill="#e8bba8" d="M60 6c8 0 14 6 22 14l28 26c6 6 2 14-6 16H16c-8-2-12-10-6-16L40 20C48 12 52 6 60 6z"></path>
+          </svg>
+          <h2 id="roof-refer-title">{referHeading}</h2>
+          <p data-i18n-path="referrers.lead">{site.referrersCta}</p>
+          <a class="roof-mail" href={referrals} translate="no">{site.referralEmail}</a>
+          <a class="roof-pill roof-pill-orange" href="/referral/" data-i18n-path="cta.referParticipant">
+            {messages.en.cta.referParticipant}
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="roof-trust" aria-label="Registration and funding">
+      <div class="roof-wrap">
+        <dl>
+          <div>
+            <dt>Registration</dt>
+            <dd data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</dd>
+          </div>
+          <div>
+            <dt>NDIS</dt>
+            <dd data-i18n-path="ndis.lead">{site.ndisDescription}</dd>
+            <dd>{site.ndisNotRegistered}</dd>
+            <dd>{site.ndisFundingNote}</dd>
+          </div>
+          <div>
+            <dt>ABN</dt>
+            <dd translate="no">{site.abnDisplay}</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="roof-faq" id="faq" aria-labelledby="roof-faq-title">
+      <div class="roof-wrap">
+        <h2 id="roof-faq-title" data-i18n-path="sections.faq">{messages.en.sections.faq}</h2>
+        <div class="roof-faq-list">
+          {
+            faqs.map((item, i) => (
+              <details>
+                <summary>
+                  <span data-i18n-path={`faq.items.${i}.question`}>{item.question}</span>
+                  <span class="roof-plus" aria-hidden="true"></span>
+                </summary>
+                <p data-i18n-path={`faq.items.${i}.answer`}>{item.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="roof-contact" id="contact" aria-labelledby="roof-contact-title">
+      <div class="roof-wrap roof-contact-grid">
+        <div>
+          <h2 id="roof-contact-title" data-i18n-path="sections.contact">{messages.en.sections.contact}</h2>
+          <p data-i18n-path="enquiry.intro">{messages.en.enquiry.intro}</p>
+          <p class="roof-contact-phone">
+            <a href={site.phoneHref} translate="no">{site.phone}</a>
+          </p>
+          <p>
+            <a href={hello} translate="no">{site.publicEmail}</a>
+          </p>
+        </div>
+        <EnquiryForm />
+      </div>
+    </section>
+  </main>
+  <RoofFooter />
+  <RoofBar enquireHref="#contact" />
+</div>

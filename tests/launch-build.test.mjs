@@ -89,9 +89,8 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     const home = readFileSync(join(dist, "index.html"), "utf8");
     assert.match(home, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/"/);
     assert.match(home, /name="robots" content="index, follow"/);
-    assert.match(home, /Personalised physiotherapy/);
-    assert.match(home, /in the comfort of/);
-    assert.match(home, />home\.</);
+    assert.match(home, /Your physio/);
+    assert.match(home, /comes to you\./);
     assert.match(home, /0433 479 703/);
     for (const suburb of [
       "Box Hill",
