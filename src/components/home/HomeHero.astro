@@ -34,14 +34,6 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
   fetchpriority="high"
 />
 
-<script is:inline>
-  (function () {
-    var variant = new URLSearchParams(location.search).get("v");
-    if (variant === "2" || variant === "3") {
-      document.documentElement.dataset.heroVariant = variant;
-    }
-  })();
-</script>
 <section id="top" class="hm-hero" aria-labelledby="hm-hero-heading">
   <div class="hm-hero-media">
     <picture>

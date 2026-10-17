@@ -724,16 +724,14 @@ html:has(.hm-header) {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* Deep green under the copy, gone before the two faces.
-     The bright wall needs a heavier left stop than the earlier photo
-     for cream text to clear AA; the fade still reaches 0 by 60%. */
+  /* Teal wash under the copy, gone before the two faces. */
   background: linear-gradient(
-    90deg,
-    rgb(22 53 46 / 0.88) 0%,
-    rgb(22 53 46 / 0.78) 18%,
-    rgb(22 53 46 / 0.7) 34%,
-    rgb(22 53 46 / 0.24) 46%,
-    rgb(22 53 46 / 0) 60%
+    118deg,
+    rgb(8 52 50 / 0.94) 0%,
+    rgb(12 84 78 / 0.82) 18%,
+    rgb(14 96 90 / 0.68) 34%,
+    rgb(16 88 82 / 0.22) 48%,
+    rgb(12 64 60 / 0) 64%
   );
 }
 
@@ -777,8 +775,6 @@ html:has(.hm-header) {
   text-shadow: 0 1px 2px rgb(8 22 18 / 0.45);
 }
 
-/* Variant 1, Bold serif — the default. ?v=2 and ?v=3 override the blocks below.
-   Once a treatment is chosen, delete the other variant sections and this note. */
 .hm-hero h1 {
   margin: 0.4rem 0 0;
   font-family: var(--hm-serif);
@@ -796,10 +792,10 @@ html:has(.hm-header) {
 .hm-hero h1 .hm-em {
   display: inline-block;
   margin-top: 0.08em;
-  padding: 0.02em 0.34em 0.07em;
-  border-radius: 0.28em;
-  background: #c4461a;
-  color: #fff;
+  padding: 0.04em 0.32em 0.08em;
+  border-radius: 0.2em;
+  background: rgb(8 32 30 / 0.94);
+  color: #e45a22;
   font-style: normal;
   font-weight: 700;
   line-height: 1.05;
@@ -807,111 +803,6 @@ html:has(.hm-header) {
   text-shadow: none;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-}
-
-/* Variant 2, Modern sans. Switch with ?v=2. */
-html[data-hero-variant="2"] .hm-hero-scrim {
-  background: linear-gradient(
-    118deg,
-    rgb(8 52 50 / 0.94) 0%,
-    rgb(12 84 78 / 0.82) 18%,
-    rgb(14 96 90 / 0.68) 34%,
-    rgb(16 88 82 / 0.22) 48%,
-    rgb(12 64 60 / 0) 64%
-  );
-}
-
-html[data-hero-variant="2"] .hm-hero .hm-kicker {
-  display: inline-block;
-  width: auto;
-  margin-bottom: 0.15rem;
-  padding: 0.32em 0.75em;
-  border: 1px solid rgb(186 232 224 / 0.55);
-  border-radius: 999px;
-  background: #0f4f4a;
-  color: var(--hm-cream);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  line-height: 1.2;
-  text-shadow: none;
-}
-
-html[data-hero-variant="2"] .hm-hero h1 {
-  font-family: var(--hm-sans);
-  font-size: clamp(2.85rem, 0.3rem + 3.6vw, 4.7rem);
-  font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 0.9;
-}
-
-html[data-hero-variant="2"] .hm-hero h1 .hm-em {
-  display: inline-block;
-  margin-top: 0.02em;
-  padding: 0 0.04em 0.12em;
-  border-radius: 0;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9 C16 3 26 13 44 8 S74 2 118 8' fill='none' stroke='%23ffa06a' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 100% 0.22em;
-  color: #ffa06a;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-}
-
-/* Variant 3, Editorial split. Switch with ?v=3. */
-html[data-hero-variant="3"] .hm-hero-scrim {
-  background:
-    linear-gradient(100deg, rgb(120 58 22 / 0.2) 0%, rgb(120 58 22 / 0) 38%),
-    linear-gradient(
-      96deg,
-      rgb(16 46 38 / 0.92) 0%,
-      rgb(24 58 46 / 0.76) 20%,
-      rgb(22 53 46 / 0.42) 40%,
-      rgb(22 53 46 / 0) 62%
-    );
-}
-
-html[data-hero-variant="3"] .hm-hero-grid {
-  width: min(34rem, 38vw);
-}
-
-html[data-hero-variant="3"] .hm-hero-lead {
-  padding-left: 0.95rem;
-  border-left: 0.28rem solid #c4461a;
-}
-
-html[data-hero-variant="3"] .hm-hero h1 {
-  font-size: clamp(2.7rem, 0.15rem + 2.95vw, 4.35rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
-}
-
-html[data-hero-variant="3"] .hm-hero h1 span:nth-of-type(2) {
-  font-weight: 600;
-  font-size: 0.62em;
-  letter-spacing: -0.01em;
-}
-
-html[data-hero-variant="3"] .hm-hero h1 .hm-em {
-  display: inline-block;
-  margin-top: 0.12em;
-  padding: 0.04em 0.42em 0.1em;
-  border-radius: 0.42em;
-  background: #faf6f0;
-  color: #c4461a;
-  font-family: var(--hm-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  box-shadow: 0 10px 24px rgb(12 28 24 / 0.2);
-}
-
-html[data-hero-variant="3"] .hm-hero-support {
-  max-width: 46ch;
 }
 
 .hm-hero-support {
@@ -1942,10 +1833,10 @@ a.hm-card:hover {
     height: 32%;
     background: linear-gradient(
       to bottom,
-      rgb(22 53 46 / 0.88) 0%,
-      rgb(22 53 46 / 0.7) 48%,
-      rgb(22 53 46 / 0.22) 78%,
-      rgb(22 53 46 / 0) 100%
+      rgb(8 52 50 / 0.94) 0%,
+      rgb(10 72 68 / 0.78) 48%,
+      rgb(14 90 84 / 0.2) 78%,
+      rgb(12 64 60 / 0) 100%
     );
   }
 
@@ -1978,7 +1869,7 @@ a.hm-card:hover {
     max-width: none;
     margin: 0;
     padding: 0.95rem 1rem 1.4rem;
-    background: #16352e;
+    background: #0f3c38;
     color: var(--hm-cream);
   }
 
@@ -1988,49 +1879,6 @@ a.hm-card:hover {
 
   .hm-hero h1 {
     font-size: clamp(1.42rem, 5.5vw, 2.35rem);
-    line-height: 1.02;
-  }
-
-  html[data-hero-variant="2"] .hm-hero-scrim {
-    height: 30%;
-    background: linear-gradient(
-      to bottom,
-      rgb(8 52 50 / 0.94) 0%,
-      rgb(10 72 68 / 0.88) 62%,
-      rgb(14 90 84 / 0.2) 84%,
-      rgb(12 64 60 / 0) 100%
-    );
-  }
-
-  html[data-hero-variant="2"] .hm-hero h1 {
-    font-size: clamp(1.32rem, 5vw, 2.05rem);
-    letter-spacing: -0.04em;
-    line-height: 0.94;
-  }
-
-  html[data-hero-variant="2"] .hm-hero .hm-kicker {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-  }
-
-  html[data-hero-variant="3"] .hm-hero-scrim {
-    background:
-      linear-gradient(to bottom, rgb(120 58 22 / 0.18) 0%, rgb(120 58 22 / 0) 70%),
-      linear-gradient(
-        to bottom,
-        rgb(16 46 38 / 0.92) 0%,
-        rgb(22 53 46 / 0.7) 48%,
-        rgb(22 53 46 / 0.18) 78%,
-        rgb(22 53 46 / 0) 100%
-      );
-  }
-
-  html[data-hero-variant="3"] .hm-hero-lead {
-    padding-left: 0.75rem;
-  }
-
-  html[data-hero-variant="3"] .hm-hero h1 {
-    font-size: clamp(1.45rem, 5.8vw, 2.45rem);
     line-height: 1.02;
   }
 
