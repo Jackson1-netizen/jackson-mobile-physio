@@ -95,7 +95,13 @@ function initScrollSpy(root: ParentNode): void {
 function initMenu(root: ParentNode): void {
   const menu = root.querySelector<HTMLDetailsElement>("details.hm-menu");
   const summary = menu?.querySelector<HTMLElement>("summary");
-  if (!menu || !summary) return;
+  const panel = menu?.querySelector<HTMLElement>(".hm-menu-panel");
+  if (!menu || !summary || !panel) return;
+
+  const setExpanded = () => {
+    summary.setAttribute("aria-expanded", menu.open ? "true" : "false");
+  };
+  setExpanded();
 
   menu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
@@ -117,12 +123,15 @@ function initMenu(root: ParentNode): void {
   });
 
   // Above the fold the draft banner pushes the header down, so cap the panel from its real position.
-  const panel = menu.querySelector<HTMLElement>(".hm-menu-panel");
   menu.addEventListener("toggle", () => {
-    if (!panel) return;
+    setExpanded();
     panel.style.maxHeight = "";
     if (!menu.open) return;
-    const available = window.innerHeight - panel.getBoundingClientRect().top - 8;
-    if (panel.scrollHeight > available) panel.style.maxHeight = `${Math.max(available, 160)}px`;
+    const available = window.innerHeight - panel.getBoundingClientRect().top - 12;
+    const cssMax = Number.parseFloat(getComputedStyle(panel).maxHeight);
+    const limit = Math.min(Number.isFinite(cssMax) ? cssMax : available, available);
+    if (panel.scrollHeight > limit) panel.style.maxHeight = `${Math.max(limit, 160)}px`;
+    const first = panel.querySelector<HTMLElement>("a");
+    if (first && !panel.contains(document.activeElement)) first.focus();
   });
 }

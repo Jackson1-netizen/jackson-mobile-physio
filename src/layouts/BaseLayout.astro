@@ -77,6 +77,14 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
     <meta name="twitter:image:alt" content={site.seo.ogImageAlt} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {
+      v1Home && (
+        <script
+          is:inline
+          set:html={`(function(){var value=new URLSearchParams(location.search).get("h");if(value==="2"||value==="3")document.documentElement.dataset.headerVariant=value;})();`}
+        />
+      )
+    }
 
     <script type="application/ld+json" set:html={jsonLd} />
     {faqLd && <script type="application/ld+json" set:html={faqLd} />}
