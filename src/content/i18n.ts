@@ -218,9 +218,9 @@ const en = {
   ...(site.draft ? { draftBanner: { short: "Draft preview — not indexed" } } : {}),
   home: {
     eyebrow: "Mobile physiotherapy",
-    h1Lead: "Move well.",
-    h1Mid: "Live well.",
-    h1Em: "At home.",
+    h1Lead: "Personalised physiotherapy",
+    h1Mid: "in the comfort of",
+    h1Em: "home.",
     support:
       "Independent mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you speak directly with Jackson — the physiotherapist who personally delivers your care. Appointments in English, Cantonese and Mandarin.",
     primaryCta: "Make an enquiry",
@@ -536,9 +536,9 @@ const zhHant = {
   ...(site.draft ? { draftBanner: { short: "草稿預覽 — 未公開索引" } } : {}),
   home: {
     eyebrow: "上門物理治療",
-    h1Lead: "好好活動。",
-    h1Mid: "好好生活。",
-    h1Em: "在家。",
+    h1Lead: "個人化物理治療",
+    h1Mid: "在家中安心接受",
+    h1Em: "服務。",
     support:
       "墨爾本東郊獨立上門物理治療。查詢時由 Jackson 本人接聽，亦由他親自提供護理。可使用英語、粵語或普通話。",
     primaryCta: "查詢預約",
@@ -839,9 +839,9 @@ const zhHans = {
   ...(site.draft ? { draftBanner: { short: "草稿预览 — 未公开索引" } } : {}),
   home: {
     eyebrow: "上门物理治疗",
-    h1Lead: "好好活动。",
-    h1Mid: "好好生活。",
-    h1Em: "在家。",
+    h1Lead: "个性化物理治疗",
+    h1Mid: "在家中安心接受",
+    h1Em: "服务。",
     support:
       "墨尔本东郊独立上门物理治疗。查询时由 Jackson 本人接听，亦由他亲自提供护理。可使用英语、粤语或普通话。",
     primaryCta: "查询预约",

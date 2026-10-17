@@ -136,6 +136,24 @@ html:has(.hm-header) {
   display: none;
 }
 
+.hm .hm-hero-lang .lang-switch {
+  background: transparent;
+  border-color: rgb(250 246 240 / 0.45);
+}
+
+.hm .hm-hero-lang .lang-btn:not([data-active="true"]) {
+  color: var(--hm-cream);
+}
+
+.hm .hm-hero-lang .lang-btn:not([data-active="true"]):hover {
+  color: #fff;
+}
+
+.hm .hm-hero-lang .lang-btn[data-active="true"] {
+  background: var(--hm-cream);
+  color: var(--hm-forest);
+}
+
 .hm-menu-lang {
   margin-top: 0.6rem;
   padding-top: 0.75rem;
@@ -679,6 +697,7 @@ html:has(.hm-header) {
 }
 
 .hm-hero {
+  --hm-focus: #ffd2b8;
   position: relative;
   isolation: isolate;
   display: flex;
@@ -686,8 +705,8 @@ html:has(.hm-header) {
   overflow: hidden;
   min-height: max(34rem, min(92svh, 58vw));
   padding: clamp(1.1rem, 0.7rem + 1.2vw, 2rem) 0 clamp(1.5rem, 1rem + 1.5vw, 2.6rem);
-  background: var(--hm-cream);
-  color: var(--hm-forest);
+  background: var(--hm-green-deep);
+  color: var(--hm-cream);
 }
 
 .hm-hero-media {
@@ -705,13 +724,16 @@ html:has(.hm-header) {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* Soft cream veil on the quiet left wall, clear before the two faces. */
+  /* Deep green under the copy, gone before the two faces.
+     The bright wall needs a heavier left stop than the earlier photo
+     for cream text to clear AA; the fade still reaches 0 by 60%. */
   background: linear-gradient(
     90deg,
-    rgb(250 246 240 / 0.78) 0%,
-    rgb(250 246 240 / 0.5) 22%,
-    rgb(250 246 240 / 0.16) 36%,
-    rgb(250 246 240 / 0) 48%
+    rgb(22 53 46 / 0.88) 0%,
+    rgb(22 53 46 / 0.78) 18%,
+    rgb(22 53 46 / 0.7) 34%,
+    rgb(22 53 46 / 0.24) 46%,
+    rgb(22 53 46 / 0) 60%
   );
 }
 
@@ -737,14 +759,10 @@ html:has(.hm-header) {
   grid-template-columns: minmax(0, 1fr);
   gap: 0;
   align-items: center;
-  width: min(32rem, calc(100% - 2rem));
+  /* Stay inside the deep part of the fade. Faces begin near 43% of the frame. */
+  width: min(26rem, 30vw);
   margin-left: clamp(1rem, 2.5vw, 2.75rem);
   margin-right: auto;
-}
-
-.hm-hero-lead,
-.hm-hero-panel {
-  max-width: min(28rem, 34vw);
 }
 
 .hm-hero-lead {
@@ -752,27 +770,38 @@ html:has(.hm-header) {
 }
 
 .hm-hero .hm-kicker {
-  color: var(--hm-forest);
+  color: var(--hm-cream);
+}
+
+.hm-hero :is(.hm-kicker, h1, .hm-hero-support, .hm-chips, .hm-ahpra) {
+  text-shadow: 0 1px 2px rgb(8 22 18 / 0.45);
 }
 
 .hm-hero h1 {
   margin: 0.35rem 0 0;
-  font-size: clamp(2.35rem, 1rem + 3.1vw, 4.75rem);
+  font-size: clamp(1.55rem, 0.7rem + 1.15vw, 1.85rem);
   font-weight: 700;
-  line-height: 1.02;
-  color: var(--hm-forest);
+  line-height: 1.08;
+  color: var(--hm-cream);
 }
 
 .hm-hero h1 span {
   white-space: normal;
 }
 
+.hm-hero h1 .hm-em {
+  color: var(--hm-cream);
+  font-style: italic;
+  background: none;
+  padding: 0;
+}
+
 .hm-hero-support {
   margin: 0.85rem 0 0;
-  max-width: 36ch;
+  max-width: 38ch;
   font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
   line-height: 1.45;
-  color: var(--hm-forest);
+  color: var(--hm-cream);
 }
 
 .hm-hero-actions {
@@ -804,11 +833,11 @@ html:has(.hm-header) {
 }
 
 .hm-hero .hm-chips li {
-  color: var(--hm-forest);
+  color: var(--hm-cream);
 }
 
 .hm-hero .hm-chip-icon {
-  color: var(--hm-forest);
+  color: #f3c7ae;
 }
 
 .hm-ahpra {
@@ -818,18 +847,19 @@ html:has(.hm-header) {
 }
 
 .hm-hero .hm-ahpra {
-  color: var(--hm-forest);
+  color: var(--hm-cream);
 }
 
 .hm-hero .hm-btn-secondary {
-  background: var(--hm-warm-white);
+  background: var(--hm-cream);
   color: var(--hm-forest);
-  border-color: var(--hm-forest);
+  border-color: var(--hm-cream);
 }
 
 .hm-hero .hm-btn-secondary:hover {
-  background: var(--hm-forest);
-  color: #fff;
+  background: #fff;
+  color: var(--hm-forest);
+  border-color: #fff;
 }
 
 .hm-hero-photo {
@@ -1773,12 +1803,6 @@ a.hm-card:hover {
   }
 }
 
-@media (min-width: 768px) {
-  .hm-hero h1 span {
-    white-space: nowrap;
-  }
-}
-
 @media (max-width: 768px) {
   .hm-hero {
     display: block;
@@ -1797,18 +1821,21 @@ a.hm-card:hover {
 
   .hm-hero-scrim {
     inset: 0 0 auto 0;
-    height: 28%;
+    height: 32%;
     background: linear-gradient(
-      180deg,
-      rgb(250 246 240 / 0.58) 0%,
-      rgb(250 246 240 / 0.16) 62%,
-      rgb(250 246 240 / 0) 100%
+      to bottom,
+      rgb(22 53 46 / 0.88) 0%,
+      rgb(22 53 46 / 0.7) 48%,
+      rgb(22 53 46 / 0.22) 78%,
+      rgb(22 53 46 / 0) 100%
     );
   }
 
   .hm-hero-caption {
     top: 0.65rem;
     right: 0.7rem;
+    color: var(--hm-cream);
+    text-shadow: 0 1px 2px rgb(8 22 18 / 0.45);
   }
 
   .hm-hero-grid {
@@ -1833,12 +1860,17 @@ a.hm-card:hover {
     max-width: none;
     margin: 0;
     padding: 0.95rem 1rem 1.4rem;
-    background: var(--hm-cream);
+    background: #16352e;
+    color: var(--hm-cream);
+  }
+
+  .hm-hero-panel :is(.hm-hero-support, .hm-chips, .hm-ahpra) {
+    text-shadow: none;
   }
 
   .hm-hero h1 {
-    font-size: clamp(1.55rem, 6.5vw, 2.35rem);
-    line-height: 1.02;
+    font-size: clamp(1.2rem, 4.8vw, 1.55rem);
+    line-height: 1.05;
   }
 
   .hm-hero .hm-kicker {
