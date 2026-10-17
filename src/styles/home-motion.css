@@ -706,22 +706,17 @@ html:has(.hm-header) {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      rgb(22 53 46 / 0.96) 0%,
-      rgb(22 53 46 / 0.94) 42%,
-      rgb(22 53 46 / 0.72) 56%,
-      rgb(22 53 46 / 0.3) 72%,
-      rgb(22 53 46 / 0.12) 100%
-    ),
-    linear-gradient(
-      to top,
-      rgb(22 53 46 / 0.62) 0%,
-      rgb(22 53 46 / 0.22) 34%,
-      rgb(22 53 46 / 0.06) 62%,
-      transparent 100%
-    );
+  /* ~73% at the far-left text edge, gone by the middle of the frame.
+     The mask keeps the top of the frame open so her face is not under the veil. */
+  background: linear-gradient(
+    90deg,
+    rgb(22 53 46 / 0.75) 0%,
+    rgb(22 53 46 / 0.42) 26%,
+    rgb(22 53 46 / 0.1) 50%,
+    rgb(22 53 46 / 0) 64%
+  );
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0 12%, #000 26%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0 12%, #000 26%, #000 100%);
 }
 
 .hm-hero-grid {
@@ -735,11 +730,24 @@ html:has(.hm-header) {
 }
 
 .hm-hero-copy {
-  max-width: 42.5rem;
+  max-width: 36rem;
+  margin-top: clamp(4.5rem, 11vh, 7.5rem);
+}
+
+@media (max-height: 860px) {
+  .hm-hero-copy {
+    margin-top: clamp(2.25rem, 6vh, 4rem);
+  }
 }
 
 .hm-hero .hm-kicker {
   color: var(--hm-cream);
+}
+
+.hm-hero :is(.hm-kicker, h1, .hm-hero-support, .hm-chips, .hm-ahpra) {
+  text-shadow:
+    0 1px 2px rgb(12 28 24 / 0.55),
+    0 10px 28px rgb(12 28 24 / 0.4);
 }
 
 .hm-hero h1 {
@@ -754,6 +762,14 @@ html:has(.hm-header) {
 
 .hm-hero h1 .hm-em {
   color: var(--hm-orange);
+  background-color: rgb(22 53 46 / 0.72);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 0.12em;
+  border-radius: 0.08em;
+  text-shadow:
+    0 0 10px rgb(8 20 17 / 0.9),
+    0 1px 2px rgb(8 20 17 / 0.85);
 }
 
 .hm-hero-support {
@@ -825,10 +841,10 @@ html:has(.hm-header) {
   height: 100%;
   max-width: none;
   object-fit: cover;
-  /* Both faces sit in the upper middle of the 4:3 frame. */
-  object-position: 50% 24%;
+  /* Keep both people in frame; the zoom origin sits between them. */
+  object-position: 48% 34%;
   transform: translate3d(0, 0, 0) scale(1);
-  transform-origin: 50% 24%;
+  transform-origin: 46% 34%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -871,7 +887,7 @@ html:has(.hm-header) {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(-1.5%, -1.1%, 0) scale(1.11);
+    transform: translate3d(-0.7%, -0.4%, 0) scale(1.06);
   }
 }
 
@@ -1789,16 +1805,18 @@ a.hm-card:hover {
   }
 
   .hm-hero-scrim {
-    background:
-      linear-gradient(
-        180deg,
-        rgb(22 53 46 / 0.9) 0%,
-        rgb(22 53 46 / 0.88) 100%
-      );
+    background: linear-gradient(
+      180deg,
+      rgb(22 53 46 / 0.68) 0%,
+      rgb(22 53 46 / 0.74) 100%
+    );
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .hm-hero-copy {
     max-width: none;
+    margin-top: 0.25rem;
   }
 }
 
