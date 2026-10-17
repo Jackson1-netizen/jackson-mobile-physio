@@ -21,7 +21,7 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
   type="image/avif"
   imagesrcset={landscapeAvif}
   imagesizes="100vw"
-  media="(min-width: 700px)"
+  media="(min-width: 769px)"
   fetchpriority="high"
 />
 <link
@@ -30,7 +30,7 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
   type="image/avif"
   imagesrcset={portraitAvif}
   imagesizes="100vw"
-  media="(max-width: 699px)"
+  media="(max-width: 768px)"
   fetchpriority="high"
 />
 
@@ -38,37 +38,37 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
   <div class="hm-hero-media">
     <picture>
       <source
-        media="(min-width: 700px)"
+        media="(min-width: 769px)"
         type="image/avif"
         srcset={landscapeAvif}
         sizes="100vw"
       />
       <source
-        media="(min-width: 700px)"
+        media="(min-width: 769px)"
         type="image/webp"
         srcset={srcset("landscape", landscapeWidths, "webp")}
         sizes="100vw"
       />
       <source
-        media="(min-width: 700px)"
+        media="(min-width: 769px)"
         type="image/jpeg"
         srcset={srcset("landscape", landscapeWidths, "jpg")}
         sizes="100vw"
       />
       <source
-        media="(max-width: 699px)"
+        media="(max-width: 768px)"
         type="image/avif"
         srcset={portraitAvif}
         sizes="100vw"
       />
       <source
-        media="(max-width: 699px)"
+        media="(max-width: 768px)"
         type="image/webp"
         srcset={srcset("portrait", portraitWidths, "webp")}
         sizes="100vw"
       />
       <source
-        media="(max-width: 699px)"
+        media="(max-width: 768px)"
         type="image/jpeg"
         srcset={srcset("portrait", portraitWidths, "jpg")}
         sizes="100vw"
@@ -83,14 +83,11 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
         fetchpriority="high"
       />
     </picture>
+    <div class="hm-hero-scrim" aria-hidden="true"></div>
+    <p class="hm-hero-caption" data-i18n-path="hm.hero.caption">Illustrative image</p>
   </div>
-  <div class="hm-hero-scrim" aria-hidden="true"></div>
-  <p class="hm-hero-caption" data-i18n-path="hm.hero.caption">Illustrative image</p>
   <div class="hm-wrap hm-hero-grid">
-    <div class="hm-hero-copy">
-      <div class="hm-hero-lang">
-        <LanguageSwitcher />
-      </div>
+    <div class="hm-hero-lead">
       <p class="hm-kicker hm-kicker-forest" data-i18n-path="home.eyebrow">{homeHero.eyebrow}</p>
       <h1 id="hm-hero-heading">
         <span data-i18n-path="home.h1Lead">{homeHero.h1Lead}</span>
@@ -99,6 +96,8 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
         <br />
         <span data-i18n-path="home.h1Em">{homeHero.h1Em}</span>
       </h1>
+    </div>
+    <div class="hm-hero-panel">
       <p class="hm-hero-support" data-i18n-path="hm.hero.support">{homeHero.support}</p>
       <ul class="hm-chips">
         {
@@ -124,6 +123,9 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
       <p class="hm-ahpra" data-i18n-path="hm.hero.ahpra">
         {registrationLine}
       </p>
+      <div class="hm-hero-lang">
+        <LanguageSwitcher />
+      </div>
     </div>
   </div>
 </section>

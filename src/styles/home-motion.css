@@ -735,15 +735,19 @@ html:has(.hm-header) {
   z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--hm-stack) 2rem;
+  gap: 0;
   align-items: center;
   width: min(32rem, calc(100% - 2rem));
   margin-left: clamp(1rem, 2.5vw, 2.75rem);
   margin-right: auto;
 }
 
-.hm-hero-copy {
+.hm-hero-lead,
+.hm-hero-panel {
   max-width: min(28rem, 34vw);
+}
+
+.hm-hero-lead {
   margin-top: clamp(0.35rem, 1.5vh, 1.25rem);
 }
 
@@ -847,32 +851,42 @@ html:has(.hm-header) {
     will-change: transform;
   }
 
-  .hm-hero-copy > * {
+  .hm-hero-lead > *,
+  .hm-hero-panel > * {
     animation: hm-hero-rise 700ms ease-out both;
   }
 
-  .hm-hero-copy > *:nth-child(2) {
+  .hm-hero-lead > *:nth-child(1) {
     animation-delay: 80ms;
   }
 
-  .hm-hero-copy > *:nth-child(3) {
+  .hm-hero-lead > *:nth-child(2) {
     animation-delay: 160ms;
   }
 
-  .hm-hero-copy > *:nth-child(4) {
+  .hm-hero-panel > *:nth-child(1) {
     animation-delay: 240ms;
   }
 
-  .hm-hero-copy > *:nth-child(5) {
+  .hm-hero-panel > *:nth-child(2) {
     animation-delay: 320ms;
   }
 
-  .hm-hero-copy > *:nth-child(6) {
+  .hm-hero-panel > *:nth-child(3) {
     animation-delay: 400ms;
   }
 
-  .hm-hero-copy > *:nth-child(7) {
+  .hm-hero-panel > *:nth-child(4) {
     animation-delay: 480ms;
+  }
+}
+
+@keyframes hm-kenburns-portrait {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0, 0, 0) scale(1.018);
   }
 }
 
@@ -1751,7 +1765,8 @@ a.hm-card:hover {
     transform: none !important;
     will-change: auto !important;
   }
-  .hm-hero-copy > * {
+  .hm-hero-lead > *,
+  .hm-hero-panel > * {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -1764,68 +1779,101 @@ a.hm-card:hover {
   }
 }
 
-@media (max-width: 699px) {
+@media (max-width: 768px) {
   .hm-hero {
-    align-items: flex-start;
-    min-height: max(46rem, 100svh);
-    padding-top: 0.85rem;
+    display: block;
+    align-items: start;
+    min-height: 0;
+    padding: 0;
+    overflow: visible;
   }
 
-  .hm-hero h1 {
-    font-size: clamp(2.05rem, 8.4vw, 2.7rem);
-  }
-
-  .hm-hero-support {
-    margin-top: 0.65rem;
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-
-  .hm-hero .hm-chips {
-    margin-top: 0.65rem;
-  }
-
-  .hm-hero-actions {
-    margin-top: 0.75rem;
-  }
-
-  .hm-hero .hm-ahpra {
-    margin-top: 0.65rem;
-  }
-
-  .hm-hero-lang {
-    margin-bottom: 0.45rem;
-  }
-
-  .hm-hero .hm-kicker {
-    font-size: 0.82rem;
-    letter-spacing: 0.14em;
+  .hm-hero-media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 4 / 5;
   }
 
   .hm-hero-scrim {
+    inset: 0 0 auto 0;
+    height: 28%;
     background: linear-gradient(
       180deg,
-      rgb(250 246 240 / 0.9) 0%,
-      rgb(250 246 240 / 0.72) 20%,
-      rgb(250 246 240 / 0.48) 38%,
-      rgb(250 246 240 / 0.22) 54%,
-      rgb(250 246 240 / 0) 70%
+      rgb(250 246 240 / 0.58) 0%,
+      rgb(250 246 240 / 0.16) 62%,
+      rgb(250 246 240 / 0) 100%
     );
   }
 
-  .hm-hero-copy {
-    max-width: 22rem;
-    margin-top: 0.15rem;
-  }
-
   .hm-hero-caption {
-    top: 0.7rem;
+    top: 0.65rem;
     right: 0.7rem;
   }
 
+  .hm-hero-grid {
+    display: contents;
+  }
+
+  .hm-hero-lead {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    width: auto;
+    max-width: none;
+    margin: 0.45rem 1rem 0;
+  }
+
+  .hm-hero-panel {
+    position: relative;
+    z-index: 2;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0.95rem 1rem 1.4rem;
+    background: var(--hm-cream);
+  }
+
+  .hm-hero h1 {
+    font-size: clamp(1.55rem, 6.5vw, 2.35rem);
+    line-height: 1.02;
+  }
+
+  .hm-hero .hm-kicker {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+  }
+
+  .hm-hero-support {
+    margin-top: 0.45rem;
+    max-width: 38rem;
+    font-size: 0.98rem;
+    line-height: 1.35;
+  }
+
+  .hm-hero .hm-chips {
+    margin-top: 0.75rem;
+  }
+
+  .hm-hero-actions {
+    margin-top: 0.85rem;
+  }
+
+  .hm-hero .hm-ahpra {
+    margin-top: 0.75rem;
+  }
+
+  .hm-hero-lang {
+    margin-top: 0.85rem;
+    margin-bottom: 0;
+  }
+
   .hm-hero-photo {
-    object-position: 50% 46%;
-    transform-origin: 50% 52%;
+    object-position: 50% 50%;
+    transform-origin: 50% 50%;
+    animation-name: hm-kenburns-portrait;
   }
 }
 
