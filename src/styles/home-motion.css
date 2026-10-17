@@ -683,10 +683,10 @@ html:has(.hm-header) {
   position: relative;
   isolation: isolate;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   min-height: max(35rem, 92svh);
-  padding: clamp(1.75rem, 1.1rem + 2.2vw, 3.25rem) 0;
+  padding: clamp(1.35rem, 0.8rem + 1.6vw, 2.4rem) 0 clamp(1.75rem, 1.1rem + 2vw, 3rem);
   background: var(--hm-green-deep);
   color: var(--hm-cream);
 }
@@ -709,10 +709,10 @@ html:has(.hm-header) {
   background:
     linear-gradient(
       90deg,
-      rgb(22 53 46 / 0.94) 0%,
-      rgb(22 53 46 / 0.9) 30%,
-      rgb(22 53 46 / 0.62) 48%,
-      rgb(22 53 46 / 0.28) 66%,
+      rgb(22 53 46 / 0.96) 0%,
+      rgb(22 53 46 / 0.94) 42%,
+      rgb(22 53 46 / 0.72) 56%,
+      rgb(22 53 46 / 0.3) 72%,
       rgb(22 53 46 / 0.12) 100%
     ),
     linear-gradient(
@@ -735,7 +735,7 @@ html:has(.hm-header) {
 }
 
 .hm-hero-copy {
-  max-width: 40rem;
+  max-width: 42.5rem;
 }
 
 .hm-hero .hm-kicker {
@@ -743,8 +743,8 @@ html:has(.hm-header) {
 }
 
 .hm-hero h1 {
-  margin: 0.85rem 0 0;
-  font-size: clamp(2.2rem, 1.2rem + 5.2vw, 4.05rem);
+  margin: 0.55rem 0 0;
+  font-size: clamp(1.85rem, 0.95rem + 2.4vw, 3.15rem);
   color: var(--hm-cream);
 }
 
@@ -757,10 +757,10 @@ html:has(.hm-header) {
 }
 
 .hm-hero-support {
-  margin: 1rem 0 0;
+  margin: 0.75rem 0 0;
   max-width: 44ch;
-  font-size: clamp(1.12rem, 1rem + 0.6vw, 1.28rem);
-  line-height: 1.5;
+  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+  line-height: 1.45;
   color: var(--hm-cream);
 }
 
@@ -768,14 +768,14 @@ html:has(.hm-header) {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.6rem;
+  margin-top: 1.15rem;
 }
 
 .hm-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.1rem 1.5rem;
-  margin-top: 1.35rem;
+  gap: 0.7rem 1.15rem;
+  margin-top: 1rem;
   padding: 0;
   list-style: none;
 }
@@ -826,9 +826,9 @@ html:has(.hm-header) {
   max-width: none;
   object-fit: cover;
   /* Both faces sit in the upper middle of the 4:3 frame. */
-  object-position: 50% 30%;
+  object-position: 50% 24%;
   transform: translate3d(0, 0, 0) scale(1);
-  transform-origin: 50% 30%;
+  transform-origin: 50% 24%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1748,19 +1748,52 @@ a.hm-card:hover {
   }
 }
 
+@media (min-width: 768px) {
+  .hm-hero h1 span {
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 767px) {
   .hm-hero {
     align-items: flex-start;
+    /* 92svh is taller than the 4:3 photo can cover without cutting a face. */
+    min-height: 35rem;
+    padding-top: 1.1rem;
+  }
+
+  .hm-hero h1 {
+    font-size: clamp(1.6rem, 6.4vw, 2rem);
+  }
+
+  .hm-hero-support {
+    margin-top: 0.55rem;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .hm-hero .hm-chips {
+    margin-top: 0.65rem;
+  }
+
+  .hm-hero-actions {
+    margin-top: 0.75rem;
+  }
+
+  .hm-hero .hm-ahpra {
+    margin-top: 0.65rem;
+  }
+
+  .hm-hero-lang {
+    margin-bottom: 0.55rem;
   }
 
   .hm-hero-scrim {
     background:
       linear-gradient(
         180deg,
-        rgb(22 53 46 / 0.93) 0%,
-        rgb(22 53 46 / 0.88) 48%,
-        rgb(22 53 46 / 0.5) 72%,
-        rgb(22 53 46 / 0.22) 100%
+        rgb(22 53 46 / 0.9) 0%,
+        rgb(22 53 46 / 0.88) 100%
       );
   }
 
@@ -1775,7 +1808,7 @@ a.hm-card:hover {
   }
   .hm-hero-actions {
     gap: 0.6rem;
-    margin-top: 1.25rem;
+    margin-top: 0.7rem;
   }
   .hm-hero-actions .hm-btn {
     min-height: 2.9rem;
@@ -1785,8 +1818,8 @@ a.hm-card:hover {
     white-space: normal;
   }
   .hm-chips {
-    gap: 0.6rem 1.1rem;
-    margin-top: 1rem;
+    gap: 0.45rem 0.85rem;
+    margin-top: 0.65rem;
   }
   .hm-section-head {
     margin-bottom: 1.25rem;
