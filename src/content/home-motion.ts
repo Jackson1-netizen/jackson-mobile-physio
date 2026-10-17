@@ -19,8 +19,8 @@ export const homeNav = [
 export const homeHero = {
   eyebrow: "Mobile physiotherapy",
   h1Lead: messages.en.home.h1Lead,
-  h1Mid: "in the comfort of",
-  h1Em: "home.",
+  h1Mid: messages.en.home.h1Mid,
+  h1Em: messages.en.home.h1Em,
   support: hm.hero.support,
   primaryCta: messages.en.home.primaryCta,
   secondaryCta: messages.en.home.secondaryCta,
@@ -40,7 +40,7 @@ export const homePhotos = {
     widths: [480, 640, 819],
     width: 819,
     height: 614,
-    alt: hm.hero.photoAlt,
+    alt: "Physiotherapist supporting walking practice with a walking frame during a home visit",
   },
   homeGait: {
     src: "/photos/home-gait-support.jpg",

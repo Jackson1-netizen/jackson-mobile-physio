@@ -679,16 +679,15 @@ html:has(.hm-header) {
 }
 
 .hm-hero {
-  --hm-focus: #ffd2b8;
   position: relative;
   isolation: isolate;
   display: flex;
   align-items: flex-start;
   overflow: hidden;
-  min-height: max(35rem, 92svh);
-  padding: clamp(1.35rem, 0.8rem + 1.6vw, 2.4rem) 0 clamp(1.75rem, 1.1rem + 2vw, 3rem);
-  background: var(--hm-green-deep);
-  color: var(--hm-cream);
+  min-height: max(34rem, min(92svh, 58vw));
+  padding: clamp(1.1rem, 0.7rem + 1.2vw, 2rem) 0 clamp(1.5rem, 1rem + 1.5vw, 2.6rem);
+  background: var(--hm-cream);
+  color: var(--hm-forest);
 }
 
 .hm-hero-media {
@@ -706,17 +705,29 @@ html:has(.hm-header) {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* ~73% at the far-left text edge, gone by the middle of the frame.
-     The mask keeps the top of the frame open so her face is not under the veil. */
+  /* Soft cream veil on the quiet left wall, clear before the two faces. */
   background: linear-gradient(
     90deg,
-    rgb(22 53 46 / 0.75) 0%,
-    rgb(22 53 46 / 0.42) 26%,
-    rgb(22 53 46 / 0.1) 50%,
-    rgb(22 53 46 / 0) 64%
+    rgb(250 246 240 / 0.78) 0%,
+    rgb(250 246 240 / 0.5) 22%,
+    rgb(250 246 240 / 0.16) 36%,
+    rgb(250 246 240 / 0) 48%
   );
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0 12%, #000 26%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0 12%, #000 26%, #000 100%);
+}
+
+.hm-hero-caption {
+  position: absolute;
+  z-index: 3;
+  top: 0.85rem;
+  right: 1rem;
+  margin: 0;
+  max-width: 12rem;
+  color: var(--hm-forest);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  text-align: right;
 }
 
 .hm-hero-grid {
@@ -726,58 +737,38 @@ html:has(.hm-header) {
   grid-template-columns: minmax(0, 1fr);
   gap: var(--hm-stack) 2rem;
   align-items: center;
-  width: min(72rem, calc(100% - 2.5rem));
+  width: min(32rem, calc(100% - 2rem));
+  margin-left: clamp(1rem, 2.5vw, 2.75rem);
+  margin-right: auto;
 }
 
 .hm-hero-copy {
-  max-width: 36rem;
-  margin-top: clamp(4.5rem, 11vh, 7.5rem);
-}
-
-@media (max-height: 860px) {
-  .hm-hero-copy {
-    margin-top: clamp(2.25rem, 6vh, 4rem);
-  }
+  max-width: min(28rem, 34vw);
+  margin-top: clamp(0.35rem, 1.5vh, 1.25rem);
 }
 
 .hm-hero .hm-kicker {
-  color: var(--hm-cream);
-}
-
-.hm-hero :is(.hm-kicker, h1, .hm-hero-support, .hm-chips, .hm-ahpra) {
-  text-shadow:
-    0 1px 2px rgb(12 28 24 / 0.55),
-    0 10px 28px rgb(12 28 24 / 0.4);
+  color: var(--hm-forest);
 }
 
 .hm-hero h1 {
-  margin: 0.55rem 0 0;
-  font-size: clamp(1.85rem, 0.95rem + 2.4vw, 3.15rem);
-  color: var(--hm-cream);
+  margin: 0.35rem 0 0;
+  font-size: clamp(2.35rem, 1rem + 3.1vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.02;
+  color: var(--hm-forest);
 }
 
 .hm-hero h1 span {
   white-space: normal;
 }
 
-.hm-hero h1 .hm-em {
-  color: var(--hm-orange);
-  background-color: rgb(22 53 46 / 0.72);
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-  padding: 0 0.12em;
-  border-radius: 0.08em;
-  text-shadow:
-    0 0 10px rgb(8 20 17 / 0.9),
-    0 1px 2px rgb(8 20 17 / 0.85);
-}
-
 .hm-hero-support {
-  margin: 0.75rem 0 0;
-  max-width: 44ch;
+  margin: 0.85rem 0 0;
+  max-width: 36ch;
   font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
   line-height: 1.45;
-  color: var(--hm-cream);
+  color: var(--hm-forest);
 }
 
 .hm-hero-actions {
@@ -809,7 +800,11 @@ html:has(.hm-header) {
 }
 
 .hm-hero .hm-chips li {
-  color: var(--hm-cream);
+  color: var(--hm-forest);
+}
+
+.hm-hero .hm-chip-icon {
+  color: var(--hm-forest);
 }
 
 .hm-ahpra {
@@ -819,19 +814,18 @@ html:has(.hm-header) {
 }
 
 .hm-hero .hm-ahpra {
-  color: var(--hm-cream);
+  color: var(--hm-forest);
 }
 
 .hm-hero .hm-btn-secondary {
-  background: var(--hm-cream);
+  background: var(--hm-warm-white);
   color: var(--hm-forest);
-  border-color: var(--hm-cream);
+  border-color: var(--hm-forest);
 }
 
 .hm-hero .hm-btn-secondary:hover {
-  background: #fff;
-  color: var(--hm-forest);
-  border-color: #fff;
+  background: var(--hm-forest);
+  color: #fff;
 }
 
 .hm-hero-photo {
@@ -841,10 +835,10 @@ html:has(.hm-header) {
   height: 100%;
   max-width: none;
   object-fit: cover;
-  /* Keep both people in frame; the zoom origin sits between them. */
-  object-position: 48% 34%;
+  /* Landscape: keep the quiet left wall and both faces inside the 16:9 frame. */
+  object-position: 52% 40%;
   transform: translate3d(0, 0, 0) scale(1);
-  transform-origin: 46% 34%;
+  transform-origin: 58% 44%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -887,7 +881,7 @@ html:has(.hm-header) {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(-0.7%, -0.4%, 0) scale(1.06);
+    transform: translate3d(-0.28%, -0.1%, 0) scale(1.035);
   }
 }
 
@@ -1770,20 +1764,19 @@ a.hm-card:hover {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 699px) {
   .hm-hero {
     align-items: flex-start;
-    /* 92svh is taller than the 4:3 photo can cover without cutting a face. */
-    min-height: 35rem;
-    padding-top: 1.1rem;
+    min-height: max(46rem, 100svh);
+    padding-top: 0.85rem;
   }
 
   .hm-hero h1 {
-    font-size: clamp(1.6rem, 6.4vw, 2rem);
+    font-size: clamp(2.05rem, 8.4vw, 2.7rem);
   }
 
   .hm-hero-support {
-    margin-top: 0.55rem;
+    margin-top: 0.65rem;
     font-size: 1rem;
     line-height: 1.4;
   }
@@ -1801,22 +1794,38 @@ a.hm-card:hover {
   }
 
   .hm-hero-lang {
-    margin-bottom: 0.55rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .hm-hero .hm-kicker {
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
   }
 
   .hm-hero-scrim {
     background: linear-gradient(
       180deg,
-      rgb(22 53 46 / 0.68) 0%,
-      rgb(22 53 46 / 0.74) 100%
+      rgb(250 246 240 / 0.9) 0%,
+      rgb(250 246 240 / 0.72) 20%,
+      rgb(250 246 240 / 0.48) 38%,
+      rgb(250 246 240 / 0.22) 54%,
+      rgb(250 246 240 / 0) 70%
     );
-    -webkit-mask-image: none;
-    mask-image: none;
   }
 
   .hm-hero-copy {
-    max-width: none;
-    margin-top: 0.25rem;
+    max-width: 22rem;
+    margin-top: 0.15rem;
+  }
+
+  .hm-hero-caption {
+    top: 0.7rem;
+    right: 0.7rem;
+  }
+
+  .hm-hero-photo {
+    object-position: 50% 46%;
+    transform-origin: 50% 52%;
   }
 }
 

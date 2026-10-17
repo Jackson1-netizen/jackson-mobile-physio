@@ -1,43 +1,91 @@
 ---
-import HomePicture from "./HomePicture.astro";
 import { getRegistrationDisplayLine } from "../../content/site";
-import { homeHero, homeMedia } from "../../content/home-motion";
+import { homeHero } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
 
 const registrationLine = getRegistrationDisplayLine();
-const hero = homeMedia.hero;
-const widths = hero.widths ?? [];
-const stem = hero.src.replace(/^\/photos\//, "/photos/opt/").replace(/\.[a-z]+$/i, "");
-const avifSrcset = widths.map((w) => `${stem}-${w}.avif ${w}w`).join(", ");
-const largest = widths[widths.length - 1];
+const alt =
+  "Illustration of a physiotherapist helping an older woman with a walking frame at home";
+const landscapeWidths = [1920, 2560, 3840] as const;
+const portraitWidths = [800, 1200, 1600, 2400] as const;
+const srcset = (name: string, widths: readonly number[], ext: string) =>
+  widths.map((w) => `/photos/hero/${name}-${w}.${ext} ${w}w`).join(", ");
+const landscapeAvif = srcset("landscape", landscapeWidths, "avif");
+const portraitAvif = srcset("portrait", portraitWidths, "avif");
 ---
 
-{
-  largest && (
-    <link
-      rel="preload"
-      as="image"
-      type="image/avif"
-      href={`${stem}-${largest}.avif`}
-      imagesrcset={avifSrcset}
-      imagesizes="100vw"
-      fetchpriority="high"
-    />
-  )
-}
+<link
+  rel="preload"
+  as="image"
+  type="image/avif"
+  imagesrcset={landscapeAvif}
+  imagesizes="100vw"
+  media="(min-width: 700px)"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  as="image"
+  type="image/avif"
+  imagesrcset={portraitAvif}
+  imagesizes="100vw"
+  media="(max-width: 699px)"
+  fetchpriority="high"
+/>
 
 <section id="top" class="hm-hero" aria-labelledby="hm-hero-heading">
   <div class="hm-hero-media">
-    <HomePicture
-      class="hm-hero-photo"
-      photo={hero}
-      altPath="hm.hero.photoAlt"
-      sizes="100vw"
-      priority
-    />
+    <picture>
+      <source
+        media="(min-width: 700px)"
+        type="image/avif"
+        srcset={landscapeAvif}
+        sizes="100vw"
+      />
+      <source
+        media="(min-width: 700px)"
+        type="image/webp"
+        srcset={srcset("landscape", landscapeWidths, "webp")}
+        sizes="100vw"
+      />
+      <source
+        media="(min-width: 700px)"
+        type="image/jpeg"
+        srcset={srcset("landscape", landscapeWidths, "jpg")}
+        sizes="100vw"
+      />
+      <source
+        media="(max-width: 699px)"
+        type="image/avif"
+        srcset={portraitAvif}
+        sizes="100vw"
+      />
+      <source
+        media="(max-width: 699px)"
+        type="image/webp"
+        srcset={srcset("portrait", portraitWidths, "webp")}
+        sizes="100vw"
+      />
+      <source
+        media="(max-width: 699px)"
+        type="image/jpeg"
+        srcset={srcset("portrait", portraitWidths, "jpg")}
+        sizes="100vw"
+      />
+      <img
+        class="hm-hero-photo"
+        src="/photos/hero/landscape-1920.jpg"
+        alt={alt}
+        data-i18n-attr="alt:hm.hero.photoAlt"
+        width="3840"
+        height="2160"
+        fetchpriority="high"
+      />
+    </picture>
   </div>
   <div class="hm-hero-scrim" aria-hidden="true"></div>
+  <p class="hm-hero-caption" data-i18n-path="hm.hero.caption">Illustrative image</p>
   <div class="hm-wrap hm-hero-grid">
     <div class="hm-hero-copy">
       <div class="hm-hero-lang">
@@ -49,7 +97,7 @@ const largest = widths[widths.length - 1];
         <br />
         <span data-i18n-path="home.h1Mid">{homeHero.h1Mid}</span>
         <br />
-        <span class="hm-em" data-i18n-path="home.h1Em">{homeHero.h1Em}</span>
+        <span data-i18n-path="home.h1Em">{homeHero.h1Em}</span>
       </h1>
       <p class="hm-hero-support" data-i18n-path="hm.hero.support">{homeHero.support}</p>
       <ul class="hm-chips">

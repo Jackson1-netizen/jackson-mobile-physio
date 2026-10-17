@@ -218,9 +218,9 @@ const en = {
   ...(site.draft ? { draftBanner: { short: "Draft preview — not indexed" } } : {}),
   home: {
     eyebrow: "Mobile physiotherapy",
-    h1Lead: "Personalised physiotherapy",
-    h1Mid: "in the comfort of",
-    h1Em: "home.",
+    h1Lead: "Move well.",
+    h1Mid: "Live well.",
+    h1Em: "At home.",
     support:
       "Independent mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you speak directly with Jackson — the physiotherapist who personally delivers your care. Appointments in English, Cantonese and Mandarin.",
     primaryCta: "Make an enquiry",
@@ -247,7 +247,8 @@ const en = {
       chips: ["Home & community visits", "All ages welcome", "NDIS enquiries welcome"],
       ahpra: "AHPRA registered physiotherapist",
       photoAlt:
-        "Jackson providing mobile physiotherapy at home, supporting walking practice with a walking frame",
+        "Illustration of a physiotherapist helping an older woman with a walking frame at home",
+      caption: "Illustrative image",
     },
     services: {
       heading: "Our Services",
@@ -535,9 +536,9 @@ const zhHant = {
   ...(site.draft ? { draftBanner: { short: "草稿預覽 — 未公開索引" } } : {}),
   home: {
     eyebrow: "上門物理治療",
-    h1Lead: "個人化物理治療",
-    h1Mid: "在家中安心接受",
-    h1Em: "服務。",
+    h1Lead: "好好活動。",
+    h1Mid: "好好生活。",
+    h1Em: "在家。",
     support:
       "墨爾本東郊獨立上門物理治療。查詢時由 Jackson 本人接聽，亦由他親自提供護理。可使用英語、粵語或普通話。",
     primaryCta: "查詢預約",
@@ -558,7 +559,8 @@ const zhHant = {
         "為墨爾本東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
       chips: ["上門及社區探訪", "歡迎所有年齡人士", "歡迎 NDIS 查詢"],
       ahpra: "AHPRA 註冊物理治療師",
-      photoAlt: "Jackson 上門提供物理治療，協助使用助行架進行步行練習",
+      photoAlt: "插圖：物理治療師在家中協助一位年長女士使用助行架",
+      caption: "示意插圖",
     },
     services: {
       heading: "我們的服務",
@@ -837,9 +839,9 @@ const zhHans = {
   ...(site.draft ? { draftBanner: { short: "草稿预览 — 未公开索引" } } : {}),
   home: {
     eyebrow: "上门物理治疗",
-    h1Lead: "个性化物理治疗",
-    h1Mid: "在家中安心接受",
-    h1Em: "服务。",
+    h1Lead: "好好活动。",
+    h1Mid: "好好生活。",
+    h1Em: "在家。",
     support:
       "墨尔本东郊独立上门物理治疗。查询时由 Jackson 本人接听，亦由他亲自提供护理。可使用英语、粤语或普通话。",
     primaryCta: "查询预约",
@@ -860,7 +862,8 @@ const zhHans = {
         "为墨尔本东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
       chips: ["上门及社区探访", "欢迎所有年龄人士", "欢迎 NDIS 咨询"],
       ahpra: "AHPRA 注册物理治疗师",
-      photoAlt: "Jackson 上门提供物理治疗，协助使用助行架进行步行练习",
+      photoAlt: "插图：物理治疗师在家中协助一位年长女士使用助行架",
+      caption: "示意插图",
     },
     services: {
       heading: "我们的服务",
