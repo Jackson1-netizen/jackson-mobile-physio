@@ -2,7 +2,7 @@
 import HomeLogo from "./HomeLogo.astro";
 import { site } from "../../content/site";
 import { messages } from "../../content/i18n";
-import { homeNav, homeHero } from "../../content/home-motion";
+import { homeNav, homeHero, homeMenuServices, homeMenuAreas } from "../../content/home-motion";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
 
 const t = messages.en.hm.header;
@@ -11,24 +11,8 @@ const t = messages.en.hm.header;
 <header class="hm-header no-print">
   <div class="hm-wrap hm-header-inner">
     <a class="hm-logo" href="/">
-      <HomeLogo alt={`${site.displayBrand} ${site.tagline}`} sizes="(min-width: 1024px) 185px, 145px" />
+      <HomeLogo alt={`${site.displayBrand} ${site.tagline}`} sizes="(min-width: 1024px) 150px, 110px" />
     </a>
-
-    <nav class="hm-nav" aria-label={t.primaryNav} data-i18n-attr="aria-label:hm.header.primaryNav">
-      {
-        homeNav.map((item) => (
-          <a
-            href={item.href}
-            class={item.spy === "top" ? "is-active" : undefined}
-            aria-current={item.spy === "top" ? "page" : undefined}
-            data-i18n-path={item.path}
-            data-spy={item.spy}
-          >
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
 
     <div class="hm-header-tools">
       <div class="hm-lang">
@@ -39,21 +23,56 @@ const t = messages.en.hm.header;
         <span class="hm-arrow" aria-hidden="true">→</span>
       </a>
       <details class="hm-menu">
-        <summary data-i18n-path="hm.header.menu">{t.menu}</summary>
-        <div class="hm-menu-panel">
+        <summary aria-expanded="false" aria-controls="hm-menu-panel">
+          <svg class="hm-menu-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+            <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+          <span data-i18n-path="hm.header.menu">{t.menu}</span>
+        </summary>
+        <div class="hm-menu-panel" id="hm-menu-panel">
           <nav aria-label={t.mobileNav} data-i18n-attr="aria-label:hm.header.mobileNav">
-            {
-              homeNav.map((item) => (
-                <a href={item.href} data-i18n-path={item.path} data-spy={item.spy}>
-                  {item.label}
-                </a>
-              ))
-            }
-            <a class="hm-menu-cta" href="#contact" data-i18n-path="home.primaryCta">{homeHero.primaryCta}</a>
+            <ul class="hm-menu-primary">
+              {
+                homeNav.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      class={item.spy === "top" ? "is-active" : undefined}
+                      aria-current={item.spy === "top" ? "page" : undefined}
+                      data-i18n-path={item.path}
+                      data-spy={item.spy}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+            <div class="hm-menu-group">
+              <p class="hm-menu-label" id="hm-menu-services" data-i18n-path="nav.services">{messages.en.nav.services}</p>
+              <ul aria-labelledby="hm-menu-services">
+                {
+                  homeMenuServices.map((item) => (
+                    <li>
+                      <a href={item.href} data-i18n-path={item.path}>{item.label}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <div class="hm-menu-group">
+              <p class="hm-menu-label" id="hm-menu-areas" data-i18n-path="nav.areas">{messages.en.nav.areas}</p>
+              <ul aria-labelledby="hm-menu-areas">
+                {
+                  homeMenuAreas.map((area) => (
+                    <li>
+                      <a href={area.href}>{area.name}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
           </nav>
-          <div class="hm-menu-lang">
-            <LanguageSwitcher />
-          </div>
         </div>
       </details>
     </div>

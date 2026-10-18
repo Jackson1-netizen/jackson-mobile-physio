@@ -247,7 +247,8 @@ const en = {
       chips: ["Home & community visits", "All ages welcome", "NDIS enquiries welcome"],
       ahpra: "AHPRA registered physiotherapist",
       photoAlt:
-        "Jackson providing mobile physiotherapy at home, supporting walking practice with a walking frame",
+        "Illustration of a physiotherapist helping an older woman with a walking frame at home",
+      caption: "Illustrative image",
     },
     services: {
       heading: "Our Services",
@@ -558,7 +559,8 @@ const zhHant = {
         "為墨爾本東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
       chips: ["上門及社區探訪", "歡迎所有年齡人士", "歡迎 NDIS 查詢"],
       ahpra: "AHPRA 註冊物理治療師",
-      photoAlt: "Jackson 上門提供物理治療，協助使用助行架進行步行練習",
+      photoAlt: "插圖：物理治療師在家中協助一位年長女士使用助行架",
+      caption: "示意插圖",
     },
     services: {
       heading: "我們的服務",
@@ -860,7 +862,8 @@ const zhHans = {
         "为墨尔本东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
       chips: ["上门及社区探访", "欢迎所有年龄人士", "欢迎 NDIS 咨询"],
       ahpra: "AHPRA 注册物理治疗师",
-      photoAlt: "Jackson 上门提供物理治疗，协助使用助行架进行步行练习",
+      photoAlt: "插图：物理治疗师在家中协助一位年长女士使用助行架",
+      caption: "示意插图",
     },
     services: {
       heading: "我们的服务",

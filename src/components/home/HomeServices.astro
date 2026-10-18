@@ -1,5 +1,5 @@
 ---
-import { homeServices } from "../../content/home-motion";
+import { homeServices, serviceAnchor } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 ---
 
@@ -19,7 +19,7 @@ import HomeIcon from "./HomeIcon.astro";
     <ul class="hm-service-grid">
       {
         homeServices.cards.map((card, i) => (
-          <li>
+          <li id={serviceAnchor(card.title)}>
             <div class="hm-card hm-service-card">
               <span class="hm-service-icon">
                 <HomeIcon name={card.icon} size={28} />

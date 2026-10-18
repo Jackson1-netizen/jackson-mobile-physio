@@ -16,11 +16,21 @@ export const homeNav = [
   { href: "#contact", label: nav.contact, path: "nav.contact", spy: "contact" },
 ] as const;
 
+/** Stable in-page id for a homepage service card. There are no separate service routes. */
+export function serviceAnchor(title: string): string {
+  const slug = title
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return `service-${slug}`;
+}
+
 export const homeHero = {
   eyebrow: "Mobile physiotherapy",
   h1Lead: messages.en.home.h1Lead,
-  h1Mid: "in the comfort of",
-  h1Em: "home.",
+  h1Mid: messages.en.home.h1Mid,
+  h1Em: messages.en.home.h1Em,
   support: hm.hero.support,
   primaryCta: messages.en.home.primaryCta,
   secondaryCta: messages.en.home.secondaryCta,
@@ -40,7 +50,7 @@ export const homePhotos = {
     widths: [480, 640, 819],
     width: 819,
     height: 614,
-    alt: hm.hero.photoAlt,
+    alt: "Physiotherapist supporting walking practice with a walking frame during a home visit",
   },
   homeGait: {
     src: "/photos/home-gait-support.jpg",
@@ -127,6 +137,12 @@ export const homeServices = {
   ],
 };
 
+export const homeMenuServices = homeServices.cards.map((card, index) => ({
+  href: `#${serviceAnchor(card.title)}`,
+  label: card.title,
+  path: `hm.services.cards.${index}.title`,
+}));
+
 export const homeSteps = hm.how.steps.map((step, i) => ({
   num: String(i + 1).padStart(2, "0"),
   ...step,
@@ -199,6 +215,9 @@ export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {
     href: page ? suburbPath(page.slug) : "/#areas",
   };
 });
+
+/** Suburb landing pages only — skip any area that has no real route. */
+export const homeMenuAreas = homeSuburbs.filter((area) => area.href.startsWith("/areas/"));
 
 export const homeFaq = messages.en.faq.items;
 

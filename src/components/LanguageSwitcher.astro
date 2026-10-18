@@ -1,5 +1,13 @@
 ---
-import { localeLabels } from "../content/i18n";
+/**
+ * Visible languages are English and Simplified Chinese only.
+ * zh-Hant stays in the message bundles so a previously stored locale still applies;
+ * it is not offered here.
+ */
+const options = [
+  { code: "en", label: "EN", lang: "en" },
+  { code: "zh-Hans", label: "CN", lang: "zh-Hans" },
+] as const;
 ---
 
 <div
@@ -9,14 +17,14 @@ import { localeLabels } from "../content/i18n";
   data-i18n-attr="aria-label:hm.header.languageGroup"
 >
   {
-    Object.entries(localeLabels).map(([code, label]) => (
+    options.map(({ code, label, lang }) => (
       <button
         type="button"
         class="lang-btn rounded px-2 py-1 font-medium text-[var(--color-ink-muted)] transition hover:text-[var(--color-accent)] data-[active=true]:bg-[var(--color-accent)] data-[active=true]:text-white"
         data-locale={code}
         data-active={code === "en" ? "true" : "false"}
         aria-pressed={code === "en" ? "true" : "false"}
-        lang={code === "en" ? "en" : code}
+        lang={lang}
       >
         {label}
       </button>
