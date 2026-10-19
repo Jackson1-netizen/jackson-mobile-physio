@@ -10,6 +10,7 @@ import { kitchenBenchPhoto } from "../content/home-motion";
 
 const copy = messages.en.referralPage;
 const referralMailto = getReferralEmailHref();
+const [referralLocal, referralDomain] = site.referralEmail.split("@");
 const quals = publicQualifications();
 const stepIcons = ["mail", "people", "clipboard"] as const;
 const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
@@ -63,21 +64,27 @@ const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
           }
         </ol>
         <ul class="ref-cards">
-          <li>
-            <span class="ref-card-icon" aria-hidden="true"><HomeIcon name="shield" size={28} /></span>
-            <p data-i18n-path="referralPage.ahpraCard">{copy.ahpraCard}</p>
+          <li class="ref-card ref-card-ahpra">
+            <span class="ref-badge" aria-hidden="true"><HomeIcon name="shield" size={32} /></span>
+            <p>
+              <span class="ref-ahpra-lead" data-i18n-path="referralPage.ahpraLead">{copy.ahpraLead}</span>
+              <span class="ref-ahpra-rest" data-i18n-path="referralPage.ahpraRest">{copy.ahpraRest}</span>
+            </p>
           </li>
-          <li>
-            <span class="ref-card-icon" aria-hidden="true"><HomeIcon name="clipboard" size={28} /></span>
-            <p data-i18n-path="referralPage.ndisCard">{copy.ndisCard}</p>
+          <li class="ref-card">
+            <span class="ref-badge ref-badge-hands" aria-hidden="true"><HomeIcon name="handshake" size={32} /></span>
+            <p class="ref-card-title" data-i18n-path="referralPage.ndisCard">{copy.ndisCard}</p>
             <p class="ref-card-note" data-i18n-path="referralPage.ndisLimit">{copy.ndisLimit}</p>
           </li>
-          <li>
-            <span class="ref-card-icon ref-card-icon-mail" aria-hidden="true"><HomeIcon name="mail" size={28} /></span>
-            <p><a href={referralMailto}>{site.referralEmail}</a></p>
+          <li class="ref-card ref-card-mail">
+            <span class="ref-badge ref-badge-mail" aria-hidden="true"><HomeIcon name="mail" size={30} /></span>
+            <a class="ref-mail" href={referralMailto}>
+              <span>{referralLocal}@</span>
+              <span>{referralDomain}</span>
+            </a>
             <a class="ref-btn" href="#referral-details">
               <span data-i18n-path="referralPage.cta">{copy.cta}</span>
-              <span aria-hidden="true"> →</span>
+              <span class="ref-btn-arrow" aria-hidden="true">→</span>
             </a>
           </li>
         </ul>
@@ -371,74 +378,134 @@ const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
 
   .ref-cards {
     display: grid;
+    align-items: stretch;
     gap: 0.75rem;
     margin: 1.2rem 0 0;
     padding: 0;
     list-style: none;
   }
 
-  .ref-cards li {
-    display: grid;
-    gap: 0.45rem;
-    min-height: 100%;
-    padding: 0.95rem 0.95rem 1rem;
-    border-radius: 1.05rem;
+  .ref-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    height: 100%;
+    min-width: 0;
+    padding: 1.05rem 1rem 1.05rem;
+    border-radius: 1.15rem;
     background: #f7f1e6;
     color: #16352e;
   }
 
-  .ref-card-icon {
+  .ref-card-ahpra {
+    background: #f3f7f4;
+  }
+
+  .ref-badge {
     display: grid;
     place-items: center;
-    width: 2.8rem;
-    height: 2.8rem;
-    border-radius: 0.8rem;
-    background: #e7f2ea;
+    flex: none;
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: 999px;
+    background: #d7efe8;
+    color: #14685e;
+  }
+
+  .ref-badge-hands {
+    background: #e5efe8;
     color: #16352e;
   }
 
-  .ref-card-icon-mail {
+  .ref-badge-mail {
     background: #f6d7c8;
-    color: #c4461a;
+    color: #c4531d;
   }
 
   .ref-cards p {
     margin: 0;
     font-size: 1rem;
-    font-weight: 750;
+    font-weight: 650;
     line-height: 1.35;
+  }
+
+  .ref-ahpra-lead {
+    display: block;
+    color: #14685e;
+    font-size: 1.35rem;
+    font-weight: 650;
+    line-height: 1.15;
+  }
+
+  .ref-ahpra-rest {
+    display: block;
+    margin-top: 0.15rem;
+    color: #16352e;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .ref-card-title {
+    font-weight: 650;
   }
 
   .ref-card-note {
     color: #3d534c;
-    font-size: 0.92rem;
-    font-weight: 650;
+    font-size: 0.9rem;
+    font-weight: 450;
+    line-height: 1.4;
   }
 
-  .ref-cards a {
+  .ref-mail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
     color: #16352e;
-    font-weight: 750;
-    overflow-wrap: normal;
-    word-break: normal;
+    font-weight: 700;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .ref-mail span {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
   }
 
   .ref-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 3rem;
-    margin-top: 0.2rem;
-    padding: 0.55rem 1rem;
+    gap: 0.45rem;
+    max-width: 100%;
+    min-height: 2.75rem;
+    margin-top: auto;
+    padding: 0.5rem 0.95rem;
     border-radius: 999px;
-    background: #c4461a;
-    color: #fff !important;
+    background: #c4531d;
+    color: #fff;
     font-weight: 750;
+    line-height: 1.2;
     text-align: center;
     text-decoration: none;
   }
 
+  .ref-btn-arrow {
+    flex: none;
+  }
+
   .ref-btn:hover {
-    background: #a9380b;
+    background: #a84416;
+    color: #fff;
+  }
+
+  .ref-btn:focus-visible,
+  .ref-mail:focus-visible {
+    outline: 3px solid #16352e;
+    outline-offset: 3px;
   }
 
   .ref-photo-card {
@@ -673,11 +740,6 @@ const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
     .ref-layout {
       grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.72fr);
       align-items: stretch;
-    }
-
-    .ref-cards a[href^="mailto:"] {
-      font-size: 0.84rem;
-      white-space: nowrap;
     }
 
     .ref-photo-frame {
