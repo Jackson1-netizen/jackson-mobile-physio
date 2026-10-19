@@ -396,21 +396,24 @@ const en = {
     },
     how: {
       kicker: "How our service works",
-      heading: "Simple, flexible and tailored to you.",
+      heading: "A clear start. Care tailored to you.",
       steps: [
         {
-          title: "Get in touch",
-          body: "Make an enquiry and share your suburb, language and needs. You speak with Jackson — not a call centre.",
+          title: "Discuss your needs",
+          body: "Tell us about your goals, daily routines and preferred language. We'll discuss how physiotherapy may support you.",
         },
         {
-          title: "We arrange a visit",
-          body: "We talk through goals, location and funding context, then arrange a home or community appointment if suitable.",
+          title: "Plan your first visit",
+          body: "We'll confirm suitability, location and funding arrangements, then organise a home or community appointment.",
         },
         {
-          title: "Personalised care",
-          body: "You receive assessment and a practical plan in your environment, with the same physiotherapist for follow-up visits.",
+          title: "Review and adapt your care",
+          body: "Your physiotherapist will assess your needs, develop a personalised plan and review your progress over time.",
         },
       ],
+      note: "Make an enquiry to begin, and include your suburb. You speak with Jackson — not a call centre. Funding arrangements are confirmed before a visit, including NDIS plan-managed or self-managed enquiries where that applies. Home Motion is not an NDIS registered provider, and funding is not guaranteed. Please do not include health information in that first message. Follow-up visits are with the same physiotherapist.",
+      photoAlt: "Illustration of a physiotherapist helping an older woman with a walking frame at home",
+      caption: "Illustrative image",
     },
     why: {
       kicker: "Why choose Home Motion",
@@ -835,21 +838,24 @@ const zhHant = {
     },
     how: {
       kicker: "服務流程",
-      heading: "簡單、靈活，切合您的需要。",
+      heading: "清晰的開始。照護按您的需要安排。",
       steps: [
         {
-          title: "聯絡我們",
-          body: "提出查詢，並告訴我們您所在的郊區、語言及需要。您會直接與 Jackson 溝通 — 並非電話中心。",
+          title: "談談您的需要",
+          body: "告訴我們您的目標、日常作息和偏好語言。我們會討論物理治療可以如何支持您。",
         },
         {
-          title: "安排到訪",
-          body: "我們會了解您的目標、地點及資助情況，如合適便安排上門或社區預約。",
+          title: "安排第一次探訪",
+          body: "我們會確認是否合適、地點和資助安排，然後安排上門或社區預約。",
         },
         {
-          title: "個人化照護",
-          body: "在您熟悉的環境接受評估並獲得實用計劃，之後的跟進亦由同一位物理治療師負責。",
+          title: "檢視並調整照護",
+          body: "您的物理治療師會評估您的需要，制定個人化計劃，並隨時間檢視進展。",
         },
       ],
+      note: "開始時請提出查詢，並告訴我們您所在的郊區。您會與 Jackson 溝通，而不是電話中心。探訪前會確認資助安排，包括適用時的 NDIS 計劃管理或自管查詢。Home Motion 不是 NDIS 註冊服務提供者，資助並無保證。請勿在第一次聯絡中填寫健康資料。之後的跟進由同一位物理治療師負責。",
+      photoAlt: "插圖：物理治療師在家中協助一位年長女士使用助行架",
+      caption: "示意圖",
     },
     why: {
       kicker: "為何選擇 Home Motion",
@@ -1267,21 +1273,24 @@ const zhHans = {
     },
     how: {
       kicker: "服务流程",
-      heading: "简单、灵活，贴合您的需要。",
+      heading: "清晰的开始。照护按您的需要安排。",
       steps: [
         {
-          title: "联系我们",
-          body: "提交咨询，并告诉我们您所在的郊区、语言及需要。您会直接与 Jackson 沟通 — 而不是呼叫中心。",
+          title: "谈谈您的需要",
+          body: "告诉我们您的目标、日常作息和偏好语言。我们会讨论物理治疗可以如何支持您。",
         },
         {
-          title: "安排上门",
-          body: "我们会了解您的目标、地点及资助情况，如合适便安排上门或社区预约。",
+          title: "安排第一次上门",
+          body: "我们会确认是否合适、地点和资助安排，然后安排上门或社区预约。",
         },
         {
-          title: "个性化照护",
-          body: "在您熟悉的环境中接受评估并获得实用计划，后续跟进也由同一位物理治疗师负责。",
+          title: "检视并调整照护",
+          body: "您的物理治疗师会评估您的需要，制定个性化计划，并随时间检视进展。",
         },
       ],
+      note: "开始时请提出咨询，并告诉我们您所在的郊区。您会与 Jackson 沟通，而不是呼叫中心。上门前会确认资助安排，包括适用时的 NDIS 计划管理或自管咨询。Home Motion 不是 NDIS 注册服务提供者，资助并无保证。请勿在第一次联系中填写健康信息。后续跟进由同一位物理治疗师负责。",
+      photoAlt: "插图：物理治疗师在家中协助一位年长女士使用助行架",
+      caption: "示意图",
     },
     why: {
       kicker: "为何选择 Home Motion",
