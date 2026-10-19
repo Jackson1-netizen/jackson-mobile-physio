@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EnquiryBanner from "../../components/home/EnquiryBanner.astro";
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { suburbPages, suburbPath } from "../../content/suburbs";
+
+const areas = messages.en.areas;
+---
+
+<BaseLayout
+  translatable={true}
+  canonicalPath="/areas"
+  title={`Service areas | ${site.businessName}${site.draft ? " (draft)" : ""}`}
+  description={areas.intro}
+>
+  <article class="mx-auto max-w-3xl px-4 py-14">
+    <p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">
+      {site.businessName} · {site.tagline}
+    </p>
+    <h1 class="mt-3 font-serif text-4xl font-bold text-[var(--color-ink)]" data-i18n-path="sections.areas">
+      {messages.en.sections.areas}
+    </h1>
+    <p class="mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]" data-i18n-path="areas.intro">
+      {areas.intro}
+    </p>
+    <ul class="mt-8 space-y-2">
+      {
+        suburbPages.map((suburb) => (
+          <li>
+            <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href={suburbPath(suburb.slug)}>
+              {suburb.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </article>
+  <EnquiryBanner />
+</BaseLayout>

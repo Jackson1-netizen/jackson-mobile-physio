@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EnquiryForm from "../components/EnquiryForm.astro";
+import HomePicture from "../components/home/HomePicture.astro";
+import { site } from "../content/site";
+import { messages } from "../content/i18n";
+import { kitchenBenchPhoto } from "../content/home-motion";
+import "../styles/home-motion.css";
+
+const t = messages.en.enquiry;
+const title = `Enquiry | ${site.businessName}${site.draft ? " (draft)" : ""}`;
+---
+
+<BaseLayout
+  translatable={true}
+  canonicalPath="/enquiry"
+  title={title}
+  description="Send an enquiry to Home Motion Physiotherapy. Share a few details and we will contact you about service fit and availability."
+>
+  <div class="hm enq">
+    <header class="enq-hero">
+      <div class="enq-hero-copy">
+        <h1 data-i18n-path="enquiry.pageTitle">{t.pageTitle}</h1>
+        <p data-i18n-path="enquiry.pageIntro">{t.pageIntro}</p>
+      </div>
+      <div class="enq-hero-media">
+        <div class="enq-shot enq-shot-a">
+          <HomePicture
+            photo={kitchenBenchPhoto}
+            altPath="hm.aboutBlock.photoAlt"
+            sizes="(min-width: 900px) 280px, 46vw"
+          />
+        </div>
+        <div class="enq-shot enq-shot-b">
+          <HomePicture
+            photo={kitchenBenchPhoto}
+            decorative
+            sizes="(min-width: 900px) 220px, 36vw"
+          />
+        </div>
+        <p class="hm-photo-label" data-i18n-path="hm.aboutBlock.caption">Illustrative image</p>
+      </div>
+    </header>
+
+    <section class="enq-body" aria-labelledby="enq-contact-heading">
+      <div class="enq-details">
+        <p class="hm-kicker" data-i18n-path="enquiry.contactLabel">{t.contactLabel}</p>
+        <h2 id="enq-contact-heading" data-i18n-path="enquiry.contactHeading">{t.contactHeading}</h2>
+        <p class="enq-phone">
+          <a href={site.phoneHref}>{site.phone}</a>
+        </p>
+        <p>
+          <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a>
+        </p>
+        <p class="enq-emergency" data-i18n-path="enquiry.emergency">{t.emergency}</p>
+      </div>
+      <div class="enq-card">
+        <EnquiryForm />
+      </div>
+    </section>
+  </div>
+</BaseLayout>

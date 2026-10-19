@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import EnquiryBanner from "../../components/home/EnquiryBanner.astro";
 import { site } from "../../content/site";
 import { suburbPages } from "../../content/suburbs";
 
@@ -13,7 +14,12 @@ export function getStaticPaths() {
 const { suburb } = Astro.props;
 ---
 
-<BaseLayout title={suburb.seo.title} description={suburb.seo.description} canonicalPath={`/areas/${suburb.slug}`}>
+<BaseLayout
+  translatable={true}
+  title={suburb.seo.title}
+  description={suburb.seo.description}
+  canonicalPath={`/areas/${suburb.slug}`}
+>
   <article class="mx-auto max-w-3xl px-4 py-14">
     <p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-accent)]">
       {site.businessName} · {site.tagline}
@@ -43,10 +49,10 @@ const { suburb } = Astro.props;
         Call {site.phone}
       </a>
       <a
-        href="/#contact"
+        href="/enquiry/"
         class="inline-flex items-center justify-center rounded-md border border-[var(--color-border)] bg-white px-6 py-3 font-semibold no-underline hover:border-[var(--color-accent)]"
       >
-        Send an enquiry
+        <span data-i18n-path="home.primaryCta">Make an enquiry</span>
       </a>
     </div>
     <p class="mt-10 text-sm">
@@ -55,4 +61,5 @@ const { suburb } = Astro.props;
       </a>
     </p>
   </article>
+  <EnquiryBanner />
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import EnquiryBanner from "../components/home/EnquiryBanner.astro";
 import QRCode from "qrcode";
 import { site, formatServiceAreasLine, getReferralEmailHref, publicQualifications } from "../content/site";
 
@@ -108,6 +109,7 @@ const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
       {site.abnDisplay}. AHPRA registered physiotherapist. Not for emergency use. Call 000.
     </footer>
   </div>
+  <EnquiryBanner />
 </BaseLayout>
 
 <style>

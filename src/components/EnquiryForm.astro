@@ -1,20 +1,30 @@
 ---
-import { site, getEmailHref } from "../content/site";
+import { site } from "../content/site";
 import { messages } from "../content/i18n";
 
 const t = messages.en.enquiry;
-const publicMailto = getEmailHref("Enquiry — Home Motion");
 const enquiryMessages = {
   en: messages.en.enquiry,
   "zh-Hant": messages["zh-Hant"].enquiry,
   "zh-Hans": messages["zh-Hans"].enquiry,
 };
-const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
+const suburbs = site.serviceAreas.suburbs;
+const roleValues = ["Myself", "A family member", "A carer or support coordinator", "A referrer or health professional", "Other"];
+const serviceValues = [
+  "Mobile Physiotherapy",
+  "Mobility & Balance",
+  "Strength & Functional Capacity",
+  "Rehabilitation After Hospitalisation",
+  "Neurological & Disability-Related",
+  "Home Exercise Programs",
+];
+const fundingValues = ["NDIS", "Home Care Package", "Private", "Not sure"];
+const contactValues = ["Phone", "Email", "Either"];
 ---
 
 <form
   id="enquiry-form"
-  class="hm-form"
+  class="hm-form hm-form-card"
   name="enquiry"
   method="POST"
   action="/enquiry-received/"
@@ -24,6 +34,8 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
   aria-describedby="enq-required-note"
 >
   <input type="hidden" name="form-name" value="enquiry" />
+  <input type="hidden" name="language" value="" />
+  <input type="hidden" name="ndis" value="" />
   <p class="hm-honeypot" aria-hidden="true">
     <label>
       Leave this blank
@@ -32,17 +44,67 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
   </p>
 
   <div id="enq-fields">
-    <p id="enq-required-note" class="hm-form-note" data-i18n-path="enquiry.requiredNote">{t.requiredNote}</p>
+    <fieldset class="hm-form-grid">
+      <legend class="sr-only" data-i18n-path="sections.enquiry">Send an enquiry</legend>
+      <p id="enq-required-note" class="hm-form-note hm-form-span" data-i18n-path="enquiry.requiredNote">{t.requiredNote}</p>
 
-    <div class="grid gap-4 sm:grid-cols-2">
       <div class="hm-field">
         <label for="enq-name">
           <span data-i18n-path="enquiry.name">{t.name}</span>
           <span class="hm-req" aria-hidden="true">*</span>
         </label>
-        <input id="enq-name" class="hm-input" type="text" name="name" autocomplete="name" required maxlength="100" />
+        <input
+          id="enq-name"
+          class="hm-input"
+          type="text"
+          name="name"
+          autocomplete="name"
+          enterkeyhint="next"
+          required
+          maxlength="100"
+        />
         <p id="enq-name-error" class="hm-field-error" hidden></p>
       </div>
+
+      <div class="hm-field">
+        <label for="enq-role">
+          <span data-i18n-path="enquiry.role">{t.role}</span>
+          <span class="hm-req" aria-hidden="true">*</span>
+        </label>
+        <select id="enq-role" class="hm-input hm-select" name="enquiring-as" required>
+          <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+          {
+            roleValues.map((value, i) => (
+              <option value={value} data-i18n-path={`enquiry.roleOptions.${i}`}>
+                {t.roleOptions[i]}
+              </option>
+            ))
+          }
+        </select>
+        <p id="enq-role-error" class="hm-field-error" hidden></p>
+      </div>
+
+      <div class="hm-field">
+        <label for="enq-email">
+          <span data-i18n-path="enquiry.email">{t.email}</span>
+          <span class="hm-req" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="enq-email"
+          class="hm-input"
+          type="email"
+          name="email"
+          autocomplete="email"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          enterkeyhint="next"
+          required
+          maxlength="254"
+        />
+        <p id="enq-email-error" class="hm-field-error" hidden></p>
+      </div>
+
       <div class="hm-field">
         <label for="enq-phone">
           <span data-i18n-path="enquiry.phone">{t.phone}</span>
@@ -55,62 +117,125 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
           name="phone"
           autocomplete="tel"
           inputmode="tel"
+          enterkeyhint="next"
           required
           maxlength="20"
         />
         <p id="enq-phone-error" class="hm-field-error" hidden></p>
       </div>
-    </div>
 
-    <div class="grid gap-4 sm:grid-cols-2">
-      <div class="hm-field">
-        <label for="enq-email">
-          <span data-i18n-path="enquiry.email">{t.email}</span>
-          <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
-        </label>
-        <input id="enq-email" class="hm-input" type="email" name="email" autocomplete="email" maxlength="254" />
-        <p id="enq-email-error" class="hm-field-error" hidden></p>
-      </div>
-      <div class="hm-field">
+      <div class="hm-field hm-form-span">
         <label for="enq-suburb">
           <span data-i18n-path="enquiry.suburb">{t.suburb}</span>
+          <span class="hm-req" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="enq-suburb"
+          class="hm-input"
+          type="text"
+          name="suburb"
+          autocomplete="address-level2"
+          enterkeyhint="next"
+          list="enq-suburbs"
+          required
+          maxlength="80"
+          aria-describedby="enq-suburb-hint"
+        />
+        <datalist id="enq-suburbs">
+          {suburbs.map((name) => <option value={name} />)}
+        </datalist>
+        <p id="enq-suburb-hint" class="hm-form-note" data-i18n-path="enquiry.suburbHint">{t.suburbHint}</p>
+        <p id="enq-suburb-error" class="hm-field-error" hidden></p>
+      </div>
+
+      <div class="hm-field">
+        <label for="enq-service">
+          <span data-i18n-path="enquiry.service">{t.service}</span>
           <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
         </label>
-        <input id="enq-suburb" class="hm-input" type="text" name="suburb" autocomplete="address-level2" maxlength="80" />
+        <select id="enq-service" class="hm-input hm-select" name="service">
+          <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+          {
+            serviceValues.map((value, i) => (
+              <option value={value} data-i18n-path={`enquiry.serviceOptions.${i}`}>
+                {t.serviceOptions[i]}
+              </option>
+            ))
+          }
+        </select>
       </div>
-    </div>
 
-    <div class="hm-field">
-      <label for="enq-language">
-        <span data-i18n-path="enquiry.language">{t.language}</span>
-      </label>
-      <select id="enq-language" class="hm-input hm-select" name="language" autocomplete="off">
-        {
-          languageValues.map((value, i) => (
-            <option value={value} data-i18n-path={`enquiry.languageOptions.${i}`}>
-              {t.languageOptions[i]}
-            </option>
-          ))
-        }
-      </select>
-    </div>
+      <div class="hm-field">
+        <label for="enq-funding">
+          <span data-i18n-path="enquiry.funding">{t.funding}</span>
+          <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+        </label>
+        <select id="enq-funding" class="hm-input hm-select" name="funding" aria-describedby="enq-funding-hint">
+          <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+          {
+            fundingValues.map((value, i) => (
+              <option value={value} data-i18n-path={`enquiry.fundingOptions.${i}`}>
+                {t.fundingOptions[i]}
+              </option>
+            ))
+          }
+        </select>
+        <p id="enq-funding-hint" class="hm-form-note" data-i18n-path="enquiry.fundingHint">{t.fundingHint}</p>
+      </div>
 
-    <div class="hm-field hm-field-check">
-      <input id="enq-ndis" type="checkbox" name="ndis" value="Yes — plan-managed or self-managed" />
-      <label for="enq-ndis" data-i18n-path="enquiry.ndisLabel">{t.ndisLabel}</label>
-    </div>
+      <div class="hm-field">
+        <label for="enq-preferred">
+          <span data-i18n-path="enquiry.preferredContact">{t.preferredContact}</span>
+          <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+        </label>
+        <select id="enq-preferred" class="hm-input hm-select" name="preferred-contact">
+          <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+          {
+            contactValues.map((value, i) => (
+              <option value={value} data-i18n-path={`enquiry.preferredContactOptions.${i}`}>
+                {t.preferredContactOptions[i]}
+              </option>
+            ))
+          }
+        </select>
+      </div>
 
-    <div class="hm-field">
-      <label for="enq-message">
-        <span data-i18n-path="enquiry.message">{t.message}</span>
-        <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
-      </label>
-      <textarea id="enq-message" class="hm-input" name="message" rows="3" maxlength="1000" aria-describedby="enq-privacy-note"></textarea>
-      <p id="enq-privacy-note" class="hm-form-note">
-        <span data-i18n-path="enquiry.privacyNote">{t.privacyNote}</span>{" "}
-        <a href="/privacy/" data-i18n-path="enquiry.privacyLink">{t.privacyLink}</a>.
-      </p>
-    </div>
+      <div class="hm-field">
+        <label for="enq-time">
+          <span data-i18n-path="enquiry.preferredTime">{t.preferredTime}</span>
+          <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+        </label>
+        <input id="enq-time" class="hm-input" type="text" name="preferred-time" autocomplete="off" maxlength="80" />
+      </div>
+
+      <div class="hm-field hm-form-span">
+        <label for="enq-message">
+          <span data-i18n-path="enquiry.help">{t.help}</span>
+          <span class="hm-optional" data-i18n-path="enquiry.optional">{t.optional}</span>
+        </label>
+        <textarea
+          id="enq-message"
+          class="hm-input"
+          name="message"
+          rows="4"
+          maxlength="1000"
+          aria-describedby="enq-help-hint"
+        ></textarea>
+        <p id="enq-help-hint" class="hm-form-note" data-i18n-path="enquiry.helpHint">{t.helpHint}</p>
+      </div>
+
+      <div class="hm-field hm-field-check hm-form-span">
+        <input id="enq-consent" type="checkbox" name="consent" value="yes" required />
+        <div>
+          <label for="enq-consent">
+            <span data-i18n-path="enquiry.consentLead">{t.consentLead}</span>
+          </label>
+          {" "}
+          <a href="/privacy/" data-i18n-path="enquiry.privacyNotice">{t.privacyNotice}</a>.
+          <p id="enq-consent-error" class="hm-field-error" hidden></p>
+        </div>
+      </div>
+    </fieldset>
 
     <noscript>
       <p class="hm-form-unavailable">
@@ -119,15 +244,11 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
       </p>
     </noscript>
 
-    <button type="submit" class="hm-btn hm-btn-primary hm-form-submit">
-      <span data-i18n-path="enquiry.submit">{t.submit}</span>
+    <button type="submit" class="hm-btn hm-btn-forest hm-form-submit">
+      <span data-i18n-path="enquiry.submitLabel">{t.submitLabel}</span>
+      <span class="hm-arrow" aria-hidden="true">→</span>
     </button>
   </div>
-
-  <p class="hm-form-secondary">
-    <span data-i18n-path="enquiry.secondaryLead">{t.secondaryLead}</span>{" "}
-    <a href={publicMailto}>{site.publicEmail}</a>
-  </p>
 
   <div id="enq-feedback" class="hm-form-feedback" role="status" aria-live="polite" tabindex="-1">
     <div data-feedback="errors" hidden>
@@ -158,8 +279,11 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
     const submitButton = form.querySelector("button[type=submit]");
     const fields = {
       name: form.querySelector("#enq-name"),
-      phone: form.querySelector("#enq-phone"),
+      role: form.querySelector("#enq-role"),
       email: form.querySelector("#enq-email"),
+      phone: form.querySelector("#enq-phone"),
+      suburb: form.querySelector("#enq-suburb"),
+      consent: form.querySelector("#enq-consent"),
     };
     let attempted = false;
 
@@ -170,8 +294,14 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
     };
 
     const checkField = (name) => {
+      if (name === "consent") return fields.consent.checked ? null : "consentRequired";
       const value = fields[name].value.trim();
       if (name === "name") return value ? null : "nameRequired";
+      if (name === "role") return value ? null : "roleRequired";
+      if (name === "email") {
+        if (!value) return "emailRequired";
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? null : "emailInvalid";
+      }
       if (name === "phone") {
         if (!value) return "phoneRequired";
         const digits = value.replace(/\D/g, "");
@@ -179,27 +309,27 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
           ? null
           : "phoneInvalid";
       }
-      if (name === "email") {
-        return !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? null : "emailInvalid";
-      }
+      if (name === "suburb") return value ? null : "suburbRequired";
       return null;
     };
 
     const showFieldState = (name, errorKey) => {
       const input = fields[name];
       const error = form.querySelector(`#enq-${name}-error`);
+      const hint = name === "suburb" ? "enq-suburb-hint" : "";
       if (errorKey) {
         error.setAttribute("data-i18n-path", `enquiry.errors.${errorKey}`);
         error.textContent = currentMessages().errors[errorKey];
         error.hidden = false;
         input.setAttribute("aria-invalid", "true");
-        input.setAttribute("aria-describedby", error.id);
+        input.setAttribute("aria-describedby", hint ? `${hint} ${error.id}` : error.id);
       } else {
         error.removeAttribute("data-i18n-path");
         error.textContent = "";
         error.hidden = true;
         input.removeAttribute("aria-invalid");
-        input.removeAttribute("aria-describedby");
+        if (hint) input.setAttribute("aria-describedby", hint);
+        else input.removeAttribute("aria-describedby");
       }
     };
 
@@ -218,6 +348,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         if (!form.querySelector("[aria-invalid='true']")) showFeedback(null);
       };
       fields[name].addEventListener("input", handler);
+      fields[name].addEventListener("change", handler);
       fields[name].addEventListener("blur", handler);
     });
 
@@ -238,6 +369,12 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
 
       const bot = form.querySelector("[name=bot-field]");
       if (bot && bot.value) return;
+
+      const funding = form.querySelector("#enq-funding");
+      const ndis = form.querySelector("[name=ndis]");
+      if (ndis && funding) {
+        ndis.value = funding.value === "NDIS" ? "Yes — plan-managed or self-managed" : "";
+      }
 
       const messagesNow = currentMessages();
       const label = submitButton.querySelector("span");
@@ -261,7 +398,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "No preference"];
         feedback.focus();
         submitButton.disabled = false;
         submitButton.removeAttribute("aria-busy");
-        if (label) label.textContent = messagesNow.submit;
+        if (label) label.textContent = messagesNow.submitLabel;
       }
     });
   }

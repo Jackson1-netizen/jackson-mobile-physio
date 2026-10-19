@@ -155,17 +155,33 @@ export const homeWhy = {
   items: hm.why.items,
 };
 
-export const homeAbout = {
-  kicker: "About",
-  heading: "Meet Jackson",
-  name: site.practitionerName,
-  role: site.tagline,
-  paragraphs: [...site.aboutParagraphs],
-  philosophy: site.differentiator,
-  languagesLabel: "Languages",
-  qualificationsLabel: "Qualifications",
-  photo: homePhotos.portrait,
+export const kitchenBenchPhoto = {
+  src: "/photos/kitchen-bench.jpg",
+  widths: [480, 720, 960, 1200, 1448] as const,
+  width: 1448,
+  height: 1086,
+  alt: hm.aboutBlock.photoAlt,
 };
+
+export const homeAbout = {
+  kicker: hm.aboutBlock.kicker,
+  heading: hm.aboutBlock.heading,
+  p1: hm.aboutBlock.p1,
+  p2: hm.aboutBlock.p2,
+  points: [
+    { icon: "home" as const, ...hm.aboutBlock.points[0] },
+    { icon: "person" as const, ...hm.aboutBlock.points[1] },
+    { icon: "notes" as const, ...hm.aboutBlock.points[2] },
+  ],
+  cardTitle: hm.aboutBlock.cardTitle,
+  cardBody: hm.aboutBlock.cardBody,
+  caption: hm.aboutBlock.caption,
+  ahpra: hm.aboutBlock.ahpra,
+  insurance: hm.aboutBlock.insurance,
+  photo: kitchenBenchPhoto,
+};
+
+export const homeBanner = hm.banner;
 
 export const homeReferrers = {
   heading: hm.referrers.heading,
@@ -227,7 +243,7 @@ export const homeFaq = messages.en.faq.items;
  */
 export const homeMedia = {
   hero: homePhotos.homeWalker,
-  about: homePhotos.portrait,
+  about: kitchenBenchPhoto,
   how: homePhotos.homeSitToStand,
   ndis: homePhotos.homeGait,
 };
