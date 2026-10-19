@@ -560,6 +560,13 @@ html:has(.hm-header) {
 }
 
 .hm-header {
+  --hm-forest: #16352e;
+  --hm-orange: #e45a22;
+  --hm-orange-action: #c4461a;
+  --hm-orange-action-hover: #a9380b;
+  --hm-cream: #faf6f0;
+  --hm-radius-pill: 999px;
+  --hm-header-h: 5rem;
   position: sticky;
   top: 0;
   z-index: 40;
@@ -623,7 +630,7 @@ html:has(.hm-header) {
   order: 3;
 }
 
-.hm .hm-header .lang-switch {
+.hm-header .lang-switch {
   border: 1px solid rgb(22 53 46 / 0.16);
   background: rgb(255 253 249 / 0.9);
   border-radius: 999px;
@@ -634,8 +641,8 @@ html:has(.hm-header) {
   letter-spacing: 0.04em;
 }
 
-.hm .hm-header .lang-btn,
-.hm .hm-header .lang-btn + .lang-btn {
+.hm-header .lang-btn,
+.hm-header .lang-btn + .lang-btn {
   border-radius: 999px;
   box-shadow: none;
   min-width: 2.1rem;
@@ -646,13 +653,13 @@ html:has(.hm-header) {
   color: var(--hm-forest);
 }
 
-.hm .hm-header .lang-btn[data-active="true"] {
+.hm-header .lang-btn[data-active="true"] {
   background: var(--hm-forest);
   color: #fff;
   text-decoration: none;
 }
 
-.hm .hm-header .lang-btn:not([data-active="true"]):hover {
+.hm-header .lang-btn:not([data-active="true"]):hover {
   background: transparent;
   color: var(--hm-forest);
   text-decoration: none;
@@ -731,7 +738,7 @@ html:has(.hm-header) {
   box-shadow: 0 16px 40px rgb(23 61 53 / 0.14);
   z-index: 50;
   /* The header is sticky, so an over-tall panel could never be scrolled into view. */
-  max-height: min(26rem, calc(100dvh - var(--hm-header-h) - 1.25rem));
+  max-height: calc(100dvh - 18rem);
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -774,7 +781,7 @@ html:has(.hm-header) {
   padding-top: 0.75rem;
   border-top: 1px solid #e6e1d8;
   color: #5c564e;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.3;
@@ -1850,7 +1857,8 @@ a.hm-card:hover {
     height: 5.72rem;
     max-width: none;
   }
-  .hm {
+  .hm,
+  .hm-header {
     --hm-header-h: 110.2125px;
   }
   .hm-header-tools {

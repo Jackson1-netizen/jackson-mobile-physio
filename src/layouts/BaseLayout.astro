@@ -1,9 +1,10 @@
 ---
 import "../styles/global.css";
+import "../styles/home-motion.css";
 import { site } from "../content/site";
 import { getLocalBusinessJsonLd, getFaqJsonLd } from "../lib/structured-data";
 import DraftBanner from "../components/DraftBanner.astro";
-import SiteHeader from "../components/SiteHeader.astro";
+import HomeHeader from "../components/home/HomeHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import StickyContactBar from "../components/StickyContactBar.astro";
 import I18nScript from "../components/I18nScript.astro";
@@ -87,7 +88,7 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
   <body class={showSiteChrome ? "pb-16 sm:pb-0" : ""}>
     <a class="skip-link" href="#main-content" data-i18n-path="hm.skipLink">Skip to main content</a>
     {showDraftBanner && <DraftBanner />}
-    {showSiteChrome && <SiteHeader showLanguageSwitcher={translatable} />}
+    {showSiteChrome && <HomeHeader />}
     {
       v1Home ? (
         <slot />

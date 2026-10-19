@@ -48,7 +48,7 @@ const t = homeReferrers;
         </li>
         <li class="hm-ref-card hm-ref-card-mail">
           <span class="hm-ref-mail" aria-hidden="true"><HomeIcon name="mail" size={18} /></span>
-          <p><a href={referralMailto}>{site.referralEmail.replace("@", "@\u200b")}</a></p>
+          <p><a href={referralMailto}>{site.referralEmail}</a></p>
           <a class="hm-ref-btn" href="/referral/">
             <span data-i18n-path="hm.referrers.cta">{t.cta}</span>
             <span aria-hidden="true"> →</span>
@@ -295,8 +295,16 @@ const t = homeReferrers;
   .hm-ref-card a {
     color: #16352e;
     font-weight: 750;
-    overflow-wrap: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
     text-underline-offset: 0.12em;
+  }
+
+  @media (min-width: 1100px) {
+    .hm-ref-card a[href^="mailto:"] {
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
   }
 
   .hm-ref-mail {
