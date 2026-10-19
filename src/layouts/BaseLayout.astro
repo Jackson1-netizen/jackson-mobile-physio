@@ -18,6 +18,8 @@ interface Props {
   includeFaqSchema?: boolean;
   /** When true, a stored language preference may set html lang and translate the page. */
   translatable?: boolean;
+  /** Limit the embedded translation bundle to these top-level keys. */
+  i18nInclude?: readonly string[];
   /** Always noindex, including after launch. Used by the 404 page. */
   noindex?: boolean;
 }
@@ -30,6 +32,7 @@ const {
   v1Home = false,
   includeFaqSchema = false,
   translatable = false,
+  i18nInclude,
   noindex = false,
 } = Astro.props;
 
@@ -96,6 +99,6 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
     }
     {showSiteChrome && <SiteFooter />}
     {showSiteChrome && <StickyContactBar />}
-    {translatable && <I18nScript />}
+    {translatable && <I18nScript include={i18nInclude} />}
   </body>
 </html>

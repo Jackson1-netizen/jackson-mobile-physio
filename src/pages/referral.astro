@@ -1,114 +1,200 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import EnquiryBanner from "../components/home/EnquiryBanner.astro";
+import HomeIcon from "../components/home/HomeIcon.astro";
+import HomePicture from "../components/home/HomePicture.astro";
 import QRCode from "qrcode";
-import { site, formatServiceAreasLine, getReferralEmailHref, publicQualifications } from "../content/site";
+import { site, getReferralEmailHref, publicQualifications } from "../content/site";
+import { messages } from "../content/i18n";
+import { kitchenBenchPhoto } from "../content/home-motion";
 
-const serviceList = site.services.map((s) => s.title).join("; ");
-const serviceAreaLine = formatServiceAreasLine();
+const copy = messages.en.referralPage;
 const referralMailto = getReferralEmailHref();
+const quals = publicQualifications();
+const stepIcons = ["mail", "people", "clipboard"] as const;
 const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
   type: "svg",
   margin: 1,
   errorCorrectionLevel: "M",
   color: { dark: "#16352e", light: "#ffffff" },
-})).replace(/<\?xml[^>]*>\s*/i, "").replace("<svg ", '<svg role="img" aria-label="QR code for the Home Motion referral page" ');
+}))
+  .replace(/<\?xml[^>]*>\s*/i, "")
+  .replace(
+    "<svg ",
+    '<svg role="img" aria-label="QR code for the Home Motion referral page" data-i18n-attr="aria-label:referralPage.qrLabel" ',
+  );
 ---
 
 <BaseLayout
-  title={`Referral sheet | ${site.businessName}`}
-  description={
-    site.draft
-      ? "Printable referral information for support coordinators and families (draft)."
-      : "Printable referral information for support coordinators and families."
-  }
+  translatable={true}
+  i18nInclude={["nav", "cta", "sections", "hm", "referralPage"]}
+  title={`For referrers | ${site.businessName}`}
+  description={copy.intro}
   canonicalPath="/referral"
 >
-  <div class="referral-sheet mx-auto max-w-[210mm] bg-white px-6 py-8 text-[var(--color-ink)] sm:px-10 sm:py-12">
-    <p class="no-print mb-6 rounded border border-amber-200 bg-[var(--color-draft-bg)] p-3 text-sm text-[var(--color-draft)]">
-      {site.draft ? "Draft referral sheet. " : ""}Use your browser&apos;s Print command (Ctrl+P / ⌘P). This page is the printable sheet, not a PDF.
-    </p>
-
-    <header class="border-b border-[var(--color-border)] pb-6">
-      <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">Referral information</p>
-      <h1 class="mt-2 font-serif text-3xl font-bold">{site.businessName}</h1>
-      <p class="mt-1 text-xl font-semibold tracking-wide text-[var(--color-ink)]">{site.tagline}</p>
-      <p class="text-lg text-[var(--color-ink-muted)]">{site.locationDescriptor}</p>
-    </header>
-
-    <div class="mt-6 grid gap-8 sm:grid-cols-[1fr_auto]">
-      <div class="space-y-6 text-sm leading-relaxed">
-        <section>
-          <h2 class="font-serif text-lg font-semibold">Practitioner</h2>
-          <p class="mt-1">{site.practitionerName}</p>
-          <ul class="mt-2 list-none space-y-1 text-[var(--color-ink-muted)]">
-            {publicQualifications().map((q) => (
-              <li><span class="text-[var(--color-ink)]">{q.label}:</span> {q.value}</li>
-            ))}
-          </ul>
-          <p class="mt-2 text-[var(--color-ink-muted)]">{site.ahpraNotice}</p>
-          <p class="mt-2">{site.registeredBusinessName} is a registered business name of {site.soleTraderName}, sole trader. {site.abnDisplay}.</p>
-        </section>
-
-        <section>
-          <h2 class="font-serif text-lg font-semibold">Service model</h2>
-          <p class="mt-1">Independent mobile / home / community physiotherapy.</p>
-          <p class="mt-2">{site.differentiator}</p>
-        </section>
-
-        <section>
-          <h2 class="font-serif text-lg font-semibold">Service areas</h2>
-          <p class="mt-1">{serviceAreaLine}</p>
-        </section>
-
-        <section>
-          <h2 class="font-serif text-lg font-semibold">Languages</h2>
-          <p class="mt-1">{site.languages.join(", ")}</p>
-        </section>
-
-        <section>
-          <h2 class="font-serif text-lg font-semibold">Example services (non-exhaustive)</h2>
-          <p class="mt-1">{serviceList}</p>
-          <p class="mt-2 text-[var(--color-ink-muted)]">{site.servicesIntro}</p>
-        </section>
-
-        <section>
-          <h2 class="font-serif text-lg font-semibold">NDIS</h2>
-          <p class="mt-1">{site.ndisDescription}</p>
-          <p class="mt-2">{site.ndisNotRegistered}</p>
-          <p class="mt-2 text-[var(--color-ink-muted)]">{site.ndisFundingNote}</p>
-        </section>
-
-        <section>
-          <h2 class="font-serif text-lg font-semibold">How to refer</h2>
-          <ul class="mt-1 list-disc space-y-1 pl-5">
-            {site.referral.howToRefer.map((step) => (
-              <li>{step}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section>
-          <h2 class="font-serif text-lg font-semibold">Contact</h2>
-          <p class="mt-1">Phone: <a href={site.phoneHref}>{site.phone}</a></p>
-          <p>Referrals: <a href={referralMailto}>{site.referralEmail}</a></p>
-          <p>General enquiries: <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a></p>
-        </section>
-      </div>
-
-      <aside class="referral-qr flex flex-col items-center justify-start text-center" aria-label="QR code for the referral page">
-        <div set:html={qrSvg} />
-        <p class="referral-qr-caption mt-2 max-w-[9.5rem] text-xs leading-snug text-[var(--color-ink-muted)]">
-          {site.referralSheetUrl}
+  <section class="ref-hero" aria-labelledby="ref-heading">
+    <div class="ref-shapes" aria-hidden="true">
+      <span class="ref-blob ref-blob-a"></span>
+      <span class="ref-blob ref-blob-b"></span>
+      <svg class="ref-arc" viewBox="0 0 240 240">
+        <circle cx="210" cy="20" r="150" fill="none" stroke="#e45a22" stroke-width="1.25"></circle>
+      </svg>
+    </div>
+    <div class="ref-wrap ref-layout">
+      <div class="ref-copy">
+        <p class="ref-kicker">
+          <span class="ref-rule" aria-hidden="true"></span>
+          <span data-i18n-path="referralPage.kicker">{copy.kicker}</span>
         </p>
+        <h1 id="ref-heading" data-i18n-path="referralPage.heading">{copy.heading}</h1>
+        <p class="ref-intro" data-i18n-path="referralPage.intro">{copy.intro}</p>
+        <ol class="ref-steps">
+          {
+            copy.steps.map((step, i) => (
+              <li>
+                <span class="ref-step-icon" aria-hidden="true">
+                  <HomeIcon name={stepIcons[i]} size={22} />
+                  <span class="ref-step-num">{i + 1}</span>
+                </span>
+                <strong data-i18n-path={`referralPage.steps.${i}.title`}>{step.title}</strong>
+                <span data-i18n-path={`referralPage.steps.${i}.body`}>{step.body}</span>
+              </li>
+            ))
+          }
+        </ol>
+        <ul class="ref-cards">
+          <li>
+            <span class="ref-card-icon" aria-hidden="true"><HomeIcon name="shield" size={28} /></span>
+            <p data-i18n-path="referralPage.ahpraCard">{copy.ahpraCard}</p>
+          </li>
+          <li>
+            <span class="ref-card-icon" aria-hidden="true"><HomeIcon name="clipboard" size={28} /></span>
+            <p data-i18n-path="referralPage.ndisCard">{copy.ndisCard}</p>
+            <p class="ref-card-note" data-i18n-path="referralPage.ndisLimit">{copy.ndisLimit}</p>
+          </li>
+          <li>
+            <span class="ref-card-icon ref-card-icon-mail" aria-hidden="true"><HomeIcon name="mail" size={28} /></span>
+            <p><a href={referralMailto}>{site.referralEmail}</a></p>
+            <a class="ref-btn" href="#referral-details">
+              <span data-i18n-path="referralPage.cta">{copy.cta}</span>
+              <span aria-hidden="true"> →</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <aside class="ref-photo-card">
+        <div class="ref-photo-frame">
+          <HomePicture
+            photo={kitchenBenchPhoto}
+            altPath="referralPage.photoAlt"
+            sizes="(min-width: 1100px) 36vw, 100vw"
+            priority={true}
+          />
+          <p class="ref-photo-label" data-i18n-path="referralPage.photoLabel">{copy.photoLabel}</p>
+        </div>
+        <div class="ref-photo-quote">
+          <span class="ref-rule" aria-hidden="true"></span>
+          <p class="ref-quote">
+            <span data-i18n-path="referralPage.quoteBefore">{copy.quoteBefore}</span><em data-i18n-path="referralPage.quoteWord">{copy.quoteWord}</em><span data-i18n-path="referralPage.quoteAfter">{copy.quoteAfter}</span>
+          </p>
+          <p class="ref-tag" data-i18n-path="referralPage.tagline">{copy.tagline}</p>
+        </div>
       </aside>
     </div>
+  </section>
 
-    <footer class="mt-10 border-t border-[var(--color-border)] pt-4 text-xs text-[var(--color-ink-muted)]">
-      {site.draft && site.draftNotice.title ? `${site.draftNotice.title}. ` : ""}
-      {site.abnDisplay}. AHPRA registered physiotherapist. Not for emergency use. Call 000.
-    </footer>
-  </div>
+  <section id="referral-details" class="ref-sheet" aria-labelledby="ref-sheet-title">
+    <div class="ref-wrap">
+      <p class="ref-print-note no-print">
+        {site.draft ? "Draft referral sheet. " : ""}
+        <span data-i18n-path="referralPage.printNote">{copy.printNote}</span>
+      </p>
+      <p class="ref-sheet-kicker" data-i18n-path="referralPage.sheetKicker">{copy.sheetKicker}</p>
+      <h2 id="ref-sheet-title" data-i18n-path="referralPage.sheetTitle">{copy.sheetTitle}</h2>
+      <div class="ref-sheet-grid">
+        <div class="ref-sheet-main">
+          <section>
+            <h3 data-i18n-path="referralPage.practitioner">{copy.practitioner}</h3>
+            <p>{site.practitionerName}</p>
+            <ul class="ref-facts">
+              {
+                quals.map((item, i) => (
+                  <li data-i18n-path={`referralPage.qualLines.${i}`}>
+                    <span class="ref-qual-label">{item.label}:</span> {item.value}
+                  </li>
+                ))
+              }
+            </ul>
+            <p data-i18n-path="referralPage.ahpraNotice">{copy.ahpraNotice}</p>
+            <p data-i18n-path="referralPage.business">{copy.business}</p>
+          </section>
+          <section>
+            <h3 data-i18n-path="referralPage.serviceModel">{copy.serviceModel}</h3>
+            <p data-i18n-path="referralPage.serviceModelBody">{copy.serviceModelBody}</p>
+            <p data-i18n-path="referralPage.differentiator">{copy.differentiator}</p>
+          </section>
+          <section>
+            <h3 data-i18n-path="referralPage.areasHeading">{copy.areasHeading}</h3>
+            <p data-i18n-path="referralPage.areasBody">{copy.areasBody}</p>
+          </section>
+          <section>
+            <h3 data-i18n-path="referralPage.languagesHeading">{copy.languagesHeading}</h3>
+            <p data-i18n-path="referralPage.languagesBody">{copy.languagesBody}</p>
+          </section>
+          <section>
+            <h3 data-i18n-path="referralPage.servicesHeading">{copy.servicesHeading}</h3>
+            <ul>
+              {
+                copy.services.map((title, i) => (
+                  <li data-i18n-path={`referralPage.services.${i}`}>{title}</li>
+                ))
+              }
+            </ul>
+            <p data-i18n-path="referralPage.servicesIntro">{copy.servicesIntro}</p>
+          </section>
+          <section>
+            <h3 data-i18n-path="referralPage.ndisHeading">{copy.ndisHeading}</h3>
+            <p data-i18n-path="referralPage.ndisDescription">{copy.ndisDescription}</p>
+            <p data-i18n-path="referralPage.ndisNotRegistered">{copy.ndisNotRegistered}</p>
+            <p data-i18n-path="referralPage.ndisFundingNote">{copy.ndisFundingNote}</p>
+          </section>
+          <section>
+            <h3 data-i18n-path="referralPage.howHeading">{copy.howHeading}</h3>
+            <ul>
+              {
+                copy.how.map((step, i) => (
+                  <li data-i18n-path={`referralPage.how.${i}`}>{step}</li>
+                ))
+              }
+            </ul>
+          </section>
+          <section>
+            <h3 data-i18n-path="referralPage.contactHeading">{copy.contactHeading}</h3>
+            <p>
+              <span data-i18n-path="referralPage.phoneLabel">{copy.phoneLabel}</span>:{" "}
+              <a href={site.phoneHref}>{site.phone}</a>
+            </p>
+            <p>
+              <span data-i18n-path="referralPage.referralsLabel">{copy.referralsLabel}</span>:{" "}
+              <a href={referralMailto}>{site.referralEmail}</a>
+            </p>
+            <p>
+              <span data-i18n-path="referralPage.generalLabel">{copy.generalLabel}</span>:{" "}
+              <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a>
+            </p>
+          </section>
+        </div>
+        <aside class="ref-qr" aria-label="QR code for the referral page">
+          <div set:html={qrSvg} />
+          <p class="ref-qr-caption">{site.referralSheetUrl}</p>
+        </aside>
+      </div>
+      <p class="ref-sheet-foot">
+        {site.draft && site.draftNotice.title ? `${site.draftNotice.title}. ` : ""}
+        <span data-i18n-path="referralPage.sheetFooter">{copy.sheetFooter}</span>
+      </p>
+    </div>
+  </section>
   <EnquiryBanner />
 </BaseLayout>
 
@@ -119,26 +205,501 @@ const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
       margin: 12mm;
     }
 
-    .referral-sheet {
-      max-width: none;
-      padding: 0;
+    .ref-hero,
+    .ref-sheet {
+      background: #fff !important;
+      color: #16352e !important;
+    }
+
+    .ref-shapes,
+    .ref-photo-card,
+    .ref-btn {
+      display: none !important;
     }
   }
 </style>
 
 <style is:global>
-  .referral-qr svg {
-    display: block;
-    width: 8rem;
-    height: 8rem;
+  .ref-hero {
+    position: relative;
+    overflow: hidden;
+    background: #102820;
+    color: #f7f3ea;
   }
 
-  .referral-qr-caption {
+  .ref-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .ref-blob {
+    position: absolute;
+    border-radius: 50%;
+    background: #1c463c;
+  }
+
+  .ref-blob-a {
+    top: -8rem;
+    left: -6rem;
+    width: 22rem;
+    height: 18rem;
+  }
+
+  .ref-blob-b {
+    right: -8rem;
+    bottom: -10rem;
+    width: 26rem;
+    height: 20rem;
+    background: #183e36;
+  }
+
+  .ref-arc {
+    position: absolute;
+    top: -4.5rem;
+    right: -3rem;
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .ref-wrap {
+    width: min(76rem, calc(100% - 2.5rem));
+    margin-inline: auto;
+  }
+
+  .ref-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.6rem, 3vw, 2.8rem) 0 clamp(1.8rem, 3vw, 3rem);
+  }
+
+  .ref-kicker,
+  .ref-sheet-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0;
+    color: #f3e6da;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .ref-rule {
+    width: 2.2rem;
+    height: 2px;
+    background: #e45a22;
+  }
+
+  .ref-hero h1 {
+    margin: 0.45rem 0 0;
+    max-width: 12ch;
+    color: #fff;
+    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+    font-size: clamp(2.6rem, 1.6rem + 2.6vw, 4.2rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+  }
+
+  .ref-intro {
+    margin: 0.9rem 0 0;
+    max-width: 38rem;
+    color: #e7f0ea;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .ref-steps {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ref-steps li {
+    display: grid;
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+    align-items: start;
+  }
+
+  .ref-step-icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 999px;
+    background: #f6d7c8;
+    color: #c4461a;
+  }
+
+  .ref-step-num {
+    position: absolute;
+    top: -0.15rem;
+    right: -0.15rem;
+    display: grid;
+    place-items: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 999px;
+    background: #c4461a;
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .ref-steps strong {
+    color: #fff;
+    font-size: 0.98rem;
+    line-height: 1.3;
+  }
+
+  .ref-steps li > span:last-child {
+    grid-column: 2;
+    color: #d7e6df;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+
+  .ref-cards {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ref-cards li {
+    display: grid;
+    gap: 0.45rem;
+    min-height: 100%;
+    padding: 0.95rem 0.95rem 1rem;
+    border-radius: 1.05rem;
+    background: #f7f1e6;
+    color: #16352e;
+  }
+
+  .ref-card-icon {
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 0.8rem;
+    background: #e7f2ea;
+    color: #16352e;
+  }
+
+  .ref-card-icon-mail {
+    background: #f6d7c8;
+    color: #c4461a;
+  }
+
+  .ref-cards p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 750;
+    line-height: 1.35;
+  }
+
+  .ref-card-note {
+    color: #3d534c;
+    font-size: 0.92rem;
+    font-weight: 650;
+  }
+
+  .ref-cards a {
+    color: #16352e;
+    font-weight: 750;
     overflow-wrap: anywhere;
   }
 
+  .ref-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    margin-top: 0.2rem;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    background: #c4461a;
+    color: #fff !important;
+    font-weight: 750;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .ref-btn:hover {
+    background: #a9380b;
+  }
+
+  .ref-photo-card {
+    position: relative;
+    display: grid;
+    gap: 0;
+    min-height: 100%;
+  }
+
+  .ref-photo-frame {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 1.4rem 1.4rem 0 0;
+    background: #1a3a32;
+  }
+
+  .ref-photo-frame picture,
+  .ref-photo-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ref-photo-frame img {
+    object-fit: cover;
+    object-position: 68% 42%;
+  }
+
+  .ref-photo-label {
+    position: absolute;
+    z-index: 2;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    margin: 0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.4rem;
+    background: #f6f1e8;
+    color: #16352e;
+    font-size: 0.75rem;
+    font-weight: 750;
+    line-height: 1.3;
+  }
+
+  .ref-photo-quote {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    padding: 1.15rem 1.15rem 1.2rem;
+    border-radius: 0 0 1.4rem 1.4rem;
+    background: #14352e;
+  }
+
+  .ref-quote {
+    margin: 0;
+    color: #fff;
+    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+    font-size: clamp(1.45rem, 1.1rem + 1vw, 2rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .ref-quote em {
+    color: #ffe1d0;
+    font-style: italic;
+  }
+
+  .ref-tag {
+    margin: 0;
+    color: #d7e6df;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .ref-sheet {
+    background: #f6f1e8;
+    color: #16352e;
+    scroll-margin-top: 6.5rem;
+  }
+
+  .ref-sheet .ref-wrap {
+    padding: clamp(1.8rem, 3vw, 3rem) 0 clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .ref-print-note {
+    margin: 0 0 1rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #e2c98a;
+    border-radius: 0.7rem;
+    background: #faf3e0;
+    color: #5c4a1f;
+    font-size: 0.92rem;
+  }
+
+  .ref-sheet-kicker {
+    color: #3d534c;
+  }
+
+  .ref-sheet h2,
+  .ref-sheet h3 {
+    margin: 0.35rem 0 0;
+    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .ref-sheet h2 {
+    font-size: clamp(1.8rem, 1.3rem + 1.2vw, 2.4rem);
+  }
+
+  .ref-sheet h3 {
+    font-size: 1.25rem;
+  }
+
+  .ref-sheet-grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.2rem;
+  }
+
+  .ref-sheet-main {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .ref-sheet-main section {
+    padding: 1rem 1.05rem 1.1rem;
+    border-radius: 1rem;
+    background: #fffdf9;
+  }
+
+  .ref-sheet p,
+  .ref-sheet li {
+    color: #243f38;
+    line-height: 1.5;
+  }
+
+  .ref-sheet p {
+    margin: 0.45rem 0 0;
+  }
+
+  .ref-sheet ul {
+    margin: 0.45rem 0 0;
+    padding-left: 1.15rem;
+  }
+
+  .ref-facts {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .ref-qual-label {
+    font-weight: 750;
+  }
+
+  .ref-sheet a {
+    color: #16352e;
+    font-weight: 700;
+  }
+
+  .ref-qr {
+    align-self: start;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #fff;
+    text-align: center;
+  }
+
+  .ref-qr svg {
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    margin-inline: auto;
+  }
+
+  .ref-qr-caption {
+    margin: 0.55rem 0 0;
+    color: #3d534c;
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
+  }
+
+  .ref-sheet-foot {
+    margin: 1.1rem 0 0;
+    color: #3d534c;
+    font-size: 0.85rem;
+  }
+
+  .ref-hero :is(a, button):focus-visible,
+  .ref-sheet :is(a, button):focus-visible {
+    outline: 3px solid #b8410f;
+    outline-offset: 3px;
+  }
+
+  @media (min-width: 760px) {
+    .ref-steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ref-steps::before {
+      content: "";
+      position: absolute;
+      top: 1.7rem;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background: rgb(255 255 255 / 0.28);
+    }
+
+    .ref-steps li {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .ref-steps li > span:last-child {
+      grid-column: auto;
+    }
+
+    .ref-cards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .ref-layout {
+      grid-template-columns: minmax(0, 1.22fr) minmax(18rem, 0.78fr);
+      align-items: stretch;
+    }
+
+    .ref-photo-frame {
+      aspect-ratio: auto;
+      height: 100%;
+      min-height: 28rem;
+      border-radius: 1.5rem;
+    }
+
+    .ref-photo-quote {
+      position: absolute;
+      top: 1.2rem;
+      bottom: 1.2rem;
+      left: 0;
+      width: min(17.5rem, 58%);
+      border-radius: 0 1.8rem 1.8rem 0;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ref-btn {
+      transition: none;
+    }
+  }
+
   @media print {
-    .referral-qr svg {
+    .ref-qr svg {
       width: 28mm;
       height: 28mm;
     }
