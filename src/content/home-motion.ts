@@ -184,17 +184,22 @@ export const homeAbout = {
 export const homeBanner = hm.banner;
 
 export const homeReferrers = {
+  kicker: hm.referrers.kicker,
   heading: hm.referrers.heading,
   lead: hm.referrers.lead,
-  registration: hm.referrers.registration,
-  ndis: hm.referrers.ndis,
-  audience:
-    "Support Coordinators, Recovery Coaches, GPs, allied health professionals, families and authorised representatives are welcome to get in touch.",
-  points: [
-    { icon: "notes" as const, title: hm.referrers.points[0] },
-    { icon: "group" as const, title: hm.referrers.points[1] },
-    { icon: "handshake" as const, title: hm.referrers.points[2] },
+  steps: [
+    { icon: "mail" as const, ...hm.referrers.steps[0] },
+    { icon: "people" as const, ...hm.referrers.steps[1] },
+    { icon: "clipboard" as const, ...hm.referrers.steps[2] },
   ],
+  registration: hm.referrers.registration,
+  ndisCard: hm.referrers.ndisCard,
+  ndisLimit: hm.referrers.ndisLimit,
+  quoteBefore: hm.referrers.quoteBefore,
+  quoteWord: hm.referrers.quoteWord,
+  quoteAfter: hm.referrers.quoteAfter,
+  quoteBody: hm.referrers.quoteBody,
+  tagline: hm.referrers.tagline,
   cta: hm.referrers.cta,
 };
 
