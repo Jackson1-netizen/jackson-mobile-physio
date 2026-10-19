@@ -1,26 +1,5 @@
 ---
-import { site, getEmailHref } from "../../content/site";
-import { messages } from "../../content/i18n";
-
-const publicMailto = getEmailHref();
-const copy = messages.en.hm.contactShort;
-const emergency = messages.en.enquiry.emergency;
+import ContactExperience from "../ContactExperience.astro";
 ---
 
-<section id="contact" class="hm-contact">
-  <div class="hm-wrap hm-section hm-contact-short">
-    <h2 data-i18n-path="sections.contact">Contact</h2>
-    <p data-i18n-path="hm.contactShort.body">{copy.body}</p>
-    <p class="hm-contact-phone">
-      <a href={site.phoneHref}>{site.phone}</a>
-    </p>
-    <p>
-      <a href={publicMailto}>{site.publicEmail}</a>
-    </p>
-    <p class="hm-contact-emergency" data-i18n-path="enquiry.emergency">{emergency}</p>
-    <a class="hm-btn hm-btn-primary" href="/enquiry/">
-      <span data-i18n-path="hm.contactShort.cta">{copy.cta}</span>
-      <span class="hm-arrow" aria-hidden="true">→</span>
-    </a>
-  </div>
-</section>
+<ContactExperience headingLevel="h2" anchor="contact" reserveMobileBar />

@@ -1,0 +1,888 @@
+---
+import HomeIcon from "./home/HomeIcon.astro";
+import { site, getEmailHref } from "../content/site";
+import { messages } from "../content/i18n";
+
+interface Props {
+  /** Homepage already has an h1, so the same visual heading is an h2 there. */
+  headingLevel?: "h1" | "h2";
+  anchor?: string;
+  reserveMobileBar?: boolean;
+}
+
+const { headingLevel = "h1", anchor, reserveMobileBar = false } = Astro.props;
+const Heading = headingLevel === "h1" ? "h1" : "h2";
+const Sub = headingLevel === "h1" ? "h2" : "h3";
+const t = messages.en.enquiry;
+const enquiryMessages = {
+  en: messages.en.enquiry,
+  "zh-Hant": messages["zh-Hant"].enquiry,
+  "zh-Hans": messages["zh-Hans"].enquiry,
+};
+const mailto = getEmailHref();
+const suburbs = site.serviceAreas.suburbs;
+
+const roleValues = [
+  "Participant or client",
+  "Family member or carer",
+  "Support coordinator",
+  "Health professional",
+  "Other referrer",
+  "Other",
+];
+const serviceValues = ["Physiotherapy", "Not sure yet", "Other"];
+const fundingValues = ["NDIS", "Support at Home", "Private", "Other or not sure"];
+const contactValues = ["Phone", "Email"];
+const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
+---
+
+<section
+  id={anchor}
+  class:list={["cx", reserveMobileBar && "cx-home"]}
+  aria-labelledby="cx-heading"
+>
+  <div class="cx-bg" aria-hidden="true">
+    <svg class="cx-leaf cx-leaf-tr" viewBox="0 0 220 180">
+      <path d="M190 20c-30 10-48 38-52 62 18-8 48-6 70 8-8-28-8-52-18-70Z" fill="#d7e4d4" />
+      <path d="M168 48c-22 18-28 46-20 68 22-14 46-12 64 4-6-30-18-54-44-72Z" fill="#c5d7c0" />
+      <path d="M150 78c8 20 28 32 52 34-16-18-22-36-18-54-12 4-24 12-34 20Z" fill="#b7cbb0" />
+    </svg>
+    <svg class="cx-leaf cx-leaf-bl" viewBox="0 0 160 140">
+      <path d="M20 110c28-8 48-30 58-54-20 6-46 8-66-4 8 24 6 42 8 58Z" fill="#d5e3d2" />
+      <path d="M48 96c16-20 20-44 10-64-20 16-40 16-56-2 8 26 20 48 46 66Z" fill="#c3d6be" />
+    </svg>
+    <svg class="cx-curve cx-curve-a" viewBox="0 0 280 220">
+      <path d="M20 180c40-70 90-90 150-70s90 10 110-30" fill="none" stroke="#e7a27a" stroke-width="1.4" />
+    </svg>
+    <svg class="cx-curve cx-curve-b" viewBox="0 0 200 160">
+      <path d="M10 40c50 20 70 70 140 90" fill="none" stroke="#efb08a" stroke-width="1.2" />
+    </svg>
+  </div>
+
+  <div class="cx-wrap">
+    <div class="cx-copy">
+      <p class="cx-kicker">
+        <span data-i18n-path="enquiry.kicker">{t.kicker}</span>
+        <span class="cx-rule" aria-hidden="true"></span>
+      </p>
+      <Heading id="cx-heading" class="cx-title" data-i18n-path="enquiry.heading">{t.heading}</Heading>
+      <p class="cx-lead" data-i18n-path="enquiry.intro">{t.intro}</p>
+      <ul class="cx-direct">
+        <li>
+          <a href={site.phoneHref}>
+            <span class="cx-chip" aria-hidden="true"><HomeIcon name="phone" size={18} /></span>
+            <span>{site.phone}</span>
+          </a>
+        </li>
+        <li>
+          <a class="cx-mail" href={mailto}>
+            <span class="cx-chip" aria-hidden="true"><HomeIcon name="mail" size={18} /></span>
+            <span>{site.publicEmail}</span>
+          </a>
+        </li>
+      </ul>
+      <hr class="cx-line" />
+      <Sub class="cx-sub" data-i18n-path="enquiry.helpHeading">{t.helpHeading}</Sub>
+      <p class="cx-help" data-i18n-path="enquiry.helpBody">{t.helpBody}</p>
+      <div class="cx-scene" aria-hidden="true">
+        <svg viewBox="0 0 520 280" role="presentation">
+          <ellipse cx="250" cy="250" rx="190" ry="18" fill="#e7dfd2" />
+          <path d="M70 168c0-36 28-58 78-58h150c42 0 70 18 78 52v46H70v-40Z" fill="#f4efe8" />
+          <path d="M78 150c6-28 28-42 68-42h130c34 0 58 12 66 38v28H78v-24Z" fill="#fbf8f4" />
+          <path d="M86 168h168c8 0 14 8 12 16l-8 18H96l-10-34Z" fill="#f7f1ea" />
+          <path d="M210 150c28 8 46 28 52 52h-28c-6-16-16-28-32-36l8-16Z" fill="#c4531d" />
+          <path d="M248 168c10 14 12 30 8 46h-22c2-14 0-26-8-36 6-4 14-8 22-10Z" fill="#a84416" />
+          <rect x="292" y="176" width="46" height="8" rx="2" fill="#efe6da" />
+          <rect x="300" y="168" width="38" height="8" rx="2" fill="#f7f3ee" />
+          <ellipse cx="390" cy="214" rx="46" ry="10" fill="#e5d3bc" />
+          <path d="M348 214c8-46 28-78 48-78s36 32 42 78Z" fill="#e8c9a4" />
+          <ellipse cx="392" cy="168" rx="22" ry="8" fill="#f3e6d4" />
+          <path d="M392 166c-2-28 8-48 14-62 6 16 8 36 4 62Z" fill="#7d9a72" />
+          <path d="M390 164c-16-18-14-42-6-58 10 18 14 40 8 58Z" fill="#6d8c64" />
+          <path d="M396 162c14-16 28-22 40-18-10 16-22 28-38 34Z" fill="#8eaa82" />
+          <path d="M40 40c18 8 28 24 30 40-12-4-28-2-40 6-2-18 2-34 10-46Z" fill="#d5e3d2" opacity="0.9" />
+          <path d="M78 70c-10 16-8 32 2 44 8-14 8-28 2-42 4-2 6-2 8-2-4 0-8 0-12 0Z" fill="#c5d6c0" opacity="0.8" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="cx-card">
+      <p class="cx-kicker">
+        <span data-i18n-path="enquiry.formKicker">{t.formKicker}</span>
+        <span class="cx-rule" aria-hidden="true"></span>
+      </p>
+      <form
+        id="enquiry-form"
+        class="cx-form"
+        name="enquiry"
+        method="POST"
+        action="/enquiry-received/"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        novalidate
+        aria-describedby="enq-required-note"
+      >
+        <input type="hidden" name="form-name" value="enquiry" />
+        <input id="enq-ndis-value" type="hidden" name="ndis" value="No" />
+        <p class="cx-honeypot" aria-hidden="true">
+          <label>
+            Leave this blank
+            <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </label>
+        </p>
+        <p id="enq-required-note" class="cx-sr" data-i18n-path="enquiry.requiredNote">{t.requiredNote}</p>
+
+        <div id="enq-summary" class="cx-summary" role="alert" tabindex="-1" hidden>
+          <p data-i18n-path="enquiry.errorSummary">{t.errorSummary}</p>
+          <ul id="enq-summary-list"></ul>
+        </div>
+
+        <div id="enq-fields" class="cx-grid">
+          <div class="cx-field">
+            <label for="enq-name">
+              <span data-i18n-path="enquiry.name">{t.name}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-name" name="name" type="text" autocomplete="name" enterkeyhint="next" maxlength="100" required aria-required="true" />
+            <p id="enq-name-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-role">
+              <span data-i18n-path="enquiry.role">{t.role}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-role" name="enquiring-as" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {roleValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.roleOptions.${i}`}>{t.roleOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-role-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-email"><span data-i18n-path="enquiry.email">{t.email}</span></label>
+            <input id="enq-email" name="email" type="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" maxlength="254" />
+            <p id="enq-email-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-phone"><span data-i18n-path="enquiry.phone">{t.phone}</span></label>
+            <input id="enq-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" maxlength="20" />
+            <p id="enq-phone-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-suburb"><span data-i18n-path="enquiry.suburb">{t.suburb}</span></label>
+            <input id="enq-suburb" name="suburb" type="text" autocomplete="address-level2" enterkeyhint="next" list="enq-suburbs" maxlength="80" />
+            <datalist id="enq-suburbs">
+              {suburbs.map((name) => <option value={name} />)}
+            </datalist>
+            <p id="enq-suburb-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-service">
+              <span data-i18n-path="enquiry.service">{t.service}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-service" name="service" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {serviceValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.serviceOptions.${i}`}>{t.serviceOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-service-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-funding">
+              <span data-i18n-path="enquiry.funding">{t.funding}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-funding" name="funding" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {fundingValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.fundingOptions.${i}`}>{t.fundingOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-funding-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-preferred">
+              <span data-i18n-path="enquiry.preferredContact">{t.preferredContact}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-preferred" name="preferred-contact" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {contactValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.preferredContactOptions.${i}`}>{t.preferredContactOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-preferred-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field cx-half">
+            <label for="enq-language"><span data-i18n-path="enquiry.language">{t.language}</span></label>
+            <select id="enq-language" name="language">
+              {languageValues.map((value, i) => (
+                <option value={value} selected={value === "English"} data-i18n-path={`enquiry.languageOptions.${i}`}>
+                  {t.languageOptions[i]}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div class="cx-field cx-check cx-full">
+            <input id="enq-ndis" type="checkbox" />
+            <label for="enq-ndis" data-i18n-path="enquiry.ndisLabel">{t.ndisLabel}</label>
+          </div>
+
+          <div class="cx-field cx-full">
+            <label for="enq-message">
+              <span data-i18n-path="enquiry.help">{t.help}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <textarea id="enq-message" name="message" rows="5" maxlength="1000" required aria-required="true" aria-describedby="enq-help-hint"></textarea>
+            <p id="enq-message-error" class="cx-error" hidden></p>
+            <p id="enq-help-hint" class="cx-hint" data-i18n-path="enquiry.helpHint">{t.helpHint}</p>
+          </div>
+        </div>
+
+        <noscript>
+          <p class="cx-noscript">
+            <span data-i18n-path="enquiry.noscript">{t.noscript}</span>
+            <a href={site.phoneHref}>{site.phone}</a>
+          </p>
+        </noscript>
+
+        <button type="submit" class="cx-submit">
+          <span data-i18n-path="enquiry.submitLabel">{t.submitLabel}</span>
+          <span aria-hidden="true"> →</span>
+        </button>
+        <p class="cx-privacy">
+          <span data-i18n-path="enquiry.privacyLead">{t.privacyLead}</span>
+          <a href="/privacy/" data-i18n-path="enquiry.privacyNotice">{t.privacyNotice}</a>.
+        </p>
+
+        <div id="enq-failed" class="cx-failed" role="alert" tabindex="-1" hidden>
+          <p class="cx-failed-title" data-i18n-path="enquiry.failedTitle">{t.failedTitle}</p>
+          <p>
+            <span data-i18n-path="enquiry.failedBody">{t.failedBody}</span>
+            <a href={site.phoneHref}>{site.phone}</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ enquiryMessages }}>
+  const form = document.getElementById("enquiry-form");
+  if (form) {
+    const summary = form.querySelector("#enq-summary");
+    const summaryList = form.querySelector("#enq-summary-list");
+    const failed = form.querySelector("#enq-failed");
+    const submitButton = form.querySelector("button[type=submit]");
+    const ndisValue = form.querySelector("#enq-ndis-value");
+    const ndisBox = form.querySelector("#enq-ndis");
+    const fields = {
+      name: form.querySelector("#enq-name"),
+      role: form.querySelector("#enq-role"),
+      email: form.querySelector("#enq-email"),
+      phone: form.querySelector("#enq-phone"),
+      service: form.querySelector("#enq-service"),
+      funding: form.querySelector("#enq-funding"),
+      preferred: form.querySelector("#enq-preferred"),
+      message: form.querySelector("#enq-message"),
+    };
+    let attempted = false;
+
+    const currentMessages = () => {
+      const lang = document.documentElement.lang;
+      const key = lang === "zh-Hant" || lang === "zh-Hans" ? lang : "en";
+      return enquiryMessages[key] || enquiryMessages.en;
+    };
+
+    const emailOk = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const phoneOk = (value) => {
+      const digits = value.replace(/\D/g, "");
+      return /^[+\d\s().-]+$/.test(value) && digits.length >= 8 && digits.length <= 15;
+    };
+
+    const collectErrors = () => {
+      const errors = [];
+      const email = fields.email.value.trim();
+      const phone = fields.phone.value.trim();
+      const preferred = fields.preferred.value;
+      if (!fields.name.value.trim()) errors.push({ name: "name", key: "nameRequired" });
+      if (!fields.role.value) errors.push({ name: "role", key: "roleRequired" });
+      if (preferred === "Email") {
+        if (!email) errors.push({ name: "email", key: "emailRequired" });
+        else if (!emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
+        if (phone && !phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
+      } else if (preferred === "Phone") {
+        if (!phone) errors.push({ name: "phone", key: "phoneRequired" });
+        else if (!phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
+        if (email && !emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
+      } else {
+        errors.push({ name: "preferred", key: "preferredRequired" });
+        if (email && !emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
+        if (phone && !phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
+      }
+      if (!fields.service.value) errors.push({ name: "service", key: "serviceRequired" });
+      if (!fields.funding.value) errors.push({ name: "funding", key: "fundingRequired" });
+      if (!fields.message.value.trim()) errors.push({ name: "message", key: "messageRequired" });
+      return errors;
+    };
+
+    const syncConditional = () => {
+      const preferred = fields.preferred.value;
+      fields.email.setAttribute("aria-required", preferred === "Email" ? "true" : "false");
+      fields.phone.setAttribute("aria-required", preferred === "Phone" ? "true" : "false");
+    };
+
+    const showField = (name, errorKey) => {
+      const input = fields[name];
+      const error = form.querySelector(`#enq-${name}-error`);
+      if (!input || !error) return;
+      const hint = name === "message" ? "enq-help-hint" : "";
+      if (errorKey) {
+        error.setAttribute("data-i18n-path", `enquiry.errors.${errorKey}`);
+        error.textContent = currentMessages().errors[errorKey];
+        error.hidden = false;
+        input.setAttribute("aria-invalid", "true");
+        input.setAttribute("aria-describedby", hint ? `${hint} ${error.id}` : error.id);
+      } else {
+        error.removeAttribute("data-i18n-path");
+        error.textContent = "";
+        error.hidden = true;
+        input.removeAttribute("aria-invalid");
+        if (hint) input.setAttribute("aria-describedby", hint);
+        else input.removeAttribute("aria-describedby");
+      }
+    };
+
+    const render = (errors) => {
+      const keys = new Set(errors.map((item) => item.name));
+      Object.keys(fields).forEach((name) => {
+        const found = errors.find((item) => item.name === name);
+        showField(name, found ? found.key : null);
+      });
+      summaryList.replaceChildren();
+      if (!errors.length) {
+        summary.hidden = true;
+        return;
+      }
+      const messagesNow = currentMessages();
+      errors.forEach((item) => {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `#enq-${item.name}`;
+        link.textContent = messagesNow.errors[item.key];
+        li.append(link);
+        summaryList.append(li);
+      });
+      summary.hidden = false;
+      void keys;
+    };
+
+    const refresh = () => {
+      syncConditional();
+      if (!attempted) return;
+      render(collectErrors());
+    };
+
+    Object.values(fields).forEach((input) => {
+      input.addEventListener("input", refresh);
+      input.addEventListener("change", refresh);
+    });
+    syncConditional();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      attempted = true;
+      failed.hidden = true;
+      const errors = collectErrors();
+      render(errors);
+      if (errors.length) {
+        summary.focus();
+        return;
+      }
+      if (form.querySelector("[name=bot-field]")?.value) return;
+      ndisValue.value = ndisBox.checked ? "Yes — plan-managed or self-managed" : "No";
+      const messagesNow = currentMessages();
+      const label = submitButton.querySelector("span");
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-busy", "true");
+      if (label) label.textContent = messagesNow.sending;
+      try {
+        const body = new URLSearchParams(new FormData(form)).toString();
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body,
+        });
+        if (!response.ok) throw new Error("Form was not accepted");
+        window.location.assign("/enquiry-received/");
+      } catch {
+        failed.hidden = false;
+        failed.focus();
+        submitButton.disabled = false;
+        submitButton.removeAttribute("aria-busy");
+        if (label) label.textContent = messagesNow.submitLabel;
+      }
+    });
+  }
+</script>
+
+<style>
+  .cx {
+    --cx-ink: #1a3a32;
+    --cx-body: #3f534c;
+    --cx-muted: #4e5e58;
+    --cx-line: #e4ddd4;
+    --cx-sage: #e5f0ea;
+    --cx-orange: #c4531d;
+    --cx-orange-line: #e28a4a;
+    --cx-card: #ffffff;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    scroll-margin-top: 7.5rem;
+    color: var(--cx-ink);
+    background:
+      radial-gradient(ellipse 42% 36% at 12% 18%, #f4e6d4 0%, transparent 70%),
+      radial-gradient(ellipse 36% 32% at 88% 8%, #f7efe6 0%, transparent 68%),
+      radial-gradient(ellipse 46% 34% at 78% 92%, #f3e7da 0%, transparent 70%),
+      linear-gradient(180deg, #fbf7f2 0%, #f4efe8 100%);
+    font-family: "Source Sans 3", "Source Sans 3 Fallback", "PingFang TC", "PingFang SC", "Noto Sans TC", "Noto Sans SC", "Microsoft JhengHei", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .cx-home {
+    padding-bottom: calc(3.25rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .cx-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .cx-leaf,
+  .cx-curve {
+    position: absolute;
+  }
+
+  .cx-leaf-tr {
+    top: -0.5rem;
+    right: -1rem;
+    width: min(16rem, 28vw);
+  }
+
+  .cx-leaf-bl {
+    left: -1.5rem;
+    bottom: 18%;
+    width: min(11rem, 24vw);
+  }
+
+  .cx-curve-a {
+    right: 4%;
+    bottom: 8%;
+    width: min(16rem, 24vw);
+  }
+
+  .cx-curve-b {
+    left: 38%;
+    top: 6%;
+    width: min(12rem, 18vw);
+  }
+
+  .cx-wrap {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.86fr) minmax(0, 1.2fr);
+    gap: 2.5rem 3rem;
+    align-items: start;
+    width: min(76rem, calc(100% - 3rem));
+    margin-inline: auto;
+    padding: 3.4rem 0 2.2rem;
+  }
+
+  .cx p {
+    max-width: none;
+    margin: 0;
+  }
+
+  .cx-kicker {
+    margin: 0;
+    color: var(--cx-ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  :lang(zh) .cx-kicker,
+  :lang(zh-Hant) .cx-kicker,
+  :lang(zh-Hans) .cx-kicker {
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+  .cx-rule {
+    display: block;
+    width: 2.15rem;
+    height: 3px;
+    margin-top: 0.45rem;
+    border-radius: 2px;
+    background: var(--cx-orange-line);
+  }
+
+  .cx-title,
+  .cx-sub {
+    margin: 0;
+    color: var(--cx-ink);
+    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+    font-weight: 560;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .cx-title {
+    margin-top: 0.85rem;
+    font-size: clamp(3.15rem, 5vw, 4.7rem);
+  }
+
+  .cx-lead,
+  .cx-help {
+    margin-top: 1rem;
+    max-width: 28rem;
+    color: var(--cx-body);
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .cx-direct {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.35rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cx-direct a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    color: var(--cx-ink);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .cx-direct a.cx-mail span:last-child {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .cx-chip {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 999px;
+    background: var(--cx-sage);
+    color: var(--cx-ink);
+  }
+
+  .cx-line {
+    margin: 1.35rem 0 1.15rem;
+    border: 0;
+    border-top: 1px solid var(--cx-line);
+    max-width: 26rem;
+  }
+
+  .cx-sub {
+    font-size: clamp(1.7rem, 2vw, 2rem);
+  }
+
+  .cx-scene {
+    width: min(100%, 28rem);
+    margin-top: 1.25rem;
+  }
+
+  .cx-scene svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .cx-card {
+    border-radius: 1.7rem;
+    background: var(--cx-card);
+    box-shadow: 0 18px 50px rgb(90 60 30 / 0.08);
+    padding: 1.7rem 1.55rem 1.45rem;
+  }
+
+  .cx-form {
+    display: grid;
+    gap: 0.95rem;
+    margin-top: 1.05rem;
+  }
+
+  .cx-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.95rem 1rem;
+  }
+
+  .cx-full {
+    grid-column: 1 / -1;
+  }
+
+  .cx-field {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+    align-content: start;
+  }
+
+  .cx-field label {
+    color: var(--cx-ink);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .cx-star {
+    margin-left: 0.15rem;
+  }
+
+  .cx-field input,
+  .cx-field select,
+  .cx-field textarea {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid #e3ddd4;
+    border-radius: 0.7rem;
+    background: #fff;
+    color: var(--cx-ink);
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .cx-field select {
+    appearance: none;
+    padding-right: 2.2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 7.5 10 12.5 15 7.5' fill='none' stroke='%231a3a32' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1rem;
+  }
+
+  .cx-field select:has(option[value=""]:checked) {
+    color: var(--cx-muted);
+  }
+
+  .cx-field textarea {
+    min-height: 7.5rem;
+    resize: vertical;
+  }
+
+  .cx-field input::placeholder,
+  .cx-field textarea::placeholder {
+    color: var(--cx-muted);
+  }
+
+  .cx-field :is(input, select, textarea):focus-visible,
+  .cx a:focus-visible,
+  .cx-submit:focus-visible,
+  .cx-summary:focus-visible,
+  .cx-failed:focus-visible {
+    outline: 3px solid var(--cx-ink);
+    outline-offset: 3px;
+  }
+
+  .cx-field :is(input, select, textarea)[aria-invalid="true"] {
+    border: 2px solid #8a2e14;
+  }
+
+  .cx-hint,
+  .cx-error,
+  .cx-privacy,
+  .cx-noscript {
+    color: var(--cx-muted);
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .cx-error {
+    color: #8a2e14;
+    font-weight: 700;
+  }
+
+  .cx-check {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2.75rem;
+  }
+
+  .cx-check input {
+    appearance: none;
+    flex: 0 0 2.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .cx-check input::before {
+    content: "";
+    width: 1.15rem;
+    height: 1.15rem;
+    border: 1.5px solid #c8bfb4;
+    border-radius: 0.25rem;
+    background: #fff center / 0.85rem no-repeat;
+  }
+
+  .cx-check input:checked::before {
+    border-color: var(--cx-orange);
+    background-color: var(--cx-orange);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.2 8.2 6.4 11.4 12.8 4.6' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  .cx-check label {
+    font-weight: 500;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .cx-submit {
+    justify-self: start;
+    min-height: 2.75rem;
+    margin-top: 0.2rem;
+    padding: 0.7rem 1.35rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--cx-orange);
+    color: #fff;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .cx-submit:hover {
+    background: #a84416;
+  }
+
+  .cx-submit:disabled {
+    cursor: progress;
+    opacity: 0.75;
+  }
+
+  .cx-privacy a,
+  .cx-failed a,
+  .cx-noscript a,
+  .cx-summary a {
+    color: var(--cx-ink);
+    font-weight: 700;
+    text-underline-offset: 0.15em;
+  }
+
+  .cx-summary,
+  .cx-failed {
+    padding: 0.8rem 0.9rem;
+    border-radius: 0.8rem;
+    border-left: 4px solid #8a2e14;
+    background: #fff6f3;
+    color: #6d2410;
+  }
+
+  .cx-summary ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .cx-failed-title {
+    font-weight: 800;
+  }
+
+  .cx-honeypot,
+  .cx-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 900px) {
+    .cx-wrap {
+      grid-template-columns: 1fr;
+      width: min(40rem, calc(100% - 2rem));
+      padding-top: 2.2rem;
+    }
+
+    .cx-title {
+      font-size: clamp(2.7rem, 12vw, 3.6rem);
+    }
+
+    .cx-scene {
+      width: min(100%, 22rem);
+    }
+
+    .cx-leaf-bl,
+    .cx-curve-b {
+      display: none;
+    }
+
+    .cx-grid,
+    .cx-half,
+    .cx-full {
+      grid-template-columns: 1fr;
+    }
+
+    .cx-half,
+    .cx-full {
+      grid-column: 1 / -1;
+    }
+
+    .cx-card {
+      padding: 1.25rem 1rem 1.15rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cx-home {
+      padding-bottom: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cx-submit {
+      transition: none;
+    }
+  }
+</style>

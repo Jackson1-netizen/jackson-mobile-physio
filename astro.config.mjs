@@ -24,6 +24,9 @@ export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
+  redirects: {
+    '/contact': '/enquiry/',
+  },
   server: {
     port: 4721,
     host: true,

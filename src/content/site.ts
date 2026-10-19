@@ -244,7 +244,7 @@ export const site = {
       {
         heading: "What this website asks for",
         paragraphs: [
-          "The enquiry form is for a first contact only. It asks for your name and phone number. You may also give an email address, suburb, preferred language, whether the enquiry relates to an NDIS plan (plan-managed or self-managed), and a brief reason for getting in touch.",
+          "The enquiry form is for a first contact only. It asks for your name, who is enquiring, a service, a funding pathway, whether you prefer a phone call or an email, and a short description. You also give the phone number or email address you choose, and you may add the other contact method, a suburb, a preferred language, and whether the enquiry relates to an NDIS plan (plan-managed or self-managed).",
           "Please do not include health information or other sensitive details in the form, in email, or in a text message. A short note is enough for us to reply. There is no online booking, payment, or clinical record on this website.",
         ],
       },
@@ -266,7 +266,7 @@ export const site = {
       {
         heading: "Email, storage, and overseas access",
         paragraphs: [
-          "The enquiry form is handled by Netlify, the service hosting this website. Netlify stores the name, phone number, and any optional details you submit, and can email that enquiry to hello@homemotionphysio.com.au. Netlify may process and store that information outside Australia. This website does not keep its own database of form submissions.",
+          "The enquiry form is handled by Netlify, the service hosting this website. Netlify stores the details you submit and can email that enquiry to hello@homemotionphysio.com.au. Netlify may process and store that information outside Australia. This website does not keep its own database of form submissions.",
           "You can also email hello@homemotionphysio.com.au from your own email app. Those messages are handled by Google Workspace, which may store them outside Australia.",
         ],
       },
