@@ -4,6 +4,7 @@ import { site, getReferralEmailHref } from "../../content/site";
 import HomeIcon from "./HomeIcon.astro";
 
 const referralMailto = getReferralEmailHref();
+const [referralLocal, referralDomain] = site.referralEmail.split("@");
 const t = homeReferrers;
 ---
 
@@ -40,18 +41,26 @@ const t = homeReferrers;
       </ol>
       <ul class="hm-ref-cards">
         <li class="hm-ref-card hm-ref-card-ahpra">
-          <p data-i18n-path="hm.referrers.registration">{t.registration}</p>
+          <span class="hm-ref-badge" aria-hidden="true"><HomeIcon name="shield" size={30} /></span>
+          <p>
+            <span class="hm-ref-ahpra-lead" data-i18n-path="hm.referrers.ahpraLead">{t.ahpraLead}</span>
+            <span class="hm-ref-ahpra-rest" data-i18n-path="hm.referrers.ahpraRest">{t.ahpraRest}</span>
+          </p>
         </li>
         <li class="hm-ref-card">
-          <p data-i18n-path="hm.referrers.ndisCard">{t.ndisCard}</p>
+          <span class="hm-ref-badge hm-ref-badge-hands" aria-hidden="true"><HomeIcon name="handshake" size={30} /></span>
+          <p class="hm-ref-card-title" data-i18n-path="hm.referrers.ndisCard">{t.ndisCard}</p>
           <p class="hm-ref-card-note" data-i18n-path="hm.referrers.ndisLimit">{t.ndisLimit}</p>
         </li>
         <li class="hm-ref-card hm-ref-card-mail">
-          <span class="hm-ref-mail" aria-hidden="true"><HomeIcon name="mail" size={18} /></span>
-          <p><a href={referralMailto}>{site.referralEmail}</a></p>
+          <span class="hm-ref-badge hm-ref-badge-mail" aria-hidden="true"><HomeIcon name="mail" size={28} /></span>
+          <a class="hm-ref-email" href={referralMailto}>
+            <span>{referralLocal}@</span>
+            <span>{referralDomain}</span>
+          </a>
           <a class="hm-ref-btn" href="/referral/">
             <span data-i18n-path="hm.referrers.cta">{t.cta}</span>
-            <span aria-hidden="true"> →</span>
+            <span class="hm-ref-btn-arrow" aria-hidden="true">→</span>
           </a>
         </li>
       </ul>
@@ -59,7 +68,7 @@ const t = homeReferrers;
     <svg class="hm-ref-clipdefs" width="0" height="0" aria-hidden="true">
       <defs>
         <clipPath id="hm-ref-blob" clipPathUnits="objectBoundingBox">
-          <path d="M0.06,0.16 C0.14,0.04 0.42,0.01 0.7,0.05 C0.92,0.08 0.99,0.2 0.98,0.46 C0.97,0.74 0.9,0.98 0.62,0.99 C0.3,1 0.04,0.86 0.02,0.56 C0.01,0.3 0.01,0.24 0.06,0.16 Z"></path>
+          <path d="M0.04,0.1 L0.04,0.72 C0.06,0.9 0.28,0.99 0.55,0.98 C0.78,0.97 0.94,0.86 0.99,0.68 C0.99,0.42 0.96,0.18 0.78,0.08 C0.58,0.01 0.28,0.04 0.04,0.1 Z"></path>
         </clipPath>
       </defs>
     </svg>
@@ -137,7 +146,7 @@ const t = homeReferrers;
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(16rem, 0.88fr);
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
     gap: 1.5rem 2rem;
     align-items: stretch;
     width: min(76rem, calc(100% - 3rem));
@@ -179,7 +188,7 @@ const t = homeReferrers;
   }
 
   .hm-ref-lead {
-    max-width: 46ch;
+    max-width: 54ch;
     margin: 0.9rem 0 0;
     color: rgb(244 239 232 / 0.9);
     font-size: 1.02rem;
@@ -257,20 +266,59 @@ const t = homeReferrers;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.7rem;
-    margin: 1.15rem 0 0;
+    margin: 1.6rem 0 0;
     padding: 0;
     list-style: none;
   }
 
   .hm-ref-card {
-    display: grid;
-    align-content: start;
-    gap: 0.4rem;
-    min-height: 8.5rem;
-    padding: 0.95rem 0.85rem 0.9rem;
-    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    min-width: 0;
+    min-height: 13.5rem;
+    height: 100%;
+    padding: 1rem 0.9rem 0.95rem;
+    border-radius: 1.05rem;
     background: #f7f1e8;
     color: #16352e;
+  }
+
+  .hm-ref-badge {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 999px;
+    background: #d7efe8;
+    color: #14685e;
+  }
+
+  .hm-ref-badge-hands {
+    background: #e5efe8;
+    color: #16352e;
+  }
+
+  .hm-ref-badge-mail {
+    background: #f6d7c8;
+    color: #c4531d;
+  }
+
+  .hm-ref-ahpra-lead {
+    display: block;
+    color: #14685e;
+    font-size: 1.2rem;
+    font-weight: 650;
+    line-height: 1.15;
+  }
+
+  .hm-ref-ahpra-rest {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.95rem;
+    font-weight: 650;
   }
 
   .hm-ref-card-ahpra {
@@ -289,51 +337,51 @@ const t = homeReferrers;
   .hm-ref-card-note {
     color: #3d534c !important;
     font-size: 0.84rem !important;
-    font-weight: 650 !important;
+    font-weight: 450 !important;
   }
 
-  .hm-ref-card a {
+  .hm-ref-email {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+    min-width: 0;
     color: #16352e;
-    font-weight: 750;
-    overflow-wrap: normal;
-    word-break: normal;
-    text-underline-offset: 0.12em;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
   }
 
-  @media (min-width: 1100px) {
-    .hm-ref-card a[href^="mailto:"] {
-      font-size: 0.82rem;
-      white-space: nowrap;
-    }
-  }
-
-  .hm-ref-mail {
-    display: grid;
-    place-items: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    border-radius: 999px;
-    background: #f6d7c8;
-    color: #c4461a;
+  .hm-ref-email span {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
   }
 
   .hm-ref-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.45rem;
     width: fit-content;
     max-width: 100%;
     min-height: 2.75rem;
-    margin-top: 0.15rem;
-    padding: 0.45rem 0.85rem;
+    margin-top: auto;
+    padding: 0.5rem 0.95rem;
     border-radius: 999px;
-    background: #c4461a;
+    background: #c4531d;
     color: #fff;
     font-size: 0.92rem;
     font-weight: 750;
     line-height: 1.2;
     text-align: center;
     text-decoration: none;
+  }
+
+  .hm-ref-card .hm-ref-btn,
+  .hm-ref-card .hm-ref-btn:hover {
+    color: #fff;
   }
 
   .hm-ref-btn:hover {
@@ -378,10 +426,10 @@ const t = homeReferrers;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.7rem;
+    justify-content: flex-start;
+    gap: 0.65rem;
     min-height: 100%;
-    padding: 18% 8% 10% 4%;
+    padding: 1.6rem 22% 1.2rem 0.2rem;
   }
 
   .hm-ref-quote-rule {
@@ -396,8 +444,8 @@ const t = homeReferrers;
     margin: 0;
     color: #fff;
     font-family: var(--hm-serif);
-    font-size: clamp(1.7rem, 2.2vw, 2.35rem);
-    font-weight: 560;
+    font-size: clamp(1.85rem, 2.1vw, 2.45rem);
+    font-weight: 500;
     letter-spacing: -0.03em;
     line-height: 1.12;
   }
@@ -416,11 +464,13 @@ const t = homeReferrers;
   }
 
   .hm-ref-tag {
+    max-width: 9ch;
     margin: 0;
     color: #d7e4de;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 800;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
+    line-height: 1.45;
     text-transform: uppercase;
   }
 

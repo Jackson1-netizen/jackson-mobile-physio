@@ -26,7 +26,6 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
           ))
         }
       </ol>
-      <p class="hm-flow-note" data-i18n-path="hm.how.note">{copy.note}</p>
     </div>
     <figure class="hm-flow-media">
       <div class="hm-flow-frame">
@@ -48,6 +47,7 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
       </div>
       <figcaption data-i18n-path="hm.how.caption">{copy.caption}</figcaption>
     </figure>
+    <p class="hm-flow-note" data-i18n-path="hm.how.note">{copy.note}</p>
   </div>
 </section>
 
@@ -74,12 +74,13 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
 
   .hm-flow h2 {
     margin: 0.45rem 0 0;
-    max-width: 12.5em;
+    max-width: 9.2em;
     color: #16352e;
-    font-size: clamp(2.1rem, 1.3rem + 2vw, 3.15rem);
+    font-family: var(--hm-sans);
+    font-size: clamp(2.15rem, 1.2rem + 2.1vw, 3.05rem);
     font-weight: 650;
     letter-spacing: -0.03em;
-    line-height: 1.05;
+    line-height: 1.08;
     text-wrap: balance;
   }
 
@@ -139,7 +140,9 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
   }
 
   .hm-flow-note {
-    margin: 0.9rem 0 0;
+    grid-column: 1 / -1;
+    margin: 0.35rem 0 0;
+    max-width: 70rem;
     color: #243f38;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -180,7 +183,7 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
 
   @media (min-width: 960px) {
     .hm-flow-grid {
-      grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1.75rem;
     }
 

@@ -193,6 +193,8 @@ export const homeReferrers = {
     { icon: "clipboard" as const, ...hm.referrers.steps[2] },
   ],
   registration: hm.referrers.registration,
+  ahpraLead: hm.referrers.ahpraLead,
+  ahpraRest: hm.referrers.ahpraRest,
   ndisCard: hm.referrers.ndisCard,
   ndisLimit: hm.referrers.ndisLimit,
   quoteBefore: hm.referrers.quoteBefore,
@@ -213,6 +215,7 @@ export const homeAreas = {
   cardLabel: hm.areas.cardLabel,
   logoAlt: hm.areas.logoAlt,
   cardPlace: hm.areas.cardPlace,
+  cardRole: hm.areas.cardRole,
   benefits: hm.areas.benefits,
 };
 
