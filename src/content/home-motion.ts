@@ -199,29 +199,28 @@ export const homeReferrers = {
 };
 
 export const homeAreas = {
-  kicker: hm.areas.heading,
-  heading: hm.areas.lead,
-  intro:
-    "This is a mobile service. We do not publish a clinic or home address. Confirm travel for your location when you enquire.",
+  kicker: hm.areas.kicker,
+  heading: hm.areas.heading,
+  lead: hm.areas.lead,
+  body: hm.areas.body,
   mapCaption: hm.areas.mapCaption,
+  mapChip: hm.areas.mapChip,
   cardLabel: hm.areas.cardLabel,
-  mapLinkLabel: "Open eastern Melbourne on OpenStreetMap",
-  mapEmbed:
-    "https://www.openstreetmap.org/export/embed.html?bbox=145.02%2C-37.90%2C145.28%2C-37.76&layer=mapnik",
-  mapExternal: "https://www.openstreetmap.org/#map=12/-37.82/145.15",
-  motto: "People Movement Home",
-  cardPlace: "Melbourne's Eastern Suburbs",
+  logoAlt: hm.areas.logoAlt,
+  cardPlace: hm.areas.cardPlace,
+  benefits: hm.areas.benefits,
 };
 
+/** Approximate suburb centres. Positions on the illustrative map use these values. */
 export const homeMapPins = [
-  { name: "Box Hill", lat: -37.819, lng: 145.1227 },
-  { name: "Doncaster", lat: -37.788, lng: 145.124 },
-  { name: "Blackburn", lat: -37.8197, lng: 145.1515 },
-  { name: "Ringwood", lat: -37.8116, lng: 145.2296 },
-  { name: "Burwood", lat: -37.8498, lng: 145.1135 },
-  { name: "Glen Waverley", lat: -37.8796, lng: 145.1648 },
-  { name: "Mitcham", lat: -37.817, lng: 145.1928 },
-  { name: "Nunawading", lat: -37.8203, lng: 145.1771 },
+  { name: "Box Hill", lat: -37.819, lng: 145.122, side: "left" },
+  { name: "Doncaster", lat: -37.784, lng: 145.125, side: "right" },
+  { name: "Blackburn", lat: -37.82, lng: 145.151, side: "up" },
+  { name: "Ringwood", lat: -37.815, lng: 145.229, side: "down" },
+  { name: "Burwood", lat: -37.851, lng: 145.113, side: "right" },
+  { name: "Glen Waverley", lat: -37.878, lng: 145.164, side: "left" },
+  { name: "Mitcham", lat: -37.815, lng: 145.193, side: "up" },
+  { name: "Nunawading", lat: -37.819, lng: 145.176, side: "down" },
 ] as const;
 
 export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {

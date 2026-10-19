@@ -1,139 +1,123 @@
 ---
-import { homeMapPins } from "../../content/home-motion";
+import { homeMapPins, homeSuburbs } from "../../content/home-motion";
 import { messages } from "../../content/i18n";
 
-const west = 145.09;
-const east = 145.25;
-const north = -37.775;
-const south = -37.895;
+/**
+ * Equirectangular projection of the eight served suburbs.
+ * Bounds sit just outside those suburbs so every pin and its label
+ * stays inside the canvas. No other place names are drawn.
+ */
+const west = 145.088;
+const east = 145.258;
+const north = -37.766;
+const south = -37.9;
+const cos = Math.cos((-37.82 * Math.PI) / 180);
+const xSpan = (east - west) * cos;
+const ySpan = north - south;
+const vbW = 640;
+const vbH = Math.round(vbW / (xSpan / ySpan));
 
-const pins = homeMapPins.map((pin) => {
-  const left = ((pin.lng - west) / (east - west)) * 100;
-  const top = ((north - pin.lat) / (north - south)) * 100;
-  return { ...pin, left, top };
+function project(lat: number, lng: number) {
+  return {
+    x: (((lng - west) * cos) / xSpan) * vbW,
+    y: ((north - lat) / ySpan) * vbH,
+  };
+}
+
+function line(points: ReadonlyArray<readonly [number, number]>) {
+  return points
+    .map(([lng, lat], i) => {
+      const p = project(lat, lng);
+      return `${i === 0 ? "M" : "L"}${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
+    })
+    .join(" ");
+}
+
+const freeway = line([
+  [145.09, -37.798],
+  [145.14, -37.784],
+  [145.19, -37.778],
+  [145.25, -37.792],
+]);
+const rail = line([
+  [145.1, -37.822],
+  [145.122, -37.819],
+  [145.151, -37.82],
+  [145.176, -37.819],
+  [145.193, -37.815],
+  [145.229, -37.815],
+  [145.25, -37.812],
+]);
+const northSouth = line([
+  [145.123, -37.772],
+  [145.121, -37.82],
+  [145.116, -37.89],
+]);
+const southRoad = line([
+  [145.16, -37.78],
+  [145.164, -37.84],
+  [145.17, -37.892],
+]);
+
+const parks = [
+  [145.14, -37.845, 48, 30],
+  [145.205, -37.85, 42, 26],
+  [145.11, -37.868, 36, 22],
+].map(([lng, lat, rx, ry]) => {
+  const p = project(lat as number, lng as number);
+  return { cx: p.x, cy: p.y, rx, ry };
 });
+
+const pins = homeMapPins.map((pin, index) => {
+  const suburb = homeSuburbs.find((item) => item.name === pin.name);
+  const p = project(pin.lat, pin.lng);
+  return {
+    ...pin,
+    href: suburb?.href ?? "/areas/",
+    n: index + 1,
+    left: (p.x / vbW) * 100,
+    top: (p.y / vbH) * 100,
+  };
+});
+
+const t = messages.en.hm.areas;
 ---
 
-<div class="hm-map" data-hm-map>
-  <div
-    class="hm-map-canvas"
-    data-hm-map-canvas
-    role="region"
-    aria-label={messages.en.hm.areas.mapLabel}
-    data-i18n-attr="aria-label:hm.areas.mapLabel"
-  ></div>
-  <ul class="hm-map-pins">
+<div class="hm-sa-map">
+  <div class="hm-sa-canvas" style={`aspect-ratio:${vbW} / ${vbH}`}>
+    <svg class="hm-sa-svg" viewBox={`0 0 ${vbW} ${vbH}`} aria-hidden="true">
+      <rect width={vbW} height={vbH} fill="#e7f0e4" />
+      {
+        parks.map((park) => (
+          <ellipse cx={park.cx} cy={park.cy} rx={park.rx} ry={park.ry} fill="#c5dcc0" />
+        ))
+      }
+      <path d={freeway} fill="none" stroke="#f4efe6" stroke-width="14" stroke-linecap="round" />
+      <path d={northSouth} fill="none" stroke="#f7f3ec" stroke-width="7" stroke-linecap="round" />
+      <path d={southRoad} fill="none" stroke="#f7f3ec" stroke-width="6" stroke-linecap="round" />
+      <path d={rail} fill="none" stroke="#b7ab9e" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round" />
+    </svg>
     {
       pins.map((pin) => (
-        <li
-          class="hm-map-pin"
-          data-lat={pin.lat}
-          data-lng={pin.lng}
-          style={`left:${pin.left.toFixed(1)}%;top:${pin.top.toFixed(1)}%;`}
+        <a
+          class:list={["hm-sa-pin", `is-label-${pin.side}`]}
+          href={pin.href}
+          data-area={pin.name}
+          style={`left:${pin.left.toFixed(2)}%;top:${pin.top.toFixed(2)}%;`}
         >
-          <span class="hm-map-pin-mark" aria-hidden="true"></span>
-          <span class="hm-map-pin-label">{pin.name}</span>
-        </li>
+          <span class="hm-sa-pin-mark" aria-hidden="true">
+            <span class="hm-sa-pin-num">{pin.n}</span>
+          </span>
+          <span class="hm-sa-pin-name">{pin.name}</span>
+        </a>
       ))
     }
-  </ul>
+  </div>
+  <div class="hm-sa-map-foot">
+    <p class="hm-sa-chip">
+      <span class="hm-sa-chip-icon" aria-hidden="true"></span>
+      <span data-i18n-path="hm.areas.mapChip">{t.mapChip}</span>
+    </p>
+    <p class="hm-sa-map-note" data-i18n-path="hm.areas.mapCaption">{t.mapCaption}</p>
+  </div>
 </div>
-
-<script>
-  // Leaflet (JS + CSS) is fetched only when the map nears the viewport. Until then —
-  // or if the chunk fails to load — the static CSS-positioned pins stay visible.
-  // `?url` keeps Astro from hoisting leaflet.css into the page as a blocking stylesheet.
-  import leafletCssUrl from "leaflet/dist/leaflet.css?url";
-
-  const loadStylesheet = (href: string) =>
-    new Promise<void>((resolve, reject) => {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      link.onload = () => resolve();
-      link.onerror = () => reject(new Error(`Failed to load ${href}`));
-      document.head.append(link);
-    });
-
-  const mountMap = async (root: HTMLElement) => {
-    const canvas = root.querySelector<HTMLElement>("[data-hm-map-canvas]");
-    if (!canvas || canvas.dataset.mounted === "1") return;
-
-    const pins = [...root.querySelectorAll<HTMLElement>(".hm-map-pin")]
-      .map((el) => ({
-        name: el.querySelector(".hm-map-pin-label")?.textContent?.trim() ?? "",
-        lat: Number(el.dataset.lat),
-        lng: Number(el.dataset.lng),
-      }))
-      .filter((pin) => Number.isFinite(pin.lat) && Number.isFinite(pin.lng) && pin.name);
-
-    if (!pins.length) return;
-    canvas.dataset.mounted = "1";
-
-    let L: typeof import("leaflet");
-    try {
-      [L] = await Promise.all([import("leaflet"), loadStylesheet(leafletCssUrl)]);
-    } catch {
-      canvas.dataset.mounted = "";
-      return;
-    }
-
-    const map = L.map(canvas, {
-      scrollWheelZoom: false,
-      zoomControl: true,
-      attributionControl: true,
-      zoomSnap: 0.25,
-      zoomDelta: 0.5,
-    });
-
-    L.tileLayer(
-      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
-      {
-        maxZoom: 19,
-        attribution:
-          'Tiles &copy; <a href="https://www.esri.com/">Esri</a>',
-      },
-    ).addTo(map);
-
-    const labelLeft = new Set(["Box Hill", "Burwood", "Nunawading"]);
-    const bounds: [number, number][] = [];
-    for (const pin of pins) {
-      const left = labelLeft.has(pin.name);
-      const icon = L.divIcon({
-        className: left ? "hm-leaflet-pin is-label-left" : "hm-leaflet-pin",
-        html: left
-          ? `<span class="hm-leaflet-pin-label">${pin.name}</span><span class="hm-leaflet-pin-mark" aria-hidden="true"></span>`
-          : `<span class="hm-leaflet-pin-mark" aria-hidden="true"></span><span class="hm-leaflet-pin-label">${pin.name}</span>`,
-        iconSize: left ? [132, 24] : [132, 24],
-        iconAnchor: left ? [124, 12] : [8, 12],
-      });
-      L.marker([pin.lat, pin.lng], { icon, title: pin.name, keyboard: false }).addTo(map);
-      bounds.push([pin.lat, pin.lng]);
-    }
-
-    const fit = () => {
-      map.invalidateSize();
-      map.fitBounds(bounds, { padding: [22, 26], maxZoom: 13 });
-    };
-    root.classList.add("is-live");
-    requestAnimationFrame(fit);
-  };
-
-  const root = document.querySelector<HTMLElement>("[data-hm-map]");
-  if (root) {
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            io.disconnect();
-            void mountMap(root);
-          }
-        },
-        { rootMargin: "300px 0px" },
-      );
-      io.observe(root);
-    } else {
-      void mountMap(root);
-    }
-  }
-</script>

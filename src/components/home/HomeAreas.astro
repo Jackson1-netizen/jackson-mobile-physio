@@ -1,41 +1,39 @@
 ---
 import HomeLogo from "./HomeLogo.astro";
+import HomeIcon from "./HomeIcon.astro";
+import ServiceAreaMap from "./ServiceAreaMap.astro";
 import { site } from "../../content/site";
 import { homeAreas, homeSuburbs } from "../../content/home-motion";
-import ServiceAreaMap from "./ServiceAreaMap.astro";
-import HomeIcon from "./HomeIcon.astro";
+import { messages } from "../../content/i18n";
 
+interface Props {
+  /** Use an h1 when this section is the page heading, as on /areas/. */
+  pageHeading?: boolean;
+}
+
+const { pageHeading = false } = Astro.props;
+const Heading = pageHeading ? "h1" : "h2";
+const benefitIcons = ["home", "pin", "people"] as const;
+const mapLabel = messages.en.hm.areas.mapLabel;
 ---
 
-<section id="areas" class="hm-areas-band">
-  <div class="hm-areas-split">
-    <div class="hm-card-stage">
-      <div class="hm-card-stack" role="group" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
-        <article class="hm-print-card hm-print-card-back" lang="en">
-          <HomeLogo sizes="106px" lazy />
-        </article>
-        <article class="hm-print-card hm-print-card-front" lang="en">
-          <p class="hm-print-name">Jackson</p>
-          <p class="hm-print-role">Mobile Physiotherapist</p>
-          <p class="hm-print-phone"><a href={site.phoneHref}>{site.phone}</a></p>
-          <p class="hm-print-email"><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a></p>
-          <div class="hm-print-foot">
-            <p class="hm-print-place">{homeAreas.cardPlace}</p>
-            <p class="hm-print-motto">{homeAreas.motto}</p>
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="hm-areas-copy">
-      <div class="hm-areas-copy-text">
-        <h2 data-i18n-path="hm.areas.heading">{homeAreas.kicker}</h2>
-        <p data-i18n-path="hm.areas.lead">{homeAreas.heading}</p>
-        <ul class="hm-pin-list">
+<section id="areas" class="hm-sa" data-sa aria-labelledby="hm-sa-heading">
+  <div class="hm-sa-wrap">
+    <div class="hm-sa-top">
+      <div class="hm-sa-copy">
+        <p class="hm-sa-kicker">
+          <span class="hm-sa-rule" aria-hidden="true"></span>
+          <span data-i18n-path="hm.areas.kicker">{homeAreas.kicker}</span>
+        </p>
+        <Heading id="hm-sa-heading" data-i18n-path="hm.areas.heading">{homeAreas.heading}</Heading>
+        <p class="hm-sa-lead" data-i18n-path="hm.areas.lead">{homeAreas.lead}</p>
+        <p data-i18n-path="hm.areas.body">{homeAreas.body}</p>
+        <ul class="hm-sa-list">
           {
             homeSuburbs.map((suburb) => (
               <li>
-                <a href={suburb.href}>
-                  <span class="hm-pin">
+                <a href={suburb.href} data-area={suburb.name}>
+                  <span class="hm-sa-list-icon" aria-hidden="true">
                     <HomeIcon name="pin" size={18} />
                   </span>
                   {suburb.name}
@@ -45,10 +43,528 @@ import HomeIcon from "./HomeIcon.astro";
           }
         </ul>
       </div>
-      <div class="hm-areas-map-col">
-        <ServiceAreaMap />
-        <p class="hm-map-caption" data-i18n-path="hm.areas.mapCaption">{homeAreas.mapCaption}</p>
+      <div class="hm-sa-stage">
+        <div class="hm-sa-blob hm-sa-blob-green" aria-hidden="true"></div>
+        <div class="hm-sa-blob hm-sa-blob-orange" aria-hidden="true"></div>
+        <div role="group" aria-label={mapLabel} data-i18n-attr="aria-label:hm.areas.mapLabel">
+          <ServiceAreaMap />
+        </div>
+        <aside class="hm-sa-card" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
+          <HomeLogo sizes="168px" lazy alt={homeAreas.logoAlt} altPath="hm.areas.logoAlt" />
+          <p class="hm-sa-card-row">
+            <span class="hm-sa-card-icon" aria-hidden="true"><HomeIcon name="phone" size={16} /></span>
+            <a href={site.phoneHref}>{site.phone}</a>
+          </p>
+          <p class="hm-sa-card-row">
+            <span class="hm-sa-card-icon" aria-hidden="true"><HomeIcon name="mail" size={16} /></span>
+            <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a>
+          </p>
+          <p class="hm-sa-card-row">
+            <span class="hm-sa-card-icon" aria-hidden="true"><HomeIcon name="pin" size={16} /></span>
+            <span data-i18n-path="hm.areas.cardPlace">{homeAreas.cardPlace}</span>
+          </p>
+        </aside>
       </div>
     </div>
+    <ul class="hm-sa-benefits">
+      {
+        homeAreas.benefits.map((item, i) => (
+          <li>
+            <span class="hm-sa-benefit-icon" aria-hidden="true">
+              <HomeIcon name={benefitIcons[i]} size={22} />
+            </span>
+            <span>
+              <strong data-i18n-path={`hm.areas.benefits.${i}.title`}>{item.title}</strong>
+              <span data-i18n-path={`hm.areas.benefits.${i}.body`}>{item.body}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-sa]");
+  if (root) {
+    const groups = root.querySelectorAll<HTMLElement>("[data-area]");
+    const paint = (name: string | null, on: boolean) => {
+      if (!name) return;
+      root.querySelectorAll<HTMLElement>(`[data-area="${CSS.escape(name)}"]`).forEach((el) => {
+        el.classList.toggle("is-hot", on);
+      });
+    };
+    groups.forEach((el) => {
+      const name = el.getAttribute("data-area");
+      el.addEventListener("pointerenter", () => paint(name, true));
+      el.addEventListener("pointerleave", () => paint(name, false));
+      el.addEventListener("focus", () => paint(name, true));
+      el.addEventListener("blur", () => paint(name, false));
+    });
+  }
+</script>
+
+<style is:global>
+  .hm-sa {
+    background: #f6f1e8;
+    color: #16352e;
+  }
+
+  .hm-sa-wrap {
+    width: min(76rem, calc(100% - 2.5rem));
+    margin-inline: auto;
+    padding: clamp(2.2rem, 4vw, 3.5rem) 0;
+  }
+
+  .hm-sa-top {
+    display: grid;
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  .hm-sa-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0;
+    color: #3d534c;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hm-sa-rule {
+    width: 2.4rem;
+    height: 2px;
+    background: #e45a22;
+  }
+
+  .hm-sa h1,
+  .hm-sa h2,
+  .hm .hm-sa h1,
+  .hm .hm-sa h2 {
+    margin: 0.45rem 0 0;
+    max-width: 12ch;
+    color: #16352e;
+    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+    font-size: clamp(2.4rem, 1.4rem + 2.4vw, 3.6rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+  }
+
+  .hm-sa-copy > .hm-sa-lead {
+    margin: 0.85rem 0 0;
+    max-width: 28rem;
+    color: #16352e;
+    font-size: 1.2rem;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .hm-sa-copy > p {
+    margin: 0.75rem 0 0;
+    max-width: 34rem;
+    color: #3d534c;
+  }
+
+  .hm-sa-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.15rem 0.8rem;
+    margin: 1.15rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hm-sa-list a {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 2.75rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 999px;
+    color: #16352e;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .hm-sa-list-icon {
+    display: grid;
+    place-items: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 999px;
+    background: #fde8df;
+    color: #c4461a;
+  }
+
+  .hm-sa-list a.is-hot,
+  .hm-sa-list a:hover {
+    background: #fde8df;
+  }
+
+  .hm-sa-stage {
+    position: relative;
+    min-height: 22rem;
+    padding: 1.25rem 0.25rem 0.25rem;
+  }
+
+  .hm-sa-blob {
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .hm-sa-blob-green {
+    top: 0;
+    right: 6%;
+    width: 11rem;
+    height: 11rem;
+    background: #c5d4bf;
+  }
+
+  .hm-sa-blob-orange {
+    right: 0;
+    bottom: 1.5rem;
+    width: 8.5rem;
+    height: 8.5rem;
+    background: #f3c7b4;
+  }
+
+  .hm-sa-map {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 38rem);
+    overflow: hidden;
+    border-radius: 1.35rem;
+    background: #e7f0e4;
+    box-shadow: 0 18px 40px rgb(22 53 46 / 0.12);
+  }
+
+  .hm-sa-canvas {
+    position: relative;
+  }
+
+  .hm-sa-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .hm-sa-pin {
+    position: absolute;
+    z-index: 2;
+    width: 2.75rem;
+    height: 2.75rem;
+    transform: translate(-50%, -100%);
+    color: #16352e;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .hm-sa-pin-mark {
+    position: absolute;
+    left: 50%;
+    bottom: 0.2rem;
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    border: 2px solid #fff;
+    border-radius: 50% 50% 50% 0;
+    background: #c4461a;
+    box-shadow: 0 2px 4px rgb(22 53 46 / 0.22);
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  .hm-sa-pin-num {
+    display: none;
+    transform: rotate(45deg);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .hm-sa-pin-mark::after {
+    content: "";
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 999px;
+    background: #fff;
+    transform: rotate(45deg);
+  }
+
+  .hm-sa-pin-name {
+    position: absolute;
+    padding: 0.14rem 0.42rem;
+    border-radius: 0.4rem;
+    background: #fff;
+    box-shadow: 0 1px 3px rgb(22 53 46 / 0.16);
+    font-size: 0.78rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .hm-sa-pin.is-label-right .hm-sa-pin-name {
+    left: calc(50% + 0.85rem);
+    bottom: 0.45rem;
+  }
+
+  .hm-sa-pin.is-label-left .hm-sa-pin-name {
+    right: calc(50% + 0.85rem);
+    bottom: 0.45rem;
+  }
+
+  .hm-sa-pin.is-label-up .hm-sa-pin-name {
+    left: 50%;
+    bottom: 2.05rem;
+    transform: translateX(-50%);
+  }
+
+  .hm-sa-pin.is-label-down .hm-sa-pin-name {
+    left: 50%;
+    top: calc(100% + 0.05rem);
+    transform: translateX(-50%);
+  }
+
+  .hm-sa-pin.is-hot,
+  .hm-sa-pin:hover,
+  .hm-sa-pin:focus-visible {
+    z-index: 4;
+  }
+
+  .hm-sa-pin.is-hot .hm-sa-pin-mark,
+  .hm-sa-pin:hover .hm-sa-pin-mark,
+  .hm-sa-pin:focus-visible .hm-sa-pin-mark {
+    background: #16352e;
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #16352e;
+  }
+
+  .hm-sa-map-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.75rem;
+    padding: 0.55rem 0.75rem 0.65rem;
+  }
+
+  .hm-sa-chip,
+  .hm-sa-map-note {
+    margin: 0;
+  }
+
+  .hm-sa-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.7rem;
+    background: #fff;
+    color: #16352e;
+    font-size: 0.78rem;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgb(22 53 46 / 0.12);
+  }
+
+  .hm-sa-chip-icon {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: #e45a22;
+  }
+
+  .hm-sa-map-note {
+    left: 0.7rem;
+    bottom: 0.45rem;
+    color: #3d534c;
+    font-size: 0.72rem;
+    font-weight: 650;
+  }
+
+  .hm-sa-card {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 18rem);
+    margin-top: 0.85rem;
+    padding: 1rem 1.05rem 1.05rem;
+    border-radius: 1.1rem;
+    background: #fff;
+    box-shadow: 0 16px 36px rgb(22 53 46 / 0.12);
+  }
+
+  .hm-sa-card img {
+    width: 8.6rem;
+    height: auto;
+  }
+
+  .hm-sa-card-row:first-of-type {
+    margin-top: 0.7rem;
+  }
+
+  .hm-sa-card-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    margin: 0.35rem 0 0;
+    color: #16352e;
+    font-size: 0.92rem;
+    font-weight: 650;
+  }
+
+  .hm-sa-card-row a {
+    color: #16352e;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+
+  .hm-sa-card-row a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hm-sa-card-icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-top: 0.1rem;
+    color: #c4461a;
+  }
+
+  .hm-sa-benefits {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0 0;
+    padding: 1.15rem 0 0;
+    border-top: 1px solid #e6dccf;
+    list-style: none;
+  }
+
+  .hm-sa-benefits li {
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: start;
+  }
+
+  .hm-sa-benefit-icon {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 999px;
+    background: #e7f2ea;
+    color: #16352e;
+  }
+
+  .hm-sa-benefits li:nth-child(2) .hm-sa-benefit-icon {
+    background: #fde8df;
+    color: #c4461a;
+  }
+
+  .hm-sa-benefits strong {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .hm-sa-benefits li span span {
+    display: block;
+    margin-top: 0.15rem;
+    color: #3d534c;
+    font-size: 0.92rem;
+  }
+
+  .hm-sa :is(a, button):focus-visible {
+    outline: 3px solid #b8410f;
+    outline-offset: 3px;
+  }
+
+  @media (min-width: 900px) {
+    .hm-sa-top {
+      grid-template-columns: minmax(16rem, 0.86fr) minmax(0, 1.14fr);
+    }
+
+    .hm-sa-stage {
+      min-height: 32rem;
+      padding-right: 1rem;
+    }
+
+    .hm-sa-map {
+      width: min(100%, 40rem);
+    }
+
+    .hm-sa-map-foot {
+      box-sizing: border-box;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: calc(100% - 14.5rem);
+    }
+
+    .hm-sa-card {
+      position: absolute;
+      right: 0;
+      bottom: 0.65rem;
+      width: 15.75rem;
+      margin-top: 0;
+    }
+
+    .hm-sa-benefits {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 900px) and (max-width: 1099px) {
+    .hm-sa-card {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: min(100%, 18rem);
+      margin-top: 0.85rem;
+    }
+
+    .hm-sa-map-foot {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 699px) {
+    .hm-sa-pin-name {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .hm-sa-pin-num {
+      display: block;
+    }
+
+    .hm-sa-pin-mark {
+      width: 1.85rem;
+      height: 1.85rem;
+    }
+
+    .hm-sa-pin-mark::after {
+      content: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hm-sa-pin,
+    .hm-sa-list a {
+      transition: none;
+    }
+  }
+</style>
