@@ -10,6 +10,13 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const sitePath = join(root, "src/content/site.ts");
 const original = readFileSync(sitePath, "utf8");
 
+// npm is a .cmd shim on Windows. Invoke its real CLI with Node in the copied builds.
+function runBuild(cwd, env) {
+  const npmCli = process.env.npm_execpath;
+  assert.ok(npmCli, "Run the launch-build tests via npm test");
+  execFileSync(process.execPath, [npmCli, "run", "build"], { cwd, env, stdio: "pipe" });
+}
+
 function withDraft(source, value) {
   const flag = value ? "true" : "false";
   if (!source.includes("const draft = true;") && !source.includes("const draft = false;")) {
@@ -58,7 +65,7 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     delete env.URL;
     delete env.DEPLOY_PRIME_URL;
     delete env.PUBLIC_SITE_URL;
-    execFileSync("npm", ["run", "build"], { cwd: temp, env, stdio: "pipe" });
+    runBuild(temp, env);
 
     const dist = join(temp, "dist");
     const files = walk(dist);
@@ -126,7 +133,9 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(privacy, /name="robots" content="index, follow"/);
     assert.match(disclaimer, /name="robots" content="index, follow"/);
     assert.match(privacy, /Last updated:/);
-    assert.match(privacy, /4 October 2026/);
+    assert.match(privacy, /21 October 2026/);
+    assert.match(privacy, /provided by Google Maps/);
+    assert.doesNotMatch(privacy, /loaded from Esri/);
     assert.match(disclaimer, /4 October 2026/);
     assert.doesNotMatch(privacy, /Not yet adopted/);
     assert.doesNotMatch(privacy, /Pending owner review/);
@@ -182,7 +191,7 @@ function buildCopy(flags) {
   delete env.URL;
   delete env.DEPLOY_PRIME_URL;
   delete env.PUBLIC_SITE_URL;
-  execFileSync("npm", ["run", "build"], { cwd: temp, env, stdio: "pipe" });
+  runBuild(temp, env);
   return temp;
 }
 
@@ -237,7 +246,8 @@ test("adopted legal pages are indexable only after the site leaves draft", { tim
     assert.match(privacy, /name="robots" content="index, follow"/);
     assert.match(disclaimer, /name="robots" content="index, follow"/);
     assert.match(privacy, /Last updated:/);
-    assert.match(privacy, /4 October 2026/);
+    assert.match(privacy, /21 October 2026/);
+    assert.match(privacy, /provided by Google Maps/);
     assert.match(disclaimer, /4 October 2026/);
     assert.doesNotMatch(privacy, /Professional insurance is maintained/);
     assert.match(disclaimer, /Professional insurance is maintained as required for practice\./);
