@@ -30,6 +30,28 @@ for (const { file, widths } of photos) {
   }
 }
 
+// Hero masters already live at the largest filename. AVIF/WebP are rebuilt from
+// those JPEGs. The 3840 and 2400 JPEGs are not recompressed.
+const heroDir = join(root, "photos", "hero");
+const heroes = [
+  { master: "landscape-3840.jpg", name: "landscape", widths: [1280, 1600, 1920, 2560, 3200, 3840] },
+  { master: "portrait-2400.jpg", name: "portrait", widths: [800, 1200, 1600, 2400] },
+];
+for (const { master, name, widths } of heroes) {
+  for (const width of widths) {
+    const pipeline = sharp(join(heroDir, master)).resize({
+      width,
+      withoutEnlargement: true,
+      kernel: "lanczos3",
+    });
+    await pipeline.clone().avif({ quality: 72, effort: 6 }).toFile(join(heroDir, `${name}-${width}.avif`));
+    await pipeline.clone().webp({ quality: 88, effort: 6 }).toFile(join(heroDir, `${name}-${width}.webp`));
+    if (width < Number(master.match(/(\d+)\.jpg$/)[1])) {
+      await pipeline.clone().jpeg({ quality: 88, mozjpeg: true }).toFile(join(heroDir, `${name}-${width}.jpg`));
+    }
+  }
+}
+
 // Logo: lossless resizes only, so the artwork looks identical to the original PNG.
 const logoOut = join(root, "logo");
 mkdirSync(logoOut, { recursive: true });
