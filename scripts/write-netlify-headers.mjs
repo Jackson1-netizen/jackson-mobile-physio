@@ -30,14 +30,16 @@ const csp = [
   "base-uri 'self'",
   "object-src 'none'",
   "frame-ancestors 'none'",
-  "frame-src 'none'",
+  "frame-src https://*.google.com",
   "form-action 'self'",
-  "script-src 'self' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline'",
-  "font-src 'self'",
-  "img-src 'self' data: blob: https://server.arcgisonline.com",
+  // Google Maps' documented allowlist CSP requires unsafe-eval for its SDK.
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https://*.googleapis.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com",
   "media-src 'self'",
-  "connect-src 'self' https://server.arcgisonline.com",
+  "connect-src 'self' data: blob: https://*.googleapis.com https://*.gstatic.com https://*.google.com",
+  "worker-src 'self' blob:",
   "upgrade-insecure-requests",
 ].join("; ");
 

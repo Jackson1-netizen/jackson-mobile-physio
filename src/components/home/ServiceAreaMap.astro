@@ -1,123 +1,60 @@
 ---
-import { homeMapPins, homeSuburbs } from "../../content/home-motion";
 import { messages } from "../../content/i18n";
-
-/**
- * Equirectangular projection of the eight served suburbs.
- * Bounds sit just outside those suburbs so every pin and its label
- * stays inside the canvas. No other place names are drawn.
- */
-const west = 145.088;
-const east = 145.258;
-const north = -37.766;
-const south = -37.9;
-const cos = Math.cos((-37.82 * Math.PI) / 180);
-const xSpan = (east - west) * cos;
-const ySpan = north - south;
-const vbW = 640;
-const vbH = Math.round(vbW / (xSpan / ySpan));
-
-function project(lat: number, lng: number) {
-  return {
-    x: (((lng - west) * cos) / xSpan) * vbW,
-    y: ((north - lat) / ySpan) * vbH,
-  };
-}
-
-function line(points: ReadonlyArray<readonly [number, number]>) {
-  return points
-    .map(([lng, lat], i) => {
-      const p = project(lat, lng);
-      return `${i === 0 ? "M" : "L"}${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
-    })
-    .join(" ");
-}
-
-const freeway = line([
-  [145.09, -37.798],
-  [145.14, -37.784],
-  [145.19, -37.778],
-  [145.25, -37.792],
-]);
-const rail = line([
-  [145.1, -37.822],
-  [145.122, -37.819],
-  [145.151, -37.82],
-  [145.176, -37.819],
-  [145.193, -37.815],
-  [145.229, -37.815],
-  [145.25, -37.812],
-]);
-const northSouth = line([
-  [145.123, -37.772],
-  [145.121, -37.82],
-  [145.116, -37.89],
-]);
-const southRoad = line([
-  [145.16, -37.78],
-  [145.164, -37.84],
-  [145.17, -37.892],
-]);
-
-const parks = [
-  [145.14, -37.845, 48, 30],
-  [145.205, -37.85, 42, 26],
-  [145.11, -37.868, 36, 22],
-].map(([lng, lat, rx, ry]) => {
-  const p = project(lat as number, lng as number);
-  return { cx: p.x, cy: p.y, rx, ry };
-});
-
-const pins = homeMapPins.map((pin, index) => {
-  const suburb = homeSuburbs.find((item) => item.name === pin.name);
-  const p = project(pin.lat, pin.lng);
-  return {
-    ...pin,
-    href: suburb?.href ?? "/areas/",
-    n: index + 1,
-    left: (p.x / vbW) * 100,
-    top: (p.y / vbH) * 100,
-  };
-});
-
 const t = messages.en.hm.areas;
+const mapCopy = Object.fromEntries(Object.entries(messages).map(([locale, bundle]) => [locale, {
+  loading: bundle.hm.areas.mapLoading,
+  unavailable: bundle.hm.areas.mapUnavailable,
+  showArea: bundle.hm.areas.showArea,
+  selected: bundle.hm.areas.selectedArea,
+  visitNote: bundle.hm.areas.visitNote,
+  zoomIn: bundle.hm.areas.zoomIn,
+  zoomOut: bundle.hm.areas.zoomOut,
+  areaDetails: bundle.hm.areas.areaDetails,
+  enquireArea: bundle.hm.areas.enquireArea,
+  clusterLabel: bundle.hm.areas.clusterLabel,
+}]));
 ---
 
-<div class="hm-sa-map">
-  <div class="hm-sa-canvas" style={`aspect-ratio:${vbW} / ${vbH}`}>
-    <svg class="hm-sa-svg" viewBox={`0 0 ${vbW} ${vbH}`} aria-hidden="true">
-      <rect width={vbW} height={vbH} fill="#e7f0e4" />
-      {
-        parks.map((park) => (
-          <ellipse cx={park.cx} cy={park.cy} rx={park.rx} ry={park.ry} fill="#c5dcc0" />
-        ))
-      }
-      <path d={freeway} fill="none" stroke="#f4efe6" stroke-width="14" stroke-linecap="round" />
-      <path d={northSouth} fill="none" stroke="#f7f3ec" stroke-width="7" stroke-linecap="round" />
-      <path d={southRoad} fill="none" stroke="#f7f3ec" stroke-width="6" stroke-linecap="round" />
-      <path d={rail} fill="none" stroke="#b7ab9e" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round" />
+<div class="hm-area-map" data-hm-map data-map-state="idle">
+  <div
+    id="hm-service-area-map"
+    class="hm-area-map-canvas"
+    data-hm-map-canvas
+    role="region"
+    aria-label={t.mapLabel}
+    data-i18n-attr="aria-label:hm.areas.mapLabel"
+    aria-describedby="hm-area-map-note"
+  ></div>
+  <a
+    class="hm-area-map-external"
+    data-hm-google-map
+    href="https://www.google.com/maps/search/?api=1&query=Box%20Hill%20VIC%20Australia"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={t.openMapLabel}
+    data-i18n-attr="aria-label:hm.areas.openMapLabel"
+  >
+    <span data-i18n-path="hm.areas.openMap">{t.openMap}</span><span aria-hidden="true">↗</span>
+  </a>
+  <button class="hm-area-map-reset" type="button" data-hm-map-reset disabled aria-label={t.fitAreas} data-i18n-attr="aria-label:hm.areas.fitAreas">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5" /><circle cx="12" cy="12" r="3" />
     </svg>
-    {
-      pins.map((pin) => (
-        <a
-          class:list={["hm-sa-pin", `is-label-${pin.side}`]}
-          href={pin.href}
-          data-area={pin.name}
-          style={`left:${pin.left.toFixed(2)}%;top:${pin.top.toFixed(2)}%;`}
-        >
-          <span class="hm-sa-pin-mark" aria-hidden="true">
-            <span class="hm-sa-pin-num">{pin.n}</span>
-          </span>
-          <span class="hm-sa-pin-name">{pin.name}</span>
-        </a>
-      ))
-    }
+    <span data-i18n-path="hm.areas.fitAreas">{t.fitAreas}</span>
+  </button>
+  <div class="hm-area-map-fallback" data-hm-map-fallback>
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+      <path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16" />
+    </svg>
+    <p data-hm-map-status role="status" data-i18n-path="hm.areas.mapLoading">{t.mapLoading}</p>
+    <button class="hm-area-map-retry" type="button" data-hm-map-retry hidden data-i18n-path="hm.areas.retryMap">{t.retryMap}</button>
+    <noscript><p data-i18n-path="hm.areas.mapUnavailable">{t.mapUnavailable}</p></noscript>
   </div>
-  <div class="hm-sa-map-foot">
-    <p class="hm-sa-chip">
-      <span class="hm-sa-chip-icon" aria-hidden="true"></span>
-      <span data-i18n-path="hm.areas.mapChip">{t.mapChip}</span>
-    </p>
-    <p class="hm-sa-map-note" data-i18n-path="hm.areas.mapCaption">{t.mapCaption}</p>
-  </div>
+  <p class="sr-only" data-hm-area-status role="status" aria-atomic="true"></p>
+  <script type="application/json" data-hm-map-copy set:html={JSON.stringify(mapCopy).replace(/</g, "\\u003c")} />
 </div>
+
+<script>
+  import { initServiceAreas } from "../../lib/service-area-map";
+  initServiceAreas();
+</script>

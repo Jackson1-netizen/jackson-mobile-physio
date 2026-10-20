@@ -128,6 +128,22 @@ export const site = {
       "Glen Waverley",
       "Mitcham",
       "Nunawading",
+      "Balwyn",
+      "Forest Hill",
+      "Caulfield",
+    ],
+    nearbySuburbs: [
+      "Mont Albert",
+      "Surrey Hills",
+      "Camberwell",
+      "Glen Iris",
+      "Mount Waverley",
+      "Burwood East",
+      "Blackburn South",
+      "Vermont",
+      "Vermont South",
+      "Wantirna",
+      "Doncaster East",
     ],
     surroundingNote: "and surrounding areas",
   },
@@ -228,7 +244,7 @@ export const site = {
       ? "Privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs."
       : "Draft privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs. Pending owner review.",
     lastUpdatedLabel: privacyAdopted ? "Last updated:" : "Status:",
-    lastUpdated: privacyAdopted ? "4 October 2026" : "Draft for owner review — October 2026. Not yet adopted.",
+    lastUpdated: privacyAdopted ? "21 October 2026" : "Draft for owner review — October 2026. Not yet adopted.",
     privacyEnquiriesContactLabel: "For privacy enquiries, contact:",
     workingDraftNotice: privacyAdopted
       ? ""
@@ -274,7 +290,7 @@ export const site = {
         heading: "Hosting and the service-area map",
         paragraphs: [
           "This website is hosted by Netlify. When your browser loads a page, that request can send standard connection information, such as your IP address and browser details, to Netlify.",
-          "The service-area map is loaded from Esri (ArcGIS). When the map loads, standard connection information such as your IP address and browser details may be sent to Esri. The map does not ask for your location, and this website does not store those map requests.",
+          "The interactive service-area map, when available, is provided by Google Maps. When you view or interact with it, standard connection information such as your IP address and browser details may be sent to Google, which may process that information outside Australia under its privacy policy. The map does not request your device location, and this website does not store those map requests. Links labelled View in Google Maps open Google's website in a new tab.",
         ],
       },
       {

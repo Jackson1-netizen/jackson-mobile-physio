@@ -1,9 +1,12 @@
 /// <reference types="astro/client" />
+/// <reference types="google.maps" />
 
 /** Set by astro.config.mjs at build time. Not a secret. */
 declare const __HM_SITE_ORIGIN__: string;
 
 interface ImportMetaEnv {
+  /** Browser-visible Google Maps key. Restrict HTTP referrers and the API in Google Cloud. */
+  readonly PUBLIC_GOOGLE_MAPS_API_KEY?: string;
   /**
    * Public site origin for canonical URLs, Open Graph, JSON-LD and the sitemap.
    * Does not publish the site or change DNS. Indexing is controlled by site.draft.

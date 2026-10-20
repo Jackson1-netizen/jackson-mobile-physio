@@ -219,7 +219,7 @@ export const homeAreas = {
   benefits: hm.areas.benefits,
 };
 
-/** Approximate suburb centres. Positions on the illustrative map use these values. */
+/** Approximate suburb centres, not practice addresses or guaranteed coverage boundaries. */
 export const homeMapPins = [
   { name: "Box Hill", lat: -37.819, lng: 145.122, side: "left" },
   { name: "Doncaster", lat: -37.784, lng: 145.125, side: "right" },
@@ -229,15 +229,34 @@ export const homeMapPins = [
   { name: "Glen Waverley", lat: -37.878, lng: 145.164, side: "left" },
   { name: "Mitcham", lat: -37.815, lng: 145.193, side: "up" },
   { name: "Nunawading", lat: -37.819, lng: 145.176, side: "down" },
+  { name: "Balwyn", lat: -37.809, lng: 145.081, side: "left" },
+  { name: "Forest Hill", lat: -37.837, lng: 145.183, side: "right" },
+  { name: "Caulfield", lat: -37.884, lng: 145.027, side: "left" },
+  { name: "Mont Albert", lat: -37.817, lng: 145.105, side: "up" },
+  { name: "Surrey Hills", lat: -37.825, lng: 145.099, side: "left" },
+  { name: "Camberwell", lat: -37.843, lng: 145.069, side: "left" },
+  { name: "Glen Iris", lat: -37.859, lng: 145.058, side: "left" },
+  { name: "Mount Waverley", lat: -37.876, lng: 145.129, side: "down" },
+  { name: "Burwood East", lat: -37.851, lng: 145.150, side: "down" },
+  { name: "Blackburn South", lat: -37.839, lng: 145.153, side: "down" },
+  { name: "Vermont", lat: -37.836, lng: 145.194, side: "right" },
+  { name: "Vermont South", lat: -37.855, lng: 145.185, side: "down" },
+  { name: "Wantirna", lat: -37.851, lng: 145.226, side: "right" },
+  { name: "Doncaster East", lat: -37.790, lng: 145.167, side: "up" },
 ] as const;
 
 export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {
   const page = suburbPages.find((s) => s.name === name);
   return {
     name,
-    href: page ? suburbPath(page.slug) : "/#areas",
+    href: page ? suburbPath(page.slug) : "/enquiry/",
   };
 });
+
+export const nearbyMapSuburbs = site.serviceAreas.nearbySuburbs.map((name) => ({
+  name,
+  href: "/enquiry/",
+}));
 
 /** Suburb landing pages only — skip any area that has no real route. */
 export const homeMenuAreas = homeSuburbs.filter((area) => area.href.startsWith("/areas/"));

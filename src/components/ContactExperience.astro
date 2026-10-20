@@ -20,7 +20,7 @@ const enquiryMessages = {
   "zh-Hans": messages["zh-Hans"].enquiry,
 };
 const mailto = getEmailHref();
-const suburbs = site.serviceAreas.suburbs;
+const suburbs = [...site.serviceAreas.suburbs, ...site.serviceAreas.nearbySuburbs];
 
 const roleValues = [
   "Participant or client",
@@ -279,9 +279,14 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
   </div>
 </section>
 
-<script define:vars={{ enquiryMessages }}>
+<script define:vars={{ enquiryMessages, suburbs }}>
   const form = document.getElementById("enquiry-form");
   if (form) {
+    const requestedSuburb = new URLSearchParams(window.location.search).get("suburb");
+    const suburbInput = form.querySelector("#enq-suburb");
+    if (suburbInput && !suburbInput.value && suburbs.includes(requestedSuburb)) {
+      suburbInput.value = requestedSuburb;
+    }
     const summary = form.querySelector("#enq-summary");
     const summaryList = form.querySelector("#enq-summary-list");
     const failed = form.querySelector("#enq-failed");
