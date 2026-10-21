@@ -232,6 +232,30 @@ const en = {
   referralPage: {
     kicker: "Home Motion",
     heading: "For Referrers",
+    designA: {
+      subtitle: "Mobile physiotherapy. One point of contact.",
+      intro: "Contact Jackson directly to discuss home and community physiotherapy for your client.",
+      enquire: "Make a referral enquiry",
+      call: "Call Jackson",
+      print: "Print referral information",
+      glance: "At a glance",
+      glanceItems: ["Melbourne’s eastern suburbs", "English · Cantonese · Mandarin", "Home and community visits", "AHPRA registered physiotherapist"],
+      steps: [
+        { title: "Get in touch", body: "Call or email Jackson with your contact details and the person’s suburb." },
+        { title: "Confirm arrangements", body: "Jackson confirms location, availability and funding arrangements." },
+        { title: "Plan the first visit", body: "Agree the next steps and a suitable time." },
+      ],
+      supportHeading: "Who we can support",
+      supportBody: "Support with mobility, strength and balance, falls prevention and rehabilitation at home.",
+      fundingHeading: "Funding",
+      fundingNote: "Funding and availability must be confirmed before care begins.",
+      checklistHeading: "Before you enquire",
+      checklist: ["Your name and contact details", "The person’s suburb", "Preferred language", "Funding pathway, if known"],
+      warning: "Please do not send health information or clinical documents in your initial enquiry.",
+      contactHeading: "Contact Jackson",
+      providerHeading: "Provider details",
+      privacy: "Privacy",
+    },
     intro:
       "Jackson (Wai Wa Law) is the physiotherapist who provides this service. Home Motion offers home and community visits across Melbourne's eastern suburbs, in English, Cantonese and Mandarin. Support coordinators, GPs, allied health professionals and families can contact him directly.",
     steps: [
@@ -704,6 +728,30 @@ const zhHant = {
   referralPage: {
     kicker: "Home Motion",
     heading: "轉介人士",
+    designA: {
+      subtitle: "上門物理治療，由同一位治療師直接聯絡。",
+      intro: "直接聯絡 Jackson，討論為您的服務對象提供家居及社區物理治療。",
+      enquire: "提出轉介查詢",
+      call: "致電 Jackson",
+      print: "列印轉介資料",
+      glance: "服務一覽",
+      glanceItems: ["墨爾本東區", "英語・廣東話・普通話", "家居及社區探訪", "AHPRA 註冊物理治療師"],
+      steps: [
+        { title: "聯絡我們", body: "致電或電郵 Jackson，提供您的聯絡資料及服務對象所在的郊區。" },
+        { title: "確認安排", body: "Jackson 會確認地點、是否可安排服務及資助安排。" },
+        { title: "安排首次探訪", body: "商定下一步及合適的時間。" },
+      ],
+      supportHeading: "我們可以支援誰",
+      supportBody: "提供家居活動能力、肌力及平衡、預防跌倒與康復方面的支援。",
+      fundingHeading: "資助安排",
+      fundingNote: "開始照護前，必須確認資助及是否可安排服務。",
+      checklistHeading: "查詢前準備",
+      checklist: ["您的姓名及聯絡資料", "服務對象所在的郊區", "偏好語言", "資助途徑（如已知）"],
+      warning: "首次查詢時，請勿傳送健康資料或臨床文件。",
+      contactHeading: "聯絡 Jackson",
+      providerHeading: "服務提供者資料",
+      privacy: "私隱",
+    },
     intro:
       "Jackson（Wai Wa Law）是提供這項服務的物理治療師。Home Motion 在墨爾本東區提供上門及社區探訪，可使用英語、廣東話及普通話。支援協調員、家庭醫生、專職醫療人員及家屬可直接聯絡他。",
     steps: [
@@ -1161,6 +1209,30 @@ const zhHans = {
   referralPage: {
     kicker: "Home Motion",
     heading: "转介方",
+    designA: {
+      subtitle: "上门物理治疗，由同一位治疗师直接联系。",
+      intro: "直接联系 Jackson，讨论为您的服务对象提供居家及社区物理治疗。",
+      enquire: "发起转介咨询",
+      call: "致电 Jackson",
+      print: "打印转介资料",
+      glance: "服务一览",
+      glanceItems: ["墨尔本东区", "英语・粤语・普通话", "居家及社区探访", "AHPRA 注册物理治疗师"],
+      steps: [
+        { title: "联系我们", body: "致电或发送邮件给 Jackson，提供您的联系方式及服务对象所在的郊区。" },
+        { title: "确认安排", body: "Jackson 会确认地点、是否能安排服务及资助安排。" },
+        { title: "安排首次探访", body: "商定下一步及合适的时间。" },
+      ],
+      supportHeading: "我们可以支持谁",
+      supportBody: "提供居家活动能力、肌力与平衡、预防跌倒及康复方面的支持。",
+      fundingHeading: "资助安排",
+      fundingNote: "开始照护前，必须确认资助及是否能安排服务。",
+      checklistHeading: "咨询前准备",
+      checklist: ["您的姓名及联系方式", "服务对象所在的郊区", "偏好语言", "资助途径（如已知）"],
+      warning: "首次咨询时，请勿发送健康信息或临床文件。",
+      contactHeading: "联系 Jackson",
+      providerHeading: "服务提供者资料",
+      privacy: "隐私",
+    },
     intro:
       "Jackson（Wai Wa Law）是提供这项服务的物理治疗师。Home Motion 在墨尔本东区提供上门及社区探访，可使用英语、粤语及普通话。支持协调员、全科医生、专职医疗人员及家属可以直接联系他。",
     steps: [

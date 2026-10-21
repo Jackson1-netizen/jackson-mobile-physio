@@ -48,6 +48,7 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
       filter: (src) => {
         const rel = src.slice(root.length);
         return (
+          !rel.split(sep).some((name) => name === ".env" || name.startsWith(".env.")) &&
           !rel.includes(`${sep}node_modules`) &&
           !rel.includes(`${sep}.git`) &&
           rel !== `${sep}dist` &&
@@ -123,7 +124,9 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(home, /href="\/areas\/box-hill\/"/);
     const referral = readFileSync(join(dist, "referral/index.html"), "utf8");
     assert.match(referral, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/referral\/"/);
-    assert.match(referral, /Registration:<\/span> AHPRA registered physiotherapist/);
+    assert.match(referral, /AHPRA registered physiotherapist/);
+    assert.match(referral, /data-i18n-path="referralPage\.designA\.enquire"/);
+    assert.match(referral, /data-referral-print/);
     assert.doesNotMatch(referral, /AHPRA registration/);
     const missing = readFileSync(join(dist, "404.html"), "utf8");
     assert.match(missing, /name="robots" content="noindex, nofollow"/);
@@ -164,6 +167,7 @@ function copyTree() {
     filter: (src) => {
       const rel = src.slice(root.length);
       return (
+        !rel.split(sep).some((name) => name === ".env" || name.startsWith(".env.")) &&
         !rel.includes(`${sep}node_modules`) &&
         !rel.includes(`${sep}.git`) &&
         rel !== `${sep}dist` &&

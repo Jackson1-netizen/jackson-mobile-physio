@@ -1,776 +1,150 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import EnquiryBanner from "../components/home/EnquiryBanner.astro";
+import HomeHeader from "../components/home/HomeHeader.astro";
 import HomeIcon from "../components/home/HomeIcon.astro";
-import HomePicture from "../components/home/HomePicture.astro";
-import QRCode from "qrcode";
-import { site, getReferralEmailHref, publicQualifications } from "../content/site";
+import ReferralPrintButton from "../components/ReferralPrintButton.astro";
+import { site, getReferralEmailHref } from "../content/site";
 import { messages } from "../content/i18n";
-import { kitchenBenchPhoto } from "../content/home-motion";
+import "../styles/referral.css";
 
 const copy = messages.en.referralPage;
+const t = copy.designA;
+const glanceIcons = ["pin", "people", "home", "clipboard"] as const;
 const referralMailto = getReferralEmailHref();
-const [referralLocal, referralDomain] = site.referralEmail.split("@");
-const quals = publicQualifications();
-const stepIcons = ["mail", "people", "clipboard"] as const;
-const qrSvg = (await QRCode.toString(site.referralSheetUrl, {
-  type: "svg",
-  margin: 1,
-  errorCorrectionLevel: "M",
-  color: { dark: "#16352e", light: "#ffffff" },
-}))
-  .replace(/<\?xml[^>]*>\s*/i, "")
-  .replace(
-    "<svg ",
-    '<svg role="img" aria-label="QR code for the Home Motion referral page" data-i18n-attr="aria-label:referralPage.qrLabel" ',
-  );
+const publicDomain = new URL(site.referralSheetUrl).hostname;
 ---
 
 <BaseLayout
+  v1Home={true}
   translatable={true}
   i18nInclude={["nav", "cta", "sections", "hm", "referralPage"]}
-  title={`For referrers | ${site.businessName}`}
+  title={"For referrers | " + site.businessName}
   description={copy.intro}
   canonicalPath="/referral"
 >
-  <section class="ref-hero" aria-labelledby="ref-heading">
-    <div class="ref-shapes" aria-hidden="true">
-      <span class="ref-blob ref-blob-a"></span>
-      <span class="ref-blob ref-blob-b"></span>
-      <svg class="ref-arc" viewBox="0 0 240 240">
-        <circle cx="210" cy="20" r="150" fill="none" stroke="#e45a22" stroke-width="1.25"></circle>
-      </svg>
-    </div>
-    <div class="ref-wrap ref-layout">
-      <div class="ref-copy">
-        <p class="ref-kicker">
-          <span class="ref-rule" aria-hidden="true"></span>
-          <span data-i18n-path="referralPage.kicker">{copy.kicker}</span>
-        </p>
-        <h1 id="ref-heading" data-i18n-path="referralPage.heading">{copy.heading}</h1>
-        <p class="ref-intro" data-i18n-path="referralPage.intro">{copy.intro}</p>
-        <ol class="ref-steps">
-          {
-            copy.steps.map((step, i) => (
-              <li>
-                <span class="ref-step-icon" aria-hidden="true">
-                  <HomeIcon name={stepIcons[i]} size={22} />
-                  <span class="ref-step-num">{i + 1}</span>
-                </span>
-                <strong data-i18n-path={`referralPage.steps.${i}.title`}>{step.title}</strong>
-                <span data-i18n-path={`referralPage.steps.${i}.body`}>{step.body}</span>
-              </li>
-            ))
-          }
-        </ol>
-        <ul class="ref-cards">
-          <li class="ref-card ref-card-ahpra">
-            <span class="ref-badge" aria-hidden="true"><HomeIcon name="shield" size={32} /></span>
-            <p>
-              <span class="ref-ahpra-lead" data-i18n-path="referralPage.ahpraLead">{copy.ahpraLead}</span>
-              <span class="ref-ahpra-rest" data-i18n-path="referralPage.ahpraRest">{copy.ahpraRest}</span>
-            </p>
-          </li>
-          <li class="ref-card">
-            <span class="ref-badge ref-badge-hands" aria-hidden="true"><HomeIcon name="handshake" size={32} /></span>
-            <p class="ref-card-title" data-i18n-path="referralPage.ndisCard">{copy.ndisCard}</p>
-            <p class="ref-card-note" data-i18n-path="referralPage.ndisLimit">{copy.ndisLimit}</p>
-          </li>
-          <li class="ref-card ref-card-mail">
-            <span class="ref-badge ref-badge-mail" aria-hidden="true"><HomeIcon name="mail" size={30} /></span>
-            <a class="ref-mail" href={referralMailto}>
-              <span>{referralLocal}@</span>
-              <span>{referralDomain}</span>
+  <div class="hm ref-a">
+    <HomeHeader />
+    <main id="main-content" tabindex="-1">
+      <section class="ref-a-hero" aria-labelledby="ref-heading">
+        <div class="ref-a-hero-inner">
+          <span class="ref-a-rule" aria-hidden="true"></span>
+          <h1 id="ref-heading" data-i18n-path="referralPage.heading">{copy.heading}</h1>
+          <p class="ref-a-subtitle" data-i18n-path="referralPage.designA.subtitle">{t.subtitle}</p>
+          <p class="ref-a-intro" data-i18n-path="referralPage.designA.intro">{t.intro}</p>
+          <div class="ref-a-actions no-print">
+            <a class="ref-a-enquire" href="/enquiry/">
+              <span data-i18n-path="referralPage.designA.enquire">{t.enquire}</span>
+              <span aria-hidden="true">→</span>
             </a>
-            <a class="ref-btn" href="#referral-details">
-              <span data-i18n-path="referralPage.cta">{copy.cta}</span>
-              <span class="ref-btn-arrow" aria-hidden="true">→</span>
+            <a class="ref-a-call" href={site.phoneHref}>
+              <HomeIcon name="phone" size={25} />
+              <span data-i18n-path="referralPage.designA.call">{t.call}</span>
             </a>
-          </li>
-        </ul>
-      </div>
-      <aside class="ref-photo-card">
-        <div class="ref-photo-frame">
-          <HomePicture
-            photo={kitchenBenchPhoto}
-            altPath="referralPage.photoAlt"
-            sizes="(min-width: 1100px) 36vw, 100vw"
-            priority={true}
-          />
-          <p class="ref-photo-label" data-i18n-path="referralPage.photoLabel">{copy.photoLabel}</p>
+          </div>
+          <div class="ref-a-hero-print no-print">
+            <ReferralPrintButton />
+            <noscript><p data-i18n-path="referralPage.printNote">{copy.printNote}</p></noscript>
+          </div>
         </div>
-        <div class="ref-photo-quote">
-          <span class="ref-rule" aria-hidden="true"></span>
-          <p class="ref-quote">
-            <span data-i18n-path="referralPage.quoteBefore">{copy.quoteBefore}</span><em data-i18n-path="referralPage.quoteWord">{copy.quoteWord}</em><span data-i18n-path="referralPage.quoteAfter">{copy.quoteAfter}</span>
-          </p>
-          <p class="ref-tag" data-i18n-path="referralPage.tagline">{copy.tagline}</p>
-        </div>
-      </aside>
-    </div>
-  </section>
+      </section>
 
-  <section id="referral-details" class="ref-sheet" aria-labelledby="ref-sheet-title">
-    <div class="ref-wrap">
-      <p class="ref-print-note no-print">
-        {site.draft ? "Draft referral sheet. " : ""}
-        <span data-i18n-path="referralPage.printNote">{copy.printNote}</span>
-      </p>
-      <p class="ref-sheet-kicker" data-i18n-path="referralPage.sheetKicker">{copy.sheetKicker}</p>
-      <h2 id="ref-sheet-title" data-i18n-path="referralPage.sheetTitle">{copy.sheetTitle}</h2>
-      <div class="ref-sheet-grid">
-        <div class="ref-sheet-main">
-          <section>
-            <h3 data-i18n-path="referralPage.practitioner">{copy.practitioner}</h3>
-            <p>{site.practitionerName}</p>
-            <ul class="ref-facts">
-              {
-                quals.map((item, i) => (
-                  <li data-i18n-path={`referralPage.qualLines.${i}`}>
-                    <span class="ref-qual-label">{item.label}:</span> {item.value}
-                  </li>
-                ))
-              }
-            </ul>
-            <p data-i18n-path="referralPage.ahpraNotice">{copy.ahpraNotice}</p>
-            <p data-i18n-path="referralPage.business">{copy.business}</p>
-          </section>
-          <section>
-            <h3 data-i18n-path="referralPage.serviceModel">{copy.serviceModel}</h3>
-            <p data-i18n-path="referralPage.serviceModelBody">{copy.serviceModelBody}</p>
-            <p data-i18n-path="referralPage.differentiator">{copy.differentiator}</p>
-          </section>
-          <section>
-            <h3 data-i18n-path="referralPage.areasHeading">{copy.areasHeading}</h3>
-            <p data-i18n-path="referralPage.areasBody">{copy.areasBody}</p>
-          </section>
-          <section>
-            <h3 data-i18n-path="referralPage.languagesHeading">{copy.languagesHeading}</h3>
-            <p data-i18n-path="referralPage.languagesBody">{copy.languagesBody}</p>
-          </section>
-          <section>
-            <h3 data-i18n-path="referralPage.servicesHeading">{copy.servicesHeading}</h3>
+      <div class="ref-a-body">
+        <section class="ref-a-glance" aria-labelledby="ref-glance-heading">
+          <h2 id="ref-glance-heading" data-i18n-path="referralPage.designA.glance">{t.glance}</h2>
+          <ul class="ref-a-glance-list">
+            {t.glanceItems.map((item, i) => (
+              <li>
+                <HomeIcon name={glanceIcons[i]} size={39} />
+                <span data-i18n-path={"referralPage.designA.glanceItems." + i}>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section id="referral-details" class="ref-a-process" aria-labelledby="ref-process-heading">
+          <h2 id="ref-process-heading" data-i18n-path="referralPage.howHeading">{copy.howHeading}</h2>
+          <ol class="ref-a-steps">
+            {t.steps.map((step, i) => (
+              <li>
+                <div class="ref-a-step-track" aria-hidden="true"><span>{i + 1}</span></div>
+                <h3 data-i18n-path={"referralPage.designA.steps." + i + ".title"}>{step.title}</h3>
+                <p data-i18n-path={"referralPage.designA.steps." + i + ".body"}>{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <div class="ref-a-panels">
+          <div class="ref-a-support">
+            <section aria-labelledby="ref-support-heading">
+              <h2 id="ref-support-heading" data-i18n-path="referralPage.designA.supportHeading">{t.supportHeading}</h2>
+              <p data-i18n-path="referralPage.designA.supportBody">{t.supportBody}</p>
+            </section>
+            <section class="ref-a-funding" aria-labelledby="ref-funding-heading">
+              <h2 id="ref-funding-heading" data-i18n-path="referralPage.designA.fundingHeading">{t.fundingHeading}</h2>
+              <p data-i18n-path="referralPage.ndisDescription">{copy.ndisDescription}</p>
+              <p class="ref-a-funding-note">
+                <span data-i18n-path="referralPage.ndisNotRegistered">{copy.ndisNotRegistered}</span>{" "}
+                <span data-i18n-path="referralPage.designA.fundingNote">{t.fundingNote}</span>
+              </p>
+            </section>
+          </div>
+
+          <section class="ref-a-checklist" aria-labelledby="ref-checklist-heading">
+            <h2 id="ref-checklist-heading" data-i18n-path="referralPage.designA.checklistHeading">{t.checklistHeading}</h2>
             <ul>
-              {
-                copy.services.map((title, i) => (
-                  <li data-i18n-path={`referralPage.services.${i}`}>{title}</li>
-                ))
-              }
+              {t.checklist.map((item, i) => (
+                <li>
+                  <span class="ref-a-check" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  </span>
+                  <span data-i18n-path={"referralPage.designA.checklist." + i}>{item}</span>
+                </li>
+              ))}
             </ul>
-            <p data-i18n-path="referralPage.servicesIntro">{copy.servicesIntro}</p>
-          </section>
-          <section>
-            <h3 data-i18n-path="referralPage.ndisHeading">{copy.ndisHeading}</h3>
-            <p data-i18n-path="referralPage.ndisDescription">{copy.ndisDescription}</p>
-            <p data-i18n-path="referralPage.ndisNotRegistered">{copy.ndisNotRegistered}</p>
-            <p data-i18n-path="referralPage.ndisFundingNote">{copy.ndisFundingNote}</p>
-          </section>
-          <section>
-            <h3 data-i18n-path="referralPage.howHeading">{copy.howHeading}</h3>
-            <ul>
-              {
-                copy.how.map((step, i) => (
-                  <li data-i18n-path={`referralPage.how.${i}`}>{step}</li>
-                ))
-              }
-            </ul>
-          </section>
-          <section>
-            <h3 data-i18n-path="referralPage.contactHeading">{copy.contactHeading}</h3>
-            <p>
-              <span data-i18n-path="referralPage.phoneLabel">{copy.phoneLabel}</span>:{" "}
-              <a href={site.phoneHref}>{site.phone}</a>
-            </p>
-            <p>
-              <span data-i18n-path="referralPage.referralsLabel">{copy.referralsLabel}</span>:{" "}
-              <a href={referralMailto}>{site.referralEmail}</a>
-            </p>
-            <p>
-              <span data-i18n-path="referralPage.generalLabel">{copy.generalLabel}</span>:{" "}
-              <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a>
+            <p class="ref-a-warning">
+              <span class="ref-a-warning-icon" aria-hidden="true">!</span>
+              <span data-i18n-path="referralPage.designA.warning">{t.warning}</span>
             </p>
           </section>
         </div>
-        <aside class="ref-qr" aria-label="QR code for the referral page">
-          <div set:html={qrSvg} />
-          <p class="ref-qr-caption">{site.referralSheetUrl}</p>
-        </aside>
+
+        <section id="referral-contact" class="ref-a-contact" aria-labelledby="ref-contact-heading">
+          <h2 id="ref-contact-heading" data-i18n-path="referralPage.designA.contactHeading">{t.contactHeading}</h2>
+          <div class="ref-a-contact-links">
+            <a class="ref-a-phone" href={site.phoneHref}>
+              <span class="ref-a-contact-icon"><HomeIcon name="phone" size={27} /></span>
+              <span>{site.phone}</span>
+            </a>
+            <a class="ref-a-email" href={referralMailto}>
+              <span class="ref-a-contact-icon"><HomeIcon name="mail" size={28} /></span>
+              <span>{site.referralEmail}</span>
+            </a>
+          </div>
+          <div class="ref-a-provider">
+            <div>
+              <h3 data-i18n-path="referralPage.designA.providerHeading">{t.providerHeading}</h3>
+              <p>{"Jackson (" + site.soleTraderName + ")"}</p>
+              <p>{site.registeredBusinessName} · {site.abnDisplay}</p>
+            </div>
+            <div class="ref-a-provider-print no-print"><ReferralPrintButton /></div>
+          </div>
+        </section>
       </div>
-      <p class="ref-sheet-foot">
-        {site.draft && site.draftNotice.title ? `${site.draftNotice.title}. ` : ""}
-        <span data-i18n-path="referralPage.sheetFooter">{copy.sheetFooter}</span>
-      </p>
-    </div>
-  </section>
-  <EnquiryBanner />
+    </main>
+    <footer class="ref-a-footer">
+      <span>{publicDomain}</span>
+      <a href="/privacy/" data-i18n-path="referralPage.designA.privacy">{t.privacy}</a>
+    </footer>
+  </div>
 </BaseLayout>
 
-<style>
-  @media print {
-    @page {
-      size: A4;
-      margin: 12mm;
-    }
-
-    .ref-hero,
-    .ref-sheet {
-      background: #fff !important;
-      color: #16352e !important;
-    }
-
-    .ref-shapes,
-    .ref-photo-card,
-    .ref-btn {
-      display: none !important;
-    }
-  }
-</style>
-
-<style is:global>
-  .ref-hero {
-    position: relative;
-    overflow: hidden;
-    background: #102820;
-    color: #f7f3ea;
-  }
-
-  .ref-shapes {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .ref-blob {
-    position: absolute;
-    border-radius: 50%;
-    background: #1c463c;
-  }
-
-  .ref-blob-a {
-    top: -8rem;
-    left: -6rem;
-    width: 22rem;
-    height: 18rem;
-  }
-
-  .ref-blob-b {
-    right: -8rem;
-    bottom: -10rem;
-    width: 26rem;
-    height: 20rem;
-    background: #183e36;
-  }
-
-  .ref-arc {
-    position: absolute;
-    top: -4.5rem;
-    right: -3rem;
-    width: 16rem;
-    height: 16rem;
-  }
-
-  .ref-wrap {
-    width: min(76rem, calc(100% - 2.5rem));
-    margin-inline: auto;
-  }
-
-  .ref-layout {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    gap: 1.5rem;
-    padding: clamp(1.6rem, 3vw, 2.8rem) 0 clamp(1.8rem, 3vw, 3rem);
-  }
-
-  .ref-kicker,
-  .ref-sheet-kicker {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin: 0;
-    color: #f3e6da;
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .ref-rule {
-    width: 2.2rem;
-    height: 2px;
-    background: #e45a22;
-  }
-
-  .ref-hero h1 {
-    margin: 0.45rem 0 0;
-    max-width: 12ch;
-    color: #fff;
-    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
-    font-size: clamp(2.6rem, 1.6rem + 2.6vw, 4.2rem);
-    font-weight: 650;
-    letter-spacing: -0.03em;
-    line-height: 0.98;
-  }
-
-  .ref-intro {
-    margin: 0.9rem 0 0;
-    max-width: 38rem;
-    color: #e7f0ea;
-    font-size: 1.05rem;
-    line-height: 1.5;
-  }
-
-  .ref-steps {
-    position: relative;
-    display: grid;
-    gap: 1rem;
-    margin: 1.4rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .ref-steps li {
-    display: grid;
-    grid-template-columns: 3.4rem minmax(0, 1fr);
-    column-gap: 0.75rem;
-    align-items: start;
-  }
-
-  .ref-step-icon {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 3.4rem;
-    height: 3.4rem;
-    border-radius: 999px;
-    background: #f6d7c8;
-    color: #c4461a;
-  }
-
-  .ref-step-num {
-    position: absolute;
-    top: -0.15rem;
-    right: -0.15rem;
-    display: grid;
-    place-items: center;
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 999px;
-    background: #c4461a;
-    color: #fff;
-    font-size: 0.68rem;
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  .ref-steps strong {
-    color: #fff;
-    font-size: 0.98rem;
-    line-height: 1.3;
-  }
-
-  .ref-steps li > span:last-child {
-    grid-column: 2;
-    color: #d7e6df;
-    font-size: 0.92rem;
-    line-height: 1.4;
-  }
-
-  .ref-cards {
-    display: grid;
-    align-items: stretch;
-    gap: 0.75rem;
-    margin: 1.2rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .ref-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.7rem;
-    height: 100%;
-    min-width: 0;
-    padding: 1.05rem 1rem 1.05rem;
-    border-radius: 1.15rem;
-    background: #f7f1e6;
-    color: #16352e;
-  }
-
-  .ref-card-ahpra {
-    background: #f3f7f4;
-  }
-
-  .ref-badge {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 4.25rem;
-    height: 4.25rem;
-    border-radius: 999px;
-    background: #d7efe8;
-    color: #14685e;
-  }
-
-  .ref-badge-hands {
-    background: #e5efe8;
-    color: #16352e;
-  }
-
-  .ref-badge-mail {
-    background: #f6d7c8;
-    color: #c4531d;
-  }
-
-  .ref-cards p {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 650;
-    line-height: 1.35;
-  }
-
-  .ref-ahpra-lead {
-    display: block;
-    color: #14685e;
-    font-size: 1.35rem;
-    font-weight: 650;
-    line-height: 1.15;
-  }
-
-  .ref-ahpra-rest {
-    display: block;
-    margin-top: 0.15rem;
-    color: #16352e;
-    font-size: 1rem;
-    font-weight: 650;
-    line-height: 1.3;
-  }
-
-  .ref-card-title {
-    font-weight: 650;
-  }
-
-  .ref-card-note {
-    color: #3d534c;
-    font-size: 0.9rem;
-    font-weight: 450;
-    line-height: 1.4;
-  }
-
-  .ref-mail {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 100%;
-    color: #16352e;
-    font-weight: 700;
-    line-height: 1.35;
-    text-decoration: none;
-  }
-
-  .ref-mail span {
-    display: block;
-    max-width: 100%;
-    white-space: nowrap;
-  }
-
-  .ref-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    max-width: 100%;
-    min-height: 2.75rem;
-    margin-top: auto;
-    padding: 0.5rem 0.95rem;
-    border-radius: 999px;
-    background: #c4531d;
-    color: #fff;
-    font-weight: 750;
-    line-height: 1.2;
-    text-align: center;
-    text-decoration: none;
-  }
-
-  .ref-btn-arrow {
-    flex: none;
-  }
-
-  .ref-btn:hover {
-    background: #a84416;
-    color: #fff;
-  }
-
-  .ref-btn:focus-visible,
-  .ref-mail:focus-visible {
-    outline: 3px solid #16352e;
-    outline-offset: 3px;
-  }
-
-  .ref-photo-card {
-    position: relative;
-    display: grid;
-    gap: 0;
-    min-height: 100%;
-  }
-
-  .ref-photo-frame {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border-radius: 1.4rem 1.4rem 0 0;
-    background: #1a3a32;
-  }
-
-  .ref-photo-frame picture,
-  .ref-photo-frame img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .ref-photo-frame img {
-    object-fit: cover;
-    object-position: 88% 32%;
-  }
-
-  .ref-photo-label {
-    position: absolute;
-    z-index: 2;
-    right: 0.625rem;
-    bottom: 0.625rem;
-    margin: 0;
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.2rem;
-    background: transparent;
-    color: #fff;
-    font-size: 0.6875rem;
-    font-weight: 400;
-    line-height: 1.3;
-  }
-
-  .ref-photo-quote {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    padding: 1.15rem 1.15rem 1.2rem;
-    border-radius: 0 0 1.4rem 1.4rem;
-    background: #14352e;
-  }
-
-  .ref-quote {
-    margin: 0;
-    color: #fff;
-    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
-    font-size: clamp(1.45rem, 1.1rem + 1vw, 2rem);
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  .ref-quote em {
-    color: #ffe1d0;
-    font-style: italic;
-  }
-
-  .ref-tag {
-    margin: 0;
-    color: #d7e6df;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .ref-sheet {
-    background: #f6f1e8;
-    color: #16352e;
-    scroll-margin-top: 6.5rem;
-  }
-
-  .ref-sheet .ref-wrap {
-    padding: clamp(1.8rem, 3vw, 3rem) 0 clamp(2rem, 4vw, 3.5rem);
-  }
-
-  .ref-print-note {
-    margin: 0 0 1rem;
-    padding: 0.75rem 0.9rem;
-    border: 1px solid #e2c98a;
-    border-radius: 0.7rem;
-    background: #faf3e0;
-    color: #5c4a1f;
-    font-size: 0.92rem;
-  }
-
-  .ref-sheet-kicker {
-    color: #3d534c;
-  }
-
-  .ref-sheet h2,
-  .ref-sheet h3 {
-    margin: 0.35rem 0 0;
-    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  .ref-sheet h2 {
-    font-size: clamp(1.8rem, 1.3rem + 1.2vw, 2.4rem);
-  }
-
-  .ref-sheet h3 {
-    font-size: 1.25rem;
-  }
-
-  .ref-sheet-grid {
-    display: grid;
-    gap: 1.25rem;
-    margin-top: 1.2rem;
-  }
-
-  .ref-sheet-main {
-    display: grid;
-    gap: 0.85rem;
-  }
-
-  .ref-sheet-main section {
-    padding: 1rem 1.05rem 1.1rem;
-    border-radius: 1rem;
-    background: #fffdf9;
-  }
-
-  .ref-sheet p,
-  .ref-sheet li {
-    color: #243f38;
-    line-height: 1.5;
-  }
-
-  .ref-sheet p {
-    margin: 0.45rem 0 0;
-  }
-
-  .ref-sheet ul {
-    margin: 0.45rem 0 0;
-    padding-left: 1.15rem;
-  }
-
-  .ref-facts {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .ref-qual-label {
-    font-weight: 750;
-  }
-
-  .ref-sheet a {
-    color: #16352e;
-    font-weight: 700;
-  }
-
-  .ref-qr {
-    align-self: start;
-    padding: 1rem;
-    border-radius: 1rem;
-    background: #fff;
-    text-align: center;
-  }
-
-  .ref-qr svg {
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    margin-inline: auto;
-  }
-
-  .ref-qr-caption {
-    margin: 0.55rem 0 0;
-    color: #3d534c;
-    font-size: 0.78rem;
-    overflow-wrap: anywhere;
-  }
-
-  .ref-sheet-foot {
-    margin: 1.1rem 0 0;
-    color: #3d534c;
-    font-size: 0.85rem;
-  }
-
-  .ref-hero :is(a, button):focus-visible,
-  .ref-sheet :is(a, button):focus-visible {
-    outline: 3px solid #b8410f;
-    outline-offset: 3px;
-  }
-
-  @media (min-width: 760px) {
-    .ref-steps {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .ref-steps::before {
-      content: "";
-      position: absolute;
-      top: 1.7rem;
-      left: 8%;
-      right: 8%;
-      height: 1px;
-      background: rgb(255 255 255 / 0.28);
-    }
-
-    .ref-steps li {
-      grid-template-columns: 1fr;
-      justify-items: center;
-      text-align: center;
-    }
-
-    .ref-steps li > span:last-child {
-      grid-column: auto;
-    }
-
-    .ref-cards {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 1100px) {
-    .ref-layout {
-      grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.72fr);
-      align-items: stretch;
-    }
-
-    .ref-photo-frame {
-      aspect-ratio: auto;
-      height: 100%;
-      min-height: 28rem;
-      border-radius: 1.5rem;
-    }
-
-    .ref-photo-quote {
-      position: absolute;
-      top: 8%;
-      bottom: auto;
-      left: 0;
-      width: min(12.5rem, 38%);
-      border-radius: 0 1.4rem 1.4rem 0;
-      justify-content: center;
-      background: linear-gradient(90deg, rgb(12 40 34 / 0.94) 0%, rgb(12 40 34 / 0.82) 72%, rgb(12 40 34 / 0.2) 100%);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ref-btn {
-      transition: none;
-    }
-  }
-
-  @media print {
-    .ref-qr svg {
-      width: 28mm;
-      height: 28mm;
-    }
-  }
-</style>
+<script>
+  import { initHomeMotion } from "../lib/home-motion-motion";
+  initHomeMotion();
+  // Homepage navigation stays available, but Home is not the current page here.
+  document.querySelectorAll(".ref-a .hm-header a[aria-current]").forEach((link) => {
+    link.removeAttribute("aria-current");
+    link.classList.remove("is-active");
+  });
+</script>
