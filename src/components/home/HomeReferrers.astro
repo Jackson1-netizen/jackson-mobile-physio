@@ -6,15 +6,23 @@ import HomeIcon from "./HomeIcon.astro";
 const referralMailto = getReferralEmailHref();
 const [referralLocal, referralDomain] = site.referralEmail.split("@");
 const t = homeReferrers;
+// One shared path keeps the photo clipping and fine border perfectly aligned.
+const photoFrame = "M34 38H560C700 38 720 0 850 0C943 0 1000 38 1000 147V1000C770 1000 480 955 270 910C80 870 0 790 0 600V80C0 55 14 38 34 38Z";
 ---
 
 <section id="referrers" class="hm-band hm-band-refer hm-refpanel" aria-labelledby="hm-refer-heading">
   <div class="hm-ref-bg" aria-hidden="true">
-    <svg class="hm-ref-arc hm-ref-arc-tr" viewBox="0 0 280 220">
-      <path d="M20 200C90 40 180 20 270 90" fill="none" stroke="#e7a06a" stroke-width="1.4"></path>
-    </svg>
-    <svg class="hm-ref-arc hm-ref-arc-br" viewBox="0 0 220 180">
-      <path d="M10 20c70 30 120 90 200 140" fill="none" stroke="#e7a06a" stroke-width="1.2"></path>
+    <svg viewBox="0 0 1440 800" preserveAspectRatio="none">
+      <path d="M710 0H1440V250C1300 142 1170 117 1070 99C930 75 813 85 710 0Z" fill="#315d4d" opacity=".36"></path>
+      <path d="M0 800V630C160 592 309 689 464 702C685 719 705 595 924 654C1164 707 1230 797 1440 788V800Z" fill="#20513f" opacity=".5"></path>
+      <path d="M650 800C730 695 824 680 955 735L1100 800Z" fill="#426a54" opacity=".22"></path>
+      <g fill="none" stroke="#96b19e" stroke-width=".7" opacity=".1">
+        <path d="M-30 240C130 480-60 510 150 800"></path>
+        <path d="M-60 270C100 510-90 540 120 830"></path>
+        <path d="M-90 300C70 540-120 570 90 860"></path>
+        <path d="M-120 330C40 570-150 600 60 890"></path>
+      </g>
+      <path class="hm-ref-top-arc" d="M995-36C1005 41 1030 79 1110 126" fill="none" stroke="#efa65e" stroke-width="4"></path>
     </svg>
   </div>
   <div class="hm-wrap hm-section hm-refer-grid">
@@ -68,205 +76,209 @@ const t = homeReferrers;
     <svg class="hm-ref-clipdefs" width="0" height="0" aria-hidden="true">
       <defs>
         <clipPath id="hm-ref-blob" clipPathUnits="objectBoundingBox">
-          <path d="M0.04,0.1 L0.04,0.72 C0.06,0.9 0.28,0.99 0.55,0.98 C0.78,0.97 0.94,0.86 0.99,0.68 C0.99,0.42 0.96,0.18 0.78,0.08 C0.58,0.01 0.28,0.04 0.04,0.1 Z"></path>
+          <path d={photoFrame} transform="scale(.001)"></path>
         </clipPath>
+        <linearGradient id="hm-ref-frame-stroke" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b5b99b" stop-opacity=".65"></stop>
+          <stop offset=".4" stop-color="#c58e4f"></stop>
+          <stop offset="1" stop-color="#f3ac60"></stop>
+        </linearGradient>
       </defs>
     </svg>
     <div class="hm-ref-visual">
       <div class="hm-ref-shape">
-        <div class="hm-ref-photo" data-asset="missing"></div>
+        <img
+          class="hm-ref-photo"
+          src="/photos/referrers/consultation-1448.webp"
+          srcset="/photos/referrers/consultation-720.webp 720w, /photos/referrers/consultation-1080.webp 1080w, /photos/referrers/consultation-1448.webp 1448w"
+          sizes="(max-width: 599px) calc(100vw - 48px), (max-width: 899px) calc(100vw - 64px), (max-width: 1536px) 49vw, 750px"
+          width="1448"
+          height="1086"
+          loading="lazy"
+          decoding="async"
+          alt={t.photoAlt}
+          data-i18n-attr="alt:hm.referrers.photoAlt"
+        />
         <div class="hm-ref-shade" aria-hidden="true"></div>
+        <div class="hm-ref-quote">
+          <span class="hm-ref-quote-rule" aria-hidden="true"></span>
+          <p class="hm-ref-quote-title">
+            <span data-i18n-path="hm.referrers.quoteBefore">{t.quoteBefore}</span><em data-i18n-path="hm.referrers.quoteWord">{t.quoteWord}</em><span data-i18n-path="hm.referrers.quoteAfter">{t.quoteAfter}</span>
+          </p>
+          <span class="hm-ref-quote-rule hm-ref-quote-rule-muted" aria-hidden="true"></span>
+          <p class="hm-ref-quote-body" data-i18n-path="hm.referrers.quoteBody">{t.quoteBody}</p>
+          <p class="hm-ref-tag" data-i18n-path="hm.referrers.tagline">{t.tagline}</p>
+        </div>
       </div>
-      <div class="hm-ref-quote">
-        <span class="hm-ref-quote-rule" aria-hidden="true"></span>
-        <p class="hm-ref-quote-title">
-          <span data-i18n-path="hm.referrers.quoteBefore">{t.quoteBefore}</span><em data-i18n-path="hm.referrers.quoteWord">{t.quoteWord}</em><span data-i18n-path="hm.referrers.quoteAfter">{t.quoteAfter}</span>
-        </p>
-        <p class="hm-ref-quote-body" data-i18n-path="hm.referrers.quoteBody">{t.quoteBody}</p>
-        <span class="hm-ref-quote-rule" aria-hidden="true"></span>
-        <p class="hm-ref-tag" data-i18n-path="hm.referrers.tagline">{t.tagline}</p>
-      </div>
+      <svg class="hm-ref-outline" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+        <path d={photoFrame} fill="none" stroke="url(#hm-ref-frame-stroke)" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+      </svg>
     </div>
   </div>
 </section>
 
 <style>
   .hm-refpanel {
+    --ref-gutter: clamp(1.5rem, 4.2vw, 4rem);
     position: relative;
     isolation: isolate;
     overflow: clip;
-    color: #f7f3ee;
-    background:
-      radial-gradient(ellipse 42% 55% at 100% 0%, #1d4c40 0%, transparent 62%),
-      radial-gradient(ellipse 36% 48% at 0% 100%, #0c2822 0%, transparent 70%),
-      #12352c;
+    color: #f7f3e9;
+    background: radial-gradient(ellipse at 25% 20%, #073c30, transparent 70%), #022c23;
   }
 
   .hm-refpanel::before {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 0;
     pointer-events: none;
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%);
+    background-image: linear-gradient(#e1edcf08 1px, transparent 1px), linear-gradient(90deg, #e1edcf08 1px, transparent 1px);
+    background-size: clamp(20px, 2.1vw, 32px) clamp(20px, 2.1vw, 32px);
+    mask-image: linear-gradient(115deg, transparent 40%, #000 85%);
   }
 
-  .hm-ref-bg {
+  .hm-ref-bg,
+  .hm-ref-bg > svg {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
   }
 
-  .hm-ref-clipdefs {
-    position: absolute;
-  }
-
-  .hm-ref-arc {
-    position: absolute;
-  }
-
-  .hm-ref-arc-tr {
-    top: -1rem;
-    right: -2rem;
-    width: min(18rem, 28vw);
-  }
-
-  .hm-ref-arc-br {
-    right: 6%;
-    bottom: -1rem;
-    width: min(14rem, 22vw);
-  }
+  .hm-ref-clipdefs { position: absolute; }
 
   .hm-refpanel .hm-refer-grid {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
-    gap: 1.5rem 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2.4rem);
     align-items: stretch;
-    width: min(76rem, calc(100% - 3rem));
-    padding-block: clamp(2.2rem, 4vw, 3.2rem);
+    width: min(100%, 96rem);
+    padding: clamp(1.8rem, 3.2vw, 3rem) var(--ref-gutter) clamp(.9rem, 1.5vw, 1.5rem);
+    margin-inline: auto;
   }
 
-  .hm-ref-copy {
-    min-width: 0;
-  }
+  .hm-ref-copy { min-width: 0; }
 
   .hm-ref-kicker {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: clamp(.9rem, 2vw, 1.8rem);
     margin: 0;
-    color: #f4efe8;
-    font-size: 0.72rem;
-    font-weight: 750;
-    letter-spacing: 0.18em;
+    color: #c5d1c0;
+    font-size: clamp(.5rem, .8vw, .75rem);
+    font-weight: 500;
+    letter-spacing: .45em;
     line-height: 1;
     text-transform: uppercase;
   }
 
   .hm-ref-kicker-rule {
-    width: 2.4rem;
-    height: 2px;
-    background: #e28a4a;
+    width: clamp(2.5rem, 4.2vw, 4rem);
+    height: 1px;
+    background: #e6a04c;
   }
 
   .hm-refpanel h2 {
-    margin: 0.7rem 0 0;
-    max-width: 12ch;
-    color: #fff;
+    margin: clamp(1rem, 1.8vw, 1.7rem) 0 0;
+    color: #faf7ee;
     font-family: var(--hm-serif);
-    font-size: clamp(2.7rem, 4.6vw, 4.15rem);
-    font-weight: 560;
-    letter-spacing: -0.03em;
-    line-height: 0.98;
+    font-size: clamp(3.1rem, 5.2vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1;
   }
 
   .hm-ref-lead {
-    max-width: 54ch;
-    margin: 0.9rem 0 0;
-    color: rgb(244 239 232 / 0.9);
-    font-size: 1.02rem;
-    line-height: 1.45;
+    max-width: 57ch;
+    margin: clamp(.85rem, 1.5vw, 1.4rem) 0 0;
+    color: #d6dfd3;
+    font-size: clamp(.84rem, 1.4vw, 1.35rem);
+    line-height: 1.35;
   }
 
   .hm-ref-steps {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.8rem;
-    margin: 1.35rem 0 0;
+    gap: clamp(.65rem, 1.4vw, 1.35rem);
+    margin: clamp(1.25rem, 2.2vw, 2.1rem) 0 0;
     padding: 0;
     list-style: none;
   }
 
-  .hm-ref-steps::before {
-    content: "";
-    position: absolute;
-    top: 1.35rem;
-    left: 12%;
-    right: 12%;
-    height: 1px;
-    background: rgb(255 255 255 / 0.28);
-  }
-
   .hm-ref-steps li {
     position: relative;
-    display: grid;
-    justify-items: center;
-    gap: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(.3rem, .6vw, .55rem);
     text-align: center;
+  }
+
+  .hm-ref-steps li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: clamp(1.35rem, 2.35vw, 2.25rem);
+    left: calc(50% + clamp(2.25rem, 4vw, 3.9rem));
+    width: calc(100% - clamp(3.85rem, 6.6vw, 6.35rem));
+    height: 1px;
+    background: #a3b5a7;
+    opacity: .75;
   }
 
   .hm-ref-step-icon {
     position: relative;
     display: grid;
     place-items: center;
-    width: 3.15rem;
-    height: 3.15rem;
-    border-radius: 999px;
-    background: #f6efe6;
-    color: #e07a3d;
+    flex: none;
+    width: clamp(2.7rem, 4.7vw, 4.5rem);
+    height: clamp(2.7rem, 4.7vw, 4.5rem);
+    margin-bottom: clamp(.25rem, .5vw, .45rem);
+    border: 1px solid #e7e4ce;
+    border-radius: 50%;
+    background: #fff4e3;
+    color: #f28c3c;
   }
+
+  .hm-ref-step-icon > :global(svg) { width: 56%; height: 56%; }
 
   .hm-ref-step-num {
     position: absolute;
-    top: -0.15rem;
-    right: -0.15rem;
+    top: -12%;
+    right: -22%;
     display: grid;
     place-items: center;
-    width: 1.15rem;
-    height: 1.15rem;
-    border-radius: 999px;
-    background: #e07a3d;
-    color: #fff;
-    font-size: 0.68rem;
-    font-weight: 800;
+    width: 46%;
+    height: 46%;
+    border: 1px solid #819e89;
+    border-radius: 50%;
+    background: #073a2d;
+    color: #d4decc;
+    font-size: clamp(.6rem, .95vw, .9rem);
+    line-height: 1;
   }
 
   .hm-ref-steps strong {
-    color: #fff;
-    font-size: 0.92rem;
-    font-weight: 750;
+    color: #edf0e3;
+    font-size: clamp(.72rem, 1.15vw, 1.1rem);
+    font-weight: 650;
     line-height: 1.25;
   }
 
   .hm-ref-steps li > span:last-child {
-    color: rgb(244 239 232 / 0.82);
-    font-size: 0.82rem;
-    line-height: 1.35;
+    max-width: 22ch;
+    color: #d1dccf;
+    font-size: clamp(.7rem, 1.1vw, 1.05rem);
+    line-height: 1.3;
   }
 
   .hm-ref-cards {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.7rem;
-    margin: 1.6rem 0 0;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.03fr) minmax(0, 1.07fr);
+    gap: clamp(.5rem, .9vw, .9rem);
+    margin: clamp(1rem, 1.7vw, 1.65rem) calc(-1 * clamp(.5rem, 1vw, 1rem)) 0;
     padding: 0;
     list-style: none;
   }
@@ -275,260 +287,204 @@ const t = homeReferrers;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.55rem;
+    gap: clamp(.3rem, .55vw, .55rem);
     min-width: 0;
-    min-height: 13.5rem;
-    height: 100%;
-    padding: 1rem 0.9rem 0.95rem;
-    border-radius: 1.05rem;
-    background: #f7f1e8;
-    color: #16352e;
+    min-height: clamp(10rem, 16.6vw, 16rem);
+    padding: clamp(.65rem, 1.1vw, 1.1rem);
+    border: 1px solid #b8c9af;
+    border-radius: clamp(.5rem, .85vw, .8rem);
+    background: linear-gradient(130deg, #faf6ed, #f3eee2);
+    color: #173b30;
   }
+
+  .hm-ref-card-ahpra { background: linear-gradient(130deg, #e9f0e2, #dfe9d8); }
 
   .hm-ref-badge {
     display: grid;
     place-items: center;
     flex: none;
-    width: 3.6rem;
-    height: 3.6rem;
-    border-radius: 999px;
-    background: #d7efe8;
-    color: #14685e;
+    width: clamp(2.65rem, 4.3vw, 4.15rem);
+    height: clamp(2.65rem, 4.3vw, 4.15rem);
+    border-radius: 50%;
+    background: #d7e7d0;
+    color: #377664;
   }
 
-  .hm-ref-badge-hands {
-    background: #e5efe8;
-    color: #16352e;
-  }
+  .hm-ref-badge > :global(svg) { width: 57%; height: 57%; }
+  .hm-ref-badge-hands { color: #436d57; background: #e4ead9; }
+  .hm-ref-badge-mail { color: #f28b3c; background: #fbe6d0; }
 
-  .hm-ref-badge-mail {
-    background: #f6d7c8;
-    color: #c4531d;
-  }
-
-  .hm-ref-ahpra-lead {
-    display: block;
-    color: #14685e;
-    font-size: 1.2rem;
-    font-weight: 650;
-    line-height: 1.15;
-  }
-
-  .hm-ref-ahpra-rest {
-    display: block;
-    margin-top: 0.15rem;
-    font-size: 0.95rem;
-    font-weight: 650;
-  }
-
-  .hm-ref-card-ahpra {
-    background: #e7f3ea;
-  }
-
-  .hm-ref-card p {
-    max-width: none;
-    margin: 0;
-    color: #16352e;
-    font-size: 0.95rem;
-    font-weight: 750;
-    line-height: 1.3;
-  }
-
-  .hm-ref-card-note {
-    color: #3d534c !important;
-    font-size: 0.84rem !important;
-    font-weight: 450 !important;
-  }
+  .hm-ref-card p { margin: 0; color: #173b30; line-height: 1.28; }
+  .hm-ref-ahpra-lead { display: block; color: #286d60; font-size: clamp(1rem, 1.7vw, 1.65rem); font-weight: 650; }
+  .hm-ref-ahpra-rest { display: block; font-size: clamp(.82rem, 1.35vw, 1.3rem); }
+  .hm-ref-card-title,
+  .hm-ref-card-note { font-size: clamp(.67rem, 1.05vw, 1rem); font-weight: 450; }
+  .hm-ref-card-note { margin-top: -.35em !important; }
 
   .hm-ref-email {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     max-width: 100%;
-    min-width: 0;
-    color: #16352e;
-    font-size: 0.92rem;
-    font-weight: 700;
+    color: #173b30;
+    font-size: clamp(.64rem, 1.04vw, 1rem);
+    font-weight: 650;
     line-height: 1.3;
     text-decoration: none;
   }
-
-  .hm-ref-email span {
-    display: block;
-    max-width: 100%;
-    white-space: nowrap;
-  }
+  .hm-ref-email span { white-space: nowrap; }
 
   .hm-ref-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.45rem;
-    width: fit-content;
-    max-width: 100%;
-    min-height: 2.75rem;
+    gap: clamp(.25rem, .55vw, .5rem);
+    width: 100%;
+    min-height: clamp(2rem, 3.55vw, 3.4rem);
     margin-top: auto;
-    padding: 0.5rem 0.95rem;
+    padding: .65em .8em;
     border-radius: 999px;
     background: #c4531d;
-    color: #fff;
-    font-size: 0.92rem;
-    font-weight: 750;
-    line-height: 1.2;
+    font-size: clamp(.62rem, .98vw, .94rem);
+    font-weight: 600;
+    line-height: 1.15;
     text-align: center;
     text-decoration: none;
   }
-
-  .hm-ref-card .hm-ref-btn,
-  .hm-ref-card .hm-ref-btn:hover {
-    color: #fff;
-  }
-
-  .hm-ref-btn:hover {
-    background: #a9380b;
-  }
-
-  .hm-ref-btn:focus-visible,
-  .hm-ref-card a:focus-visible {
-    outline: 3px solid #fff;
-    outline-offset: 3px;
-  }
+  .hm-ref-card .hm-ref-btn { color: #fff8ed; }
+  .hm-ref-card .hm-ref-btn:hover { color: #fff; background: #b94b1d; }
+  .hm-ref-btn-arrow { flex: none; font-size: 1.4em; line-height: .7; }
+  .hm-ref-card a:focus-visible { outline: 3px solid #163e31; outline-offset: 3px; }
 
   .hm-ref-visual {
     position: relative;
-    min-height: 28rem;
+    width: calc(100% + var(--ref-gutter));
+    min-height: clamp(27rem, 46vw, 44rem);
+    margin-top: clamp(2.7rem, 4.8vw, 4.6rem);
   }
 
   .hm-ref-shape,
-  .hm-ref-photo,
-  .hm-ref-shade {
+  .hm-ref-shade,
+  .hm-ref-outline { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hm-ref-shape { clip-path: url("#hm-ref-blob"); background: #172f23; }
+  .hm-ref-outline { pointer-events: none; overflow: visible; }
+
+  .hm-ref-photo {
     position: absolute;
-    inset: 0;
-  }
-
-  .hm-ref-shape {
-    clip-path: url("#hm-ref-blob");
-    background: #0e2c26;
-  }
-
-  .hm-ref-photo[data-asset="missing"] {
-    background:
-      radial-gradient(ellipse 50% 60% at 72% 48%, #245246 0%, transparent 70%),
-      #0e2c26;
+    top: 0;
+    left: 4%;
+    width: 110%;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
   }
 
   .hm-ref-shade {
-    background: linear-gradient(90deg, rgb(10 36 30 / 0.94) 0%, rgb(10 36 30 / 0.78) 36%, rgb(10 36 30 / 0.28) 62%, rgb(10 36 30 / 0.05) 100%);
+    background: linear-gradient(90deg, #13271cf5 0%, #172a20eb 19%, #152b2180 36%, #132b2100 56%), linear-gradient(0deg, #0b271c60, transparent 40%);
   }
 
   .hm-ref-quote {
-    position: relative;
-    z-index: 1;
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 0.65rem;
-    min-height: 100%;
-    padding: 1.6rem 22% 1.2rem 0.2rem;
+    align-items: flex-start;
+    gap: clamp(.75rem, 1.45vw, 1.4rem);
+    padding: clamp(2.15rem, 4vw, 3.85rem) clamp(1.8rem, 3.2vw, 3.1rem);
   }
 
-  .hm-ref-quote-rule {
-    display: block;
-    width: 2.2rem;
-    height: 2px;
-    background: #e28a4a;
-  }
-
+  .hm-ref-quote-rule { flex: none; width: clamp(1.45rem, 2.5vw, 2.4rem); height: 3px; background: #f1a54d; }
+  .hm-ref-quote-rule-muted { height: 2px; background: #bdc6ad; }
   .hm-ref-quote-title {
-    max-width: 14ch;
+    max-width: 7.2em;
     margin: 0;
-    color: #fff;
-    font-family: var(--hm-serif);
-    font-size: clamp(1.85rem, 2.1vw, 2.45rem);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.12;
+    color: #faf4e8;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.6rem, 2.8vw, 2.7rem);
+    font-weight: 400;
+    letter-spacing: -.025em;
+    line-height: 1.08;
   }
-
-  .hm-ref-quote-title em {
-    color: #e28a4a;
-    font-style: italic;
-  }
-
-  .hm-ref-quote-body {
-    max-width: 28ch;
-    margin: 0;
-    color: rgb(244 239 232 / 0.88);
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-
+  .hm-ref-quote-title em { color: #f0a54d; font-style: italic; }
+  .hm-ref-quote-body { max-width: 19ch; margin: 0; color: #d4ddce; font-size: clamp(.75rem, 1.2vw, 1.15rem); line-height: 1.3; }
   .hm-ref-tag {
-    max-width: 9ch;
+    position: absolute;
+    left: clamp(4.5rem, 9.6vw, 9.2rem);
+    bottom: clamp(3rem, 6vw, 5.75rem);
+    max-width: 17ch;
     margin: 0;
-    color: #d7e4de;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-    line-height: 1.45;
+    color: #d4ddc5;
+    font-size: clamp(.44rem, .73vw, .7rem);
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: .4em;
+    line-height: 1.7;
     text-transform: uppercase;
   }
+  .hm-ref-tag::before { content: ""; position: absolute; left: -3.5em; top: 50%; width: 2.4em; height: 1px; background: #e8a557; }
 
-  :lang(zh) .hm-ref-kicker,
   :lang(zh-Hant) .hm-ref-kicker,
   :lang(zh-Hans) .hm-ref-kicker,
-  :lang(zh) .hm-ref-tag,
   :lang(zh-Hant) .hm-ref-tag,
-  :lang(zh-Hans) .hm-ref-tag {
-    letter-spacing: 0.04em;
-    text-transform: none;
+  :lang(zh-Hans) .hm-ref-tag { letter-spacing: .08em; text-transform: none; }
+
+  @media (min-width: 900px) {
+    :lang(zh-Hant) .hm-ref-quote-title,
+    :lang(zh-Hans) .hm-ref-quote-title {
+      max-width: 5.2em;
+      font-size: clamp(1.6rem, 2.55vw, 2.45rem);
+      line-height: 1.2;
+    }
+    .hm-ref-quote-title em { white-space: nowrap; }
   }
 
-  @media (max-width: 1099px) {
-    .hm-refpanel .hm-refer-grid {
-      grid-template-columns: 1fr;
-      width: min(46rem, calc(100% - 2rem));
-    }
-
-    .hm-ref-visual {
-      min-height: 22rem;
-    }
+  @media (max-width: 899px) {
+    .hm-ref-top-arc { display: none; }
+    .hm-refpanel .hm-refer-grid { grid-template-columns: 1fr; max-width: 49rem; padding-block: 2.5rem; gap: 1.5rem; }
+    .hm-ref-kicker { font-size: .65rem; }
+    .hm-refpanel h2 { margin-top: 1rem; font-size: clamp(2.6rem, 7vw, 3.8rem); }
+    .hm-ref-lead { margin-top: 1rem; font-size: 1rem; line-height: 1.45; }
+    .hm-ref-steps { margin-top: 1.75rem; }
+    .hm-ref-step-icon { width: 3.2rem; height: 3.2rem; }
+    .hm-ref-steps li:not(:last-child)::after { top: 1.6rem; left: calc(50% + 2.5rem); width: calc(100% - 4.4rem); }
+    .hm-ref-step-num { font-size: .7rem; }
+    .hm-ref-steps strong { font-size: .94rem; }
+    .hm-ref-steps li > span:last-child { font-size: .88rem; }
+    .hm-ref-card { min-height: 14rem; padding: 1rem; }
+    .hm-ref-cards { margin-inline: 0; }
+    .hm-ref-badge { width: 3.5rem; height: 3.5rem; }
+    .hm-ref-ahpra-lead { font-size: 1.3rem; }
+    .hm-ref-ahpra-rest { font-size: 1rem; }
+    .hm-ref-card-title, .hm-ref-card-note { font-size: .9rem; }
+    .hm-ref-email { font-size: .78rem; }
+    .hm-ref-btn { min-height: 2.75rem; font-size: .78rem; }
+    .hm-ref-visual { width: 100%; min-height: 36rem; margin: 0; }
+    .hm-ref-quote { padding: 3rem 2rem; gap: 1rem; }
+    .hm-ref-quote-title { font-size: 2.45rem; }
+    .hm-ref-quote-body { font-size: 1rem; }
+    .hm-ref-tag { left: 5rem; bottom: 4rem; font-size: .6rem; }
   }
 
-  @media (max-width: 720px) {
-    .hm-ref-steps,
-    .hm-ref-cards {
-      grid-template-columns: 1fr;
-    }
-
-    .hm-ref-steps::before {
-      display: none;
-    }
-
-    .hm-ref-steps li {
-      justify-items: start;
-      grid-template-columns: auto 1fr;
-      column-gap: 0.75rem;
-      text-align: left;
-    }
-
-    .hm-ref-steps strong,
-    .hm-ref-steps li > span:last-child {
-      grid-column: 2;
-    }
-
-    .hm-ref-step-icon {
-      grid-row: 1 / span 2;
-    }
-
-    .hm-refpanel h2 {
-      max-width: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hm-ref-btn {
-      transition: none;
-    }
+  @media (max-width: 599px) {
+    .hm-refpanel .hm-refer-grid { gap: 2rem; }
+    .hm-ref-steps { grid-template-columns: 1fr; gap: 1.3rem; }
+    .hm-ref-steps li { display: grid; grid-template-columns: 3.2rem 1fr; column-gap: 1.2rem; justify-items: start; text-align: left; }
+    .hm-ref-steps li:not(:last-child)::after { display: none; }
+    .hm-ref-step-icon { grid-column: 1; grid-row: 1 / span 2; margin: 0; }
+    .hm-ref-steps strong, .hm-ref-steps li > span:last-child { grid-column: 2; max-width: none; }
+    .hm-ref-cards { grid-template-columns: 1fr; gap: .75rem; margin-top: 1.5rem; }
+    .hm-ref-card { min-height: 0; padding: 1.25rem; gap: .7rem; }
+    .hm-ref-card-title, .hm-ref-card-note, .hm-ref-email { font-size: 1rem; }
+    .hm-ref-card-note { margin-top: 0 !important; }
+    .hm-ref-btn { width: fit-content; min-height: 2.75rem; margin-top: .3rem; padding-inline: 1.25rem; font-size: .94rem; }
+    .hm-ref-visual { min-height: 35rem; }
+    .hm-ref-photo { top: 0; bottom: auto; left: 0; width: 100%; height: 60%; object-fit: cover; object-position: 40% center; mask-image: none; }
+    .hm-ref-shade { background: linear-gradient(0deg, #142e21 0%, #142e21 38%, #142e2100 67%); }
+    .hm-ref-quote { justify-content: flex-end; padding: 1.5rem 1.4rem 6.5rem; gap: .6rem; }
+    .hm-ref-quote-title { max-width: 12em; font-size: 1.85rem; }
+    .hm-ref-quote-body { max-width: 28ch; font-size: .94rem; }
+    .hm-ref-tag { position: relative; left: auto; bottom: auto; max-width: none; margin: .3rem 0 0 2.4rem; font-size: .5rem; }
+    .hm-ref-tag::before { left: -2.8em; width: 2em; }
+    .hm-ref-quote-rule-muted { display: none; }
   }
 </style>

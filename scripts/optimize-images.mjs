@@ -10,6 +10,7 @@ import { join, parse } from "node:path";
 
 // The current desktop hero has its own lossless PNG-based pipeline.
 await import("./optimize-hero.mjs");
+await import("./optimize-referrers.mjs");
 
 const root = join(import.meta.dirname, "..", "public");
 

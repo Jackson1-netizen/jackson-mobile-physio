@@ -184,6 +184,7 @@ export const homeAbout = {
 export const homeBanner = hm.banner;
 
 export const homeReferrers = {
+  photoAlt: hm.referrers.photoAlt,
   kicker: hm.referrers.kicker,
   heading: hm.referrers.heading,
   lead: hm.referrers.lead,
