@@ -18,11 +18,23 @@ their separate portrait source set. Screens requiring more than 1672 source
 pixels will still be limited by this original; a genuinely higher-resolution
 master is needed for additional real detail on large or high-DPI displays.
 
-The photo moves smoothly between 1× and 1.035× over 16 seconds per direction,
-with no lateral translation. Top-aligned desktop cropping and a face-oriented
-transform origin preserve headroom. Reduced-motion preferences disable motion.
+The second approved scene is `steps-original.png` (1672 × 941), also exported as
+lossless 1280px/1672px WebP. It retains both people through a right-focused mobile
+crop with a reserved headline band, so the text does not cover their faces.
+Both native-size WebPs preserve the RGB pixels of their respective PNGs.
+
+Each image completes a 1× → 1.035× → 1× zoom over **10 seconds** (5 seconds in,
+5 seconds out), then crossfades to the other over 700ms. There is no lateral drift.
+The slideshow provides two manual image buttons and pause/resume. It waits for the
+next image to decode before changing; an unavailable second image leaves the first
+visible. Focus in the controls, hidden tabs and an offscreen hero pause progression.
+Reduced-motion users get a static initial image and manual switching without zoom
+or crossfade. JavaScript-disabled visitors retain the first image.
+
+Top-aligned desktop cropping and face-oriented transform origins preserve headroom.
 
 Validation: Astro check (0 diagnostics), production build and draft/form assertions,
-decoded PNG/WebP pixel comparison, and production-browser checks at 390, 768, 769,
-1440 (DPR 1/2), 1920, 2560 (DPR 2), and 3440 CSS pixels. Sampled the zoom-in,
-zoom-out and reversal frames: no exposed edges or duplicate hero downloads.
+21 regression tests, and decoded PNG/WebP pixel comparison for both photos.
+Browser verification covers the 10-second switch and return, mid-cycle zoom,
+manual navigation, pause/resume, reduced-motion and 390px/768px mobile framing.
+The earlier single-image version was also checked from 390 to 3440 CSS pixels.

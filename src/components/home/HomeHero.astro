@@ -3,6 +3,7 @@ import { getRegistrationDisplayLine } from "../../content/site";
 import { homeHero } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
+import { messages } from "../../content/i18n";
 
 const registrationLine = getRegistrationDisplayLine();
 const alt =
@@ -16,6 +17,10 @@ const desktopWebp = srcset("desktop", desktopWidths, "webp");
 // The minimum covers the desktop hero's 34rem minimum height on narrow laptops.
 const desktopSizes = "max(108vw, 1008px)";
 const portraitAvif = srcset("portrait", portraitWidths, "avif");
+const t = messages.en.hm.hero;
+const slideCopy = Object.fromEntries(Object.entries(messages).map(([locale, bundle]) => [locale, {
+  pause: bundle.hm.hero.pauseSlides, play: bundle.hm.hero.playSlides,
+}]));
 ---
 
 <link
@@ -37,8 +42,9 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
   fetchpriority="high"
 />
 
-<section id="top" class="hm-hero" aria-labelledby="hm-hero-heading">
+<section id="top" class="hm-hero" data-hm-hero aria-labelledby="hm-hero-heading">
   <div class="hm-hero-media">
+    <div class="hm-hero-slide is-active" data-hm-hero-slide aria-hidden="false">
     <picture>
       <source
         media="(min-width: 769px)"
@@ -79,8 +85,30 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
         fetchpriority="high"
       />
     </picture>
+    </div>
+    <div class="hm-hero-slide" data-hm-hero-slide aria-hidden="true">
+      <picture>
+        <source type="image/webp" srcset={srcset("steps", desktopWidths, "webp")}
+          sizes="(max-width: 768px) 165vw, max(108vw, 1008px)" />
+        <img class="hm-hero-photo hm-hero-step-photo" src="/photos/hero/steps-original.png"
+          width="1672" height="941" alt={t.stepsPhotoAlt}
+          data-i18n-attr="alt:hm.hero.stepsPhotoAlt" fetchpriority="low" decoding="async" />
+      </picture>
+    </div>
     <div class="hm-hero-scrim" aria-hidden="true"></div>
     <p class="hm-hero-caption" data-i18n-path="hm.hero.caption">Illustrative image</p>
+    <div class="hm-hero-controls" data-hm-hero-controls role="group" aria-label={t.slidesLabel}
+      data-i18n-attr="aria-label:hm.hero.slidesLabel" hidden>
+      <button type="button" class="hm-hero-dot" data-hm-hero-go="0" aria-pressed="true"
+        aria-label={t.showWalkingPhoto} data-i18n-attr="aria-label:hm.hero.showWalkingPhoto"><span></span></button>
+      <button type="button" class="hm-hero-dot" data-hm-hero-go="1" aria-pressed="false"
+        aria-label={t.showStepsPhoto} data-i18n-attr="aria-label:hm.hero.showStepsPhoto"><span></span></button>
+      <button type="button" class="hm-hero-toggle" data-hm-hero-toggle aria-pressed="false" aria-label={t.pauseSlides}>
+        <svg class="hm-hero-pause-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="3" /></svg>
+        <svg class="hm-hero-play-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m5 2 9 6-9 6Z" fill="currentColor" /></svg>
+      </button>
+    </div>
+    <script type="application/json" data-hm-hero-copy set:html={JSON.stringify(slideCopy).replace(/</g, "\\u003c")} />
   </div>
   <div class="hm-wrap hm-hero-grid">
     <div class="hm-hero-lead">

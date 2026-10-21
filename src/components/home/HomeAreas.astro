@@ -11,14 +11,14 @@ interface Props { pageHeading?: boolean; }
 const { pageHeading = false } = Astro.props;
 const Heading = pageHeading ? "h1" : "h2";
 const t = messages.en.hm.areas;
-const locations = [...homeSuburbs, ...nearbyMapSuburbs].map((suburb) => {
+const primary = homeSuburbs.map((suburb) => {
   const point = homeMapPins.find((pin) => pin.name === suburb.name);
   if (!point) throw new Error("Missing service-area coordinates: " + suburb.name);
   return { ...suburb, ...point };
 });
-const primary = locations.slice(0, homeSuburbs.length);
-const nearby = locations.slice(homeSuburbs.length);
-const first = locations[0];
+// Nearby areas remain enquiry links below the map, never map marker inputs.
+const nearby = nearbyMapSuburbs;
+const first = primary[0];
 const benefitIcons = ["home", "heart", "people"] as const;
 ---
 
@@ -46,7 +46,7 @@ const benefitIcons = ["home", "heart", "people"] as const;
       </a>
       <noscript>
         <ul class="hm-area-noscript-links">
-          {locations.slice(1).map((area) => <li><a href={area.href}>{area.name}</a></li>)}
+          {primary.slice(1).map((area) => <li><a href={area.href}>{area.name}</a></li>)}
         </ul>
       </noscript>
     </div>
@@ -68,11 +68,10 @@ const benefitIcons = ["home", "heart", "people"] as const;
       <p data-i18n-path="hm.areas.nearbyNote">{t.nearbyNote}</p>
       <ul class="hm-area-nearby-list" aria-label={t.nearbyHeading} data-i18n-attr="aria-label:hm.areas.nearbyHeading">
         {nearby.map((area) => (
-          <li><button type="button" class="hm-area-choice hm-area-choice-small" data-hm-area-choice
-            data-name={area.name} data-lat={area.lat} data-lng={area.lng} data-href={area.href}
-            aria-pressed="false" aria-controls="hm-service-area-map" disabled>
+          <li><a class="hm-area-choice hm-area-choice-small hm-area-nearby-link"
+            href={"/enquiry/?suburb=" + encodeURIComponent(area.name)}>
             <HomeIcon name="pin" size={16} /><span>{area.name}</span>
-          </button></li>
+          </a></li>
         ))}
       </ul>
       <p class="hm-area-other-note" data-i18n-path="hm.areas.otherAreasNote">{t.otherAreasNote}</p>

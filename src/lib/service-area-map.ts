@@ -86,7 +86,8 @@ export function initServiceAreas(): void {
     const retry = root.querySelector<HTMLButtonElement>("[data-hm-map-retry]")!;
     const reset = root.querySelector<HTMLButtonElement>("[data-hm-map-reset]")!;
     const copies: Record<string, MapCopy> = JSON.parse(root.querySelector("[data-hm-map-copy]")!.textContent!);
-    const areas: Area[] = [...section.querySelectorAll<HTMLButtonElement>("[data-hm-area-choice]")].map((choice) => ({
+    // Only the main service-area list supplies markers and fit/cluster coordinates.
+    const areas: Area[] = [...section.querySelectorAll<HTMLButtonElement>(".hm-area-list [data-hm-area-choice]")].map((choice) => ({
       name: choice.dataset.name!, lat: Number(choice.dataset.lat), lng: Number(choice.dataset.lng),
       href: choice.dataset.href!, choice,
     }));
@@ -205,9 +206,10 @@ export function initServiceAreas(): void {
             onAdd() {
               this.layer.className = "hm-area-overlay";
               this.getPanes()!.overlayMouseTarget.append(this.layer);
-              for (const area of areas) {
+              for (const [index, area] of areas.entries()) {
                 const element = document.createElement("div");
                 element.className = "hm-area-marker";
+                element.style.setProperty("--hm-marker-delay", `${index * 45}ms`);
                 const pin = document.createElement("button");
                 pin.type = "button";
                 pin.className = "hm-area-map-pin";
@@ -273,7 +275,7 @@ export function initServiceAreas(): void {
                 if (group.points.length === 1 || lead === selected) {
                   lead.element!.hidden = false;
                   if (lead === selected && group.points.length > 1) {
-                    // Nearby areas remain available in the text list; selecting one zooms to reveal its pin.
+                    // Close primary suburbs remain selectable from the main list.
                     lead.pin!.dataset.nearbyCount = String(group.points.length - 1);
                   } else delete lead.pin!.dataset.nearbyCount;
                   return;

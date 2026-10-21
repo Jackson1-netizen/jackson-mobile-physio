@@ -1,4 +1,7 @@
+import { initHeroSlideshow } from "./hero-slideshow";
+
 export function initHomeMotion(root: ParentNode = document): void {
+  initHeroSlideshow(root);
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 

@@ -3,6 +3,8 @@
 # main has no copy of this file. Do not leave production on main.
 # Does not attach homemotionphysio.com.au. Does not change DNS.
 # Dashboard steps: docs/DEPLOYMENT.md
+# HOME-002 non-production previews are prepared but disabled by default.
+# Approval proposal: docs/STAGING_PREVIEW_PROPOSAL.md. No production-branch change.
 
 [build]
   command = "npm run build"
@@ -20,6 +22,9 @@
 
 # Pull requests into the production branch. Netlify sets CONTEXT=deploy-preview.
 [context.deploy-preview]
+  command = "npm run build"
+
+[context.branch-deploy]
   command = "npm run build"
 
 # Same command if Netlify selects the branch context for the staging branch.

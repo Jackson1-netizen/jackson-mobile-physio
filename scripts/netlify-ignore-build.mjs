@@ -7,7 +7,9 @@
  *   (Netlify's staging production branch; no custom domain)
  * - CONTEXT=deploy-preview when the pull request targets that same branch
  *
- * main and every other branch are skipped. Branch deploys are skipped.
+ * HOME-002 branch/PR previews are opt-in, after Jackson approves dashboard changes:
+ * HOME_MOTION_STAGING_PREVIEWS=enabled, only in non-production contexts.
+ * This code does not enable Netlify branch deploys, change production, or publish.
  * This does not merge or attach a custom domain.
  *
  * On a deploy preview, Netlify's BRANCH is often pull/<id>/head, not the
@@ -18,6 +20,8 @@
 import { pathToFileURL } from "node:url";
 
 const STAGING_BRANCH = "cursor/design-option-2-b759";
+const WORK_BRANCH = "agent/HOME-002-about-enquiry";
+const INTEGRATION_BRANCH = "cto/home-motion-integration";
 
 function branchName(value) {
   return String(value || "").replace(/^refs\/heads\//, "");
@@ -32,6 +36,7 @@ function repoSlug(env) {
 export async function decide(env = process.env, fetchImpl = globalThis.fetch) {
   const context = env.CONTEXT || "";
   const branch = branchName(env.BRANCH);
+  const previewsApproved = env.HOME_MOTION_STAGING_PREVIEWS === "enabled";
 
   if (context === "production" && branch === STAGING_BRANCH) {
     return { allow: true, reason: "production deploy of the staging branch" };
@@ -39,6 +44,10 @@ export async function decide(env = process.env, fetchImpl = globalThis.fetch) {
 
   if (context === "deploy-preview" && branch === STAGING_BRANCH) {
     return { allow: true, reason: "deploy preview checked out as the staging branch" };
+  }
+
+  if (context === "branch-deploy" && branch === WORK_BRANCH && previewsApproved) {
+    return { allow: true, reason: "approved non-production HOME-002 branch preview" };
   }
 
   if (context !== "deploy-preview") {
@@ -55,6 +64,8 @@ export async function decide(env = process.env, fetchImpl = globalThis.fetch) {
 
   const url = `https://api.github.com/repos/${repoSlug(env)}/pulls/${reviewId}`;
   let base = "";
+  let head = "";
+  let headRepo = "";
   try {
     const response = await fetchImpl(url, {
       headers: {
@@ -68,6 +79,8 @@ export async function decide(env = process.env, fetchImpl = globalThis.fetch) {
     }
     const data = await response.json();
     base = typeof data?.base?.ref === "string" ? data.base.ref : "";
+    head = typeof data?.head?.ref === "string" ? data.head.ref : "";
+    headRepo = typeof data?.head?.repo?.full_name === "string" ? data.head.repo.full_name : "";
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     return { allow: false, reason: `skipped: could not read the pull request base (${message})` };
@@ -75,6 +88,11 @@ export async function decide(env = process.env, fetchImpl = globalThis.fetch) {
 
   if (base === STAGING_BRANCH) {
     return { allow: true, reason: `deploy preview of pull request #${reviewId} into ${STAGING_BRANCH}` };
+  }
+
+  if (previewsApproved && base === INTEGRATION_BRANCH && head === WORK_BRANCH &&
+      headRepo.toLowerCase() === repoSlug(env).toLowerCase()) {
+    return { allow: true, reason: `approved HOME-002 deploy preview of pull request #${reviewId}` };
   }
 
   return {

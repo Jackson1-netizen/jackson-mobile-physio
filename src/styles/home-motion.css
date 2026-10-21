@@ -987,6 +987,45 @@ html:has(.hm-header) {
   border-color: #fff;
 }
 
+.hm-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.hm-hero-slide.is-active { opacity: 1; }
+
+.hm-hero-controls {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 3;
+  display: flex;
+  gap: 0.1rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgb(8 37 31 / 0.78);
+}
+.hm-hero-controls[hidden], .hm-hero-toggle[hidden] { display: none; }
+.hm-hero-dot, .hm-hero-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+.hm-hero-dot > span { width: 9px; height: 9px; border-radius: 50%; border: 1px solid white; }
+.hm-hero-dot[aria-pressed="true"] > span { background: white; }
+.hm-hero-toggle .hm-hero-play-icon { display: none; }
+.hm-hero-toggle[aria-pressed="true"] .hm-hero-play-icon { display: block; }
+.hm-hero-toggle[aria-pressed="true"] .hm-hero-pause-icon { display: none; }
+.hm-hero-dot:hover, .hm-hero-toggle:hover { background: rgb(255 255 255 / 0.15); }
+
 .hm-hero-photo {
   position: absolute;
   inset: 0;
@@ -1001,10 +1040,12 @@ html:has(.hm-header) {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hm-hero-photo {
-    animation: hm-kenburns 16s ease-in-out infinite alternate;
+  .hm-hero-slide { transition: opacity 700ms ease; }
+  .hm-hero[data-hero-ready] .hm-hero-slide.is-active .hm-hero-photo {
+    animation: hm-hero-zoom 10s ease-in-out both;
     will-change: transform;
   }
+  .hm-hero[data-hero-paused="true"] .hm-hero-photo { animation-play-state: paused; }
 
   .hm-btn:hover,
   .hm-menu summary:hover {
@@ -1057,22 +1098,9 @@ html:has(.hm-header) {
   }
 }
 
-@keyframes hm-kenburns-portrait {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.035);
-  }
-}
-
-@keyframes hm-kenburns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.035);
-  }
+@keyframes hm-hero-zoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
 }
 
 @keyframes hm-hero-rise {
@@ -2064,7 +2092,14 @@ a.hm-card:hover {
   .hm-hero-photo {
     object-position: 50% 50%;
     transform-origin: 50% 50%;
-    animation-name: hm-kenburns-portrait;
+  }
+  /* Reserve quiet headline space: the landscape scene has no portrait headroom. */
+  .hm-hero-slide:has(.hm-hero-step-photo) { background: #0f3c38; }
+  .hm-hero-step-photo {
+    top: 30%;
+    height: 70%;
+    object-position: 75% 50%;
+    transform-origin: 70% 20%;
   }
 }
 

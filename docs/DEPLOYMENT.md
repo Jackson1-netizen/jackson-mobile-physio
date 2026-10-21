@@ -1,5 +1,10 @@
 # Deployment — Netlify staging
 
+> 2026-10-21: HOME-002 non-production preview preparation is documented in
+> [STAGING_PREVIEW_PROPOSAL.md](STAGING_PREVIEW_PROPOSAL.md). It is awaiting Jackson's
+> approval; no dashboard settings were changed. Its explicit branch/PR preview plan
+> supersedes the historical "production branch only" guidance below when approved.
+
 Staging is live at **https://homemotion-staging.netlify.app**. `site.draft` is still `true`, so the site stays `noindex`. There is no custom domain. `main` is untouched and must not be deployed: it has no `netlify.toml` and is the older site.
 
 ## Verified on 3 Oct 2026

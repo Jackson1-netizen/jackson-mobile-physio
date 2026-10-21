@@ -9,17 +9,18 @@ import sharp from "sharp";
 import { join } from "node:path";
 
 const directory = join(import.meta.dirname, "..", "public", "photos", "hero");
-const original = join(directory, "desktop-original.png");
-const metadata = await sharp(original).metadata();
-if (metadata.width !== 1672 || metadata.height !== 940) {
-  throw new Error("Expected the approved 1672×940 desktop PNG; update the hero dimensions and srcset before changing masters.");
-}
-
-for (const width of [1280, 1672]) {
-  const output = join(directory, `desktop-${width}.webp`);
-  await sharp(original)
-    .resize({ width, withoutEnlargement: true, kernel: "lanczos3" })
-    .webp({ lossless: true, effort: 6 })
-    .toFile(output);
-  console.log(`Wrote ${output}`);
+for (const [name, height] of [["desktop", 940], ["steps", 941]]) {
+  const original = join(directory, `${name}-original.png`);
+  const metadata = await sharp(original).metadata();
+  if (metadata.width !== 1672 || metadata.height !== height) {
+    throw new Error(`Expected the approved 1672×${height} ${name} PNG; update the hero dimensions and srcset before changing masters.`);
+  }
+  for (const width of [1280, 1672]) {
+    const output = join(directory, `${name}-${width}.webp`);
+    await sharp(original)
+      .resize({ width, withoutEnlargement: true, kernel: "lanczos3" })
+      .webp({ lossless: true, effort: 6 })
+      .toFile(output);
+    console.log(`Wrote ${output}`);
+  }
 }
