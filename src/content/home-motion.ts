@@ -181,6 +181,19 @@ export const homeAbout = {
   photo: kitchenBenchPhoto,
 };
 
+
+export const homeMeetJackson = {
+  kicker: "About",
+  heading: "Meet Jackson",
+  name: site.practitionerName,
+  role: site.tagline,
+  paragraphs: [...site.aboutParagraphs],
+  philosophy: site.differentiator,
+  languagesLabel: "Languages",
+  qualificationsLabel: "Qualifications",
+  photo: homePhotos.portrait,
+};
+
 export const homeBanner = hm.banner;
 
 export const homeReferrers = {

@@ -987,6 +987,55 @@ html:has(.hm-header) {
   border-color: #fff;
 }
 
+/* Give the desktop copy about a third of the frame, clear of both slide subjects. */
+@media (min-width: 1200px) {
+  .hm-hero {
+    align-items: center;
+  }
+
+  .hm-hero-grid {
+    width: min(52rem, 35vw);
+  }
+
+  .hm-hero-lead {
+    margin-top: 0;
+  }
+
+  .hm-hero .hm-kicker {
+    font-size: clamp(1.5rem, 0.75rem + 0.7vw, 1.9rem);
+  }
+
+  .hm-hero h1 {
+    font-size: clamp(2.7rem, 4.1vw, 6.5rem);
+  }
+
+  .hm-hero-support {
+    max-width: 44ch;
+    margin-top: clamp(1rem, 1.1vw, 1.6rem);
+    font-size: clamp(1.2rem, 0.6rem + 0.85vw, 1.75rem);
+  }
+
+  .hm-hero .hm-chips {
+    margin-top: clamp(1rem, 1.1vw, 1.6rem);
+  }
+
+  .hm-hero .hm-chips li {
+    font-size: clamp(0.95rem, 0.65rem + 0.4vw, 1.275rem);
+  }
+
+  .hm-hero-actions {
+    margin-top: clamp(1.15rem, 1.3vw, 1.8rem);
+  }
+
+  .hm-hero-actions .hm-btn {
+    font-size: clamp(1.0625rem, 0.7rem + 0.4vw, 1.3rem);
+  }
+
+  .hm-hero .hm-ahpra {
+    font-size: clamp(0.88rem, 0.6rem + 0.35vw, 1.1rem);
+  }
+}
+
 .hm-hero-slide {
   position: absolute;
   inset: 0;
