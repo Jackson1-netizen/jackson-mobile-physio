@@ -39,13 +39,13 @@ const photo = homeAbout.photo;
       </p>
     </div>
     <div class="hm-about-visual">
-      <p class="hm-photo-label" data-i18n-path="hm.aboutBlock.caption">{homeAbout.caption}</p>
       <div class="hm-about-frame">
         <HomePicture
           photo={photo}
           altPath="hm.aboutBlock.photoAlt"
           sizes="(min-width: 1024px) 520px, (min-width: 768px) 680px, calc(100vw - 2.5rem)"
         />
+        <p class="hm-photo-label" data-i18n-path="hm.aboutBlock.caption">{homeAbout.caption}</p>
         <div class="hm-about-card">
           <p class="hm-about-card-title" data-i18n-path="hm.aboutBlock.cardTitle">{homeAbout.cardTitle}</p>
           <p data-i18n-path="hm.aboutBlock.cardBody">{homeAbout.cardBody}</p>
