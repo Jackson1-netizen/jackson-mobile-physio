@@ -14,7 +14,7 @@ What the drafts try to cover, for his review:
 
 - Privacy Act 1988 (Cth) and the Australian Privacy Principles, in plain language.
 - Health information, including the Health Records Act 2001 (Vic) as a pointer, not a full restatement.
-- The website form collects only a first contact: name, phone, and optional email, suburb, language, NDIS-plan flag, and a short reason. It asks people not to send health information that way.
+- The website form collects first-contact details: name, enquiring role, email, phone, suburb, service, funding pathway, preferred contact method, and a short reason are required. Preferred language and the NDIS-plan flag are optional. It asks people not to send health information that way.
 - Home Motion Physiotherapy is the registered business name of Wai Wa Law, sole trader, ABN 75 612 731 757.
 - General AHPRA registration PHY0004088824. No expiry date.
 - The site does not claim to be an NDIS registered provider and does not guarantee funding.

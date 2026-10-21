@@ -134,7 +134,7 @@ No Formspree, EmailJS, Resend, or SMTP account is added. Netlify Forms on the fr
 ## Enquiry form
 
 - Form name `enquiry`, `method="POST"`, `action="/enquiry-received/"`, `data-netlify="true"`, honeypot `bot-field`.
-- Fields: name (100) and phone (20) required; email (254), suburb (80), language, NDIS-plan checkbox, and a short message (1000) optional. The note beside the message says not to include detailed medical or health information and links to `/privacy`. The honeypot is off-screen, not `display: none`. There is no CAPTCHA.
+- Required fields: name (100), enquiring-as, email (254), phone (20), suburb (80), service, funding, preferred-contact, and a short message (1000). Email and phone remain required regardless of preferred-contact. Preferred language and the NDIS-plan checkbox are optional. Client-side validation includes blank/whitespace checks and email/phone format checks; native required validation remains available when JavaScript is disabled. The note beside the message says not to include detailed medical or health information, and the form links to `/privacy/`. The honeypot is off-screen, not `display: none`. There is no CAPTCHA. These browser checks are not server-side validation of direct POST requests.
 - With JavaScript, the browser posts `application/x-www-form-urlencoded` to `/`. The success state is shown only when that response is OK. A local `astro preview` rejects the post, so it must show the failure state and keep the mailto link.
 - Without JavaScript, the browser posts to `/enquiry-received/`.
 - `mailto:hello@homemotionphysio.com.au` stays visible as a secondary link. It is not the form handler.

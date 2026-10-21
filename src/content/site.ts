@@ -260,7 +260,7 @@ export const site = {
       {
         heading: "What this website asks for",
         paragraphs: [
-          "The enquiry form is for a first contact only. It asks for your name, who is enquiring, a service, a funding pathway, whether you prefer a phone call or an email, and a short description. You also give the phone number or email address you choose, and you may add the other contact method, a suburb, a preferred language, and whether the enquiry relates to an NDIS plan (plan-managed or self-managed).",
+          "The enquiry form is for a first contact only. It requires your name, who is enquiring, your email address, phone number and suburb, a service, a funding pathway, whether you prefer a phone call or an email, and a short description. You may also choose a preferred language and indicate whether the enquiry relates to an NDIS plan (plan-managed or self-managed).",
           "Please do not include health information or other sensitive details in the form, in email, or in a text message. A short note is enough for us to reply. There is no online booking, payment, or clinical record on this website.",
         ],
       },

@@ -92,7 +92,6 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
         action="/enquiry-received/"
         data-netlify="true"
         netlify-honeypot="bot-field"
-        novalidate
         aria-describedby="enq-required-note"
       >
         <input type="hidden" name="form-name" value="enquiry" />
@@ -135,20 +134,29 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
           </div>
 
           <div class="cx-field">
-            <label for="enq-email"><span data-i18n-path="enquiry.email">{t.email}</span></label>
-            <input id="enq-email" name="email" type="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" maxlength="254" />
+            <label for="enq-email">
+              <span data-i18n-path="enquiry.email">{t.email}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-email" name="email" type="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" maxlength="254" required aria-required="true" />
             <p id="enq-email-error" class="cx-error" hidden></p>
           </div>
 
           <div class="cx-field">
-            <label for="enq-phone"><span data-i18n-path="enquiry.phone">{t.phone}</span></label>
-            <input id="enq-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" maxlength="20" />
+            <label for="enq-phone">
+              <span data-i18n-path="enquiry.phone">{t.phone}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" maxlength="20" required aria-required="true" />
             <p id="enq-phone-error" class="cx-error" hidden></p>
           </div>
 
           <div class="cx-field">
-            <label for="enq-suburb"><span data-i18n-path="enquiry.suburb">{t.suburb}</span></label>
-            <input id="enq-suburb" name="suburb" type="text" autocomplete="address-level2" enterkeyhint="next" list="enq-suburbs" maxlength="80" />
+            <label for="enq-suburb">
+              <span data-i18n-path="enquiry.suburb">{t.suburb}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-suburb" name="suburb" type="text" autocomplete="address-level2" enterkeyhint="next" list="enq-suburbs" maxlength="80" required aria-required="true" />
             <datalist id="enq-suburbs">
               {suburbs.map((name) => <option value={name} />)}
             </datalist>
@@ -271,6 +279,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
       role: form.querySelector("#enq-role"),
       email: form.querySelector("#enq-email"),
       phone: form.querySelector("#enq-phone"),
+      suburb: form.querySelector("#enq-suburb"),
       service: form.querySelector("#enq-service"),
       funding: form.querySelector("#enq-funding"),
       preferred: form.querySelector("#enq-preferred"),
@@ -297,29 +306,16 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
       const preferred = fields.preferred.value;
       if (!fields.name.value.trim()) errors.push({ name: "name", key: "nameRequired" });
       if (!fields.role.value) errors.push({ name: "role", key: "roleRequired" });
-      if (preferred === "Email") {
-        if (!email) errors.push({ name: "email", key: "emailRequired" });
-        else if (!emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
-        if (phone && !phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
-      } else if (preferred === "Phone") {
-        if (!phone) errors.push({ name: "phone", key: "phoneRequired" });
-        else if (!phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
-        if (email && !emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
-      } else {
-        errors.push({ name: "preferred", key: "preferredRequired" });
-        if (email && !emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
-        if (phone && !phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
-      }
+      if (!email) errors.push({ name: "email", key: "emailRequired" });
+      else if (!emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
+      if (!phone) errors.push({ name: "phone", key: "phoneRequired" });
+      else if (!phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
+      if (!fields.suburb.value.trim()) errors.push({ name: "suburb", key: "suburbRequired" });
+      if (!preferred) errors.push({ name: "preferred", key: "preferredRequired" });
       if (!fields.service.value) errors.push({ name: "service", key: "serviceRequired" });
       if (!fields.funding.value) errors.push({ name: "funding", key: "fundingRequired" });
       if (!fields.message.value.trim()) errors.push({ name: "message", key: "messageRequired" });
       return errors;
-    };
-
-    const syncConditional = () => {
-      const preferred = fields.preferred.value;
-      fields.email.setAttribute("aria-required", preferred === "Email" ? "true" : "false");
-      fields.phone.setAttribute("aria-required", preferred === "Phone" ? "true" : "false");
     };
 
     const showField = (name, errorKey) => {
@@ -368,7 +364,6 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
     };
 
     const refresh = () => {
-      syncConditional();
       if (!attempted) return;
       render(collectErrors());
     };
@@ -377,7 +372,6 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
       input.addEventListener("input", refresh);
       input.addEventListener("change", refresh);
     });
-    syncConditional();
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -413,6 +407,9 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
         if (label) label.textContent = messagesNow.submitLabel;
       }
     });
+    // Use the accessible error summary once its handler is installed; without JS,
+    // the HTML required attributes still enable the browser's native validation.
+    form.noValidate = true;
   }
 </script>
 
