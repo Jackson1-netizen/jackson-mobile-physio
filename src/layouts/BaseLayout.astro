@@ -6,7 +6,7 @@ import { getLocalBusinessJsonLd, getFaqJsonLd } from "../lib/structured-data";
 import DraftBanner from "../components/DraftBanner.astro";
 import HomeHeader from "../components/home/HomeHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import StickyContactBar from "../components/StickyContactBar.astro";
+import FloatingContact from "../components/FloatingContact.astro";
 import I18nScript from "../components/I18nScript.astro";
 
 interface Props {
@@ -39,6 +39,9 @@ const {
 
 const showSiteChrome = !hideChrome && !v1Home;
 const showDraftBanner = site.draft && (showSiteChrome || v1Home);
+// The Contact and receipt pages already give visitors their next step.
+const pagePath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const showFloatingContact = (showSiteChrome || v1Home) && !["/enquiry", "/enquiry-received"].includes(pagePath);
 function toCanonical(path: string): string {
   const slashed = path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`;
   return new URL(slashed, site.websiteUrl).href;
@@ -85,7 +88,7 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
     <script type="application/ld+json" set:html={jsonLd} />
     {faqLd && <script type="application/ld+json" set:html={faqLd} />}
   </head>
-  <body class={showSiteChrome ? "pb-16 sm:pb-0" : ""}>
+  <body>
     <a class="skip-link" href="#main-content" data-i18n-path="hm.skipLink">Skip to main content</a>
     {showDraftBanner && <DraftBanner />}
     {showSiteChrome && <HomeHeader />}
@@ -99,7 +102,7 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
       )
     }
     {showSiteChrome && <SiteFooter />}
-    {showSiteChrome && <StickyContactBar />}
+    {showFloatingContact && <FloatingContact />}
     {translatable && <I18nScript include={i18nInclude} />}
   </body>
 </html>

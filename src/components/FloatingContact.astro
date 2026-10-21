@@ -1,0 +1,157 @@
+---
+import { messages } from "../content/i18n";
+
+const copy = messages.en.cta;
+---
+
+<aside class="connect-card no-print" data-connect-card>
+  <a class="connect-link" href="/enquiry/#enquiry-form">
+    <span class="connect-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7" />
+        <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+    <span class="connect-copy">
+      <span class="connect-title" data-i18n-path="cta.connect">{copy.connect}</span>
+      <span class="connect-detail" data-i18n-path="cta.openEnquiry">{copy.openEnquiry}</span>
+    </span>
+    <span class="connect-arrow" aria-hidden="true">→</span>
+  </a>
+  <button class="connect-close" type="button" hidden
+    aria-label={copy.dismissConnect} data-i18n-attr="aria-label:cta.dismissConnect">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </svg>
+  </button>
+</aside>
+
+<script>
+  const card = document.querySelector<HTMLElement>("[data-connect-card]");
+  if (card) {
+    const close = card.querySelector<HTMLButtonElement>(".connect-close");
+    const blockers = [...document.querySelectorAll<HTMLElement>(".cx, footer")];
+    const menu = document.querySelector<HTMLDetailsElement>("details.hm-menu");
+    let dismissed = false;
+    const visible = new Set<Element>();
+    const intersectsViewport = (element: Element) => {
+      const rect = element.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < window.innerHeight;
+    };
+    // Start with the current scroll position, including a restored Contact anchor.
+    blockers.filter(intersectsViewport).forEach((element) => visible.add(element));
+    const update = () => {
+      // A scroll must not remove the link from under a keyboard user's focus.
+      const focused = card.contains(document.activeElement);
+      card.hidden = dismissed || (!focused && (visible.size > 0 || Boolean(menu?.open)));
+    };
+    update();
+    if (typeof IntersectionObserver === "function") {
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        }
+        update();
+      });
+      blockers.forEach((element) => observer.observe(element));
+    } else {
+      const check = () => {
+        visible.clear();
+        blockers.filter(intersectsViewport).forEach((element) => visible.add(element));
+        update();
+      };
+      window.addEventListener("scroll", check, { passive: true });
+      window.addEventListener("resize", check);
+    }
+    menu?.addEventListener("toggle", update);
+    card.addEventListener("focusout", () => requestAnimationFrame(update));
+    close?.addEventListener("click", () => {
+      const hadFocus = card.contains(document.activeElement);
+      dismissed = true;
+      // Dismissal lasts for this page only and never writes tracking/storage data.
+      if (hadFocus) document.querySelector<HTMLElement>("#main-content")?.focus({ preventScroll: true });
+      update();
+    });
+    if (close) close.hidden = false;
+  }
+</script>
+
+<style>
+  .connect-card {
+    position: fixed;
+    z-index: 40;
+    right: max(1.5rem, env(safe-area-inset-right, 0px));
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    width: min(19rem, calc(100vw - 2rem));
+    border: 1px solid #dce4da;
+    border-radius: 1rem;
+    background: #fff;
+    color: #16352e;
+    box-shadow: 0 6px 24px rgb(22 53 46 / 0.13);
+    font-family: "Source Sans 3", "Source Sans 3 Fallback", system-ui, sans-serif;
+  }
+
+  .connect-card[hidden], .connect-close[hidden] { display: none; }
+
+  .connect-link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 5.5rem;
+    padding: 1.2rem 0.85rem 1rem;
+    border-radius: inherit;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .connect-icon, .connect-arrow {
+    display: grid;
+    place-items: center;
+    flex: 0 0 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+
+  .connect-icon { background: #e5ece1; }
+  .connect-copy { display: grid; gap: 0.15rem; min-width: 0; flex: 1; }
+  .connect-title { font-size: 1.125rem; font-weight: 700; line-height: 1.2; }
+  .connect-detail { color: #52685f; font-size: 0.875rem; line-height: 1.3; }
+  .connect-arrow { background: #c4461a; color: #fff; font-size: 1.5rem; line-height: 1; }
+  .connect-link:hover { color: #16352e; background: #fafcf9; }
+  .connect-link:hover .connect-arrow { background: #a9380b; }
+  .connect-link:focus-visible, .connect-close:focus-visible {
+    outline: 3px solid #b8410f;
+    outline-offset: 3px;
+  }
+
+  .connect-close {
+    position: absolute;
+    top: 0.125rem;
+    right: 0.25rem;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #52685f;
+    cursor: pointer;
+  }
+
+  .connect-close:hover { color: #16352e; background: #e5ece1; }
+
+  @media (max-width: 639px) {
+    .connect-card {
+      right: max(1rem, env(safe-area-inset-right, 0px));
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      width: min(18rem, calc(100vw - 2rem));
+    }
+  }
+
+  @media (forced-colors: active) {
+    .connect-card, .connect-arrow { border: 1px solid ButtonText; }
+  }
+</style>

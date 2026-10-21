@@ -32,6 +32,9 @@ const en = {
   cta: {
     call: "Call",
     email: "Email",
+    connect: "Connect with us",
+    openEnquiry: "Open enquiry form",
+    dismissConnect: "Dismiss contact card",
     referParticipant: "Refer a participant",
     sendEnquiry: "Send enquiry",
     discussNeeds: "Discuss your needs",
@@ -551,6 +554,9 @@ const zhHant = {
   cta: {
     call: "致電",
     email: "電郵",
+    connect: "聯絡我們",
+    openEnquiry: "開啟查詢表格",
+    dismissConnect: "關閉聯絡卡片",
     referParticipant: "轉介參加者",
     sendEnquiry: "發送查詢",
     discussNeeds: "討論您的需要",
@@ -1034,6 +1040,9 @@ const zhHans = {
   cta: {
     call: "致电",
     email: "邮件",
+    connect: "联系我们",
+    openEnquiry: "打开咨询表格",
+    dismissConnect: "关闭联系卡片",
     referParticipant: "转介参加者",
     sendEnquiry: "发送咨询",
     discussNeeds: "讨论您的需要",
