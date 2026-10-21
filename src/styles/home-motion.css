@@ -1397,8 +1397,9 @@ a.hm-card:hover {
   color: var(--hm-forest);
 }
 
+.hm-meet,
 .hm-ndis {
-  background: #fff8ee;
+  background: #e6eee4;
 }
 
 .hm-ndis-grid {
