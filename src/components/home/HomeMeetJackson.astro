@@ -47,7 +47,7 @@ const shownQualifications = publicQualifications().map((item) => ({
               <>
                 {visibleIndex > 0 && "; "}
                 <span data-i18n-path={`hm.about.qualificationLabels.${index}`}>{item.label}</span>
-                {" 鈥?"}
+                {": "}
                 <span data-i18n-path={`hm.about.qualificationValues.${index}`}>{item.value}</span>
               </>
             ))}
