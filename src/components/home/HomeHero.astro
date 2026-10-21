@@ -7,20 +7,23 @@ import LanguageSwitcher from "../LanguageSwitcher.astro";
 const registrationLine = getRegistrationDisplayLine();
 const alt =
   "Illustration of a physiotherapist helping an older woman with a walking frame at home";
-const landscapeWidths = [1280, 1600, 1920, 2560, 3200, 3840] as const;
+const desktopWidths = [1280, 1672] as const;
 const portraitWidths = [800, 1200, 1600, 2400] as const;
 const srcset = (name: string, widths: readonly number[], ext: string) =>
   widths.map((w) => `/photos/hero/${name}-${w}.${ext} ${w}w`).join(", ");
-const landscapeAvif = srcset("landscape", landscapeWidths, "avif");
+const desktopWebp = srcset("desktop", desktopWidths, "webp");
+// Include cover-cropping and the 3.5% animation overscan in resource selection.
+// The minimum covers the desktop hero's 34rem minimum height on narrow laptops.
+const desktopSizes = "max(108vw, 1008px)";
 const portraitAvif = srcset("portrait", portraitWidths, "avif");
 ---
 
 <link
   rel="preload"
   as="image"
-  type="image/avif"
-  imagesrcset={landscapeAvif}
-  imagesizes="100vw"
+  type="image/webp"
+  imagesrcset={desktopWebp}
+  imagesizes={desktopSizes}
   media="(min-width: 769px)"
   fetchpriority="high"
 />
@@ -39,21 +42,14 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
     <picture>
       <source
         media="(min-width: 769px)"
-        type="image/avif"
-        srcset={landscapeAvif}
-        sizes="100vw"
-      />
-      <source
-        media="(min-width: 769px)"
         type="image/webp"
-        srcset={srcset("landscape", landscapeWidths, "webp")}
-        sizes="100vw"
+        srcset={desktopWebp}
+        sizes={desktopSizes}
       />
       <source
         media="(min-width: 769px)"
-        type="image/jpeg"
-        srcset={srcset("landscape", landscapeWidths, "jpg")}
-        sizes="100vw"
+        type="image/png"
+        srcset="/photos/hero/desktop-original.png"
       />
       <source
         media="(max-width: 768px)"
@@ -75,11 +71,11 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
       />
       <img
         class="hm-hero-photo"
-        src="/photos/hero/landscape-3840.jpg"
+        src="/photos/hero/desktop-original.png"
         alt={alt}
         data-i18n-attr="alt:hm.hero.photoAlt"
-        width="3840"
-        height="2160"
+        width="1672"
+        height="940"
         fetchpriority="high"
       />
     </picture>

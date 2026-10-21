@@ -8,6 +8,9 @@ import sharp from "sharp";
 import { mkdirSync } from "node:fs";
 import { join, parse } from "node:path";
 
+// The current desktop hero has its own lossless PNG-based pipeline.
+await import("./optimize-hero.mjs");
+
 const root = join(import.meta.dirname, "..", "public");
 
 const photos = [
