@@ -33,7 +33,8 @@ const copy = messages.en.cta;
   const card = document.querySelector<HTMLElement>("[data-connect-card]");
   if (card) {
     const close = card.querySelector<HTMLButtonElement>(".connect-close");
-    const blockers = [...document.querySelectorAll<HTMLElement>(".cx, footer")];
+    const blockers = [...document.querySelectorAll<HTMLElement>(".cx, footer, .hm-area-map")];
+    const compactViewport = window.matchMedia("(max-width: 1023px)");
     const menu = document.querySelector<HTMLDetailsElement>("details.hm-menu");
     const hero = document.querySelector<HTMLElement>("[data-hm-hero], .ref-a-hero");
     let dismissed = false;
@@ -60,7 +61,10 @@ const copy = messages.en.cta;
       if (focused && heroVisible) {
         hero?.querySelector<HTMLElement>(".hm-hero-actions a, .ref-a-actions a")?.focus({ preventScroll: true });
       }
-      card.hidden = dismissed || Boolean(menu?.open) || heroVisible || (!focused && visible.size > 0);
+      // Compact layouts reserve the map for its own controls and attribution.
+      // This observes the existing frame; it does not change the Maps component.
+      const blocked = [...visible].some((element) => !element.matches(".hm-area-map") || compactViewport.matches);
+      card.hidden = dismissed || Boolean(menu?.open) || heroVisible || (!focused && blocked);
     };
     update();
     if (typeof IntersectionObserver === "function") {
@@ -174,6 +178,17 @@ const copy = messages.en.cta;
       bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
       width: min(18rem, calc(100vw - 2rem));
     }
+  }
+
+  @media screen and (max-width: 767px) {
+    .connect-card { width: min(17rem, calc(100vw - 2 * var(--hm-page-gutter))); }
+    .connect-link { min-height: 3.5rem; gap: 0.6rem; padding: 0.5rem 3.25rem 0.5rem 0.75rem; }
+    .connect-icon { flex-basis: 2rem; height: 2rem; }
+    .connect-icon svg { width: 20px; height: 20px; }
+    .connect-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .connect-detail { color: #16352e; font-size: 0.9375rem; font-weight: 650; }
+    .connect-arrow { display: none; }
+    .connect-close { top: 50%; right: 0.25rem; width: 44px; height: 44px; transform: translateY(-50%); }
   }
 
   @media (forced-colors: active) {

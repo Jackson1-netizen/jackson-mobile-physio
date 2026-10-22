@@ -1,0 +1,37 @@
+{
+  "npmTest": {
+    "pass": 24,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "durationMs": 410137.7529,
+    "location": "Byte-identical isolated validation copy; physical dependencies avoid Windows worktree-junction EPERM"
+  },
+  "check": {
+    "files": 75,
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0
+  },
+  "build": {
+    "pages": 16,
+    "seconds": 3.31,
+    "draftNoindex": "PASS",
+    "netlifyForm": "PASS"
+  },
+  "desktopGeometry": "Identical header, headings, section heights and non-map image geometry at 1440 and 1024",
+  "sourceHashesMatchValidationCopy": true,
+  "originalIntegrationSha": "2d7e85f7c38316eeb8372bb45b7799c5048fe2f9",
+  "responsiveWidths": [
+    1440,
+    1024,
+    768,
+    430,
+    390,
+    360,
+    320
+  ],
+  "horizontalOverflowAtAllWidths": 0,
+  "visualPasses": 2,
+  "lazyImageDecodeAwaited": true
+}

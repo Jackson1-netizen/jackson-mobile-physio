@@ -439,10 +439,11 @@ const photoFrame = "M34 38H560C700 38 720 0 850 0C943 0 1000 38 1000 147V1000C77
   }
 
   @media (max-width: 899px) {
+    .hm-refpanel { --ref-gutter: var(--hm-page-gutter); }
     .hm-ref-top-arc { display: none; }
-    .hm-refpanel .hm-refer-grid { grid-template-columns: 1fr; max-width: 49rem; padding-block: 2.5rem; gap: 1.5rem; }
+    .hm-refpanel .hm-refer-grid { grid-template-columns: 1fr; max-width: 49rem; padding-block: var(--hm-section-space); gap: var(--hm-content-gap); }
     .hm-ref-kicker { font-size: .65rem; }
-    .hm-refpanel h2 { margin-top: 1rem; font-size: clamp(2.6rem, 7vw, 3.8rem); }
+    .hm-refpanel h2 { margin-top: 1rem; font-size: var(--hm-section-title); line-height: 1.12; }
     .hm-ref-lead { margin-top: 1rem; font-size: 1rem; line-height: 1.45; }
     .hm-ref-steps { margin-top: 1.75rem; }
     .hm-ref-step-icon { width: 3.2rem; height: 3.2rem; }
@@ -473,15 +474,16 @@ const photoFrame = "M34 38H560C700 38 720 0 850 0C943 0 1000 38 1000 147V1000C77
     .hm-ref-step-icon { grid-column: 1; grid-row: 1 / span 2; margin: 0; }
     .hm-ref-steps strong, .hm-ref-steps li > span:last-child { grid-column: 2; max-width: none; }
     .hm-ref-cards { grid-template-columns: 1fr; gap: .75rem; margin-top: 1.5rem; }
-    .hm-ref-card { min-height: 0; padding: 1.25rem; gap: .7rem; }
+    .hm-ref-card { min-height: 0; padding: var(--hm-card-padding); gap: .7rem; border-radius: var(--hm-image-radius); }
     .hm-ref-card-title, .hm-ref-card-note, .hm-ref-email { font-size: 1rem; }
     .hm-ref-card-note { margin-top: 0 !important; }
     .hm-ref-btn { width: fit-content; min-height: 2.75rem; margin-top: .3rem; padding-inline: 1.25rem; font-size: .94rem; }
-    .hm-ref-visual { min-height: 35rem; }
-    .hm-ref-photo { top: 0; bottom: auto; left: 0; width: 100%; height: 60%; object-fit: cover; object-position: 40% center; mask-image: none; }
-    .hm-ref-shade { background: linear-gradient(0deg, #142e21 0%, #142e21 38%, #142e2100 67%); }
-    .hm-ref-quote { justify-content: flex-end; padding: 1.5rem 1.4rem 6.5rem; gap: .6rem; }
-    .hm-ref-quote-title { max-width: 12em; font-size: 1.85rem; }
+    .hm-ref-visual { min-height: 0; }
+    .hm-ref-shape { position: relative; clip-path: none; overflow: hidden; border: 1px solid #849079; border-radius: var(--hm-image-radius); }
+    .hm-ref-photo { position: static; display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; mask-image: none; }
+    .hm-ref-shade, .hm-ref-outline { display: none; }
+    .hm-ref-quote { position: relative; inset: auto; padding: var(--hm-card-padding); gap: .75rem; }
+    .hm-ref-quote-title { max-width: 12em; font-size: 1.65rem; }
     .hm-ref-quote-body { max-width: 28ch; font-size: .94rem; }
     .hm-ref-tag { position: relative; left: auto; bottom: auto; max-width: none; margin: .3rem 0 0 2.4rem; font-size: .5rem; }
     .hm-ref-tag::before { left: -2.8em; width: 2em; }

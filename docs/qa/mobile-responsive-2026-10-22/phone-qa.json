@@ -1,0 +1,359 @@
+{
+  "layouts": [
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/areas/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/enquiry/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/referral/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/privacy/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/disclaimer/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/areas/box-hill/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "route": "/404.html",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/areas/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/enquiry/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/referral/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/privacy/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/disclaimer/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/areas/box-hill/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hans",
+      "route": "/404.html",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/areas/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/enquiry/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/referral/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/privacy/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/disclaimer/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/areas/box-hill/",
+      "result": "PASS"
+    },
+    {
+      "width": 390,
+      "locale": "zh-Hant",
+      "route": "/404.html",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/areas/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/enquiry/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/referral/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/privacy/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/disclaimer/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/areas/box-hill/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "en",
+      "route": "/404.html",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/areas/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/enquiry/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/referral/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/privacy/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/disclaimer/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/areas/box-hill/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hans",
+      "route": "/404.html",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/areas/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/enquiry/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/referral/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/privacy/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/disclaimer/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/areas/box-hill/",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "locale": "zh-Hant",
+      "route": "/404.html",
+      "result": "PASS"
+    }
+  ],
+  "maps": [
+    {
+      "width": 390,
+      "state": "ready",
+      "pins": 8,
+      "nearbyLinks": 14,
+      "floatingContactHidden": true,
+      "selectionReset": "PASS"
+    },
+    {
+      "width": 320,
+      "state": "ready",
+      "pins": 8,
+      "nearbyLinks": 14,
+      "floatingContactHidden": true,
+      "selectionReset": "PASS"
+    }
+  ],
+  "rotation": [
+    {
+      "viewport": "844x390",
+      "overflow": 0,
+      "menuEscape": "PASS"
+    },
+    {
+      "viewport": "390x844",
+      "overflow": 0,
+      "menuEscape": "PASS"
+    },
+    {
+      "viewport": "844x390",
+      "overflow": 0,
+      "menuEscape": "PASS"
+    },
+    {
+      "viewport": "320x844",
+      "overflow": 0,
+      "menuEscape": "PASS"
+    }
+  ],
+  "images": [
+    {
+      "width": 390,
+      "slide": 0,
+      "rendered": true,
+      "heroNotObstructed": true
+    },
+    {
+      "width": 390,
+      "slide": 1,
+      "rendered": true,
+      "heroNotObstructed": true
+    },
+    {
+      "width": 320,
+      "slide": 0,
+      "rendered": true,
+      "heroNotObstructed": true
+    },
+    {
+      "width": 320,
+      "slide": 1,
+      "rendered": true,
+      "heroNotObstructed": true
+    }
+  ],
+  "status": "PASS"
+}

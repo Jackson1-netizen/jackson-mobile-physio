@@ -1,0 +1,34 @@
+{
+  "pageHeights": {
+    "1440": {
+      "before": 9436,
+      "after": 9436
+    },
+    "1024": {
+      "before": 9776,
+      "after": 9776
+    },
+    "768": {
+      "before": 15450,
+      "after": 14126
+    },
+    "430": {
+      "before": 15851,
+      "after": 15577
+    },
+    "390": {
+      "before": 16207,
+      "after": 15754
+    },
+    "360": {
+      "before": 16563,
+      "after": 15985
+    },
+    "320": {
+      "before": 17027,
+      "after": 16401
+    }
+  },
+  "desktop": "PASS",
+  "phone": "PASS"
+}

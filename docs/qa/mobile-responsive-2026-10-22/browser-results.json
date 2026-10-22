@@ -1,0 +1,165 @@
+{
+  "menu": [
+    {
+      "route": "/",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/areas/",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/enquiry/",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/privacy/",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/referral/",
+      "viewport": "1440x900",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/",
+      "viewport": "390x844",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/areas/",
+      "viewport": "390x844",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/enquiry/",
+      "viewport": "390x844",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/privacy/",
+      "viewport": "390x844",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/referral/",
+      "viewport": "390x844",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/",
+      "viewport": "320x740",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/areas/",
+      "viewport": "320x740",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/enquiry/",
+      "viewport": "320x740",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/privacy/",
+      "viewport": "320x740",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    },
+    {
+      "route": "/referral/",
+      "viewport": "320x740",
+      "result": "PASS",
+      "checks": "aria open/close, Escape focus, Enter/Space, programmatic state, duplicate-init, navigation"
+    }
+  ],
+  "floating": [
+    {
+      "viewport": "1440x900",
+      "result": "PASS",
+      "checks": "hero hit tests/clicks, CTA hit tests, after-scroll card, hysteresis, focus, menu/form/footer avoidance, dismissal, equal document height, referral hero"
+    },
+    {
+      "viewport": "390x844",
+      "result": "PASS",
+      "checks": "hero hit tests/clicks, CTA hit tests, after-scroll card, hysteresis, focus, menu/form/footer avoidance, dismissal, equal document height, referral hero"
+    },
+    {
+      "viewport": "320x740",
+      "result": "PASS",
+      "checks": "hero hit tests/clicks, CTA hit tests, after-scroll card, hysteresis, focus, menu/form/footer avoidance, dismissal, equal document height, referral hero"
+    }
+  ],
+  "regression": {
+    "carousel": "PASS: actual 10-second automatic advance, manual selection and pause/play",
+    "language": "PASS: rendered English/Simplified Chinese and html lang",
+    "FAQ": "PASS",
+    "realMap/": {
+      "result": "PASS",
+      "state": "ready",
+      "pins": [
+        "Blackburn",
+        "Box Hill",
+        "Burwood",
+        "Doncaster",
+        "Glen Waverley",
+        "Mitcham",
+        "Nunawading",
+        "Ringwood"
+      ],
+      "nearbyEnquiryLinks": 14,
+      "googleAttribution": true,
+      "selectionReset": true
+    },
+    "realMap/areas/": {
+      "result": "PASS",
+      "state": "ready",
+      "pins": [
+        "Blackburn",
+        "Box Hill",
+        "Burwood",
+        "Doncaster",
+        "Glen Waverley",
+        "Mitcham",
+        "Nunawading",
+        "Ringwood"
+      ],
+      "nearbyEnquiryLinks": 14,
+      "googleAttribution": true,
+      "selectionReset": true
+    },
+    "nearbyPrefill": "PASS",
+    "form": "PASS: required validation, prefill, honeypot/form-name/NDIS serialization, 503 error + mail fallback, 200 receipt navigation; all POSTs intercepted locally",
+    "legalAnd404": "PASS: adopted dates/content; custom 404 noindex and no canonical (host status requires Netlify verification)",
+    "referral": "PASS: both print handlers once; one A4 PDF page; hero CTA hit tests",
+    "localCspSimulation": "PASS: real Google map ready at 390px with generated CSP injected; zero securitypolicyviolation events; hosted headers still unverified",
+    "reducedMotion": "PASS",
+    "noJavaScript": "PASS: ordinary-flow contact link and native required constraints",
+    "internalLinks": {
+      "checked": 580,
+      "brokenPaths": [],
+      "missingFragmentTargets": []
+    }
+  },
+  "pageErrors": [],
+  "mapConsoleErrors": [],
+  "status": "PASS"
+}

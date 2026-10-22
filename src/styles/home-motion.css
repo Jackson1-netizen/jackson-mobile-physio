@@ -72,7 +72,7 @@
 }
 
 .hm-wrap {
-  width: min(72rem, calc(100% - 2.5rem));
+  width: min(72rem, calc(100% - 2 * var(--hm-page-gutter, 1.25rem)));
   margin-inline: auto;
 }
 
@@ -1212,7 +1212,7 @@ html:has(.hm-header) {
 
 .hm-section h2 {
   margin: 0.4rem 0 0;
-  font-size: clamp(1.85rem, 4vw, 2.7rem);
+  font-size: var(--hm-section-title, clamp(1.85rem, 4vw, 2.7rem));
   max-width: 20ch;
 }
 
@@ -1956,6 +1956,9 @@ a.hm-card:hover {
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
   }
+  /* DOM introduces Jackson before his portrait; desktop keeps its photo-left grid. */
+  .hm-meet-copy { grid-column: 2; grid-row: 1; }
+  .hm-meet .hm-portrait { grid-column: 1; grid-row: 1; }
   .hm-service-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2044,7 +2047,8 @@ a.hm-card:hover {
 
 @media (max-width: 768px) {
   .hm-hero {
-    display: block;
+    display: flex;
+    flex-direction: column;
     align-items: start;
     min-height: 0;
     padding: 0;
@@ -2055,19 +2059,12 @@ a.hm-card:hover {
     position: relative;
     inset: auto;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    order: 1;
+    aspect-ratio: 4 / 3;
   }
 
   .hm-hero-scrim {
-    inset: 0 0 auto 0;
-    height: 32%;
-    background: linear-gradient(
-      to bottom,
-      rgb(8 52 50 / 0.94) 0%,
-      rgb(10 72 68 / 0.78) 48%,
-      rgb(14 90 84 / 0.2) 78%,
-      rgb(12 64 60 / 0) 100%
-    );
+    display: none;
   }
 
   .hm-hero-caption {
@@ -2080,35 +2077,49 @@ a.hm-card:hover {
   }
 
   .hm-hero-lead {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+    order: 0;
     z-index: 2;
-    width: auto;
+    width: 100%;
     max-width: none;
-    margin: 0.45rem 1rem 0;
+    margin: 0;
+    padding: 1.5rem var(--hm-page-gutter) 1.25rem;
+    background: #0f3c38;
   }
 
   .hm-hero-panel {
     position: relative;
     z-index: 2;
-    width: auto;
+    order: 2;
+    width: 100%;
     max-width: none;
     margin: 0;
-    padding: 0.95rem 1rem 1.4rem;
+    padding: 1.25rem var(--hm-page-gutter) 1.75rem;
     background: #0f3c38;
     color: var(--hm-cream);
+    display: flex;
+    flex-direction: column;
   }
+
+  .hm-hero-panel .hm-hero-actions { order: 1; }
+  .hm-hero-panel .hm-chips { order: 2; }
+  .hm-hero-panel .hm-ahpra { order: 3; }
+  .hm-hero-panel .hm-hero-lang { order: 4; }
 
   .hm-hero-panel :is(.hm-hero-support, .hm-chips, .hm-ahpra) {
     text-shadow: none;
   }
 
   .hm-hero h1 {
-    font-size: clamp(1.42rem, 5.5vw, 2.35rem);
-    line-height: 1.02;
+    max-width: 24ch;
+    font-size: var(--hm-page-title);
+    line-height: 1.12;
+    text-wrap: balance;
   }
+
+  .hm-hero h1 br { display: none; }
+  .hm-hero h1 span { display: inline; }
+  .hm-hero h1 span:not(:last-child)::after { content: " "; }
 
   .hm-hero .hm-kicker {
     font-size: 0.78rem;
@@ -2118,8 +2129,8 @@ a.hm-card:hover {
   .hm-hero-support {
     margin-top: 0.45rem;
     max-width: 38rem;
-    font-size: 0.98rem;
-    line-height: 1.35;
+    font-size: 1.0625rem;
+    line-height: 1.5;
   }
 
   .hm-hero .hm-chips {
@@ -2140,14 +2151,12 @@ a.hm-card:hover {
   }
 
   .hm-hero-photo {
-    object-position: 50% 50%;
+    object-position: 50% 60%;
     transform-origin: 50% 50%;
   }
-  /* Reserve quiet headline space: the landscape scene has no portrait headroom. */
-  .hm-hero-slide:has(.hm-hero-step-photo) { background: #0f3c38; }
   .hm-hero-step-photo {
-    top: 30%;
-    height: 70%;
+    top: 0;
+    height: 100%;
     object-position: 75% 50%;
     transform-origin: 70% 20%;
   }
@@ -2155,6 +2164,7 @@ a.hm-card:hover {
 
 @media (max-width: 767px) {
   .hm-header .lang-btn,
+  .hm-header .lang-btn + .lang-btn,
   .hm-menu summary {
     min-height: 2.75rem;
     min-width: 2.75rem;
@@ -2180,7 +2190,7 @@ a.hm-card:hover {
     margin-top: 0.7rem;
   }
   .hm-hero-actions .hm-btn {
-    min-height: 2.9rem;
+    min-height: var(--hm-touch-height);
     padding: 0.6rem 1.15rem;
   }
   .hm-hero h1 span {
@@ -2195,6 +2205,7 @@ a.hm-card:hover {
   }
 }
 
+
 .hm-about {
   background: var(--hm-warm-white);
 }
@@ -2205,7 +2216,7 @@ a.hm-card:hover {
 
 .hm-about-copy h2 {
   margin: 0.35rem 0 0;
-  font-size: clamp(2rem, 1.2rem + 2vw, 3.15rem);
+  font-size: var(--hm-section-title, clamp(2rem, 1.2rem + 2vw, 3.15rem));
   font-weight: 650;
   letter-spacing: -0.03em;
   line-height: 1.08;
@@ -2590,4 +2601,52 @@ a.hm-card:hover {
   .enq-hero-media {
     grid-template-columns: 1fr 0.72fr;
   }
+}
+
+/* Shared phone/tablet rhythm. These values do not affect desktop or print. */
+@media screen and (max-width: 1023px) {
+  .hm {
+    --hm-section-y: var(--hm-section-space);
+    --hm-card-pad: var(--hm-card-padding);
+    --hm-stack: var(--hm-content-gap);
+  }
+  .hm-section h2, .hm-about-copy h2 { line-height: 1.12; text-wrap: balance; }
+  .hm-service-grid, .hm-why-grid { gap: var(--hm-card-gap); }
+  .hm-portrait {
+    position: relative;
+    width: 100%;
+    max-width: 36rem;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    margin-inline: auto;
+    border-radius: var(--hm-image-radius);
+  }
+  .hm-portrait img { position: absolute; inset: 0; min-height: 0; }
+  .hm-about-frame, .hm-ndis-photo { border-radius: var(--hm-image-radius); }
+  .hm-about-frame { aspect-ratio: auto; overflow: visible; background: transparent; }
+  .hm-about-frame img { height: auto; aspect-ratio: 4 / 3; border-radius: var(--hm-image-radius); }
+  .hm-about-frame .hm-photo-label { top: 0.625rem; bottom: auto; }
+  .hm-about-card { position: static; margin-top: var(--hm-card-gap); padding: var(--hm-card-padding); }
+  .hm-about-card .hm-btn { min-height: var(--hm-touch-height); }
+}
+
+@media screen and (min-width: 600px) and (max-width: 768px) {
+  .hm-hero-media { aspect-ratio: 3 / 2; }
+  .hm-hero-photo { object-position: 65% center; }
+}
+
+@media screen and (max-width: 599px) {
+  .hm-supporting { max-width: 28ch; font-size: 1.25rem; line-height: 1.3; }
+  .hm-hero-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .hm-hero-actions .hm-btn { width: 100%; justify-content: center; }
+  .hm-card.hm-service-card {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    border-radius: var(--hm-image-radius);
+  }
+  .hm-service-card > div { display: contents; }
+  .hm-service-card .hm-service-icon { width: 2.5rem; height: 2.5rem; }
+  .hm-service-card .hm-service-icon svg { width: 24px; height: 24px; }
+  .hm-card.hm-service-card h3 { grid-column: 2; align-self: center; margin: 0; }
+  .hm-card.hm-service-card p { grid-column: 1 / -1; }
 }

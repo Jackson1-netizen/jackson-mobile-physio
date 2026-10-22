@@ -29,7 +29,7 @@ const slideCopy = Object.fromEntries(Object.entries(messages).map(([locale, bund
   type="image/webp"
   imagesrcset={desktopWebp}
   imagesizes={desktopSizes}
-  media="(min-width: 769px)"
+  media="(min-width: 600px)"
   fetchpriority="high"
 />
 <link
@@ -38,7 +38,7 @@ const slideCopy = Object.fromEntries(Object.entries(messages).map(([locale, bund
   type="image/avif"
   imagesrcset={portraitAvif}
   imagesizes="100vw"
-  media="(max-width: 768px)"
+  media="(max-width: 599px)"
   fetchpriority="high"
 />
 
@@ -47,30 +47,30 @@ const slideCopy = Object.fromEntries(Object.entries(messages).map(([locale, bund
     <div class="hm-hero-slide is-active" data-hm-hero-slide aria-hidden="false">
     <picture>
       <source
-        media="(min-width: 769px)"
+        media="(min-width: 600px)"
         type="image/webp"
         srcset={desktopWebp}
         sizes={desktopSizes}
       />
       <source
-        media="(min-width: 769px)"
+        media="(min-width: 600px)"
         type="image/png"
         srcset="/photos/hero/desktop-original.png"
       />
       <source
-        media="(max-width: 768px)"
+        media="(max-width: 599px)"
         type="image/avif"
         srcset={portraitAvif}
         sizes="100vw"
       />
       <source
-        media="(max-width: 768px)"
+        media="(max-width: 599px)"
         type="image/webp"
         srcset={srcset("portrait", portraitWidths, "webp")}
         sizes="100vw"
       />
       <source
-        media="(max-width: 768px)"
+        media="(max-width: 599px)"
         type="image/jpeg"
         srcset={srcset("portrait", portraitWidths, "jpg")}
         sizes="100vw"

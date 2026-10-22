@@ -1,6 +1,6 @@
 .hm-area-section {
   background: var(--hm-cream);
-  padding: clamp(3rem, 4.6vw, 5.25rem) 0;
+  padding: var(--hm-section-space, clamp(3rem, 4.6vw, 5.25rem)) 0;
 }
 
 .hm-area-layout {
@@ -120,22 +120,24 @@
 }
 
 @media (max-width: 1099px) {
-  .hm-area-layout { width: calc(100% - 3rem); grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .hm-area-layout { width: calc(100% - 2 * var(--hm-page-gutter, 1.5rem)); grid-template-columns: minmax(0, 1fr); gap: 2rem; }
   .hm-area-copy { padding-top: 0; max-width: 48rem; }
-  .hm .hm-area-copy :is(h1, h2) { font-size: 3.7rem; }
+  .hm .hm-area-copy :is(h1, h2) { font-size: var(--hm-section-title, 3.7rem); }
   .hm-area-list { max-width: 43rem; }
   .hm-area-map { aspect-ratio: 1.6; }
 }
 
 @media (max-width: 599px) {
-  .hm-area-layout { width: calc(100% - 2.5rem); gap: 1.5rem; }
-  .hm .hm-area-copy :is(h1, h2) { font-size: clamp(2.7rem, 11vw, 3.5rem); }
+  .hm-area-layout { width: calc(100% - 2 * var(--hm-page-gutter)); gap: var(--hm-content-gap); }
+  .hm .hm-area-copy h2 { font-size: var(--hm-section-title); }
+  .hm .hm-area-copy h1 { font-size: var(--hm-page-title); }
   .hm-area-lead { margin-top: 1rem; }
   .hm-area-intro { font-size: 1rem; }
   .hm-area-instruction { margin-top: 1.25rem; font-size: 0.94rem; }
   .hm-area-list { gap: 0.1rem 0.4rem; }
   .hm-area-choice { gap: 0.45rem; min-height: 3.6rem; padding-inline: 0.4rem; font-size: 0.92rem; }
   .hm-area-choice-icon { width: 1.9rem; height: 1.9rem; }
+  .hm-area-choice-small { min-height: 44px; padding: 0.45rem 0.75rem; }
   .hm-area-map { aspect-ratio: auto; height: 29rem; min-height: 0; border-radius: 0.95rem; }
   .hm-area-map-external { top: 0.7rem; right: 0.65rem; padding-inline: 0.75rem; font-size: 0.78rem; }
   .hm-area-map-reset { top: 0.7rem; left: 0.65rem; width: 44px; padding: 0; }

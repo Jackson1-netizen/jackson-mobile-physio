@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
+@import "./responsive-tokens.css";
 
 @theme {
   --font-sans: "Source Sans 3", "Source Sans 3 Fallback", ui-sans-serif, system-ui, sans-serif;
@@ -64,6 +65,11 @@
 
 #main-content:focus {
   outline: none;
+}
+
+@media screen and (max-width: 1023px) {
+  main > article { padding-inline: var(--hm-page-gutter); }
+  main > article > h1 { font-size: var(--hm-page-title); line-height: 1.12; text-wrap: balance; }
 }
 
 @media print {
