@@ -12,14 +12,7 @@ const shownQualifications = publicQualifications().map((item) => ({
 
 <section id="meet-jackson" class="hm-reveal hm-meet">
   <div class="hm-wrap hm-section hm-about-grid">
-    <div class="hm-portrait hm-img-zoom">
-      <HomePicture
-        photo={photo}
-        altPath="hm.about.portraitAlt"
-        sizes="(min-width: 1024px) 556px, (min-width: 768px) 728px, calc(100vw - 2.5rem)"
-      />
-    </div>
-    <div>
+    <div class="hm-meet-copy">
       <p class="hm-kicker" data-i18n-path="sections.about">{homeAbout.kicker}</p>
       <h2 data-i18n-path="about.heading">{homeAbout.heading}</h2>
       <p class="hm-about-name">{homeAbout.name}</p>
@@ -55,6 +48,13 @@ const shownQualifications = publicQualifications().map((item) => ({
         )
       }
       <p class="hm-registered" data-i18n-path="hm.about.ahpraNotice">{site.ahpraNotice}</p>
+    </div>
+    <div class="hm-portrait hm-img-zoom">
+      <HomePicture
+        photo={photo}
+        altPath="hm.about.portraitAlt"
+        sizes="(min-width: 1024px) 556px, (min-width: 640px) 576px, calc(100vw - 2.5rem)"
+      />
     </div>
   </div>
 </section>

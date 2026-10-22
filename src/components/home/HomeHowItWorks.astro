@@ -77,7 +77,7 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
     max-width: 9.2em;
     color: #16352e;
     font-family: var(--hm-sans);
-    font-size: clamp(2.15rem, 1.2rem + 2.1vw, 3.05rem);
+    font-size: var(--hm-section-title, clamp(2.15rem, 1.2rem + 2.1vw, 3.05rem));
     font-weight: 650;
     letter-spacing: -0.03em;
     line-height: 1.08;
@@ -212,5 +212,22 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
     .hm-flow * {
       transition: none;
     }
+  }
+
+  @media screen and (max-width: 959px) {
+    .hm-flow-grid { gap: var(--hm-content-gap); }
+    .hm-flow-frame { aspect-ratio: 4 / 3; border-radius: var(--hm-image-radius); }
+    .hm-flow-steps { gap: var(--hm-card-gap); }
+    .hm-flow-steps li {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+      gap: 0.65rem 0.75rem;
+      padding: var(--hm-card-padding);
+      border-radius: var(--hm-image-radius);
+    }
+    .hm-flow-num { grid-column: 1; grid-row: 1; width: 2.25rem; height: 2.25rem; }
+    .hm-flow-rule { display: none; }
+    .hm-flow-steps li > span:last-child { display: contents; }
+    .hm-flow-steps h3 { grid-column: 2; grid-row: 1; align-self: center; }
+    .hm-flow-steps p { grid-column: 1 / -1; margin: 0; font-size: 1rem; line-height: 1.5; }
   }
 </style>

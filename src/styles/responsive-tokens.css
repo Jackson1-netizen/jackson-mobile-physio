@@ -1,0 +1,14 @@
+/* Home Motion's phone/tablet system. Desktop keeps its existing values. */
+@media screen and (max-width: 1023px) {
+  :root {
+    --hm-page-gutter: clamp(1rem, 4.65vw, 1.5rem);
+    --hm-page-title: clamp(2rem, 1.4rem + 3vw, 2.5rem);
+    --hm-section-title: clamp(1.875rem, 1.55rem + 1.6vw, 2.5rem);
+    --hm-section-space: clamp(2.75rem, 2.35rem + 2vw, 3.5rem);
+    --hm-content-gap: 1.5rem;
+    --hm-card-gap: 1rem;
+    --hm-card-padding: clamp(1rem, 4.2vw, 1.25rem);
+    --hm-image-radius: 1.125rem;
+    --hm-touch-height: 3rem;
+  }
+}

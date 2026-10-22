@@ -836,20 +836,22 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
   @media (max-width: 900px) {
     .cx-wrap {
       grid-template-columns: 1fr;
-      width: min(40rem, calc(100% - 2rem));
+      width: min(44rem, calc(100% - 2 * var(--hm-page-gutter)));
       margin-inline: auto;
-      padding: 2.6rem 0 2rem;
-      gap: 1.75rem;
+      padding: var(--hm-section-space) 0;
+      gap: var(--hm-content-gap);
     }
 
     .cx-title {
-      font-size: clamp(3.6rem, 13vw, 5.5rem);
+      font-size: var(--hm-section-title);
+      line-height: 1.12;
     }
+    h1.cx-title { font-size: var(--hm-page-title); }
 
     .cx-scene {
       min-height: 0;
-      height: clamp(12rem, 47vw, 19rem);
-      margin: 1.5rem -1rem -1.75rem;
+      height: clamp(6rem, 30vw, 10rem);
+      margin: 1.25rem 0 0;
       background-image: image-set(url("/contact/contact-backdrop-v1-1451.avif") type("image/avif"), url("/contact/contact-backdrop-v1-1451.webp") type("image/webp"));
       background-size: 260% auto;
       background-position: left bottom;
@@ -864,7 +866,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
       background: radial-gradient(ellipse at 100% 0, #faead3, transparent 55%), #fcf6eb;
     }
 
-    .cx-grid,
+    .cx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .cx-half,
     .cx-full {
       grid-template-columns: 1fr;
@@ -876,17 +878,25 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
     }
 
     .cx-card {
-      padding: 1.75rem clamp(1rem, 4.5vw, 2rem) 1.6rem;
-      border-radius: 1.4rem;
+      padding: 1.5rem var(--hm-card-padding);
+      border-radius: var(--hm-image-radius);
     }
 
-    .cx .cx-lead { font-size: 1.2rem; }
+    .cx .cx-lead { font-size: 1.0625rem; line-height: 1.6; }
     .cx-direct a { gap: 0.8rem; font-size: 1.05rem; }
     .cx-chip { flex-basis: 3rem; width: 3rem; height: 3rem; }
     .cx-grid { gap: 1.25rem; }
     .cx-submit { min-width: 13.25rem; }
     .cx-kicker { font-size: 0.8rem; }
     .cx-hint, .cx-privacy { font-size: 0.94rem; }
+    .cx-field label { font-size: 1rem; }
+    .cx-field input, .cx-field select { min-height: var(--hm-touch-height); font-size: 1rem; }
+    .cx-submit { min-height: var(--hm-touch-height); }
+  }
+
+  @media (max-width: 599px) {
+    .cx-grid { grid-template-columns: minmax(0, 1fr); }
+    .cx-submit { width: 100%; }
   }
 
   @media (min-width: 901px) and (max-width: 1100px) {

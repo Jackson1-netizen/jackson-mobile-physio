@@ -112,7 +112,7 @@ const copy = messages.en.hm.footer;
   }
 
   .site-footer-wrap {
-    width: min(72rem, calc(100% - 2.5rem));
+    width: min(72rem, calc(100% - 2 * var(--hm-page-gutter, 1.25rem)));
     margin-inline: auto;
   }
 
@@ -274,5 +274,12 @@ const copy = messages.en.hm.footer;
     .site-footer-home {
       padding-bottom: 1.65rem;
     }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .site-footer { padding-top: var(--hm-section-space); }
+    .site-footer-grid { gap: 1.75rem var(--hm-content-gap); }
+    .site-footer-col a { display: inline-flex; align-items: center; min-height: 44px; }
+    .site-footer-col ul { gap: 0.2rem; }
   }
 </style>
