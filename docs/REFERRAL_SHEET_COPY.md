@@ -1,3 +1,7 @@
+# Archived referral-sheet copy
+
+> Superseded 22 October 2026. This is historical draft copy, not a mirror of the current page or approved launch instructions. Use REFERRAL_PAGE.md and src/pages/referral.astro for current text-led concept A (no rendered QR, no published registration number). Actual domain/account state: ACCOUNT-SIDE VERIFICATION REQUIRED.
+
 # Referral sheet copy (mirrors `/referral`)
 
 AHPRA general registration PHY0004088824 (no expiry printed). Referral email: referrals@homemotionphysio.com.au. No website URL or QR on the print sheet while the domain still shows the parked page.

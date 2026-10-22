@@ -1,6 +1,24 @@
 ---
 import { messages, defaultLocale } from "../content/i18n";
-const serialized = JSON.stringify(messages);
+
+interface Props {
+  /** Top-level message keys to embed. Omit to embed every locale bundle. */
+  include?: readonly string[];
+}
+
+const { include } = Astro.props;
+
+function scoped(bundle: object) {
+  if (!include || include.length === 0) return bundle;
+  const source = bundle as Record<string, unknown>;
+  return Object.fromEntries(include.filter((key) => key in source).map((key) => [key, source[key]]));
+}
+
+const serialized = JSON.stringify({
+  en: scoped(messages.en),
+  "zh-Hant": scoped(messages["zh-Hant"]),
+  "zh-Hans": scoped(messages["zh-Hans"]),
+});
 ---
 
 <script define:vars={{ serialized, defaultLocale }}>

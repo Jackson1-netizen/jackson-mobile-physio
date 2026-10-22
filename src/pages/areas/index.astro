@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HomeAreas from "../../components/home/HomeAreas.astro";
+import { site } from "../../content/site";
+import { homeAreas } from "../../content/home-motion";
+---
+
+<BaseLayout
+  translatable={true}
+  canonicalPath="/areas"
+  title={`Service areas | ${site.businessName}${site.draft ? " (draft)" : ""}`}
+  description={homeAreas.lead}
+>
+  <HomeAreas pageHeading={true} />
+</BaseLayout>

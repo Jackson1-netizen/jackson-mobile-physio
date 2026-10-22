@@ -1,0 +1,921 @@
+---
+import HomeIcon from "./home/HomeIcon.astro";
+import { site, getEmailHref } from "../content/site";
+import { messages } from "../content/i18n";
+
+interface Props {
+  /** Homepage already has an h1, so the same visual heading is an h2 there. */
+  headingLevel?: "h1" | "h2";
+  anchor?: string;
+  reserveMobileBar?: boolean;
+}
+
+const { headingLevel = "h1", anchor, reserveMobileBar = false } = Astro.props;
+const Heading = headingLevel === "h1" ? "h1" : "h2";
+const Sub = headingLevel === "h1" ? "h2" : "h3";
+const t = messages.en.enquiry;
+const enquiryMessages = {
+  en: messages.en.enquiry,
+  "zh-Hant": messages["zh-Hant"].enquiry,
+  "zh-Hans": messages["zh-Hans"].enquiry,
+};
+const mailto = getEmailHref();
+const suburbs = [...site.serviceAreas.suburbs, ...site.serviceAreas.nearbySuburbs];
+
+const roleValues = [
+  "Participant or client",
+  "Family member or carer",
+  "Support coordinator",
+  "Health professional",
+  "Other referrer",
+  "Other",
+];
+const serviceValues = ["Physiotherapy", "Not sure yet", "Other"];
+const fundingValues = ["NDIS", "Support at Home", "Private", "Other or not sure"];
+const contactValues = ["Phone", "Email"];
+const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
+---
+
+<section
+  id={anchor}
+  class:list={["cx", reserveMobileBar && "cx-home"]}
+  aria-labelledby="cx-heading"
+>
+  <div class="cx-bg" aria-hidden="true">
+    <picture>
+      <source type="image/avif" srcset="/contact/contact-backdrop-v1-960.avif 960w, /contact/contact-backdrop-v1-1451.avif 1451w" sizes="100vw" />
+      <img src="/contact/contact-backdrop-v1-1451.webp"
+        srcset="/contact/contact-backdrop-v1-960.webp 960w, /contact/contact-backdrop-v1-1451.webp 1451w"
+        sizes="100vw" width="1451" height="1084" alt=""
+        loading={headingLevel === "h1" ? "eager" : "lazy"} decoding="async" />
+    </picture>
+  </div>
+
+  <div class="cx-wrap">
+    <div class="cx-copy">
+      <p class="cx-kicker">
+        <span data-i18n-path="enquiry.kicker">{t.kicker}</span>
+        <span class="cx-rule" aria-hidden="true"></span>
+      </p>
+      <Heading id="cx-heading" class="cx-title" data-i18n-path="enquiry.heading">{t.heading}</Heading>
+      <p class="cx-lead" data-i18n-path="enquiry.intro">{t.intro}</p>
+      <ul class="cx-direct">
+        <li>
+          <a href={site.phoneHref}>
+            <span class="cx-chip" aria-hidden="true"><HomeIcon name="phone" size={18} /></span>
+            <span>{site.phone}</span>
+          </a>
+        </li>
+        <li>
+          <a class="cx-mail" href={mailto}>
+            <span class="cx-chip" aria-hidden="true"><HomeIcon name="mail" size={18} /></span>
+            <span>{site.publicEmail}</span>
+          </a>
+        </li>
+      </ul>
+      <hr class="cx-line" />
+      <Sub class="cx-sub" data-i18n-path="enquiry.helpHeading">{t.helpHeading}</Sub>
+      <p class="cx-help" data-i18n-path="enquiry.helpBody">{t.helpBody}</p>
+      <div class="cx-scene" aria-hidden="true"></div>
+    </div>
+
+    <div class="cx-card">
+      <p class="cx-kicker">
+        <span data-i18n-path="enquiry.formKicker">{t.formKicker}</span>
+        <span class="cx-rule" aria-hidden="true"></span>
+      </p>
+      <form
+        id="enquiry-form"
+        class="cx-form"
+        name="enquiry"
+        method="POST"
+        action="/enquiry-received/"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        aria-describedby="enq-required-note"
+      >
+        <input type="hidden" name="form-name" value="enquiry" />
+        <input id="enq-ndis-value" type="hidden" name="ndis" value="No" />
+        <p class="cx-honeypot" aria-hidden="true">
+          <label>
+            Leave this blank
+            <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </label>
+        </p>
+        <p id="enq-required-note" class="cx-sr" data-i18n-path="enquiry.requiredNote">{t.requiredNote}</p>
+
+        <div id="enq-summary" class="cx-summary" role="alert" tabindex="-1" hidden>
+          <p data-i18n-path="enquiry.errorSummary">{t.errorSummary}</p>
+          <ul id="enq-summary-list"></ul>
+        </div>
+
+        <div id="enq-fields" class="cx-grid">
+          <div class="cx-field">
+            <label for="enq-name">
+              <span data-i18n-path="enquiry.name">{t.name}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-name" name="name" type="text" autocomplete="name" enterkeyhint="next" maxlength="100" required aria-required="true" />
+            <p id="enq-name-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-role">
+              <span data-i18n-path="enquiry.role">{t.role}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-role" name="enquiring-as" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {roleValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.roleOptions.${i}`}>{t.roleOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-role-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-email">
+              <span data-i18n-path="enquiry.email">{t.email}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-email" name="email" type="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" maxlength="254" required aria-required="true" />
+            <p id="enq-email-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-phone">
+              <span data-i18n-path="enquiry.phone">{t.phone}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" maxlength="20" required aria-required="true" />
+            <p id="enq-phone-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-suburb">
+              <span data-i18n-path="enquiry.suburb">{t.suburb}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <input id="enq-suburb" name="suburb" type="text" autocomplete="address-level2" enterkeyhint="next" list="enq-suburbs" maxlength="80" required aria-required="true" />
+            <datalist id="enq-suburbs">
+              {suburbs.map((name) => <option value={name} />)}
+            </datalist>
+            <p id="enq-suburb-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-service">
+              <span data-i18n-path="enquiry.service">{t.service}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-service" name="service" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {serviceValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.serviceOptions.${i}`}>{t.serviceOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-service-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-funding">
+              <span data-i18n-path="enquiry.funding">{t.funding}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-funding" name="funding" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {fundingValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.fundingOptions.${i}`}>{t.fundingOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-funding-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field">
+            <label for="enq-preferred">
+              <span data-i18n-path="enquiry.preferredContact">{t.preferredContact}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <select id="enq-preferred" name="preferred-contact" required aria-required="true">
+              <option value="" data-i18n-path="enquiry.selectOne">{t.selectOne}</option>
+              {contactValues.map((value, i) => (
+                <option value={value} data-i18n-path={`enquiry.preferredContactOptions.${i}`}>{t.preferredContactOptions[i]}</option>
+              ))}
+            </select>
+            <p id="enq-preferred-error" class="cx-error" hidden></p>
+          </div>
+
+          <div class="cx-field cx-half">
+            <label for="enq-language"><span data-i18n-path="enquiry.language">{t.language}</span></label>
+            <select id="enq-language" name="language">
+              {languageValues.map((value, i) => (
+                <option value={value} selected={value === "English"} data-i18n-path={`enquiry.languageOptions.${i}`}>
+                  {t.languageOptions[i]}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div class="cx-field cx-check cx-full">
+            <input id="enq-ndis" type="checkbox" />
+            <label for="enq-ndis" data-i18n-path="enquiry.ndisLabel">{t.ndisLabel}</label>
+          </div>
+
+          <div class="cx-field cx-full">
+            <label for="enq-message">
+              <span data-i18n-path="enquiry.help">{t.help}</span>
+              <span class="cx-star" aria-hidden="true">*</span>
+            </label>
+            <textarea id="enq-message" name="message" rows="5" maxlength="1000" required aria-required="true" aria-describedby="enq-help-hint"></textarea>
+            <p id="enq-message-error" class="cx-error" hidden></p>
+            <p id="enq-help-hint" class="cx-hint" data-i18n-path="enquiry.helpHint">{t.helpHint}</p>
+          </div>
+        </div>
+
+        <noscript>
+          <p class="cx-noscript">
+            <span data-i18n-path="enquiry.noscript">{t.noscript}</span>
+            <a href={site.phoneHref}>{site.phone}</a>
+          </p>
+        </noscript>
+
+        <button type="submit" class="cx-submit">
+          <span data-i18n-path="enquiry.submitLabel">{t.submitLabel}</span>
+          <span aria-hidden="true"> →</span>
+        </button>
+        <p class="cx-privacy">
+          <span data-i18n-path="enquiry.privacyLead">{t.privacyLead}</span>
+          <a href="/privacy/" data-i18n-path="enquiry.privacyNotice">{t.privacyNotice}</a>.
+        </p>
+
+        <div id="enq-failed" class="cx-failed" role="alert" tabindex="-1" hidden>
+          <p class="cx-failed-title" data-i18n-path="enquiry.failedTitle">{t.failedTitle}</p>
+          <p>
+            <span data-i18n-path="enquiry.failedBody">{t.failedBody}</span>
+            <a href={site.phoneHref}>{site.phone}</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ enquiryMessages, suburbs }}>
+  const form = document.getElementById("enquiry-form");
+  if (form) {
+    const requestedSuburb = new URLSearchParams(window.location.search).get("suburb");
+    const suburbInput = form.querySelector("#enq-suburb");
+    if (suburbInput && !suburbInput.value && suburbs.includes(requestedSuburb)) {
+      suburbInput.value = requestedSuburb;
+    }
+    const summary = form.querySelector("#enq-summary");
+    const summaryList = form.querySelector("#enq-summary-list");
+    const failed = form.querySelector("#enq-failed");
+    const submitButton = form.querySelector("button[type=submit]");
+    const ndisValue = form.querySelector("#enq-ndis-value");
+    const ndisBox = form.querySelector("#enq-ndis");
+    const fields = {
+      name: form.querySelector("#enq-name"),
+      role: form.querySelector("#enq-role"),
+      email: form.querySelector("#enq-email"),
+      phone: form.querySelector("#enq-phone"),
+      suburb: form.querySelector("#enq-suburb"),
+      service: form.querySelector("#enq-service"),
+      funding: form.querySelector("#enq-funding"),
+      preferred: form.querySelector("#enq-preferred"),
+      message: form.querySelector("#enq-message"),
+    };
+    let attempted = false;
+
+    const currentMessages = () => {
+      const lang = document.documentElement.lang;
+      const key = lang === "zh-Hant" || lang === "zh-Hans" ? lang : "en";
+      return enquiryMessages[key] || enquiryMessages.en;
+    };
+
+    const emailOk = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const phoneOk = (value) => {
+      const digits = value.replace(/\D/g, "");
+      return /^[+\d\s().-]+$/.test(value) && digits.length >= 8 && digits.length <= 15;
+    };
+
+    const collectErrors = () => {
+      const errors = [];
+      const email = fields.email.value.trim();
+      const phone = fields.phone.value.trim();
+      const preferred = fields.preferred.value;
+      if (!fields.name.value.trim()) errors.push({ name: "name", key: "nameRequired" });
+      if (!fields.role.value) errors.push({ name: "role", key: "roleRequired" });
+      if (!email) errors.push({ name: "email", key: "emailRequired" });
+      else if (!emailOk(email)) errors.push({ name: "email", key: "emailInvalid" });
+      if (!phone) errors.push({ name: "phone", key: "phoneRequired" });
+      else if (!phoneOk(phone)) errors.push({ name: "phone", key: "phoneInvalid" });
+      if (!fields.suburb.value.trim()) errors.push({ name: "suburb", key: "suburbRequired" });
+      if (!preferred) errors.push({ name: "preferred", key: "preferredRequired" });
+      if (!fields.service.value) errors.push({ name: "service", key: "serviceRequired" });
+      if (!fields.funding.value) errors.push({ name: "funding", key: "fundingRequired" });
+      if (!fields.message.value.trim()) errors.push({ name: "message", key: "messageRequired" });
+      return errors;
+    };
+
+    const showField = (name, errorKey) => {
+      const input = fields[name];
+      const error = form.querySelector(`#enq-${name}-error`);
+      if (!input || !error) return;
+      const hint = name === "message" ? "enq-help-hint" : "";
+      if (errorKey) {
+        error.setAttribute("data-i18n-path", `enquiry.errors.${errorKey}`);
+        error.textContent = currentMessages().errors[errorKey];
+        error.hidden = false;
+        input.setAttribute("aria-invalid", "true");
+        input.setAttribute("aria-describedby", hint ? `${hint} ${error.id}` : error.id);
+      } else {
+        error.removeAttribute("data-i18n-path");
+        error.textContent = "";
+        error.hidden = true;
+        input.removeAttribute("aria-invalid");
+        if (hint) input.setAttribute("aria-describedby", hint);
+        else input.removeAttribute("aria-describedby");
+      }
+    };
+
+    const render = (errors) => {
+      const keys = new Set(errors.map((item) => item.name));
+      Object.keys(fields).forEach((name) => {
+        const found = errors.find((item) => item.name === name);
+        showField(name, found ? found.key : null);
+      });
+      summaryList.replaceChildren();
+      if (!errors.length) {
+        summary.hidden = true;
+        return;
+      }
+      const messagesNow = currentMessages();
+      errors.forEach((item) => {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `#enq-${item.name}`;
+        link.textContent = messagesNow.errors[item.key];
+        li.append(link);
+        summaryList.append(li);
+      });
+      summary.hidden = false;
+      void keys;
+    };
+
+    const refresh = () => {
+      if (!attempted) return;
+      render(collectErrors());
+    };
+
+    Object.values(fields).forEach((input) => {
+      input.addEventListener("input", refresh);
+      input.addEventListener("change", refresh);
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      attempted = true;
+      failed.hidden = true;
+      const errors = collectErrors();
+      render(errors);
+      if (errors.length) {
+        summary.focus();
+        return;
+      }
+      if (form.querySelector("[name=bot-field]")?.value) return;
+      ndisValue.value = ndisBox.checked ? "Yes — plan-managed or self-managed" : "No";
+      const messagesNow = currentMessages();
+      const label = submitButton.querySelector("span");
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-busy", "true");
+      if (label) label.textContent = messagesNow.sending;
+      try {
+        const body = new URLSearchParams(new FormData(form)).toString();
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body,
+        });
+        if (!response.ok) throw new Error("Form was not accepted");
+        window.location.assign("/enquiry-received/");
+      } catch {
+        failed.hidden = false;
+        failed.focus();
+        submitButton.disabled = false;
+        submitButton.removeAttribute("aria-busy");
+        if (label) label.textContent = messagesNow.submitLabel;
+      }
+    });
+    // Use the accessible error summary once its handler is installed; without JS,
+    // the HTML required attributes still enable the browser's native validation.
+    form.noValidate = true;
+  }
+</script>
+
+<style>
+  .cx {
+    --cx-ink: #123e35;
+    --cx-body: #4a5d65;
+    --cx-muted: #4e5e58;
+    --cx-line: #e4ddd4;
+    --cx-sage: #e9ebdb;
+    --cx-orange: #c4461a;
+    --cx-orange-line: #d54b13;
+    --cx-card: #ffffff;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    scroll-margin-top: 7.5rem;
+    color: var(--cx-ink);
+    background: #fcf6eb;
+    font-family: "Source Sans 3", "Source Sans 3 Fallback", "PingFang TC", "PingFang SC", "Noto Sans TC", "Noto Sans SC", "Microsoft JhengHei", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .cx-home {
+    padding-bottom: calc(3.25rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .cx-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .cx-bg picture,
+  .cx-bg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cx-bg img {
+    object-fit: cover;
+    object-position: left bottom;
+  }
+
+  .cx-bg::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(16rem, 20vw);
+    height: min(15rem, 19vw);
+    background-image: image-set(url("/contact/contact-backdrop-v1-1451.avif") type("image/avif"), url("/contact/contact-backdrop-v1-1451.webp") type("image/webp"));
+    background-size: 100vw auto;
+    background-position: right top;
+    background-repeat: no-repeat;
+    mask-image: radial-gradient(ellipse at 100% 0, #000 48%, transparent 74%);
+  }
+
+  .cx-wrap {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.51fr);
+    gap: 2.5rem clamp(2rem, 4.65vw, 4.2rem);
+    align-items: start;
+    width: min(78rem, 86.4%);
+    margin-left: max(8.3vw, calc((100% - 78rem) / 2));
+    margin-right: auto;
+    padding: clamp(4rem, 7vw, 6.3rem) 0 4.2rem;
+  }
+
+  .cx-copy {
+    min-width: 0;
+  }
+
+  .cx p {
+    max-width: none;
+    margin: 0;
+  }
+
+  .cx-kicker {
+    margin: 0;
+    color: var(--cx-ink);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  :lang(zh) .cx-kicker,
+  :lang(zh-Hant) .cx-kicker,
+  :lang(zh-Hans) .cx-kicker {
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+  .cx-rule {
+    display: block;
+    width: 2.1rem;
+    height: 3px;
+    margin-top: 1.1rem;
+    border-radius: 2px;
+    background: var(--cx-orange-line);
+  }
+
+  .cx-title,
+  .cx-sub {
+    margin: 0;
+    color: var(--cx-ink);
+    font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+    font-weight: 560;
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+  }
+
+  .cx-title {
+    margin-top: 1.25rem;
+    font-size: clamp(4.5rem, 7.7vw, 7.1rem);
+  }
+
+  .cx .cx-lead,
+  .cx .cx-help {
+    margin-top: 1rem;
+    max-width: 28rem;
+    color: var(--cx-body);
+    font-size: clamp(1.15rem, 1.65vw, 1.5rem);
+    line-height: 1.55;
+  }
+
+  .cx-direct {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.8rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cx-direct a {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(0.8rem, 1.8vw, 1.7rem);
+    min-height: 3.6rem;
+    color: var(--cx-ink);
+    font-weight: 650;
+    font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+    text-decoration: none;
+  }
+
+  .cx-direct a.cx-mail span:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .cx-chip {
+    display: grid;
+    place-items: center;
+    flex: 0 0 3.6rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 999px;
+    background: var(--cx-sage);
+    color: var(--cx-ink);
+  }
+
+  .cx-chip :global(svg) {
+    width: 27px;
+    height: 27px;
+    stroke-width: 1.7;
+  }
+
+  .cx-line {
+    margin: 2rem 0 1.65rem;
+    border: 0;
+    border-top: 1px solid var(--cx-line);
+    width: 100%;
+    max-width: 28rem;
+  }
+
+  .cx-sub {
+    font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  }
+
+  .cx .cx-help {
+    margin-top: 0.55rem;
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    line-height: 1.6;
+  }
+
+  .cx-scene {
+    min-height: clamp(18rem, 25vw, 23rem);
+    margin-top: 1.25rem;
+  }
+
+  .cx-card {
+    min-width: 0;
+    border: 1px solid #e0e2dc;
+    border-radius: 1.65rem;
+    background: var(--cx-card);
+    box-shadow: 0 20px 60px rgb(90 60 30 / 0.10);
+    padding: 2.5rem clamp(1.5rem, 4vw, 3.5rem) 2.4rem;
+  }
+
+  .cx-form {
+    display: grid;
+    gap: 1.1rem;
+    margin-top: 1.8rem;
+  }
+
+  .cx-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.45rem 1.35rem;
+  }
+
+  .cx-full {
+    grid-column: 1 / -1;
+  }
+
+  .cx-field {
+    display: grid;
+    gap: 0.6rem;
+    min-width: 0;
+    align-content: start;
+  }
+
+  .cx-field label {
+    color: var(--cx-ink);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .cx-star {
+    color: #c4531d;
+  }
+
+  .cx-star {
+    margin-left: 0.15rem;
+  }
+
+  .cx-field input,
+  .cx-field select,
+  .cx-field textarea {
+    width: 100%;
+    min-height: 3.6rem;
+    padding: 0.75rem 0.95rem;
+    border: 1px solid #d3d9dc;
+    border-radius: 0.8rem;
+    background: #fff;
+    color: var(--cx-ink);
+    font: inherit;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .cx-field select {
+    appearance: none;
+    padding-right: 2.2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 7.5 10 12.5 15 7.5' fill='none' stroke='%231a3a32' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1rem;
+  }
+
+  .cx-field select:has(option[value=""]:checked) {
+    color: var(--cx-muted);
+  }
+
+  .cx-field textarea {
+    min-height: 9.5rem;
+    resize: vertical;
+  }
+
+  .cx-field input::placeholder,
+  .cx-field textarea::placeholder {
+    color: var(--cx-muted);
+  }
+
+  .cx-field :is(input, select, textarea):focus-visible,
+  .cx a:focus-visible,
+  .cx-submit:focus-visible,
+  .cx-summary:focus-visible,
+  .cx-failed:focus-visible {
+    outline: 3px solid var(--cx-ink);
+    outline-offset: 3px;
+  }
+
+  .cx-field :is(input, select, textarea)[aria-invalid="true"] {
+    border: 2px solid #8a2e14;
+  }
+
+  .cx-hint,
+  .cx-error,
+  .cx-privacy,
+  .cx-noscript {
+    color: var(--cx-muted);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .cx-error {
+    color: #8a2e14;
+    font-weight: 700;
+  }
+
+  .cx-check {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2.75rem;
+  }
+
+  .cx-check input {
+    appearance: none;
+    flex: 0 0 2.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .cx-check input::before {
+    content: "";
+    width: 1.45rem;
+    height: 1.45rem;
+    border: 1.5px solid #c8bfb4;
+    border-radius: 0.25rem;
+    background: #fff center / 0.85rem no-repeat;
+  }
+
+  .cx-check input:checked::before {
+    border-color: var(--cx-orange);
+    background-color: var(--cx-orange);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.2 8.2 6.4 11.4 12.8 4.6' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  .cx-check label {
+    font-weight: 500;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .cx-submit {
+    justify-self: start;
+    min-height: 3.75rem;
+    min-width: 14.2rem;
+    margin-top: 0.2rem;
+    padding: 0.85rem 2.3rem;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(110deg, #cf4510, var(--cx-orange));
+    color: #fff;
+    font: inherit;
+    font-size: 1.25rem;
+    font-weight: 700;
+    transition: background 160ms ease, box-shadow 160ms ease;
+    cursor: pointer;
+  }
+
+  .cx-submit:hover {
+    background: #a84416;
+    box-shadow: 0 4px 12px rgb(168 68 22 / 0.18);
+  }
+
+  .cx-submit:disabled {
+    cursor: progress;
+    opacity: 0.75;
+  }
+
+  .cx-privacy a,
+  .cx-failed a,
+  .cx-noscript a,
+  .cx-summary a {
+    color: var(--cx-ink);
+    font-weight: 700;
+    text-underline-offset: 0.15em;
+  }
+
+  .cx-summary,
+  .cx-failed {
+    padding: 0.8rem 0.9rem;
+    border-radius: 0.8rem;
+    border-left: 4px solid #8a2e14;
+    background: #fff6f3;
+    color: #6d2410;
+  }
+
+  .cx-summary ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .cx-failed-title {
+    font-weight: 800;
+  }
+
+  .cx-honeypot,
+  .cx-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 900px) {
+    .cx-wrap {
+      grid-template-columns: 1fr;
+      width: min(40rem, calc(100% - 2rem));
+      margin-inline: auto;
+      padding: 2.6rem 0 2rem;
+      gap: 1.75rem;
+    }
+
+    .cx-title {
+      font-size: clamp(3.6rem, 13vw, 5.5rem);
+    }
+
+    .cx-scene {
+      min-height: 0;
+      height: clamp(12rem, 47vw, 19rem);
+      margin: 1.5rem -1rem -1.75rem;
+      background-image: image-set(url("/contact/contact-backdrop-v1-1451.avif") type("image/avif"), url("/contact/contact-backdrop-v1-1451.webp") type("image/webp"));
+      background-size: 260% auto;
+      background-position: left bottom;
+      background-repeat: no-repeat;
+    }
+
+    .cx-bg {
+      display: none;
+    }
+
+    .cx {
+      background: radial-gradient(ellipse at 100% 0, #faead3, transparent 55%), #fcf6eb;
+    }
+
+    .cx-grid,
+    .cx-half,
+    .cx-full {
+      grid-template-columns: 1fr;
+    }
+
+    .cx-half,
+    .cx-full {
+      grid-column: 1 / -1;
+    }
+
+    .cx-card {
+      padding: 1.75rem clamp(1rem, 4.5vw, 2rem) 1.6rem;
+      border-radius: 1.4rem;
+    }
+
+    .cx .cx-lead { font-size: 1.2rem; }
+    .cx-direct a { gap: 0.8rem; font-size: 1.05rem; }
+    .cx-chip { flex-basis: 3rem; width: 3rem; height: 3rem; }
+    .cx-grid { gap: 1.25rem; }
+    .cx-submit { min-width: 13.25rem; }
+    .cx-kicker { font-size: 0.8rem; }
+    .cx-hint, .cx-privacy { font-size: 0.94rem; }
+  }
+
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .cx-wrap { width: calc(100% - 4rem); margin-inline: auto; gap: 2rem; }
+    .cx-card { padding-inline: 1.5rem; }
+    .cx-direct a { gap: 0.8rem; font-size: 1.05rem; }
+    .cx-chip { flex-basis: 3rem; width: 3rem; height: 3rem; }
+    .cx-title { font-size: 5rem; }
+    .cx .cx-lead { font-size: 1.2rem; }
+    .cx .cx-help { font-size: 1.1rem; }
+  }
+
+  @media (max-width: 359px) {
+    .cx-direct a { font-size: 0.96rem; gap: 0.55rem; }
+    .cx-chip { flex-basis: 2.75rem; width: 2.75rem; height: 2.75rem; }
+    .cx-card { padding-inline: 1rem; }
+    .cx-field label { font-size: 1rem; }
+    .cx-submit { min-width: 0; width: 100%; }
+  }
+
+  @media (min-width: 1024px) {
+    .cx-home {
+      padding-bottom: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cx-submit {
+      transition: none;
+    }
+  }
+</style>

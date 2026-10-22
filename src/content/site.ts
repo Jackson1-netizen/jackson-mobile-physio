@@ -13,7 +13,7 @@ const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
  * Set it to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
  */
 const draft = true;
-/** Legal adoption is separate from `draft`. Leave false until Jackson approves the wording. */
+/** Legal adoption is separate from `draft`; privacy wording is adopted in this candidate. */
 const privacyAdopted = true;
 /** Legal adoption is separate from `draft`. Jackson approved this wording on 4 October 2026. */
 const disclaimerAdopted = true;
@@ -76,9 +76,9 @@ export const site = {
    */
   websiteUrl: resolvePublicSiteOrigin(),
   /**
-   * Printed on the referral sheet as a QR code.
-   * Always the public referral page, never the Netlify staging hostname.
-   * Until DNS is changed, this URL still opens the VentraIP parked page.
+   * Public target retained for referral collateral; current concept A renders no QR.
+   * Always the apex referral page, never the Netlify staging hostname.
+   * Actual domain reachability requires account-side verification.
    */
   referralSheetUrl: "https://homemotionphysio.com.au/referral/",
 
@@ -128,6 +128,22 @@ export const site = {
       "Glen Waverley",
       "Mitcham",
       "Nunawading",
+    ],
+    nearbySuburbs: [
+      "Mont Albert",
+      "Surrey Hills",
+      "Camberwell",
+      "Glen Iris",
+      "Mount Waverley",
+      "Burwood East",
+      "Blackburn South",
+      "Vermont",
+      "Vermont South",
+      "Wantirna",
+      "Doncaster East",
+      "Balwyn",
+      "Forest Hill",
+      "Caulfield",
     ],
     surroundingNote: "and surrounding areas",
   },
@@ -228,7 +244,7 @@ export const site = {
       ? "Privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs."
       : "Draft privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs. Pending owner review.",
     lastUpdatedLabel: privacyAdopted ? "Last updated:" : "Status:",
-    lastUpdated: privacyAdopted ? "4 October 2026" : "Draft for owner review — October 2026. Not yet adopted.",
+    lastUpdated: privacyAdopted ? "21 October 2026" : "Draft for owner review — October 2026. Not yet adopted.",
     privacyEnquiriesContactLabel: "For privacy enquiries, contact:",
     workingDraftNotice: privacyAdopted
       ? ""
@@ -244,7 +260,7 @@ export const site = {
       {
         heading: "What this website asks for",
         paragraphs: [
-          "The enquiry form is for a first contact only. It asks for your name and phone number. You may also give an email address, suburb, preferred language, whether the enquiry relates to an NDIS plan (plan-managed or self-managed), and a brief reason for getting in touch.",
+          "The enquiry form is for a first contact only. It requires your name, who is enquiring, your email address, phone number and suburb, a service, a funding pathway, whether you prefer a phone call or an email, and a short description. You may also choose a preferred language and indicate whether the enquiry relates to an NDIS plan (plan-managed or self-managed).",
           "Please do not include health information or other sensitive details in the form, in email, or in a text message. A short note is enough for us to reply. There is no online booking, payment, or clinical record on this website.",
         ],
       },
@@ -266,7 +282,7 @@ export const site = {
       {
         heading: "Email, storage, and overseas access",
         paragraphs: [
-          "The enquiry form is handled by Netlify, the service hosting this website. Netlify stores the name, phone number, and any optional details you submit, and can email that enquiry to hello@homemotionphysio.com.au. Netlify may process and store that information outside Australia. This website does not keep its own database of form submissions.",
+          "The enquiry form is handled by Netlify, the service hosting this website. Netlify stores the details you submit and can email that enquiry to hello@homemotionphysio.com.au. Netlify may process and store that information outside Australia. This website does not keep its own database of form submissions.",
           "You can also email hello@homemotionphysio.com.au from your own email app. Those messages are handled by Google Workspace, which may store them outside Australia.",
         ],
       },
@@ -274,7 +290,7 @@ export const site = {
         heading: "Hosting and the service-area map",
         paragraphs: [
           "This website is hosted by Netlify. When your browser loads a page, that request can send standard connection information, such as your IP address and browser details, to Netlify.",
-          "The service-area map is loaded from Esri (ArcGIS). When the map loads, standard connection information such as your IP address and browser details may be sent to Esri. The map does not ask for your location, and this website does not store those map requests.",
+          "The interactive service-area map, when available, is provided by Google Maps. When you view or interact with it, standard connection information such as your IP address and browser details may be sent to Google, which may process that information outside Australia under its privacy policy. The map does not request your device location, and this website does not store those map requests. Links labelled View in Google Maps open Google's website in a new tab.",
         ],
       },
       {

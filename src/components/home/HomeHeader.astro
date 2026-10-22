@@ -6,6 +6,12 @@ import { homeNav, homeHero, homeMenuServices, homeMenuAreas } from "../../conten
 import LanguageSwitcher from "../LanguageSwitcher.astro";
 
 const t = messages.en.hm.header;
+
+function siteHref(href: string) {
+  if (href === "#contact") return "/enquiry/";
+  if (href.startsWith("#")) return `/${href}`;
+  return href;
+}
 ---
 
 <header class="hm-header no-print">
@@ -18,7 +24,7 @@ const t = messages.en.hm.header;
       <div class="hm-lang">
         <LanguageSwitcher />
       </div>
-      <a class="hm-btn hm-btn-primary hm-cta-desktop" href="#contact">
+      <a class="hm-btn hm-btn-primary hm-cta-desktop" href="/enquiry/">
         <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
         <span class="hm-arrow" aria-hidden="true">→</span>
       </a>
@@ -36,7 +42,7 @@ const t = messages.en.hm.header;
                 homeNav.map((item) => (
                   <li>
                     <a
-                      href={item.href}
+                      href={siteHref(item.href)}
                       class={item.spy === "top" ? "is-active" : undefined}
                       aria-current={item.spy === "top" ? "page" : undefined}
                       data-i18n-path={item.path}
@@ -54,7 +60,7 @@ const t = messages.en.hm.header;
                 {
                   homeMenuServices.map((item) => (
                     <li>
-                      <a href={item.href} data-i18n-path={item.path}>{item.label}</a>
+                      <a href={siteHref(item.href)} data-i18n-path={item.path}>{item.label}</a>
                     </li>
                   ))
                 }
@@ -78,3 +84,8 @@ const t = messages.en.hm.header;
     </div>
   </div>
 </header>
+
+<script>
+  import { initHeaderMenus } from "../../lib/header-menu";
+  initHeaderMenus();
+</script>

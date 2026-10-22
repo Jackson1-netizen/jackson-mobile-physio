@@ -14,9 +14,11 @@ interface Props {
   /** i18n path for the alt text (applied by I18nScript). */
   altPath?: string;
   priority?: boolean;
+  /** Same photo shown again as a crop. Empty alt so it is not announced twice. */
+  decorative?: boolean;
 }
 
-const { photo, sizes, class: className, altPath, priority = false } = Astro.props;
+const { photo, sizes, class: className, altPath, priority = false, decorative = false } = Astro.props;
 const widths = photo.widths ?? [];
 const stem = photo.src.replace(/^\/photos\//, "/photos/opt/").replace(/\.[a-z]+$/i, "");
 const srcset = (ext: string) => widths.map((w) => `${stem}-${w}.${ext} ${w}w`).join(", ");
@@ -28,8 +30,8 @@ const srcset = (ext: string) => widths.map((w) => `${stem}-${w}.${ext} ${w}w`).j
   <img
     class={className}
     src={photo.src}
-    alt={photo.alt}
-    data-i18n-attr={altPath ? `alt:${altPath}` : undefined}
+    alt={decorative ? "" : photo.alt}
+    data-i18n-attr={!decorative && altPath ? `alt:${altPath}` : undefined}
     width={photo.width}
     height={photo.height}
     loading={priority ? "eager" : "lazy"}

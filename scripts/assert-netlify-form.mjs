@@ -2,7 +2,7 @@
  * Fails the build if the published homepage would not be detected as a Netlify Form.
  * Indexing checks follow site.draft: noindex while drafting, indexable after launch.
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { readSiteDraft } from "./site-draft.mjs";
 
@@ -79,7 +79,10 @@ export function assertPublishedSite({ html, robots, headers, draft }) {
 }
 
 function main() {
-  const html = readFileSync(new URL("../dist/index.html", import.meta.url), "utf8");
+  const home = readFileSync(new URL("../dist/index.html", import.meta.url), "utf8");
+  const enquiryUrl = new URL("../dist/enquiry/index.html", import.meta.url);
+  const enquiry = existsSync(enquiryUrl) ? readFileSync(enquiryUrl, "utf8") : "";
+  const html = `${home}\n${enquiry}`;
   const robots = readFileSync(new URL("../dist/robots.txt", import.meta.url), "utf8");
   const headers = readFileSync(new URL("../dist/_headers", import.meta.url), "utf8");
   const source = readFileSync(new URL("../src/content/site.ts", import.meta.url), "utf8");

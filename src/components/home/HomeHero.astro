@@ -3,24 +3,32 @@ import { getRegistrationDisplayLine } from "../../content/site";
 import { homeHero } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
+import { messages } from "../../content/i18n";
 
 const registrationLine = getRegistrationDisplayLine();
 const alt =
   "Illustration of a physiotherapist helping an older woman with a walking frame at home";
-const landscapeWidths = [1920, 2560, 3840] as const;
+const desktopWidths = [1280, 1672] as const;
 const portraitWidths = [800, 1200, 1600, 2400] as const;
 const srcset = (name: string, widths: readonly number[], ext: string) =>
   widths.map((w) => `/photos/hero/${name}-${w}.${ext} ${w}w`).join(", ");
-const landscapeAvif = srcset("landscape", landscapeWidths, "avif");
+const desktopWebp = srcset("desktop", desktopWidths, "webp");
+// Include cover-cropping and the 3.5% animation overscan in resource selection.
+// The minimum covers the desktop hero's 34rem minimum height on narrow laptops.
+const desktopSizes = "max(108vw, 1008px)";
 const portraitAvif = srcset("portrait", portraitWidths, "avif");
+const t = messages.en.hm.hero;
+const slideCopy = Object.fromEntries(Object.entries(messages).map(([locale, bundle]) => [locale, {
+  pause: bundle.hm.hero.pauseSlides, play: bundle.hm.hero.playSlides,
+}]));
 ---
 
 <link
   rel="preload"
   as="image"
-  type="image/avif"
-  imagesrcset={landscapeAvif}
-  imagesizes="100vw"
+  type="image/webp"
+  imagesrcset={desktopWebp}
+  imagesizes={desktopSizes}
   media="(min-width: 769px)"
   fetchpriority="high"
 />
@@ -34,26 +42,20 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
   fetchpriority="high"
 />
 
-<section id="top" class="hm-hero" aria-labelledby="hm-hero-heading">
+<section id="top" class="hm-hero" data-hm-hero aria-labelledby="hm-hero-heading">
   <div class="hm-hero-media">
+    <div class="hm-hero-slide is-active" data-hm-hero-slide aria-hidden="false">
     <picture>
       <source
         media="(min-width: 769px)"
-        type="image/avif"
-        srcset={landscapeAvif}
-        sizes="100vw"
-      />
-      <source
-        media="(min-width: 769px)"
         type="image/webp"
-        srcset={srcset("landscape", landscapeWidths, "webp")}
-        sizes="100vw"
+        srcset={desktopWebp}
+        sizes={desktopSizes}
       />
       <source
         media="(min-width: 769px)"
-        type="image/jpeg"
-        srcset={srcset("landscape", landscapeWidths, "jpg")}
-        sizes="100vw"
+        type="image/png"
+        srcset="/photos/hero/desktop-original.png"
       />
       <source
         media="(max-width: 768px)"
@@ -75,16 +77,38 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
       />
       <img
         class="hm-hero-photo"
-        src="/photos/hero/landscape-1920.jpg"
+        src="/photos/hero/desktop-original.png"
         alt={alt}
         data-i18n-attr="alt:hm.hero.photoAlt"
-        width="3840"
-        height="2160"
+        width="1672"
+        height="940"
         fetchpriority="high"
       />
     </picture>
+    </div>
+    <div class="hm-hero-slide" data-hm-hero-slide aria-hidden="true">
+      <picture>
+        <source type="image/webp" srcset={srcset("steps", desktopWidths, "webp")}
+          sizes="(max-width: 768px) 165vw, max(108vw, 1008px)" />
+        <img class="hm-hero-photo hm-hero-step-photo" src="/photos/hero/steps-original.png"
+          width="1672" height="941" alt={t.stepsPhotoAlt}
+          data-i18n-attr="alt:hm.hero.stepsPhotoAlt" fetchpriority="low" decoding="async" />
+      </picture>
+    </div>
     <div class="hm-hero-scrim" aria-hidden="true"></div>
     <p class="hm-hero-caption" data-i18n-path="hm.hero.caption">Illustrative image</p>
+    <div class="hm-hero-controls" data-hm-hero-controls role="group" aria-label={t.slidesLabel}
+      data-i18n-attr="aria-label:hm.hero.slidesLabel" hidden>
+      <button type="button" class="hm-hero-dot" data-hm-hero-go="0" aria-pressed="true"
+        aria-label={t.showWalkingPhoto} data-i18n-attr="aria-label:hm.hero.showWalkingPhoto"><span></span></button>
+      <button type="button" class="hm-hero-dot" data-hm-hero-go="1" aria-pressed="false"
+        aria-label={t.showStepsPhoto} data-i18n-attr="aria-label:hm.hero.showStepsPhoto"><span></span></button>
+      <button type="button" class="hm-hero-toggle" data-hm-hero-toggle aria-pressed="false" aria-label={t.pauseSlides}>
+        <svg class="hm-hero-pause-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="3" /></svg>
+        <svg class="hm-hero-play-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m5 2 9 6-9 6Z" fill="currentColor" /></svg>
+      </button>
+    </div>
+    <script type="application/json" data-hm-hero-copy set:html={JSON.stringify(slideCopy).replace(/</g, "\\u003c")} />
   </div>
   <div class="hm-wrap hm-hero-grid">
     <div class="hm-hero-lead">
@@ -112,7 +136,7 @@ const portraitAvif = srcset("portrait", portraitWidths, "avif");
         }
       </ul>
       <div class="hm-hero-actions">
-        <a class="hm-btn hm-btn-primary" href="#contact">
+        <a class="hm-btn hm-btn-primary" href="/enquiry/">
           <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
           <span class="hm-arrow" aria-hidden="true">→</span>
         </a>

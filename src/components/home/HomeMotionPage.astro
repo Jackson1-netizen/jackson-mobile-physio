@@ -6,31 +6,31 @@ import HomeServices from "./HomeServices.astro";
 import HomeHowItWorks from "./HomeHowItWorks.astro";
 import HomeWhyChoose from "./HomeWhyChoose.astro";
 import HomeAbout from "./HomeAbout.astro";
+import HomeMeetJackson from "./HomeMeetJackson.astro";
 import HomeNdis from "./HomeNdis.astro";
 import HomeAreas from "./HomeAreas.astro";
 import HomeReferrers from "./HomeReferrers.astro";
 import HomeFaq from "./HomeFaq.astro";
 import HomeContact from "./HomeContact.astro";
 import HomeFooter from "./HomeFooter.astro";
-import HomeMobileBar from "./HomeMobileBar.astro";
 ---
 
 <div class="hm">
   <HomeHeader />
   <main id="main-content" tabindex="-1">
     <HomeHero />
+    <HomeAbout />
+    <HomeMeetJackson />
     <HomeServices />
     <HomeAreas />
     <HomeReferrers />
     <HomeHowItWorks />
     <HomeWhyChoose />
-    <HomeAbout />
     <HomeNdis />
     <HomeFaq />
     <HomeContact />
   </main>
   <HomeFooter />
-  <HomeMobileBar />
 </div>
 
 <script>

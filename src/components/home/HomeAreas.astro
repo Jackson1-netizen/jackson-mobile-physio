@@ -1,54 +1,88 @@
 ---
+import "../../styles/service-areas.css";
 import HomeLogo from "./HomeLogo.astro";
-import { site } from "../../content/site";
-import { homeAreas, homeSuburbs } from "../../content/home-motion";
-import ServiceAreaMap from "./ServiceAreaMap.astro";
 import HomeIcon from "./HomeIcon.astro";
+import ServiceAreaMap from "./ServiceAreaMap.astro";
+import { site } from "../../content/site";
+import { messages } from "../../content/i18n";
+import { homeAreas, homeMapPins, homeSuburbs, nearbyMapSuburbs } from "../../content/home-motion";
 
+interface Props { pageHeading?: boolean; }
+const { pageHeading = false } = Astro.props;
+const Heading = pageHeading ? "h1" : "h2";
+const t = messages.en.hm.areas;
+const primary = homeSuburbs.map((suburb) => {
+  const point = homeMapPins.find((pin) => pin.name === suburb.name);
+  if (!point) throw new Error("Missing service-area coordinates: " + suburb.name);
+  return { ...suburb, ...point };
+});
+// Nearby areas remain enquiry links below the map, never map marker inputs.
+const nearby = nearbyMapSuburbs;
+const first = primary[0];
+const benefitIcons = ["home", "heart", "people"] as const;
 ---
 
-<section id="areas" class="hm-areas-band">
-  <div class="hm-areas-split">
-    <div class="hm-card-stage">
-      <div class="hm-card-stack" role="group" aria-label={homeAreas.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
-        <article class="hm-print-card hm-print-card-back" lang="en">
-          <HomeLogo sizes="106px" lazy />
-        </article>
-        <article class="hm-print-card hm-print-card-front" lang="en">
-          <p class="hm-print-name">Jackson</p>
-          <p class="hm-print-role">Mobile Physiotherapist</p>
-          <p class="hm-print-phone"><a href={site.phoneHref}>{site.phone}</a></p>
-          <p class="hm-print-email"><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a></p>
-          <div class="hm-print-foot">
-            <p class="hm-print-place">{homeAreas.cardPlace}</p>
-            <p class="hm-print-motto">{homeAreas.motto}</p>
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="hm-areas-copy">
-      <div class="hm-areas-copy-text">
-        <h2 data-i18n-path="hm.areas.heading">{homeAreas.kicker}</h2>
-        <p data-i18n-path="hm.areas.lead">{homeAreas.heading}</p>
-        <ul class="hm-pin-list">
-          {
-            homeSuburbs.map((suburb) => (
-              <li>
-                <a href={suburb.href}>
-                  <span class="hm-pin">
-                    <HomeIcon name="pin" size={18} />
-                  </span>
-                  {suburb.name}
-                </a>
-              </li>
-            ))
-          }
+<section id="areas" class="hm hm-area-section" data-hm-service-areas aria-labelledby="hm-areas-heading">
+  <div class="hm-area-layout">
+    <div class="hm-area-copy">
+      <p class="hm-area-eyebrow"><span aria-hidden="true"></span><span data-i18n-path="hm.areas.kicker">{t.kicker}</span></p>
+      <Heading id="hm-areas-heading" data-i18n-path="hm.areas.heading">{t.heading}</Heading>
+      <p class="hm-area-lead" data-i18n-path="hm.areas.lead">{t.lead}</p>
+      <p class="hm-area-intro" data-i18n-path="hm.areas.body">{t.body}</p>
+      <p class="hm-area-instruction" data-i18n-path="hm.areas.instruction">{t.instruction}</p>
+      <ul class="hm-area-list" aria-label={t.listLabel} data-i18n-attr="aria-label:hm.areas.listLabel">
+        {primary.map((area, index) => (
+          <li>
+            <button type="button" class:list={["hm-area-choice", { "is-selected": index === 0 }]}
+              data-hm-area-choice data-name={area.name} data-lat={area.lat} data-lng={area.lng} data-href={area.href}
+              aria-pressed={index === 0 ? "true" : "false"} aria-controls="hm-service-area-map" disabled>
+              <span class="hm-area-choice-icon"><HomeIcon name="pin" size={19} /></span><span>{area.name}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <a class="hm-area-detail" data-hm-area-detail href={first.href}>
+        <span data-hm-detail-label>{t.areaDetails}</span><span data-hm-area-name>{first.name}</span><span aria-hidden="true">↗</span>
+      </a>
+      <noscript>
+        <ul class="hm-area-noscript-links">
+          {primary.slice(1).map((area) => <li><a href={area.href}>{area.name}</a></li>)}
         </ul>
-      </div>
-      <div class="hm-areas-map-col">
-        <ServiceAreaMap />
-        <p class="hm-map-caption" data-i18n-path="hm.areas.mapCaption">{homeAreas.mapCaption}</p>
-      </div>
+      </noscript>
     </div>
+
+    <div class="hm-area-map-column">
+      <ServiceAreaMap />
+      <p id="hm-area-map-note" class="hm-area-map-note" data-i18n-path="hm.areas.mapCaption">{t.mapCaption}</p>
+      <aside class="hm-area-contact" aria-label={t.cardLabel} data-i18n-attr="aria-label:hm.areas.cardLabel">
+        <a class="hm-area-contact-logo" href="/" aria-label={messages.en.hm.header.logoLabel} data-i18n-attr="aria-label:hm.header.logoLabel">
+          <HomeLogo sizes="(min-width: 1440px) 144px, 120px" lazy alt={t.logoAlt} altPath="hm.areas.logoAlt" />
+        </a>
+        <div class="hm-area-contact-person"><p>Jackson</p><span data-i18n-path="hm.areas.cardRole">{t.cardRole}</span></div>
+        <a class="hm-area-contact-phone" href={site.phoneHref}><HomeIcon name="phone" size={20} /><span>{site.phone}</span></a>
+        <a class="hm-area-contact-email" href={"mailto:" + site.publicEmail}><HomeIcon name="mail" size={21} /><span>{site.publicEmail}</span></a>
+      </aside>
+    </div>
+    <div class="hm-area-nearby">
+      <h3 data-i18n-path="hm.areas.nearbyHeading">{t.nearbyHeading}</h3>
+      <p data-i18n-path="hm.areas.nearbyNote">{t.nearbyNote}</p>
+      <ul class="hm-area-nearby-list" aria-label={t.nearbyHeading} data-i18n-attr="aria-label:hm.areas.nearbyHeading">
+        {nearby.map((area) => (
+          <li><a class="hm-area-choice hm-area-choice-small hm-area-nearby-link"
+            href={"/enquiry/?suburb=" + encodeURIComponent(area.name)}>
+            <HomeIcon name="pin" size={16} /><span>{area.name}</span>
+          </a></li>
+        ))}
+      </ul>
+      <p class="hm-area-other-note" data-i18n-path="hm.areas.otherAreasNote">{t.otherAreasNote}</p>
+    </div>
+    <ul class="hm-area-benefits">
+      {homeAreas.benefits.map((item, i) => (
+        <li><span class="hm-area-benefit-icon" aria-hidden="true"><HomeIcon name={benefitIcons[i]} size={22} /></span>
+          <span><strong data-i18n-path={"hm.areas.benefits." + i + ".title"}>{item.title}</strong>
+          <span data-i18n-path={"hm.areas.benefits." + i + ".body"}>{item.body}</span></span>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>

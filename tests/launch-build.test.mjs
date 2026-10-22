@@ -10,6 +10,13 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const sitePath = join(root, "src/content/site.ts");
 const original = readFileSync(sitePath, "utf8");
 
+// npm is a .cmd shim on Windows. Invoke its real CLI with Node in the copied builds.
+function runBuild(cwd, env) {
+  const npmCli = process.env.npm_execpath;
+  assert.ok(npmCli, "Run the launch-build tests via npm test");
+  execFileSync(process.execPath, [npmCli, "run", "build"], { cwd, env, stdio: "pipe" });
+}
+
 function withDraft(source, value) {
   const flag = value ? "true" : "false";
   if (!source.includes("const draft = true;") && !source.includes("const draft = false;")) {
@@ -41,6 +48,7 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
       filter: (src) => {
         const rel = src.slice(root.length);
         return (
+          !rel.split(sep).some((name) => name === ".env" || name.startsWith(".env.")) &&
           !rel.includes(`${sep}node_modules`) &&
           !rel.includes(`${sep}.git`) &&
           rel !== `${sep}dist` &&
@@ -58,7 +66,7 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     delete env.URL;
     delete env.DEPLOY_PRIME_URL;
     delete env.PUBLIC_SITE_URL;
-    execFileSync("npm", ["run", "build"], { cwd: temp, env, stdio: "pipe" });
+    runBuild(temp, env);
 
     const dist = join(temp, "dist");
     const files = walk(dist);
@@ -66,6 +74,11 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
       "PHY0004088824",
       "Expert physiotherapy",
       "not verified",
+      "Not yet adopted",
+      "Pending owner review",
+      "localhost",
+      "127.0.0.1",
+      "example.com",
       "Draft site",
       "(draft)",
       "Draft preview",
@@ -87,6 +100,14 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.deepEqual(hits, []);
 
     const home = readFileSync(join(dist, "index.html"), "utf8");
+    for (const file of files.filter((file) => file.endsWith(".html"))) {
+      const html = readFileSync(file, "utf8");
+      const metadata = [
+        ...(html.match(/<(?:meta|link)\b[^>]*>/g) || []),
+        ...(html.match(/<script\b[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g) || []),
+      ].join("\n");
+      assert.doesNotMatch(metadata, /homemotion-staging|deploy-preview-\d+|https:\/\/www\.homemotionphysio\.com\.au|localhost|127\.0\.0\.1/i, file);
+    }
     assert.match(home, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/"/);
     assert.match(home, /name="robots" content="index, follow"/);
     assert.match(home, /Personalised physiotherapy/);
@@ -116,7 +137,9 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(home, /href="\/areas\/box-hill\/"/);
     const referral = readFileSync(join(dist, "referral/index.html"), "utf8");
     assert.match(referral, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/referral\/"/);
-    assert.match(referral, /Registration:<\/span> AHPRA registered physiotherapist/);
+    assert.match(referral, /AHPRA registered physiotherapist/);
+    assert.match(referral, /data-i18n-path="referralPage\.designA\.enquire"/);
+    assert.match(referral, /data-referral-print/);
     assert.doesNotMatch(referral, /AHPRA registration/);
     const missing = readFileSync(join(dist, "404.html"), "utf8");
     assert.match(missing, /name="robots" content="noindex, nofollow"/);
@@ -126,7 +149,9 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(privacy, /name="robots" content="index, follow"/);
     assert.match(disclaimer, /name="robots" content="index, follow"/);
     assert.match(privacy, /Last updated:/);
-    assert.match(privacy, /4 October 2026/);
+    assert.match(privacy, /21 October 2026/);
+    assert.match(privacy, /provided by Google Maps/);
+    assert.doesNotMatch(privacy, /loaded from Esri/);
     assert.match(disclaimer, /4 October 2026/);
     assert.doesNotMatch(privacy, /Not yet adopted/);
     assert.doesNotMatch(privacy, /Pending owner review/);
@@ -139,6 +164,8 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     const headers = readFileSync(join(dist, "_headers"), "utf8");
     assert.equal(headers.includes("X-Robots-Tag"), false);
     const sitemap = readFileSync(join(dist, "sitemap-0.xml"), "utf8");
+    const sitemapIndex = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
+    assert.doesNotMatch(sitemap + sitemapIndex, /netlify\.app|https:\/\/www\.homemotionphysio\.com\.au/);
     assert.match(sitemap, /https:\/\/homemotionphysio\.com\.au\/referral\//);
     assert.match(sitemap, /\/privacy\//);
     assert.match(sitemap, /\/disclaimer\//);
@@ -155,6 +182,7 @@ function copyTree() {
     filter: (src) => {
       const rel = src.slice(root.length);
       return (
+        !rel.split(sep).some((name) => name === ".env" || name.startsWith(".env.")) &&
         !rel.includes(`${sep}node_modules`) &&
         !rel.includes(`${sep}.git`) &&
         rel !== `${sep}dist` &&
@@ -182,7 +210,7 @@ function buildCopy(flags) {
   delete env.URL;
   delete env.DEPLOY_PRIME_URL;
   delete env.PUBLIC_SITE_URL;
-  execFileSync("npm", ["run", "build"], { cwd: temp, env, stdio: "pipe" });
+  runBuild(temp, env);
   return temp;
 }
 
@@ -237,7 +265,8 @@ test("adopted legal pages are indexable only after the site leaves draft", { tim
     assert.match(privacy, /name="robots" content="index, follow"/);
     assert.match(disclaimer, /name="robots" content="index, follow"/);
     assert.match(privacy, /Last updated:/);
-    assert.match(privacy, /4 October 2026/);
+    assert.match(privacy, /21 October 2026/);
+    assert.match(privacy, /provided by Google Maps/);
     assert.match(disclaimer, /4 October 2026/);
     assert.doesNotMatch(privacy, /Professional insurance is maintained/);
     assert.match(disclaimer, /Professional insurance is maintained as required for practice\./);

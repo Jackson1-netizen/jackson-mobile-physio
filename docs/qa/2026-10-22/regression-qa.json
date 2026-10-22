@@ -1,0 +1,46 @@
+{
+  "carousel": "pause, manual selection, resume and 10-second automatic advance PASS",
+  "language": "English/Simplified Chinese switch PASS",
+  "faq": "native details open/close PASS",
+  "map/": {
+    "state": "ready",
+    "primary": 8,
+    "nearbyLinks": 14,
+    "selectionAndExternalLink": "PASS",
+    "googleLogo": true
+  },
+  "map/areas/": {
+    "state": "ready",
+    "primary": 8,
+    "nearbyLinks": 14,
+    "selectionAndExternalLink": "PASS",
+    "googleLogo": true
+  },
+  "nearbyPrefill": "PASS",
+  "formRequiredValidation": "PASS",
+  "formPostFailureFallback": {
+    "status": "PASS",
+    "interceptedLocally": true,
+    "fieldNames": [
+      "email",
+      "enquiring-as",
+      "form-name",
+      "funding",
+      "language",
+      "message",
+      "name",
+      "ndis",
+      "phone",
+      "preferred-contact",
+      "service",
+      "suburb"
+    ]
+  },
+  "formAcceptedNavigation": "PASS (locally intercepted response, no hosted submission/email)",
+  "adoptedLegalPages": "PASS",
+  "referral": "both print controls, local A4 PDF and enquiry link PASS; no QR is rendered",
+  "builtInternalPaths": "PASS (all local href paths resolve)",
+  "pageErrors": [],
+  "reducedMotion": "PASS (carousel pause hidden as designed, no contact-card motion added)",
+  "noJs": "PASS (normal-flow enquiry fallback and native form constraints; NDIS hidden value left untouched)"
+}

@@ -4,9 +4,11 @@ interface Props {
   /** Rendered CSS width(s) of the logo, used to pick the 200w / 300w / 400w copy. */
   sizes: string;
   lazy?: boolean;
+  /** i18n path used to translate the alt text, for example hm.areas.logoAlt. */
+  altPath?: string;
 }
 
-const { alt = "", sizes, lazy = false } = Astro.props;
+const { alt = "", sizes, lazy = false, altPath } = Astro.props;
 ---
 
 <picture>
@@ -20,6 +22,7 @@ const { alt = "", sizes, lazy = false } = Astro.props;
     srcset="/logo/home-motion-logo-200.png 200w, /logo/home-motion-logo-300.png 300w, /logo/home-motion-logo-400.png 400w, /home-motion-logo.png 627w"
     sizes={sizes}
     alt={alt}
+    data-i18n-attr={altPath ? `alt:${altPath}` : undefined}
     width="627"
     height="388"
     loading={lazy ? "lazy" : undefined}

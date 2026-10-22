@@ -1,8 +1,10 @@
-# Home Motion — Netlify free-plan staging.
-# Production branch in the Netlify UI must be cursor/design-option-2-b759.
-# main has no copy of this file. Do not leave production on main.
-# Does not attach homemotionphysio.com.au. Does not change DNS.
+# Home Motion — reviewed integration source; account cutover is a separate action.
+# Future production source: cto/home-motion-integration, after PR #10 review/merge.
+# Never select the agent branch, legacy design branch or main for future production.
+# This file does not change Netlify settings, publish, attach a domain or change DNS.
 # Dashboard steps: docs/DEPLOYMENT.md
+# HOME-002 non-production previews are prepared but disabled by default.
+# Approval proposal: docs/STAGING_PREVIEW_PROPOSAL.md. No production-branch change.
 
 [build]
   command = "npm run build"
@@ -14,7 +16,7 @@
   # package.json requires Node >= 22.12.0. No secrets belong here.
   NODE_VERSION = "22"
 
-# Staging site. Netlify sets CONTEXT=production for the production branch.
+# Netlify sets CONTEXT=production for its configured production source.
 [context.production]
   command = "npm run build"
 
@@ -22,8 +24,11 @@
 [context.deploy-preview]
   command = "npm run build"
 
-# Same command if Netlify selects the branch context for the staging branch.
-[context."cursor/design-option-2-b759"]
+[context.branch-deploy]
+  command = "npm run build"
+
+# Same command if Netlify selects the integration branch context.
+[context."cto/home-motion-integration"]
   command = "npm run build"
 
 # Security headers and X-Robots-Tag are written at build time

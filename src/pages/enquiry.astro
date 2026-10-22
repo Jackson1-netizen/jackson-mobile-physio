@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactExperience from "../components/ContactExperience.astro";
+import { site } from "../content/site";
+
+const title = `Contact | ${site.businessName}${site.draft ? " (draft)" : ""}`;
+---
+
+<BaseLayout
+  translatable={true}
+  canonicalPath="/enquiry"
+  title={title}
+  description="Send an enquiry to Home Motion Physiotherapy. A name and phone number are enough for a first contact. Please do not include health information."
+>
+  <ContactExperience headingLevel="h1" />
+</BaseLayout>

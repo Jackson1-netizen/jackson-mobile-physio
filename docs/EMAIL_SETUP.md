@@ -1,5 +1,7 @@
 # Email setup
 
+> 22 October 2026: ACCOUNT-SIDE VERIFICATION REQUIRED for current Workspace, DNS and Netlify notification settings/delivery. Dated tests below are historical; current form fields and release instructions are in DEPLOYMENT.md. No account changes in this remediation.
+
 Public identities are on the draft site. Google Workspace is the mail host for `homemotionphysio.com.au` (MX `smtp.google.com`). As of about 4:55 AM AEST on 3 Oct 2026, SPF `v=spf1 include:_spf.google.com ~all` is valid, DKIM signing is active (selector `google`, `google._domainkey` resolves, admin status “Authenticating email with DKIM”), and DMARC `v=DMARC1; p=none` is live. The aggregate report address is not written in this repo.
 
 The website does not send mail itself. The enquiry form is a **Netlify Form**. No Formspree, EmailJS, Resend, SMTP, or other mail API is used, and none should be added. No extra paid account is required.

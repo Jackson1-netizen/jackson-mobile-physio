@@ -1,91 +1,28 @@
-# Next steps — launch checklist
+# Next steps — final independent review
 
-> **Superseded / current state (2026-10-02):** `docs/LAUNCH_STATUS.md` is the source of truth. `site.draft = true` is the only indexing switch. ABN 75 612 731 757 and AHPRA PHY0004088824 are already on the draft site. Staging is live on Netlify. The domain is still parked. **Do not change DNS** until Jackson asks.
+Updated 22 October 2026. LAUNCH_STATUS.md and DEPLOYMENT.md are the active source
+and launch runbooks; historical Phase 1/design-branch instructions are superseded.
 
-The sections below are the earlier checklist and are kept for history. The heading “When Jackson confirms AHPRA registration is granted” is outdated: that confirmation is already recorded in `docs/LAUNCH_STATUS.md`. Do not treat those steps as still to do. Where this file disagrees with `docs/LAUNCH_STATUS.md`, follow `docs/LAUNCH_STATUS.md`.
+1. Review the final remediation report and browser evidence for the four P0/P1
+   fixes. Candidate is agent/HOME-002-about-enquiry; PR #10 stays OPEN into
+   cto/home-motion-integration. Keep main untouched.
+2. Have a fresh independent reviewer give GO/NO-GO. This remediation does not
+   approve public launch, merge the PR, deploy or change accounts.
+3. After independent GO, Jackson separately approves integration merge and Netlify
+   production-source cutover. The working agent branch must never be permanent
+   production.
+4. ACCOUNT-SIDE VERIFICATION REQUIRED: actual Netlify source/deploy/settings,
+   restricted Maps key/build variable, anonymous Forms/notification delivery,
+   Workspace aliases and current domain/DNS/HTTPS.
+5. Public primary domain/canonical is **https://homemotionphysio.com.au/** (apex);
+   **www redirects to apex**.
+6. Only after explicit launch approval: change the real draft switch, appropriate
+   account access settings and deploy the reviewed integration source. Do not
+   execute those operations in this remediation.
 
----
+Privacy and disclaimer are already adopted in repository configuration. The site
+is still draft/noindex. Current referral page is text-led concept A, with print
+controls and no rendered QR. Current map is Google Maps: 8 main pins, 14 Nearby
+enquiry links. The form's required fields are listed in DEPLOYMENT.md.
 
-## Design comparison (do not mix)
-
-| Branch | What it is |
-|--------|------------|
-| `main` | **Saved** Home Motion V1 — original forest/sage homepage Jackson liked. Baseline. Do not overwrite. |
-| `cursor/chatgpt-version-b759` | **Archived option 1** — ChatGPT visual redesign (cream / orange / medium green). Frozen. Do not keep experimenting here. |
-| `cursor/design-option-2-b759` | **Option 2** — second design branch. New visual experiments go here. |
-
-Jackson will come back and pick which design to use. Keep experimental redesigns off `main`. Do not merge into `main` until Jackson chooses.
-
-## Website V2 (workflow — Concept 1 refined)
-
-1. **Review V1:** `http://127.0.0.1:4721/` (palette A, draft, noindex).  
-2. **Archive:** `/concepts/1/` for B/C comparison only.  
-3. **Next:** Explicit **writing-plans** when ready — not production multi-page yet.  
-4. **Then:** executing-plans → production multi-page Astro site → Lighthouse/SEO audit.  
-5. **Branch:** `cursor/website-v2-plan-e732`.
-
----
-
-## When Jackson confirms AHPRA registration is granted
-
-Jackson must **tell you in writing** (message to Cursor agent or confirmed note) before any public launch step below.
-
-1. **`src/content/site.ts`**
-   - Set `ahpraStatus` to `"Registered"` (or the exact label you agree with your adviser).
-   - Set `ahpraRegistrationNumber` to the real AHPRA number (no placeholders).
-   - Replace `ahpraNotice` with accurate registered-physiotherapist wording approved by Jackson.
-   - Update qualifications line for AHPRA from `"Pending"` to the registration display you want on the site.
-
-2. **Still draft until you choose go-live**
-   - Leave `draft: true` until Jackson also approves removing draft mode (privacy review, email, domain).
-
-3. **When ready for public indexing** (only after AHPRA + email + privacy review):
-   - Set `draft: false` in `site.ts`.
-   - `BaseLayout.astro` will emit `index, follow` when `draft` is false.
-   - Update `src/pages/robots.txt.ts` to allow crawling and point to the live sitemap URL.
-   - Set `websiteUrl` in `site.ts` to the **real** production URL (used for canonical, OG, JSON-LD, sitemap — still not shown as body copy unless you add it deliberately).
-   - Remove or shorten the visible draft banner (`DraftBanner.astro` is tied to `site.draft`).
-   - Deploy to your chosen host (not done by agents until you ask).
-
-4. **After launch**
-   - Add verified Google Business Profile and link real Google reviews in the home “Reviews” section (currently an honest empty slot).
-   - Submit sitemap in Search Console.
-
----
-
-## Before launch (still required)
-
-| Item | Action |
-|------|--------|
-| **Business email** | Public addresses are in `site.publicEmail` / `site.referralEmail`. The enquiry form is a Netlify Form; the notification to `hello@` is a Netlify dashboard setting (`docs/EMAIL_SETUP.md`). Leave `EMAIL_DELIVERY_READY` unset. |
-| **Degree / university** | Confirm qualifications line (currently placeholder). |
-| **Privacy** | Legal review of `site.privacy`; set `privacy.lastUpdated`. |
-| **Legal trading name** | Confirm or remove `legalNamePlaceholder`. |
-| **Production URL** | Set `websiteUrl` when domain is known. |
-| **Deploy** | Netlify staging only. Production branch is `cursor/design-option-2-b759` after this pull request is merged there. Do not use `main`. Do not attach the production domain (`docs/DEPLOYMENT.md`). |
-
----
-
-## Local development
-
-```bash
-npm install
-npm run dev    # http://127.0.0.1:4721
-npm run build
-```
-
-## Content editing
-
-- Business facts and launch switches: `src/content/site.ts`
-- UI strings (EN / 繁體 / 简体): `src/content/i18n.ts`
-- Suburb landing copy: `src/content/suburbs.ts`
-- Re-export: `src/content/index.ts`
-
-## Key routes
-
-| Path | Purpose |
-|------|---------|
-| `/` | Home — hero, about, services, how it works, NDIS, areas, FAQ, enquiry, referrers |
-| `/areas/[slug]` | Suburb landing pages (8 suburbs) |
-| `/referral` | Printable referral sheet |
-| `/privacy` | Privacy policy (draft) |
+Performance/P2/P3, old assets and new designs remain outside this pass.
