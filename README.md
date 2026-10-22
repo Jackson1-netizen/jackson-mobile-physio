@@ -2,7 +2,7 @@
 
 Draft marketing site for **Home Motion Physiotherapy** — mobile physiotherapy in Melbourne's eastern suburbs. Built with **Astro 7**, **TypeScript**, and **Tailwind CSS 4**.
 
-> **Not live:** `site.draft = true` is the launch switch (`noindex` and `robots.txt` disallow). ABN 75 612 731 757. AHPRA general registration PHY0004088824. **Do not deploy or change DNS** until Jackson asks. Status: `docs/LAUNCH_STATUS.md`.
+> **Not live:** `site.draft = true` is the launch switch (`noindex` and `robots.txt` disallow). ABN 75 612 731 757. AHPRA registration is stated without a published practitioner number. **Do not deploy or change DNS** until Jackson asks. Status: `docs/LAUNCH_STATUS.md`.
 
 ## Run locally
 
@@ -37,9 +37,11 @@ Do not scatter business copy across components.
 |------|---------|
 | `/` | Home |
 | `/areas/box-hill` (etc.) | Suburb landing pages |
-| `/referral` | Printable referral sheet |
-| `/privacy` | Privacy policy (draft — pending owner review) |
-| `/disclaimer` | Website disclaimer (draft — pending owner review) |
+| `/referral` | Text-led referral information and A4 print controls (no QR) |
+| `/privacy` | Adopted privacy policy (site remains draft/noindex) |
+| `/disclaimer` | Adopted disclaimer (site remains draft/noindex) |
+
+Current candidate: agent/HOME-002-about-enquiry → OPEN PR #10 → cto/home-motion-integration → future production. Public canonical/primary domain is apex https://homemotionphysio.com.au/; www redirects to apex. See docs/DEPLOYMENT.md.
 
 ## GitHub
 
@@ -49,6 +51,6 @@ See `docs/GITHUB_WORKFLOW.md`.
 
 ## Documentation
 
-- `docs/NEXT_STEPS.md` — **what to flip when AHPRA is granted**
-- `docs/EMAIL_SETUP.md` — public vs private email routing (no live sending yet)
+- `docs/NEXT_STEPS.md` — final independent review and separately approved release steps
+- `docs/EMAIL_SETUP.md` — mail routing history; current delivery needs account-side verification
 - `docs/PROJECT_BRIEF.md`, `docs/DECISIONS.md`, `docs/DAILY_LOG.md`

@@ -1,0 +1,12 @@
+{
+  "checkedOnClientDate": "2026-10-22",
+  "readOnly": true,
+  "site": "homemotion-staging",
+  "productionBranch": "cursor/design-option-2-b759",
+  "repository": "https://github.com/Jackson1-netizen/jackson-mobile-physio",
+  "customDomain": null,
+  "visitorAccess": true,
+  "publishedDeploy": "6ac135d1e88c900008f74349",
+  "publishedCommit": "7e74e9c42aa387495e0461fdb205987b8dcb8560",
+  "externalMutations": false
+}

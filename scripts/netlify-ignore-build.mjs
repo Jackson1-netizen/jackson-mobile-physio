@@ -3,9 +3,9 @@
  * Exit 0 skips the build. Exit 1 lets it run.
  *
  * Build only:
- * - CONTEXT=production and BRANCH=cursor/design-option-2-b759
- *   (Netlify's staging production branch; no custom domain)
- * - CONTEXT=deploy-preview when the pull request targets that same branch
+ * - CONTEXT=production and BRANCH=cto/home-motion-integration
+ *   (the reviewed PR #10 integration target; dashboard cutover is separate)
+ * - existing non-production previews, including legacy design PR previews
  *
  * HOME-002 branch/PR previews are opt-in, after Jackson approves dashboard changes:
  * HOME_MOTION_STAGING_PREVIEWS=enabled, only in non-production contexts.
@@ -19,7 +19,7 @@
  */
 import { pathToFileURL } from "node:url";
 
-const STAGING_BRANCH = "cursor/design-option-2-b759";
+const LEGACY_PREVIEW_BRANCH = "cursor/design-option-2-b759";
 const WORK_BRANCH = "agent/HOME-002-about-enquiry";
 const INTEGRATION_BRANCH = "cto/home-motion-integration";
 
@@ -38,12 +38,12 @@ export async function decide(env = process.env, fetchImpl = globalThis.fetch) {
   const branch = branchName(env.BRANCH);
   const previewsApproved = env.HOME_MOTION_STAGING_PREVIEWS === "enabled";
 
-  if (context === "production" && branch === STAGING_BRANCH) {
-    return { allow: true, reason: "production deploy of the staging branch" };
+  if (context === "production" && branch === INTEGRATION_BRANCH) {
+    return { allow: true, reason: "production deploy of the reviewed integration branch" };
   }
 
-  if (context === "deploy-preview" && branch === STAGING_BRANCH) {
-    return { allow: true, reason: "deploy preview checked out as the staging branch" };
+  if (context === "deploy-preview" && branch === LEGACY_PREVIEW_BRANCH) {
+    return { allow: true, reason: "legacy non-production design preview" };
   }
 
   if (context === "branch-deploy" && branch === WORK_BRANCH && previewsApproved) {
@@ -86,8 +86,8 @@ export async function decide(env = process.env, fetchImpl = globalThis.fetch) {
     return { allow: false, reason: `skipped: could not read the pull request base (${message})` };
   }
 
-  if (base === STAGING_BRANCH) {
-    return { allow: true, reason: `deploy preview of pull request #${reviewId} into ${STAGING_BRANCH}` };
+  if (base === LEGACY_PREVIEW_BRANCH) {
+    return { allow: true, reason: `legacy deploy preview of pull request #${reviewId} into ${LEGACY_PREVIEW_BRANCH}` };
   }
 
   if (previewsApproved && base === INTEGRATION_BRANCH && head === WORK_BRANCH &&

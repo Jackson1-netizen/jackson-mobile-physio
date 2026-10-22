@@ -4,7 +4,7 @@ import { messages } from "../content/i18n";
 const copy = messages.en.cta;
 ---
 
-<aside class="connect-card no-print" data-connect-card>
+<aside class="connect-card no-print" data-connect-card hidden>
   <a class="connect-link" href="/enquiry/#enquiry-form">
     <span class="connect-icon" aria-hidden="true">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -25,6 +25,9 @@ const copy = messages.en.cta;
     </svg>
   </button>
 </aside>
+<noscript>
+  <a class="connect-fallback no-print" href="/enquiry/#enquiry-form">{copy.openEnquiry}</a>
+</noscript>
 
 <script>
   const card = document.querySelector<HTMLElement>("[data-connect-card]");
@@ -32,6 +35,7 @@ const copy = messages.en.cta;
     const close = card.querySelector<HTMLButtonElement>(".connect-close");
     const blockers = [...document.querySelectorAll<HTMLElement>(".cx, footer")];
     const menu = document.querySelector<HTMLDetailsElement>("details.hm-menu");
+    const hero = document.querySelector<HTMLElement>("[data-hm-hero], .ref-a-hero");
     let dismissed = false;
     const visible = new Set<Element>();
     const intersectsViewport = (element: Element) => {
@@ -40,10 +44,23 @@ const copy = messages.en.cta;
     };
     // Start with the current scroll position, including a restored Contact anchor.
     blockers.filter(intersectsViewport).forEach((element) => visible.add(element));
+    let heroVisible = Boolean(hero && intersectsViewport(hero));
+    const checkHero = () => {
+      if (!hero) return;
+      const rect = hero.getBoundingClientRect();
+      // Hide until 64px past the hero; re-hide on return only when it enters
+      // the viewport. This dead band avoids flicker around the scroll boundary.
+      heroVisible = rect.width > 0 && rect.height > 0 && rect.top < window.innerHeight &&
+        rect.bottom > (heroVisible ? -64 : 0);
+    };
     const update = () => {
-      // A scroll must not remove the link from under a keyboard user's focus.
+      // Preserve focus while avoiding form/footer regions. On returning to the
+      // hero, hand focus to its primary action before hiding the fixed overlay.
       const focused = card.contains(document.activeElement);
-      card.hidden = dismissed || (!focused && (visible.size > 0 || Boolean(menu?.open)));
+      if (focused && heroVisible) {
+        hero?.querySelector<HTMLElement>(".hm-hero-actions a, .ref-a-actions a")?.focus({ preventScroll: true });
+      }
+      card.hidden = dismissed || Boolean(menu?.open) || heroVisible || (!focused && visible.size > 0);
     };
     update();
     if (typeof IntersectionObserver === "function") {
@@ -55,15 +72,22 @@ const copy = messages.en.cta;
         update();
       });
       blockers.forEach((element) => observer.observe(element));
-    } else {
-      const check = () => {
-        visible.clear();
-        blockers.filter(intersectsViewport).forEach((element) => visible.add(element));
-        update();
-      };
-      window.addEventListener("scroll", check, { passive: true });
-      window.addEventListener("resize", check);
     }
+    let frame = 0;
+    const onViewportChange = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        checkHero();
+        if (typeof IntersectionObserver !== "function") {
+          visible.clear();
+          blockers.filter(intersectsViewport).forEach((element) => visible.add(element));
+        }
+        update();
+      });
+    };
+    window.addEventListener("scroll", onViewportChange, { passive: true });
+    window.addEventListener("resize", onViewportChange);
     menu?.addEventListener("toggle", update);
     card.addEventListener("focusout", () => requestAnimationFrame(update));
     close?.addEventListener("click", () => {
@@ -93,6 +117,7 @@ const copy = messages.en.cta;
   }
 
   .connect-card[hidden], .connect-close[hidden] { display: none; }
+  .connect-fallback { display: block; width: fit-content; margin: 1.5rem auto; }
 
   .connect-link {
     display: flex;

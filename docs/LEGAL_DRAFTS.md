@@ -1,24 +1,31 @@
-# Legal drafts — pending owner review
+# Legal page adoption and launch indexing
 
-`/privacy` and `/disclaimer` are **drafts**. They are not legal advice and they have not been adopted as the practice’s policy.
+Updated 22 October 2026. Filename retained for existing links.
 
-Jackson needs to read them before launch. He may also want a lawyer or his professional association to review them. Until he approves them:
+Privacy and disclaimer are **adopted in repository configuration**:
+privacyAdopted = true and disclaimerAdopted = true in src/content/site.ts.
+Privacy displays **21 October 2026**, including Google Maps disclosure;
+disclaimer displays **4 October 2026**. The site-wide draft switch remains true,
+so both stay noindex until an approved public launch. An isolated live simulation
+must include them in the sitemap and remove their draft/adoption warnings.
 
-- The pages keep their draft banners.
-- `docs/LAUNCH_STATUS.md` keeps privacy review under NEEDS JACKSON.
-- Do not remove the draft wording just to make the site look finished.
+Adoption records owner/configuration approval, not independent legal certification
+or legal advice. This technical pass does not revise adopted legal wording.
 
-The copy lives in `src/content/site.ts` (`privacy` and `disclaimer`) so names, ABN, AHPRA number, and emails stay in one place.
+Current facts relevant to the pages:
 
-What the drafts try to cover, for his review:
+- Business identity and ABN come from central config. AHPRA registration is stated
+  in words; practitioner number/expiry are not rendered; placeholders stay hidden.
+- First-contact form requires name, role, email, phone, suburb, service, funding,
+  preferred contact and short message. Language/NDIS checkbox are optional.
+  It asks people not to send clinical details or attachments.
+- Netlify Forms handles submissions; public mail addresses are hello@ and
+  referrals@ at the business domain. No new mail API.
+- Google Maps is the active provider, not Esri; no device geolocation is used.
+- NDIS plan-managed/self-managed enquiries welcome; no registered-provider claim
+  or funding guarantee.
 
-- Privacy Act 1988 (Cth) and the Australian Privacy Principles, in plain language.
-- Health information, including the Health Records Act 2001 (Vic) as a pointer, not a full restatement.
-- The website form collects first-contact details: name, enquiring role, email, phone, suburb, service, funding pathway, preferred contact method, and a short reason are required. Preferred language and the NDIS-plan flag are optional. It asks people not to send health information that way.
-- Home Motion Physiotherapy is the registered business name of Wai Wa Law, sole trader, ABN 75 612 731 757.
-- General AHPRA registration PHY0004088824. No expiry date.
-- The site does not claim to be an NDIS registered provider and does not guarantee funding.
-- Email for the domain is hosted with Google Workspace, which may store messages outside Australia.
-- The enquiry form is a Netlify Form. Netlify stores the submission and can email it to `hello@homemotionphysio.com.au`. Netlify may process that submission outside Australia. The site does not keep its own database of form entries. The website is a Netlify preview only; the production domain is not attached.
-
-After he approves the text, replace the “pending owner review” status with the date he adopts it, and remove the draft banner on those two pages only. Leave `site.draft` true until the rest of the launch checklist is done.
+**ACCOUNT-SIDE VERIFICATION REQUIRED:** current third-party processing/account
+configuration, hosted Forms delivery, Workspace routing, domain/hosting state and
+subsequent professional/owner approvals are not proved by repository flags.
+See DEPLOYMENT.md and the final independent review.

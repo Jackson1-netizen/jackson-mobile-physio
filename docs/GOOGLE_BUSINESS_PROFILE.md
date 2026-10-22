@@ -1,6 +1,6 @@
 # Google Business Profile — editable draft
 
-> **Superseded / current state (2026-10-02):** Do not create the profile yet. Current facts are in `docs/LAUNCH_STATUS.md`. The public brand is Home Motion / Home Motion Physiotherapy, not “WAI WA LAW”. There is no `example.com` placeholder. `hello@homemotionphysio.com.au` receives the Netlify form notification; an outside-sender test is still open. The website URL is still the parked domain until DNS cutover. The referral QR points at `https://homemotionphysio.com.au/referral/` and opens that parked page until then.
+> **22 October 2026:** Do not create or publish a profile during remediation. Current launch instructions are in LAUNCH_STATUS.md and DEPLOYMENT.md. ACCOUNT-SIDE VERIFICATION REQUIRED for current mail/domain/profile state. Current referral concept A renders no QR; any later collateral target is the apex /referral/ URL. The checklist below is future profile planning, not evidence of active accounts.
 
 **Status:** TODO / NOT CONFIRMED — do not publish until business details are verified and Jackson asks.
 
@@ -57,7 +57,7 @@ Align with website list — mobility, strength and balance, functional exercise,
 
 - [ ] Home Motion, phone, email, and domain live and match the website (name, phone, and ABN confirmed in the repo)  
 - [ ] Website removed from draft (`noindex` / robots) only when appropriate  
-- [ ] Referral sheet URL matches the printed QR code (`https://homemotionphysio.com.au/referral/`) once that page is on HTTPS  
+- [ ] If a QR is later printed, verify its target (`https://homemotionphysio.com.au/referral/`) once that page is on HTTPS
 - [ ] Privacy policy URL added  
 - [ ] ABN on footer confirmed  
-- [ ] Second person reviews NDIS and AHPRA wording  
+- [ ] Second person reviews NDIS and AHPRA wording

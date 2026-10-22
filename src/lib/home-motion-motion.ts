@@ -50,7 +50,6 @@ export function initHomeMotion(root: ParentNode = document): void {
 
   initHeaderOffset(root);
   initScrollSpy(root);
-  initMenu(root);
 }
 
 function initHeaderOffset(root: ParentNode): void {
@@ -93,48 +92,4 @@ function initScrollSpy(root: ParentNode): void {
     { rootMargin: "-40% 0px -55% 0px" },
   );
   sections.forEach((section) => spy.observe(section));
-}
-
-function initMenu(root: ParentNode): void {
-  const menu = root.querySelector<HTMLDetailsElement>("details.hm-menu");
-  const summary = menu?.querySelector<HTMLElement>("summary");
-  const panel = menu?.querySelector<HTMLElement>(".hm-menu-panel");
-  if (!menu || !summary || !panel) return;
-
-  const setExpanded = () => {
-    summary.setAttribute("aria-expanded", menu.open ? "true" : "false");
-  };
-  setExpanded();
-
-  menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      menu.open = false;
-    });
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && menu.open) {
-      menu.open = false;
-      summary.focus();
-    }
-  });
-  document.addEventListener("click", (event) => {
-    if (menu.open && !menu.contains(event.target as Node)) menu.open = false;
-  });
-  menu.addEventListener("focusout", (event) => {
-    const next = event.relatedTarget as Node | null;
-    if (menu.open && next && !menu.contains(next)) menu.open = false;
-  });
-
-  // Above the fold the draft banner pushes the header down, so cap the panel from its real position.
-  menu.addEventListener("toggle", () => {
-    setExpanded();
-    panel.style.maxHeight = "";
-    if (!menu.open) return;
-    const available = window.innerHeight - panel.getBoundingClientRect().top - 12;
-    const cssMax = Number.parseFloat(getComputedStyle(panel).maxHeight);
-    const limit = Math.min(Number.isFinite(cssMax) ? cssMax : available, available);
-    if (panel.scrollHeight > limit) panel.style.maxHeight = `${Math.max(limit, 160)}px`;
-    const first = panel.querySelector<HTMLElement>("a");
-    if (first && !panel.contains(document.activeElement)) first.focus();
-  });
 }

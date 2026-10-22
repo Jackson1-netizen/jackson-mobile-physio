@@ -1,3 +1,5 @@
+> **Current release decision — 22 October 2026:** candidate → PR #10 → cto/home-motion-integration → future production. Apex primary, www → apex. Older design-source/launch entries below are historical. Current runbook: DEPLOYMENT.md. No merge, deployment or account change authorized in remediation.
+
 # Decisions log
 
 Append-only record. Do not silently overwrite prior entries.

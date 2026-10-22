@@ -1,165 +1,119 @@
-# Deployment — Netlify staging
+# Deployment and launch runbook
 
-> 2026-10-21: HOME-002 non-production preview preparation is documented in
-> [STAGING_PREVIEW_PROPOSAL.md](STAGING_PREVIEW_PROPOSAL.md). It is awaiting Jackson's
-> approval; no dashboard settings were changed. Its explicit branch/PR preview plan
-> supersedes the historical "production branch only" guidance below when approved.
+Updated 22 October 2026. Public launch requires a fresh independent GO/NO-GO review
+and Jackson's approval. This runbook does not authorize external changes.
 
-Staging is live at **https://homemotion-staging.netlify.app**. `site.draft` is still `true`, so the site stays `noindex`. There is no custom domain. `main` is untouched and must not be deployed: it has no `netlify.toml` and is the older site.
+## Source and release flow
 
-## Verified on 3 Oct 2026
+- Repository: Jackson1-netizen/jackson-mobile-physio.
+- Candidate: agent/HOME-002-about-enquiry; audit/remediation starting SHA:
+  1f25c916d259694729e078f7e0f4ac83b3da5faa. Delivery SHA is recorded in the final report.
+- PR #10 is OPEN into cto/home-motion-integration. The quality-gate workflow targets
+  the same integration branch.
+- Intended flow: candidate → reviewed PR #10 → integration → production.
+- Future production source: **cto/home-motion-integration**. The agent branch,
+  cursor/design-option-2-b759 and main are not production sources.
+- The repository gate does not change Netlify's dashboard source. Do not merge,
+  deploy or change that setting during remediation.
 
-- Git: pull request #3 is merged into `cursor/design-option-2-b759` (merge commit `a5f5745`). `main` was not updated.
-- Netlify production branch: `cursor/design-option-2-b759`.
-- Branch deploys: production branch only. Deploy previews: pull requests against that branch.
-- No custom domain. No environment variables set in Netlify.
-- Visitor Access / team login is on. Anonymous requests get **HTTP 401**. That is acceptable for staging. It must be removed at launch, or the public enquiry form will fail.
-- Netlify Forms detection is on. Form `enquiry` is detected. An email notification for `enquiry` goes to `hello@homemotionphysio.com.au`.
-- As of about **4:55 AM AEST on 3 Oct 2026**, that path is verified on staging. The test submission “TEST - staging check (please ignore)” at 4:45 AM AEST is in Netlify Forms (name, phone, email, preferred language, reason, suburb, NDIS checkbox). The notification from `formresponses@netlify.com`, subject “Form submission from enquiry form:”, arrived in the `hello@` Workspace inbox, not in Spam.
-- Google Workspace: DKIM signing is **active** (admin status “Authenticating email with DKIM”; `google._domainkey` resolves). SPF `v=spf1 include:_spf.google.com ~all` is valid. DMARC `v=DMARC1; p=none` is live. `hello@` and `referrals@` are confirmed aliases on the Workspace user. An outside-sender test to those aliases is still open. Consider `p=quarantine` only after monitoring.
+## Repository build gate
 
-## Do not do these yet
+netlify.toml: Node 22 (package.json requires >=22.12.0), npm run build, publish dist,
+ignore command node scripts/netlify-ignore-build.mjs. Exit **1 builds**, **0 skips**.
 
-- Do not add `homemotionphysio.com.au` as a custom domain in Netlify.
-- Do not change VentraIP DNS. The launch records are at the bottom of this file and need Jackson’s approval.
-- Do not merge this work into `main`, and do not set Netlify’s production branch to `main`.
-- Do not set `site.draft` to `false`.
-- Do not turn off Visitor Access until the launch steps below.
-- Do not add Formspree, EmailJS, Resend, SMTP, or any other mail API. Netlify Forms is the form handler. No extra paid account is required.
+| Context / source | Gate |
+| --- | --- |
+| production / cto/home-motion-integration | Allow |
+| production / old design, agent, main, unrelated | Skip |
+| branch-deploy / agent | Only with HOME_MOTION_STAGING_PREVIEWS=enabled |
+| deploy-preview / same-repo agent PR into integration | That opt-in plus verified numeric REVIEW_ID |
+| Existing legacy design PR preview | Existing non-production behaviour retained |
+| Unrelated preview or failed GitHub lookup | Skip |
 
-## Do not do these
+The opt-in never grants production permission. PR lookup uses public GitHub without
+a token. Direct tests: node --test tests/netlify-ignore.test.mjs.
 
-- Do not add `homemotionphysio.com.au` as a custom domain in Netlify.
-- Do not change VentraIP DNS. The later records are written at the bottom of this file and need Jackson’s separate approval.
-- Do not merge this work into `main`. Do not set Netlify’s production branch to `main`.
-- Do not set `site.draft` to `false`.
-- Do not turn on branch deploys for `main` or any other branch. The only steady deploy is the staging production branch.
-- Do not add Formspree, EmailJS, Resend, SMTP, or any other mail API. Netlify Forms is the form handler. No extra paid account is required.
+## Canonical and indexing
 
-## What the repo already configures
+**Production canonical and primary public domain: https://homemotionphysio.com.au/
+(APEX). Redirect direction: www → apex**, preserving path and query.
 
-| Piece | Where | What it does |
-| --- | --- | --- |
-| Build | `netlify.toml` | `npm run build`, publish `dist`, Node 22. |
-| Which deploys build | `scripts/netlify-ignore-build.mjs` | Exit 0 skips the build. Exit 1 builds it. |
-| Headers | `scripts/write-netlify-headers.mjs` | Writes `public/_headers` (gitignored) before Astro copies it to `dist`. |
-| Canonical origin | `scripts/site-origin.mjs` | Staging and preview URLs stay on the Netlify hostname. |
-| Enquiry form | `src/components/EnquiryForm.astro` | Netlify Form `enquiry`. Notification address is a dashboard setting, not a secret in Git. |
+scripts/site-origin.mjs supplies canonical, Open Graph, JSON-LD and sitemap origins.
+PUBLIC_SITE_URL, if used at a later launch, must be the apex origin; leave it unset
+on staging. Changing it does not configure DNS.
 
-`npm run build` runs the header script, then `astro build`.
+- Real checkout retains the single const draft = true in src/content/site.ts.
+- Draft: HTML noindex, nofollow; robots Disallow: /; generated X-Robots-Tag noindex.
+- Production simulation with draft=false: ordinary pages indexable, draft banners
+  absent, robots Allow: / and Disallow: /concepts/, apex sitemap. The 404 stays
+  noindex and has no canonical.
+- Non-production preview response headers stay noindex even if draft is simulated
+  false. A preview is not proof of public indexing.
+- Privacy and disclaimer are adopted in configuration, independently of site draft.
 
-### Why the production branch is not `main`
+scripts/write-netlify-headers.mjs writes ignored public/_headers before Astro
+copies it to dist. CSP supports the active Google Maps SDK, tiles, connections,
+fonts and styles, retaining its existing unsafe-eval allowance. Forms post only
+to self; camera, microphone, geolocation and payment remain disabled.
+Actual hosted response headers and Maps console errors still require verification.
 
-`main` is the older site and has no `netlify.toml`. Netlify reads that file from the branch it is building. If the production branch were `main`, the first production deploy would not see this ignore script. Netlify would guess the build settings and publish that old site at the public `*.netlify.app` URL, without this `noindex` header.
+## Enquiry and referral
 
-Set the production branch to `cursor/design-option-2-b759` only after this pull request is merged into that branch, so the file is actually on it. That deploy is staging. It does not attach the production domain.
+The active form is ContactExperience.astro, reused on / and /enquiry/. Netlify Form
+enquiry uses POST, data-netlify, bot-field honeypot and hidden form-name.
+Required: name (100 chars), enquiring-as, email (254), phone (20), suburb (80),
+service, funding, preferred-contact, message (1000).
+Preferred language and NDIS-plan checkbox are optional; email and phone both remain
+required. The form asks people not to send clinical details or attachments.
 
-A real launch later is a separate decision with Jackson: which branch is production, and when the domain is attached. Do not make that decision by flipping `site.draft` on this staging URL.
+JavaScript validates and posts URL-encoded data to /, showing success only for an
+OK response. Native POST targets /enquiry-received/. Local Astro is not Netlify
+Forms: local rejection must preserve the error and email fallback. General address:
+hello@homemotionphysio.com.au; referrals: referrals@homemotionphysio.com.au.
+No new mail API or submission database.
 
-### Which deploys are allowed
+/referral/ is approved text-led concept A with enquiry, phone, email and print
+controls. **The current page renders no QR code.** site.referralSheetUrl retains
+the apex /referral/ URL for future collateral; it does not prove a QR is rendered
+or that the public domain is live.
 
-`scripts/netlify-ignore-build.mjs` reads Netlify’s `CONTEXT`, `BRANCH`, and, for a pull request, `REVIEW_ID`:
+## Environment variables — names only
 
-- **Build** when `CONTEXT` is `production` and `BRANCH` is `cursor/design-option-2-b759`.
-- **Build** a deploy preview when `CONTEXT` is `deploy-preview` and the pull request targets that same branch. Netlify often checks the preview out as `pull/<id>/head`, so `BRANCH` is not the base branch. The script reads the public GitHub pull request (`REVIEW_ID`) and continues only when `base.ref` is `cursor/design-option-2-b759`. No token is stored. If GitHub cannot be read, the preview is skipped.
-- **Skip** everything else: `main`, other branches, and branch deploys.
+| Name | Purpose |
+| --- | --- |
+| CONTEXT, BRANCH, REVIEW_ID, REPOSITORY_URL | Netlify context/source checks |
+| URL, DEPLOY_PRIME_URL | Draft/preview origin |
+| PUBLIC_SITE_URL | Optional later live apex origin; ignored while draft |
+| PUBLIC_GOOGLE_MAPS_API_KEY | Maps browser key via import.meta.env, baked into build |
+| HOME_MOTION_STAGING_PREVIEWS | Non-secret enabled opt-in, non-production only |
+| NODE_VERSION | Node 22 |
 
-`netlify.toml` sets the build command for `[context.production]`, `[context.deploy-preview]`, and `[context."cursor/design-option-2-b759"]`.
+.env.local is ignored. Never commit or print a key. Keep Maps HTTP-referrer and
+Maps JavaScript API restrictions; no extra APIs or Map ID are needed. Rebuild after
+changing build-time values. The form does not read ENQUIRY_NOTIFICATION_EMAIL,
+REFERRAL_NOTIFICATION_EMAIL or EMAIL_DELIVERY_READY; dashboard notifications
+are separate. See SERVICE_AREA_MAP.md.
 
-The file cannot change the production branch in the Netlify UI. Deploy previews are generated for pull requests into the production branch. Leave other branch deploys off, so a pull request into `main` is not built.
+## Later account-side steps — not executed in remediation
 
-### Search blocking
+Every item below is **ACCOUNT-SIDE VERIFICATION REQUIRED**. Historical staging
+records are not evidence of today's domain, account settings or deployed candidate.
 
-While `site.draft` is `true`, the staging production deploy and its deploy previews all stay out of search:
+1. After independent GO and explicit approval, review/merge PR #10 into integration.
+2. Verify Netlify project/repository, then authorize integration as production
+   source; verify ignore command, build, publish path, Node and exact deploy SHA.
+3. Verify domain ownership and current Netlify DNS targets before any edit.
+   Attach apex and www, select **apex** primary, and verify www → apex HTTPS
+   redirects. Preserve Workspace MX, SPF, DKIM, DMARC and verification records.
+   Do not treat historical IP addresses in old logs as current instructions.
+4. Verify certificates for both hostnames and the reviewed deployment at apex.
+5. Verify Maps billing, API restrictions, allowed origins and build-context key;
+   check real Maps, attribution, CSP and auth errors on the actual origin.
+6. Verify Netlify Forms detection, notification routing and both Workspace aliases.
+   Actual delivery needs an approved hosted submission and inbox check.
+7. Only at authorized launch, change the real draft switch and Visitor Access.
+   Verify anonymous access, form delivery, headers, apex canonical, robots and
+   sitemap. Search Console submission is a separate later action.
 
-- HTML robots meta is `noindex, nofollow` (`src/layouts/BaseLayout.astro`).
-- `robots.txt` disallows `/` (`src/pages/robots.txt.ts`).
-- `public/_headers`, copied to `dist/_headers`, sends `X-Robots-Tag: noindex, nofollow`.
-
-Those three follow `site.draft` for a production build. Deploy previews and branch deploys also get `X-Robots-Tag` when `CONTEXT` is `deploy-preview` or `branch-deploy`, including after a later change to `site.draft`. Leave `site.draft` true until the launch steps at the bottom of this file.
-
-Other headers: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` with camera, microphone, geolocation, and payment disabled, `Strict-Transport-Security` for one year with `includeSubDomains` (no preload), and a Content-Security-Policy that allows this site’s own assets, Astro’s inline scripts and styles, and the Esri map tiles (`server.arcgisonline.com`). Forms may post only to this site (`form-action 'self'`). Historical concept pages are archived and are not part of this build, so their font and photo hosts are not in the policy.
-
-## Environment variables
-
-Names only. No values belong in Git. None of these are API keys.
-
-| Name | Who sets it | How the build uses it |
-| --- | --- | --- |
-| `CONTEXT` | Netlify | `production` for the staging branch, or `deploy-preview` for a pull request. The ignore script builds those two only when they belong to `cursor/design-option-2-b759`. `branch-deploy` is skipped. While `site.draft` is true, the header script sends `X-Robots-Tag` for every context. It also sends that header for `deploy-preview` and `branch-deploy` after a later draft change. |
-| `BRANCH` | Netlify | On the staging production deploy this is `cursor/design-option-2-b759`. On a deploy preview it is often `pull/<id>/head`. Passed into `scripts/site-origin.mjs`. It does not by itself select the public domain. |
-| `REVIEW_ID` | Netlify | Pull request number for a deploy preview. The ignore script uses it to read the public base branch. It is not a secret. |
-| `URL` | Netlify | Main site URL. While `site.draft` is true and `CONTEXT` is `production`, this is the canonical origin. |
-| `DEPLOY_PRIME_URL` | Netlify | Primary URL of that specific deploy. Used for `deploy-preview` and `branch-deploy` canonicals. Not used for a draft production-context build, where it is the branch hostname. |
-| `REPOSITORY_URL` | Netlify | Used only to choose the GitHub repository for the public pull-request lookup. |
-| `NODE_VERSION` | `netlify.toml` (`22`) | Selects the Node version for the build. Not a secret. `package.json` requires Node `>=22.12.0`. |
-| `PUBLIC_SITE_URL` | Nobody, until launch | Optional override used only when `site.draft` is `false` and the context is not a deploy preview or branch deploy. **Do not set it** on staging. While `site.draft` is true it is ignored, even if it is `https://homemotionphysio.com.au`. |
-
-### Canonical origin
-
-`scripts/site-origin.mjs` decides the origin. `astro.config.mjs` passes `CONTEXT`, `BRANCH`, `URL`, `DEPLOY_PRIME_URL`, and `PUBLIC_SITE_URL` into it and injects the result as `__HM_SITE_ORIGIN__`. Pages use that for canonical URLs, Open Graph, JSON-LD, and the sitemap.
-
-While `draft: true` and `CONTEXT` is `production`, the origin is `URL`, then `https://homemotion-staging.netlify.app`. `DEPLOY_PRIME_URL` is not used in that context, because Netlify sets it to the branch hostname. Deploy previews and branch deploys use `DEPLOY_PRIME_URL`, then `URL`, then the staging origin. A production-context build does not emit `https://homemotionphysio.com.au`. Setting `PUBLIC_SITE_URL` does not change that.
-
-The public domain is used only when production is explicitly launched: `site.draft` is `false`, and the build is not a deploy preview or branch deploy. `PUBLIC_SITE_URL` can then override that domain. Deploy previews still use the Netlify URL. None of this attaches the domain or changes DNS.
-
-`npm test` covers the staging production case and the explicit-launch case.
-
-These names are **not** read by the enquiry form. Leave them unset. Do not commit values:
-
-- `ENQUIRY_NOTIFICATION_EMAIL`
-- `REFERRAL_NOTIFICATION_EMAIL`
-- `EMAIL_DELIVERY_READY`
-
-`src/lib/email-delivery.ts` is still a stub and does not send mail. The live path is Netlify Forms.
-
-## Netlify settings already in place
-
-These match the live staging site. Do not point the production branch back at `main`.
-
-- Site: `https://homemotion-staging.netlify.app`
-- Production branch: `cursor/design-option-2-b759`
-- Branch deploys: production branch only
-- Deploy previews: pull requests against that branch
-- Build command `npm run build`, publish `dist`, Node 22, from `netlify.toml`
-- No environment variables
-- No custom domain
-- Visitor Access / team login on (HTTP 401 for anonymous requests)
-- Form `enquiry` detected; notification to `hello@homemotionphysio.com.au` saved in the dashboard, not in Git
-
-The published homepage includes `<form name="enquiry" data-netlify="true">`, the honeypot, and a hidden `form-name` field. The build fails if those are missing from `dist/index.html`.
-
-No Formspree, EmailJS, Resend, or SMTP account is added. Netlify Forms on the free plan stores the submission and sends the notification. The privacy draft says Netlify may store that submission outside Australia.
-
-## Enquiry form
-
-- Form name `enquiry`, `method="POST"`, `action="/enquiry-received/"`, `data-netlify="true"`, honeypot `bot-field`.
-- Required fields: name (100), enquiring-as, email (254), phone (20), suburb (80), service, funding, preferred-contact, and a short message (1000). Email and phone remain required regardless of preferred-contact. Preferred language and the NDIS-plan checkbox are optional. Client-side validation includes blank/whitespace checks and email/phone format checks; native required validation remains available when JavaScript is disabled. The note beside the message says not to include detailed medical or health information, and the form links to `/privacy/`. The honeypot is off-screen, not `display: none`. There is no CAPTCHA. These browser checks are not server-side validation of direct POST requests.
-- With JavaScript, the browser posts `application/x-www-form-urlencoded` to `/`. The success state is shown only when that response is OK. A local `astro preview` rejects the post, so it must show the failure state and keep the mailto link.
-- Without JavaScript, the browser posts to `/enquiry-received/`.
-- `mailto:hello@homemotionphysio.com.au` stays visible as a secondary link. It is not the form handler.
-- Nothing is written to `localStorage`. This site has no database of submissions.
-
-## Launch steps — do not apply until Jackson approves
-
-The domain still shows the VentraIP parked page. Do these only as a later, approved launch. High-Performance Edge uses different DNS targets; this site is on the free plan.
-
-Netlify’s external-DNS guidance ([configure external DNS](https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns), [SSL troubleshooting](https://docs.netlify.com/manage/domains/troubleshooting/troubleshoot-ssl-and-https)):
-
-- Apex domains cannot use a CNAME. The recommended record is an ALIAS, ANAME, or flattened CNAME to `apex-loadbalancer.netlify.com`.
-- VentraIP does not offer that record type. Use the documented fallback: one `A` record to Netlify’s load balancer IP **`75.2.60.5`**.
-- `www` is a CNAME to the site hostname **`homemotion-staging.netlify.app`**.
-- Keep a single apex `A` record. Extra apex `A` or `AAAA` records block the certificate.
-- Prefer `www` as the primary domain in Netlify when DNS stays at VentraIP. Netlify then redirects the apex to `www`.
-
-Order:
-
-1. In Netlify, add the custom domains `homemotionphysio.com.au` and `www.homemotionphysio.com.au`. Do not turn on Netlify DNS. Set `www` as the primary domain.
-2. At VentraIP, replace the apex `A` record **`103.42.108.46`** with one `A` record: host `@` (or blank) → **`75.2.60.5`**. Delete any other apex `A` or `AAAA` record.
-3. Replace the `www` `A` record with a `CNAME`: host `www` → **`homemotion-staging.netlify.app`**.
-4. Do not change MX (`smtp.google.com`), SPF (`v=spf1 include:_spf.google.com ~all`), the DKIM TXT for selector `google`, the DMARC TXT, or the Google site-verification TXT.
-5. Wait until Netlify shows the HTTPS certificate as issued for the new domain.
-6. Remove Netlify Visitor Access / team login. While it is on, anonymous visitors get HTTP 401 and cannot submit the enquiry form. Leave it on until this step.
-7. Set `site.draft` to `false` in `src/content/site.ts` and redeploy. Until then the HTML meta tag, `robots.txt`, and `X-Robots-Tag` stay `noindex`, and canonical URLs stay on the staging hostname. Do this after HTTPS works, so the public URL is the domain rather than only the staging hostname. The referral QR already points at `https://homemotionphysio.com.au/referral/`. Until this DNS cutover, that address opens the VentraIP parked page.
-8. On the live HTTPS site, submit one enquiry and confirm it arrives at `hello@homemotionphysio.com.au`. Send one message to `hello@` and one to `referrals@` from an outside address.
-9. After that, decide with Jackson whether the Netlify production branch stays `cursor/design-option-2-b759` or changes. Do not point production at `main`.
+Do not change accounts, DNS, production variables, Google Cloud, Workspace, merge,
+deploy or publish as part of this remediation.

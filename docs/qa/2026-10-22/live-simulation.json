@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "temporaryCopy": "D:\\HOMEMOTION\\prelaunch-remediation-2026-10-22\\live-simulation-bjkdkhtt",
+  "buildExitCode": 0,
+  "actualSiteFileUnchanged": true,
+  "actualSiteSha256": "9cf66e52cccf3507562a135ae856803cfb3aebad450de77a56da7259031820db",
+  "productionBranch": "cto/home-motion-integration",
+  "canonical": "https://homemotionphysio.com.au/",
+  "metadataLeaks": [],
+  "caseInsensitiveSearchCounts": {
+    "PHY0004088824": 0,
+    "Expert physiotherapy": 0,
+    "not verified": 0,
+    "Not yet adopted": 0,
+    "Pending owner review": 0,
+    "localhost": 0,
+    "127.0.0.1": 0,
+    "example.com": 0,
+    "Draft site": 0,
+    "Draft preview": 0
+  },
+  "robots": "User-agent: *\nAllow: /\nDisallow: /concepts/\nSitemap: https://homemotionphysio.com.au/sitemap-index.xml\n",
+  "sitemaps": "apex only; adopted legal pages included",
+  "ordinaryPages": "index, follow",
+  "404": "noindex; no canonical",
+  "responseHeaders": "no site-wide noindex in simulated production; existing CSP retained",
+  "adoptedLegalPages": "PASS"
+}

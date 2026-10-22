@@ -74,6 +74,11 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
       "PHY0004088824",
       "Expert physiotherapy",
       "not verified",
+      "Not yet adopted",
+      "Pending owner review",
+      "localhost",
+      "127.0.0.1",
+      "example.com",
       "Draft site",
       "(draft)",
       "Draft preview",
@@ -95,6 +100,14 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.deepEqual(hits, []);
 
     const home = readFileSync(join(dist, "index.html"), "utf8");
+    for (const file of files.filter((file) => file.endsWith(".html"))) {
+      const html = readFileSync(file, "utf8");
+      const metadata = [
+        ...(html.match(/<(?:meta|link)\b[^>]*>/g) || []),
+        ...(html.match(/<script\b[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g) || []),
+      ].join("\n");
+      assert.doesNotMatch(metadata, /homemotion-staging|deploy-preview-\d+|https:\/\/www\.homemotionphysio\.com\.au|localhost|127\.0\.0\.1/i, file);
+    }
     assert.match(home, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/"/);
     assert.match(home, /name="robots" content="index, follow"/);
     assert.match(home, /Personalised physiotherapy/);
@@ -151,6 +164,8 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     const headers = readFileSync(join(dist, "_headers"), "utf8");
     assert.equal(headers.includes("X-Robots-Tag"), false);
     const sitemap = readFileSync(join(dist, "sitemap-0.xml"), "utf8");
+    const sitemapIndex = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
+    assert.doesNotMatch(sitemap + sitemapIndex, /netlify\.app|https:\/\/www\.homemotionphysio\.com\.au/);
     assert.match(sitemap, /https:\/\/homemotionphysio\.com\.au\/referral\//);
     assert.match(sitemap, /\/privacy\//);
     assert.match(sitemap, /\/disclaimer\//);

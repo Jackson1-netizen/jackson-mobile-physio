@@ -13,7 +13,7 @@ const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
  * Set it to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
  */
 const draft = true;
-/** Legal adoption is separate from `draft`. Leave false until Jackson approves the wording. */
+/** Legal adoption is separate from `draft`; privacy wording is adopted in this candidate. */
 const privacyAdopted = true;
 /** Legal adoption is separate from `draft`. Jackson approved this wording on 4 October 2026. */
 const disclaimerAdopted = true;
@@ -76,9 +76,9 @@ export const site = {
    */
   websiteUrl: resolvePublicSiteOrigin(),
   /**
-   * Printed on the referral sheet as a QR code.
-   * Always the public referral page, never the Netlify staging hostname.
-   * Until DNS is changed, this URL still opens the VentraIP parked page.
+   * Public target retained for referral collateral; current concept A renders no QR.
+   * Always the apex referral page, never the Netlify staging hostname.
+   * Actual domain reachability requires account-side verification.
    */
   referralSheetUrl: "https://homemotionphysio.com.au/referral/",
 

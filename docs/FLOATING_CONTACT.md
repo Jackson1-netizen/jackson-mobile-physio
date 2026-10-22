@@ -12,19 +12,26 @@ sage mail icon and orange circular arrow. English text is **Connect with us** /
 - The entire card link opens `/enquiry/#enquiry-form`. This is the existing
   Netlify enquiry form, not a chat service or an additional form.
 - No card is rendered on `/enquiry/` or `/enquiry-received/`.
-- On the homepage it hides while the Contact section is visible. On all pages
+- On the homepage and referral page it hides through the hero/first-screen
+  interaction area. It appears only after the hero is 64px above the viewport;
+  returning into the hero hides it again. This dead band prevents threshold flicker.
+- On the homepage it also hides while the Contact section is visible. On all pages
   it hides while the footer is visible or the navigation menu is open.
-- A focused card stays available while scrolling so keyboard focus is not lost.
+- A focused card stays available around forms/footer while scrolling. When
+  returning to the hero, focus moves to its primary action before the fixed card
+  hides; the carousel/hero actions are never covered. The open menu also hides it.
 - The close button dismisses it for the current page only; it sets no cookie or
   storage value. Existing header and contact links remain available.
 - The old mobile contact bars are no longer rendered, avoiding duplicate fixed
   controls. Contact/footer spacing reserved for those bars is no longer applied.
-- Without JavaScript, the enquiry link still works and the inactive close button
-  is hidden. Print styles hide the card.
+- It starts hidden until its actual scroll/menu/blocker state is known, avoiding
+  a first-paint overlay. Without JavaScript, an ordinary enquiry link remains in
+  document flow instead of a fixed overlay. Print styles hide both entries.
 
 The former banner and mobile bar source components remain unused; approved image
 assets are retained. Existing form fields, validation, POST handling, SEO/draft
-settings and the production deployment configuration are unchanged.
+settings are unchanged. The production-source gate is separately remediated in
+the 22 October pre-launch pass; see DEPLOYMENT.md.
 
 ## Verification
 

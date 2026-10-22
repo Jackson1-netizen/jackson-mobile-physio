@@ -8,6 +8,8 @@ The `/referral/` page follows Jackson's selected concept A: a text-led green her
 - Public phone, referral email, business name, ABN and public domain come from `src/content/site.ts`.
 - “Make a referral enquiry” opens the existing `/enquiry/` form. It does not claim to be a separate clinical referral portal or request medical attachments.
 - Phone links use `tel:`; the referral email opens the existing referral `mailto:` link.
+- The current concept A page renders no QR code. `site.referralSheetUrl` retains
+  the apex `/referral/` URL for future collateral; that is not a rendered QR.
 - Both print buttons invoke the browser's print dialog. The page also supports Ctrl+P / Cmd+P; with JavaScript disabled, the page explains that browser shortcut instead of displaying inactive print buttons.
 
 ## Print and verification

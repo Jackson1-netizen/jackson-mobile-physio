@@ -1,0 +1,94 @@
+{
+  "menu": [
+    {
+      "route": "/",
+      "width": 1440,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/areas/",
+      "width": 1440,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/enquiry/",
+      "width": 1440,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/privacy/",
+      "width": 1440,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/referral/",
+      "width": 1440,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/areas/",
+      "width": 390,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/enquiry/",
+      "width": 390,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/privacy/",
+      "width": 390,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/referral/",
+      "width": 390,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/",
+      "width": 320,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/areas/",
+      "width": 320,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/enquiry/",
+      "width": 320,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/privacy/",
+      "width": 320,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    },
+    {
+      "route": "/referral/",
+      "width": 320,
+      "ariaEscapeKeyboardProgrammaticNavigationIdempotence": "PASS"
+    }
+  ],
+  "floating": [
+    {
+      "viewport": "1440x900",
+      "initialScrollHysteresisFocusMenuFormFooterDismissal": "PASS"
+    },
+    {
+      "viewport": "390x844",
+      "initialScrollHysteresisFocusMenuFormFooterDismissal": "PASS"
+    },
+    {
+      "viewport": "320x740",
+      "initialScrollHysteresisFocusMenuFormFooterDismissal": "PASS"
+    }
+  ],
+  "regressions": []
+}
