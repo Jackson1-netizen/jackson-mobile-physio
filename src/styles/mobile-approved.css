@@ -1,0 +1,160 @@
+/* Jackson's selected mobile screenshots, 24 October 2026.
+   Layout changes are restricted to the eight selected sections below 600px. */
+[class].hm-mobile-approved-only { display: none; }
+#about .hm-about-points strong > span { font: inherit; color: inherit; margin: 0; }
+
+@media (max-width: 599px) {
+  [class].hm-mobile-approved-only { display: block; }
+  [class].hm-mobile-approved-desktop { display: none; }
+
+  /* Everyday life: retain copy and the approved photo, shorten the lower card. */
+  #about .hm-section { padding-block: 2rem; }
+  #about .hm-about-grid { gap: 1rem; }
+  #about .hm-about-copy h2 { font-size: 1.95rem; line-height: 1.12; }
+  #about .hm-about-copy > p { font-size: 1rem; line-height: 1.55; margin-top: .85rem; }
+  #about .hm-about-points { gap: .85rem; margin-top: 1rem; }
+  #about .hm-about-points li { grid-template-columns: 2.4rem minmax(0, 1fr); gap: .65rem; }
+  #about .hm-about-icon { width: 2.4rem; height: 2.4rem; }
+  #about .hm-about-points strong { font-size: 1rem; }
+  #about .hm-about-points li > span:last-child > span { font-size: .95rem; line-height: 1.45; }
+  #about .hm-about-copy > .hm-about-facts { font-size: .8125rem; line-height: 1.45; gap: .1rem; }
+  #about .hm-about-frame { aspect-ratio: auto; }
+  #about .hm-about-frame img { height: auto; aspect-ratio: 1.8; object-position: 50% 32%; border-radius: 1rem; }
+  #about .hm-about-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .15rem .65rem; margin: .75rem 0 0; padding: .85rem; box-shadow: none; background: #eaf0e8; }
+  #about .hm-about-card-title { font-size: 1rem; }
+  #about .hm-about-card p + p { margin: 0; font-size: .875rem; line-height: 1.4; }
+  #about .hm-about-card .hm-btn { grid-column: 2; grid-row: 1 / 3; align-self: center; min-height: 44px; margin: 0; padding: .65rem .85rem; font-size: .875rem; white-space: normal; text-align: center; }
+
+  /* 09A: section title, portrait, name/role, introduction, then facts. */
+  #meet-jackson .hm-about-grid { gap: 1rem; padding-block: 2rem; }
+  #meet-jackson .hm-meet-mobile-heading h2 { margin-top: .25rem; font-size: 2rem; }
+  #meet-jackson .hm-portrait { min-height: 0; box-shadow: none; border-radius: 1.1rem; aspect-ratio: 8 / 9; }
+  #meet-jackson .hm-portrait img { min-height: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+  #meet-jackson .hm-about-name { margin: 0; font-size: 1.15rem; }
+  #meet-jackson .hm-about-role { margin-top: .25rem; font-size: .75rem; }
+  #meet-jackson .hm-meet-mobile-paragraph { margin: 1rem 0 0; font-size: 1rem; line-height: 1.55; color: #3d5a52; }
+  #meet-jackson .hm-meet-philosophy { margin-top: 1rem; border-left: 3px solid #c4461a; padding-left: .8rem; font-size: .95rem; font-weight: 400; line-height: 1.5; }
+  #meet-jackson .hm-meet-mobile-facts { margin: 1rem 0 0; padding: .3rem .75rem; border-radius: .85rem; background: #eef4eb; }
+  #meet-jackson .hm-meet-mobile-facts > div { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: .6rem; padding-block: .6rem; font-size: .8125rem; line-height: 1.45; }
+  #meet-jackson .hm-meet-mobile-facts > div + div { border-top: 1px solid #d2ddd0; }
+  #meet-jackson .hm-meet-mobile-facts dt { font-weight: 700; }
+  #meet-jackson .hm-meet-mobile-facts dd { margin: 0; }
+  #meet-jackson .hm-registered { margin-top: .75rem; padding: 0; background: transparent; font-size: .8125rem; font-weight: 400; line-height: 1.45; }
+
+  /* Services: one panel, complete service names, compact divided rows. */
+  #services .hm-section { padding-block: 2rem; }
+  #services .hm-section-head { margin-bottom: 1.25rem; }
+  #services .hm-section h2 { font-size: 2.15rem; }
+  #services .hm-supporting { font-size: 1.4rem; line-height: 1.2; }
+  #services .hm-service-grid { display: block; padding: 0 .85rem; overflow: hidden; border-radius: 1rem; background: #fffdf9; }
+  #services .hm-service-grid > li + li { border-top: 1px solid #dce2d7; }
+  #services .hm-card.hm-service-card { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .65rem; align-items: center; padding: .85rem 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  #services .hm-service-icon { width: 2.5rem; height: 2.5rem; }
+  #services .hm-service-icon svg { width: 24px; height: 24px; }
+  #services .hm-service-card h3 { font-size: 1rem; line-height: 1.3; }
+  #services .hm-service-card p { font-size: .9375rem; line-height: 1.45; }
+  #services .hm-service-mobile-footer { margin-top: .75rem; }
+  #services .hm-service-mobile-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+  #services .hm-service-mobile-footer p { margin: .15rem 0 0; color: #d8e1d5; font-size: .8125rem; line-height: 1.45; }
+
+  /* Referrers: keep the service facts and full contact, no mobile poster. */
+  #referrers.hm-refpanel .hm-refer-grid { padding: 2rem 1.25rem; gap: 0; }
+  #referrers .hm-ref-kicker { letter-spacing: .25em; }
+  #referrers.hm-refpanel h2 { margin-top: .65rem; font-size: 2.25rem; }
+  #referrers .hm-ref-lead { font-size: 1rem; line-height: 1.5; margin-top: .8rem; }
+  #referrers .hm-ref-steps { margin-top: 1.25rem; gap: 1rem; }
+  #referrers .hm-ref-steps li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .2rem .85rem; }
+  #referrers .hm-ref-step-icon { width: 2.5rem; height: 2.5rem; }
+  #referrers .hm-ref-steps strong { font-size: 1rem; }
+  #referrers .hm-ref-steps li > span:last-child { font-size: .9375rem; line-height: 1.4; }
+  #referrers .hm-ref-cards, #referrers .hm-ref-visual { display: none; }
+  #referrers .hm-ref-mobile { margin-top: 1rem; }
+  #referrers .hm-ref-mobile-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+  #referrers .hm-ref-mobile-fact { padding: .85rem; border-radius: .65rem; background: #e7efdf; color: #173b30; }
+  #referrers .hm-ref-mobile-fact .hm-ref-badge { width: 2.5rem; height: 2.5rem; margin-bottom: .55rem; }
+  #referrers .hm-ref-mobile-fact strong { display: block; font-size: 1.1rem; line-height: 1.3; }
+  #referrers .hm-ref-mobile-fact p { margin: .15rem 0 0; font-size: .9375rem; line-height: 1.4; }
+  #referrers .hm-ref-mobile-limit, #referrers .hm-ref-mobile-mail { display: flex; align-items: center; gap: .7rem; margin-top: .6rem; padding: .7rem; border-radius: .6rem; background: #faf6ed; color: #173b30; }
+  #referrers .hm-ref-mobile-limit > span { flex: 0 0 2rem; color: #b8410f; font-size: 1.5rem; text-align: center; }
+  #referrers .hm-ref-mobile-limit p { margin: 0; font-size: .875rem; line-height: 1.45; }
+  #referrers .hm-ref-mobile-mail { min-height: 48px; font-size: .9375rem; font-weight: 700; text-decoration: none; }
+  #referrers .hm-ref-mobile-mail svg { flex: 0 0 22px; color: #b8410f; }
+  #referrers .hm-ref-mobile-mail span { min-width: 0; overflow-wrap: anywhere; }
+  #referrers .hm-ref-mobile-button { width: 100%; min-height: 48px; margin-top: .65rem; font-size: 1rem; }
+
+  /* How: three original steps, then the same supporting facts as a list. */
+  #how.hm-flow .hm-section { padding-block: 2rem; gap: 1.25rem; }
+  #how.hm-flow h2 { font-family: var(--hm-serif); font-size: 2rem; line-height: 1.1; font-weight: 600; }
+  #how .hm-flow-steps { margin-top: 1.2rem; gap: 1.1rem; }
+  #how .hm-flow-steps li { padding: 0; grid-template-columns: 2.5rem 1px minmax(0, 1fr); gap: .75rem; background: transparent; border-radius: 0; align-items: start; }
+  #how .hm-flow-num { width: 2.5rem; height: 2.5rem; font-size: .9rem; }
+  #how .hm-flow-steps h3 { font-size: 1rem; }
+  #how .hm-flow-steps p { font-size: .9375rem; line-height: 1.45; }
+  #how .hm-flow-media, #how .hm-flow-note { display: none; }
+  #how .hm-flow-mobile-notes { padding: 1rem; border-radius: 1rem; background: #fffdf9; }
+  #how .hm-flow-mobile-notes h3 { margin: 0 0 .6rem; font-family: var(--hm-serif); font-size: 1.3rem; }
+  #how .hm-flow-mobile-notes ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+  #how .hm-flow-mobile-notes li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: .65rem; align-items: start; font-size: .875rem; line-height: 1.45; }
+  #how .hm-flow-mobile-note-icon { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: #e6eee4; color: #b8410f; }
+
+  /* Why: the four selected benefits in an unclipped two-column grid. */
+  .hm .hm-why .hm-section { padding-block: 2rem; }
+  .hm .hm-why .hm-section h2 { font-size: 1.8rem; }
+  .hm .hm-why .hm-why-mobile-intro { margin-top: .85rem; font-size: 1rem; line-height: 1.55; color: #3d5a52; }
+  .hm .hm-why .hm-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-top: 1.1rem; }
+  .hm .hm-why .hm-card { min-width: 0; padding: .85rem; border: 0; border-radius: .85rem; box-shadow: none; }
+  .hm .hm-why .hm-why-icon { width: 2.5rem; height: 2.5rem; margin-bottom: .7rem; }
+  .hm .hm-why .hm-card h3 { font-size: 1rem; line-height: 1.3; overflow-wrap: break-word; }
+  .hm .hm-why .hm-card p { font-size: .9375rem; line-height: 1.5; overflow-wrap: break-word; }
+
+  /* Form A only: keep the separate Contact introduction/scene unchanged. */
+  .cx .cx-wrap .cx-form-region { display: block; }
+  .cx .cx-mobile-title { margin-bottom: 1rem; }
+  .cx .cx-wrap .cx-card { padding: 1.25rem 1rem; border-radius: 1.1rem; box-shadow: none; }
+  .cx .cx-card > .cx-kicker { display: none; }
+  .cx .cx-mobile-title h2 { margin: 0; font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif; color: #16352e; font-size: 1.9rem; line-height: 1.15; }
+  .cx .cx-mobile-title h2::before { content: ""; display: block; width: 1.8rem; height: 2px; margin-bottom: .75rem; background: #c4461a; }
+  .cx .cx-mobile-title p { margin: .55rem 0 0; font-size: .875rem; color: #52675e; }
+  .cx #enquiry-form { margin-top: 1rem; gap: .85rem; }
+  .cx #enq-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem .75rem; }
+  .cx #enquiry-form .cx-field { gap: .4rem; }
+  .cx #enquiry-form .cx-field:has(#enq-name, #enq-role, #enq-email) { grid-column: 1 / -1; }
+  .cx #enquiry-form .cx-field:has(#enq-language) { grid-column: auto; }
+  .cx #enquiry-form .cx-field label { font-size: .9375rem; line-height: 1.35; }
+  .cx #enquiry-form .cx-field input:not([type="checkbox"]), .cx #enquiry-form select, .cx #enquiry-form textarea { min-height: 48px; padding: .65rem .6rem; font-size: 1rem; border-radius: .65rem; }
+  .cx #enquiry-form select { padding-right: 1.5rem; background-position: right .45rem center; }
+  .cx #enquiry-form textarea { height: 6rem; min-height: 6rem; }
+  .cx #enquiry-form .cx-check { grid-column: 1 / -1; gap: .4rem; align-items: start; }
+  .cx #enquiry-form .cx-check label { font-size: .875rem; }
+  .cx #enquiry-form .cx-check input { flex-basis: 2rem; width: 2rem; }
+  .cx #enquiry-form .cx-hint, .cx #enquiry-form .cx-privacy { font-size: .8125rem; line-height: 1.5; }
+  .cx #enquiry-form .cx-submit { width: 100%; min-width: 0; min-height: 48px; margin: 0; padding: .75rem 1rem; font-size: 1.1rem; }
+
+  /* 15A: two navigation columns, full-width contacts, complete legal text. */
+  footer.site-footer { padding-block: 1.65rem 1.4rem; }
+  footer.site-footer .site-footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem 1rem; }
+  footer.site-footer .site-footer-brand, footer.site-footer .site-footer-col:last-child { grid-column: 1 / -1; }
+  footer.site-footer .site-footer-logo { width: 9.25rem; background: transparent; }
+  footer.site-footer .site-footer-logo img { mix-blend-mode: multiply; }
+  footer.site-footer .site-footer-tagline { margin-top: .8rem; font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif; font-size: 1.2rem; line-height: 1.25; font-weight: 600; }
+  footer.site-footer .site-footer-tagline-small { margin-top: .35rem; font-size: .875rem; }
+  footer.site-footer .site-footer-wrap .site-footer-col h2 { margin-bottom: .3rem; font-family: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif; font-size: 1.2rem; }
+  footer.site-footer .site-footer-wrap .site-footer-col ul { gap: 0; }
+  footer.site-footer .site-footer-wrap .site-footer-col li > a { display: inline-flex; align-items: center; min-height: 32px; font-size: .9375rem; }
+  footer.site-footer .site-footer-col:last-child { padding-top: .95rem; border-top: 1px solid #aebbaf; }
+  footer.site-footer .site-footer-wrap .site-footer-contact a { gap: .5rem; min-height: 40px; }
+  footer.site-footer .site-footer-contact svg { color: #b8410f; }
+  footer.site-footer .site-footer-contact span { min-width: 0; }
+  footer.site-footer .site-footer-languages { margin-top: .3rem; font-size: .875rem; }
+  footer.site-footer .site-footer-bottom { display: block; margin-top: 1rem; padding-top: .8rem; font-size: .8125rem; }
+  footer.site-footer .site-footer-copy, footer.site-footer .site-footer-abn { display: inline; }
+  footer.site-footer .site-footer-copy span:first-child { display: block; }
+  footer.site-footer .site-footer-abn { margin-left: .35rem; }
+  footer.site-footer .site-footer-compliance { margin-top: .55rem; font-size: .8125rem; line-height: 1.45; }
+}
+
+@media (max-width: 359px) {
+  #about .hm-about-card { grid-template-columns: 1fr; }
+  #about .hm-about-card .hm-btn { grid-column: 1; grid-row: auto; justify-self: start; margin-top: .45rem; }
+  .cx #enquiry-form .cx-field:has(#enq-phone, #enq-suburb, #enq-service, #enq-funding, #enq-preferred, #enq-language) > label { min-height: 2.7em; }
+}

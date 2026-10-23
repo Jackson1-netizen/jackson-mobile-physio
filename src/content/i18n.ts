@@ -2,6 +2,7 @@
 
 import { formatServiceAreasLine, isPlaceholder, publicQualifications, site } from "./site";
 import { concept1Purpose } from "./concept1-home";
+import { mobileApproved } from "./mobile-approved";
 
 export const localeLabels = {
   en: "English",
@@ -329,6 +330,7 @@ const en = {
   },
   /** Homepage (`/`) copy. English here is the source rendered by src/components/home/*. */
   hm: {
+    mobileApproved: mobileApproved.en,
     skipLink: "Skip to main content",
     header: {
       primaryNav: "Primary",
@@ -827,6 +829,7 @@ const zhHant = {
     chips: ["上門及社區探訪", "英語 / 粵語 / 普通話", "一對一個人化護理"],
   },
   hm: {
+    mobileApproved: mobileApproved["zh-Hant"],
     skipLink: "跳至主要內容",
     header: {
       primaryNav: "主要導覽",
@@ -1311,6 +1314,7 @@ const zhHans = {
     chips: ["上门及社区探访", "英语 / 粤语 / 普通话", "一对一个人化护理"],
   },
   hm: {
+    mobileApproved: mobileApproved["zh-Hans"],
     skipLink: "跳到主要内容",
     header: {
       primaryNav: "主导航",

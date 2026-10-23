@@ -3,6 +3,7 @@ import HomePicture from "./HomePicture.astro";
 import HomeIcon from "./HomeIcon.astro";
 import { site } from "../../content/site";
 import { homeAbout } from "../../content/home-motion";
+import { messages } from "../../content/i18n";
 
 const photo = homeAbout.photo;
 ---
@@ -22,7 +23,10 @@ const photo = homeAbout.photo;
                 <HomeIcon name={point.icon} size={22} />
               </span>
               <span>
-                <strong data-i18n-path={`hm.aboutBlock.points.${i}.title`}>{point.title}</strong>
+                <strong>
+                  <span class={i === 2 ? "hm-mobile-approved-desktop" : undefined} data-i18n-path={`hm.aboutBlock.points.${i}.title`}>{point.title}</span>
+                  {i === 2 && <span class="hm-mobile-approved-only" data-i18n-path="hm.mobileApproved.languages">{messages.en.hm.mobileApproved.languages}</span>}
+                </strong>
                 <span data-i18n-path={`hm.aboutBlock.points.${i}.body`}>{point.body}</span>
               </span>
             </li>

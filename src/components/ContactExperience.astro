@@ -79,6 +79,11 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
       <div class="cx-scene" aria-hidden="true"></div>
     </div>
 
+    <div class="cx-form-region">
+      <div class="hm-mobile-approved-only cx-mobile-title">
+        <h2 data-i18n-path="hm.mobileApproved.enquiryTitle">{messages.en.hm.mobileApproved.enquiryTitle}</h2>
+        <p data-i18n-path="hm.mobileApproved.required">{messages.en.hm.mobileApproved.required}</p>
+      </div>
     <div class="cx-card">
       <p class="cx-kicker">
         <span data-i18n-path="enquiry.formKicker">{t.formKicker}</span>
@@ -257,6 +262,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
         </div>
       </form>
     </div>
+    </div>
   </div>
 </section>
 
@@ -414,6 +420,7 @@ const languageValues = ["English", "Cantonese", "Mandarin", "Other"];
 </script>
 
 <style>
+  .cx-form-region { display: contents; }
   .cx {
     --cx-ink: #123e35;
     --cx-body: #4a5d65;
