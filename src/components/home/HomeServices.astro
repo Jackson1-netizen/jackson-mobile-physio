@@ -1,6 +1,7 @@
 ---
 import { homeServices, serviceAnchor } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
+import { messages } from "../../content/i18n";
 ---
 
 <section id="services" class="hm-band hm-band-green">
@@ -10,7 +11,7 @@ import HomeIcon from "./HomeIcon.astro";
         <h2 data-i18n-path="hm.services.heading">{homeServices.heading}</h2>
         <p class="hm-supporting" data-i18n-path="hm.services.supporting">{homeServices.supporting}</p>
       </div>
-      <a class="hm-text-link" href="/enquiry/">
+      <a class="hm-text-link hm-mobile-approved-desktop" href="/enquiry/">
         <span data-i18n-path="hm.services.enquire">{homeServices.enquire}</span>
         <span class="hm-arrow" aria-hidden="true">→</span>
       </a>
@@ -33,5 +34,9 @@ import HomeIcon from "./HomeIcon.astro";
         ))
       }
     </ul>
+    <div class="hm-mobile-approved-only hm-service-mobile-footer">
+      <a class="hm-text-link" href="/enquiry/"><span data-i18n-path="hm.services.enquire">{homeServices.enquire}</span><span aria-hidden="true"> →</span></a>
+      <p data-i18n-path="hm.mobileApproved.servicesNote">{messages.en.hm.mobileApproved.servicesNote}</p>
+    </div>
   </div>
 </section>

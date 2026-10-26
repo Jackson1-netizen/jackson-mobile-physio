@@ -1,8 +1,11 @@
 ---
 import { homeSteps } from "../../content/home-motion";
 import { messages } from "../../content/i18n";
+import HomeIcon, { type HomeIconName } from "./HomeIcon.astro";
 
 const copy = messages.en.hm.how;
+const mobile = messages.en.hm.mobileApproved;
+const noteIcons: HomeIconName[] = ["pin", "person", "notes", "shield", "shield", "people"];
 const widths = [800, 1200, 1600, 2400] as const;
 const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${ext} ${w}w`).join(", ");
 ---
@@ -48,6 +51,21 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
       <figcaption data-i18n-path="hm.how.caption">{copy.caption}</figcaption>
     </figure>
     <p class="hm-flow-note" data-i18n-path="hm.how.note">{copy.note}</p>
+    <section class="hm-mobile-approved-only hm-flow-mobile-notes" aria-labelledby="hm-flow-mobile-notes-heading">
+      <h3 id="hm-flow-mobile-notes-heading" data-i18n-path="hm.mobileApproved.howNoteTitle">{mobile.howNoteTitle}</h3>
+      <ul>
+        {mobile.howNotes.map((note, i) => (
+          <li>
+            <span class="hm-flow-mobile-note-icon" aria-hidden="true">
+              {i === 3 ? <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-11v1"/></svg>
+                : i === 4 ? <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg>
+                : <HomeIcon name={noteIcons[i]} size={22} />}
+            </span>
+            <span data-i18n-path={`hm.mobileApproved.howNotes.${i}`}>{note}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   </div>
 </section>
 

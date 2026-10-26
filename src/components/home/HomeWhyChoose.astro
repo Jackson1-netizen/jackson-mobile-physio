@@ -1,6 +1,7 @@
 ---
 import { homeWhy } from "../../content/home-motion";
 import HomeIcon, { type HomeIconName } from "./HomeIcon.astro";
+import { messages } from "../../content/i18n";
 
 const icons: HomeIconName[] = ["house", "person", "run", "pin"];
 ---
@@ -9,7 +10,8 @@ const icons: HomeIconName[] = ["house", "person", "run", "pin"];
   <div class="hm-wrap hm-section">
     <p class="hm-kicker" data-i18n-path="hm.why.kicker">{homeWhy.kicker}</p>
     <h2 data-i18n-path="hm.why.heading">{homeWhy.heading}</h2>
-    <p class="mt-4 text-[#3d5a52]" data-i18n-path="hm.why.intro">{homeWhy.intro}</p>
+    <p class="mt-4 text-[#3d5a52] hm-mobile-approved-desktop" data-i18n-path="hm.why.intro">{homeWhy.intro}</p>
+    <p class="hm-mobile-approved-only hm-why-mobile-intro" data-i18n-path="hm.mobileApproved.whyIntro">{messages.en.hm.mobileApproved.whyIntro}</p>
     <ul class="hm-why-grid mt-8">
       {
         homeWhy.items.map((item, i) => (
@@ -18,7 +20,8 @@ const icons: HomeIconName[] = ["house", "person", "run", "pin"];
               <HomeIcon name={icons[i] ?? "heart"} size={24} />
             </span>
             <h3 data-i18n-path={`hm.why.items.${i}.title`}>{item.title}</h3>
-            <p data-i18n-path={`hm.why.items.${i}.body`}>{item.body}</p>
+            <p class="hm-mobile-approved-desktop" data-i18n-path={`hm.why.items.${i}.body`}>{item.body}</p>
+            <p class="hm-mobile-approved-only" data-i18n-path={`hm.mobileApproved.whyBodies.${i}`}>{messages.en.hm.mobileApproved.whyBodies[i]}</p>
           </li>
         ))
       }

@@ -72,6 +72,15 @@ const photoFrame = "M34 38H560C700 38 720 0 850 0C943 0 1000 38 1000 147V1000C77
           </a>
         </li>
       </ul>
+      <div class="hm-mobile-approved-only hm-ref-mobile">
+        <div class="hm-ref-mobile-facts">
+          <div class="hm-ref-mobile-fact"><span class="hm-ref-badge" aria-hidden="true"><HomeIcon name="shield" size={26} /></span><strong data-i18n-path="hm.referrers.ahpraLead">{t.ahpraLead}</strong><p data-i18n-path="hm.referrers.ahpraRest">{t.ahpraRest}</p></div>
+          <div class="hm-ref-mobile-fact"><span class="hm-ref-badge" aria-hidden="true"><HomeIcon name="handshake" size={26} /></span><strong>NDIS</strong><p data-i18n-path="hm.referrers.ndisCard">{t.ndisCard}</p></div>
+        </div>
+        <div class="hm-ref-mobile-limit"><span aria-hidden="true">ⓘ</span><p data-i18n-path="hm.referrers.ndisLimit">{t.ndisLimit}</p></div>
+        <a class="hm-ref-mobile-mail" href={referralMailto}><HomeIcon name="mail" size={22} /><span>{site.referralEmail}</span></a>
+        <a class="hm-ref-btn hm-ref-mobile-button" href="/referral/"><span data-i18n-path="hm.referrers.cta">{t.cta}</span><span aria-hidden="true"> →</span></a>
+      </div>
     </div>
     <svg class="hm-ref-clipdefs" width="0" height="0" aria-hidden="true">
       <defs>

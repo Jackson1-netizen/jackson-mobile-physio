@@ -2143,13 +2143,15 @@ a.hm-card:hover {
     object-position: 50% 50%;
     transform-origin: 50% 50%;
   }
-  /* Reserve quiet headline space: the landscape scene has no portrait headroom. */
+  /* Reserve headline space, with a soft overlap into the shared teal scrim. */
   .hm-hero-slide:has(.hm-hero-step-photo) { background: #0f3c38; }
   .hm-hero-step-photo {
-    top: 30%;
-    height: 70%;
+    top: calc(30% - 2rem);
+    height: calc(70% + 2rem);
     object-position: 75% 50%;
     transform-origin: 70% 20%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3rem);
+    mask-image: linear-gradient(to bottom, transparent, #000 3rem);
   }
 }
 
