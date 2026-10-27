@@ -39,7 +39,7 @@ function walk(dir, found = []) {
 }
 
 test("draft false build uses the apex and drops launch-blocking copy", { timeout: 180000 }, () => {
-  assert.match(original, /const draft = true;/);
+  assert.match(original, /const draft = (true|false);/);
   assert.doesNotMatch(original, /\bdraft:\s*(true|false)\b/);
   const temp = mkdtempSync(join(tmpdir(), "hm-launch-"));
   try {
@@ -60,7 +60,7 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     if (!existsSync(linkedModules)) symlinkSync(join(root, "node_modules"), linkedModules);
     const tempSite = join(temp, "src/content/site.ts");
     writeFileSync(tempSite, withDraft(readFileSync(tempSite, "utf8"), false));
-    assert.match(readFileSync(sitePath, "utf8"), /const draft = true;/);
+    assert.equal(readFileSync(sitePath, "utf8"), original);
 
     const env = { ...process.env, CONTEXT: "production" };
     delete env.URL;
@@ -171,7 +171,7 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(sitemap, /\/disclaimer\//);
   } finally {
     rmSync(temp, { recursive: true, force: true });
-    assert.match(readFileSync(sitePath, "utf8"), /const draft = true;/);
+    assert.equal(readFileSync(sitePath, "utf8"), original);
   }
 });
 
@@ -241,7 +241,7 @@ test("adopted legal pages are indexable only after the site leaves draft", { tim
     assert.match(readFileSync(sitePath, "utf8"), /const privacyAdopted = true;/);
     assert.match(readFileSync(sitePath, "utf8"), /const disclaimerAdopted = true;/);
     assert.match(readFileSync(sitePath, "utf8"), /const showInsuranceStatement = true;/);
-    assert.match(readFileSync(sitePath, "utf8"), /const draft = true;/);
+    assert.equal(readFileSync(sitePath, "utf8"), original);
 
     const dist = join(launched, "dist");
     const leftovers = [];

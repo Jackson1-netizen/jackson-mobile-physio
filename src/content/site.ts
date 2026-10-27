@@ -12,7 +12,7 @@ const REFERRAL_PUBLIC_EMAIL = "referrals@homemotionphysio.com.au";
  * Single launch switch. Scripts read this const, and `site.draft` is this same value.
  * Set it to false only when Jackson deliberately launches. See docs/LAUNCH_STATUS.md.
  */
-const draft = true;
+const draft = false;
 /** Legal adoption is separate from `draft`; privacy wording is adopted in this candidate. */
 const privacyAdopted = true;
 /** Legal adoption is separate from `draft`. Jackson approved this wording on 4 October 2026. */
