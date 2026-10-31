@@ -559,6 +559,16 @@ html:has(.hm-header) {
   color: #fff;
 }
 
+/* The shipped file is variable; this alias keeps the mockup's 650 weight
+   confined to the header without changing existing page typography. */
+@font-face {
+  font-family: "Home Motion Header Sans";
+  src: url("/fonts/source-sans-3-latin.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 .hm-header {
   --hm-forest: #16352e;
   --hm-orange: #e45a22;
@@ -566,21 +576,20 @@ html:has(.hm-header) {
   --hm-orange-action-hover: #a9380b;
   --hm-cream: #faf6f0;
   --hm-radius-pill: 999px;
-  --hm-header-h: 5rem;
+  --hm-header-h: 110px;
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgb(255 253 249 / 0.58);
-  border-bottom: 1px solid rgb(255 253 249 / 0.45);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.75),
-    0 10px 28px rgb(22 53 46 / 0.06);
+  background: rgb(253 251 248 / 0.96);
+  box-shadow: 0 6px 24px rgb(22 53 46 / 0.04);
+  font-family: "Home Motion Header Sans", "Source Sans 3 Fallback", system-ui, sans-serif;
+  color: var(--hm-forest);
 }
 
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .hm-header {
-    -webkit-backdrop-filter: blur(18px) saturate(1.3);
-    backdrop-filter: blur(18px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
   }
 }
 
@@ -588,9 +597,11 @@ html:has(.hm-header) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  min-height: 4.35rem;
-  padding: 0.35rem 0;
+  position: relative;
+  width: min(1152px, calc(100% - 64px));
+  gap: 24px;
+  min-height: 110px;
+  padding: 0;
 }
 
 .hm-logo {
@@ -601,9 +612,10 @@ html:has(.hm-header) {
 }
 
 .hm-header .hm-logo img {
-  height: 3.6rem;
-  width: auto;
-  max-width: 9.5rem;
+  display: block;
+  height: auto;
+  width: 148px;
+  max-width: none;
 }
 
 .hm-logo img {
@@ -615,41 +627,42 @@ html:has(.hm-header) {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  gap: 0.45rem;
+  gap: 12px;
 }
 
 .hm-lang {
-  order: 2;
-}
-
-.hm-cta-desktop {
-  order: 1;
-}
-
-.hm-menu {
   order: 3;
 }
 
+.hm-cta-desktop {
+  order: 2;
+}
+
+.hm-menu {
+  order: 4;
+}
+
 .hm-header .lang-switch {
-  border: 1px solid rgb(22 53 46 / 0.16);
-  background: rgb(255 253 249 / 0.9);
+  border: 1px solid #d5d8d1;
+  background: #fffdfa;
   border-radius: 999px;
-  padding: 0.12rem;
-  gap: 0.08rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  padding: 3px;
+  gap: 0;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .hm-header .lang-btn,
 .hm-header .lang-btn + .lang-btn {
   border-radius: 999px;
   box-shadow: none;
-  min-width: 2.1rem;
-  min-height: 1.7rem;
-  padding: 0.1rem 0.4rem;
-  font-size: 0.72rem;
-  line-height: 1;
+  min-width: 31px;
+  min-height: 30px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
   color: var(--hm-forest);
 }
 
@@ -665,10 +678,37 @@ html:has(.hm-header) {
   text-decoration: none;
 }
 
+.hm-header-referral,
 .hm-header .hm-cta-desktop {
-  min-height: 2.25rem;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 39px;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hm-header-referral {
+  order: 1;
+  background: var(--hm-forest);
+  color: #fff;
+}
+
+.hm-header-referral:hover {
+  background: #2b5145;
+  color: #fff;
+}
+
+.hm-header .hm-cta-desktop .hm-arrow {
+  font-size: inherit;
+  transform: none;
 }
 
 .hm .lang-btn[data-active="true"] {
@@ -691,18 +731,18 @@ html:has(.hm-header) {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  min-width: 2.5rem;
-  min-height: 2.5rem;
+  width: 41px;
+  height: 41px;
+  min-width: 41px;
+  min-height: 41px;
   list-style: none;
   cursor: pointer;
   padding: 0;
-  border: 1px solid rgb(22 53 46 / 0.16);
+  border: 1px solid #d5d8d1;
   border-radius: 999px;
   font-weight: 700;
   color: var(--hm-forest);
-  background: rgb(255 253 249 / 0.92);
+  background: #fffefa;
 }
 
 .hm-menu-icon {
@@ -1907,12 +1947,6 @@ a.hm-card:hover {
   }
 }
 
-@media (max-width: 767px) {
-  .hm-header .hm-cta-desktop {
-    display: none;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 1023px) {
   .hm-step-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1923,10 +1957,10 @@ a.hm-card:hover {
 }
 
 @media (min-width: 1024px) {
-  /* 80% of the previous rendered header (137.765625px at 1440 and 1920). */
+  /* Shared header dimensions follow the approved referral mockup. */
   .hm-header {
     box-sizing: border-box;
-    height: 110.2125px;
+    height: 110px;
   }
   .hm-header-inner {
     height: 100%;
@@ -1934,15 +1968,16 @@ a.hm-card:hover {
     padding-block: 0;
   }
   .hm-header .hm-logo img {
-    height: 5.72rem;
+    height: auto;
+    width: 148px;
     max-width: none;
   }
   .hm,
   .hm-header {
-    --hm-header-h: 110.2125px;
+    --hm-header-h: 110px;
   }
   .hm-header-tools {
-    gap: 0.7rem;
+    gap: 12px;
   }
   .hm-faq-aside {
     position: sticky;
@@ -2155,16 +2190,96 @@ a.hm-card:hover {
   }
 }
 
-@media (max-width: 767px) {
-  .hm-header .lang-btn,
-  .hm-menu summary {
-    min-height: 2.75rem;
-    min-width: 2.75rem;
+@media (max-width: 900px) {
+  .hm-header .hm-header-inner {
+    width: calc(100% - 40px);
+    min-height: 94px;
+    gap: 16px;
   }
-  .hm-menu summary {
-    width: 2.75rem;
-    height: 2.75rem;
+  .hm-header .hm-logo img {
+    width: 124px;
+  }
+  .hm-header-tools {
+    gap: 8px;
+  }
+  .hm-header .hm-header-referral,
+  .hm-header .hm-cta-desktop {
+    font-size: 13px;
+    padding: 10px 13px;
+    min-height: 39px;
+  }
+}
+
+/* Two action pills remain visible on the second row at phone widths. */
+@media (max-width: 600px) {
+  .hm-header {
+    position: relative;
+    height: auto;
+    --hm-header-h: 126px;
+  }
+  .hm-header .hm-header-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: calc(100% - 32px);
+    height: auto;
+    min-height: 126px;
+    gap: 6px 8px;
+    padding-block: 7px 12px;
+  }
+  .hm-header .hm-logo {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+  .hm-header .hm-logo img {
+    width: 100px;
+    height: 62px;
+    object-fit: contain;
+  }
+  .hm-header-tools {
+    display: contents;
+  }
+  .hm-header .hm-lang {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    margin-right: 47px;
+  }
+  .hm-header .lang-btn,
+  .hm-header .lang-btn + .lang-btn {
+    padding: 6px 7px;
+    font-size: 11px;
+  }
+  .hm-header .hm-menu {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    position: static;
+  }
+  .hm-header .hm-menu summary {
+    width: 37px;
+    height: 37px;
+    min-width: 37px;
+    min-height: 37px;
     padding: 0;
+  }
+  .hm-header .hm-header-referral,
+  .hm-header .hm-cta-desktop {
+    grid-row: 2;
+    min-height: 39px;
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+  .hm-header-referral {
+    grid-column: 1;
+  }
+  .hm-header .hm-cta-desktop {
+    grid-column: 2;
+    gap: 6px;
+  }
+  .hm-header .hm-menu-panel {
+    top: 100%;
+    width: min(300px, calc(100vw - 32px));
   }
 }
 

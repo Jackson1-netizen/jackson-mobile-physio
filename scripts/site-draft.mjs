@@ -23,7 +23,7 @@ export function readAdopted(source, block) {
 
 export function includeInSitemap(pathname, { privacyAdopted, disclaimerAdopted }) {
   if (pathname.startsWith("/concepts")) return false;
-  if (pathname.startsWith("/enquiry-received")) return false;
+  if (pathname.startsWith("/enquiry-received") || pathname.startsWith("/referral-received")) return false;
   if (pathname === "/404" || pathname === "/404/") return false;
   if ((pathname === "/privacy" || pathname === "/privacy/") && !privacyAdopted) return false;
   if ((pathname === "/disclaimer" || pathname === "/disclaimer/") && !disclaimerAdopted) return false;

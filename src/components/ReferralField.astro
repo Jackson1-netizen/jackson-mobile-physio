@@ -1,0 +1,42 @@
+---
+import { messages } from "../content/i18n";
+
+interface Props {
+  name: keyof typeof messages.en.referralForm.labels;
+  type?: "text" | "email" | "tel" | "date" | "textarea";
+  required?: boolean;
+  full?: boolean;
+  autocomplete?: string;
+  options?: readonly string[];
+  optionKey?: "roleOptions" | "genderOptions" | "fundingOptions" | "updateOptions";
+  hint?: "updateHint" | "fundingHint";
+}
+const { name, type = "text", required = false, full = false, autocomplete, options, optionKey, hint } = Astro.props;
+const t = messages.en.referralForm;
+const maxLength = type === "email" ? 254 : type === "tel" ? 24 : name === "participant_postcode" ? 4 : name === "participant_address" ? 240 : 120;
+---
+
+<div class:list={["rx-field", full && "rx-full"]}>
+  <label for={name}>
+    <span data-i18n-path={`referralForm.labels.${name}`}>{t.labels[name]}</span>
+    {required && <span class="rx-required" aria-hidden="true"> *</span>}
+    {name === "new_funding_type" && <span class="rx-required" data-referral-funding-required aria-hidden="true" hidden> *</span>}
+  </label>
+  {options ? (
+    <select id={name} name={name} required={required} autocomplete={autocomplete} aria-describedby={hint ? `${name}-hint` : undefined}>
+      <option value="" data-i18n-path="referralForm.selectOne">{t.selectOne}</option>
+      {options.map((value, i) => <option value={value} data-i18n-path={optionKey ? `referralForm.${optionKey}.${i}` : undefined}>{optionKey ? t[optionKey][i] : value}</option>)}
+    </select>
+  ) : type === "textarea" ? (
+    <textarea id={name} name={name} rows="4" maxlength="1000" required={required} aria-describedby={hint ? `${name}-hint` : undefined}></textarea>
+  ) : (
+    <input id={name} name={name} type={type} required={required} autocomplete={autocomplete}
+      maxlength={type === "date" ? undefined : maxLength}
+      inputmode={name === "participant_postcode" ? "numeric" : type === "tel" ? "tel" : undefined}
+      pattern={name === "participant_postcode" ? "[0-9]{4}" : undefined}
+      autocapitalize={type === "email" ? "off" : undefined} spellcheck={type === "email" ? false : undefined}
+      aria-describedby={hint ? `${name}-hint` : undefined} />
+  )}
+  <p id={`${name}-error`} class="rx-error" data-error-for={name} hidden></p>
+  {hint && <p id={`${name}-hint`} class="rx-hint" data-i18n-path={`referralForm.${hint}`}>{t[hint]}</p>}
+</div>

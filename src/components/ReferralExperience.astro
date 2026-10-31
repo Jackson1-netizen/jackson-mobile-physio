@@ -1,0 +1,149 @@
+---
+import ReferralField from "./ReferralField.astro";
+import ReferralIcon from "./ReferralIcon.astro";
+import { site, getEmailHref, getReferralEmailHref } from "../content/site";
+import { messages } from "../content/i18n";
+import "../styles/referral-experience.css";
+
+const t = messages.en.referralForm;
+const updateValues = ["new-care-plan", "funding-change", "new-referral-letter", "other-update"];
+const states = ["VIC", "NSW", "QLD", "SA", "WA", "TAS", "ACT", "NT"];
+const risks = ["pets", "aggressive-behaviour", "access-issues"];
+---
+
+<section class="rx" aria-labelledby="referral-heading">
+  <div class="rx-layout">
+    <div class="rx-copy">
+      <p class="rx-eyebrow"><span data-i18n-path="referralForm.kicker">{t.kicker}</span><span class="rx-rule" aria-hidden="true"></span></p>
+      <h1 id="referral-heading" data-i18n-path="referralForm.heading">{t.heading}</h1>
+      <p class="rx-welcome" data-i18n-path="referralForm.welcome">{t.welcome}</p>
+      <div class="rx-mode-cards" role="group" aria-label={t.modeLabel} data-i18n-attr="aria-label:referralForm.modeLabel">
+        {(["new", "update"] as const).map((mode) => (
+          <button class:list={["rx-mode-card", mode === "new" && "selected"]} type="button"
+            aria-pressed={mode === "new" ? "true" : "false"} aria-controls="referral-form" data-referral-mode={mode}>
+            <span class="rx-mode-icon"><ReferralIcon name={mode === "new" ? "plus" : "update"} /></span>
+            <span><strong data-i18n-path={`referralForm.${mode}Title`}>{t[`${mode}Title`]}</strong>
+              <small data-i18n-path={`referralForm.${mode}Description`}>{t[`${mode}Description`]}</small></span>
+            <span class="rx-mode-check"><ReferralIcon name="check" /></span>
+          </button>
+        ))}
+      </div>
+      <ul class="rx-direct">
+        <li><a href={site.phoneHref}><span class="rx-contact-chip"><ReferralIcon name="phone" /></span><span>{site.phone}</span></a></li>
+        <li><a href={getEmailHref()}><span class="rx-contact-chip"><ReferralIcon name="mail" /></span><span>{site.publicEmail}</span></a></li>
+      </ul>
+      <section class="rx-how" id="how-referrals-work" aria-labelledby="referral-how-title">
+        <h2 id="referral-how-title" data-i18n-path="referralForm.howHeading">{t.howHeading}</h2>
+        <ol>{t.steps.map((step, i) => (
+          <li><span class="rx-how-number">{String(i + 1).padStart(2, "0")}</span><div>
+            <h3 data-i18n-path={`referralForm.steps.${i}.title`}>{step.title}</h3>
+            <p data-i18n-path={`referralForm.steps.${i}.body`}>{step.body}</p>
+          </div></li>
+        ))}</ol>
+        <p class="rx-response"><ReferralIcon name="clock" /><span data-i18n-path="referralForm.response">{t.response}</span></p>
+      </section>
+      <p class="rx-child-note"><ReferralIcon name="info" /><span>
+        <span data-i18n-path="referralForm.childNote">{t.childNote}</span>{" "}<span class="rx-age" data-i18n-path="referralForm.childAge">{t.childAge}</span>.
+      </span></p>
+      <div class="rx-scene" aria-hidden="true"></div>
+      <p class="rx-print-link"><a href="/referral-sheet/" data-i18n-path="referralForm.printSheet">{t.printSheet}</a></p>
+    </div>
+
+    <form class="rx-form" id="referral-form" name="referral" method="POST" action="/referral-received/"
+      data-referral-form data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data"
+      aria-labelledby="referral-form-title" aria-describedby="referral-required-note">
+      <input type="hidden" name="form-name" value="referral" />
+      <input type="hidden" name="referral-type" value="new" />
+      <p class="rx-honeypot" aria-hidden="true"><label>Leave this blank<input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+      <div class="rx-form-top">
+        <p class="rx-eyebrow"><span data-i18n-path="referralForm.formKicker">{t.formKicker}</span><span class="rx-rule" aria-hidden="true"></span></p>
+        <div class="rx-form-top-line">
+          <h2 id="referral-form-title" data-referral-title data-i18n-path="referralForm.newTitle">{t.newTitle}</h2>
+          <p id="referral-required-note"><span data-i18n-path="referralForm.requiredNote">{t.requiredNote}</span> <span class="rx-required">*</span></p>
+        </div>
+      </div>
+      <div class="rx-summary" data-referral-summary role="alert" tabindex="-1" hidden>
+        <p data-referral-summary-label data-i18n-path="referralForm.errorSummary">{t.errorSummary}</p>
+        <ul data-referral-summary-list></ul>
+      </div>
+
+      <section class="rx-form-section" aria-labelledby="referrer-details-title">
+        <div class="rx-section-heading"><span class="rx-section-number">01</span><h2 id="referrer-details-title" data-i18n-path="referralForm.referrerHeading">{t.referrerHeading}</h2></div>
+        <div class="rx-fields">
+          <ReferralField name="referrer_role" full required options={t.roleOptions} optionKey="roleOptions" />
+          <ReferralField name="referrer_name" required autocomplete="section-referrer name" />
+          <ReferralField name="referrer_organisation" autocomplete="section-referrer organization" />
+          <ReferralField name="referrer_phone" type="tel" required autocomplete="section-referrer tel" />
+          <ReferralField name="referrer_email" type="email" required autocomplete="section-referrer email" />
+        </div>
+      </section>
+      <section class="rx-form-section" aria-labelledby="participant-details-title">
+        <div class="rx-section-heading"><span class="rx-section-number">02</span><h2 id="participant-details-title" data-i18n-path="referralForm.participantHeading">{t.participantHeading}</h2></div>
+        <div class="rx-fields">
+          <ReferralField name="participant_name" required autocomplete="section-participant name" />
+          <fieldset class="rx-mode-fields" data-referral-fields="new" aria-labelledby="participant-details-title">
+            <ReferralField name="participant_gender" options={t.genderOptions} optionKey="genderOptions" />
+            <ReferralField name="participant_dob" type="date" required autocomplete="section-participant bday" />
+            <ReferralField name="participant_phone" type="tel" autocomplete="section-participant tel" />
+            <ReferralField name="participant_email" type="email" full autocomplete="section-participant email" />
+            <ReferralField name="participant_address" full required autocomplete="section-participant street-address" />
+            <div class="rx-address-row rx-full">
+              <ReferralField name="participant_suburb" required autocomplete="section-participant address-level2" />
+              <ReferralField name="participant_state" required options={states} autocomplete="section-participant address-level1" />
+              <ReferralField name="participant_postcode" required autocomplete="section-participant postal-code" />
+            </div>
+          </fieldset>
+        </div>
+      </section>
+      <fieldset class="rx-form-section" data-referral-fields="new" aria-labelledby="funding-service-title">
+        <div class="rx-section-heading"><span class="rx-section-number">03</span><h2 id="funding-service-title" data-i18n-path="referralForm.fundingHeading">{t.fundingHeading}</h2></div>
+        <div class="rx-fields">
+          <ReferralField name="funding_type" full required options={t.fundingOptions} optionKey="fundingOptions" />
+          <fieldset class="rx-risks rx-full"><legend data-i18n-path="referralForm.risksHeading">{t.risksHeading}</legend>
+            <div class="rx-risk-options">{risks.map((value, i) => (
+              <label><input type="checkbox" name="risks" value={value} /><span data-i18n-path={`referralForm.risks.${i}`}>{t.risks[i]}</span></label>
+            ))}</div>
+          </fieldset>
+        </div>
+      </fieldset>
+      <fieldset class="rx-form-section" data-referral-fields="update" aria-labelledby="update-details-title" hidden disabled>
+        <div class="rx-section-heading"><span class="rx-section-number">03</span><h2 id="update-details-title" data-i18n-path="referralForm.updateHeading">{t.updateHeading}</h2></div>
+        <div class="rx-fields">
+          <ReferralField name="update_type" full required options={updateValues} optionKey="updateOptions" />
+          <ReferralField name="new_funding_type" full options={t.fundingOptions} optionKey="fundingOptions" hint="fundingHint" />
+          <ReferralField name="effective_date" type="date" />
+          <ReferralField name="update_notes" type="textarea" full required hint="updateHint" />
+        </div>
+      </fieldset>
+      <div class="rx-field rx-upload-region">
+        <label for="upload"><span data-i18n-path="referralForm.uploadLabel">{t.uploadLabel}</span> <span class="rx-optional" data-i18n-path="referralForm.optional">{t.optional}</span></label>
+        <div class="rx-upload-box"><span class="rx-upload-icon"><ReferralIcon name="upload" /></span><div>
+          <input id="upload" name="upload" type="file" multiple aria-describedby="upload-hint" />
+        </div></div>
+        <p id="upload-hint" class="rx-sr" data-i18n-path="referralForm.uploadHint">{t.uploadHint}</p>
+        <p id="upload-error" class="rx-error" data-error-for="upload" hidden></p>
+      </div>
+      <div class="rx-consent-area">
+        <label class="rx-consent" for="consent"><input id="consent" type="checkbox" name="consent" value="yes" required aria-describedby="referral-privacy-note" /><span><span data-i18n-path="referralForm.consent">{t.consent}</span> <span class="rx-required" aria-hidden="true">*</span></span></label>
+        <p id="consent-error" class="rx-error" data-error-for="consent" hidden></p>
+        <p class="rx-privacy-note" id="referral-privacy-note"><span data-i18n-path="referralForm.privacyLead">{t.privacyLead}</span>{" "}<a href="/privacy/" data-i18n-path="referralForm.privacyLink">{t.privacyLink}</a>.</p>
+        <div class="rx-submit-row">
+          <button class="rx-submit" type="submit" data-referral-submit><span data-referral-submit-label data-i18n-path="referralForm.submitLabel">{t.submitLabel}</span><span aria-hidden="true">→</span></button>
+          <p><span data-i18n-path="referralForm.responseLead">{t.responseLead}</span><br class="rx-desktop-break" /> <span data-i18n-path="referralForm.responseEnd">{t.responseEnd}</span></p>
+        </div>
+        <div class="rx-feedback" data-referral-feedback role="alert" tabindex="-1" hidden>
+          <p class="rx-failed-title" data-i18n-path="referralForm.failedTitle">{t.failedTitle}</p>
+          <p data-referral-failure-message data-i18n-path="referralForm.failedBody">{t.failedBody}</p>
+          <p><a href={site.phoneHref}>{site.phone}</a> · <a href={getReferralEmailHref()}>{site.referralEmail}</a></p>
+        </div>
+        <noscript><p class="rx-hint rx-noscript" data-i18n-path="referralForm.noscript">{t.noscript}</p><a href={site.phoneHref}>{site.phone}</a> · <a href={getReferralEmailHref()}>{site.referralEmail}</a></noscript>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  import { initReferralForm } from "../lib/referral-form.mjs";
+  import { referralMessages } from "../content/referral-i18n";
+  initReferralForm({ messages: referralMessages });
+</script>

@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { spawnSync } from "node:child_process";
+import { closeSync, mkdtempSync, openSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { decide } from "../scripts/netlify-ignore-build.mjs";
 
@@ -60,11 +63,28 @@ test("unrelated preview branches and unknown contexts fail closed", async () => 
 
 test("direct ignore command uses Netlify's allow=1 and skip=0 exit codes", () => {
   const script = fileURLToPath(new URL("../scripts/netlify-ignore-build.mjs", import.meta.url));
-  for (const [BRANCH, expected] of [["cto/home-motion-integration", 1], ["cursor/design-option-2-b759", 0], [branch, 0], ["unrelated", 0]]) {
-    const run = spawnSync(process.execPath, [script], {
-      env: { ...process.env, CONTEXT: "production", BRANCH }, encoding: "utf8",
-    });
-    assert.equal(run.status, expected, run.stderr);
-    assert.match(run.stdout, expected ? /Netlify build allowed/ : /Netlify build ignored/);
+  const logs = mkdtempSync(join(tmpdir(), "hm-ignore-output-"));
+  try {
+    for (const [BRANCH, expected] of [["cto/home-motion-integration", 1], ["cursor/design-option-2-b759", 0], [branch, 0], ["unrelated", 0]]) {
+      const path = join(logs, "command.log");
+      const output = openSync(path, "w");
+      let run;
+      try {
+        // Use a regular file rather than sync pipes, which some sandboxes deny.
+        run = spawnSync(process.execPath, [script], {
+          env: { ...process.env, CONTEXT: "production", BRANCH },
+          stdio: ["ignore", output, output],
+        });
+      } finally {
+        closeSync(output);
+      }
+      const text = readFileSync(path, "utf8");
+      assert.equal(run.error, undefined, run.error?.message ?? text);
+      assert.equal(run.signal, null, text);
+      assert.equal(run.status, expected, text);
+      assert.match(text, expected ? /Netlify build allowed/ : /Netlify build ignored/);
+    }
+  } finally {
+    rmSync(logs, { recursive: true, force: true });
   }
 });

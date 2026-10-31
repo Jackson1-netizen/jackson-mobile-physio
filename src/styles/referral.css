@@ -12,9 +12,6 @@
 .ref-a :is(h2, h3) { font-weight: 650; }
 .ref-a h2 { font-size: clamp(1.7rem, 3vw, 2.9rem); line-height: 1.15; }
 .ref-a :is(a, button):focus-visible { outline: 3px solid #b8410f; outline-offset: 4px; }
-.ref-a .hm-header { background: #fffdf9; }
-.ref-a .hm-header-inner { width: min(80rem, calc(100% - 7rem)); }
-.ref-a .hm-logo { width: clamp(9.5rem, 18vw, 13rem); }
 
 .ref-a-hero,
 .ref-a-contact {
@@ -148,8 +145,7 @@
 .ref-a-footer a { min-height: 2.75rem; display: inline-flex; align-items: center; color: inherit; text-underline-offset: 0.2em; }
 
 @media (max-width: 767px) {
-  .ref-a .hm-header-inner, .ref-a-hero-inner, .ref-a-footer { width: calc(100% - 2.5rem); }
-  .ref-a .hm-logo { width: 7.5rem; }
+  .ref-a-hero-inner, .ref-a-footer { width: calc(100% - 2.5rem); }
   .ref-a-body { width: calc(100% - 2rem); }
   .ref-a-hero-inner { padding: 2rem 0 1.5rem; }
   .ref-a-rule { margin-bottom: 1rem; }

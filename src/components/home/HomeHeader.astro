@@ -17,15 +17,18 @@ function siteHref(href: string) {
 <header class="hm-header no-print">
   <div class="hm-wrap hm-header-inner">
     <a class="hm-logo" href="/">
-      <HomeLogo alt={`${site.displayBrand} ${site.tagline}`} sizes="(min-width: 1024px) 150px, 110px" />
+      <HomeLogo alt={`${site.displayBrand} ${site.tagline}`} sizes="(max-width: 600px) 100px, 148px" />
     </a>
 
     <div class="hm-header-tools">
+      <a class="hm-header-referral" href="/referral/">
+        <span data-i18n-path="cta.referral">Make a referral</span>
+      </a>
       <div class="hm-lang">
         <LanguageSwitcher />
       </div>
       <a class="hm-btn hm-btn-primary hm-cta-desktop" href="/enquiry/">
-        <span data-i18n-path="home.primaryCta">{homeHero.primaryCta}</span>
+        <span data-i18n-path="cta.enquiry">{homeHero.primaryCta}</span>
         <span class="hm-arrow" aria-hidden="true">→</span>
       </a>
       <details class="hm-menu">
