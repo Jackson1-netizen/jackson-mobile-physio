@@ -3,6 +3,7 @@
 import { formatServiceAreasLine, isPlaceholder, publicQualifications, site } from "./site";
 import { concept1Purpose } from "./concept1-home";
 import { mobileApproved } from "./mobile-approved";
+import { referralMessages } from "./referral-i18n";
 
 export const localeLabels = {
   en: "English",
@@ -17,6 +18,7 @@ export const defaultLocale: Locale = "en";
 const referralQualLines = publicQualifications().map((item) => `${item.label}: ${item.value}`);
 
 const en = {
+  referralForm: referralMessages.en,
   nav: {
     home: "Home",
     about: "About",
@@ -31,6 +33,8 @@ const en = {
     referralSheet: "Referral sheet",
   },
   cta: {
+    referral: "Make a referral",
+    enquiry: "Make an enquiry",
     call: "Call",
     email: "Email",
     connect: "Connect with us",
@@ -540,6 +544,7 @@ const en = {
 } as const;
 
 const zhHant = {
+  referralForm: referralMessages["zh-Hant"],
   nav: {
     home: "主頁",
     about: "關於",
@@ -554,6 +559,8 @@ const zhHant = {
     referralSheet: "轉介表",
   },
   cta: {
+    referral: "提交轉介",
+    enquiry: "發送查詢",
     call: "致電",
     email: "電郵",
     connect: "聯絡我們",
@@ -1027,6 +1034,7 @@ const zhHant = {
 } as const;
 
 const zhHans = {
+  referralForm: referralMessages["zh-Hans"],
   nav: {
     home: "主页",
     about: "关于",
@@ -1041,6 +1049,8 @@ const zhHans = {
     referralSheet: "转介表",
   },
   cta: {
+    referral: "提交转介",
+    enquiry: "发送咨询",
     call: "致电",
     email: "邮件",
     connect: "联系我们",

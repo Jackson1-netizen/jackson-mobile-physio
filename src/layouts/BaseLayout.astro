@@ -5,7 +5,7 @@ import "../styles/mobile-approved.css";
 import { site } from "../content/site";
 import { getLocalBusinessJsonLd, getFaqJsonLd } from "../lib/structured-data";
 import DraftBanner from "../components/DraftBanner.astro";
-import HomeHeader from "../components/home/HomeHeader.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import FloatingContact from "../components/FloatingContact.astro";
 import I18nScript from "../components/I18nScript.astro";
@@ -42,7 +42,7 @@ const showSiteChrome = !hideChrome && !v1Home;
 const showDraftBanner = site.draft && (showSiteChrome || v1Home);
 // The Contact and receipt pages already give visitors their next step.
 const pagePath = Astro.url.pathname.replace(/\/+$/, "") || "/";
-const showFloatingContact = (showSiteChrome || v1Home) && !["/enquiry", "/enquiry-received"].includes(pagePath);
+const showFloatingContact = (showSiteChrome || v1Home) && !["/enquiry", "/enquiry-received", "/referral", "/referral-received"].includes(pagePath);
 function toCanonical(path: string): string {
   const slashed = path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`;
   return new URL(slashed, site.websiteUrl).href;
@@ -96,7 +96,7 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
   <body>
     <a class="skip-link" href="#main-content" data-i18n-path="hm.skipLink">Skip to main content</a>
     {showDraftBanner && <DraftBanner />}
-    {showSiteChrome && <HomeHeader />}
+    {showSiteChrome && <SiteHeader />}
     {
       v1Home ? (
         <slot />
@@ -106,7 +106,7 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
         </main>
       )
     }
-    {showSiteChrome && <SiteFooter />}
+    {showSiteChrome && <SiteFooter referralForm={pagePath === "/referral"} />}
     {showFloatingContact && <FloatingContact />}
     {translatable && <I18nScript include={i18nInclude} />}
   </body>
