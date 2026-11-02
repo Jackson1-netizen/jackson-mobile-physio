@@ -68,6 +68,7 @@ export function assertReferralForm({ html, receivedHtml }) {
     errors.push('Built referral form must default to referral-type="new".');
   }
   if (attribute(field("upload") ?? "", "type") !== "file") errors.push("Built referral upload must be a file input.");
+  if (attribute(field("upload") ?? "", "multiple") !== null) errors.push("Netlify supports only one file per upload field.");
   if (attribute(field("consent") ?? "", "type") !== "checkbox") errors.push("Built referral consent must be a checkbox.");
   for (const name of ["referrer_role", "referrer_name", "referrer_phone", "referrer_email", "participant_name", "participant_dob", "funding_type", "consent"]) {
     if (attribute(field(name) ?? "", "required") === null) {

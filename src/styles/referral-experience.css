@@ -102,8 +102,6 @@
 .rx-how li p { font-size: 15px; color: var(--rx-muted); margin-top: 3px; }
 .rx .rx-response { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; line-height: 1.5; margin-top: 20px; }
 .rx-response > .rx-icon { width: 20px; height: 20px; margin-top: 2px; }
-.rx .rx-child-note { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.55; color: var(--rx-muted); margin-top: 22px; }
-.rx-child-note > .rx-icon { width: 19px; height: 19px; margin-top: 2px; }
 .rx-age { color: #99441d; }
 .rx-scene {
   height: 230px;
@@ -194,8 +192,6 @@
   .rx-how ol { grid-template-columns: 1fr; }
   .rx-how-number { width: 33px; height: 33px; font-size: 15px; }
   .rx .rx-response { font-size: 15px; }
-  .rx .rx-child-note { font-size: 14px; gap: 9px; }
-  .rx-child-note > .rx-icon { width: 18px; height: 18px; }
   .rx-form { border-radius: 22px; padding: 24px 18px; box-shadow: 0 12px 40px #5a3c1e0c; scroll-margin-top: 24px; }
   .rx-form-top h2 { font-size: 30px; }
   .rx-form-section { margin-top: 22px; padding-top: 20px; scroll-margin-top: 24px; }

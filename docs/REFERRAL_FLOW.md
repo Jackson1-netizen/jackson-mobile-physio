@@ -66,7 +66,7 @@ diagnosis or other health-detail fields beyond the approved form.
 | `new_funding_type` | New funding category; required for Funding change, optional for other updates |
 | `effective_date` | Optional date the change takes effect; update |
 | `update_notes` | Required short update note; update; do not include detailed health information |
-| `upload` | Optional referral letter/documents; either mode; multiple files share the combined size cap |
+| `upload` | Optional referral letter/documents; either mode; one file up to the client size cap |
 | `consent` | Required confirmation that the referrer has permission to share these details; either mode |
 
 Visible labels and client feedback support EN/中文. Names and machine values remain
@@ -76,8 +76,7 @@ Dates and files should contain only the information needed for the referral.
 ## Upload limits
 
 Netlify's total form-request limit is **8 MB**, including all fields, multipart
-headers and file content. The enhanced client limits all selected documents
-together to **7 MiB** (7 × 1024 × 1024 bytes; displayed as **7 MB** in the form)
+headers and file content. The enhanced client limits the selected document to **7 MiB** (7 × 1024 × 1024 bytes; displayed as **7 MB** in the form)
 so the rest of the request has space. Native POST is ultimately
 limited by Netlify, and JavaScript validation cannot replace platform checks.
 Jackson must confirm the account's current Forms allowance and upload behavior
@@ -96,9 +95,7 @@ npm run build
 ```
 
 The feature brief describes `site.draft=true`, while the supplied branch contains
-`const draft = false`. This discrepancy requires owner clarification before
-release; the referral change does not alter the launch switch or global
-indexing/headers logic. The receipt page has its own unconditional noindex flag.
+`const draft = false`. Jackson confirmed on 2 November 2026 that `draft=false` must remain unchanged. The referral change does not alter the launch switch or global indexing/headers logic. The receipt page has its own unconditional noindex flag.
 
 The build assertion checks the pre-rendered referral form's Netlify contract and
 the receipt page's noindex marker. Inspect `dist/referral/index.html` for named
@@ -129,7 +126,7 @@ These are account-side checks and have not been performed by repository work:
    **Home Motion — Referral / care plan update**. Save it. Do not put participant
    details in the subject or change the enquiry recipient.
 4. With synthetic details, submit both modes without a file and with a small
-   harmless file, then with several small harmless files. Check a stored record
+   harmless file, and confirm the file picker permits only one file per submission. Check a stored record
    on `referral`, the correct `referral-type` and active fields, accessible uploads,
    `/referral-received/` redirect, and mail
    received at the intended address. A redirect alone does not prove delivery.
@@ -190,3 +187,12 @@ Hosted storage, notification delivery and screenshot comparison remain manual
 checks. The child-age cutoff remains the approved mockup's unconfirmed wording.
 The existing `site.draft=false` value was preserved pending clarification of the
 conflicting task instructions.
+
+
+## Owner release instructions — 2 November 2026
+
+Jackson authorized release of PR #16, keeping the current live/draft=false state.
+The complete child-age restriction sentence and all translated placeholders were removed.
+Netlify supports one file per upload field, so the existing upload picker now accepts
+one file with the existing 7 MiB client limit; the UI states this in all languages.
+The honeypot and platform spam filtering remain enabled.

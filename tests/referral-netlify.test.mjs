@@ -17,6 +17,10 @@ test("static referral form and noindex receipt satisfy Netlify build guard", () 
   assert.doesNotThrow(() => check(form.replaceAll('"', "'")));
 });
 
+test("upload cannot offer multiple files that Netlify would drop", () => {
+  assert.throws(() => check(form.replace('type="file"', 'type="file" multiple')), /one file per upload field/);
+});
+
 test("missing form and each missing required Netlify attribute fail the build", () => {
   assert.throws(() => check(""), /no <form name="referral">/);
   for (const attr of [' data-netlify="true"', ' netlify-honeypot="bot-field"', ' enctype="multipart/form-data"', ' method="POST"', ' action="/referral-received/"']) {

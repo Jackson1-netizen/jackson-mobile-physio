@@ -42,9 +42,6 @@ const risks = ["pets", "aggressive-behaviour", "access-issues"];
         ))}</ol>
         <p class="rx-response"><ReferralIcon name="clock" /><span data-i18n-path="referralForm.response">{t.response}</span></p>
       </section>
-      <p class="rx-child-note"><ReferralIcon name="info" /><span>
-        <span data-i18n-path="referralForm.childNote">{t.childNote}</span>{" "}<span class="rx-age" data-i18n-path="referralForm.childAge">{t.childAge}</span>.
-      </span></p>
       <div class="rx-scene" aria-hidden="true"></div>
       <p class="rx-print-link"><a href="/referral-sheet/" data-i18n-path="referralForm.printSheet">{t.printSheet}</a></p>
     </div>
@@ -118,7 +115,7 @@ const risks = ["pets", "aggressive-behaviour", "access-issues"];
       <div class="rx-field rx-upload-region">
         <label for="upload"><span data-i18n-path="referralForm.uploadLabel">{t.uploadLabel}</span> <span class="rx-optional" data-i18n-path="referralForm.optional">{t.optional}</span></label>
         <div class="rx-upload-box"><span class="rx-upload-icon"><ReferralIcon name="upload" /></span><div>
-          <input id="upload" name="upload" type="file" multiple aria-describedby="upload-hint" />
+          <input id="upload" name="upload" type="file" aria-describedby="upload-hint" />
         </div></div>
         <p id="upload-hint" class="rx-sr" data-i18n-path="referralForm.uploadHint">{t.uploadHint}</p>
         <p id="upload-error" class="rx-error" data-error-for="upload" hidden></p>
