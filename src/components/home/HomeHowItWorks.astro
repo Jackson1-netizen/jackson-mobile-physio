@@ -6,8 +6,8 @@ import HomeIcon, { type HomeIconName } from "./HomeIcon.astro";
 const copy = messages.en.hm.how;
 const mobile = messages.en.hm.mobileApproved;
 const noteIcons: HomeIconName[] = ["pin", "person", "notes", "shield", "shield", "people"];
-const widths = [800, 1200, 1600, 2400] as const;
-const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${ext} ${w}w`).join(", ");
+const widths = [560, 800, 1122] as const;
+const srcset = (ext: string) => widths.map((w) => `/photos/hero/female-portrait-${w}.${ext} ${w}w`).join(", ");
 ---
 
 <section id="how" class="hm-how hm-flow hm-reveal" aria-labelledby="hm-how-heading">
@@ -36,19 +36,19 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
           <source type="image/avif" srcset={srcset("avif")} sizes="(min-width: 960px) 34rem, calc(100vw - 2.5rem)" />
           <source type="image/webp" srcset={srcset("webp")} sizes="(min-width: 960px) 34rem, calc(100vw - 2.5rem)" />
           <img
-            src="/photos/hero/portrait-1200.jpg"
+            src="/photos/hero/female-portrait-1122.jpg"
             srcset={srcset("jpg")}
             sizes="(min-width: 960px) 34rem, calc(100vw - 2.5rem)"
             alt={copy.photoAlt}
             data-i18n-attr="alt:hm.how.photoAlt"
-            width="2400"
-            height="3000"
+            width="1122"
+            height="1402"
             loading="lazy"
             decoding="async"
           />
         </picture>
+        <figcaption data-i18n-path="hm.how.caption">{copy.caption}</figcaption>
       </div>
-      <figcaption data-i18n-path="hm.how.caption">{copy.caption}</figcaption>
     </figure>
     <p class="hm-flow-note" data-i18n-path="hm.how.note">{copy.note}</p>
     <section class="hm-mobile-approved-only hm-flow-mobile-notes" aria-labelledby="hm-flow-mobile-notes-heading">
@@ -194,8 +194,9 @@ const srcset = (ext: string) => widths.map((w) => `/photos/hero/portrait-${w}.${
 
   .hm-flow-media figcaption {
     position: absolute;
-    top: 0.625rem;
-    right: 0.625rem;
+    bottom: 0.625rem;
+    left: 0.625rem;
+    z-index: 2;
     margin: 0;
     padding: 0.125rem 0.375rem;
     border-radius: 0.2rem;
