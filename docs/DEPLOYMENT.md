@@ -42,7 +42,11 @@ scripts/site-origin.mjs supplies canonical, Open Graph, JSON-LD and sitemap orig
 PUBLIC_SITE_URL, if used at a later launch, must be the apex origin; leave it unset
 on staging. Changing it does not configure DNS.
 
-- Real checkout retains the single const draft = true in src/content/site.ts.
+- `src/content/site.ts` remains the single source of truth for `draft`. The v5
+  feature task describes a `true` baseline, but the supplied feature-branch
+  checkout contains `const draft = false`; this discrepancy requires owner
+  clarification. The referral implementation does not change that switch or
+  indexing/headers logic.
 - Draft: HTML noindex, nofollow; robots Disallow: /; generated X-Robots-Tag noindex.
 - Production simulation with draft=false: ordinary pages indexable, draft banners
   absent, robots Allow: / and Disallow: /concepts/, apex sitemap. The 404 stays
@@ -72,10 +76,72 @@ Forms: local rejection must preserve the error and email fallback. General addre
 hello@homemotionphysio.com.au; referrals: referrals@homemotionphysio.com.au.
 No new mail API or submission database.
 
-/referral/ is approved text-led concept A with enquiry, phone, email and print
-controls. **The current page renders no QR code.** site.referralSheetUrl retains
-the apex /referral/ URL for future collateral; it does not prove a QR is rendered
-or that the public domain is live.
+/referral/ now uses the approved v5.1 Make a Referral layout. The Netlify Form
+named `referral` handles both new referrals (`referral-type=new`) and existing
+participant/care plan updates (`referral-type=update`). It is pre-rendered into
+static HTML with POST, `data-netlify="true"`, the `bot-field` honeypot, hidden
+`form-name=referral` and `multipart/form-data` encoding. Enhanced submission posts
+multipart data to the same-origin Netlify endpoint and redirects only after an
+OK response to `/referral-received/`; native POST uses that page as its action.
+The thank-you page explicitly stays noindex, including after a future launch.
+Opening it directly is not proof of a submission or email delivery.
+
+The earlier complete A4 content remains at `/referral-sheet/`, linked as
+**Printable referral sheet** from the referral page. `site.referralSheetUrl`
+retains its existing apex `/referral/` value; no domain or production-source
+configuration changes are part of this feature.
+
+### Referral release and Netlify checklist
+
+The v5 referral work is prepared only on `feat/referral-form-v5`. The manager
+reviews and pushes it through the approved release process; this feature does
+not change the existing Netlify production-source selection, preview gate, DNS,
+domain, CI or the existing draft/indexing configuration. The supplied checkout's
+`draft=false` conflicts with the task's stated `true` baseline and must be
+resolved explicitly before release. Any account changes below are for Jackson
+after the reviewed candidate is available on an approved Netlify deployment.
+
+1. Run `npm test`, `npm run check` and `npm run build`. The build must fail if the
+   static referral form, field names, multipart encoding or thank-you noindex
+   contract is absent. Inspect `dist/referral/index.html` and
+   `dist/referral-received/index.html`. Compare approved desktop/390px screenshots
+   separately; browser rendering is not available in the implementation sandbox.
+2. Confirm the deployed SHA and project. In Netlify **Forms**, ensure form
+   detection is enabled and that the deployed static form appears as `referral`.
+   Existing `enquiry` must remain detected.
+3. Open **Forms → referral → Notifications → Add notification → Email
+   notification**. Some dashboard views expose this under **Configuration →
+   Notifications → Form submission notifications**; choose `referral`. Enter
+   **referrals@homemotionphysio.com.au** (`site.referralEmail`) as the recipient,
+   use a subject such as **Home Motion — Referral / care plan update**, and save.
+   Do not include participant data in the subject. Keep enquiry notifications
+   routed separately to `hello@homemotionphysio.com.au`.
+4. Check Forms allowance and request/file limits in the account. Netlify's total
+   form-request limit is **8 MB**; optional uploaded documents have a combined
+   client cap of **7 MiB** (7 × 1024 × 1024 bytes, displayed as **7 MB**) to allow
+   for fields and multipart overhead. Native uploads remain subject to Netlify's
+   own enforcement. Check one and several small harmless attachments are
+   accessible from the authenticated submission; an email notification may link
+   to them rather than carry the files as attachments.
+5. Send synthetic new and update submissions, with and without a small file.
+   Confirm the same `referral` form stores the correct mode and fields, the
+   thank-you redirect occurs, and mail reaches the referral address. Test
+   invalid/empty required fields, bad email/phone, file-size failure, failed AJAX,
+   EN/中文, and native POST when AJAX is unavailable. With JavaScript disabled
+   entirely, the form defaults to new referral; use the shown phone/email fallback
+   for updates. Use no patient data or clinical documents.
+6. Inspect **Forms → referral → Verified submissions / Spam submissions**, and
+   the recipient's Inbox/Spam and Google Workspace rules. Mark a legitimate test
+   **Not spam** as needed. Add only a narrow filter for a verified notification
+   sender/subject; keep the honeypot and spam filtering enabled. Verify that
+   enquiry delivery still reaches its own recipient.
+7. Record the deployed SHA, test modes, stored-record result, attachment result
+   and inbox result without committing private addresses or patient information.
+   Remove synthetic submissions/files under the practice's retention policy.
+
+No dashboard, inbox or hosted submission checks have been carried out by this
+repository change. Notification setup is account-side, not an environment
+variable. See `EMAIL_SETUP.md` and `REFERRAL_FLOW.md` for details.
 
 ## Environment variables — names only
 

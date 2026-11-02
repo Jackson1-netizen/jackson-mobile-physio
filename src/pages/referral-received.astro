@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, getReferralEmailHref } from "../content/site";
+import { messages } from "../content/i18n";
+
+const copy = messages.en.referralForm.received;
+---
+
+<BaseLayout
+  title={`${copy.title} | ${site.businessName}`}
+  description="This page follows the Home Motion referral form. Opening it directly does not send a referral."
+  canonicalPath="/referral-received"
+  translatable
+  i18nInclude={["nav", "cta", "sections", "hm", "referralForm"]}
+  noindex
+>
+  <article class="mx-auto max-w-3xl px-4 py-14">
+    <h1
+      class="font-serif text-3xl font-bold text-[var(--color-ink)]"
+      data-i18n-path="referralForm.received.heading"
+    >{copy.heading}</h1>
+    <p
+      class="mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]"
+      data-i18n-path="referralForm.received.body"
+    >{copy.body}</p>
+    <p
+      class="mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]"
+      data-i18n-path="referralForm.received.response"
+    >{copy.response}</p>
+    <ul class="mt-4 grid list-none gap-3 p-0">
+      <li>
+        <a class="font-semibold text-[var(--color-ink)] underline underline-offset-4" href={site.phoneHref}>
+          <span data-i18n-path="referralForm.received.call">{copy.call}</span>: {site.phone}
+        </a>
+      </li>
+      <li>
+        <a class="break-words font-semibold text-[var(--color-ink)] underline underline-offset-4" href={getReferralEmailHref()}>
+          <span data-i18n-path="referralForm.received.email">{copy.email}</span>: {site.referralEmail}
+        </a>
+      </li>
+    </ul>
+    <p class="mt-6 text-sm">
+      <a
+        class="text-[var(--color-accent)] underline-offset-4 hover:underline"
+        href="/"
+        data-i18n-path="referralForm.received.back"
+      >{copy.back}</a>
+    </p>
+  </article>
+</BaseLayout>

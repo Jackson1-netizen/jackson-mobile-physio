@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { cpSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from "node:fs";
+import { closeSync, cpSync, existsSync, mkdtempSync, openSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, sep } from "node:path";
 import test from "node:test";
@@ -14,7 +14,20 @@ const original = readFileSync(sitePath, "utf8");
 function runBuild(cwd, env) {
   const npmCli = process.env.npm_execpath;
   assert.ok(npmCli, "Run the launch-build tests via npm test");
-  execFileSync(process.execPath, [npmCli, "run", "build"], { cwd, env, stdio: "pipe" });
+  // A regular file also captures diagnostics on sandboxes that disallow sync pipes.
+  const logs = mkdtempSync(join(tmpdir(), "hm-build-output-"));
+  const path = join(logs, "build.log");
+  const output = openSync(path, "w");
+  try {
+    execFileSync(process.execPath, [npmCli, "run", "build"], {
+      cwd, env, stdio: ["ignore", output, output],
+    });
+  } catch (cause) {
+    throw new Error(`Copied launch build failed:\n${readFileSync(path, "utf8")}`, { cause });
+  } finally {
+    closeSync(output);
+    rmSync(logs, { recursive: true, force: true });
+  }
 }
 
 function withDraft(source, value) {
@@ -137,10 +150,21 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(home, /href="\/areas\/box-hill\/"/);
     const referral = readFileSync(join(dist, "referral/index.html"), "utf8");
     assert.match(referral, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/referral\/"/);
-    assert.match(referral, /AHPRA registered physiotherapist/);
-    assert.match(referral, /data-i18n-path="referralPage\.designA\.enquire"/);
-    assert.match(referral, /data-referral-print/);
-    assert.doesNotMatch(referral, /AHPRA registration/);
+    assert.match(referral, /<form\b[^>]*name="referral"[^>]*data-netlify="true"/);
+    assert.match(referral, /action="\/referral-received\/"/);
+    assert.match(referral, /href="\/referral-sheet\/"/);
+    // The former referral landing page remains available as the printable sheet.
+    const referralSheet = readFileSync(join(dist, "referral-sheet/index.html"), "utf8");
+    assert.match(referralSheet, /rel="canonical" href="https:\/\/homemotionphysio\.com\.au\/referral-sheet\/"/);
+    assert.match(referralSheet, /AHPRA registered physiotherapist/);
+    assert.match(referralSheet, /data-i18n-path="referralPage\.designA\.enquire"/);
+    assert.match(referralSheet, /data-referral-print/);
+    assert.doesNotMatch(referralSheet, /AHPRA registration/);
+    for (const html of [home, referral, referralSheet]) {
+      assert.match(html, /class="hm-header-referral" href="\/referral\/"/);
+      assert.match(html, /data-i18n-path="cta\.referral">Make a referral/);
+      assert.match(html, /class="hm-btn hm-btn-primary hm-cta-desktop" href="\/enquiry\/"/);
+    }
     const missing = readFileSync(join(dist, "404.html"), "utf8");
     assert.match(missing, /name="robots" content="noindex, nofollow"/);
     assert.equal(missing.includes('rel="canonical"'), false);

@@ -7,15 +7,17 @@ import { messages } from "../content/i18n";
 interface Props {
   /** Homepage mobile bar is fixed, so the footer clears it below 1024px. */
   reserveMobileBar?: boolean;
+  /** The approved referral form has its own responsive footer composition. */
+  referralForm?: boolean;
 }
 
-const { reserveMobileBar = false } = Astro.props;
+const { reserveMobileBar = false, referralForm = false } = Astro.props;
 const year = new Date().getFullYear();
 const mailto = getEmailHref();
 const copy = messages.en.hm.footer;
 ---
 
-<footer class:list={["site-footer", reserveMobileBar && "site-footer-home"]}>
+<footer class:list={["site-footer", reserveMobileBar && "site-footer-home", referralForm && "site-footer-referral"]}>
   <div class="site-footer-wrap">
     <div class="site-footer-grid">
       <div class="site-footer-brand">
@@ -37,11 +39,11 @@ const copy = messages.en.hm.footer;
           <li>
             <a href="/#how" data-i18n-path="sections.howItWorks">{messages.en.sections.howItWorks}</a>
           </li>
-          <li>
+          {!referralForm && <li>
             <a href="/areas/" data-i18n-path="sections.areas">{messages.en.sections.areas}</a>
-          </li>
+          </li>}
           <li>
-            <a href="/referral/" data-i18n-path="nav.referralSheet">{messages.en.nav.referralSheet}</a>
+            <a href="/referral/" data-i18n-path={referralForm ? "referralForm.formLabel" : "nav.referralSheet"}>{referralForm ? "Referral form" : messages.en.nav.referralSheet}</a>
           </li>
         </ul>
       </nav>
@@ -273,6 +275,187 @@ const copy = messages.en.hm.footer;
   @media (min-width: 1024px) {
     .site-footer-home {
       padding-bottom: 1.65rem;
+    }
+  }
+
+  /* Referral-only geometry follows v5_1; other routes keep their footer. */
+  .site-footer-referral {
+    font-family: "Referral Sans", "Source Sans 3", system-ui, sans-serif;
+    padding: 42px 0 27px;
+  }
+
+  .site-footer-referral .site-footer-wrap {
+    width: min(1152px, calc(100% - 64px));
+  }
+
+  .site-footer-referral .site-footer-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr) minmax(0, .9fr) minmax(0, 1.15fr);
+    gap: 32px 36px;
+  }
+
+  .site-footer-referral .site-footer-brand {
+    grid-column: auto;
+  }
+
+  .site-footer-referral .site-footer-logo {
+    display: block;
+    width: 184px;
+    background: var(--ft-plate);
+  }
+
+  .site-footer-referral .site-footer-logo :global(img) {
+    mix-blend-mode: normal;
+  }
+
+  .site-footer-referral .site-footer-tagline {
+    margin-top: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .site-footer-referral .site-footer-tagline-small {
+    margin-top: 7px;
+    font-size: 13px;
+  }
+
+  .site-footer-referral h2 {
+    margin-bottom: 14px;
+    font: 700 15px/1.3 "Referral Sans", "Source Sans 3", system-ui, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .site-footer-referral .site-footer-col ul {
+    gap: 8px;
+  }
+
+  .site-footer-referral .site-footer-col a {
+    font-size: 15px;
+  }
+
+  .site-footer-referral .site-footer-contact a {
+    display: flex;
+    gap: 8px;
+  }
+
+  .site-footer-referral .site-footer-contact :global(svg) {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+  }
+
+  .site-footer-referral .site-footer-languages {
+    margin-top: 11px;
+    font-size: 15px;
+  }
+
+  .site-footer-referral .site-footer-bottom {
+    margin-top: 30px;
+    padding-top: 15px;
+    gap: 12px 24px;
+    font-size: 13px;
+  }
+
+  .site-footer-referral .site-footer-compliance {
+    margin-top: 9px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 1150px) {
+    .site-footer-referral .site-footer-grid {
+      grid-template-columns: 1.2fr .7fr .7fr 1.2fr;
+      gap: 24px;
+    }
+    .site-footer-referral .site-footer-contact a {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .site-footer-referral .site-footer-wrap {
+      width: calc(100% - 40px);
+    }
+    .site-footer-referral .site-footer-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 28px;
+    }
+    .site-footer-referral .site-footer-brand {
+      grid-column: 1 / -1;
+      max-width: 420px;
+    }
+    .site-footer-referral .site-footer-col:last-child {
+      grid-column: 1 / -1;
+      padding-top: 20px;
+      border-top: 1px solid #bdcabc;
+    }
+    .site-footer-referral .site-footer-contact a {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .site-footer-referral {
+      padding: 32px 0 24px;
+    }
+    .site-footer-referral .site-footer-wrap {
+      width: calc(100% - 32px);
+    }
+    .site-footer-referral .site-footer-grid {
+      gap: 26px 20px;
+    }
+    .site-footer-referral .site-footer-logo {
+      width: 150px;
+    }
+    .site-footer-referral .site-footer-tagline {
+      font: 560 23px/1.2 "Referral Serif", "Source Serif 4", Georgia, serif;
+      letter-spacing: -.025em;
+    }
+    .site-footer-referral .site-footer-tagline-small {
+      margin-top: 8px;
+    }
+    .site-footer-referral .site-footer-col h2 {
+      margin-bottom: 13px;
+      font: 560 21px/1.2 "Referral Serif", "Source Serif 4", Georgia, serif;
+      letter-spacing: -.02em;
+    }
+    .site-footer-referral .site-footer-col ul {
+      gap: 12px;
+    }
+    .site-footer-referral .site-footer-col li > a {
+      display: inline;
+      min-height: 0;
+      font-size: 15px;
+    }
+    .site-footer-referral .site-footer-contact li > a {
+      display: flex;
+      min-height: 0;
+    }
+    .site-footer-referral .site-footer-contact :global(svg) {
+      color: inherit;
+    }
+    .site-footer-referral .site-footer-languages {
+      font-size: 15px;
+    }
+    .site-footer-referral .site-footer-bottom {
+      display: block;
+      margin-top: 24px;
+      padding-top: 15px;
+      font-size: 13px;
+    }
+    .site-footer-referral .site-footer-copy,
+    .site-footer-referral .site-footer-abn {
+      display: block;
+    }
+    .site-footer-referral .site-footer-copy span:first-child {
+      display: inline;
+    }
+    .site-footer-referral .site-footer-abn {
+      margin: 4px 0 0;
+    }
+    .site-footer-referral .site-footer-compliance {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.55;
     }
   }
 </style>
