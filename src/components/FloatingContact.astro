@@ -105,9 +105,9 @@ const copy = messages.en.cta;
   .connect-card {
     position: fixed;
     z-index: 40;
-    right: max(1.5rem, env(safe-area-inset-right, 0px));
-    /* Leave the bottom strip clear for the hosting badge. */
-    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    right: max(1.125rem, env(safe-area-inset-right, 0px));
+    /* Align above the hosting badge with a small visual gap. */
+    bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
     width: min(19rem, calc(100vw - 2rem));
     border: 1px solid #dce4da;
     border-radius: 1rem;
@@ -171,8 +171,6 @@ const copy = messages.en.cta;
 
   @media (max-width: 639px) {
     .connect-card {
-      right: max(1rem, env(safe-area-inset-right, 0px));
-      bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
       width: min(18rem, calc(100vw - 2rem));
     }
   }
