@@ -1,0 +1,93 @@
+---
+import "../../styles/whatsapp.css";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
+import { messages } from "../../content/i18n";
+import { whatsappUrl } from "../../lib/whatsapp.mjs";
+
+const t = messages.en.hm.whatsapp;
+const copy = {
+  en: messages.en.hm.whatsapp,
+  "zh-Hant": messages["zh-Hant"].hm.whatsapp,
+  "zh-Hans": messages["zh-Hans"].hm.whatsapp,
+};
+---
+
+<!-- Not a Netlify form: no name/data-netlify, fields have no name attributes, nothing is posted or stored. -->
+<form class="hm-wa-card" data-wa-consult action={whatsappUrl()} method="get" target="_blank" novalidate
+  aria-labelledby="hm-wa-title" aria-describedby="hm-wa-note">
+  <div class="hm-wa-head">
+    <p class="hm-wa-title" id="hm-wa-title" data-i18n-path="hm.whatsapp.title">{t.title}</p>
+    <p class="hm-wa-lead" data-i18n-path="hm.whatsapp.lead">{t.lead}</p>
+  </div>
+  <div class="hm-wa-grid">
+    <div class="hm-wa-field">
+      <label for="hm-wa-name" data-i18n-path="hm.whatsapp.name">{t.name}</label>
+      <input id="hm-wa-name" type="text" autocomplete="name" maxlength="80" required aria-describedby="hm-wa-name-error" />
+      <p class="hm-wa-error" id="hm-wa-name-error" hidden></p>
+    </div>
+    <div class="hm-wa-field">
+      <label for="hm-wa-phone" data-i18n-path="hm.whatsapp.phone">{t.phone}</label>
+      <input id="hm-wa-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" required aria-describedby="hm-wa-phone-error" />
+      <p class="hm-wa-error" id="hm-wa-phone-error" hidden></p>
+    </div>
+    <div class="hm-wa-field">
+      <label for="hm-wa-role" data-i18n-path="hm.whatsapp.role">{t.role}</label>
+      <select id="hm-wa-role">
+        <option value="" data-i18n-path="hm.whatsapp.selectOne">{t.selectOne}</option>
+        {t.roleOptions.map((label, i) => <option value={String(i)} data-i18n-path={`hm.whatsapp.roleOptions.${i}`}>{label}</option>)}
+      </select>
+    </div>
+    <div class="hm-wa-field">
+      <label for="hm-wa-need" data-i18n-path="hm.whatsapp.need">{t.need}</label>
+      <select id="hm-wa-need">
+        <option value="" data-i18n-path="hm.whatsapp.selectOne">{t.selectOne}</option>
+        {t.needOptions.map((label, i) => <option value={String(i)} data-i18n-path={`hm.whatsapp.needOptions.${i}`}>{label}</option>)}
+      </select>
+    </div>
+  </div>
+  <button class="hm-btn hm-wa-submit" type="submit">
+    <WhatsAppIcon size={20} />
+    <span data-i18n-path="hm.whatsapp.button">{t.button}</span>
+  </button>
+  <p class="hm-wa-note" id="hm-wa-note" data-i18n-path="hm.whatsapp.note">{t.note}</p>
+  <script type="application/json" data-wa-copy set:html={JSON.stringify(copy).replace(/</g, "\\u003c")} />
+</form>
+
+<script>
+  import { consultMessage, whatsappUrl } from "../../lib/whatsapp.mjs";
+
+  const form = document.querySelector<HTMLFormElement>("[data-wa-consult]");
+  const all = JSON.parse(form?.querySelector("[data-wa-copy]")?.textContent ?? "{}");
+  const copy = () => all[document.documentElement.lang] ?? all.en;
+  const field = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+  const optionText = (id: string, key: "roleOptions" | "needOptions") => {
+    const value = field(id)?.value ?? "";
+    return value === "" ? "" : (copy()[key]?.[Number(value)] ?? "");
+  };
+  function showError(id: string, message: string) {
+    const input = field(id);
+    const error = document.getElementById(`${id}-error`);
+    if (!input || !error) return;
+    error.hidden = !message;
+    error.textContent = message;
+    if (message) input.setAttribute("aria-invalid", "true");
+    else input.removeAttribute("aria-invalid");
+  }
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const c = copy();
+    const name = field("hm-wa-name")?.value.trim() ?? "";
+    const phone = field("hm-wa-phone")?.value.trim() ?? "";
+    showError("hm-wa-name", name ? "" : c.nameRequired);
+    showError("hm-wa-phone", phone ? "" : c.phoneRequired);
+    if (!name || !phone) {
+      field(name ? "hm-wa-phone" : "hm-wa-name")?.focus();
+      return;
+    }
+    const url = whatsappUrl(consultMessage(c.message, {
+      name, phone, role: optionText("hm-wa-role", "roleOptions"), need: optionText("hm-wa-need", "needOptions"),
+    }));
+    form.dataset.waUrl = url;
+    window.open(url, "_blank", "noopener");
+  });
+</script>

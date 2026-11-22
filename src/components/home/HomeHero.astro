@@ -3,6 +3,7 @@ import { getRegistrationDisplayLine } from "../../content/site";
 import { homeHero } from "../../content/home-motion";
 import HomeIcon from "./HomeIcon.astro";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
+import HomeQuickConsult from "./HomeQuickConsult.astro";
 import { messages } from "../../content/i18n";
 
 const registrationLine = getRegistrationDisplayLine();
@@ -151,5 +152,8 @@ const slideCopy = Object.fromEntries(Object.entries(messages).map(([locale, bund
         <LanguageSwitcher />
       </div>
     </div>
+  </div>
+  <div class="hm-wa-wrap">
+    <HomeQuickConsult />
   </div>
 </section>

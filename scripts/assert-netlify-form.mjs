@@ -10,7 +10,9 @@ export { readSiteDraft };
 
 function formErrors(html) {
   const errors = [];
-  const formTag = html.match(/<form\b[^>]*>/i)?.[0] ?? "";
+  // Other forms (e.g. the WhatsApp quick-consult card) may come first; check the enquiry form itself.
+  const formTag = [...html.matchAll(/<form\b[^>]*>/gi)].map((match) => match[0])
+    .find((tag) => tag.includes('name="enquiry"')) ?? "";
   if (!formTag.includes('name="enquiry"')) errors.push('Built HTML has no <form name="enquiry">.');
   if (!/\snetlify(?:=|"|\s|>)/.test(formTag) && !formTag.includes('data-netlify="true"')) {
     errors.push("Built enquiry form is missing the Netlify form attribute.");

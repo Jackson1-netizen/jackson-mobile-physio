@@ -4,6 +4,7 @@ import { formatServiceAreasLine, isPlaceholder, publicQualifications, site } fro
 import { concept1Purpose } from "./concept1-home";
 import { mobileApproved } from "./mobile-approved";
 import { referralMessages } from "./referral-i18n";
+import { whatsappCopy } from "./whatsapp-copy.mjs";
 
 export const localeLabels = {
   en: "English",
@@ -352,6 +353,7 @@ const en = {
   /** Homepage (`/`) copy. English here is the source rendered by src/components/home/*. */
   hm: {
     mobileApproved: mobileApproved.en,
+    whatsapp: whatsappCopy["en"],
     skipLink: "Skip to main content",
     header: {
       primaryNav: "Primary",
@@ -870,6 +872,7 @@ const zhHant = {
   },
   hm: {
     mobileApproved: mobileApproved["zh-Hant"],
+    whatsapp: whatsappCopy["zh-Hant"],
     skipLink: "跳至主要內容",
     header: {
       primaryNav: "主要導覽",
@@ -1374,6 +1377,7 @@ const zhHans = {
   },
   hm: {
     mobileApproved: mobileApproved["zh-Hans"],
+    whatsapp: whatsappCopy["zh-Hans"],
     skipLink: "跳到主要内容",
     header: {
       primaryNav: "主导航",
