@@ -6,12 +6,18 @@ cto/home-motion-integration → future production. No deployment in remediation.
 ## Current repository behaviour
 
 - Shared Google Maps component on / and /areas/.
-- Main pins: Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley,
-  Mitcham, Nunawading — **8 pins**.
-- Nearby enquiry links: Mont Albert, Surrey Hills, Camberwell, Glen Iris,
-  Mount Waverley, Burwood East, Blackburn South, Vermont, Vermont South,
-  Wantirna, Doncaster East, Balwyn, Forest Hill, Caulfield — **14 links**.
-  Nearby entries never create markers or extend map bounds.
+- Main pins (Google Business Profile service area, centred on Oakleigh):
+  Oakleigh, Bentleigh East, Carnegie, Clayton, Mount Waverley, Caulfield,
+  Moorabbin, Burwood, Malvern, Glen Waverley, Camberwell, Springvale,
+  Mulgrave, Cheltenham, Box Hill, Forest Hill, Blackburn, Noble Park,
+  Keysborough, Rowville — **20 pins**.
+- Nearby enquiry links: Mont Albert, Surrey Hills, Glen Iris, Burwood East,
+  Blackburn South, Vermont, Vermont South, Wantirna, Doncaster East, Balwyn —
+  **10 links**. Nearby entries never create markers or extend map bounds.
+- Existing `/areas/` landing pages remain for Box Hill, Doncaster, Blackburn,
+  Ringwood, Burwood, Glen Waverley, Mitcham and Nunawading. Suburbs in the
+  official list without a landing page link to `/enquiry/` instead. Do not
+  remove the leftover pages until a keep / redirect / remove decision.
 - Primary-list selection highlights/pans a main marker and updates the Google
   Maps external link. Nearby links open /enquiry/ with suburb prefill.
 - Clustering, all-areas reset, keyboard markers and reduced-motion-safe pin drop

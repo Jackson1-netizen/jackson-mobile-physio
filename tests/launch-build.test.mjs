@@ -128,16 +128,32 @@ test("draft false build uses the apex and drops launch-blocking copy", { timeout
     assert.match(home, />home\.</);
     assert.match(home, /0433 479 703/);
     for (const suburb of [
-      "Box Hill",
-      "Doncaster",
-      "Blackburn",
-      "Ringwood",
+      "Oakleigh",
+      "Bentleigh East",
+      "Carnegie",
+      "Clayton",
+      "Mount Waverley",
+      "Caulfield",
+      "Moorabbin",
       "Burwood",
+      "Malvern",
       "Glen Waverley",
-      "Mitcham",
-      "Nunawading",
+      "Camberwell",
+      "Springvale",
+      "Mulgrave",
+      "Cheltenham",
+      "Box Hill",
+      "Forest Hill",
+      "Blackburn",
+      "Noble Park",
+      "Keysborough",
+      "Rowville",
     ]) {
       assert.match(home, new RegExp(suburb));
+    }
+    // Existing area pages for suburbs no longer in the official list stay published.
+    for (const leftover of ["doncaster", "ringwood", "mitcham", "nunawading"]) {
+      assert.equal(existsSync(join(dist, "areas", leftover, "index.html")), true, leftover);
     }
     assert.doesNotMatch(home, /PHY0004088824/);
     assert.doesNotMatch(home, /Draft status/);

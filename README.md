@@ -1,6 +1,6 @@
 # Home Motion — mobile physiotherapy (draft)
 
-Draft marketing site for **Home Motion Physiotherapy** — mobile physiotherapy in Melbourne's eastern suburbs. Built with **Astro 7**, **TypeScript**, and **Tailwind CSS 4**.
+Draft marketing site for **Home Motion Physiotherapy** — mobile physiotherapy in Melbourne's south-eastern and eastern suburbs. Built with **Astro 7**, **TypeScript**, and **Tailwind CSS 4**.
 
 > **Not live:** `site.draft = true` is the launch switch (`noindex` and `robots.txt` disallow). ABN 75 612 731 757. AHPRA registration is stated without a published practitioner number. **Do not deploy or change DNS** until Jackson asks. Status: `docs/LAUNCH_STATUS.md`.
 

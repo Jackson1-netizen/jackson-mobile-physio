@@ -257,13 +257,25 @@ export const homeMapPins = [
   { name: "Vermont South", lat: -37.855, lng: 145.185, side: "down" },
   { name: "Wantirna", lat: -37.851, lng: 145.226, side: "right" },
   { name: "Doncaster East", lat: -37.790, lng: 145.167, side: "up" },
+  { name: "Oakleigh", lat: -37.899, lng: 145.102, side: "down" },
+  { name: "Bentleigh East", lat: -37.922, lng: 145.059, side: "left" },
+  { name: "Carnegie", lat: -37.889, lng: 145.057, side: "left" },
+  { name: "Clayton", lat: -37.915, lng: 145.122, side: "down" },
+  { name: "Moorabbin", lat: -37.938, lng: 145.057, side: "left" },
+  { name: "Malvern", lat: -37.862, lng: 145.036, side: "left" },
+  { name: "Springvale", lat: -37.949, lng: 145.153, side: "down" },
+  { name: "Mulgrave", lat: -37.928, lng: 145.172, side: "right" },
+  { name: "Cheltenham", lat: -37.967, lng: 145.055, side: "down" },
+  { name: "Noble Park", lat: -37.967, lng: 145.176, side: "right" },
+  { name: "Keysborough", lat: -37.991, lng: 145.167, side: "down" },
+  { name: "Rowville", lat: -37.923, lng: 145.236, side: "right" },
 ] as const;
 
 export const homeSuburbs = site.serviceAreas.suburbs.map((name) => {
   const page = suburbPages.find((s) => s.name === name);
   return {
     name,
-    href: page ? suburbPath(page.slug) : "/enquiry/",
+    href: page ? suburbPath(page.slug) : `/enquiry/?suburb=${encodeURIComponent(name)}`,
   };
 });
 

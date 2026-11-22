@@ -57,7 +57,7 @@ export const suburbPages: SuburbPage[] = [
     seo: {
       title: "Mobile Physiotherapist Blackburn | Home Motion",
       description:
-        "Mobile physio in Blackburn and Blackburn South. Eastern suburbs home visits; English, Cantonese, and Mandarin. Independent practitioner — not a corporate roster.",
+        "Mobile physio in Blackburn and Blackburn South. Home visits across Melbourne's south-eastern and eastern suburbs; English, Cantonese, and Mandarin. Independent practitioner — not a corporate roster.",
     },
     headline: "Mobile physiotherapy in Blackburn",
     paragraphs: [

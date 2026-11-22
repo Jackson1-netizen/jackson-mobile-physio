@@ -55,7 +55,7 @@ export const site = {
   tagline: "Mobile Physiotherapy",
   /** Brand line in hero — swappable */
   motto: "Your physio comes to you.",
-  locationDescriptor: "Melbourne Eastern Suburbs",
+  locationDescriptor: "Melbourne's south-eastern and eastern suburbs",
 
   phone: "0433 479 703",
   phoneHref: "tel:+61433479703",
@@ -118,23 +118,33 @@ export const site = {
   languages: ["English", "Cantonese", "Mandarin"] as const,
 
   serviceAreas: {
-    region: "Melbourne Eastern Suburbs",
+    region: "Melbourne's south-eastern and eastern suburbs",
     suburbs: [
-      "Box Hill",
-      "Doncaster",
-      "Blackburn",
-      "Ringwood",
+      "Oakleigh",
+      "Bentleigh East",
+      "Carnegie",
+      "Clayton",
+      "Mount Waverley",
+      "Caulfield",
+      "Moorabbin",
       "Burwood",
+      "Malvern",
       "Glen Waverley",
-      "Mitcham",
-      "Nunawading",
+      "Camberwell",
+      "Springvale",
+      "Mulgrave",
+      "Cheltenham",
+      "Box Hill",
+      "Forest Hill",
+      "Blackburn",
+      "Noble Park",
+      "Keysborough",
+      "Rowville",
     ],
     nearbySuburbs: [
       "Mont Albert",
       "Surrey Hills",
-      "Camberwell",
       "Glen Iris",
-      "Mount Waverley",
       "Burwood East",
       "Blackburn South",
       "Vermont",
@@ -142,8 +152,6 @@ export const site = {
       "Wantirna",
       "Doncaster East",
       "Balwyn",
-      "Forest Hill",
-      "Caulfield",
     ],
     surroundingNote: "and surrounding areas",
   },
@@ -156,7 +164,7 @@ export const site = {
   ] as const,
 
   aboutParagraphs: [
-    "Jackson (Wai Wa Law) provides a personal, mobile physiotherapy service focused on home and community-based care across Melbourne's eastern suburbs. The service is designed to make physiotherapy more accessible and convenient, with appointments available in English, Cantonese and Mandarin.",
+    "Jackson (Wai Wa Law) provides a personal, mobile physiotherapy service focused on home and community-based care across Melbourne's south-eastern and eastern suburbs. The service is designed to make physiotherapy more accessible and convenient, with appointments available in English, Cantonese and Mandarin.",
     "Jackson has experience working with people in community and disability settings and values practical, individualised care focused on mobility, function and meaningful everyday goals.",
   ] as const,
 
@@ -164,7 +172,7 @@ export const site = {
     "When you enquire, you speak with the physiotherapist who personally delivers your care — not a call centre or rotating roster.",
 
   contactCta:
-    "Looking for mobile physiotherapy in Melbourne's eastern suburbs? Contact us to discuss your needs, location and appointment availability.",
+    "Looking for mobile physiotherapy in Melbourne's south-eastern and eastern suburbs? Contact us to discuss your needs, location and appointment availability.",
 
   referrersCta:
     "Support Coordinators, Recovery Coaches, families and other health professionals are welcome to get in touch regarding potential referrals.",
@@ -226,7 +234,7 @@ export const site = {
   draftNotice: {
     title: draft ? "Draft site — not for public use" : "",
     body: draft
-      ? "This website is a private draft for Home Motion, a mobile physiotherapy service in Melbourne's eastern suburbs. It is not indexed. AHPRA physiotherapy registration has been granted. Do not use this page for clinical or emergency care."
+      ? "This website is a private draft for Home Motion, a mobile physiotherapy service in Melbourne's south-eastern and eastern suburbs. It is not indexed. AHPRA physiotherapy registration has been granted. Do not use this page for clinical or emergency care."
       : "",
   },
 
@@ -241,8 +249,8 @@ export const site = {
     adopted: privacyAdopted,
     pageTitle: "Privacy policy",
     metaDescription: privacyAdopted
-      ? "Privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs."
-      : "Draft privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's eastern suburbs. Pending owner review.",
+      ? "Privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's south-eastern and eastern suburbs."
+      : "Draft privacy policy for people who contact Home Motion, a mobile physiotherapy practice in Melbourne's south-eastern and eastern suburbs. Pending owner review.",
     lastUpdatedLabel: privacyAdopted ? "Last updated:" : "Status:",
     lastUpdated: privacyAdopted ? "21 October 2026" : "Draft for owner review — October 2026. Not yet adopted.",
     privacyEnquiriesContactLabel: "For privacy enquiries, contact:",
@@ -253,7 +261,7 @@ export const site = {
       {
         heading: "Who we are",
         paragraphs: [
-          "Home Motion Physiotherapy is a registered business name of Wai Wa Law (Jackson Law), a sole trader (ABN 75 612 731 757), providing mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you are contacting the physiotherapist who provides the service. Jackson is a physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA).",
+          "Home Motion Physiotherapy is a registered business name of Wai Wa Law (Jackson Law), a sole trader (ABN 75 612 731 757), providing mobile physiotherapy in Melbourne's south-eastern and eastern suburbs. When you enquire, you are contacting the physiotherapist who provides the service. Jackson is a physiotherapist registered with the Australian Health Practitioner Regulation Agency (AHPRA).",
           "This policy describes how the practice handles personal information, including health information, in line with the Privacy Act 1988 (Cth) and the Australian Privacy Principles. In Victoria, the Health Records Act 2001 (Vic) may also apply to health information. It is not a complete statement of every legal duty.",
         ],
       },
@@ -370,9 +378,9 @@ export const site = {
   },
 
   seo: {
-    defaultTitle: "Home Motion | Mobile Physiotherapy — Melbourne Eastern Suburbs",
+    defaultTitle: "Home Motion | Mobile Physiotherapy — Melbourne's South-Eastern and Eastern Suburbs",
     description:
-      "Home Motion provides mobile physiotherapy at home and in the community across Melbourne's eastern suburbs. Jackson Law, AHPRA-registered physiotherapist. English, Cantonese and Mandarin. NDIS plan-managed and self-managed enquiries welcome. Not an NDIS registered provider.",
+      "Home Motion provides mobile physiotherapy at home and in the community across Melbourne's south-eastern and eastern suburbs. Jackson Law, AHPRA-registered physiotherapist. English, Cantonese and Mandarin. NDIS plan-managed and self-managed enquiries welcome. Not an NDIS registered provider.",
     locale: "en_AU",
     ogImagePath: "/og.png",
     ogImageAlt: "Home Motion Physiotherapy",
@@ -385,6 +393,7 @@ export const site = {
       "Mandarin physiotherapist Melbourne",
       "Chinese physiotherapist Melbourne",
       "mobile physiotherapy eastern suburbs Melbourne",
+      "mobile physiotherapy south-eastern suburbs Melbourne",
     ],
   },
 } as const;

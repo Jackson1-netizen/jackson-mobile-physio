@@ -3,7 +3,7 @@ export const mobileApproved = {
   en: {
     languages: "English · Cantonese · Mandarin",
     meetParagraphs: [
-      "Jackson (Wai Wa Law) provides a personal, mobile physiotherapy service focused on home and community-based care across Melbourne’s eastern suburbs.",
+      "Jackson (Wai Wa Law) provides a personal, mobile physiotherapy service focused on home and community-based care across Melbourne’s south-eastern and eastern suburbs.",
       "Appointments are available in English, Cantonese and Mandarin, with practical, individualised care focused on mobility, function and meaningful everyday goals.",
     ],
     servicesNote: "Examples of support; care is planned individually.",
@@ -16,12 +16,12 @@ export const mobileApproved = {
       "Please do not include health information in the first message.",
       "Follow-up visits are with the same physiotherapist.",
     ],
-    whyIntro: "We provide one-to-one physiotherapy in your home and community across Melbourne’s eastern suburbs — built on clear communication, practical goals, and care in English, Cantonese, and Mandarin.",
+    whyIntro: "We provide one-to-one physiotherapy in your home and community across Melbourne’s south-eastern and eastern suburbs — built on clear communication, practical goals, and care in English, Cantonese, and Mandarin.",
     whyBodies: [
       "Physiotherapy where you live and move — no clinic visit required.",
       "Speak directly with the physiotherapist who provides your care.",
       "Practical goals focused on mobility, function and everyday tasks.",
-      "Home and community visits across Melbourne Eastern Suburbs, by appointment.",
+      "Home and community visits across Melbourne's south-eastern and eastern suburbs, by appointment.",
     ],
     enquiryTitle: "Online enquiry",
     required: "* Required fields",
@@ -31,7 +31,7 @@ export const mobileApproved = {
   "zh-Hant": {
     languages: "英語 · 粵語 · 普通話",
     meetParagraphs: [
-      "Jackson（Wai Wa Law）在墨爾本東區提供個人化的流動物理治療，以家居及社區照護為主。",
+      "Jackson（Wai Wa Law）在墨爾本東南區及東區提供個人化的流動物理治療，以家居及社區照護為主。",
       "可使用英語、粵語或普通話，提供切合個人需要的實用照護，著重活動能力、功能及有意義的日常目標。",
     ],
     servicesNote: "以上為支援例子；照護會按個人需要規劃。",
@@ -44,12 +44,12 @@ export const mobileApproved = {
       "首次留言請勿提供健康資料。",
       "後續探訪由同一位物理治療師提供。",
     ],
-    whyIntro: "我們在墨爾本東區提供一對一的家居及社區物理治療，重視清晰溝通、實際目標，並可使用英語、粵語和普通話。",
+    whyIntro: "我們在墨爾本東南區及東區提供一對一的家居及社區物理治療，重視清晰溝通、實際目標，並可使用英語、粵語和普通話。",
     whyBodies: [
       "在您生活和活動的地方接受物理治療，無需到診所。",
       "直接與為您提供照護的物理治療師聯絡。",
       "以活動能力、功能及日常事務為實際目標。",
-      "在墨爾本東區提供預約制家居及社區探訪。",
+      "在墨爾本東南區及東區提供預約制家居及社區探訪。",
     ],
     enquiryTitle: "網上查詢",
     required: "* 必填欄位",
@@ -59,7 +59,7 @@ export const mobileApproved = {
   "zh-Hans": {
     languages: "英语 · 粤语 · 普通话",
     meetParagraphs: [
-      "Jackson（Wai Wa Law）在墨尔本东区提供个性化的上门物理治疗，以居家及社区照护为主。",
+      "Jackson（Wai Wa Law）在墨尔本东南区及东区提供个性化的上门物理治疗，以居家及社区照护为主。",
       "可使用英语、粤语或普通话，提供切合个人需要的实用照护，着重活动能力、功能及有意义的日常目标。",
     ],
     servicesNote: "以上为支持示例；照护会按个人需要规划。",
@@ -72,12 +72,12 @@ export const mobileApproved = {
       "首次留言请勿提供健康信息。",
       "后续探访由同一位物理治疗师提供。",
     ],
-    whyIntro: "我们在墨尔本东区提供一对一的居家及社区物理治疗，重视清晰沟通、实际目标，并可使用英语、粤语和普通话。",
+    whyIntro: "我们在墨尔本东南区及东区提供一对一的居家及社区物理治疗，重视清晰沟通、实际目标，并可使用英语、粤语和普通话。",
     whyBodies: [
       "在您生活和活动的地方接受物理治疗，无需到诊所。",
       "直接与为您提供照护的物理治疗师联系。",
       "以活动能力、功能及日常事务为实际目标。",
-      "在墨尔本东区提供预约制居家及社区探访。",
+      "在墨尔本东南区及东区提供预约制居家及社区探访。",
     ],
     enquiryTitle: "在线咨询",
     required: "* 必填项",

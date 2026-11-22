@@ -45,7 +45,7 @@ const en = {
     discussNeeds: "Discuss your needs",
   },
   hero: {
-    regionLabel: "Melbourne Eastern Suburbs",
+    regionLabel: "Melbourne's South-Eastern and Eastern Suburbs",
     languagesLabel: "Languages",
     fundingNote:
       "NDIS plan-managed & self-managed enquiries welcome · Not an NDIS registered provider",
@@ -93,7 +93,7 @@ const en = {
   },
   areas: {
     intro:
-      "Home and community visits across Melbourne's eastern suburbs. This is a mobile service — we do not publish a clinic address.",
+      "Home and community visits across Melbourne's south-eastern and eastern suburbs. This is a mobile service — we do not publish a clinic address.",
     viewSuburb: "Mobile physio in",
     allAreas: "Browse all service areas",
   },
@@ -133,12 +133,12 @@ const en = {
       {
         question: "Do you have a clinic I can visit?",
         answer:
-          "No. Home Motion is mobile only. Appointments are at your home or an agreed community location across the eastern suburbs.",
+          "No. Home Motion is mobile only. Appointments are at your home or an agreed community location across Melbourne's south-eastern and eastern suburbs.",
       },
       {
         question: "Which suburbs do you cover?",
         answer:
-          "We regularly visit Box Hill, Doncaster, Blackburn, Ringwood, Burwood, Glen Waverley, Mitcham, Nunawading, and surrounding areas. Contact us to confirm travel for your address.",
+          "We visit Melbourne's south-eastern and eastern suburbs, including Oakleigh, Bentleigh East, Carnegie, Clayton, Mount Waverley, Caulfield, Moorabbin, Burwood, Malvern, Glen Waverley, Camberwell, Springvale, Mulgrave, Cheltenham, Box Hill, Forest Hill, Blackburn, Noble Park, Keysborough, Rowville, and surrounding areas. Contact us to confirm travel for your address.",
       },
       {
         question: "Can I use NDIS funding?",
@@ -247,7 +247,7 @@ const en = {
       call: "Call Jackson",
       print: "Print referral information",
       glance: "At a glance",
-      glanceItems: ["Melbourne’s eastern suburbs", "English · Cantonese · Mandarin", "Home and community visits", "AHPRA registered physiotherapist"],
+      glanceItems: ["Melbourne’s south-eastern and eastern suburbs", "English · Cantonese · Mandarin", "Home and community visits", "AHPRA registered physiotherapist"],
       steps: [
         { title: "Get in touch", body: "Call or email Jackson with your contact details and the person’s suburb." },
         { title: "Confirm arrangements", body: "Jackson confirms location, availability and funding arrangements." },
@@ -265,7 +265,7 @@ const en = {
       privacy: "Privacy",
     },
     intro:
-      "Jackson (Wai Wa Law) is the physiotherapist who provides this service. Home Motion offers home and community visits across Melbourne's eastern suburbs, in English, Cantonese and Mandarin. Support coordinators, GPs, allied health professionals and families can contact him directly.",
+      "Jackson (Wai Wa Law) is the physiotherapist who provides this service. Home Motion offers home and community visits across Melbourne's south-eastern and eastern suburbs, in English, Cantonese and Mandarin. Support coordinators, GPs, allied health professionals and families can contact him directly.",
     steps: [
       { title: "You contact Jackson", body: "Reach out directly and Jackson provides the physiotherapy." },
       { title: "Home and community visits", body: "No clinic to travel to." },
@@ -323,7 +323,7 @@ const en = {
     h1Mid: "in the comfort of",
     h1Em: "home.",
     support:
-      "Independent mobile physiotherapy in Melbourne's eastern suburbs. When you enquire, you speak directly with Jackson — the physiotherapist who personally delivers your care. Appointments in English, Cantonese and Mandarin.",
+      "Independent mobile physiotherapy in Melbourne's south-eastern and eastern suburbs. When you enquire, you speak directly with Jackson — the physiotherapist who personally delivers your care. Appointments in English, Cantonese and Mandarin.",
     primaryCta: "Make an enquiry",
     secondaryCta: "Learn about our services",
     chips: [
@@ -345,7 +345,7 @@ const en = {
     },
     hero: {
       support:
-        "Personalised, evidence-based physiotherapy care in Melbourne's eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
+        "Personalised, evidence-based physiotherapy care in Melbourne's south-eastern and eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
       chips: ["Home & community visits", "All ages welcome", "NDIS enquiries welcome"],
       ahpra: "AHPRA registered physiotherapist",
       photoAlt:
@@ -380,11 +380,11 @@ const en = {
     areas: {
       kicker: "Where we help",
       heading: "Service Areas",
-      lead: "Home and community visits across Melbourne's eastern suburbs.",
+      lead: "Home and community visits across Melbourne's south-eastern and eastern suburbs.",
       body: "We bring physiotherapy to your home, aged care residence or community setting, to help you stay independent and keep doing the things that matter to you.",
       cardLabel: "Home Motion contact card",
       logoAlt: "Home Motion Mobile Physiotherapy",
-      cardPlace: "Melbourne's eastern suburbs",
+      cardPlace: "Melbourne's south-eastern and eastern suburbs",
       cardRole: "Mobile Physiotherapist",
       mapCaption: "Suburb locations only, not a coverage boundary. Please confirm availability for your address.",
       mapLabel: "Google street map of Melbourne service areas. Select a suburb from the list or a map marker.",
@@ -407,17 +407,17 @@ const en = {
       zoomIn: "Zoom in",
       zoomOut: "Zoom out",
       clusterLabel: "Zoom in to view nearby areas:",
-      mapChip: "Serving Melbourne's eastern suburbs",
+      mapChip: "Serving Melbourne's south-eastern and eastern suburbs",
       benefits: [
         { title: "In your home or community", body: "We come to you, making care easier and more convenient." },
-        { title: "Local to the eastern suburbs", body: "Visits across Melbourne's eastern suburbs." },
+        { title: "Local to the south-eastern and eastern suburbs", body: "Visits across Melbourne's south-eastern and eastern suburbs." },
         { title: "Personalised care", body: "One-on-one physiotherapy tailored to your goals." },
       ],
     },
     referrers: {
       kicker: "Home Motion",
       heading: "For Referrers",
-      lead: "Jackson (Wai Wa Law) is the physiotherapist who provides this service. Home Motion offers home and community visits across Melbourne's eastern suburbs, in English, Cantonese and Mandarin. Support coordinators, GPs, allied health professionals and families can contact him directly.",
+      lead: "Jackson (Wai Wa Law) is the physiotherapist who provides this service. Home Motion offers home and community visits across Melbourne's south-eastern and eastern suburbs, in English, Cantonese and Mandarin. Support coordinators, GPs, allied health professionals and families can contact him directly.",
       registration: "AHPRA registered physiotherapist.",
       ahpraLead: "AHPRA",
       ahpraRest: "registered physiotherapist.",
@@ -498,7 +498,7 @@ const en = {
     aboutBlock: {
       kicker: "About Home Motion",
       heading: "Physiotherapy built around everyday life.",
-      p1: "Home Motion Physiotherapy provides mobile physiotherapy in Melbourne's eastern suburbs, so care happens where daily movement happens.",
+      p1: "Home Motion Physiotherapy provides mobile physiotherapy in Melbourne's south-eastern and eastern suburbs, so care happens where daily movement happens.",
       p2: "We work with older adults, people living with disability, and people recovering from illness or injury, with a focus on practical goals and personalised support.",
       points: [
         { title: "Home visits", body: "We come to you, at home or in the community." },
@@ -522,7 +522,7 @@ const en = {
         "Whether you're looking for yourself, a family member or a client, get in touch and we'll talk through what help at home could look like.",
       enquire: "Make an enquiry",
       call: `Call ${site.phone}`,
-      note: "Home visits across Melbourne's eastern suburbs.",
+      note: "Home visits across Melbourne's south-eastern and eastern suburbs.",
       caption: "Illustrative image",
     },
     contactShort: {
@@ -533,7 +533,7 @@ const en = {
       rights: site.footer.copyrightSuffix,
       privacy: site.footer.privacyLinkLabel,
       disclaimer: site.footer.disclaimerLinkLabel,
-      tagline: "Mobile physiotherapy in Melbourne's eastern suburbs.",
+      tagline: "Mobile physiotherapy in Melbourne's south-eastern and eastern suburbs.",
       taglineSmall: "Care tailored to your goals, at home and in the community.",
       explore: "Explore",
       information: "Information",
@@ -571,7 +571,7 @@ const zhHant = {
     discussNeeds: "討論您的需要",
   },
   hero: {
-    regionLabel: "墨爾本東區",
+    regionLabel: "墨爾本東南區及東區",
     languagesLabel: "語言",
     fundingNote: "歡迎 NDIS 自管及計劃管理查詢 · 非 NDIS 註冊服務提供者",
   },
@@ -594,13 +594,13 @@ const zhHant = {
     languagesLabel: "語言",
     role: "上門物理治療",
     paragraphs: [
-      "Jackson（Wai Wa Law）在墨爾本東區提供個人化上門物理治療，專注家居及社區照護，並可提供英語、廣東話及普通話預約。",
+      "Jackson（Wai Wa Law）在墨爾本東南區及東區提供個人化上門物理治療，專注家居及社區照護，並可提供英語、廣東話及普通話預約。",
       "Jackson 具社區及殘疾服務經驗，重視切合個人需要的實用照護，以活動能力、功能及日常生活目標為本。",
     ],
     differentiator:
       "查詢時您會直接與負責治療的物理治療師溝通 — 並非電話中心或輪更團隊。",
     contactCta:
-      "正在尋找墨爾本東區上門物理治療？歡迎聯絡我們，討論您的需要、地點及可預約時間。",
+      "正在尋找墨爾本東南區及東區上門物理治療？歡迎聯絡我們，討論您的需要、地點及可預約時間。",
     hydroCaption:
       "圖片僅作水中照護情境示意。Home Motion 為上門及社區物理治療服務，並非水療診所。",
   },
@@ -620,7 +620,7 @@ const zhHant = {
     noGuarantee: "開始照護前須確認資助資格及可預約時段。本網站不保證 NDIS 批准或治療結果。",
   },
   areas: {
-    intro: "於墨爾本東區提供上門及社區物理治療。本為流動服務，不設固定診所地址。",
+    intro: "於墨爾本東南區及東區提供上門及社區物理治療。本為流動服務，不設固定診所地址。",
     viewSuburb: "上門物理治療：",
     allAreas: "查看所有服務地區",
   },
@@ -653,12 +653,12 @@ const zhHant = {
     items: [
       {
         question: "是否有診所可以前往？",
-        answer: "沒有 — 僅提供上門服務。預約在您的家中或東區約定的社區地點進行。",
+        answer: "沒有 — 僅提供上門服務。預約在您的家中或東南區及東區約定的社區地點進行。",
       },
       {
         question: "覆蓋哪些郊區？",
         answer:
-          "我們經常到訪 Box Hill、Doncaster、Blackburn、Ringwood、Burwood、Glen Waverley、Mitcham、Nunawading 及周邊地區。請聯絡我們確認您的地址。",
+          "我們的服務覆蓋墨爾本東南區及東區，包括 Oakleigh、Bentleigh East、Carnegie、Clayton、Mount Waverley、Caulfield、Moorabbin、Burwood、Malvern、Glen Waverley、Camberwell、Springvale、Mulgrave、Cheltenham、Box Hill、Forest Hill、Blackburn、Noble Park、Keysborough、Rowville 及周邊地區。請聯絡我們確認您的地址。",
       },
       {
         question: "可以使用 NDIS 資助嗎？",
@@ -750,7 +750,7 @@ const zhHant = {
       call: "致電 Jackson",
       print: "列印轉介資料",
       glance: "服務一覽",
-      glanceItems: ["墨爾本東區", "英語・廣東話・普通話", "家居及社區探訪", "AHPRA 註冊物理治療師"],
+      glanceItems: ["墨爾本東南區及東區", "英語・廣東話・普通話", "家居及社區探訪", "AHPRA 註冊物理治療師"],
       steps: [
         { title: "聯絡我們", body: "致電或電郵 Jackson，提供您的聯絡資料及服務對象所在的郊區。" },
         { title: "確認安排", body: "Jackson 會確認地點、是否可安排服務及資助安排。" },
@@ -768,7 +768,7 @@ const zhHant = {
       privacy: "私隱",
     },
     intro:
-      "Jackson（Wai Wa Law）是提供這項服務的物理治療師。Home Motion 在墨爾本東區提供上門及社區探訪，可使用英語、廣東話及普通話。支援協調員、家庭醫生、專職醫療人員及家屬可直接聯絡他。",
+      "Jackson（Wai Wa Law）是提供這項服務的物理治療師。Home Motion 在墨爾本東南區及東區提供上門及社區探訪，可使用英語、廣東話及普通話。支援協調員、家庭醫生、專職醫療人員及家屬可直接聯絡他。",
     steps: [
       { title: "您聯絡 Jackson", body: "直接聯絡，並由 Jackson 提供物理治療。" },
       { title: "上門及社區探訪", body: "無需前往診所。" },
@@ -787,7 +787,7 @@ const zhHant = {
     photoLabel: "示意圖",
     photoAlt: "插圖：物理治療師在家中廚房與一位年長女士談話",
     printNote: "請使用瀏覽器的列印功能（Ctrl+P / ⌘P）。此頁是可列印資料，不是 PDF。",
-    sheetKicker: `${site.businessName} · ${site.tagline} · 墨爾本東區`,
+    sheetKicker: `${site.businessName} · ${site.tagline} · 墨爾本東南區及東區`,
     sheetTitle: "轉介資料",
     practitioner: "治療師",
     qualLines: ["註冊：AHPRA 註冊物理治療師", "專業保險：按執業要求投保"],
@@ -797,7 +797,7 @@ const zhHant = {
     serviceModelBody: "獨立的上門、家居及社區物理治療。",
     differentiator: "查詢時，您會與親自提供治療的物理治療師溝通 — 並非電話中心或輪更團隊。",
     areasHeading: "服務地區",
-    areasBody: "墨爾本東區 — Box Hill、Doncaster、Blackburn、Ringwood、Burwood、Glen Waverley、Mitcham、Nunawading，以及附近地區。",
+    areasBody: "墨爾本東南區及東區 — Oakleigh、Bentleigh East、Carnegie、Clayton、Mount Waverley、Caulfield、Moorabbin、Burwood、Malvern、Glen Waverley、Camberwell、Springvale、Mulgrave、Cheltenham、Box Hill、Forest Hill、Blackburn、Noble Park、Keysborough、Rowville，以及附近地區。",
     languagesHeading: "語言",
     languagesBody: "英語、廣東話、普通話",
     servicesHeading: "服務例子（並非全部）",
@@ -847,7 +847,7 @@ const zhHant = {
     },
     hero: {
       support:
-        "為墨爾本東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
+        "為墨爾本東南區及東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
       chips: ["上門及社區探訪", "歡迎所有年齡人士", "歡迎 NDIS 查詢"],
       ahpra: "AHPRA 註冊物理治療師",
       photoAlt: "插圖：物理治療師在家中協助一位年長女士使用助行架",
@@ -875,11 +875,11 @@ const zhHant = {
     areas: {
       kicker: "我們服務的地方",
       heading: "服務地區",
-      lead: "為墨爾本東區提供上門及社區探訪。",
+      lead: "為墨爾本東南區及東區提供上門及社區探訪。",
       body: "我們把物理治療帶到您的家中、安老院舍或社區地點，幫助您保持獨立，並繼續做對您重要的事。",
       cardLabel: "Home Motion 聯絡卡",
       logoAlt: "Home Motion 上門物理治療",
-      cardPlace: "墨爾本東區",
+      cardPlace: "墨爾本東南區及東區",
       cardRole: "上門物理治療師",
       mapCaption: "只標示郊區位置，並非服務邊界。請確認您的地址及預約安排。",
       mapLabel: "墨爾本服務地區的 Google 街道地圖。可從列表或地圖標記選擇地區。",
@@ -902,17 +902,17 @@ const zhHant = {
       zoomIn: "放大地圖",
       zoomOut: "縮小地圖",
       clusterLabel: "放大查看鄰近地區：",
-      mapChip: "服務墨爾本東區",
+      mapChip: "服務墨爾本東南區及東區",
       benefits: [
         { title: "在您的家中或社區", body: "我們到您所在的地方，讓照護更方便。" },
-        { title: "就在東區", body: "在墨爾本東區提供上門探訪。" },
+        { title: "就在東南區及東區", body: "在墨爾本東南區及東區提供上門探訪。" },
         { title: "個人化照護", body: "一對一物理治療，按您的目標安排。" },
       ],
     },
     referrers: {
       kicker: "Home Motion",
       heading: "轉介人士",
-      lead: "Jackson（Wai Wa Law）是提供這項服務的物理治療師。Home Motion 在墨爾本東區提供上門及社區探訪，可使用英語、廣東話及普通話。支援協調員、家庭醫生、專職醫療人員及家屬可直接聯絡他。",
+      lead: "Jackson（Wai Wa Law）是提供這項服務的物理治療師。Home Motion 在墨爾本東南區及東區提供上門及社區探訪，可使用英語、廣東話及普通話。支援協調員、家庭醫生、專職醫療人員及家屬可直接聯絡他。",
       registration: "AHPRA 註冊物理治療師。",
       ahpraLead: "AHPRA",
       ahpraRest: "註冊物理治療師。",
@@ -962,7 +962,7 @@ const zhHant = {
       kicker: "為何選擇 Home Motion",
       heading: "為何選擇 Home Motion？",
       intro:
-        "我們在墨爾本東區的家居及社區提供一對一物理治療 — 重視清晰溝通和實際目標，並可使用英語、廣東話及普通話。與您溝通的人，就是為您提供治療的人。",
+        "我們在墨爾本東南區及東區的家居及社區提供一對一物理治療 — 重視清晰溝通和實際目標，並可使用英語、廣東話及普通話。與您溝通的人，就是為您提供治療的人。",
       items: [
         { title: "上門照護", body: "在您生活和活動的地方接受物理治療 — 無需前往診所。" },
         {
@@ -970,7 +970,7 @@ const zhHant = {
           body: "查詢時您會直接與負責治療的物理治療師溝通 — 並非電話中心或輪更團隊。",
         },
         { title: "更獨立自主", body: "以活動能力、身體功能及對您重要的日常事務為實際目標。" },
-        { title: "本地而靈活", body: "於墨爾本東區提供上門及社區探訪，需預約。" },
+        { title: "本地而靈活", body: "於墨爾本東南區及東區提供上門及社區探訪，需預約。" },
       ],
     },
     about: {
@@ -992,7 +992,7 @@ const zhHant = {
     aboutBlock: {
       kicker: "關於 Home Motion",
       heading: "圍繞日常生活的物理治療。",
-      p1: "Home Motion Physiotherapy 在墨爾本東區提供上門物理治療，讓照護發生在日常活動的地方。",
+      p1: "Home Motion Physiotherapy 在墨爾本東南區及東區提供上門物理治療，讓照護發生在日常活動的地方。",
       p2: "我們服務年長者、殘疾人士，以及疾病或受傷後正在恢復的人，重點是實際目標和個人化支援。",
       points: [
         { title: "上門探訪", body: "我們到您所在的地方，包括家中或社區。" },
@@ -1012,7 +1012,7 @@ const zhHant = {
       support: "無論是為您自己、家人還是客戶了解服務，歡迎聯絡我們，一起看看上門幫助可以是什麼樣子。",
       enquire: "發送查詢",
       call: `致電 ${site.phone}`,
-      note: "上門服務覆蓋墨爾本東區。",
+      note: "上門服務覆蓋墨爾本東南區及東區。",
       caption: "示意圖",
     },
     contactShort: {
@@ -1023,7 +1023,7 @@ const zhHant = {
       rights: "版權所有。",
       privacy: site.draft ? "私隱政策（草稿）" : "私隱政策",
       disclaimer: site.draft ? "網站聲明（草稿）" : "網站聲明",
-      tagline: "墨爾本東區上門物理治療。",
+      tagline: "墨爾本東南區及東區上門物理治療。",
       taglineSmall: "照護配合您的目標，在家中及社區進行。",
       explore: "探索",
       information: "資訊",
@@ -1061,7 +1061,7 @@ const zhHans = {
     discussNeeds: "讨论您的需要",
   },
   hero: {
-    regionLabel: "墨尔本东区",
+    regionLabel: "墨尔本东南区及东区",
     languagesLabel: "语言",
     fundingNote: "欢迎 NDIS 自管及计划管理咨询 · 非 NDIS 注册服务提供者",
   },
@@ -1084,12 +1084,12 @@ const zhHans = {
     languagesLabel: "语言",
     role: "上门物理治疗",
     paragraphs: [
-      "Jackson（Wai Wa Law）在墨尔本东区提供个性化上门物理治疗，专注家居及社区照护，并可提供英语、粤语及普通话预约。",
+      "Jackson（Wai Wa Law）在墨尔本东南区及东区提供个性化上门物理治疗，专注家居及社区照护，并可提供英语、粤语及普通话预约。",
       "Jackson 具社区及残疾服务经验，重视切合个人需要的实用照护，以活动能力、功能及日常生活目标为本。",
     ],
     differentiator: "咨询时您会直接与负责治疗的物理治疗师沟通 — 并非电话中心或轮更团队。",
     contactCta:
-      "正在寻找墨尔本东区上门物理治疗？欢迎联系我们，讨论您的需要、地点及可预约时间。",
+      "正在寻找墨尔本东南区及东区上门物理治疗？欢迎联系我们，讨论您的需要、地点及可预约时间。",
     hydroCaption:
       "图片仅作水中照护情境示意。Home Motion 为上门及社区物理治疗服务，并非水疗诊所。",
   },
@@ -1108,7 +1108,7 @@ const zhHans = {
     noGuarantee: "开始照护前须确认资助资格及可预约时段。本网站不保证 NDIS 批准或治疗结果。",
   },
   areas: {
-    intro: "于墨尔本东区提供上门及社区物理治疗。本为流动服务，不设固定诊所地址。",
+    intro: "于墨尔本东南区及东区提供上门及社区物理治疗。本为流动服务，不设固定诊所地址。",
     viewSuburb: "上门物理治疗：",
     allAreas: "查看所有服务地区",
   },
@@ -1141,12 +1141,12 @@ const zhHans = {
     items: [
       {
         question: "是否有诊所可以前往？",
-        answer: "没有 — 仅提供上门服务。预约在您的家中或东区约定的社区地点进行。",
+        answer: "没有 — 仅提供上门服务。预约在您的家中或东南区及东区约定的社区地点进行。",
       },
       {
         question: "覆盖哪些郊区？",
         answer:
-          "我们经常到访 Box Hill、Doncaster、Blackburn、Ringwood、Burwood、Glen Waverley、Mitcham、Nunawading 及周边地区。请联系我们确认您的地址。",
+          "我们的服务覆盖墨尔本东南区及东区，包括 Oakleigh、Bentleigh East、Carnegie、Clayton、Mount Waverley、Caulfield、Moorabbin、Burwood、Malvern、Glen Waverley、Camberwell、Springvale、Mulgrave、Cheltenham、Box Hill、Forest Hill、Blackburn、Noble Park、Keysborough、Rowville 及周边地区。请联系我们确认您的地址。",
       },
       {
         question: "可以使用 NDIS 资助吗？",
@@ -1238,7 +1238,7 @@ const zhHans = {
       call: "致电 Jackson",
       print: "打印转介资料",
       glance: "服务一览",
-      glanceItems: ["墨尔本东区", "英语・粤语・普通话", "居家及社区探访", "AHPRA 注册物理治疗师"],
+      glanceItems: ["墨尔本东南区及东区", "英语・粤语・普通话", "居家及社区探访", "AHPRA 注册物理治疗师"],
       steps: [
         { title: "联系我们", body: "致电或发送邮件给 Jackson，提供您的联系方式及服务对象所在的郊区。" },
         { title: "确认安排", body: "Jackson 会确认地点、是否能安排服务及资助安排。" },
@@ -1256,7 +1256,7 @@ const zhHans = {
       privacy: "隐私",
     },
     intro:
-      "Jackson（Wai Wa Law）是提供这项服务的物理治疗师。Home Motion 在墨尔本东区提供上门及社区探访，可使用英语、粤语及普通话。支持协调员、全科医生、专职医疗人员及家属可以直接联系他。",
+      "Jackson（Wai Wa Law）是提供这项服务的物理治疗师。Home Motion 在墨尔本东南区及东区提供上门及社区探访，可使用英语、粤语及普通话。支持协调员、全科医生、专职医疗人员及家属可以直接联系他。",
     steps: [
       { title: "您联系 Jackson", body: "直接联系，并由 Jackson 提供物理治疗。" },
       { title: "上门及社区探访", body: "无需前往诊所。" },
@@ -1275,7 +1275,7 @@ const zhHans = {
     photoLabel: "示意图",
     photoAlt: "插图：物理治疗师在家中厨房与一位年长女士谈话",
     printNote: "请使用浏览器的打印功能（Ctrl+P / ⌘P）。此页是可打印资料，不是 PDF。",
-    sheetKicker: `${site.businessName} · ${site.tagline} · 墨尔本东区`,
+    sheetKicker: `${site.businessName} · ${site.tagline} · 墨尔本东南区及东区`,
     sheetTitle: "转介信息",
     practitioner: "治疗师",
     qualLines: ["注册：AHPRA 注册物理治疗师", "专业保险：按执业要求投保"],
@@ -1285,7 +1285,7 @@ const zhHans = {
     serviceModelBody: "独立的上门、居家及社区物理治疗。",
     differentiator: "咨询时，您会与亲自提供治疗的物理治疗师沟通 — 并非电话中心或轮更团队。",
     areasHeading: "服务地区",
-    areasBody: "墨尔本东区 — Box Hill、Doncaster、Blackburn、Ringwood、Burwood、Glen Waverley、Mitcham、Nunawading，以及附近地区。",
+    areasBody: "墨尔本东南区及东区 — Oakleigh、Bentleigh East、Carnegie、Clayton、Mount Waverley、Caulfield、Moorabbin、Burwood、Malvern、Glen Waverley、Camberwell、Springvale、Mulgrave、Cheltenham、Box Hill、Forest Hill、Blackburn、Noble Park、Keysborough、Rowville，以及附近地区。",
     languagesHeading: "语言",
     languagesBody: "英语、粤语、普通话",
     servicesHeading: "服务例子（并非全部）",
@@ -1318,7 +1318,7 @@ const zhHans = {
     h1Mid: "在家中安心接受",
     h1Em: "服务。",
     support:
-      "墨尔本东郊独立上门物理治疗。查询时由 Jackson 本人接听，亦由他亲自提供护理。可使用英语、粤语或普通话。",
+      "墨尔本东南郊及东郊独立上门物理治疗。查询时由 Jackson 本人接听，亦由他亲自提供护理。可使用英语、粤语或普通话。",
     primaryCta: "查询预约",
     secondaryCta: "了解服务",
     chips: ["上门及社区探访", "英语 / 粤语 / 普通话", "一对一个人化护理"],
@@ -1335,7 +1335,7 @@ const zhHans = {
     },
     hero: {
       support:
-        "为墨尔本东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
+        "为墨尔本东南区及东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
       chips: ["上门及社区探访", "欢迎所有年龄人士", "欢迎 NDIS 咨询"],
       ahpra: "AHPRA 注册物理治疗师",
       photoAlt: "插图：物理治疗师在家中协助一位年长女士使用助行架",
@@ -1363,11 +1363,11 @@ const zhHans = {
     areas: {
       kicker: "我们服务的地方",
       heading: "服务地区",
-      lead: "为墨尔本东区提供上门及社区探访。",
+      lead: "为墨尔本东南区及东区提供上门及社区探访。",
       body: "我们把物理治疗带到您的家中、老年照护住所或社区地点，帮助您保持独立，并继续做对您重要的事。",
       cardLabel: "Home Motion 联系卡",
       logoAlt: "Home Motion 上门物理治疗",
-      cardPlace: "墨尔本东区",
+      cardPlace: "墨尔本东南区及东区",
       cardRole: "上门物理治疗师",
       mapCaption: "只标示郊区位置，并非服务边界。请确认您的地址及预约安排。",
       mapLabel: "墨尔本服务地区的 Google 街道地图。可从列表或地图标记选择地区。",
@@ -1390,17 +1390,17 @@ const zhHans = {
       zoomIn: "放大地图",
       zoomOut: "缩小地图",
       clusterLabel: "放大查看附近地区：",
-      mapChip: "服务墨尔本东区",
+      mapChip: "服务墨尔本东南区及东区",
       benefits: [
         { title: "在您的家中或社区", body: "我们到您所在的地方，让照护更方便。" },
-        { title: "就在东区", body: "在墨尔本东区提供上门探访。" },
+        { title: "就在东南区及东区", body: "在墨尔本东南区及东区提供上门探访。" },
         { title: "个性化照护", body: "一对一物理治疗，按您的目标安排。" },
       ],
     },
     referrers: {
       kicker: "Home Motion",
       heading: "转介方",
-      lead: "Jackson（Wai Wa Law）是提供这项服务的物理治疗师。Home Motion 在墨尔本东区提供上门及社区探访，可使用英语、粤语及普通话。支持协调员、全科医生、专职医疗人员及家属可以直接联系他。",
+      lead: "Jackson（Wai Wa Law）是提供这项服务的物理治疗师。Home Motion 在墨尔本东南区及东区提供上门及社区探访，可使用英语、粤语及普通话。支持协调员、全科医生、专职医疗人员及家属可以直接联系他。",
       registration: "AHPRA 注册物理治疗师。",
       ahpraLead: "AHPRA",
       ahpraRest: "注册物理治疗师。",
@@ -1450,7 +1450,7 @@ const zhHans = {
       kicker: "为何选择 Home Motion",
       heading: "为何选择 Home Motion？",
       intro:
-        "我们在墨尔本东区的居家及社区提供一对一物理治疗 — 注重清晰沟通和实际目标，并可使用英语、粤语及普通话。与您沟通的人，就是为您提供治疗的人。",
+        "我们在墨尔本东南区及东区的居家及社区提供一对一物理治疗 — 注重清晰沟通和实际目标，并可使用英语、粤语及普通话。与您沟通的人，就是为您提供治疗的人。",
       items: [
         { title: "上门照护", body: "在您生活和活动的地方接受物理治疗 — 无需前往诊所。" },
         {
@@ -1458,7 +1458,7 @@ const zhHans = {
           body: "咨询时您会直接与负责治疗的物理治疗师沟通 — 并非电话中心或轮更团队。",
         },
         { title: "更加独立", body: "以活动能力、身体功能及对您重要的日常事务为实际目标。" },
-        { title: "本地且灵活", body: "在墨尔本东区提供上门及社区探访，需预约。" },
+        { title: "本地且灵活", body: "在墨尔本东南区及东区提供上门及社区探访，需预约。" },
       ],
     },
     about: {
@@ -1480,7 +1480,7 @@ const zhHans = {
     aboutBlock: {
       kicker: "关于 Home Motion",
       heading: "围绕日常生活的物理治疗。",
-      p1: "Home Motion Physiotherapy 在墨尔本东区提供上门物理治疗，让照护发生在日常活动的地方。",
+      p1: "Home Motion Physiotherapy 在墨尔本东南区及东区提供上门物理治疗，让照护发生在日常活动的地方。",
       p2: "我们服务年长者、残疾人士，以及疾病或受伤后正在恢复的人，重点是实际目标和个性化支持。",
       points: [
         { title: "上门探访", body: "我们到您所在的地方，包括家中或社区。" },
@@ -1500,7 +1500,7 @@ const zhHans = {
       support: "无论是为您自己、家人还是客户了解服务，欢迎联系我们，一起看看上门帮助可以是什么样子。",
       enquire: "发送咨询",
       call: `致电 ${site.phone}`,
-      note: "上门服务覆盖墨尔本东区。",
+      note: "上门服务覆盖墨尔本东南区及东区。",
       caption: "示意图",
     },
     contactShort: {
@@ -1511,7 +1511,7 @@ const zhHans = {
       rights: "版权所有。",
       privacy: site.draft ? "隐私政策（草稿）" : "隐私政策",
       disclaimer: site.draft ? "网站声明（草稿）" : "网站声明",
-      tagline: "墨尔本东区上门物理治疗。",
+      tagline: "墨尔本东南区及东区上门物理治疗。",
       taglineSmall: "照护配合您的目标，在家中及社区进行。",
       explore: "探索",
       information: "信息",

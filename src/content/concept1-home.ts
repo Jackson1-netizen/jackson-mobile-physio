@@ -1,7 +1,7 @@
 import { site } from "./site";
 
 export const concept1Hero = {
-  h1: "Mobile physiotherapy in Melbourne's eastern suburbs",
+  h1: "Mobile physiotherapy in Melbourne's south-eastern and eastern suburbs",
   support:
     "When you enquire, you speak directly with Jackson — the physiotherapist who personally delivers your care. Appointments available in English, Cantonese and Mandarin.",
   chips: [
@@ -16,7 +16,7 @@ export const concept1Hero = {
 export const concept1Purpose = {
   heading: "Personal mobile physiotherapy",
   body:
-    "We provide one-to-one physiotherapy in your home and community across Melbourne's eastern suburbs — built on clear communication, practical goals, and care in English, Cantonese, and Mandarin. The person you speak with is the person who provides your care.",
+    "We provide one-to-one physiotherapy in your home and community across Melbourne's south-eastern and eastern suburbs — built on clear communication, practical goals, and care in English, Cantonese, and Mandarin. The person you speak with is the person who provides your care.",
 };
 
 export const concept1TrustHighlights = [
@@ -38,7 +38,7 @@ export const concept1ServiceNav = [
 
 export const concept1TrustStrip = [
   { title: "Home & community visits", body: "Physiotherapy where you live — no clinic visit required." },
-  { title: "Eastern suburbs", body: "Mobile service across Melbourne's east and surrounding areas." },
+  { title: "South-eastern and eastern suburbs", body: "Mobile service across Melbourne's south-east and east and surrounding areas." },
   { title: "Languages", body: "English · 廣東話 · 普通話" },
   { title: "One-to-one care", body: "The person you speak with is the person who provides your care." },
 ] as const;
@@ -68,7 +68,7 @@ export const concept1Steps = [
 export const concept1MeetJackson = {
   heading: "Meet Jackson",
   paragraphs: [
-    "Jackson is a mobile physiotherapist focused on practical, person-centred care across Melbourne's eastern suburbs.",
+    "Jackson is a mobile physiotherapist focused on practical, person-centred care across Melbourne's south-eastern and eastern suburbs.",
     "He values clear communication, realistic goals, and working with you (and your supports) in familiar settings.",
   ],
   philosophy:
