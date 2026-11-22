@@ -4,8 +4,11 @@ import { site } from "../../content/site";
 import { messages } from "../../content/i18n";
 import { homeNav, homeHero, homeMenuServices, homeMenuAreas } from "../../content/home-motion";
 import LanguageSwitcher from "../LanguageSwitcher.astro";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
+import "../../styles/whatsapp.css";
 
 const t = messages.en.hm.header;
+const wa = messages.en.hm.whatsapp;
 
 function siteHref(href: string) {
   if (href === "#contact") return "/enquiry/";
@@ -30,6 +33,11 @@ function siteHref(href: string) {
       <a class="hm-btn hm-btn-primary hm-cta-desktop" href="/enquiry/">
         <span data-i18n-path="cta.enquiry">{homeHero.primaryCta}</span>
         <span class="hm-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="hm-header-whatsapp" href={wa.headerHref} target="_blank" rel="noopener"
+        data-i18n-attr="href:hm.whatsapp.headerHref">
+        <WhatsAppIcon size={18} />
+        <span class="hm-header-whatsapp-label" data-i18n-path="hm.whatsapp.header">{wa.header}</span>
       </a>
       <details class="hm-menu">
         <summary aria-expanded="false" aria-controls="hm-menu-panel">
