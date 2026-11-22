@@ -1,5 +1,7 @@
 export const MAX_UPLOAD_BYTES: number;
 export const REFERRAL_SUCCESS_PATH: string;
+export const REFERRAL_DATE_FIELDS: readonly string[];
+export function parseReferralDate(input: unknown): string | null;
 export interface ReferralData {
   get(name: string): unknown;
   getAll(name: string): unknown[];
@@ -14,6 +16,7 @@ export interface ReferralCopy {
   readonly errorSummary: string;
   readonly newTitle: string;
   readonly updateTitle: string;
+  readonly noFileChosen?: string;
   readonly errors: Readonly<Record<string, string>>;
 }
 export function australianPhoneValid(value: string): boolean;

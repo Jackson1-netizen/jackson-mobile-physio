@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   australianPhoneValid,
   MAX_UPLOAD_BYTES,
+  parseReferralDate,
   REFERRAL_SUCCESS_PATH,
   submitReferral,
   validateReferral,
@@ -81,6 +82,31 @@ test("date of birth must be a real date on or before today; postcode must be fou
   assert.deepEqual(validate(newReferral({ participant_dob: "2026-10-31" })), []);
   assert.deepEqual(validate(newReferral({ participant_dob: "2000-02-29" })), []);
   assert.deepEqual(validate(newReferral({ participant_postcode: "300" })), [{ name: "participant_postcode", key: "postcodeInvalid" }]);
+});
+
+test("dates are typed as DD/MM/YYYY in every language and checked as calendar dates", () => {
+  assert.equal(parseReferralDate("25/12/1950"), "1950-12-25");
+  assert.equal(parseReferralDate("5/3/1950"), "1950-03-05");
+  assert.equal(parseReferralDate(" 05-03-1950 "), "1950-03-05");
+  assert.equal(parseReferralDate("05.03.1950"), "1950-03-05");
+  assert.equal(parseReferralDate("1950-03-05"), "1950-03-05", "ISO autofill still works");
+  for (const bad of ["31/02/2000", "13/13/1950", "1950/03/05", "03/1950", "", "05/03/50"]) {
+    assert.equal(parseReferralDate(bad), null, bad);
+  }
+  assert.deepEqual(validate(newReferral({ participant_dob: "29/02/2000" })), []);
+  assert.deepEqual(validate(newReferral({ participant_dob: "01/11/2026" })), [{ name: "participant_dob", key: "dobInvalid" }]);
+  assert.deepEqual(validate(newReferral({ participant_dob: "31/10/2026" })), []);
+});
+
+test("typed dates are submitted in the existing YYYY-MM-DD format", async () => {
+  const data = new FormData();
+  data.set("form-name", "referral");
+  data.set("participant_dob", "25/12/1950");
+  data.set("effective_date", "1/2/2027");
+  let body;
+  await submitReferral(data, { fetcher: async (_url, options) => { body = options.body; return { ok: true }; }, navigate() {} });
+  assert.equal(body.get("participant_dob"), "1950-12-25");
+  assert.equal(body.get("effective_date"), "2027-02-01");
 });
 
 test("care plan update validates without the disabled new referral fields", () => {

@@ -115,7 +115,12 @@ const risks = ["pets", "aggressive-behaviour", "access-issues"];
       <div class="rx-field rx-upload-region">
         <label for="upload"><span data-i18n-path="referralForm.uploadLabel">{t.uploadLabel}</span> <span class="rx-optional" data-i18n-path="referralForm.optional">{t.optional}</span></label>
         <div class="rx-upload-box"><span class="rx-upload-icon"><ReferralIcon name="upload" /></span><div>
-          <input id="upload" name="upload" type="file" aria-describedby="upload-hint" />
+          <!-- The native file button follows the browser language; this label and status follow the page language. -->
+          <div class="rx-file">
+            <input id="upload" class="rx-file-input" name="upload" type="file" aria-describedby="upload-hint upload-status" />
+            <label class="rx-file-button" for="upload" aria-hidden="true" data-i18n-path="referralForm.chooseFile">{t.chooseFile}</label>
+            <span id="upload-status" class="rx-file-status" data-upload-status data-i18n-path="referralForm.noFileChosen">{t.noFileChosen}</span>
+          </div>
         </div></div>
         <p id="upload-hint" class="rx-sr" data-i18n-path="referralForm.uploadHint">{t.uploadHint}</p>
         <p id="upload-error" class="rx-error" data-error-for="upload" hidden></p>

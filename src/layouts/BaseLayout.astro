@@ -24,6 +24,8 @@ interface Props {
   i18nInclude?: readonly string[];
   /** Always noindex, including after launch. Used by the 404 page. */
   noindex?: boolean;
+  /** Key in the `pageTitles` messages used for the browser-tab title in Chinese. */
+  titleKey?: string;
 }
 
 const {
@@ -36,6 +38,7 @@ const {
   translatable = false,
   i18nInclude,
   noindex = false,
+  titleKey,
 } = Astro.props;
 
 const showSiteChrome = !hideChrome && !v1Home;
@@ -57,7 +60,7 @@ const robotsContent = site.draft || noindex ? "noindex, nofollow" : "index, foll
 ---
 
 <!doctype html>
-<html lang="en-AU">
+<html lang="en-AU" data-i18n-title={translatable ? titleKey : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

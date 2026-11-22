@@ -9,11 +9,14 @@ interface Props {
   autocomplete?: string;
   options?: readonly string[];
   optionKey?: "roleOptions" | "genderOptions" | "fundingOptions" | "updateOptions";
-  hint?: "updateHint" | "fundingHint";
+  hint?: "updateHint" | "fundingHint" | "dateHint";
 }
 const { name, type = "text", required = false, full = false, autocomplete, options, optionKey, hint } = Astro.props;
 const t = messages.en.referralForm;
-const maxLength = type === "email" ? 254 : type === "tel" ? 24 : name === "participant_postcode" ? 4 : name === "participant_address" ? 240 : 120;
+// Native date pickers follow the browser language, not the page language, so dates are typed as DD/MM/YYYY.
+const isDate = type === "date";
+const hintKey = hint ?? (isDate ? "dateHint" : undefined);
+const maxLength = isDate ? 10 : type === "email" ? 254 : type === "tel" ? 24 : name === "participant_postcode" ? 4 : name === "participant_address" ? 240 : 120;
 ---
 
 <div class:list={["rx-field", full && "rx-full"]}>
@@ -30,13 +33,16 @@ const maxLength = type === "email" ? 254 : type === "tel" ? 24 : name === "parti
   ) : type === "textarea" ? (
     <textarea id={name} name={name} rows="4" maxlength="1000" required={required} aria-describedby={hint ? `${name}-hint` : undefined}></textarea>
   ) : (
-    <input id={name} name={name} type={type} required={required} autocomplete={autocomplete}
-      maxlength={type === "date" ? undefined : maxLength}
-      inputmode={name === "participant_postcode" ? "numeric" : type === "tel" ? "tel" : undefined}
+    <input id={name} name={name} type={isDate ? "text" : type} required={required} autocomplete={autocomplete}
+      maxlength={maxLength}
+      inputmode={name === "participant_postcode" || isDate ? "numeric" : type === "tel" ? "tel" : undefined}
+      placeholder={isDate ? t.datePlaceholder : undefined}
+      data-i18n-attr={isDate ? "placeholder:referralForm.datePlaceholder" : undefined}
+      data-referral-date={isDate ? "" : undefined}
       pattern={name === "participant_postcode" ? "[0-9]{4}" : undefined}
       autocapitalize={type === "email" ? "off" : undefined} spellcheck={type === "email" ? false : undefined}
-      aria-describedby={hint ? `${name}-hint` : undefined} />
+      aria-describedby={hintKey ? `${name}-hint` : undefined} />
   )}
   <p id={`${name}-error`} class="rx-error" data-error-for={name} hidden></p>
-  {hint && <p id={`${name}-hint`} class="rx-hint" data-i18n-path={`referralForm.${hint}`}>{t[hint]}</p>}
+  {hintKey && <p id={`${name}-hint`} class="rx-hint" data-i18n-path={`referralForm.${hintKey}`}>{t[hintKey]}</p>}
 </div>

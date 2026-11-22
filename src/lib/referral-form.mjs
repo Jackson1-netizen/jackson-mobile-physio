@@ -9,10 +9,29 @@ export function australianPhoneValid(value) {
   return /^(?:0[23478]\d{8}|61[23478]\d{8}|13\d{4}|(?:1300|1800)\d{6})$/.test(digits);
 }
 
+export const REFERRAL_DATE_FIELDS = ["participant_dob", "effective_date"];
+
+/**
+ * Reads a typed DD/MM/YYYY date (or an ISO YYYY-MM-DD autofill value) as YYYY-MM-DD.
+ * Dates are typed rather than picked because native pickers follow the browser language.
+ * @param {unknown} input
+ * @returns {string | null}
+ */
+export function parseReferralDate(input) {
+  const value = String(input ?? "").trim();
+  let parts = value.match(/^(\d{4})-(\d{2})-(\d{2})$/)?.slice(1, 4);
+  if (!parts) {
+    const dmy = value.match(/^(\d{1,2})\s*[/.\-\s]\s*(\d{1,2})\s*[/.\-\s]\s*(\d{4})$/);
+    if (dmy) parts = [dmy[3], dmy[2], dmy[1]];
+  }
+  if (!parts) return null;
+  const iso = `${parts[0]}-${parts[1].padStart(2, "0")}-${parts[2].padStart(2, "0")}`;
+  const date = new Date(`${iso}T00:00:00Z`);
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === iso ? iso : null;
+}
+
 function validDate(value) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const date = new Date(`${value}T00:00:00Z`);
-  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
+  return parseReferralDate(value) !== null;
 }
 
 /**
@@ -50,7 +69,7 @@ export function validateReferral(data, { today = (() => {
     }
   } else {
     requireField("participant_dob");
-    if (value("participant_dob") && (!validDate(value("participant_dob")) || value("participant_dob") > today)) {
+    if (value("participant_dob") && (!validDate(value("participant_dob")) || String(parseReferralDate(value("participant_dob"))) > today)) {
       errors.push({ name: "participant_dob", key: "dobInvalid" });
     }
     for (const name of ["participant_address", "participant_suburb", "participant_state", "participant_postcode"]) {
@@ -77,6 +96,11 @@ export async function submitReferral(data, {
   fetcher = globalThis.fetch,
   navigate = (path) => globalThis.location.assign(path),
 } = {}) {
+  // Submissions keep the YYYY-MM-DD format used before dates were typed as DD/MM/YYYY.
+  for (const name of REFERRAL_DATE_FIELDS) {
+    const iso = data.has?.(name) ? parseReferralDate(data.get(name)) : null;
+    if (iso) data.set(name, iso);
+  }
   const response = await fetcher("/", { method: "POST", body: data });
   if (!response.ok) throw new Error("Referral was not accepted");
   navigate(REFERRAL_SUCCESS_PATH);
@@ -137,7 +161,8 @@ export function initReferralForm({ messages, document: doc = document, window: w
           link.href = `#${field?.id ?? error.name}`;
           const label = field?.labels?.[0]?.textContent?.replace(/\s*\*\s*$/, "").trim();
           const message = copy().errors[error.key] ?? copy().errors.required;
-          link.textContent = label ? `${label}: ${message}` : message;
+          const separator = doc.documentElement.lang.startsWith("zh") ? "：" : ": ";
+          link.textContent = label ? `${label}${separator}${message}` : message;
           item.append(link);
           list.append(item);
         }
@@ -195,6 +220,24 @@ export function initReferralForm({ messages, document: doc = document, window: w
   };
   updateType?.addEventListener("change", syncFundingRequired);
   syncFundingRequired();
+
+  // The native file control is hidden; show the chosen file name (or the page-language "No file chosen").
+  const upload = fieldFor("upload");
+  const uploadStatus = form.querySelector("[data-upload-status]");
+  const emptyUploadPath = uploadStatus?.getAttribute("data-i18n-path");
+  const syncUploadStatus = () => {
+    if (!uploadStatus) return;
+    const names = [...(upload?.files ?? [])].map((file) => file.name).filter(Boolean);
+    if (names.length) {
+      uploadStatus.removeAttribute("data-i18n-path");
+      uploadStatus.textContent = names.join(", ");
+    } else {
+      if (emptyUploadPath) uploadStatus.setAttribute("data-i18n-path", emptyUploadPath);
+      uploadStatus.textContent = copy().noFileChosen ?? uploadStatus.textContent;
+    }
+  };
+  upload?.addEventListener("change", syncUploadStatus);
+  form.addEventListener("reset", () => win.setTimeout(syncUploadStatus, 0));
 
   // Keep the normal multipart POST and native validation if AJAX is unavailable.
   if (typeof win.fetch !== "function" || typeof win.FormData !== "function" || !submit) return;

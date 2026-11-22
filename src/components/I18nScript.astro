@@ -11,7 +11,8 @@ const { include } = Astro.props;
 function scoped(bundle: object) {
   if (!include || include.length === 0) return bundle;
   const source = bundle as Record<string, unknown>;
-  return Object.fromEntries(include.filter((key) => key in source).map((key) => [key, source[key]]));
+  const keys = [...include, "pageTitles"];
+  return Object.fromEntries(keys.filter((key) => key in source).map((key) => [key, source[key]]));
 }
 
 const serialized = JSON.stringify({
@@ -46,6 +47,13 @@ const serialized = JSON.stringify({
   function applyLocale(locale) {
     const bundle = WWL_MESSAGES[locale] || WWL_MESSAGES[defaultLocale];
     document.documentElement.lang = htmlLang(locale);
+    // Browser-tab title follows the page language; English keeps the server-rendered title.
+    const titleKey = document.documentElement.getAttribute("data-i18n-title");
+    if (titleKey) {
+      if (!document.documentElement.dataset.titleEn) document.documentElement.dataset.titleEn = document.title;
+      const localized = locale === "en" ? undefined : getNestedValue(bundle, "pageTitles." + titleKey);
+      document.title = typeof localized === "string" ? localized : document.documentElement.dataset.titleEn;
+    }
     document.querySelectorAll("[data-i18n-path]").forEach((el) => {
       const path = el.getAttribute("data-i18n-path");
       if (!path) return;
