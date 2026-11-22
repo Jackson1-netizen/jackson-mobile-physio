@@ -1,23 +1,26 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../content/site";
+import { messages } from "../content/i18n";
+
+const copy = messages.en.enquiryReceived;
 ---
 
 <BaseLayout
   title={`If you've just sent an enquiry | ${site.businessName}`}
   description="This page is shown after the Home Motion enquiry form. Opening it on its own does not send an enquiry."
   canonicalPath="/enquiry-received"
+  translatable
+  titleKey="enquiryReceived"
   noindex
 >
   <article class="mx-auto max-w-3xl px-4 py-14">
-    <h1 class="font-serif text-3xl font-bold text-[var(--color-ink)]">If you've just sent an enquiry, thank you</h1>
+    <h1 class="font-serif text-3xl font-bold text-[var(--color-ink)]" data-i18n-path="enquiryReceived.heading">{copy.heading}</h1>
     <p class="mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)]">
-      If you've just sent an enquiry, thank you. Jackson will be in touch when he has your message. Opening this page
-      directly does not send an enquiry, and sending the form does not start treatment. If you need to reach him sooner,
-      call <a class="font-semibold text-[var(--color-ink)] underline underline-offset-4" href={site.phoneHref}>{site.phone}</a>.
+      <span data-i18n-path="enquiryReceived.bodyLead">{copy.bodyLead}</span>{" "}<a class="font-semibold text-[var(--color-ink)] underline underline-offset-4" href={site.phoneHref}>{site.phone}</a><span data-i18n-path="enquiryReceived.bodyEnd">{copy.bodyEnd}</span>
     </p>
     <p class="mt-6 text-sm">
-      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/">Back to home</a>
+      <a class="text-[var(--color-accent)] underline-offset-4 hover:underline" href="/" data-i18n-path="enquiryReceived.back">{copy.back}</a>
     </p>
   </article>
 </BaseLayout>

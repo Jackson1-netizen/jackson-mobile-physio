@@ -33,6 +33,14 @@ let mapsReady: Promise<typeof google.maps> | undefined;
 let authenticationFailed = false;
 
 /** Official async Maps JavaScript API. No key, tiles or account credentials live in Git. */
+/** Map controls follow the page language, not the visitor's browser language. */
+function mapsLanguage(): string {
+  const lang = document.documentElement.lang;
+  if (lang === "zh-Hant") return "zh-TW";
+  if (lang.startsWith("zh")) return "zh-CN";
+  return "en";
+}
+
 function loadGoogleMaps(): Promise<typeof google.maps> {
   if (authenticationFailed) return Promise.reject(new Error("Google Maps authentication failed"));
   if (window.google?.maps?.Map) return Promise.resolve(window.google.maps);
@@ -60,7 +68,7 @@ function loadGoogleMaps(): Promise<typeof google.maps> {
     };
     const query = new URLSearchParams({
       key, v: "quarterly", loading: "async", callback: "__hmGoogleMapsReady",
-      region: "AU", language: "en", auth_referrer_policy: "origin",
+      region: "AU", language: mapsLanguage(), auth_referrer_policy: "origin",
     });
     script.src = "https://maps.googleapis.com/maps/api/js?" + query;
     script.async = true;

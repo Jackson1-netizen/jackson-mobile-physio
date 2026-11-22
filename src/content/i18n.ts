@@ -19,6 +19,23 @@ const referralQualLines = publicQualifications().map((item) => `${item.label}: $
 
 const en = {
   referralForm: referralMessages.en,
+  /** Browser-tab titles for translatable pages; English pages keep their server-rendered title. */
+  pageTitles: {
+    home: site.seo.defaultTitle,
+    enquiry: `Contact | ${site.businessName}`,
+    referral: `Make a Referral | ${site.businessName}`,
+    referralReceived: `Referral received | ${site.businessName}`,
+    enquiryReceived: `If you've just sent an enquiry | ${site.businessName}`,
+    areas: `Service areas | ${site.businessName}`,
+    referralSheet: `For referrers | ${site.businessName}`,
+  },
+  enquiryReceived: {
+    heading: "If you've just sent an enquiry, thank you",
+    bodyLead:
+      "If you've just sent an enquiry, thank you. Jackson will be in touch when he has your message. Opening this page directly does not send an enquiry, and sending the form does not start treatment. If you need to reach him sooner, call",
+    bodyEnd: ".",
+    back: "Back to home",
+  },
   nav: {
     home: "Home",
     about: "About",
@@ -148,7 +165,7 @@ const en = {
       {
         question: "Which languages are available?",
         answer:
-          "Consultations can be conducted in English, Cantonese (廣東話), or Mandarin (普通話), including with family or support workers present when helpful.",
+          "Consultations can be conducted in English, Cantonese, or Mandarin, including with family or support workers present when helpful.",
       },
       {
         question: "Is AHPRA registration confirmed?",
@@ -209,7 +226,7 @@ const en = {
     serviceOptions: ["Physiotherapy", "Not sure yet", "Other"],
     fundingOptions: ["NDIS", "Support at Home", "Private", "Other or not sure"],
     preferredContactOptions: ["Phone", "Email"],
-    languageOptions: ["English", "Cantonese (廣東話)", "Mandarin (普通話)", "Other"],
+    languageOptions: ["English", "Cantonese", "Mandarin", "Other"],
     requiredNote:
       "Fields marked with an asterisk are required, including email, phone and suburb. Preferred contact tells us how you would like us to respond.",
     submitLabel: "Send enquiry",
@@ -345,7 +362,7 @@ const en = {
     },
     hero: {
       support:
-        "Personalised, evidence-based physiotherapy care in Melbourne's eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
+        "Personalised, evidence-based physiotherapy care in Melbourne's eastern and south-eastern suburbs. Helping you move better, stay independent and enjoy everyday life.",
       chips: ["Home & community visits", "All ages welcome", "NDIS enquiries welcome"],
       ahpra: "AHPRA registered physiotherapist",
       photoAlt:
@@ -506,7 +523,7 @@ const en = {
           title: "Consistent physiotherapist",
           body: "Continuity of care with the same physiotherapist where possible.",
         },
-        { title: "English · 廣東話 · 普通話", body: "Clear communication in the language you prefer." },
+        { title: "English · Cantonese · Mandarin", body: "Clear communication in the language you prefer." },
       ],
       cardTitle: "Tell us what support you're looking for.",
       cardBody: "A short introduction is enough.",
@@ -545,6 +562,22 @@ const en = {
 
 const zhHant = {
   referralForm: referralMessages["zh-Hant"],
+  pageTitles: {
+    home: `${site.businessName} | 墨爾本東區上門物理治療`,
+    enquiry: `聯絡 | ${site.businessName}`,
+    referral: `提交轉介 | ${site.businessName}`,
+    referralReceived: `已收到轉介 | ${site.businessName}`,
+    enquiryReceived: `已收到查詢 | ${site.businessName}`,
+    areas: `服務地區 | ${site.businessName}`,
+    referralSheet: `轉介人資訊 | ${site.businessName}`,
+  },
+  enquiryReceived: {
+    heading: "如您剛提交查詢，謝謝您",
+    bodyLead:
+      "如您剛提交查詢，謝謝您。Jackson 收到您的訊息後會與您聯絡。直接打開本頁不會提交查詢，提交表格亦不代表已開始治療。如需盡快聯絡，請致電",
+    bodyEnd: "。",
+    back: "返回主頁",
+  },
   nav: {
     home: "主頁",
     about: "關於",
@@ -847,7 +880,7 @@ const zhHant = {
     },
     hero: {
       support:
-        "為墨爾本東區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
+        "為墨爾本東區及東南區提供以實證為本、切合個人需要的物理治療，助您活動得更好、保持獨立，享受日常生活。",
       chips: ["上門及社區探訪", "歡迎所有年齡人士", "歡迎 NDIS 查詢"],
       ahpra: "AHPRA 註冊物理治療師",
       photoAlt: "插圖：物理治療師在家中協助一位年長女士使用助行架",
@@ -1035,6 +1068,22 @@ const zhHant = {
 
 const zhHans = {
   referralForm: referralMessages["zh-Hans"],
+  pageTitles: {
+    home: `${site.businessName} | 墨尔本东区上门物理治疗`,
+    enquiry: `联系 | ${site.businessName}`,
+    referral: `提交转介 | ${site.businessName}`,
+    referralReceived: `已收到转介 | ${site.businessName}`,
+    enquiryReceived: `已收到咨询 | ${site.businessName}`,
+    areas: `服务地区 | ${site.businessName}`,
+    referralSheet: `转介人信息 | ${site.businessName}`,
+  },
+  enquiryReceived: {
+    heading: "如您刚提交咨询，谢谢您",
+    bodyLead:
+      "如您刚提交咨询，谢谢您。Jackson 收到您的信息后会与您联系。直接打开本页不会提交咨询，提交表格亦不代表已开始治疗。如需尽快联系，请致电",
+    bodyEnd: "。",
+    back: "返回主页",
+  },
   nav: {
     home: "主页",
     about: "关于",
@@ -1335,7 +1384,7 @@ const zhHans = {
     },
     hero: {
       support:
-        "为墨尔本东区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
+        "为墨尔本东区及东南区提供循证、因人而异的物理治疗，帮助您活动得更好、保持独立，享受日常生活。",
       chips: ["上门及社区探访", "欢迎所有年龄人士", "欢迎 NDIS 咨询"],
       ahpra: "AHPRA 注册物理治疗师",
       photoAlt: "插图：物理治疗师在家中协助一位年长女士使用助行架",
